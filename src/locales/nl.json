@@ -1,0 +1,1178 @@
+{
+  "language": "Taal",
+  "intro": "Dit is een collectie tools voor het oplossen van geocaching puzzels. Ga naar <a href='https://www.geocaching.com/'>Geocaching.com</a> voor meer informatie over geoaching. Meer informatie over geocaching puzzels is te vinden bij <a href='./howtostart'>Tips</a>.",
+
+  "errors": {
+    "generic": "Er ging iets mis. Probeer het opnieuw.",
+    "noinput": "Er zijn geen gegevens ingevoerd",
+    "nocoords": "Geen coördinaten ingevoerd. Voer een coördinaat in.",
+    "incorrectcoords": "Fout bij converteren coordinaat, controleer het ingevoerde coordinaat en het geselecteerde formaat.",
+    "invalidinput": "Invoer kan niet worden vertaald. Controleer het geselecteerde type invoer.",
+    "noresult": "Geen resultaten gevonden"
+  },
+
+  "labels": {
+    "from": "Van",
+    "to": "Naar",
+    "message": "Bericht",
+    "coordinate": "Coördinaat",
+    "coordformat": "Coördinaat formaat",
+    "distance": "Afstand",
+    "angle": "Richting",
+    "radius": "Straal",
+    "variable": "Variabele",
+    "option": "Waardes",
+    "point": "Punt",
+    "surface": "Oppervlakte",
+    "center": "Middelpunt",
+    "circumference": "Omtrek",
+    "result": "Resultaat",
+    "alphabet": "Alfabet",
+    "search": "Zoekterm"
+  },
+
+  "buttons": {
+    "convert": "Converteer",
+    "calc": "Bereken",
+    "search": "Zoek",
+    "format": "Formatteer",
+    "reset": "Reset",
+    "cancel": "Annuleer",
+    "save": "Opslaan",
+    "get": "Haal op",
+    "check": "Controleer",
+    "showtab": "Toon/verberg tabel",
+    "showres": "Toon/verberg resultaat"
+  },
+
+  "languages": {
+    "english": "Engels",
+    "dutch": "Nederlands",
+    "german": "Duits",
+    "french": "Frans",
+    "spanish": "Spaans"
+  },
+
+  "highlights": {
+    "red": "Rood",
+    "yellow": "Geel",
+    "blue": "Blauw",
+    "bold": "Vet",
+    "upper": "Hoofdletters"
+  },
+
+  "menu": {
+    "home": "Home",
+    "coordinates": "Coördinaten",
+    "texttools": "Teksttools",
+    "ciphers": "Geheimschriften",
+    "codebook": "Codebook",
+    "imagetools": "Imagetools",
+    "htmlscanner": "HTML Scanner",
+    "mathtools": "Math tools",
+    "other": "Nog meer tools",
+    "sudokusolver": "Sudoku oplosser",
+    "mmsolver": "Mastermind oplosser",
+    "periodictable": "Periodiek systeem",
+    "resistorcode": "Weerstandscode",
+    "countries": "Landentabel",
+    "usastates": "Staten van de VS",
+    "nlprovinces": "Provincies van Nederland",
+    "howto": "Tips",
+    "about": "Info"
+  },
+
+  "coordinates": {
+    "convert": {
+      "title": "Converteren",
+      "short": "Converteer van WGS84, RD, UTM, Maidenhead en meer",
+      "long" : "Converteren van een (of meerdere) coördinaten. O.a. RD, WGS84, UTM, Maidenhead. Geconverteerde coördinaten worden getoond op kaart."
+    },
+    "project": {
+      "title": "Projecteren",
+      "short": "Projecteer een coördinaat",
+      "long" : "Projecteren van een coördinaat. Ondersteund verschillende formaten. Afstand in meter, kilometer, mijl, foot, yard. Hoek in graden, radialen of gon."
+    },
+    "mapmaker": {
+      "title": "Kaart maken",
+      "short": "Toon coördinaten met label en cirkel op kaart.",
+      "long" : "Toon meedere coördinaten op kaart met label. Desgewenst kan een cirkel om elk coördinaat worden getekend. Ideaal voor het spotten van mogelijk geocachelocaties."
+    },
+    "incomplete": {
+      "title": "Incomplete coördinaten",
+      "short": "Bereken en toon coördinaten met onbekende cijfers.",
+      "long" : "Bereken en toon coördinaten met 1 tot 4 onbekende variabelen. Maximaal 500 locaties worden getoond op kaart, met een popup van de gebruikte waardes."
+    },
+    "lines": {
+      "title": "Lijnen",
+      "short": "Middelpunt, lengte, richting en snijpunt van 1 of 2 lijnen.",
+      "long" : "Bereken het middelpunt, lengte en richting van een lijn. Bereken het dichtsbijzijnde punt op een lijn gezien vanaf een ander punt. Bereken het snijpunt van twee lijnen. Berekende punten worden getoond op kaart."
+    },
+    "triangles": {
+      "title": "Driehoeken",
+      "short": "Oppervlakte, omtrek, zwaartepunt, hoogtepunt  en andere driehoekspunten.",
+      "long" : "Bereken het oppervlakte, omtrek, zwaartepunt, hoogtepunt, middelpunt ingeschreven cirkel, middelpunt omgeschreven circkel, negenpuntspunt van een driehoek. Berekende punten worden getoond op kaart."
+    },
+    "circles": {
+      "title": "Cirkels",
+      "short": "Oppervlakte en snijpunten van twee cirkels.",
+      "long" : "Bereken de snijpunten van twee cirkels en de oppervlakte van het gezamenlijke deel. Berekende punten worden getoond op kaart."
+    },
+    "antipode": {
+      "title": "Antipode",
+      "short": "Het punt exact aan de andere kant van de aarde.",
+      "long" : "Bereken de antipode, het punt exact aan de andere kant van de aardbol."
+    },
+    "support": {
+      "title": "Ondersteunde coördinaten",
+      "short": "WGS84, UTM, MGRS, NAD, OSGB, RD (Dutch Grid), Lambert, Geohash, Maidenhead, Open Location Code.",
+      "long" : "Alle tools ondersteunen WGS84, UTM, MGRS, NAD, OSGB, RD (Dutch Grid), Lambert, Geohash, Maidenhead, Open Location Code en enkele andere. Voor WGS84 en NAD herkent de tool het juiste formaat. Accepteert N,S,Z en W,E,O."
+    }
+  },
+
+  "texttools": {
+    "wordvalue": {
+      "title": "Woordwaarde & stapeltellen",
+      "short": "Bereken de woordwaarde en stapeltelling van een tekst en van elk woord in de tekst",
+      "long" : "Bereken de woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon."
+    },
+    "charcodes": {
+      "title": "Karakter codes",
+      "short": "Converteer tekst naar computer codes en vice versa",
+      "long" : "Converteer tekst naar computer codes en vice versa. Computers vertalen tekst intern naar numbers met gebruik van codepages. De tool ondersteunt ASCII, UTF, alt-codes en een groot aantal codepages en converteert ook Baudotcode en Murraycode."
+    },
+    "smartreplace": {
+      "title": "Slimme Substitutie",
+      "short": "Een tool om substitutie geheimschriften op te lossen",
+      "long" : "Een tool om substitutie geheimschriften op te lossen. Analiseert de frequenties in de gegeven tekst en toont de beste match. Ondersteunt diverse talen waaronder Nederlands, Duits en Engels."
+    },
+    "analyze": {
+      "title": "Analiseer tekst",
+      "short": "Telt het aantal zinnen, woorden, letters, cijfers, spaties en andere tekens",
+      "long" : "Telt het aantal zinnen, woorden, letters (hoofd- en kleine letters), cijfers, spaties en andere tekens. Geeft ook de percentages."
+    },
+    "texttonumbers": {
+      "title": "Tekst naar nummers",
+      "short": "Vertaalt tekst naar nummers en vice versa op basis van de positie in het alfabet",
+      "long" : "Vertaalt tekst naar nummers en vice versa op basis van de positie in het alfabet. Ondersteunt diverse alfabetten. Eventueel in omgekeerde volgorde en/of beginnend op nul."
+    },
+    "keyboards": {
+      "title": "Toetsenborden",
+      "short": "Vertaalt tekst alsof het op een ander toetsenbord was getikt.",
+      "long" : "Vertaalt tekst alsof het op een ander toetsenbord was getikt. Ondersteund Azerty, Dvorak, Cyrillisch, Colemak en enkele andere indelingen."
+    }
+  },
+
+  "cp": {
+    "short": "Meer dan 50 verschillende geheimschriften en codes.",
+    "info": "Selecteer een geheimschrift hieronder. Vul de benodigde sleutels/ sleutelwoorden in. Kies coderen of decoderen. In de meeste gevallen is het handig naar hoofdletters te converteren. Het verwijderen van tekens die niet in het alfabet voorkomen geeft vaak het beste resultaat. Het gecodeerde bericht kan eventueel worden geformatteerd in blokken (dit is gebruikelijk in de cryptografie). Om te decoderen zal de formattering vaak verwijderd moeten worden.",
+    "cipher": "Geheimschrift",
+    "gensq": "Genereer vierkant",
+    "genalp": "Genereer alfabet",
+    "phencmsg": "Gecodeerd bericht",
+    "encode": "Codeer",
+    "decode": "Decodeer",
+    "toupper": "Hoofdletters",
+    "remnonalp": "Verwijder niet alfabet",
+    "repl": "Vervang",
+    "errdec": "Bericht kan niet worden gedecodeerd. Er gaat iets fout.",
+    "errenc": "Bericht kan niet worden gecodeerd. Er gaat iets fout.",
+    "sep": "Scheidingsteken",
+    "remform": "Verwijder formattering",
+    "bs": "Lengte blokken",
+    "adfgvx": {
+      "info": "De ADFGX(V) cijfer gebruikt een Polybiusvierkant (van 5 bij 5 of 6 bij 6). Daarna worden de kolommen verplaatst volgens de gegeven sleutel. Hierdoor wordt de code gefractioneerd.",
+      "k1": "Transpositiesleutel"
+    },
+    "affine": {
+      "info": "De Affine cijfer is een substitutiecifjer. Het gebruikt de functie y=ax + b. De waarde van A moet een co-priem zijn met de lengte van het alfabet.",
+      "k1": "A (groter dan 1)",
+      "k2": "B (groter dan 0)"
+    },
+    "amsco": {
+      "info": "De AMSCO cijfer is een substitutiecijfer. Het bericht wordt in een tabel geschreven volgens in blokken van 1 en 2. De transpositiesleutel wordt gebruikt om de kolommen te verplaatsen.",
+      "k1": "Transpositiesleutel"
+    },
+    "atbash": {
+      "info": "Atbash is een simpele substitutiecijfer. Elke letter wordt vervangen door die in het omgekeerde alfabet. Dus A=Z, B=Y, enzovoorts."
+    },
+    "autokey": {
+      "info": "Een autokeycijfer is een polyalfabetische cijfer (er worden meerdere alfabetten gebruikt). In eerste instantie wordt begonnen met de gegeven sleutel, die steeds wordt aangevuld met het gecodeerde bericht. Deze autokey gebruikt de Vigenerecijfer.",
+      "k1": "Sleutel"
+    },
+    "bacon": {
+      "info": "Elk karakter wordt vervangen door 5 letters (normaliter A en B). In versie 1 wordt dezelfde combinatie gebruikt voor I/J en U/V. Versie 2 is uniek voor het hele alfabet. Je kan de Bacon cijfer ook in een willekeurige tekst verstoppen door voor A en B een ander font te gebruiken of te wisselen tussen hoofd- en kleine letters.",
+      "k1": "Versie (1 of 2)",
+      "k2": "Vervang A door:",
+      "k3": "Vervang B door:"
+    },
+    "base91": {
+      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
+    },
+    "base64": {
+      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
+    },
+    "base32": {
+      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
+    },
+    "base16": {
+      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
+    },
+    "uuencode": {
+      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
+    },
+    "bazeries": {
+      "info": "De Bazeries cijfer codeert 2-letters per keer. Het gebruikte alfabet is 25 of 36 letters. Er worden twee vierkanten gebruikt. De sleutels voor het genereren van de vierkanten zijn optioneel. De numerieke sleutel wordt gebruikt voor transpositie van het gecodeerde bericht en eventueel om het tweede vierkant te genereren, indien de sleutel ontbreekt.",
+      "k1": "Sleutel 1",
+      "k2": "Sleutel 2",
+      "k3": "Transpositiesleutel (numeriek)"
+    },
+    "beaufort": {
+      "info": "De Beaufort cijfer, (genoemd naar zijn bedenker by Sir Francis Beaufort), is een substitutiecijfer vergelijkbaar met de Vigenere cijfer, met een enigszins aangepast tableau. De sleutel is verplicht",
+      "k1": "Sleutel"
+    },
+    "bibibinary": {
+      "info": "Bibi-binary is systeem voor het coderen van getallen. Het getal wordt geconverteerd naar hexadecimaal en dan omgezet naar een grappig klinkende tekst. Alleen nummers kunnen worden gecodeerd."
+    },
+    "bifid": {
+      "info": "De Bifid cijfer gebruikt een Polybiusvierkant. Op het resultaat wordt een transpositie uitgevoerd met de gegeven sleutel. Hierdoor treedt fractionering op. Het resultaat daarvan wordt weer vertaald naar tekst met hetzelfde Polybiusvierkant.",
+      "k1": "Transpositiesleutel"
+    },
+    "burrowswheeler": {
+      "info": "De Burrow Wheeler cijfer is transpositie cijfer. Het werkt met een zogenaamd end-of-file karakter. Dit karakter is noodzakelijk.",
+      "k1": "End-of-file karakter"
+    },
+    "cadenus": {
+      "info": "De Cadenus cijfer is een transpositie cijfer. De sleutel regelt de volgorde van de kolommen, maar ook het startpunt van elke kolom. Het bericht moet altijd 25 keer de lengte van de sleutel lang zijn.",
+      "k1": "Transpositiesleutel"
+    },
+    "caesar": {
+      "info": "De Caesar cijfer is een klassieke substitutiecijfer. Elke letter wordt vervangen door de letter die een aantal plaatsen verder in het alfabet ligt. De default verschuiving is 13. ROT13 is hetzelfde als een Caesarcijfer met verschuiving 13.",
+      "k1": "Verschuiving"
+    },
+    "rot13": {
+      "info": "De Caesar cijfer is een klassieke substitutiecijfer. Elke letter wordt vervangen door de letter die een aantal plaatsen verder in het alfabet ligt. De default verschuiving is 13. ROT13 is hetzelfde als een Caesarcijfer met verschuiving 13.",
+      "k1": "Verschuiving"
+    },
+    "chaocipher": {
+      "info": "De chaocijfer is een polyalfabetische cijfer, waarbij steeds een nieuw alfabet wordt gegenereerd. Hij is uitgevonden in 1918 door John F. Byrne.",
+      "k1": "Linker startalfabet",
+      "k2": "Rechter startalfabet"
+    },
+    "collon": {
+      "info": "De Colloncijfer vertaalt letters naar bigrams met behulp van een Polybiusvierkant. Het bigram ontstaat door het combineren van de eerste/laatste letter in de rij/kolom. De periode wordt vervolgens gebruikt voor transpositie, waardoor fractionering optreedt.",
+      "k1": "Volgorde van bigrams:",
+      "k2": "Sleutel voor het Polybiusvierkant",
+      "k3": "Periode",
+      "s1": {
+        "rfcl": "Rij eerst, kolom laatst",
+        "rlcl": "Rij laatst, kolom laatst",
+        "rfcf": "Rij eerst, kolom eerst",
+        "rlcf": "Rij laatst, kolom eerst",
+        "clrl": "Kolom laatste, rij laatst",
+        "clrf": "Kolom laatste, rij eerst",
+        "cfrf": "Kolom eerst, rij eerst",
+        "cfrl": "Kolom eerst, rij laatst"
+      }
+    },
+    "columnartransposition": {
+      "info": "Kolomtranspositie schrijft het bericht onder elkaar in regels. Vervolgens worden de kolommen verplaatst volgens de gebruikte sleutel. Het resultaat wordt kolom na kolom opgeschreven.",
+      "k1": "Transpositiesleutel"
+    },
+    "condi": {
+      "info": "De Condi cijfer (condi staat voor consecutive digrams) gebruikt steeds twee letters (digrams) voor het bepalen van de verschuiving voor de volgende letter. De cijfer is verrassend lastig te kraken.",
+      "k1": "Sleutel voor het cijferalfabet",
+      "k2": "Start met verschuiving"
+    },
+    "digrafid": {
+      "info": "De Digrafid cijfer gebruikt een tableau gebaseerd op twee alfabetten van 3 bij 9 en 9 bij 3 (27 tekens - ABCDEFGHIJKLMNOPQRSTUVWXYZ#).",
+      "k1": "Sleutel voor tableau 1",
+      "k2": "Sleutel voor tableau 2",
+      "k3": "Periode"
+    },
+    "foursquare": {
+      "info": "De Foursquare cijfer is vervangt digrams (2 letters) op basis van twee Polybiusvierkanten.",
+        "k1": "Sleutel 1",
+        "k2": "Sleutel 2"
+    },
+    "gcid": {
+      "info": "Geocache id, ookwel base 31, vertaalt het geocache id (een nummer) naar de geocache code, zoals GC001. Meerdere id's of codes kunnen worden ingevoerd.."
+    },
+    "goldbug": {
+      "info": "De Goldbug cijfer is een simpele substitutiecijfer die te vinden was in een kort verhaal van Edgar Allan Poe uit 1843."
+    },
+    "graycode": {
+      "info": "De Gray Code of ook wel de reflected binary code (RBC)is genoemd naar Frank Gray. Het is een binaire nummering waarbij twee opeenvolgende cijfers steeds maar 1 bit verschillen. Alleen coderen van nummers is mogelijk.",
+      "k1": "Aantal bits"
+    },
+    "gromark": {
+      "info": "De Gromark cijfer gebruikt de sleutel om eerst het alfabet te herordenen en vervolgens dezelfde sleutel voor transpositie. De primer wordt gebruikt om de verschuiving van elke letter te bepalen.",
+      "k1": "Sleutel",
+      "k2": "Primer (5 cijfers)"
+    },
+    "gronsfeld": {
+      "info": "De Gronsfeld cijfer is een Vigenere cijfer met een numerieke sleutel.",
+      "k1": "Sleutel (numeriek)"
+    },
+    "kennycode": {
+      "info": "De Kenny code is gebaseerd het gemompel van het gelijknamige Southpark karakter. Elke letter wordt vervangen door een combinatie van m, p en f (fff wordt niet gebruikt)."
+    },
+    "monomedinome": {
+      "info": "De Monome-dinome cijfer gebruikt een alfabet van 24 letters. De eerst sleutel wordt gebruikt om een 3x8 rechthoek te genereren. De tweede sleutel wordt gebruikt om rijen en kolommen te nummmeren.",
+      "k1": "Sleutel voor het alfabet",
+      "k2": "Sleutel voor rij/kolom (min 10 letters)"
+    },
+    "morbit": {
+      "info": "Morbit vertaalt het bericht eerst naar Morse. De resulterende code wordt opgedeeld in koppels van 2 tekens, die met behulp van de sleutel (9 letters) worden omgezet in tekst.",
+      "k1": "Sleutel (9 letters)"
+    },
+    "morse": {
+      "info": "Morse code is bekend. Letters worden met korte of lange piepjes (. en -) gecodeerd voor transmissie via de ether. Deze morse doet ook cijfers en leestekens."
+    },
+    "myszkowski": {
+      "info": "De Myszkowski cijfer is een kolom transpositie gebruikmakend van een sleutel met dubbele letters. Bij de transpositie worden gelijke letters van links naar rechts gelezen en vervolgens per kolom.",
+      "k1": "Transpositiesleutel (met dubbele letters)"
+    },
+    "nicodemus": {
+      "info": "De Nicodemus cijfer voert eerst een transpositie uit met de sleutel. Op het resultaat wordt met dezelfde sleutel een Vigenere cijfer toegepast.",
+      "k1": "Sleutel"
+    },
+    "nihilist": {
+      "info": "De Nihilist cijfer is een variant op de Polybius cipher. De eerste sleutel wordt gebruikt om het Polybiusvierkant te genereren. De tweede sleutel wordt ook gecodeerd en vervolgens bij elke letter opgeteld.",
+      "k1": "Sleutel voor vierkant",
+      "k2": "Sleutel om op te tellen"
+    },
+    "nihilisttransposition": {
+      "info": "De Nihilist transpositiecijfer is een kolomtranspositie gevolgd door een rijtranspositie. Voor beide wordt dezelfde sleutel gebruikt. Het resultaat wordt vervolgens per kolom of per rij uitgeschreven. De lengte van het bericht moet een kwadraat van de sleutellengte zijn. (Deze cijfer heeft niks te maken met de Nihilist cijfer.)",
+      "k1": "Transpositiesleutel:",
+      "k2": "Per kolom / per rij:",
+      "s1": {
+        "row": "Rij",
+        "col": "Kolom"
+      }
+    },
+    "onetimepad": {
+      "info": "De One Time Pad gebruikt een sleutel met dezelfde lengte als het bericht. Daardoor treedt er geen herhaling op en is elke vorm van frequentieanalyse kansloos. De One Time Pad is dan ook de enige echt onbreekbare cijfer, mits er geen herhaling in de sleutel zitten en de sleutel maar één keer wordt gebruikt.",
+      "k1": "Pad"
+    },
+    "phillips": {
+      "info": "De Phillips cijfer is een variant op de Polybiuscijfer. De rijen en kolommen van het vierkant worden verschoven zodat er 8 verschillende vierkanten ontstaan. De 8 vierkanten worden na elkaar gebruikt.",
+      "k1": "Sleutel voor vierkant"
+    },
+    "playfair": {
+      "info": "De Playfair cijfer codeert bigrams (2 letters) per keer met een Polybiusvierkant. Het is één van de klassieke cijfers en werd in 1854 uitgevonden door Sir Charles Wheatstone. De sleutel is optioneel om het Polybiusvierkant te genereren.",
+      "k1": "Sleutel"
+    },
+    "polybius": {
+      "info": "De Polybiuscijfer gebruikt een vierkant (het Polybiusvierkant) van 5x5 (of 6x6). De labels van de rijen en kolommen zijn standaard 12345, maar dit kan worden aangepast. Het Polybiusiverkant wordt in veel andere cijfers gebruikt. Het vierkant is een klassieker die teruggaat naar de Oude Grieken.",
+      "k1": "Rijen",
+      "k2": "Kolommen"
+    },
+    "pollux": {
+      "info": "De Pollux cijfer vertaalt het bericht eerst naar Morse. Vervolgens worden de -, . en x (pauze) omgezet naar letters. De letter wordt steeds random gekozen uit een verzameling. De sleutels mogen geen overeenkomende letters hebben.",
+      "k1": "Tekens voor .",
+      "k2": "Tekens voor -",
+      "k3": "Tekens voor x"
+    },
+    "porta": {
+      "info": "De Porta cijfer gebruikt 13 verschillende alfabetten die een variant zijn op het standaard tableau van de Vigenerecijfer (die gebruikt 26 alfabetten). De sleutel bepaalt de volgorde waarin de alfabetten worden gekozen.",
+      "k1": "Sleutel"
+    },
+    "portax": {
+      "info": "De Portax cijfer combineert verschillende technieken. Hij is vervangt digrams (2 letters), gebruikt meerdere alfabetten (het alfabet wordt steeds verschoven) en tenslotte ook transpositie (rij naar kolommen).",
+      "k1": "Transpositiesleutel"
+    },
+    "ragbaby": {
+      "info": "Ragbaby is een substitutiecijfer. De sleutel wordt gebruikt om het cijferalfabet te genereren. De substitutie wordt steeds berekend op basis van woordpositie en letterpositie in het woord (bijv. 1e woord, 1e letter = 1 en 3e woord, 4e letter = 6). Oorspronkelijk wordt een 24-letter alfabet gebruikt met I=J en W=X, maar dat is niet noodzakelijk.",
+      "k1": "Sleutel"
+    },
+    "railfence": {
+      "info": "De Railfence cijfer is een transpositie cijfer die gebruikmaakt van een zigzag-patroon (rails). De offset wordt gebruikt om niet op de eerste rails naar beneden te beginnen, maar bijvoorbeeld op de derde rails naar boven.",
+      "k1": "Aantal rails (groter dan 1)",
+      "k2": "Offset"
+    },
+    "redefence": {
+      "info": "De Redefence cijfer is een transpositie cijfer die gebruikmaakt van een zigzagpatroon (rails). Hij is identiek aan de Railfence cijfer, alleen kan de volgorde waarin de rails worden afgedrukt worden aangepast.",
+      "k1": "Aantal rails (groter dan 1)",
+      "k2": "Offset",
+      "k3": "Volgorde van de rails"
+    },
+    "reverse": {
+      "info": "Omkeren van het bericht."
+    },
+    "reversewords": {
+      "info": "Omkeren van elk woord in het bericht."
+    },
+    "rot5": {
+      "info": "ROT5 is een simpele Caesar cijfer die bedoeld is voor getallen. De standaard shift is 5.",
+      "k1": "Verschuiving"
+    },
+    "rot47": {
+      "info": "ROT47 is een Caesar cijfer die de ASCII karakters 33 t/m 126 gebruikt (hoofdletters, kleine letters, cijfers en diverse leestekens en symbolen). De standaardverschuiving is 47.",
+      "k1": "Verschuiving"
+    },
+    "scytale": {
+      "info": "Scytale is een simpele transpositiecijfer die al gebruikt werd in het oude Griekenland. Het bericht wordt geschreven op een lint dat om een rol wordt gewikkeld. Vervolgens wordt het regel voor regel afgelezen.",
+      "k1": "Aantal wikkelingen"
+    },
+    "substitution": {
+      "info": "Dit is de algemene substitutiecijfer. Elke letter wordt vervangen door de letter in het sleutelalfabet op dezelfde positie. Als je de sleutel niet kent is deze cijfer beter op te lossen met de Slimme Substitutie tool (zie Teksttools).",
+      "k1": "Cijferalfabet"
+    },
+    "trifid": {
+      "info": "De Trifid cijfer gebruikt 3 vierkanten van 3x3 op basis van een alfabet van 27 letters. De sleutel wordt gebruikt om de vierkanten te genereren. Elke letter wordt gecodeerd op basis van vierkant, rij, kolom (3 cijfers). Die worden per kolom achter elkaar gezet en daarna per rij opgeschreven. Hierdoor onstaat fractionering.",
+      "k1": "Sleutel"
+    },
+    "trisquare": {
+      "info": "De Trisquare cijfer gebruikt dire Polybiusvierkanten. Groepen van twee letters (digrams) worden vertaald naar groepjes van 3 letters.",
+      "k1": "Enter key square 1:",
+      "k2": "Enter key square 2:",
+      "k3": "Enter key square 3:"
+    },
+    "vatsyayana": {
+      "info": "De Vatsyayana or Kamasutra cijfer is een simpele substitutiecijfer die paren van letters gebruikt (meestal 13), waarbij de letters steeds elkaars vervanging zijn.",
+      "k1": "Eerste helft van de paren",
+      "k2": "Tweede helft van de paren"
+    },
+    "vigenere": {
+      "info": "De Vigenère cijfer is een klassieke polyalphabetische cijfer. Er worden 26 verschillende alfabetten gegenereerd, waarbij elk alfabet steeds een positie wordt verschoven. Het zo ontstane tableau heet ook wel tableau recta. De sleutel bepaald in welke volgorde de verschillende alfabetten worden gebruikt.",
+      "k1": "Sleutel"
+    },
+    "zygazyfa": {
+      "info": "De Zygazyfa cijfer is bedacht door Ray Crowther die hem gebruikt in sommige van zijn geocaches. Het is een polyalphabetische cijfer, waarbij het volgende alfabet steeds wordt gegenereerd op basis van de te coderen letter.",
+      "k1": "Sleutel"
+    }
+  },
+
+  "mathtools": {
+    "baseconvert": {
+      "title": "Base conversie",
+      "short": "Conversie van en naar binair, decimaal, hexadecimaal en andere getalstelsels",
+      "long" : "Conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd."
+    },
+    "decimals": {
+      "title": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3",
+      "short": "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar",
+      "long" : "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar."
+    },
+    "fibonacci": {
+      "title": "Fibonacci",
+      "short": "Toont één van de eerste 500 Fibonacci nummers",
+      "long" : "Toont één van de eerste 500 Fibonacci nummers of controleert of het opgegeven nummer in de reeks voorkomt."
+    },
+    "primegcdlcm": {
+      "title": "Priem factoren, GGD en KGV",
+      "short": "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud.",
+      "long" : "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen."
+    },
+    "numberprop": {
+      "title": "Eigenschappen van nummers",
+      "short": "Toont de eigenschappen van een nummers, zoals priem, Fibonacci",
+      "long" : "Toont de eigenschappen van een nummers, zoals priem, Fibonacci en enkele andere eigenschappen."
+    },
+    "nimbers": {
+      "title": "Nimbers",
+      "short": "Berekent het product en de som van twee nimbers",
+      "long" : "Nimbers zijn geen nummers maar ze kunnen worden opgeteld en vermenigvuldigd. Nimbers worden gebruikt in de Game Theorie."
+    },
+    "sequences": {
+      "title": "Reeksen",
+      "short": "Geeft de n-de term van enkele reeksen",
+      "long" : "Toont ook de gehele reeks tot en met de gevraagde term van enkele bekende reeksen, zoals de Hailstone, Conway and Niven reeks. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. De meeste reeksen kunnen worden gevonden in de Online Encyclopedia of Integer Sequences. OEIS kan zoeken op woorden maar ook op delen van een reeks."
+    },
+    "palindrome": {
+      "title": "Palindroom",
+      "short": "Hoeveel omgekeerde optellingen maken een getal een palindroom",
+      "long" : "Berekent hoelang het duurt voordat een getal een palindroom wordt door het omgekeerde getal erbij op te tellen. De meeste getallen worden verrassend snel een palindroom."
+    }
+  },
+
+  "codebook": {
+    "short": "vind de juiste codepage door te zoeken op tags en woorden",
+    "long": "Vind de juiste codepage door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar.",
+    "availtags": "Beschikbare tags"
+  },
+
+  "imagetools": {
+    "short": "haalt de metadata van een foto op, zoals GPS",
+    "long": "Image tools haalt de metadata (EXIF en andere informatie) van een foto op. Indien een GPS locatie aanwezig is wordt die getoond op de kaart. Het is ook mogelijk de foto te spiegelen of te draaien.",
+    "btnfh": "Spiegel horizontaal",
+    "btnfv": "Spiegel verticaal",
+    "btnrot": "Draai 90°",
+    "nogps": "Geen GPS van de camera",
+    "gps": "GPS van de camera",
+    "error": "Fout bij het laden van de foto of het ophalen van de EXIF data",
+    "noinfo": "Geen info",
+    "info": "Image info",
+    "cinfo": "Camera info",
+    "desc": "Omschrijving",
+    "ainfo": "Informatie auteur",
+    "filename": "Filenaam",
+    "filetype": "Type",
+    "size": "Grootte",
+    "width": "Breedte",
+    "height": "Hoogte",
+    "date": "Datum & tijd",
+    "datec": "Aanmaakdatum & tijd",
+    "camera": "Camera",
+    "lens": "Lens",
+    "aperture": "Diafragma",
+    "shutter": "Sluiter",
+    "title": "Titel",
+    "subject": "Onderwerp",
+    "about": "Info",
+    "keywords": "Keywords",
+    "comment": "Commentaar",
+    "artist": "Artiest",
+    "creator": "Maker",
+    "author": "Auteur",
+    "copyright": "Copyright"
+  },
+
+  "htmlscanner": {
+    "short": "HTML Scanner scant de paginabron op links, afbeeldingen en verborgen informatie",
+    "long": "HTML Scanner scant de paginabron op links, afbeeldingen en verborgen informatie, zoals witte text en commentaar. Kopieer en plak de paginabron hieronder.",
+    "ph": "Plak de paginabron hier",
+    "btnscan": "Scan",
+    "links": "Links gevonden - selecteer om de link te openen",
+    "images": "Afbeeldingen found - selecteer om de afbeelding te bekijken",
+    "comms": "(Verborgen) commentaren gevonden",
+    "white": "Witte tekst gevonden",
+    "strong": "Belangrijke tekst",
+    "bold": "Vette tekst",
+    "ital": "Cursieve tekst",
+    "sup": "Superscript tekst",
+    "sub": "Subscript tekst",
+    "nocache": "Geen cache details gevonden. Laad een correcte paginabron.",
+    "complete": "Scan compleet, details hieronder (kan eventueel leeg zijn).",
+    "error": "Fout bij het laden of scannen van de paginabron."
+  },
+
+  "sudoku": {
+    "short": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3",
+    "long": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3.",
+    "info": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3. 4x4 uitgeschakeld vanwege belasting server. Vul het vierkant hieronder of voer de hints als rij, kolom, cijfer gescheiden door komma's, bijv. 125,243,254",
+    "error": "Fout bij het oplossen van de sudoky. Te veel oplossing of timeout van de server",
+    "type": "Sudoku type",
+    "size": "Afmeting",
+    "alt": "Hints",
+    "solve": "Los op",
+    "thereare": "Er zijn",
+    "sols": "oplossingen"
+  },
+
+  "mmsolver": {
+    "short": "Mastermind solver voor 3 t/m 6 pins en 4 t/m 9 kleuren",
+    "long": "Mastermind solver voor 3 t/m 6 pins en 4 t/m 9 kleuren.",
+    "info": "Mastermind is een logische puzzel. Het doel is een code (set kleuren) te achterhalen. Voor elke poging wordt het aantal correcte pins (kleur en positie) alsmede het aantal pins waarvan alleen de kleur juist is (maar de positie niet) gegeven. Door deze informatie logisch te gebruiken kan in een aantal pogingen de juiste combinatie worden gevonden. Het originele spel was 5 posities en 8 kleuren. De meeste populaire variant heeft 4 posities en 6 kleuren. De kleuren kunnen uniek zijn maar dat is meestal niet het geval. Deze tool gebruikt cijfers in plaats van kleuren. Voer het aantal pins, het aantal kleuren en de gedane pogingen in en de tool berekent de mogelijke combinaties.",
+    "npin": "Aantal pins",
+    "ncolor": "Aantal kleuren",
+    "unique": "Kleuren zijn uniek",
+    "pins": "Pogingen",
+    "pos": "Kleur & positie",
+    "col": "Alleen kleur",
+    "invalidhint1": "Poging heeft onjuist aantal pins",
+    "invalidhint2": "Poging heeft een ongeldige kleur",
+    "invalidhint3": "Aantal matches moet kleiner of gelijk zijn aan het aantal pins"
+  },
+
+  "periodictable": {
+    "short": "Een tool om nummers, symbolen en namen van chemische elementen te vertalen",
+    "long": "Een tool om nummers, symbolen en namen van chemische elementen te vertalen.",
+    "info": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een een- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen. De tool gebruikt de Engelse namen voor de elementen.</p>",
+    "ph": "Type nummers, namen of symbolen",
+    "searchsym": "Zoek symbolen",
+    "searchnum": "Zoek nummers",
+    "searchname": "Zoek namen",
+    "num": "Nummer",
+    "sym": "Symbool",
+    "grp": "Groep",
+    "prd": "Periode",
+    "blk": "Blok",
+    "name": "Naam"
+  },
+
+  "resistorcode": {
+    "info": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>",
+    "short": "Weerstandscode berekenen",
+    "long": "Berekent de waarde van een weerstand op basis van de gekleurde banden.",
+    "band": "Band",
+    "mult": "x Factor",
+    "res": "De weerstand bedraagt:"
+  },
+
+  "countries": {
+    "short": "Tabel met alle landen en autonome gebieden",
+    "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie.",
+    "info": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie. De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>",
+    "ph": "Voer meerdere codes, nummers of namen in",
+    "flag": "Vlag",
+    "ccode3": "ISO 3-letter code",
+    "ccode2": "ISO 2-letter code",
+    "cnum": "ISO land nr",
+    "name": "Land",
+    "tel": "Telefoon",
+    "web": "Web TLD",
+    "cur": "Munt",
+    "ccur": "Munt code",
+    "names": {
+      "abw": "Aruba",
+      "afg": "Afghanistan",
+      "ago": "Angola",
+      "aia": "Anguilla",
+      "ala": "Åland",
+      "alb": "Albania",
+      "and": "Andorra",
+      "are": "United Arab Emirates",
+      "arg": "Argentina",
+      "arm": "Armenia",
+      "asm": "American Samoa",
+      "ata": "Antarctica",
+      "atf": "French Southern and Antarctic Lands",
+      "atg": "Antigua and Barbuda",
+      "aus": "Australia",
+      "aut": "Austria",
+      "aze": "Azerbaijan",
+      "bdi": "Burundi",
+      "bel": "Belgium",
+      "ben": "Benin",
+      "bes": "Caribbean Netherlands",
+      "bfa": "Burkina Faso",
+      "bgd": "Bangladesh",
+      "bgr": "Bulgaria",
+      "bhr": "Bahrain",
+      "bhs": "The Bahamas",
+      "bih": "Bosnia and Herzegovina",
+      "blm": "Saint Barthélemy",
+      "blr": "Belarus",
+      "blz": "Belize",
+      "bmu": "Bermuda",
+      "bol": "Bolivia",
+      "bra": "Brazil",
+      "brb": "Barbados",
+      "brn": "Brunei",
+      "btn": "Bhutan",
+      "bvt": "Bouvet Island",
+      "bwa": "Botswana",
+      "caf": "Central African Republic",
+      "can": "Canada",
+      "cck": "Cocos (Keeling) Islands",
+      "che": "Switzerland",
+      "chl": "Chili",
+      "chn": "China",
+      "civ": "Ivory Coast",
+      "cmr": "Cameroon",
+      "cod": "Democratic Republic of the Congo",
+      "cog": "Republic of the Congo",
+      "cok": "Cook Islands",
+      "col": "Colombia",
+      "com": "Comoros",
+      "cpv": "Cape Verde",
+      "cri": "Costa Rica",
+      "cub": "Cuba",
+      "cuw": "Curaçao",
+      "cxr": "Christmas Island",
+      "cym": "Cayman Islands",
+      "cyp": "Cyprus",
+      "cze": "Czech Republic",
+      "deu": "Germany",
+      "dji": "Djibouti",
+      "dma": "Dominica",
+      "dnk": "Denmark",
+      "dom": "Dominican Republic",
+      "dza": "Algeria",
+      "ecu": "Ecuador",
+      "egy": "Egypt",
+      "eri": "Eritrea",
+      "esh": "Western Sahara",
+      "esp": "Spain",
+      "est": "Estonia",
+      "eth": "Ethiopia",
+      "fin": "Finland",
+      "fji": "Fiji",
+      "flk": "Falkland Islands",
+      "fra": "France",
+      "fro": "Faroe Islands",
+      "fsm": "Micronesia",
+      "gab": "Gabon",
+      "gbr": "United Kingdom",
+      "geo": "Georgia",
+      "ggy": "Guernsey",
+      "gha": "Ghana",
+      "gib": "Gibraltar",
+      "gin": "Guinea",
+      "glp": "Guadeloupe",
+      "gmb": "The Gambia",
+      "gnb": "Guinea-Bissau",
+      "gnq": "Equatorial Guinea",
+      "grc": "Greece",
+      "grd": "Grenada",
+      "grl": "Greenland",
+      "gtm": "Guatemala",
+      "guf": "French Guiana",
+      "gum": "Guam",
+      "guy": "Guyana",
+      "hkg": "Hong Kong",
+      "hmd": "Heard Island and McDonald Islands",
+      "hnd": "Honduras",
+      "hrv": "Croatia",
+      "hti": "Haiti",
+      "hun": "Hungary",
+      "idn": "Indonesia",
+      "imn": "Isle of Man",
+      "ind": "India",
+      "iot": "British Indian Ocean Territory",
+      "irl": "Ireland",
+      "irn": "Iran",
+      "irq": "Iraq",
+      "isl": "Iceland",
+      "isr": "Israel",
+      "ita": "Italy",
+      "jam": "Jamaica",
+      "jey": "Jersey",
+      "jor": "Jordan",
+      "jpn": "Japan",
+      "kaz": "Kazakhstan",
+      "ken": "Kenya",
+      "kgz": "Kyrgyzstan",
+      "khm": "Cambodia",
+      "kir": "Kiribati",
+      "kna": "Saint Kitts and Nevis",
+      "kor": "South Korea",
+      "kwt": "Kuwait",
+      "lao": "Laos",
+      "lbn": "Lebanon",
+      "lbr": "Liberia",
+      "lby": "Libya",
+      "lca": "Saint Lucia",
+      "lie": "Liechtenstein",
+      "lka": "Sri Lanka",
+      "lso": "Lesotho",
+      "ltu": "Lithuania",
+      "lux": "Luxembourg",
+      "lva": "Latvia",
+      "mac": "Macau",
+      "maf": "Collectivity of Saint Martin",
+      "mar": "Morocco",
+      "mco": "Monaco",
+      "mda": "Moldova",
+      "mdg": "Madagascar",
+      "mdv": "Maldives",
+      "mex": "Mexico",
+      "mhl": "Marshall Islands",
+      "mkd": "North Macedonia",
+      "mli": "Mali",
+      "mlt": "Malta",
+      "mmr": "Myanmar",
+      "mne": "Montenegro",
+      "mng": "Mongolia",
+      "mnp": "Northern Mariana Islands",
+      "moz": "Mozambique",
+      "mrt": "Mauritania",
+      "msr": "Montserrat",
+      "mtq": "Martinique",
+      "mus": "Mauritius",
+      "mwi": "Malawi",
+      "mys": "Malaysia",
+      "myt": "Mayotte",
+      "nam": "Namibia",
+      "ncl": "New Caledonia",
+      "ner": "Niger",
+      "nfk": "Norfolk Island",
+      "nga": "Nigeria",
+      "nic": "Nicaragua",
+      "niu": "Niue",
+      "nld": "Netherlands",
+      "nor": "Norway",
+      "npl": "Nepal",
+      "nru": "Nauru",
+      "nzl": "New Zealand",
+      "omn": "Oman",
+      "pak": "Pakistan",
+      "pan": "Panama",
+      "pcn": "Pitcairn Islands",
+      "per": "Peru",
+      "phl": "Philippines",
+      "plw": "Palau",
+      "png": "Papua New Guinea",
+      "pol": "Poland",
+      "pri": "Puerto Rico",
+      "prk": "North Korea",
+      "prt": "Portugal",
+      "pry": "Paraguay",
+      "pse": "State of Palestine",
+      "pyf": "French Polynesia",
+      "qat": "Qatar",
+      "reu": "Réunion",
+      "rou": "Romania",
+      "rus": "Russia",
+      "rwa": "Rwanda",
+      "sau": "Saudi Arabia",
+      "sdn": "Sudan",
+      "sen": "Senegal",
+      "sgp": "Singapore",
+      "sgs": "South Georgia and the South Sandwich Islands",
+      "shn": "Saint Helena, Ascension and Tristan da Cunha",
+      "sjm": "Svalbard and Jan Mayen",
+      "slb": "Solomon Islands",
+      "sle": "Sierra Leone",
+      "slv": "El Salvador",
+      "smr": "San Marino",
+      "som": "Somalia",
+      "spm": "Saint Pierre and Miquelon",
+      "srb": "Serbia",
+      "ssd": "South Sudan",
+      "stp": "São Tomé and Príncipe",
+      "sur": "Suriname",
+      "svk": "Slovakia",
+      "svn": "Slovenia",
+      "swe": "Sweden",
+      "swz": "Eswatini",
+      "sxm": "Sint Maarten",
+      "syc": "Seychelles",
+      "syr": "Syria",
+      "tca": "Turks and Caicos Islands",
+      "tcd": "Chad",
+      "tgo": "Togo",
+      "tha": "Thailand",
+      "tjk": "Tajikistan",
+      "tkl": "Tokelau",
+      "tkm": "Turkmenistan",
+      "tls": "East Timor",
+      "ton": "Tonga",
+      "tto": "Trinidad and Tobago",
+      "tun": "Tunisia",
+      "tur": "Turkey",
+      "tuv": "Tuvalu",
+      "twn": "Taiwan",
+      "tza": "Tanzania",
+      "uga": "Uganda",
+      "ukr": "Ukraine",
+      "umi": "United States Minor Outlying Islands",
+      "ury": "Uruguay",
+      "usa": "United States",
+      "uzb": "Uzbekistan",
+      "vat": "Vatican City",
+      "vct": "Saint Vincent and the Grenadines",
+      "ven": "Venezuela",
+      "vgb": "British Virgin Islands",
+      "vir": "United States Virgin Islands",
+      "vnm": "Vietnam",
+      "vut": "Vanuatu",
+      "wlf": "Wallis and Futuna",
+      "wsm": "Samoa",
+      "yem": "Yemen",
+      "zaf": "South Africa",
+      "zmb": "Zambia",
+      "zwe": "Zimbabwe"
+    }
+  },
+
+  "usastates": {
+    "short": "Lijst van staten van de VS inclusief vlag",
+    "long": "Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum.",
+    "info": "<p> Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum. De code is zowel de code gebruikt door de US Post als de code volgens <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. De naam van de staat is een link naar de Wikipedia.</p><p>Het is mogelijk meerdere codes, namen en nummers in te voeren gescheiden door spaties. Voor de USPS Code kan de spatie achterwege blijven.</p>",
+    "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "flag": "Vlag",
+    "code": "ISO3166:2 code",
+    "name": "Staat",
+    "num": "Toetreding",
+    "reps": "Huis reps",
+    "area": "Opp. ranking",
+    "cap": "Hoofdstad"
+  },
+
+  "nlprovinces": {
+    "short": "Lijst van provincies van Nederland met vlag",
+    "long": "Lijst van provincies van Nederland met vlag, aantal gemeentes, ranking volgens oppervlakte en hoofdstad.",
+    "info": "<p>Lijst van provincies van Nederland met vlag, aantal gemeentes, ranking volgens oppervlakte en hoofdstad. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>.</p><p>Het is mogelijk meerdere codes of nummers tegelijk in te voeren, gescheiden door spaties. Voor codes kan de spaties achterwege blijven. De naam van de provincie is een link naar de Wikipedia pagina, waar meer informatie over de provincie is te vinden.</p>",
+    "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "flag": "Vlag",
+    "code": "ISO3166:2 code",
+    "name": "Provincie",
+    "mun": "Gemeentes",
+    "area": "Opp. ranking",
+    "cap": "Hoofdstad"
+  },
+
+  "dialogpb":{
+    "title": "Polybiusvierkant",
+    "start": "Startalfabet:",
+    "key": "Sleutel",
+    "dir": "Richting",
+    "corner": "Startlocatie",
+    "flip": "Flip rij/kolom",
+    "d": {
+      "hor": "Horizontaal",
+      "ver": "Verticaal",
+      "diah": "Diagonaal links rechts",
+      "diav": "Diagonaal boven onder",
+      "si": "Spiraal binnenwaarts"
+    },
+    "c": {
+      "tl": "Linksboven",
+      "tr": "Rechtsboven",
+      "bl": "Linksonder",
+      "br": "Rechtsonder"
+    }
+  },
+
+  "dialogmap": {
+    "getloc": "Huidige locatie",
+    "mapstyle": "Kaartsoort",
+    "street": "Straten",
+    "satellite": "Satelliet",
+    "satstreet": "Satelliet/Straten",
+    "outdoors": "Wandelen/Outdoor",
+    "light": "Licht",
+    "dark": "Donker"
+  },
+
+  "dialogcc": {
+    "info": "Selecteer het formaat van de van en naar coördinaten. Selecteer eventueel de notatie voor WGS84 (en NAD). Alle geconverteerde coördinaten worden getoond op de kaart.",
+    "proj4jsmsg": "Je kan elk coördinaat systeem converteren door hieronder de proj4js definitie in te voeren. De definitie kan gevonden worden op <a href='http://epsg.io'>EPSG.io</a>. Neem de Proj4js.def (onderaan op de pagina) en kopieer de string die begint met + (zonder de aanhalingstekens).",
+    "proj4jslabel": "Proj4js definitie",
+    "phfrom": "Coördinaten om te converteren",
+    "phto": "Geconverteerde coördinaten"
+  },
+
+  "dialogcproj": {
+    "info": "Een projectie is een coördinaat op een gegeven afstand en richting van het startcoördinaat. Voer het startcoördinaat in (selecteer het juiste formaat) en voer de richting en afstand in.",
+    "projcoord": "Het geprojecteerde coördinaat is ",
+    "startpoint": "Startpunt",
+    "projpoint": "Geprojecteerde punt"
+  },
+
+  "dialogmm": {
+    "info": "Kies het formaat van de te plotten coördinaten. Selecteer of er markers en labels getoond moeten worden. Selecteer of er cirkels (pas eventueel de straal aan) getekend moeten worden. Het invoeren van labels is optioneel (default label is het coördinaat).",
+    "phcoord": "Coördinaten hier invoeren",
+    "phlabel": "Labels hier invoeren",
+    "showmark": "Toon markers",
+    "showlabel": "Toon marker labels",
+    "drawcircle": "Teken cirkels",
+    "makemap": "Maak kaart",
+    "error1": "Aantal coördinaten en labels moet gelijk zijn"
+  },
+
+  "dialogic": {
+    "intro": "Vul het coordinaat in en vervang de ontbrekende cijfers door abcd (of een andere letter of gebruik !@#%). Vul de mogelijke waardes in om te proberen. Maximaal 500 coordinaten.",
+    "button": "Toon coördinaten",
+    "error1": "Het maximale aantal coordinaten is 500. Beperk het aantal mogelijke waardes."
+  },
+
+  "dialoglines": {
+    "info": "Voer de coördinaten in en selecteer de gewenste berekening. Het resultaat wordt ook getoond op de kaart.",
+    "calc1": "Bereken afstand, richting en middenpunt (gebruikt coördinaten 1 & 2)",
+    "calc2": "Bereken punt het dichtste bij punt 3 op de lijn door punt 1 en punt 2.",
+    "calc3": "Bereken het snijpunt van de lijn door punt 1 en punt 2 en de lijn door punt 3 en punt 4.",
+    "midpoint": "Middenpunt",
+    "distance": "De afstand is: ",
+    "direction": "De richting is: ",
+    "pointnearest": "Dichtstbijzijnde punt: ",
+    "intersection": "Snijpunt: "
+  },
+
+  "dialogtriangles": {
+    "info": "Voer de coördinaten in. De berekening toont zwaartepunt, hoogtepunt, middelpunten van de ingeschreven en omgeschreven cirkels en het negenpuntspunt. Resultaten worden ook getoond op de kaart.",
+    "centroid": "Zwaartepunt",
+    "orthocenter": "Hoogtepunt",
+    "incenter": "Middelpunt ingeschreven cirkel",
+    "circumcenter": "Middelpunt omgeschreven cirkel",
+    "ninepoint": "Negenpuntspunt",
+    "or": " of "
+  },
+
+  "dialogcircles": {
+    "info": "Berekend de snijpunten en de oppervlakte van het snijvlak van twee cirkels. Selecteer het middelpunt (kies het gewenste formaat van het coordinaat) en de straal van beide cirkels.",
+    "ip": "Snijpunt",
+    "ia": "Oppervlakte snijvlak",
+    "ni": "Geen snijpunten",
+    "or": " of "
+  },
+
+  "dialogantipode": {
+    "info": "De antipode is het punt exact aan de andere kant van de aarde.",
+    "result": "Het antipode coördinaat is ",
+    "or": " of "
+  },
+
+  "dialogwv": {
+    "info": "Berekent de woordwaarde en stapeltelling van de tekst en van elk afzonderlijk woord. Selecteer het gewenste alfabet. Kies eventueel voor omgekeerde volgorde of beginnen met nul. Vervang de diakrieten indien nodig (maar let op want in sommige alfabetten zijn deze letters uniek).",
+    "reverse": "Omgekeerde volgorde Z→A",
+    "startzero": "Begin met nul (A=0 of Z=0 indien omgekeerd)",
+    "replacediac": "Vervang diakrieten",
+    "showhide": "Toon/verberg alfabet",
+    "someinfo": "Informatie over alfabetten",
+    "someinfo2": "<p>Er wordt gerekend met de officiële alfabetten. In sommige talen zijn diakrieten aparte letters (zoals Ä in het Duits of Å in het Zweeds) en in sommige talen komen zij overeen met de originele letter (zoals é of ô in het Frans). <b>Vervang diakrieten</b> is echter genadeloos en vervangt alle diakrieten. Dat werkt goed in de meeste gevallen, maar niet voor talen waarbij deze letters deel zijn van het alfabet</p><p>De Griekse en Cyrillische alfabetten hebben letters die grote gelijkenis vertonen met de Westerse versies, zoals A of B. Maar ze zijn wel degelijk verschillend. Indien ingevoerd met een Westers toetsenbord komen ze niet overeen en krijgen een waarde 0. Indien je een Russische/Griekse tekst zou kopieren, bijvoorbeeld plaatsnamen van Wikipedia (zoals Амстердам) dan worden de juiste letters gebruikt en de berekening correct uitgevoerd.</p><p>De Scrabble waardes zijn die van de laatst bekende versies. Er zijn nog veel meer versies in omloop. Een goed overzicht is te vinden op <a href='https://en.wikipedia.org/wiki/Scrabble_letter_distributions'>Wikipedia</a>, maar je moet dan zelf de berekening uitvoeren.</p>"
+  },
+
+  "dialogcharcodes": {
+    "info": "Computers kennen geen letters maar alleen cijfers. Cijfers worden door zogenaamde codepages omgezet in karakters. Er zijn honderden verschillende codepages. Deze tool kent de meest gangbare, inclusief de beruchte alt-codes.",
+    "input": "Type invoer",
+    "output": "Gewenste uitvoer",
+    "someinfo": "Informatie over codepages",
+    "someinfo2": "<p>Computers zijn binair, ze gebruiken alleen 0 en 1. Deze getallen kunnen natuurlijk ook worden omgezet naar decimaal, octaal of hexadecimaal. Deze tool accepteert ze allemaal en converteert desgewenst. De nummers worden gebruikt om het juiste karakter (glyph in nerd speak) op te zoeken in een codepage.</p><p>De allereerste codepage was ASCII en deze is nog steeds in gebruik. Het is nu een subset van UTF, en is ook een subset van de codepages die gebruikt werden in MS DOS en MS Windows. ASCII gebruikt slechts 7-bits (128 karakters). De codepages van Microsoft gebruiken 8 bits (zoals CP437, CP850, CP1252), 256 characters. Voor talen met andere karakters (Russich, Chinees, Oost Europese talen) moest een andere codepage gebruikt worden. Met de introductie van UTF kan dezelfde codepage gebruikt worden voor alle talen en ook voor emoji's ;-). <strong>Alt codes</strong>: afhankelijk van de versie van MS DOS of MS Windows en geïnstalleerde codepage kan door het intikken van getallen op het numerieke toetsenbord in combinatie met de Alt-toets en code worden ingevoerd, resulterend in een speciaal karakter.</p><p>Voor een geschiedenis van alle codepages zie <a href='https://en.wikipedia.org/wiki/List_of_information_system_character_sets'>Wikipedia's history of information system character sets</a> en <a href='https://en.wikipedia.org/wiki/Code_page'>Wikipedia codepages</a>.</p><p>In de tijden van telegraaf en telex werden er ook al binaire codes gebruikt zoals de Baudot code (ITA-1) en de Murray code (ITA-2). De tool converteert ook deze codes. De bits zijn normaal in de volgorde 54321, maar de omgekeerde volgorde 12345 komt ook voor. Er is ook een Cyrillische versie van de Murraycode genaamdas MTK-2. Voor meer informatie <a href='https://en.wikipedia.org/wiki/Baudot_code>Wikipedia</a>.</p>"
+  },
+
+  "dialogsr": {
+    "info": "Voer de gecodeerde tekst in. Gebruik Hints ophalen voor het berekenen van mogelijke substituties op basis van frequentieanalyse. Selecteer de juiste taal voor het beste resultaat. Voer de originele en substituten in. De gedecodeerde tekst wordt getoond. Ga op zoek naar veel voorkomende woorden (zoals en, een, de en het). Je kan deze tool ook gebruiken om codepages op te lossen.",
+    "errorlength": "Origineel en substituten moeten dezelfde lengte hebben",
+    "errordouble": "Dubbele letters gevonden.",
+    "highlight": "Highlight",
+    "orig": "Originele letters",
+    "repl": "Substituten",
+    "get": "Hints ophalen",
+    "apply": "Hints toepassen"
+  },
+
+  "dialoganal": {
+    "info": "Voer de tekst in voor analyse. Het aantal woorden, regels, karakters, letters, cijfers, witgebruik en symbolen wordt berekend. Ook de percentages worden getoond.",
+    "analyze": "Analiseer tekst",
+    "result": "Tabel met aantallen en percentages komt hier",
+    "nwords": "Aantal woorden",
+    "nlines": "Aantal regels",
+    "nchar": "Aantal karakters",
+    "nalpha": "Aantal letters (A to Z, a to z)",
+    "ndigit": "Aantal cijfers (0 to 9)",
+    "nwhite": "Aantal witgebruik (spaties, tabs, regeleinde)",
+    "nupper": "Aantal hoofdletters (A to Z)",
+    "nlower": "Aantal kleine letters (a to z)",
+    "nnonalpha": "Aantal niet-letters",
+    "nnonwhite": "Aantal niet-witgebruik",
+    "letter": "Letter",
+    "digit": "Cijfer",
+    "symbol": "Symbool",
+    "count": "Aantal",
+    "perc": "Percentage",
+    "upper": "hoofd",
+    "lower": "kleine"
+  },
+
+  "dialogttn": {
+    "info": "Vertaal tekst naar nummers en vice versa op basis van de positie in het alfabet. Gebruik de omgekeerde volgorde of begin te tellen met nul (optioneel). Voor getallen onder de tien kan de nul in sommige gevallen worden weggelaten. Indien gewenst kan de nul altijd worden weergegeven.",
+    "leadzero": "Gebruik altijd een 0 voor getallen <10",
+    "btnttn": "Tekst naar getallen",
+    "btnntt": "Getallen naar tekst"
+  },
+
+  "dialogkb": {
+    "info": "Er zijn veel verschillende toetsenborden in gebruik. Een tekst getypt op het ene toetsenbord geeft een ander resultaat op een ander toetsenbord. Gebruik deze tool voor het vertalen.",
+    "inputkb": "Invoer toetsenbord",
+    "outputkb": "Uitvoer toetsenbord",
+    "error": "Toetsenbord kan niet worden geconverteerd. Controleer de invoer."
+  },
+
+  "dialogbaseconv": {
+    "info": "Selecteer de base for links en rechts. Het is mogelijk meerdere nummers tegelijk te converteren. Pas eventueel de karakters aan die de getallen weergeven, bijvoorbeeld voor binair A en B in plaats van 0 en 1.",
+    "base1": "Base links (2 t/m 36)",
+    "base2": "Base rechts (2 t/m 36)"
+  },
+
+  "dialogdeci": {
+    "info": "Deze tool zoekt de decimalen van enkele bekende nummers. De eerste decimaal achter de punt is positie 1. Selecteer de start- en einddecimaal. De eerste 1,000,000 decimalen zijn beschikbaar.",
+    "sel": "Selecteer een nummer",
+    "pi": "π of pi, begint met 3.141592653589...",
+  	"e": "e, begint met 2.718281828459...",
+    "tau": "𝜏, tau of 2*π, begint met 6.2831853071...",
+    "phi": "φ of phi of de gulden ratio, begint met 1.61803398874989...",
+    "euler": "γ of de Euler–Mascheroni constante, begint met 0.577215664901...",
+    "sq2": "√2, begint met 1.414213562373095...",
+    "sq3": "√3, begint met 1.7320508075...",
+    "from": "Vanaf decimaal",
+    "to": "tot decimaal",
+    "get": "Haal op",
+    "res1": "De decimalen vanaf ",
+    "res2": "tot",
+    "res3": "zijn"
+  },
+
+  "dialogfib": {
+    "info": "De Fibonacci reeks begint met 1, 1. Het volgede nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar.",
+    "pos": "Fibonacci nummer op positie",
+    "check": "Controleer of dit een Fibonacci nummer is",
+    "toobig": "Positie te hoog (max 500)",
+    "errorzero": "Positie moet groter dan 0 zijn",
+    "the": "Het ",
+    "nth": "e Fibonacci nummer is ",
+    "not": " niet",
+    "fib": " een Fibonacci nummer"
+  },
+
+  "dialoggcd": {
+    "info": "Deze tool berekent de Grootste Gemene Deler (GGD) en het Kleinste Gemene Veelvoud (KGV). Het geeft tevens de priemfactoren van elk getal. Let op want voor zeer grote getallen kan de berekening flink wat tijd kosten.",
+    "num": "Nummers",
+    "inperror": "Ongeldige invoer, nummer moet groter dan 0 zijn",
+    "t1": "Grootste Gemene Deler (GGD) & Kleinste Gemene Veelvoud (KGV)",
+    "t2": "Priemfactoren",
+    "gcd": "De GGD is ",
+    "lcm": "Het KGV is"
+  },
+
+  "dialognim": {
+    "info": "Nimbers zijn geen nummers, maar je kan ze wel optellen en vermenigvuldigen. Nimbers worden gebruikt in combinatorial game theory (CGT). Voer twee getallen in en het product en de som worden berekend.",
+    "num1": "Eerste nummer",
+    "num2": "Tweede nummer",
+    "t1": "Product & som",
+    "prod": "Het nimber product is",
+    "sum": "De nimber som is"
+  },
+
+  "dialogpali": {
+    "info": "Hoeveel herhalingen zijn nodig om van een nummer een palindroom te maken, door er steeds het omgekeerde getal bij opt te tellen. Voor de meeste getallen is dit opvallend weinig, maar sommige getallen duren aanzienlijk langer. Het algortime stopt na 100 herhalingen.",
+    "t1": "Palindroom",
+    "res1": "Het duurt",
+    "res2": "herhalingen om een palindroom te worden.",
+    "res3": "De reeks is",
+    "toomany": "Meer dan 100 iteraties"
+  },
+
+  "dialognp": {
+    "info": "Deze tool checkt de eigenschappen van een nummer. Het maximum nummer is 1,000,000,000",
+    "num": "Nummer",
+    "t1": "Eigenschappen",
+    "even": "Even: nummers deelbaar door 2",
+    "odd": "Oneven: nummers niet deelbaar door 2",
+    "prime": "Priem: Een natuurlijk getal groter dan 1 dat niet het product is van twee andere natuurlijke getallen",
+    "fib": "Fibonacci: Reeks, elk nummer is de som van de voorgaande twee nummers. De reeks begint met 1, 1, 2, 3, ...",
+    "comp": "Composiet: Nummers waarvoor geldt n = x*y met x > 1 en y > 1 (niet priem getallen)",
+    "bi": "Bipriem: Nummers die het product zijn van exact twee priemgetallen",
+    "niven": "Niven or Harshad: Nummers deelbaar door de som van de cijfers",
+    "sqfree": "Squarefree: Nummers niet deelbaar door een kwadraat > 1",
+    "evil": "Evil: Het binaire getal heeft een even aantal enen.",
+    "odious": "Odious: Het binaire getal heeft een oneven aantal enen",
+    "perfect": "Perfect: Sigma(n) = 2n, met sigma(n) is de some van de delers van n",
+    "defi": "Deficient: Sigma(n) < 2n, met sigma(n) is de some van de delers van n",
+    "abun": "Abundant: Sigma(n) > 2n, met sigma(n) is de some van de delers van n",
+    "narc": "Narcistic: Som van de cijfers ** (aantal cijfers) is gelijk aan n",
+    "pow": "Powerful: Voor elk priemgetallen p dat een deler is van n geldt dat p**2 ook een deler is van n",
+    "lucky": "Lucky: zie https://en.wikipedia.org/wiki/Lucky_number voor uitleg",
+    "happy": "Happy: zie https://en.wikipedia.org/wiki/Happy_number voor uitleg",
+    "asp": "Aspiring: zie https://oeis.org/A063769 Online Encyclopedia of Integer Sequences voor uitleg",
+    "penta": "Pentagonal: een getal in de reeks a(n) = n*(3*n-1)/2",
+    "toobig": "Nummer moet kleiner zijn dan 1,000,000,000"
+  },
+
+  "dialogseq": {
+    "info": "Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks.",
+    "sel": "Selecteer een reeks",
+    "conway": "Conway reeks ook wel bekend als de hoor-en-spreek reeks",
+    "revconway": "Reverse Conway reeks ook wel bekend als de hoor-en-spreek reeks",
+    "hailstone": "Hailstone reeks, als n even n/2, als n oneven 3n+1",
+    "niven": "Niven, nummers deelbaar door de som van de cijfers",
+    "abundant": "Abundant, nummers waarvoor de som van de delers groter is dan het nummer",
+    "deficient": "Deficient, nummers waarvoor de soms van de delers kleiner is dan het nummer",
+    "golomb": "Golomb, de n-de term is gelijk aan het aantal keren dat n voorkomt in de reels",
+    "niter": "Aantal herhalingen",
+    "start": "Startwaarde",
+    "res1": "Het getal op positie",
+    "res2": "De reeks is"
+  },
+
+  "dialogabout": {
+    "info": "Deze pagina is helaas alleen beschikbaar in het Engels."
+  },
+
+  "dialoghowto": {
+    "info": "Deze pagina is helaas alleen beschikbaar in het Engels."
+  }
+}

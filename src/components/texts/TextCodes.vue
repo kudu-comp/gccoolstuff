@@ -1,0 +1,261 @@
+<template>
+  <div class="d-flex flex-column mx-4">
+    <div class="sectionhead">
+      {{$t('texttools.charcodes.title')}}
+    </div>
+    <div class="mainpage">
+      <div class="infoblock">
+        {{$t('dialogcharcodes.info')}}
+      </div>
+      <div class="form-inline">
+        <label class="form-label mb-2 mr-2" for="codes">{{$t('dialogcharcodes.input')}}</label>
+        <v-code class="mb-2" id="codes" v-model:code="selectedcode"></v-code>
+      </div>
+      <div class="form-row mb-2">
+        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+      </div>
+      <div class="form-inline">
+        <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="translateInput">
+        <label class="form-label mb-2 mr-2" for="codes">{{$t('dialogcharcodes.output')}}</label>
+        <v-code class="mb-2" id="codes" v-model:code="selectedoutput" @change="translateInput"></v-code>
+      </div>
+      <div class="card card-text p-2">{{result}}</div>
+      <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
+        <template v-slot:header>{{$t('dialogcharcodes.someinfo')}}</template>
+        <template v-slot:content><div v-html="$t('dialogcharcodes.someinfo2')"></div></template>
+      </va-item>
+      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import VCode from '@/components/inputs/VCode.vue'
+import * as baudotcode from '@/scripts/baudotcode.js'
+import * as codepages from '@/scripts/codepages.js'
+import { codePoints, fromCodePoint } from 'utf16-char-codes'
+import VaItem from '@/components/inputs/VaItem.vue'
+
+export default {
+  name: 'TextCodes',
+
+  props: {
+    msg: String,
+  },
+
+  data: function () {
+    return {
+      message: "",
+      result : this.$t('labels.result'),
+      selectedcode : "Decimal",
+      selectedoutput: "UTF16",
+      error: false,
+      errormsg: "",
+      showinfo: true,
+    }
+  },
+
+  components: {
+    VCode,
+    VaItem,
+  },
+
+  mounted: function() {
+    this.$refs.message.focus();
+  },
+
+  methods: {
+
+    // Decide if input is read one by one or divided by whitespace
+    getMany: function (s) {
+      switch (s) {
+        case "Baudotcode" :
+        case "BaudotcodeR" :
+        case "Murraycode" :
+        case "MurraycodeR" :
+        case "MurrayMTK2" :
+        case "MurrayMTK2R" :
+        case "Binary" :
+        case "Octal" :
+        case "Decimal" :
+        case "Hexadecimal" :
+          return true;
+        default :
+          return false;
+      }
+    },
+
+    // Convert the intermediate result (a decimal number) to the requested output
+    decimalToOutput : function (w) {
+      // If input is -1 a control character has been used and output is empty
+      if (w == -1) return "";
+
+      // Convert to w to the requested output
+      switch (this.selectedoutput) {
+
+        case "Baudotcode" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.baudotASCIIToCode(w);
+
+        case "BaudotcodeR" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.baudotReversedASCIIToCode(w);
+
+        case "Murraycode" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.murrayASCIIToCode(w);
+
+        case "MurraycodeR" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.murrayReversedASCIIToCode(w);
+
+        case "MurrayMTK2" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.murrayMTK2ASCIIToCode(w);
+
+        case "MurrayMTK2R" :
+          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
+          return baudotcode.murrayMTK2ReversedASCIIToCode(w);
+
+        case "UTF16" :
+          // Input is a decimal number of the UTF character, fromCodePoint comes from the utf-16 lib
+          return [fromCodePoint(w)];
+
+        case "Binary" :
+          // Input is a decimal number to be converted to binary
+          return [w.toString(2)];
+
+        case "Octal" :
+          // Input is a decimal number to be converted to octal
+          return [w.toString(8)];
+
+        case "Decimal" :
+          // Input is a decimal number
+          return [w.toString(10)];
+
+        case "Hexadecimal" :
+          // Input is a decimal number to be converted to hex
+          return [w.toString(16)];
+
+        default :
+          // Default find the codepage in codepages.js
+          var cp = codepages.findCodepage(this.selectedoutput);
+          if (cp >= 0)
+            return [codepages.codeToChar(parseInt(w), cp)];
+          else {
+            // This should never happen
+            this.error = true;
+            this.errormsg = this.$t('errors.generic');
+            return [""];
+          }
+      }
+    },
+
+    // Convert the input to the intermediate result (a decimal number)
+    inputToDecimal : function (w) {
+
+      switch (this.selectedcode) {
+
+        case "Baudotcode" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+          return baudotcode.baudotCodeToASCII(w);
+
+        case "BaudotcodeR" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+            return baudotcode.baudotReversedCodeToASCII(w);
+
+        case "Murraycode" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+          return baudotcode.murrayCodeToASCII(w);
+
+        case "MurraycodeR" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+          return baudotcode.murrayReversedCodeToASCII(w);
+
+        case "MurrayMTK2" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+          return baudotcode.murrayMTK2ToASCII(w);
+
+        case "MurrayMTK2R" :
+          // Input is a binary string representing the baudotcode
+          // Or returns -1 for a control character
+          return baudotcode.murrayMTK2ReversedCodeToASCII(w);
+
+        case "UTF16" :
+          // input is an UTF character
+          // codePoints returns an array of integers, but we always have only one
+          return codePoints(w)[0];
+
+        case "Binary" :
+          // Input is a binary number convert to decimal
+          return parseInt(w, 2);
+
+        case "Octal" :
+          // Input is a octal number convert to decimal
+          return parseInt(w, 8);
+
+        case "Decimal" :
+          // Input is a binary number convert to decimal
+          return parseInt(w);
+
+        case "Hexadecimal" :
+          // Input is a binary number convert to decimal
+          return parseInt(w, 16);
+
+        default :
+          // This should never happen
+          var cp = codepages.findCodepage(this.selectedcode)
+          if (cp >= 0)
+            return codepages.charToCode(w, cp);
+          else {
+            this.error = true;
+            this.errormsg = this.$t('errors.generic');
+            return -1;
+          }
+      }
+    },
+
+    // Translate the input
+    translateInput : function () {
+
+      // Reset error flag and reset baudotcode flag to letters
+      this.error = false;
+      baudotcode.reset();
+
+      try {
+        // Break down input in words
+        this.message = this.message.trim();
+        var words;
+        if (!this.getMany(this.selectedcode)) {
+          words = this.message.match(/./gu);
+        } else {
+          words = this.message.split(/[,.\s]+/g);
+        }
+
+        // For each word convert and add to the output
+        // Baudotcode and Murraycode might output two strings, so arrays are used
+        this.result = "";
+        for (let i=0; i < words.length; i++) {
+          var inp = this.inputToDecimal(words[i]);
+          var outp = this.decimalToOutput(inp);
+          for (let i=0; i < outp.length; i++) {
+            this.result += outp[i] + " ";
+          }
+        }
+      } catch (e) {
+        this.error = true;
+        this.errormsg = this.$t('errors.invalidinput');
+        console.log(e);
+      }
+    },
+  },
+}
+</script>
+
+<style scoped>
+</style>
