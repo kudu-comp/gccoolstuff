@@ -76,8 +76,11 @@
 <script>
 
 export default {
+
   name: "VPolybius",
+
   props: ['polybiussquare'],
+  
   data() {
     return {
       startalphabet: "",
@@ -94,6 +97,7 @@ export default {
   },
 
   mounted: function() {
+
     // Start with the given alphabet
     this.alphabet = this.polybiussquare;
     this.startalphabet = this.polybiussquare;
@@ -101,28 +105,34 @@ export default {
       this.alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
       this.startalphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
     }
+
+    // Generate first square
     this.genSquare();
+
   },
 
   methods: {
 
-    // Help function to create a square with various options, default is the default Polybius square
-    // returns a string
+    // Help function to create a square with various options, default is the
+    // default Polybius square. Returns a string
     fillSquare: function  () {
 
       // Initialize variables
-      var text = this.alphabet;
-      var dir = this.dir;
-      var c = this.start;
-      var flip = this.flip;
-
+      let text = this.alphabet;
+      let dir = this.dir;
+      let c = this.start;
+      let flip = this.flip;
+      let corners = ["TL", "TR", "BR", "BL"];
+      let loop = 0;
+      let ct = "";      
+      let idx = 0;
+      let fliprow = flip;
+      let sq = [];
+      
       // Get size of square
-      var size = Math.floor(Math.sqrt(text.length));
+      let size = Math.floor(Math.sqrt(text.length));
 
-      // Initialize all variables
-      var idx = 0;
-      var fliprow = flip;
-      var sq = [];
+      // Initalize the square
       for (let i = 0; i < size; i++) {
         sq.push([]);
         for (let j = 0; j <= i; j++) {
@@ -244,9 +254,9 @@ export default {
 
         case "SI" :
           // Spiral inwards start at specified corner and rotate towards center
-          var corners = ["TL", "TR", "BR", "BL"];
-          var loop = 0;
-          var ct = "";
+          corners = ["TL", "TR", "BR", "BL"];
+          loop = 0;
+          ct = "";
           if (!flip) {
 
             //Clockwise
@@ -286,12 +296,13 @@ export default {
           break;
 
         default :
-          // Will return the pre filled square with X's
+          // Do nothing
+
       }
       // end switch statement
 
       // Output square as a string
-      var s = "";
+      let s = "";
       for (let i = 0; i < size; i++)
         for (let j = 0; j < size; j++) s += sq[i][j];
           return s;
@@ -299,15 +310,16 @@ export default {
     },
 
     genAlphabet() {
+
       // Generate the alphabet from the starting alphabet and the given key
       var s = "";
 
-      // Get all the letters from the key, but only if they also exist in square
+      // Get all the unique letters from the key, but only if they also exist in square
       for (let c of this.key) {
           if (s.indexOf(c) < 0 && this.startalphabet.indexOf(c) >= 0) s += c;
       }
 
-      //  Add the remaining letters
+      //  Add the remaining unique letters
       for (let c of this.startalphabet) {
           if (s.indexOf(c) < 0) s += c;
       }
@@ -316,16 +328,19 @@ export default {
     },
 
     genReset () {
+
+      // Reset the square and all defaults
       this.start = "TL";
       this.dir = "HOR";
       this.flip = false;
       this.alphabet = this.startalphabet;
+
     },
 
     genSquare() {
 
       // Check if we have a valid alphabet
-      var len = Math.sqrt(this.alphabet.length);
+      let len = Math.sqrt(this.alphabet.length);
       if (this.alphabet.length % len != 0) {
         this.error=true;
         this.errormsg="Alphabet must be 25 or 36 characters";
@@ -341,11 +356,15 @@ export default {
       for (let i = 0; i < len; i++) {
         this.squaredisp.push(this.alphabet.substr(i*len, len));
       }
+
     },
 
     genCleanSquare() {
+
+      // Regenerate the square from the starting alphabet
       this.alphabet = this.startalphabet;
       this.genSquare();
+
     },
 
     closeModal() {
@@ -358,8 +377,6 @@ export default {
 
   }
 };
-
-// https://css-tricks.com/considerations-styling-modal/ styling to be added
 
 </script>
 

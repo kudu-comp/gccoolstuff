@@ -66,14 +66,14 @@ export default {
       try {
 
         // Translate the inputed coordinates to WGS84 for display on map
-        var coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        var coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-        var coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
+        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
+        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
+        let coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
 
         // Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        var gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-        var gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
+        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+        let gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
 
         this.error = false;
         let data = {
@@ -104,12 +104,13 @@ export default {
               this.result += "<br>" + this.$t('labels.circumference') + ": "  + data.circumference.toFixed(0) + "m<sup>2</sup>";
 
               // Convert points to WGS84
-              var centroid = coords.convertCoordToWGS( {lat: data.centroid.y, lon: data.centroid.x}, "RD");
-              var orthocenter = coords.convertCoordToWGS( {lat: data.orthocenter.y, lon: data.orthocenter.x}, "RD");
-              var incenter = coords.convertCoordToWGS( {lat: data.incenter.y, lon: data.incenter.x}, "RD");
-              var circumcenter = coords.convertCoordToWGS( {lat: data.circumcenter.y, lon: data.circumcenter.x}, "RD");
-              var ninepointcenter = coords.convertCoordToWGS( {lat: data.ninepointcenter.y, lon: data.ninepointcenter.x}, "RD");
+              let centroid = coords.convertCoordToWGS( {lat: data.centroid.y, lon: data.centroid.x}, "RD");
+              let orthocenter = coords.convertCoordToWGS( {lat: data.orthocenter.y, lon: data.orthocenter.x}, "RD");
+              let incenter = coords.convertCoordToWGS( {lat: data.incenter.y, lon: data.incenter.x}, "RD");
+              let circumcenter = coords.convertCoordToWGS( {lat: data.circumcenter.y, lon: data.circumcenter.x}, "RD");
+              let ninepointcenter = coords.convertCoordToWGS( {lat: data.ninepointcenter.y, lon: data.ninepointcenter.x}, "RD");
 
+              // Print results
               this.result += "<br>" + this.$t('dialogtriangles.centroid') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(centroid, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
               this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(centroid, "N12 34.567 E1 23.456");
               this.result += "<br>"+ this.$t('dialogtriangles.orthocenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(orthocenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
@@ -130,15 +131,19 @@ export default {
 
           })
           .catch((error) => {
+
               console.error('Error ', error);
               this.errormsg = this.$t('errors.incorrectcoords');
               this.error = true;
+
           });
 
         } catch (e) {
+
           console.log(e);
           this.error = true;
           this.errormsg = this.$t('errors.incorrectcoords');
+          
         }
 
     },

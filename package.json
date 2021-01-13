@@ -11,7 +11,7 @@
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "@what3words/api": "^3.1.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "exifreader": "^3.12.6",
     "latlon-geohash": "^2.0.0",
@@ -21,6 +21,7 @@
     "vue": "^3.0.2",
     "vue-i18n": "^9.0.0-beta.16",
     "vue-router": "^4.0.0-0",
+    "vue-slider-component": "^4.0.0-beta.3",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

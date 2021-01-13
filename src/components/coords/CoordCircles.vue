@@ -73,14 +73,14 @@ export default {
       try {
 
         // Translate the inputed coordinates to WGS84 for display on map
-        var coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        var coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
+        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
+        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
 
         // Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        var gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-        var r1 = this.radius1 * this.unit1;
-        var r2 = this.radius2 * this.unit2;
+        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+        let r1 = this.radius1 * this.unit1;
+        let r2 = this.radius2 * this.unit2;
 
         this.error = false;
         let data = {
@@ -120,8 +120,8 @@ export default {
                 // Intersection
 
                 // Convert points to WGS84
-                var p1 = coords.convertCoordToWGS( {lat: data.p1.y, lon: data.p1.x}, "RD");
-                var p2 = coords.convertCoordToWGS( {lat: data.p2.y, lon: data.p2.x}, "RD");
+                let p1 = coords.convertCoordToWGS( {lat: data.p1.y, lon: data.p1.x}, "RD");
+                let p2 = coords.convertCoordToWGS( {lat: data.p2.y, lon: data.p2.x}, "RD");
 
                 this.result = "<br>" + this.$t('dialogcircles.ip') + " 1: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p1, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
                 this.result += this.$t('dialogcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
@@ -144,16 +144,19 @@ export default {
 
           })
           .catch((error) => {
+
               console.error('Error ', error);
               this.errormsg = this.$t('errors.incorrectcoords');
               this.error = true;
+              
           });
 
         } catch (e) {
+
           console.log(e);
           this.error = true;
-          this.errormsg =  this.$t('errors.incorrectcoords')
-          ;
+          this.errormsg =  this.$t('errors.incorrectcoords');
+          
         }
 
     },

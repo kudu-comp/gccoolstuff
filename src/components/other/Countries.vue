@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">  {{this.$t('menu.countries')}}</div>
+        <div class="text-center">  {{this.$t('othertools.countries.title')}}</div>
     </div>
     <div class="mainpage">
       <div class="infoblock" v-html="$t('countries.info')"></div>
@@ -159,7 +159,7 @@ export default {
         { ccode3: "CZE", web: "cz", ccode2: "CZ", cnum: "203", tel: "420", cur: "koruna", ccur: "CZK" },
         { ccode3: "DEU", web: "de", ccode2: "DE", cnum: "276", tel: "49", cur: "euro", ccur: "EUR" },
         { ccode3: "DJI", web: "dj", ccode2: "DJ", cnum: "262", tel: "253", cur: "frank", ccur: "DJF" },
-        { ccode3: "DMA", web: "dm", ccode2: "DM", cnum: "212", tel: "767", cur: "dollar", ccur: "XCD" },
+        { ccode3: "DMA", web: "dm", ccode2: "DM", cnum: "212", tel: "1-767", cur: "dollar", ccur: "XCD" },
         { ccode3: "DNK", web: "dk", ccode2: "DK", cnum: "208", tel: "45", cur: "krone", ccur: "DKK" },
         { ccode3: "DOM", web: "do", ccode2: "DO", cnum: "214", tel: "1-809", cur: "kroon", ccur: "DKK" },
         { ccode3: "DZA", web: "dz", ccode2: "DZ", cnum: "012", tel: "123", cur: "dinar", ccur: "DZD" },

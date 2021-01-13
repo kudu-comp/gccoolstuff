@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{this.$t('menu.mmsolver')}}
+      {{this.$t('othertools.mmsolver.title')}}
     </div>
     <div class="mainpage">
       <div class="infoblock">
@@ -109,7 +109,7 @@ export default {
 
     // Print the selected solution from the dropdown
     printSolution : function() {
-      for (var r=1; r <= this.npin; r++) {
+      for (let r=1; r <= this.npin; r++) {
         // Print each pin
       }
     },
@@ -122,7 +122,7 @@ export default {
         let temp = this.pins[i].split("");
 
         // Position and color match
-        var pos = 0;
+        let pos = 0;
         for (let j=0; j < this.npin; j++) {
           if (temp[j] == pins[j]) {
             pos++;
@@ -133,11 +133,11 @@ export default {
         if (pos != this.pos[i]) return false;
 
         // Color only match
-        var col = 0;
+        let col = 0;
         for (let j=0; j < this.npin; j++) {
           // Numbers who have been matched on position must be skipped
           if (temp[j] == 'x') continue;
-          var idx = temp.indexOf(pins[j]);
+          let idx = temp.indexOf(pins[j]);
           if (idx >= 0) {
             col++;
             // Avoid counting again, do not set to x because that assumed it was matched on position
@@ -150,10 +150,13 @@ export default {
 
       // All tests passed
       return true;
+
     },
 
     generatePins: function gen(s, np, nc, uniq, check, res) {
+
       // While the string is not the required length generate
+      // recursive function calls
       if (s.length < np) {
         for (let p=1; p <= nc; p++) {
           if (uniq && s.indexOf(p) >= 0) continue;
@@ -164,9 +167,10 @@ export default {
           res.push(s);
         }
       }
+
     },
 
-    // Solve the sudoku by calling the PHP script on the server
+    // solve the mastermind puzzle
     solveMM : function () {
 
       // reset
@@ -182,12 +186,14 @@ export default {
           this.nhints = i;
           break;
         }
+
         // Check if #pins is correct
         if (this.pins[i].length != this.npin) {
           this.error = true;
           this.errormsg = this.$t('mmsolver.invalidhint1');
           return;
         }
+
         // Check if pins are correct colors
         for (let j=0; j < this.npin; j++) {
           if (this.pins[i][j] < 1 ||  this.pins[i][j] > this.ncolor) {
@@ -196,6 +202,7 @@ export default {
             return;
           }
         }
+
         // Check if pos and col are okay
         if ( parseInt(this.pos[i]) + parseInt(this.col[i]) > this.ncolor ) {
           this.error = true;
@@ -204,7 +211,10 @@ export default {
         }
       }
 
+      // Solve the puzzle
       this.generatePins("", this.npin, this.ncolor, this.unique, this.checkpins, this.results);
+
+      // Print the results
       this.numberofsolutions = this.results.length;
       this.solved = true;
 

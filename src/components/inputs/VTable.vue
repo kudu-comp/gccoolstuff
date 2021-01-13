@@ -206,7 +206,7 @@ export default {
       this.result = "";
       for (let c of this.cols) {
         if (c.image) continue;
-        this.result += c.label + ": ";
+        this.result += "<b>" + c.label + ":</b> ";
         for (let r of this.sortArr) {
           if (c.computed) {
             // for computed columns call function computed
@@ -241,7 +241,7 @@ export default {
         // Custom compare functions, asc and desc handled here
         // Should we pass rows instead of fields because of computed columns?
         this.sortArr.sort ( (a,b) =>  {
-          var srt = this.cols[idx].sortable.srtCol(this.rows[a][field], this.rows[b][field]);
+          let srt = this.cols[idx].sortable.srtCol(this.rows[a][field], this.rows[b][field]);
           return (this.sortable.sort == "desc") ? srt * -1 : srt;
         });
 
@@ -299,13 +299,15 @@ export default {
 
     search: function () {
 
-      // Reset error
+      // Reset error, init variables
       this.error = false;
+      let idx = 0;
+      let codes = [];
 
       // Parse the input into separate search terms
       if ( this.cols[this.searchIndex].parseCol ) {
         // Custom parsing of searchinput
-        var codes = this.cols[this.searchIndex].parseCol(this.searchInput);
+        codes = this.cols[this.searchIndex].parseCol(this.searchInput);
       } else {
         // Default parse input using regex - white space separated
         codes = this.searchInput.match(/([^\s]+)/ug);
@@ -320,10 +322,14 @@ export default {
 
         // Search all parsed inputs
         for (let c of codes) {
+
           if ( this.cols[this.searchIndex].matchCol ) {
+
             // Custom matching of searchinput
-            var idx = this.cols[this.searchIndex].matchCol(c);
+            idx = this.cols[this.searchIndex].matchCol(c);
+
           } else {
+
             // Default parse input using regex - white space separated
             // Default match is case insensitive
             if (this.cols[this.searchIndex].computed) {
@@ -333,8 +339,12 @@ export default {
               // compare normal fields
               idx = this.rows.findIndex( (e) => e[searchField].toUpperCase() == c.toUpperCase().trim() )
             }
+            
           }
+
+          // If input has been found add it the display array
           if (idx >=0 ) this.sortArr.push(idx);
+
         }
 
         // Reset if no results found

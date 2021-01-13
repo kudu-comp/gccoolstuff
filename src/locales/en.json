@@ -38,11 +38,25 @@
     "format": "Format",
     "reset": "Reset",
     "cancel": "Cancel",
+    "update": "Update",
     "save": "Save",
     "get": "Get",
     "check": "Check",
     "showtab": "Show/hide table",
-    "showres": "Show/hide results"
+    "showres": "Show/hide results",
+    "apply": "Apply",
+    "original": "Original"
+  },
+
+  "colors": {
+    "white": "White",
+    "black": "Black",
+    "red": "Red",
+    "blue": "Blue",
+    "green": "Green",
+    "cyan": "Cyan",
+    "magenta": "Magenta",
+    "yellow": "Yellow"
   },
 
   "languages": {
@@ -54,9 +68,6 @@
   },
 
   "highlights": {
-    "red": "Red",
-    "yellow": "Yellow",
-    "blue": "Blue",
     "bold": "Bold",
     "upper": "Uppercase"
   },
@@ -67,17 +78,10 @@
     "texttools": "Text tools",
     "ciphers": "Ciphers",
     "codebook": "Codebook",
-    "imagetools": "Image tools",
+    "imagetools": "Images",
     "htmlscanner": "HTML Scanner",
     "mathtools": "Math tools",
     "other": "More tools",
-    "sudokusolver": "Sudoku solver",
-    "mmsolver": "Mastermind solver",
-    "periodictable": "Periodic table",
-    "resistorcode": "Resistor colors",
-    "countries": "Country codes",
-    "usastates": "US States",
-    "nlprovinces": "Dutch Provinces",
     "howto": "How to",
     "about": "About"
   },
@@ -161,6 +165,62 @@
       "short": "Convert text as if it was typed with a different keyboard",
       "long" : "Convert text as if it was typed with a different keyboard. Supports different keyboard layouts including Azerty, Cyrillic, Dvorak and Colemak."
     }
+  },
+
+  "imagetools": { 
+    "exifscanner": {
+      "title": "Exif Scanner",
+      "short": "Retrieves the metadata (EXIF) of an image, like GPS",
+      "long": "Exif reader retrieve the metadata (EXIF and others) from an image. If a GPS location is included it is shown on the map. Also flips or rotates the image."
+    },
+    "colorpicker": {
+      "title": "Color Picker",
+      "short": "Color picker show the RGB, hex, CMYK, HSL and HSV values",
+      "long": "Color picker. Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color."
+    },
+    "filltool": {
+      "title": "Color editor",
+      "short": "Fill an area, apply a filter, change brightness and contrast or flip the image.",
+      "long": "Fill an area with a selected color and a given tolerance. Adjust the brightness and contrast. Apply one of the filters, grayscale, invert, sepia and a few more. Flip the image vertically or horizontally. Try to replace large areas with the same color with another to reveal unseen differences in color."
+    }
+  },
+
+  "othertools" : {
+    "sudokusolver": {
+      "title": "Sudoku solver",
+      "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
+      "long":  "Solver for Sudoku and Sudoku X, sizes 2 and 3."
+    },
+    "mmsolver": {
+      "title": "Mastermind solver",
+      "short": "Mastermind solver for 3 to 6 pins, 4 to 9 colors",
+      "long":  "Mastermind solver for 3 to 6 pins, 4 to 9 colors."
+    },
+    "periodictable": {
+      "title": "Periodic table",
+      "short": "Tool to translate chemical element numbers, symbols and names",
+      "long": "Tool to translate chemical element numbers, symbols and names."
+    },
+    "resistorcode": {
+      "title": "Resistor colors",
+      "short": "Resistor color code calculator",
+      "long": "Resistor color code. Calculate the value of a resistors from the colored bands."  
+    }, 
+    "countries": {
+      "title": "Country codes",
+      "short": "List of all the countries and named territories",
+      "long": "List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes."
+    },
+    "usastates": {
+      "title": "US States",
+      "short": "List of the states of the US including flags",
+      "long": "List of the states of the US including flags, number of representatives in the U.S. House, area ranking, joined as and capital."  
+    },
+    "nlprovinces": {
+      "title": "Dutch Provinces",
+      "short": "List of the provinces of the Netherlands including flags",
+      "long": "List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital."  
+    } 
   },
 
   "cp": {
@@ -493,12 +553,8 @@
     "availtags": "Available tags"
   },
 
-  "imagetools": {
-    "short": "retrieves the metadata of an image, like GPS",
-    "long": "Image tools retrieve the metadata (EXIF and others) from an image. If a GPS location is included it is shown on the map. Also flips or rotates the image.",
-    "btnfh": "Flip horizontal",
-    "btnfv": "Flip vertical",
-    "btnrot": "Rotate 90° clockwise",
+  "exifscanner": {
+    "infoblock": "Metadata shows information about the image, such as title, comments, author and sometimes also the GPS location. This tool shows the most important information. Read the metadat to look for clues. Load the image to display all the meta data of an info. The tool shows EXIF, but also IPTC, XMP, ICC, and MPF.",
     "nogps": "No GPS from camera",
     "gps": "GPS from camera",
     "error": "Error loading image or EXIF data",
@@ -529,6 +585,42 @@
     "copyright": "Copyright"
   },
 
+  "colorpicker": {
+    "info": "Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color. You can load the image from your computer or paste a URL.",
+    "selcolor": "Selected color",
+    "rgbval": "RGB values",
+    "alpha": "Alpha channel",
+    "hexval": "RGB hexadecimal",
+    "hex": "RGB hex",
+    "hslval": "Hue, Saturation, Lightness",
+    "hue": "Hue",
+    "sat": "Saturation",
+    "lum": "Lumination",
+    "hsvval": "Hue, Saturation, Brigthness",
+    "bri": "Brightness",
+    "cmykval": "CMYK values",
+    "cmyval": "CMY values"
+  },
+
+  "filltool": {
+    "info": "<p>Replace one color with another. Convert the image to grayscale or invert the image. Try to replace large areas with the same color with another to reveal unseen differences in color.</p><p>Use the buttons to convert to image to grayscale or to invert the image. Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled.</p>",
+    "selfill": "Fill color",
+    "tol": "Tolerance",
+    "fill": "Color fill",
+    "fillinfo": "Click anywhere in the image to fill an area.",
+    "filter": "Filters",
+    "filterinfo": "Select one of the filters.",
+    "conbri": "Brightness & contrast",
+    "brigh": "Brightness",
+    "contr": "Contrast",
+    "gray": "Grayscale",
+    "invert": "Invert",
+    "sepia": "Sepia",
+    "transform": "Transformations",
+    "fliph": "Flip horizontal",
+    "flipv": "Flip vertical"
+  },
+
   "htmlscanner": {
     "short": "HTML Scanner scans the page source for links, images and hidden information",
     "long": "HTML Scanner scans the page source for links, images and hidden information, such as white text and comments. Copy & paste the page source below.",
@@ -549,8 +641,6 @@
   },
 
   "sudoku": {
-    "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
-    "long":  "Solver for Sudoku and Sudoku X, sizes 2 and 3.",
     "info": "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares below or alternatively type the hints as row column number separed by comma, e.g. 125,243,254",
     "error": "Error solving sudoku, too many solutions or server timeout",
     "type": "Sudoku type",
@@ -562,8 +652,6 @@
   },
 
   "mmsolver": {
-    "short": "Mastermind solver for 3 to 6 pins, 4 to 9 colors",
-    "long":  "Mastermind solver for 3 to 6 pins, 4 to 9 colors.",
     "info": "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors. Instead of colors this solver uses numbers.",
     "npin": "Number of pins",
     "ncolor": "Number of colors",
@@ -577,8 +665,6 @@
   },
 
   "periodictable": {
-    "short": "Tool to translate chemical element numbers, symbols and names",
-    "long": "Tool to translate chemical element numbers, symbols and names.",
     "info": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>",
     "ph": "Type numbers, names or symbols",
     "searchsym": "Search symbols",
@@ -594,16 +680,12 @@
 
   "resistorcode": {
     "info": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>",
-    "short": "Resistor color code calculator",
-    "long": "Resistor color code. Calculate the value of a resistors from the colored bands.",
     "band": "Band",
     "mult": "Multiplier",
     "res": "The resistance value is:"
   },
 
   "countries": {
-    "short": "List of all the countries and named territories",
-    "long": "List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes.",
     "info": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>",
     "ph": "Type multiple codes or numbers",
     "flag": "Flag",
@@ -869,8 +951,6 @@
   },
 
   "usastates": {
-    "short": "List of the states of the US including flags",
-    "long": "List of the states of the US including flags, number of representatives in the U.S. House, area ranking, joined as and capital.",
     "info": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>",
     "ph": "Type searches divided by spaces, for state codes the spaces can be omitted",
     "flag": "Flag",
@@ -883,8 +963,6 @@
   },
 
   "nlprovinces": {
-    "short": "List of the provinces of the Netherlands including flags",
-    "long": "List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital.",
     "info": "<p>List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital. The code is both the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>.</p><p>You can type multiple codes and numbers. The code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The province name contains a link to the wikipedia page in Dutch.</p>",
     "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
     "flag": "Flag",

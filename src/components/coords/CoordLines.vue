@@ -73,7 +73,7 @@ export default {
     getDirection: function (c1, c2) {
 
       // Use inverse cosine
-      var temp = Math.acos( (c2.lat - c1.lat) / this.getLength(c1,c2)) * 180 / Math.PI;
+      let temp = Math.acos( (c2.lat - c1.lat) / this.getLength(c1,c2)) * 180 / Math.PI;
       //3e en 4e kwadrant
       if (c2.lon < c1.lon) temp = 360 - temp;
       return temp;
@@ -89,15 +89,15 @@ export default {
       try {
 
         // Translate the inputed coordinates to WGS84 for display on map
-        var coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        var coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
+        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
+        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
 
         // Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        var gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
 
         // Calculate midpoint, x1+x2 / 2 and y1+y2 / 2, convert from RD to WGS84
-        var midpoint = coords.convertCoordToWGS(
+        let midpoint = coords.convertCoordToWGS(
             { lat: (gridcoord1.lat + gridcoord2.lat)/2,
               lon: (gridcoord1.lon + gridcoord2.lon)/2 },"RD");
 
@@ -120,9 +120,11 @@ export default {
         this.result += "<br>"+ this.$t('dialoglines.direction') + this.getDirection(gridcoord1, gridcoord2).toFixed(2) + "°";
 
       } catch (e) {
+
         console.log(e);
         this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
+
       }
     },
 
@@ -133,25 +135,27 @@ export default {
       try {
 
         // Translate the inputed coordinates to WGS84 for display on map
-        var coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        var coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-        var coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
+        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
+        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
+        let coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
 
         /// Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        var gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-        var gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
+        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+        let gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
 
         // Get line thru 1 and 2
-        var a = (gridcoord1.lat - gridcoord2.lat) / (gridcoord1.lon - gridcoord2.lon);
-        var b = gridcoord1.lat - a * gridcoord1.lon;
+        let a = (gridcoord1.lat - gridcoord2.lat) / (gridcoord1.lon - gridcoord2.lon);
+        let b = gridcoord1.lat - a * gridcoord1.lon;
+
         // Formula of line perpendicular on line 1 (line 2)
-        var a2 = -1/a;
-        var b2 = gridcoord3.lat - a2 * gridcoord3.lon;
+        let a2 = -1/a;
+        let b2 = gridcoord3.lat - a2 * gridcoord3.lon;
+
         // Intersection poin when line1 and line 2 are equal
-        var pmx = (b2 - b) / (a - a2);
-        var pmy = a * pmx + b;
-        var intersectionpoint = coords.convertCoordToWGS({ lon: pmx, lat:pmy }, "RD");
+        let pmx = (b2 - b) / (a - a2);
+        let pmy = a * pmx + b;
+        let intersectionpoint = coords.convertCoordToWGS({ lon: pmx, lat:pmy }, "RD");
 
         // Set markers
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
@@ -173,9 +177,11 @@ export default {
         this.result += "<br>"+ this.$t('dialoglines.direction') + this.getDirection({lon: pmx, lat:pmy}, gridcoord3).toFixed(2) + " degrees";
 
       } catch (e) {
+
         console.log(e);
         this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
+
       }
     },
 
@@ -186,27 +192,29 @@ export default {
       try {
 
         // Translate the inputed coordinates to WGS84 for display on map
-        var coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        var coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-        var coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
-        var coord4 = coords.convertCoordFromText(this.coordinate4, this.selecteddatum4, "WGS84");
+        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
+        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
+        let coord3 = coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
+        let coord4 = coords.convertCoordFromText(this.coordinate4, this.selecteddatum4, "WGS84");
 
         /// Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        var gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-        var gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
-        var gridcoord4 =  coords.convertCoordFromLatLon (coord4, "WGS84", "RD");
+        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+        let gridcoord3 =  coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
+        let gridcoord4 =  coords.convertCoordFromLatLon (coord4, "WGS84", "RD");
 
         // Get line thru 1 and 2
-        var a = (gridcoord1.lat - gridcoord2.lat) / (gridcoord1.lon - gridcoord2.lon);
-        var b = gridcoord1.lat - a * gridcoord1.lon;
+        let a = (gridcoord1.lat - gridcoord2.lat) / (gridcoord1.lon - gridcoord2.lon);
+        let b = gridcoord1.lat - a * gridcoord1.lon;
+
         // Get line thru 3 and 4
-        var a2 = (gridcoord3.lat - gridcoord4.lat) / (gridcoord3.lon - gridcoord4.lon);
-        var b2 = gridcoord3.lat - a2 * gridcoord3.lon;
+        let a2 = (gridcoord3.lat - gridcoord4.lat) / (gridcoord3.lon - gridcoord4.lon);
+        let b2 = gridcoord3.lat - a2 * gridcoord3.lon;
+
         // Intersection poin when line1 and line 2 are equal
-        var pmx = (b2 - b) / (a - a2);
-        var pmy = a * pmx + b;
-        var intersectionpoint = coords.convertCoordToWGS({ lon: pmx, lat:pmy }, "RD");
+        let pmx = (b2 - b) / (a - a2);
+        let pmy = a * pmx + b;
+        let intersectionpoint = coords.convertCoordToWGS({ lon: pmx, lat:pmy }, "RD");
 
         // Set markers
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
@@ -226,9 +234,11 @@ export default {
         this.result += "<br>" + this.$t('dialoglines.intersection') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
 
       } catch (e) {
+
         console.log(e);
         this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
+        
       }
     },
 

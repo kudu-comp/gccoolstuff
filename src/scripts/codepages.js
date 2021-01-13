@@ -24,7 +24,7 @@ export function codeToChar (c, idx = 0) {
  */
 
 export function charToCode (char, idx = 0) {
-  var pos = listofcodepages[idx].chars.findIndex( (e) => e === char);
+  let pos = listofcodepages[idx].chars.findIndex( (e) => e === char);
   return (pos >= 0) ? pos + listofcodepages[idx].offset : pos;
 }
 
@@ -312,15 +312,12 @@ const listofcodepages = [
   },
 ]
 
-
- // 1980 - CP437, the original IBM PC code set (Extended ASCII)
  // 198? - CP850, Western European version of CP437 (Extended ASCII) MS-DOS
  // 1998 - CP858, same as 850 except but 214 is the € instead of the ı
  // 1987 - ISO8859 8 bit, there are 15 different versions
  // 1991 - Unicode (16 bit, later extended to 21 bits)
 
-
-  // ISO8859-1 similar to CP1252, same as UTF16-plane 1
+ // ISO8859-1 similar to CP1252, same as UTF16-plane 1
  // 1-31 undefined, 31 to 126 is  !"#$%&'()*+,-./01256789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}
  // 127 - 159 undefined
  // 160 - 255 same as CP1252

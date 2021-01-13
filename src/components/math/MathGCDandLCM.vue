@@ -68,7 +68,7 @@ export default {
 
     // Function to find gcd of array of numbers
     findGCD: function (arr, n) {
-      var result = arr[0];
+      let result = arr[0];
 
       // Take the GCD of two pairs
       for (let i = 1; i < n; i++)    {
@@ -85,7 +85,7 @@ export default {
     // Find the lowest common multiple
     findLCM: function (arr, n) {
 
-      var result = arr[0];
+      let result = arr[0];
 
       // Take the GCD of two pairs
       for (let i = 1; i < n; i++)    {
@@ -106,7 +106,7 @@ export default {
       this.error = false;
 
       // Convert input to array of numbers
-      var a = this.input.match(/[0-9]+/g);
+      let a = this.input.match(/[0-9]+/g);
 
       // Check for empty input
       if (a === null) {
@@ -124,6 +124,7 @@ export default {
         }
       }
 
+      // Get GCD and LCM
       this.gcd = this.findGCD (a, a.length);
       this.lcm = this.findLCM (a, a.length);
 

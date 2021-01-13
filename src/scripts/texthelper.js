@@ -147,7 +147,7 @@ const defaultMap = [
 ];
 
 function removeDiacritics (str) {
-  for(var i=0; i<defaultMap.length; i++) {
+  for(let i=0; i<defaultMap.length; i++) {
     str = str.replace(defaultMap[i].letters, defaultMap[i].base);
   }
   return str;
@@ -159,17 +159,17 @@ function getAlphabet(name) {
 
 function getExtAlphabets() {
   let a = alphabets.slice();
-  for (var ext of extalphabets)
+  for (let ext of extalphabets)
     a.push ( { name : ext.name, length : ext.length, alphabet : ext.alphabet } );
   return a;
 }
 
 function getTable (x, reverse = false, startatzero = false) {
 
-  var t = [];
-  var val = 0;
+  let t = [];
+  let val = 0;
 
-  var alphabetidx = alphabets.findIndex( (a) => a.name == x );
+  let alphabetidx = alphabets.findIndex( (a) => a.name == x );
   if (alphabetidx >= 0) {
 
     // Normal alphabet
@@ -198,10 +198,10 @@ function getTable (x, reverse = false, startatzero = false) {
 }
 
 function wordValue (str, reverse = false, startatzero = false, x = "English") {
-  var total = 0;
-  var idx = 0;
-  var alphabetidx = alphabets.findIndex( (a) => a.name == x );
-  var ext = false;
+  let total = 0;
+  let idx = 0;
+  let alphabetidx = alphabets.findIndex( (a) => a.name == x );
+  let ext = false;
 
   // For extended alphabets like vanity code and scrabble
   if (alphabetidx < 0) {
@@ -244,7 +244,7 @@ function wordValue (str, reverse = false, startatzero = false, x = "English") {
 
 // Calculate the square root of a number
 function squareRoot (n) {
-  var total = n;
+  let total = n;
   while (total > 9) {
     n = total;
     total = 0;

@@ -104,8 +104,8 @@ export default {
       }
 
       // Get all the lines form input and convert them one by one
-      var input = this.coordfrom.match(/[^\r\n]+/g);
-      var markertext = this.labels.match(/[^\r\n]+/g);
+      let input = this.coordfrom.match(/[^\r\n]+/g);
+      let markertext = this.labels.match(/[^\r\n]+/g);
 
       // Check if there are enough Labels
       if (input.length != markertext.length) {
@@ -115,20 +115,20 @@ export default {
       }
 
       // Parse input line by line
-      for (var i = 0; i < input.length; i++) {
+      for (let i = 0; i < input.length; i++) {
 
         try {
 
           // Get the coordinates
-          var mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84');
+          let mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84');
 
           // Add a marker to the map for each coordinate
           if (this.showmarkers) {
-            var marker = this.$store.state.L.marker(mapcoord).addTo(this.$store.state.mymap);
+            let marker = this.$store.state.L.marker(mapcoord).addTo(this.$store.state.mymap);
 
             // Create a popup that doesn't close and bind it to the marker
             if (this.showlabels) {
-              var p = new this.$store.state.L.Popup({ autoClose: false, closeOnClick: false })
+              let p = new this.$store.state.L.Popup({ autoClose: false, closeOnClick: false })
                     .setContent(markertext[i])
                     .setLatLng(mapcoord);
               marker.bindPopup(p).openPopup();
@@ -146,9 +146,11 @@ export default {
           }
 
         } catch(e) {
+
           this.error = true;
           this.errormsg = this.$t('errors.incorrectcoords')
           console.log(e);
+          
         }
       }
     },

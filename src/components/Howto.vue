@@ -240,9 +240,11 @@
               <router-link to="/texttoolbox/textkeyboards">Keyboards</router-link> to solve these puzzles.</li>
             <li><b>Anagrams</b> - the text might be an anagram. There are a few good anagram solvers on the internet, but none are perfect. So you
               might be on your own here. My favorite is the <a href="http://wordsmith.org/anagram/advanced.html">Internet Anagram Server</a></li>
+            <li><b>Acronyms</b> - The letters might stand for chemical elements <router-link to="/other/periodictable">(Periodic table)</router-link> or
+              <router-link to="/other/countries">Countries</router-link> or maybe <router-link to="/other/usastates">US States</router-link>.</li>
             <li><b>Substitution cipher</b> replaces each letter with one or more other
               letters/digits/symbols. The best way to crack a substitution cipher is the <router-link to="/texttoolbox/smartreplace">Smart replace</router-link>
-              tool. It will analyze frequencies in the encoded text and suggest possible replacement. It works really well for larger texts,
+              tool. It will analyze frequencies in the encoded text and suggest possible replacements. It works really well for larger texts,
               but with a bit of trial and error even with small texts most codes are easily broken.</li>
           </ul>
           <p>If the easy ones fail there is a big chance you're dealing with a more complicated cipher. Solving ciphers is an art on its
@@ -284,12 +286,13 @@
         <template v-slot:content>
           Some options to try:
           <ul>
-            <li><b>Resistor code</b> - you can find it in the <router-link to="/codebook">Code book</router-link>, search for colors.</li>
+            <li><b>Resistor code</b> - you can find it the <router-link to="/other/resistorcode">Resistor code</router-link> here.</li>
             <li><b>Color codes</b> - again go to the <router-link to="/codebook">Code book</router-link> and search for colors.</li>
             <li><b>RGB Values</b> - Red, Green and Blue values are used by the computer to generate all the colors on your screen. If you
               have an image with just a few colors, you might want to check the RGB values of each of the colors. It is easily done with
-              one of the tools on your computer (MS Paint, Paint 3D, GIMP) or online tools.</li>
-            <li><b>Other color values</b> - Instead of RGB colors could be coded with CMYK, HSV or hexadecimally.</li>
+              the <router-link to="/images/colorpicker">Colorpicker</router-link></li>
+            <li><b>Other color values</b> - Instead of RGB could be coded with CMYK, HSV or hexadecimally. These values are also available 
+            in the <router-link to="/images/colorpicker">Colorpicker</router-link></li>
           </ul>
         </template>
       </va-item>
@@ -300,7 +303,7 @@
           <ul>
             <li><b>Barcode or QR code</b> - the image is a Barcode or QR code. There are many different formats. My favorite online
               tool for cracking barcodes is the <a href="https://online-barcode-reader.inliteresearch.com/">Inlite Free Barcode reader</a>></li>
-            <li><b>Image information</b> - also called EXIF data. <router-link to="/imagetools">Image tools</router-link> will retrieve this info. Not
+            <li><b>Image information</b> - also called EXIF data. <router-link to="/images/exifscanner">Image tools</router-link> will retrieve this info. Not
               only look at the text fields, but also the dimensions and a possible GPS location in the image.</li>
             <li><b>Zoom in</b> extremely and see what the image reveales.</li>
             <li><b>Statistics</b> - get some statistics on the image, the number of pixels of each color, the sum of R, G and B values and so on.
@@ -308,8 +311,7 @@
             <li><b>Links</b> - there might be links attached to the image (or just to 1 pixel actually). Use <router-link to="/htmltools">HTML scanner</router-link>
               to find these links</li>
             <li><b>Fill areas</b> - if colors are really close the human eye cannot see the difference. For example a red area might be red text
-              on a slightly different red background. Load the image in a tool like Paint and use the filler to fill these areas with a different
-              color. The tool will know the difference and the text appears.</li>
+              on a slightly different red background. Use <router-link to="/images/filltool">Color Editor</router-link> to reveal those messages.</li>
           </ul>
           <p><b>Steganography</b> - is the art of encrypting a message within an image. There are many different ways. Data might be hidden
           in unused bits (try LSB or Least Significant Bits), it might be hidden using color depth (try to reduce color depth using an
@@ -410,8 +412,9 @@ export default {
 
   // The properties must be set immediately otherwise they are undefined when va-item is created
   created: function() {
+    let expanditem;
     if (typeof(this.$route.params.itemnr) != "undefined")
-      var expanditem = this.$route.params.itemnr;
+      expanditem = this.$route.params.itemnr;
     else
       expanditem = 0;
     for (let i=0; i < this.numitems; i++) this.show[i] = (i == expanditem);

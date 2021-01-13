@@ -18,9 +18,9 @@
       <div class="form-inline">
         <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="highlightflag">{{$t('dialogsr.highlight')}}</label>
         <select id="highlightflag" name="highlightflag" ref="highlightflag" v-model="highlightflag" class="form-control col-sm-4 col-md-3 col-lg-2 mb-2" @change="replaceInput">
-          <option value="red">{{$t('highlights.red')}}</option>
-          <option value="blue">{{$t('highlights.blue')}}</option>
-          <option value="yellow">{{$t('highlights.yellow')}}</option>
+          <option value="red">{{$t('colors.red')}}</option>
+          <option value="blue">{{$t('colors.blue')}}</option>
+          <option value="yellow">{{$t('colors.yellow')}}</option>
           <option value="bold">{{$t('highlights.bold')}}</option>
           <option value="uppercase">{{$t('highlights.upper')}}</option>
         </select>
@@ -99,12 +99,13 @@ export default {
       this.message = textHelper.removeDiacritics(this.message);
     },
     checkDouble: function (str) {
-      for (var i=0; i < str.length; i++) {
+      for (let i=0; i < str.length; i++) {
         if (str.indexOf(str[i], i+1) > 0) return true;
       }
       return false;
     },
     setLanguage: function () {
+
       switch (this.language) {
         case "nl" :
           this.alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -139,21 +140,31 @@ export default {
           break;
       }
     },
+
     printHints : function () {
-      // Analyze input
-      var countletters = [];
-      var idx;
+
+      // Reset counts
+      let countletters = [];
+      let idx;
       for (let i=0; i < this.alphabet.length; i++) countletters[i]=0;
+
+      // Get counts of all the letters in the alphabet
       for (let i=0; i < this.message.length; i++) {
         idx = this.alphabet.indexOf(this.message[i].toLowerCase());
         if (idx >= 0) countletters[idx]++;
       }
+
+      // Calculate percentages 
       this.percentages = [];
       for (let i=0; i < this.alphabet.length; i++) {
         this.percentages[i] = { char : this.alphabet[i], count : countletters[i] / this.message.length * 100 };
       }
+
+      // Sort array with percentages
       this.percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
-      var html = "<table class='table table-sm table-bordered text-center'><tr><td>Letter</td>";
+
+      // Print hints
+      let html = "<table class='table table-sm table-bordered text-center'><tr><td>Letter</td>";
       for (let i = 0; i < this.freq.length; i++) html+="<td>" + this.freq[i] + "</td>";
       html += "</tr><tr><td>Frequency</td>";
       for (let i = 0; i < this.freqperc.length; i++) html+="<td>" + this.freqperc[i] + "</td>";
@@ -165,19 +176,29 @@ export default {
       this.hints = html;
 
     },
+
     applyHints : function () {
+
+      // Calculate hints
       this.printHints();
-      // Fill from and to here
+
+      // Apply the first 8 hints
       this.from = this.freq.slice(0,8);
       this.to = "";
       for (let i=0; i<8; i++) this.to += this.percentages[i].char;
       this.replaceInput();
+
     },
+
     replaceInput: function() {
+
+      // Reset errors and lowercase input
       this.error1 = "";
       this.error2 = "";
       this.from = this.from.toLowerCase();
       this.to = this.to.toLowerCase();
+
+      // Check inputs
       if (this.to.length != this.from.length) {
         this.error1 = this.$t('dialogsr.errorlength');
         this.error2 = this.$t('dialogsr.errorlength');
@@ -186,10 +207,16 @@ export default {
       } else if (this.checkDouble(this.from)) {
         this.error1 = this.$t('dialogsr.errordouble');
       } else {
-        var html = "";
-        var idx = 0;
-        for (var i=0; i < this.message.length; i++) {
+
+        // Inputs is okay, replace starts here
+        let html = "";
+        let idx = 0;
+        for (let i=0; i < this.message.length; i++) {
+
+          // Find the letter in the "to" array
           idx = this.to.indexOf(this.message[i].toLowerCase());
+
+          // If found print with selected highlighting
           if (idx >= 0) {
             switch (this.highlightflag) {
               case 'red' :
@@ -204,13 +231,20 @@ export default {
                 html += this.from[idx].toUpperCase();
                 break;
             }
+
           } else {
+
+            // If not found print as is without highlighting
             html += this.message[i];
+
           }
         }
+
+        // Print the result
         this.result = html;
       }
     },
+    
   },
 }
 </script>

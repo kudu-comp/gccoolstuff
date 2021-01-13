@@ -101,8 +101,8 @@ export const keyboards = [
 export function convertKeyboard (s, fromkeyb, tokeyb) {
 
   // Find keyboards given the name
-  var from = keyboards.findIndex ( (e) => e.name == fromkeyb);
-  var to   = keyboards.findIndex ( (e) => e.name == tokeyb);
+  let from = keyboards.findIndex ( (e) => e.name == fromkeyb);
+  let to   = keyboards.findIndex ( (e) => e.name == tokeyb);
 
   // Handle wrong keyboard name
   if (from < 0 || to < 0) {
@@ -111,8 +111,8 @@ export function convertKeyboard (s, fromkeyb, tokeyb) {
   }
 
   // Loop over string
-  var result = "";
-  var pos = 0;
+  let result = "";
+  let pos = 0;
   for (let ch of s) {
     if (ch == " ") { result += " "; continue }
     pos = keyboards[from].keys.indexOf(ch);

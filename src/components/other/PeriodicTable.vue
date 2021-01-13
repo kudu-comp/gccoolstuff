@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">  {{this.$t('menu.periodictable')}}</div>
+        <div class="text-center">  {{this.$t('othertools.periodictable.title')}}</div>
     </div>
     <div class="mainpage">
       <div class="infoblock" v-html="$t('periodictable.info')"></div>
@@ -46,16 +46,30 @@ export default {
       phsearch: this.$t('periodictable.ph'),
 
       cols: [
-        { field: "nr", label: this.$t('periodictable.num'), sortable: true, width: "10%" },
+        { field: "nr", label: this.$t('periodictable.num'), 
+          sortable: {
+            numsort: true
+          },
+          width: "10%" 
+        },
         { field: "sym", label: this.$t('periodictable.sym'), sortable: true, width: "10%",
           parseCol: function(s) {
-            // State codes are 2 character, whitespace is optional
+            // Symbol codes are 1 captial with 0 or more lowercase characters, whitespace is optional
             return s.match(/([A-Z][a-z]*[\s]*)/g);
           },
         },
-        { field: "nr", label: this.$t('periodictable.num'), sortable: true, width: "10%" },
-        { field: "grp", label: this.$t('periodictable.grp'), sortable: true, width: "10%" },
-        { field: "prd", label: this.$t('periodictable.prd'), sortable: true, width: "10%" },
+        { field: "grp", label: this.$t('periodictable.grp'), 
+          sortable: {
+            numsort: true
+          }, 
+          width: "10%" 
+        },
+        { field: "prd", label: this.$t('periodictable.prd'), 
+          sortable: {
+            numsort: true
+          }, 
+          width: "10%" 
+        },
         { field: "blk", label: this.$t('periodictable.blk'), sortable: true, width: "10%" },
         { field: "name", label: this.$t('periodictable.name'), sortable: true, width: "40%" },
       ],

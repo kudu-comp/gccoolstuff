@@ -20,7 +20,7 @@
     <router-link to="/texttoolbox">{{$t('menu.texttools')}}</router-link> |
     <router-link to="/cipher">{{$t('menu.ciphers')}}</router-link> |
     <router-link to="/codebook">{{$t('menu.codebook')}}</router-link> |
-    <router-link to="/imagetools">{{$t('menu.imagetools')}}</router-link> |
+    <router-link to="/images">{{$t('menu.imagetools')}}</router-link> |
     <router-link to="/htmltools">{{$t('menu.htmlscanner')}}</router-link> |
     <router-link to="/math">{{$t('menu.mathtools')}}</router-link> |
     <router-link to="/other">{{$t('menu.other')}}</router-link> |
@@ -32,6 +32,9 @@
 
 <script>
 
+// Needed in modules where we have locales in the component, otherwise use
+// global injected $t
+//
 // import { useI18n } from 'vue-i18n';
 //
 // // i18n requires useI18n to be called first thing in App setup function
@@ -145,6 +148,27 @@ body {
   padding-right: 4px;
 }
 
+.box {
+  border-style: solid;
+  border-color: #785E31;
+  border-width: 2px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.box-header {
+  color: #E6D1AC;
+  background-color: #785E31;
+  text-align: center;
+  font-size: 1.2em;
+  padding: 5px;
+}
+
+.box-body {
+  font-size: 1.0em;
+  padding: 5px;
+}
+
 .card {
   border-style: solid;
   border-width: 2px;
@@ -177,6 +201,11 @@ body {
 .mapcontrol {
   display: flex;
   flex-direction: row-reverse
+}
+
+.subhead {
+  color: #E6D1AC;
+  background-color: #785E31;
 }
 
 .errormsg {

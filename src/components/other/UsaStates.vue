@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">  {{this.$t('menu.usastates')}}</div>
+        <div class="text-center">  {{this.$t('othertools.usastates.title')}}</div>
     </div>
     <div class="mainpage">
       <div class="infoblock" v-html="$t('usastates.info')"></div>

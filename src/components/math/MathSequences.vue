@@ -70,7 +70,6 @@ export default {
       number: 'hail',
       n: 1,
       start: 1,
-      // Global variables
       result: 0,
       seq: "",
       error: false,
@@ -85,7 +84,7 @@ export default {
 
   methods: {
     sequence: function() {
-      var seq = null;
+      let seq = null;
       switch (this.number) {
         case 'hail' :
           seq = mathsequences.hailstone (this.start, this.n);

@@ -102,11 +102,11 @@ export default {
       if (this.message.length == 0) return;
 
       //  Calculate value of the entire text
-      var value = textHelper.wordValue(this.message, this.reverse, this.startatzero, this.selectedalphabet);
-      var wordvalues = [ { name : "All text", value : value, squareroot : textHelper.squareRoot(value)} ];
+      let value = textHelper.wordValue(this.message, this.reverse, this.startatzero, this.selectedalphabet);
+      let wordvalues = [ { name : "All text", value : value, squareroot : textHelper.squareRoot(value)} ];
 
       // Split message in words
-      var words = this.message.match(/([^\s.,:;]+)/ug);
+      let words = this.message.match(/([^\s.,:;]+)/ug);
 
       // Calculate values for each word
       for (let i=0; i < words.length; i++) {
@@ -115,7 +115,7 @@ export default {
       }
 
       // Display table with all values
-      var html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
+      let html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
       for (let i = 0; i < wordvalues.length; i++) {
         html += "<tr";
         if (i==0) html += " style='color:red'";

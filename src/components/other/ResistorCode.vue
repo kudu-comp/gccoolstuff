@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">  {{this.$t('menu.resistorcode')}}</div>
+        <div class="text-center">  {{this.$t('othertools.resistorcode.title')}}</div>
     </div>
     <div class="mainpage">
       <div class="infoblock" v-html="$t('resistorcode.info')"></div>
@@ -80,7 +80,6 @@ export default {
       this.result += (value/1000).toFixed(4) + "kΩ<br>"
       this.result += (value/1000000).toFixed(4) + "MΩ"
     }
-
 
   },
 }

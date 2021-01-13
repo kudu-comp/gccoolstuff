@@ -15,9 +15,8 @@
  */
 
 
-
 // The Murraycode ITA-2 standard
-var murraycode = [
+const murraycode = [
   ['Not used','Not used'],  ['E','3'],  ['\n','\n'],  ['A','-'],
   [' ',' '],   ['S',"'"], ['I','8'],  ['U','7'],
   ['\r','\r'], ['D','$'],   ['R','4'],  ['J','BEL'],
@@ -28,7 +27,7 @@ var murraycode = [
   ['M','.'],   ['X','/'],   ['V','='],  ['lets','lets']
 ]
 
-var murraycodereversed = [
+const murraycodereversed = [
   ['Not used','Not used'], ['T','5'],  ['\r','\r'],  ['O','9'],
   [' ',' '],   ['H','#'],  ['N',','],  ['M','.'],
   ['\n','\n'], ['L',')'],  ['R','4'],  ['G','&'],
@@ -39,8 +38,8 @@ var murraycodereversed = [
   ['U','7'],   ['Q','1'],  ['K','('],  ['lets','lets']
 ]
 
-var murraycodefigs = 27;
-var murraycodeletters = 31;
+const murraycodefigs = 27;
+const murraycodeletters = 31;
 
 // Murraycode US TTY (not implemented)
 // S with BEL, J with ', Z with ", V with ;
@@ -48,7 +47,7 @@ var murraycodeletters = 31;
 // The Cyrillic MTK2 version of the Murray code
 // Switch to Cyrillic is 00000, but seems duplicate of letter switch
 
-var murrayMTK2 = [
+const murrayMTK2 = [
   ['lets','lets'], ['Е','3'], ['\n','\n'], ['А','–'],
   [' ',' '],   ['С',"'"],    ['И','8'], ['У','7'],
   ['\r','\r'], ['Д','WRU?'], ['Р',"4"], ['Й','Ю'],
@@ -59,7 +58,7 @@ var murrayMTK2 = [
   ['М','.'],   ['Ь','/'],    ['Ж','='], ['lets','lets']
 ]
 
-var murrayMTK2reversed = [
+const murrayMTK2reversed = [
   ['lets','lets'], ['Т','5'], ['\n','\n'], ['О','9'],
   [' ',' '],   ['Х',"Щ"],  ['Н',','],    ['М','.'],
   ['\r','\r'], ['Л',')'],  ['Р',"4"],    ['Г','Ш'],
@@ -70,10 +69,10 @@ var murrayMTK2reversed = [
   ['У','7'],   ['Я','1'],  ['К','('],    ['lets','lets']
 ]
 
-var murrayMTK2figs = 27;
-var murrayMTK2letters = 31;
+const murrayMTK2figs = 27;
+const murrayMTK2letters = 31;
 
-var baudotcode = [
+const baudotcode = [
   ['NUL','NUL'],  ['LTRS','LTRS'],  ['FIGS','FIGS'],  ['END','END'],  ['A','1'],
   ['-','.'],  ['J','6'],    ['K','('],  ['E','2'],  ['X','^'],  ['G','7'],
   ['M',')'],  ['/','^'],    ['Z',':'],  ['H','^'],   ['L','='],  ['Y','3'],
@@ -82,11 +81,11 @@ var baudotcode = [
   ['V',"'"],  ['D','0'],    ['P','+']
 ]
 
-var baudotcodefigs = 2;
-var baudotcodeletters = 1;
+const baudotcodefigs = 2;
+const baudotcodeletters = 1;
 
 // ^ flag reversed for national use
-var baudotcodereversed = [
+const baudotcodereversed = [
   ['NUL','NUL'],  ['Y','3'],  ['E','2'],  ['I','^'],  ['A','1'],
   ['U','4'],  ['É','^'],    ['O','5'],  ['FIGS','FIGS'],  ['B','8'],  ['G','7'],
   ['F','^'],  ['J','6'],    ['C','9'],  ['H','^'],   ['D','0'],  ['LTRS','LTRS'],
@@ -95,8 +94,8 @@ var baudotcodereversed = [
   ['Q',"/"],  ['L','='],    ['P','+']
 ]
 
-var baudotrevcodefigs = 8;
-var baudotrevcodeletters = 16;
+const baudotrevcodefigs = 8;
+const baudotrevcodeletters = 16;
 
 // Start in character mode
 var figs = false;
@@ -116,7 +115,7 @@ var figs = false;
    // Add code to convert .o to 01
    // console.log(s)
    // Convert to binary
-   var code = parseInt(s, 2);
+   let code = parseInt(s, 2);
    if (code > 32) {
      return -1;
    } else if (code == afigs) {
@@ -151,9 +150,9 @@ var figs = false;
 function ASCIIToCode (code, a, afigs, aletters) {
 
   // Find the ASCII character with code in the baudotarray
-  var char = String.fromCharCode(code).toUpperCase();
-  var arr = []
-  var pos = a.findIndex(  (e) => e[0] == char || e[1] == char );
+  let char = String.fromCharCode(code).toUpperCase();
+  let arr = []
+  let pos = a.findIndex(  (e) => e[0] == char || e[1] == char );
 
   // Skip unknown ASCII characters
   // If needed also push figure / letter switch
@@ -167,7 +166,7 @@ function ASCIIToCode (code, a, afigs, aletters) {
 }
 
 /*
- * Reset the switches
+ * Reset the switches for Baudotcodes
  *
  */
 export function reset() {

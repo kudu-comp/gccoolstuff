@@ -51,17 +51,11 @@ export default {
 
       try {
         // Translate the inputed coordinates to WGS84 for display on map
-        var startcoord = coords.convertCoordFromText(this.coordinate, this.selecteddatum, "WGS84");
-        console.log(startcoord);
-
-        // Set marker for the starting point
-        // var marker1 = this.L.marker([startcoord.lat, startcoord.lon]).addTo(this.mymap);
-        // marker1.bindPopup("Starting point").openPopup();
-
-        // Getting grid coord using Google pseudomap mercator to calculate projection
-        var anticoord =  { lat: -1 * startcoord.lat, lon: -1 * (180 - Math.abs(startcoord.lon)) }
-        console.log(anticoord);
-
+        let startcoord = coords.convertCoordFromText(this.coordinate, this.selecteddatum, "WGS84");
+        
+        // Getting anitpode coordinate with some basic math
+        let anticoord =  { lat: -1 * startcoord.lat, lon: -1 * (180 - Math.abs(startcoord.lon)) }
+        
         // Display marker
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, anticoord, "Antipode");
 
@@ -70,9 +64,11 @@ export default {
         this.result += this.$t('dialogantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
 
       } catch (e) {
+
         this.error = true;
         console.log(e);
         this.errormsg = this.$t('errors.incorrectcoords');
+        
       }
     }
   }

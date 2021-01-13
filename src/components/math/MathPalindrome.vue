@@ -64,10 +64,10 @@ export default {
       this.error = false;
 
       // Set counters and initial reversed number
-      var cnt = 0;
-      var s1 = this.start.toString();
-      var s2 = this.start.split("").reverse().join("");
-      var n;
+      let cnt = 0;
+      let s1 = this.start.toString();
+      let s2 = this.start.split("").reverse().join("");
+      let n;
       this.seq = this.start;
 
       // Stop after 100 iterations and raise error

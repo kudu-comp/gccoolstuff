@@ -630,16 +630,16 @@ export default {
 
     // Remove characters not present in alphabet from message
     removeUnknown: function() {
-      var s = "";
-      for (var i=0; i < this.message.length; i++)
+      let s = "";
+      for (let i=0; i < this.message.length; i++)
         if (this.alphabet.indexOf(this.message[i]) >= 0) s += this.message[i];
       this.message = s;
     },
 
     // Add separators to transmsg
     formatMessage: function() {
-      var s = "";
-      for (var i = 0; i < this.translatedmessage.length; i++) {
+      let s = "";
+      for (let i = 0; i < this.translatedmessage.length; i++) {
         if ((i % this.blocksize == 0) && (i>0)) s += this.separator;
           s += this.translatedmessage[i];
       }
@@ -649,33 +649,33 @@ export default {
 
     // Remove separators from transmsg
     unformatMessage: function() {
-      var s = "";
-      var block = parseInt(this.blocksize);
-      for (var i = 0; i < this.translatedmessage.length; i++)
+      let s = "";
+      let block = parseInt(this.blocksize);
+      for (let i = 0; i < this.translatedmessage.length; i++)
 			if ((i+1) % (block+1) != 0) s += this.translatedmessage[i];
       this.translatedmessage = s;
     },
 
     // Replace characters in message
     replaceCharacters: function () {
-      var arr = this.replacements.match(/[A-Za-z]=[A-Za-z]/g);
-      if (arr !== null) for (var i=0; i<arr.length; i++) {
-        var s = "";
-        for (var j=0; j<this.message.length; j++)
-          if (this.message[j] === arr[i][0])
-            s += arr[i][2];
-          else
-            s += this.message[j];
-        this.message = s;
-      }
+
+      let arr = this.replacements.match(/[A-Za-z]=[A-Za-z]/g);
+
+      if (arr !== null) 
+        for (let i=0; i<arr.length; i++) {
+          let s = "";
+          for (let j=0; j<this.message.length; j++)
+            if (this.message[j] === arr[i][0])
+              s += arr[i][2];
+            else
+              s += this.message[j];
+          this.message = s;
+        }
 
     }
   },
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<!--   background-image: url('headerbackground.png'); -->
 
 <style scoped>
 

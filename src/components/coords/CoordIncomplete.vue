@@ -61,6 +61,7 @@ export default {
       this.error = false;
 
       try {
+
         // Initialize variables and regular expressions
         let newcoord, coord, marker, vars;
         let regex1 = new RegExp (this.var1, "g");
@@ -69,18 +70,20 @@ export default {
         let regex4 = new RegExp (this.var4, "g");
 
         // Check if var 1 to 4 are present and verify max number of coordinates
-        var useVar1 = (this.coordinate.indexOf(this.var1) >= 0);
-        var useVar2 = (this.coordinate.indexOf(this.var2) >= 0);
-        var useVar3 = (this.coordinate.indexOf(this.var3) >= 0);
-        var useVar4 = (this.coordinate.indexOf(this.var4) >= 0);
-        var totaloptions = ((useVar1) ? this.var1options.length : 1) *
+        let useVar1 = (this.coordinate.indexOf(this.var1) >= 0);
+        let useVar2 = (this.coordinate.indexOf(this.var2) >= 0);
+        let useVar3 = (this.coordinate.indexOf(this.var3) >= 0);
+        let useVar4 = (this.coordinate.indexOf(this.var4) >= 0);
+        let totaloptions = ((useVar1) ? this.var1options.length : 1) *
                 ((useVar2) ? this.var2options.length : 1) *
                 ((useVar3) ? this.var3options.length : 1) *
                 ((useVar4) ? this.var4options.length : 1);
 
         if (totaloptions > 500) {
+
           this.error = true;
           this.errormsg = this.$t('dialogic.error1')
+          
         } else {
 
           // For each of the candidates try all options
@@ -104,11 +107,14 @@ export default {
               }
             }
           }
+          
         }
       } catch (e) {
+
         console.log(e);
         this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
+
       }
     },
   },

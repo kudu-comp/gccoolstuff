@@ -72,9 +72,10 @@ var dmsFormats = [
  */
 
 function getCoordinateForDMSFormat1 (s) {
+
   // Ngg.ddddd Egg.ddddd
-  var elem =  s.match(/[NSZEWO'"°.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[NSZEWO'"°.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // Gives array with Ngg.ddddd Egg.ddddd (or if there was whitespace after N or E these are splitted as N gg)
   // Split Ngg if needed
@@ -83,29 +84,34 @@ function getCoordinateForDMSFormat1 (s) {
     elem.splice(0, 0, elem[0][0]);
     elem[1] = elem[1].slice(1);
   }
+
   // Split Egg if needed
   if ("EWO".indexOf(elem[2]) < 0) {
     elem.splice(2, 0, elem[2][0]);
     elem[3] = elem[3].slice(1);
   }
-  // No we have N gg.ddddd E gg.ddddd for sure, set the signs
+
+  // Now we have N gg.ddddd E gg.ddddd for sure, set the signs
   (elem[0] == "N") ? northSouthSign = 1 : northSouthSign = -1;
   (elem[2] == "W") ? eastWestSign = -1 : eastWestSign = 1;
+
   // Make the coord object
   return {
     lon: parseFloat(elem[3]) * eastWestSign,
     lat: parseFloat(elem[1]) * northSouthSign
   }
+
 }
 
 function getCoordinateForDMSFormat2 (s) {
   // +gg.ddddd -gg.ddddd
-  var elem =  s.match(/[-+.0-9]+/ig);
-  var lat, lon = 0;
+  let elem =  s.match(/[-+.0-9]+/ig);
+  let lat, lon = 0;
   // Gives array with +gg.ddddd -gg.ddddd (or if there was whitespace after N or E these are splitted as N gg)
 
   // Remove single + (no use)
-	if (elem[0] == "+") elem.splice(0,1);
+  if (elem[0] == "+") elem.splice(0,1);
+  
   // Deal with minus
 	if ("-".indexOf(elem[0]) < 0) {
     // - is combined with gg
@@ -117,6 +123,7 @@ function getCoordinateForDMSFormat2 (s) {
 
   // Remove single + (no use)
   if (elem[1] == "+") elem.splice(1,1);
+
   // Deal with minus
   if ("-".indexOf(elem[1]) < 0) {
     // +- is combined with gg, + is optional notation
@@ -124,6 +131,7 @@ function getCoordinateForDMSFormat2 (s) {
   } else {
     lat = parseFloat(elem[2]) * (elem[1] == "-" ? -1 : 1);
   }
+
   // Make the coord object
   return {
     lon: lat,
@@ -132,15 +140,17 @@ function getCoordinateForDMSFormat2 (s) {
 }
 
 function getCoordinateForDMSFormat3 (s) {
+
   // Ngg mm.ddd Egg mm.ddd
-  var elem =  s.match(/[NSZEWO.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[NSZEWO.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // Split Ngg if needed
   if ("NSZ".indexOf(elem[0]) < 0) {
     elem.splice(0, 0, elem[0][0]);
     elem[1] = elem[1].slice(1);
   }
+
   // Split Egg if needed
   if ("EWO".indexOf(elem[3]) < 0) {
     elem.splice(3, 0, elem[3][0]);
@@ -150,6 +160,7 @@ function getCoordinateForDMSFormat3 (s) {
   // No we have N gg mm.ddddd E gg mm.ddddd for sure, set the signs
   (elem[0] == "N") ? northSouthSign = 1 : northSouthSign = -1;
   (elem[3] == "W") ? eastWestSign = -1 : eastWestSign = 1;
+
   // Make the coord object
   return {
     lon: parseFloat(elem[4]) * eastWestSign + (parseFloat(elem[5]) / 60 * eastWestSign),
@@ -158,12 +169,14 @@ function getCoordinateForDMSFormat3 (s) {
 }
 
 function getCoordinateForDMSFormat4 (s) {
+
   // +gg mm.ddd -gg mm.ddd
-  var elem =  s.match(/[-+.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[-+.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // Remove single + (no use)
-	if (elem[0] == "+") elem.splice(0,1);
+  if (elem[0] == "+") elem.splice(0,1);
+  
   // Deal with minus
   northSouthSign = 1;
 	if ("-".indexOf(elem[0]) < 0) {
@@ -177,7 +190,8 @@ function getCoordinateForDMSFormat4 (s) {
   }
 
   // Remove single + (no use)
-	if (elem[2] == "+") elem.splice(2,1);
+  if (elem[2] == "+") elem.splice(2,1);
+  
   // Deal with minus
   eastWestSign = 1;
 	if ("-".indexOf(elem[2]) < 0) {
@@ -198,9 +212,10 @@ function getCoordinateForDMSFormat4 (s) {
 }
 
 function getCoordinateForDMSFormat5 (s) {
+
   // Ngg mm ss.ddddd Egg mm ss.ddddd
-  var elem =  s.match(/[NSWEWO.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[NSWEWO.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // Split Ngg if needed
   if ("NSZ".indexOf(elem[0]) < 0) {
@@ -208,6 +223,7 @@ function getCoordinateForDMSFormat5 (s) {
     elem.splice(0, 0, elem[0][0]);
     elem[1] = elem[1].slice(1);
   }
+
 	// Split Egg if needed
   if ("EWO".indexOf(elem[4]) < 0) {
     elem.splice(4, 0, elem[4][0]);
@@ -226,12 +242,14 @@ function getCoordinateForDMSFormat5 (s) {
 }
 
 function getCoordinateForDMSFormat6 (s) {
+
   // Ngg mm ss.ddddd Egg mm ss.ddddd
-  var elem =  s.match(/[-+.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[-+.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // Remove single + (no use)
-	if (elem[0] == "+") elem.splice(0,1);
+  if (elem[0] == "+") elem.splice(0,1);
+  
   // Deal with minus
   northSouthSign = 1;
 	if ("-".indexOf(elem[0]) < 0) {
@@ -245,7 +263,8 @@ function getCoordinateForDMSFormat6 (s) {
   }
 
   // Remove single + (no use)
-	if (elem[3] == "+") elem.splice(3,1);
+  if (elem[3] == "+") elem.splice(3,1);
+  
   // Deal with minus
   eastWestSign = 1;
 	if ("-".indexOf(elem[3]) < 0) {
@@ -266,9 +285,10 @@ function getCoordinateForDMSFormat6 (s) {
 }
 
 function getCoordinateForDMSFormat7 (s) {
+
   // Format 7: gg mm ss.ddd N gg mm ss.ddd E
-  var elem =  s.match(/[NSWEWO.0-9]+/ig);
-  var northSouthSign, eastWestSign;
+  let elem =  s.match(/[NSWEWO.0-9]+/ig);
+  let northSouthSign, eastWestSign;
 
   // No we have N gg.ddddd E gg.ddddd for sure, set the signs
   (elem[3][0] == "N") ? northSouthSign = 1 : northSouthSign = -1;
@@ -282,8 +302,9 @@ function getCoordinateForDMSFormat7 (s) {
 }
 
 function printCoordinateFromDMSFormat1 (coord) {
+
   // Ngg.ddddd Egg.ddddd
-  var s = "";
+  let s = "";
   (coord.lat > 0) ? s = "N" : s = "S";
   s += Math.abs(coord.lat).toFixed(5) + "° ";
   (coord.lon > 0) ? s += "E" : s += "W";
@@ -298,7 +319,7 @@ function printCoordinateFromDMSFormat2 (coord) {
 
 function printCoordinateFromDMSFormat3 (coord) {
   // Ngg mm.ddd Egg mm.ddd
-  var s = "";
+  let s = "";
   (coord.lat > 0) ? s = "N" : s = "S";
   s += Math.trunc(Math.abs(coord.lat)) + "° ";
   s += ((Math.abs(coord.lat) % 1) * 60).toFixed(3) + "' ";
@@ -311,7 +332,7 @@ function printCoordinateFromDMSFormat3 (coord) {
 
 function printCoordinateFromDMSFormat4 (coord) {
   // +gg mm.ddd -gg mm.ddd
-  var s = Math.trunc(coord.lat) + "° ";
+  let s = Math.trunc(coord.lat) + "° ";
   s += ((Math.abs(coord.lat) % 1) * 60).toFixed(3) + "' ";
   s += Math.trunc(coord.lon) + "° ";
   s += ((Math.abs(coord.lon) % 1) * 60).toFixed(3) + "'";
@@ -320,8 +341,8 @@ function printCoordinateFromDMSFormat4 (coord) {
 
 function printCoordinateFromDMSFormat5 (coord) {
   // Ngg mm ss.ddd Egg mm ss.ddd
-  var s = "";
-  var min, sec;
+  let s = "";
+  let min, sec;
 
   (coord.lat > 0) ? s = "N" : s = "S";
   s += Math.trunc(Math.abs(coord.lat)) + "° ";
@@ -342,8 +363,8 @@ function printCoordinateFromDMSFormat5 (coord) {
 
 function printCoordinateFromDMSFormat6 (coord) {
   // +gg mm ss.ddd -gg mm ss.ddd
-  var s = "";
-  var min, sec;
+  let s = "";
+  let min, sec;
 
   s += Math.trunc(coord.lat) + "° ";
   min = Math.abs(coord.lat % 1) * 60;
@@ -362,8 +383,8 @@ function printCoordinateFromDMSFormat6 (coord) {
 
 function printCoordinateFromDMSFormat7 (coord) {
   // Format 7: gg mm ss.ddd N gg mm ss.ddd E
-  var s = "";
-  var min, sec;
+  let s = "";
+  let min, sec;
 
   s += Math.trunc(Math.abs(coord.lat)) + "° ";
   min = Math.abs(coord.lat % 1) * 60;
@@ -476,8 +497,8 @@ export function printCoordinateFromDMS (coord, s) {
 
 export function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
 
-  var temp = []     // Used as output from proj4
-  var fromproj = "" // Defines the proj4 projection to be used
+  let temp = []     // Used as output from proj4
+  let fromproj = "" // Defines the proj4 projection to be used
 
   switch (fromdatum) {
     // MGRS, QTH and Geohash don't use proj4 and return result immediately
@@ -544,8 +565,8 @@ export function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
 
 export function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
 
-  var temp = [];    // Used to store coordiantes returned from proj4, array with [lon, lat]
-  var toproj = "";  // String with the to be used projection for proj4
+  let temp = [];    // Used to store coordiantes returned from proj4, array with [lon, lat]
+  let toproj = "";  // String with the to be used projection for proj4
 
   // Longitude (lengtegraad), X, easting, E/W are all the same and range from -180, +180
   // Latitude (breedtegraag), Y, northing, N/S are all the same and range from -90, +90
@@ -612,7 +633,7 @@ export function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
 
 export function getCoordFromText (s, datum) {
 
-  var temp = [];     // Used to store result from regex match
+  let temp = [];     // Used to store result from regex match
 
   // Longitude (lengtegraad), X, easting, E/W are all the same and range from -180, +180
   // Latitude (breedtegraag), Y, northing, N/S are all the same and range from -90, +90
@@ -715,7 +736,7 @@ export function getTextFromCoord (coord, datum, round = 7, dmsformat = "") {
 export function convertCoordFromLatLon (coord, fromdatum, todatum, proj4jsdef = "") {
 
   // Always convert first to WGS84
-  var wgs84coord = convertCoordToWGS (coord, fromdatum, proj4jsdef);
+  let wgs84coord = convertCoordToWGS (coord, fromdatum, proj4jsdef);
 
   // Then convert WGS84 to the requested datum
   return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
@@ -736,7 +757,7 @@ export function convertCoordFromLatLon (coord, fromdatum, todatum, proj4jsdef = 
 export function convertCoordFromText (coord, fromdatum, todatum, proj4jsdef = "") {
 
   // Always convert first to WGS84
-  var wgs84coord = convertCoordToWGS ( getCoordFromText(coord, fromdatum), fromdatum, proj4jsdef);
+  let wgs84coord = convertCoordToWGS ( getCoordFromText(coord, fromdatum), fromdatum, proj4jsdef);
 
   // Then convert WGS84 to the requested datum
   return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
@@ -757,7 +778,7 @@ export function displayMarker (L, mymap, coord, text) {
   mymap.setView(coord, 13);
 
   // Set a marker
-  var markerhome = L.marker(coord).addTo(mymap);
+  let markerhome = L.marker(coord).addTo(mymap);
   markerhome.bindPopup(text).openPopup();
 }
 

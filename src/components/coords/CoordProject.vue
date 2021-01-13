@@ -62,23 +62,20 @@ export default {
       try {
         // Translate the inputed coordinates to WGS84 for display on map
         var startcoord = coords.convertCoordFromText(this.coordinate, this.selecteddatum, "WGS84");
-        // console.log(startcoord);
-        // console.log(startcoord);
-
+        
         // Getting grid coord using grid based coordinate to calculate projection
-        var gridcoord =  coords.convertCoordFromLatLon (startcoord, "WGS84", "RD");
-        // console.log(gridcoord);
-
+        let gridcoord =  coords.convertCoordFromLatLon (startcoord, "WGS84", "RD");
+        
         // Make projection and convert back to WGS84 for display
-        var projcoord = coords.convertCoordToWGS(
+        let projcoord = coords.convertCoordToWGS(
             { lat: gridcoord.lat + (this.dist * this.unit) * Math.cos(this.angle * this.angleunit),
             lon: gridcoord.lon + (this.dist * this.unit) * Math.sin(this.angle * this.angleunit) },
             "RD");
-        // console.log(projcoord);
-
+        
         // Set marker for the starting point
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, startcoord, this.$t('dialogcproj.startpoint'));
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, projcoord, this.$t('dialogcproj.projpoint'));
+        
         // Draw a line on the map
         this.$store.state.L.polyline([startcoord, projcoord], {color: 'red'}).addTo(this.$store.state.mymap);
 
@@ -87,9 +84,11 @@ export default {
         this.result += " or " + coords.printCoordinateFromDMS(projcoord, "N12 34.567 E1 23.456");
 
       } catch (e) {
+
         console.log(e);
         this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
+        
       }
     },
   }

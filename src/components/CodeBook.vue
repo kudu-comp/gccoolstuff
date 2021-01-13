@@ -7,13 +7,13 @@
       <div class="infoblock">
         {{$t('codebook.long')}}
       </div>
-      <div class="form-inline mb-2">
+      <div class="form-inline">
         <v-search id="searchstr" ref="searchstr" v-model:search="searchstr"></v-search>
-        <label for="listoftags" class="form-label ml-2">{{$t('codebook.availtags')}}:</label>
-        <select id="listoftags" class="custom-select ml-2" v-model="selectedtag">
+        <label for="listoftags" class="form-label mr-2 mb-2">{{$t('codebook.availtags')}}:</label>
+        <select id="listoftags" class="custom-select mr-2 mb-2" v-model="selectedtag">
           <option v-for="t in tags" :key="t" :value="t">{{t}}</option>
         </select>
-        <input type="button" id="btnsearch" name="btnsearch" :value="$t('buttons.search')" class="btn btn-primary ml-2" v-on:click="goSearch">
+        <input type="button" id="btnsearch" name="btnsearch" :value="$t('buttons.search')" class="btn btn-primary mb-2" v-on:click="goSearch">
       </div>
       <div class="row">
         <div class="col-2 col-sm-1">
@@ -92,7 +92,7 @@ export default {
   mounted: function() {
     // Fill tags, use Set as it only has unique values
     // Set array with found pages to all available pages
-    var tags = new Set();
+    let tags = new Set();
     this.foundpages = [];
     for (let i=0; i < codepages.length; i++) {
       this.foundpages.push(i);

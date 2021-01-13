@@ -26,7 +26,10 @@ import MathPalindrome from '@/components/math/MathPalindrome.vue'
 import MathSequences from '@/components/math/MathSequences'
 import MathProperties from '@/components/math/MathProperties.vue'
 import MathBase from  '@/components/math/MathBase.vue'
-import ImageTools from '@/components/ImageTools.vue'
+import ImageTools from '@/components/images/ImageTools.vue'
+import ExifScanner from '@/components/images/ExifScanner.vue'
+import ColorPicker from '@/components/images/ColorPicker.vue'
+import FillTool from '@/components/images/FillTool.vue'
 import HtmlToolbox from '@/views/HtmlToolbox'
 import Sudoku from '../views/Sudoku.vue'
 import OtherTools from '@/views/OtherTools.vue'
@@ -140,9 +143,26 @@ const routes = [
     ]
   },
   {
-    path: '/imagetools',
-    name: 'ImageTools',
-    component: ImageTools
+    path: '/images',
+    name: "ImageTools",
+    component: ImageTools,
+    children: [
+      {
+        path: '/images/exifscanner',
+        name: 'ExifScanner',
+        component: ExifScanner
+      },
+      {
+        path: '/images/colorpicker',
+        name: 'ColorPicker',
+        component: ColorPicker
+      },
+      {
+        path: '/images/filltool',
+        name: 'FillTool',
+        component: FillTool
+      },
+    ]
   },
   {
     path: '/htmltools',

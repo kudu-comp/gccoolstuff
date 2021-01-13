@@ -45,7 +45,9 @@
       </div>
       <h3>{{$t('menu.imagetools')}}</h3>
       <div class="p mb-2">
-        <router-link to="/imagetools">{{$t('menu.imagetools')}}</router-link> {{$t('imagetools.short')}}.
+        <router-link to="/images/exifscanner">{{$t('imagetools.exifscanner.title')}}</router-link> {{$t('imagetools.exifscanner.short')}}.<br>
+        <router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link> {{$t('imagetools.colorpicker.short')}}.<br>
+        <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> {{$t('imagetools.filltool.short')}}.
       </div>
       <h3>{{$t('menu.htmlscanner')}}</h3>
       <div class="p mb-2">
@@ -64,13 +66,13 @@
       </div>
       <h3>{{$t('menu.other')}}</h3>
       <div class="p mb-2">
-        <router-link to="/other/sudokusolver">{{$t('menu.sudokusolver')}}</router-link> {{$t('sudoku.short')}}.<br>
-        <router-link to="/other/mmsolver">{{$t('menu.mmsolver')}}</router-link> {{$t('mmsolver.short')}}.<br>
-        <router-link to="/other/periodictable">{{$t('menu.periodictable')}}</router-link> {{$t('periodictable.short')}}.<br>
-        <router-link to="/other/countries">{{$t('menu.countries')}}</router-link> {{$t('countries.short')}}.<br>
-        <router-link to="/other/usastates">{{$t('menu.usastates')}}</router-link> {{$t('usastates.short')}}.<br>
-        <router-link to="/other/nlprovinces">{{$t('menu.nlprovinces')}}</router-link> {{$t('nlprovinces.short')}}.<br>
-        <router-link to="/other/resistorcode">{{$t('menu.resistorcode')}}</router-link> {{$t('resistorcode.short')}}.
+        <router-link to="/other/sudokusolver">{{$t('othertools.sudokusolver.title')}}</router-link> {{$t('othertools.sudokusolver.short')}}.<br>
+        <router-link to="/other/mmsolver">{{$t('othertools.mmsolver.title')}}</router-link> {{$t('othertools.mmsolver.short')}}.<br>
+        <router-link to="/other/periodictable">{{$t('othertools.periodictable.title')}}</router-link> {{$t('othertools.periodictable.short')}}.<br>
+        <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> {{$t('othertools.countries.short')}}.<br>
+        <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> {{$t('othertools.usastates.short')}}.<br>
+        <router-link to="/other/nlprovinces">{{$t('othertools.nlprovinces.title')}}</router-link> {{$t('othertools.nlprovinces.short')}}.<br>
+        <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> {{$t('othertools.resistorcode.short')}}.
       </div>
     </div>
   </div>

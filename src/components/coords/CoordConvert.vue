@@ -91,7 +91,7 @@ export default {
       if (this.coordfrom == "") { this.error = true; this.errormsg = this.$t('errors.nocoords'); return; }
 
       // Get all the lines form input and convert them one by one
-      var input = this.coordfrom.match(/[^\r\n]+/g);
+      let input = this.coordfrom.match(/[^\r\n]+/g);
 
       // Clear map of markers
       // this.mymap.eachLayer((layer) => {
@@ -102,19 +102,25 @@ export default {
       this.result = "";
       this.count = 0;
       this.error = false;
-      for (var i = 0; i < input.length; i++) {
-        // Split in words
+
+      // Convert each coordinate
+      for (let i = 0; i < input.length; i++) {
+
         this.count++;
         try {
+
           this.result += coords.getTextFromCoord(coords.convertCoordFromText(input[i], this.from, this.to, this.proj4jsdef), this.to, 7, this.wgsformat) + "\n";
 
           // Add a marker to the map for each coordinaat
-          var mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84', this.proj4jsdef);
+          let mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84', this.proj4jsdef);
           coords.displayMarker(this.$store.state.L, this.$store.state.mymap, mapcoord, "Point " + this.count);
+
         } catch(e) {
+
           this.error = true;
           this.errormsg = this.$t('errors.incorrectcoords');
           console.log(e);
+
         }
       }
     },

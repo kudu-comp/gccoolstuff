@@ -33,10 +33,13 @@
 import * as textHelper from '@/scripts/texthelper.js';
 
 export default {
+
   name: 'TextAnalyze',
+
   props: {
     msg: String,
   },
+  
   data: function () {
     return {
       message: "",
@@ -75,10 +78,10 @@ export default {
       const DigitAlphabet = "0123456789";
 
       // Reset the array with counters
-      var lowerchararr = [];
-      var upperchararr = [];
-      var digitarr = [];
-      var freqarr = [];
+      let lowerchararr = [];
+      let upperchararr = [];
+      let digitarr = [];
+      let freqarr = [];
 
       // Reset all individual counters
       this.error = "";
@@ -101,7 +104,7 @@ export default {
       for (let i=0; i < DigitAlphabet.length; i++) digitarr[i] = 0;
 
       // Start scanning the message
-      var idx = 0;
+      let idx = 0;
       for (let i = 0; i <  this.message.length; i++) {
 
         // Increase total number of characters
@@ -148,7 +151,7 @@ export default {
       this.totalnonwhite = this.totalchar - this.totalwhite;
 
       // Print alphabets
-      var html = "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('dialoganal.letter') + "</th>";
+      let html = "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('dialoganal.letter') + "</th>";
       for (let i = 0; i < UpperCaseAlphabet.length; i++) html+="<th scope='col'>" + UpperCaseAlphabet[i] + "</th>";
       html += "</tr></thead><tr><td>" + this.$t('dialoganal.count') + "</td>";
       for (let i = 0; i < lowerchararr.length; i++) html+="<td>" + (lowerchararr[i]+upperchararr[i]) + "</td>";
@@ -181,9 +184,12 @@ export default {
       html += "</tr><tr><td>" + this.$t('dialoganal.perc') + "</td>";
       for (let i = 0; i < freqarr.length; i++) html+="<td>" + freqarr[i].perc.toFixed(1) + "%</td>";
       html += "</tr></table>";
+
+      // Print the results
       this.result = html;
 
     },
+
   },
 }
 </script>

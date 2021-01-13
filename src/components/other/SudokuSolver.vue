@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{this.$t('menu.sudokusolver')}}
+      {{this.$t('othertools.sudokusolver.title')}}
     </div>
     <div class="mainpage">
       <div class="infoblock">
@@ -78,19 +78,19 @@ export default {
 
     // Dynamically generate the 3x3 or 4x4 table
     generateTable() {
-      var tableElement = document.getElementById("sudokutable");
-      for (var r=1; r <= this.size2; r++) {
-        var newRow = document.createElement("tr");
+      let tableElement = document.getElementById("sudokutable");
+      for (let r=1; r <= this.size2; r++) {
+        let newRow = document.createElement("tr");
         newRow.id = "sudokurow-" + r;
         tableElement.appendChild(newRow);
-        for (var c=1; c <= this.size2; c++) {
-          var newCell = document.createElement("td");
+        for (let c=1; c <= this.size2; c++) {
+          let newCell = document.createElement("td");
           newRow.appendChild(newCell);
-          var newInput = document.createElement("input");
+          let newInput = document.createElement("input");
           newInput.type="text";
           newInput.size="1";
           newInput.id = "box-" + r + "-" + c;
-          var classstr="form-control ";
+          let classstr="form-control ";
           if (c % this.size == 0) classstr += "mr-2 ";
           if (r % this.size == 0) classstr += "mb-2";
           newInput.setAttribute("class", classstr)
@@ -102,10 +102,10 @@ export default {
     // Generate the strings with known numbers from the table
     generateKnownNumbers() {
       if (this.knownnumbers != "") return this.knownnumbers;
-      var hints = "";
-      for (var r=1; r <= this.size2; r++) {
-        for (var c=1; c <= this.size2; c++) {
-          var v = document.getElementById("box-"+r+"-"+c).value;
+      let hints = "";
+      for (let r=1; r <= this.size2; r++) {
+        for (let c=1; c <= this.size2; c++) {
+          let v = document.getElementById("box-"+r+"-"+c).value;
           if (v != "") hints = hints + this.codes[r-1] + this.codes[c-1] + this.codes[v-1]  + ',';
         }
       }
@@ -115,17 +115,17 @@ export default {
 
     // Print the selected solution from the dropdown
     printSolution : function() {
-      for (var r=1; r <= this.size2; r++)
-        for (var c=1; c <= this.size2; c++) {
+      for (let r=1; r <= this.size2; r++)
+        for (let c=1; c <= this.size2; c++) {
           document.getElementById(['box-'+r+"-"+c]).value = parseInt(this.codes.indexOf(this.selectedsolution[((r-1)*this.size2)+c-1])) + 1;
         }
     },
 
     // Change the Sudokytype and change the background of the X if needed
     changeType : function () {
-      var bgcolor = "";
+      let bgcolor = "";
       if (this.sudokutype == "SudokuX") bgcolor = "lightgray";
-      for (var i=1; i <= this.size2; i++) {
+      for (let i=1; i <= this.size2; i++) {
         document.getElementById("box-" + i + "-" + i).style.backgroundColor = bgcolor;
         document.getElementById("box-" + i + "-" + (this.size2 + 1 - i)).style.backgroundColor = bgcolor;
         document.getElementById("box-" + (this.size2 + 1 - i) + "-" + i).style.backgroundColor = bgcolor;
@@ -135,7 +135,7 @@ export default {
 
     // Switch between Sudoku sizes
     changeSize : function () {
-      for (var r=1; r <= this.size2; r++) {
+      for (let r=1; r <= this.size2; r++) {
         document.getElementById("sudokurow-" + r).remove();
       }
       this.size2 = this.size**2;
@@ -145,14 +145,15 @@ export default {
 
     // Reset sudoku, clear all fields
     resetSudoku: function () {
-      for (var r=1; r <= this.size2; r++)
-        for (var c=1; c <= this.size2; c++) {
+      for (let r=1; r <= this.size2; r++)
+        for (let c=1; c <= this.size2; c++) {
           document.getElementById(['box-'+r+"-"+c]).value = "";
         }
     },
 
     // Solve the sudoku by calling the PHP script on the server
     solveSudoku : function () {
+
       this.error = false;
       this.solved = false;
       let data = {
@@ -160,8 +161,7 @@ export default {
         size: this.size,
         knownnumbers: this.generateKnownNumbers(),
       };
-      //console.log (JSON.stringify(data));
-      //console.log(data);
+      
       fetch(this.phpurl, {
           method: 'POST',
           body: JSON.stringify(data)
@@ -180,6 +180,7 @@ export default {
           this.errormsg = this.$t('sudoku.error');
         });
     },
+    
   }
 }
 </script>

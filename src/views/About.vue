@@ -35,12 +35,13 @@
         <template v-slot:header>To do list</template>
         <template v-slot:content>
           <ul>
-            <li>Mastermind solver</li>
             <li>Math tools - primes</li>
             <li>Codebook - add more codes</li>
             <li>Fix refresh issue for Sudoku, Image tools, Math tools (only on hosting server)</li>
             <li>Coordinates - improve accuracy (do not use grid)</li>
             <li>Image Tools - load from URL</li>
+            <li>Image Tools - use HTML canvas, pick RGB values, fill areas</li>
+            <li>Unit convertor</li>
             <li>Browse codebook use srcset</li>
             <li>A tool to hack hashes of coordinates</li>
             <li>HTML Scanner - add option to retrieve with geocache id</li>

@@ -122,18 +122,18 @@ export default {
 
     // Open a selected link from the dropdown with links
     openLink: function () {
-        window.open(this.selectedlink);
+      window.open(this.selectedlink);
     },
 
     // Open an image from the dropdown with images
     openImage: function () {
-        window.open(this.selectedimage);
+      window.open(this.selectedimage);
     },
 
-    // Get all the nodes with a certain tag
+    // Get all the nodes with a certain tag return a string
     listTags: function (tag) {
-      var nodes = this.cacheNode.getElementsByTagName(tag);
-      var tags ="";
+      let nodes = this.cacheNode.getElementsByTagName(tag);
+      let tags ="";
       for (let node of nodes) {
         // console.log(node);
         tags += node.textContent + " ";
@@ -162,8 +162,8 @@ export default {
 
       try {
         // Scan the XML
-        var parser = new DOMParser();
-        var xmlTree = parser.parseFromString(this.gchtml,"text/html");
+        let parser = new DOMParser();
+        let xmlTree = parser.parseFromString(this.gchtml,"text/html");
 
         // First find the div with id cachedetails
         this.cacheNode = xmlTree.getElementById("ctl00_ContentBody_LongDescription");
@@ -177,7 +177,7 @@ export default {
 
         // Find the links
         this.links = [];
-        var nodes = this.cacheNode.getElementsByTagName("a");
+        let nodes = this.cacheNode.getElementsByTagName("a");
         for (let node of nodes) {
           // console.log(node);
           this.links.push({ name: node.textContent, url: node.getAttribute("href") });
@@ -199,8 +199,8 @@ export default {
         }
 
         // Find the comments using XPath
-        var x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
-        var comment = x.iterateNext();
+        let x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
+        let comment = x.iterateNext();
         this.showcomments = (comment != null);
         this.comments = "";
         while (comment) {
@@ -213,7 +213,7 @@ export default {
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='white'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#FFFFFF'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#FFFFFF')]", xmlTree, null, XPathResult.ANY_TYPE, null);
-        var white = x.iterateNext();
+        let white = x.iterateNext();
         this.showwhites = (white != null);
         this.whites = "";
         while (white) {
@@ -236,9 +236,11 @@ export default {
         this.scanresult = this.$t('htmlscanner.complete');
 
       } catch (e) {
+
         this.error = true;
         this.errormsg = this.$t('htmlscanner.error');
         console.log(e);
+
       }
     },
   },

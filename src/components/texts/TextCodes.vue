@@ -37,6 +37,7 @@ import { codePoints, fromCodePoint } from 'utf16-char-codes'
 import VaItem from '@/components/inputs/VaItem.vue'
 
 export default {
+
   name: 'TextCodes',
 
   props: {
@@ -228,9 +229,10 @@ export default {
       baudotcode.reset();
 
       try {
+        
         // Break down input in words
         this.message = this.message.trim();
-        var words;
+        let words;
         if (!this.getMany(this.selectedcode)) {
           words = this.message.match(/./gu);
         } else {
@@ -241,16 +243,19 @@ export default {
         // Baudotcode and Murraycode might output two strings, so arrays are used
         this.result = "";
         for (let i=0; i < words.length; i++) {
-          var inp = this.inputToDecimal(words[i]);
-          var outp = this.decimalToOutput(inp);
+          let inp = this.inputToDecimal(words[i]);
+          let outp = this.decimalToOutput(inp);
           for (let i=0; i < outp.length; i++) {
             this.result += outp[i] + " ";
           }
         }
+
       } catch (e) {
+
         this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
         console.log(e);
+
       }
     },
   },

@@ -76,11 +76,11 @@ export default {
     textToNumbers : function () {
 
       // Get the selected alphabet using the name
-      var alpha = textHelper.getAlphabet(this.selectedalphabet);
-      var mod = Math.floor(alpha.length / 10);
+      let alpha = textHelper.getAlphabet(this.selectedalphabet);
+      let mod = Math.floor(alpha.length / 10);
       if (this.startatzero) mod--;
-      var html = "";
-      var idx = 0;
+      let html = "";
+      let idx = 0;
       for (let i=0; i < this.message.length; i++) {
         idx = alpha.indexOf(this.message[i]);
         if (idx >= 0) {
@@ -101,13 +101,13 @@ export default {
 
     // Convert numbers to text
     numbersToText : function() {
-      var alpha = textHelper.getAlphabet(this.selectedalphabet);
-      var mod = Math.floor(alpha.length / 10);
+      let alpha = textHelper.getAlphabet(this.selectedalphabet);
+      let mod = Math.floor(alpha.length / 10);
       if (this.startatzero) mod--;
-      var html = "";
-      var d1 = 0;
-      var d2 = 0;
-      var pos = 0;
+      let html = "";
+      let d1 = 0;
+      let d2 = 0;
+      let pos = 0;
       for (let i=0; i < this.message.length; i++) {
         if ("0123456789".indexOf(this.message[i]) >= 0) {
           d1 = parseInt(this.message[i]);

@@ -7,7 +7,7 @@
  *
  */
 export function primeFactorization (n) {
-    var a = [];
+  let a = [];
 
     // Get all the 2 factors
     while (n % 2 == 0) {
@@ -16,7 +16,7 @@ export function primeFactorization (n) {
     }
 
     // Get the other factors starting at 3
-    var f = 3;
+    let f = 3;
     while (f * f <= n) {
         if (n % f == 0) {
             a.push(f);
@@ -43,18 +43,18 @@ export function primeFactorization (n) {
 export function primeFactorizationString (n) {
 
     // Vind deler
-    var deler = 2;
+    let deler = 2;
     while (n % deler != 0) deler++;
 
     // Divide as many times as you can
-    var k = 0;
+    let k = 0;
     while (n % deler == 0) {
         n /= deler;
         k++;
     }
 
     // Add to string
-    var s = "" + deler;
+    let s = "" + deler;
     if (k > 1) s += '^' + k;
 
     // Repeat with remaining number
@@ -70,7 +70,7 @@ export function primeFactorizationString (n) {
  *
  */
 export function gcd (a, b) {
-  var t;
+  let t;
 	while (b != 0 ) {
     t = b;
     b = a % b;
@@ -103,8 +103,8 @@ export function hailstone (start, count) {
 
 	// If n is even, divide it by 2.
 	// If n is odd, multiply it by 3 and add 1;
-	var n = start;
-	var seq = "" + n;
+	let n = start;
+	let seq = "" + n;
 
 	for (let i = 1; i <= count; i++) {
 		if ((n % 2) == 0) {
@@ -130,9 +130,9 @@ export function hailstone (start, count) {
 	// a(1) = 1
 	// a(n + 1) = 1 + a(n + 1 – a(a(n)))
 
-  var dp = [];
+  let dp = [];
   dp[1] = 1;
-  var seq = dp[1];
+  let seq = dp[1];
 
   // Finding and printing first
   // n terms of Golomb Sequence.
@@ -155,8 +155,8 @@ export function hailstone (start, count) {
  * @return object     object with n (the number) and seq (a string)
  */
 export function conway (seed, n) {
-  var seq = "" + seed;
-  var s = "" + seed;
+  let seq = "" + seed;
+  let s = "" + seed;
   for (let i = 1; i <= n; i++) {
     s = nextconway (s);
     seq += " " + s;
@@ -166,8 +166,8 @@ export function conway (seed, n) {
 
 function nextconway (t) {
   if (t == "") return "0";
-  var r = "";
-  var idx = 0;
+  let r = "";
+  let idx = 0;
   while (idx < t.length) {
     let i=0;
     while ( (idx + i < t.length) && (t[idx+i] == t[idx]) ) i++;
@@ -186,8 +186,8 @@ function nextconway (t) {
  * @return object     object with n (the number) and seq (a string)
  */
 export function revconway (seed, n) {
-  var s = "" + seed;
-  var seq = "" + seed;
+  let s = "" + seed;
+  let seq = "" + seed;
   for (let i = 1; i <= n; i++) {
     s = prevconway (s);
     seq += " " + s;
@@ -196,9 +196,9 @@ export function revconway (seed, n) {
 }
 
 function prevconway (t) {
-  var r = "";
+  let r = "";
   if ((t.length % 2) == 1) return r;     // impossible
-  var idx = 0;
+  let idx = 0;
   while (idx < t.length) {
       for (let i=0; i < t[idx]; i++)
         r += t[idx+1];
@@ -216,8 +216,8 @@ function prevconway (t) {
  */
 export function abundant(n) {
   // The first abundant number is 12
-  var seq = "12";
-  var j = 13;
+  let seq = "12";
+  let j = 13;
   for (let i = 1; i < n; i++) {
     while ( !isabundant(j) ) j++;
     seq += " " + j;
@@ -229,7 +229,7 @@ export function abundant(n) {
 function isabundant (n) {
 	// Check if number is abundant
 	// sigma(n) > 2n, where sigma(n) is the sum of the divisors of n
-	var sum = 0;
+	let sum = 0;
 	for (let i = 1; i<=n; i++) {
 		if ((n % i) == 0) sum = sum + i;
 	}
@@ -244,8 +244,8 @@ function isabundant (n) {
  * @return object     object with n (the number) and seq (a string)
  */
 export function deficient(n) {
-  var seq = "1";
-  var j = 2;
+  let seq = "1";
+  let j = 2;
   for (let i = 1; i < n; i++) {
     while ( !isdeficient(j) ) j++;
     seq += " " + j;
@@ -257,7 +257,7 @@ export function deficient(n) {
 function isdeficient (n) {
 	// Check if number is deficient
 	// sigma(n) < 2n, where sigma(n) is the sum of the divisors of n
-	var sum = 0;
+	let sum = 0;
 	for (let i = 1; i<=n; i++) {
 		if ((n % i) == 0) sum = sum + i;
 	}
@@ -272,8 +272,8 @@ function isdeficient (n) {
  * @return object     object with n (the number) and seq (a string)
  */
 export function niven(n) {
-  var seq = "1";
-  var j = 2;
+  let seq = "1";
+  let j = 2;
   for (let i = 1; i < n; i++) {
     while ( !isniven(j) ) j++;
     seq += " " + j;
@@ -285,8 +285,8 @@ export function niven(n) {
 function isniven (n) {
 	// Check if number is divisable by the sum of its digits
 	// sigma(n) < 2n, where sigma(n) is the sum of the divisors of n
-	var s = n.toString();
-  var sum = 0
+	let s = n.toString();
+  let sum = 0
 	for (let i = 0; i < s.length; i++) {
     sum += parseInt(s[i]);
 	}

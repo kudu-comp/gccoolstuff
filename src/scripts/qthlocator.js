@@ -21,16 +21,16 @@ function qth2wgs (s = "") {
 	if (s.length < 2) return "Maidenhead locator must be at least 2 characters";
 	if (s.length % 2 == 1) return "Maidenhead locator must be an even number of characters";
 
-	var base0 = 18;
-	var factorlon = 360 / base0;
-	var factorlat = 180 / base0;
+	let base0 = 18;
+	let factorlon = 360 / base0;
+	let factorlat = 180 / base0;
 
-	var lon = factorlon * (s.codePointAt(0) - 'A'.codePointAt(0)) - 180;
-	var lat = factorlat * (s.codePointAt(1) - 'A'.codePointAt(0)) - 90;
+	let lon = factorlon * (s.codePointAt(0) - 'A'.codePointAt(0)) - 180;
+	let lat = factorlat * (s.codePointAt(1) - 'A'.codePointAt(0)) - 90;
 
-	var b = 10;
+	let b = 10;
 
-	for (var i = 2; i < s.length; i += 2) {
+	for (let i = 2; i < s.length; i += 2) {
 
 		factorlon /= b;
 		factorlat /= b;
@@ -60,21 +60,21 @@ function wgs2qth (lon = 0, lat = 0, prec = 7) {
 
 	if (prec < 1) prec = 1;
 
-	var base0 = 18;
-	var factorlon = 360 / base0;
-	var factorlat = 180 / base0;
+	let base0 = 18;
+	let factorlon = 360 / base0;
+	let factorlat = 180 / base0;
 
-	var s = "";
-	var longmult = Math.floor ((lon + 180) / factorlon);
-	var latmult  = Math.floor ((lat + 90) / factorlat);
+	let s = "";
+	let longmult = Math.floor ((lon + 180) / factorlon);
+	let latmult  = Math.floor ((lat + 90) / factorlat);
 
 	s = s + String.fromCodePoint('A'.codePointAt(0) + longmult) + String.fromCodePoint('A'.codePointAt(0) + latmult);
 	lon = lon - factorlon * longmult + 180;
 	lat = lat - factorlat * latmult + 90;
 
-	var b = 10;
+	let b = 10;
 
-	for (var i = 1; i < prec; i++) {
+	for (let i = 1; i < prec; i++) {
 
 		factorlon /= b;
 		factorlat /= b;
