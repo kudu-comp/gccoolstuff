@@ -17,17 +17,17 @@
   <div id="nav" class="col-12 text-center">
     <router-link to="/">{{$t('menu.home')}}</router-link> |
     <router-link to="/coord">{{$t('menu.coordinates')}}</router-link> |
-    <router-link to="/texttoolbox">{{$t('menu.texttools')}}</router-link> |
+    <router-link to="/text">{{$t('menu.texttools')}}</router-link> |
     <router-link to="/cipher">{{$t('menu.ciphers')}}</router-link> |
     <router-link to="/codebook">{{$t('menu.codebook')}}</router-link> |
     <router-link to="/images">{{$t('menu.imagetools')}}</router-link> |
-    <router-link to="/htmltools">{{$t('menu.htmlscanner')}}</router-link> |
+    <router-link to="/html">{{$t('menu.htmlscanner')}}</router-link> |
     <router-link to="/math">{{$t('menu.mathtools')}}</router-link> |
     <router-link to="/other">{{$t('menu.other')}}</router-link> |
     <router-link to="/howtostart">{{$t('menu.howto')}}</router-link> |
     <router-link to="/about">{{$t('menu.about')}}</router-link>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>

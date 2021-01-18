@@ -57,7 +57,7 @@
             </li>
             <li><b>Hidden information</b> - try select all (Ctrl-A) on the webpage and see what happens. There might be white text, that becomes
               visible. But there might also be information hidden inside the HTML (e.g. comments, 1x1 pixel links and more). Try
-              <router-link to="/htmltools">HTML scanner</router-link> and see if it can find this hidden information.
+              <router-link to="/html">HTML scanner</router-link> and see if it can find this hidden information.
             </li>
           </ul>
         </template>
@@ -101,7 +101,7 @@
             <li>Calculating the square root is done by adding to the numbers, till there is one left. So James Bond = 83 = 8+3 = 11 = 1+1 = 2.</li>
           </ul>
           There are lots of alternatives where the values of A-Z differ, e.g. the Scrabble values, A=0-Z=25 or Z=26-A=1. All of these are available
-          in the tool <router-link to="/texttoolbox/textwordvalue">Word value &amp; square root</router-link>. Saving you all the hard work.
+          in the tool <router-link to="/text/textwordvalue">Word value &amp; square root</router-link>. Saving you all the hard work.
         </template>
       </va-item>
       <va-item v-bind:showitem='show[4]' v-on:toggle='toggleItem(4)'>
@@ -153,7 +153,7 @@
             <li>Try some other geocache tool websites</li>
             <li>Make a snapshot of one or a few symbols and try Google image search</li>
             <li>If the text is long enough replace all the symbols with letters a to z and crack the code using substituion
-              using <router-link to="/texttoolbox/smartreplace">Smart replace</router-link>.</li>
+              using <router-link to="/text/smartreplace">Smart replace</router-link>.</li>
           </ul>
         </template>
       </va-item>
@@ -201,7 +201,7 @@
           <ul>
             <li><b>UTF or ASCII</b>. The numbers are the numbers used by the computer internally (also known as ASCII, UTF,
               codepages or alt codes). There are many different options here. The input could be decimal, but also binary or
-              hexadecimal. The used codepage could be one of many. With <router-link to="/texttoolbox/textcodes">Character &amp; codes</router-link>
+              hexadecimal. The used codepage could be one of many. With <router-link to="/text/textcodes">Character &amp; codes</router-link>
               you can quickly try all the options.
             </li>
             <li><b>Base conversion</b>. The numbers are specified in a different base. The maximum digit might indicate the base
@@ -209,7 +209,7 @@
               converter</router-link> and try.
             </li>
             <li><b>Text to numbers</b>. The values of the letters are written one after the other. A leading zero might or might
-              not be included. E.g. 011812 read ARM. You can use <router-link to="/texttoolbox/texttonumbers">Text to numbers</router-link>
+              not be included. E.g. 011812 read ARM. You can use <router-link to="/text/texttonumbers">Text to numbers</router-link>
               to crack the code.
             </li>
             <li><b>ROT5</b>. Actually a cipher with all the digits shifted 5 positions. Use <router-link :to="{ name: 'Cipher',
@@ -234,16 +234,16 @@
             <li><b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', params: { cipher: 'Caesar'}}">Caesar</router-link>
               to solve the puzzle.
             </li>
-            <li><b>Analyze</b> the text using <router-link to="/texttoolbox/textanalyzer">Analyzer</router-link>. The coordinate might be
+            <li><b>Analyze</b> the text using <router-link to="/text/textanalyzer">Analyzer</router-link>. The coordinate might be
               hidden in the number of words, lines, certain letters.</li>
             <li><b>Keyboards</b> - the text was typed as if it where another keyboard (like Dvorak or Colemak). You can use
-              <router-link to="/texttoolbox/textkeyboards">Keyboards</router-link> to solve these puzzles.</li>
+              <router-link to="/text/textkeyboards">Keyboards</router-link> to solve these puzzles.</li>
             <li><b>Anagrams</b> - the text might be an anagram. There are a few good anagram solvers on the internet, but none are perfect. So you
               might be on your own here. My favorite is the <a href="http://wordsmith.org/anagram/advanced.html">Internet Anagram Server</a></li>
             <li><b>Acronyms</b> - The letters might stand for chemical elements <router-link to="/other/periodictable">(Periodic table)</router-link> or
               <router-link to="/other/countries">Countries</router-link> or maybe <router-link to="/other/usastates">US States</router-link>.</li>
             <li><b>Substitution cipher</b> replaces each letter with one or more other
-              letters/digits/symbols. The best way to crack a substitution cipher is the <router-link to="/texttoolbox/smartreplace">Smart replace</router-link>
+              letters/digits/symbols. The best way to crack a substitution cipher is the <router-link to="/text/smartreplace">Smart replace</router-link>
               tool. It will analyze frequencies in the encoded text and suggest possible replacements. It works really well for larger texts,
               but with a bit of trial and error even with small texts most codes are easily broken.</li>
           </ul>
@@ -266,12 +266,12 @@
               <router-link :to="{ name: 'Cipher', params: { cipher: 'UUencode'}}">UUencode</router-link>. In these
               cases the text is likely a combination of symbols, letters and digits.</li>
             <li><b>Computer codes</b> - symbols might convert to numbers, or might convert to letters when using a different codepage.
-              With <router-link to="/texttoolbox/textcodes">Character &amp; codes</router-link> you can quickly try all the options.</li>
-            <li><b>Cyrillic or Greek letters</b> - are actually normal text. The tools <router-link to="/texttoolbox/textcodes">Character &amp; codes</router-link>
-              and <router-link to="/texttoolbox/textkeyboards">Keyboards</router-link> support Cyrillic and Greek.</li>
+              With <router-link to="/text/textcodes">Character &amp; codes</router-link> you can quickly try all the options.</li>
+            <li><b>Cyrillic or Greek letters</b> - are actually normal text. The tools <router-link to="/text/textcodes">Character &amp; codes</router-link>
+              and <router-link to="/text/textkeyboards">Keyboards</router-link> support Cyrillic and Greek.</li>
             <li><b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link :to="{ name: 'Cipher',
               params: { cipher: 'Goldbug'}}">here</router-link>.</li>
-            <li><b>Another cipher</b> - use <router-link to="/texttoolbox/smartreplace">Smart replace</router-link> to see if the frequencies
+            <li><b>Another cipher</b> - use <router-link to="/text/smartreplace">Smart replace</router-link> to see if the frequencies
               are similar to those of natural language. If so, you can use the tool to find the right replacements.</li>
             <li><b>Hashed text</b> - hashes are used for example to encrypt passwords. They only work one way. The coded hash can not be
               converted back to the original text. The only way to solve it is trying all options and find the one that matches. There are
@@ -308,7 +308,7 @@
             <li><b>Zoom in</b> extremely and see what the image reveales.</li>
             <li><b>Statistics</b> - get some statistics on the image, the number of pixels of each color, the sum of R, G and B values and so on.
               The code might be hidden somewhere in these stats. (I still need to write a tool to help with this.)</li>
-            <li><b>Links</b> - there might be links attached to the image (or just to 1 pixel actually). Use <router-link to="/htmltools">HTML scanner</router-link>
+            <li><b>Links</b> - there might be links attached to the image (or just to 1 pixel actually). Use <router-link to="/html">HTML scanner</router-link>
               to find these links</li>
             <li><b>Fill areas</b> - if colors are really close the human eye cannot see the difference. For example a red area might be red text
               on a slightly different red background. Use <router-link to="/images/filltool">Color Editor</router-link> to reveal those messages.</li>

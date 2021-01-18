@@ -59,6 +59,7 @@
         <router-link to="/math/countdigits">{{$t('mathtools.decimals.title')}}</router-link> {{$t('mathtools.decimals.short')}}.<br>
         <router-link to="/math/fibonacci">{{$t('mathtools.fibonacci.title')}}</router-link> {{$t('mathtools.fibonacci.short')}}.<br>
         <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> {{$t('mathtools.primegcdlcm.short')}}.<br>
+        <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> {{$t('mathtools.formulasolver.short')}}.<br>
         <router-link to="/math/numberproperties">{{$t('mathtools.numberprop.title')}}</router-link> {{$t('mathtools.numberprop.short')}}.<br>
         <router-link to="/math/nimbers">{{$t('mathtools.nimbers.title')}}</router-link> {{$t('mathtools.nimbers.short')}}.<br>
         <router-link to="/math/sequences">{{$t('mathtools.sequences.title')}}</router-link> {{$t('mathtools.sequences.short')}}.<br>

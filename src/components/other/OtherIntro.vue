@@ -14,7 +14,7 @@
       <va-item v-bind:showitem='show[0]' v-on:toggle='toggleItem(0)'>
         <template v-slot:header>{{$t('othertools.sudokusolver.title')}}</template>
         <template v-slot:content>
-          <router-link to="/other/sudokusolver">{{$t('othertools.sudokusolver.title')}}</router-link> - {{$t('othertools.sudoku.long')}}.<br>
+          <router-link to="/other/sudokusolver">{{$t('othertools.sudokusolver.title')}}</router-link> - {{$t('othertools.sudokusolver.long')}}.<br>
         </template>
       </va-item>
       <va-item v-bind:showitem='show[1]' v-on:toggle='toggleItem(1)'>

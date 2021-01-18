@@ -246,7 +246,7 @@ export default {
       this.sla = (data[3]/255).toFixed(4);
 
       // RGB value as hex
-      this.slx = "#"+ data[0].toString(16) + data[1].toString(16) + data[2].toString(16);
+      this.slx = "#"+ data[0].toString(16).padStart(2,'0') + data[1].toString(16).padStart(2,'0') + data[2].toString(16).padStart(2,'0');
 
       // HSL values
       let hsl = this.rgbToHsl (data[0], data[1], data[2]);

@@ -1,14 +1,14 @@
 <template>
   <div>
     <select class="custom-select" :value='code' @input="updateCode($event.target.value)">
-      <option value="UTF16">Unicode (UTF8/UTF16)</option>
+      <option value="UTF16">Text (UTF8/UTF16)</option>
       <option disabled>--- Numbers ---</option>
       <option value="Binary">Binary (0,1)</option>
       <option value="Octal">Octal (0-7)</option>
       <option value="Decimal">Decimal (0-9)</option>
       <option value="Hexadecimal">Hexadecimal (0-F)</option>
       <option disabled>--- Older codepages &amp; alt codes ---</option>
-      <option value="ASCII">Ascii character set</option>
+      <option value="ASCII">Text Ascii</option>
       <option value="CP1252">Windows Western European (CP1252)</option>
       <option value="CP437">Original IBM Hardware (CP437)</option>
       <option value="CP850">MS DOS Western European(CP850)</option>

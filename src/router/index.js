@@ -20,6 +20,7 @@ import CodeBook from '@/components/CodeBook.vue'
 import MathToolbox from '../views/MathToolbox.vue'
 import MathFib from '@/components/math/MathFib.vue'
 import MathDigits from '@/components/math/MathDigits.vue'
+import MathFormula from '@/components/math/MathFormula.vue'
 import MathGCDandLCM from '@/components/math/MathGCDandLCM.vue'
 import MathNimbers from '@/components/math/MathNimbers.vue'
 import MathPalindrome from '@/components/math/MathPalindrome.vue'
@@ -63,16 +64,16 @@ const routes = [
     ]
   },
   {
-    path: '/texttoolbox',
+    path: '/text',
     name: 'TextToolbox',
     component: TextToolbox,
     children: [
-      { path: "/texttoolbox/textwordvalue", component: TextWordValue },
-      { path: "/texttoolbox/smartreplace", component: SmartReplace },
-      { path: "/texttoolbox/textanalyzer", component: TextAnalyze },
-      { path: "/texttoolbox/texttonumbers", component: TextToNumbers },
-      { path: "/texttoolbox/textcodes", component: TextCodes },
-      { path: "/texttoolbox/textkeyboards", component: TextKeyboards },
+      { path: "/text/textwordvalue", component: TextWordValue },
+      { path: "/text/smartreplace", component: SmartReplace },
+      { path: "/text/textanalyzer", component: TextAnalyze },
+      { path: "/text/texttonumbers", component: TextToNumbers },
+      { path: "/text/textcodes", component: TextCodes },
+      { path: "/text/textkeyboards", component: TextKeyboards },
     ]
   },
   {
@@ -92,6 +93,7 @@ const routes = [
     children: [
       { path: "/math/baseconvertor", component: MathBase },
       { path: "/math/countdigits", component: MathDigits },
+      { path: "/math/formulasolv", component: MathFormula},
       { path: "/math/numberproperties", component: MathProperties },
       { path: "/math/fibonacci", component: MathFib },
       { path: "/math/nimbers", component: MathNimbers },
@@ -165,7 +167,7 @@ const routes = [
     ]
   },
   {
-    path: '/htmltools',
+    path: '/html',
     name: 'HtmlTools',
     component: HtmlToolbox
   },

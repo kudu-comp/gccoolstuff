@@ -38,7 +38,6 @@
     "format": "Format",
     "reset": "Reset",
     "cancel": "Cancel",
-    "update": "Update",
     "save": "Save",
     "get": "Get",
     "check": "Check",
@@ -75,12 +74,12 @@
   "menu": {
     "home": "Home",
     "coordinates": "Coordinates",
-    "texttools": "Text tools",
+    "texttools": "Text",
     "ciphers": "Ciphers",
     "codebook": "Codebook",
     "imagetools": "Images",
     "htmlscanner": "HTML Scanner",
-    "mathtools": "Math tools",
+    "mathtools": "Math",
     "other": "More tools",
     "howto": "How to",
     "about": "About"
@@ -525,6 +524,11 @@
       "short": "Get the prime factors, greatest common divisor or least common muliple of one or more numbers",
       "long" : "Get the prime factors, greatest common divisor or least common muliple of one or more numbers. Large numbers can take some time to calculate"
     },
+    "formulasolver": {
+      "title": "Formula solver",
+      "short": "Solve funny formulas like THIS + IS + TOO = FUNNY",
+      "long": "Solve formulas where letters represent numbers, e.g. THIS + IS + TOO = FUNNY. You can select uniqueness of numbers and optionally change the number base (default is decimal)."
+    },
     "numberprop": {
       "title": "Number properties",
       "short": "Show the properties of a number, e.g. prime, fibonacci or others",
@@ -568,6 +572,7 @@
     "size": "Size",
     "width": "Width",
     "height": "Height",
+    "npixels": "# pixels",
     "date": "Date & time",
     "datec": "Date & time created",
     "camera": "Camera",
@@ -586,7 +591,7 @@
   },
 
   "colorpicker": {
-    "info": "Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color. You can load the image from your computer or paste a URL.",
+    "info": "Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color. You can load the image from your computer.",
     "selcolor": "Selected color",
     "rgbval": "RGB values",
     "alpha": "Alpha channel",
@@ -603,13 +608,12 @@
   },
 
   "filltool": {
-    "info": "<p>Replace one color with another. Convert the image to grayscale or invert the image. Try to replace large areas with the same color with another to reveal unseen differences in color.</p><p>Use the buttons to convert to image to grayscale or to invert the image. Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled.</p>",
+    "info": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness. Flip the image horizontally or vertically.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>",
     "selfill": "Fill color",
     "tol": "Tolerance",
     "fill": "Color fill",
     "fillinfo": "Click anywhere in the image to fill an area.",
     "filter": "Filters",
-    "filterinfo": "Select one of the filters.",
     "conbri": "Brightness & contrast",
     "brigh": "Brightness",
     "contr": "Contrast",
@@ -617,6 +621,8 @@
     "invert": "Invert",
     "sepia": "Sepia",
     "transform": "Transformations",
+    "colordepth": "Reduce color depth",
+    "colors": "colors",
     "fliph": "Flip horizontal",
     "flipv": "Flip vertical"
   },
@@ -1033,7 +1039,7 @@
   },
 
   "dialogic": {
-    "intro": "Specify a coordinate and replace the unknowns with abcd (or another letter or use !@#%). You can choose the numbers you want to try. This works with all coordinate formats. The maximum number of coordinates that can be generated is 500.",
+    "intro": "Specify a coordinate and replace the unknowns with abcd (or another letter). You can choose the numbers you want to try. This works with all coordinate formats. The maximum number of coordinates that can be generated is 500.",
     "button": "Show coordinates",
     "error1": "Maximum number of coordinates is 500. Reduce the number of options."
   },
@@ -1099,6 +1105,7 @@
     "highlight": "Highlight",
     "orig": "Original letters",
     "repl": "Substitutes",
+    "casesens": "Case sensitive",
     "get": "Get hints",
     "apply": "Apply hints"
   },
@@ -1184,6 +1191,15 @@
     "t2": "Prime factors",
     "gcd": "The GCD is ",
     "lcm": "The LCM is"
+  },
+
+  "dialogformulasolver": {
+    "info": "<p>Solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>",
+    "formula": "Formula",
+    "unique": "Unique numbers",
+    "base": "Base for calculations",
+    "nosol": "There are no solutions",
+    "exprerror": "Error evaluating expression, please check the formula"
   },
 
   "dialognim": {

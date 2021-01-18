@@ -33,7 +33,13 @@
           <option value="es">{{$t('languages.spanish')}}</option>
         </select>
       </div>
-      <input type="button" id="analyze" name="analyze" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+      <div>
+        <input type="button" id="remdiacr" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" name="reverse" id="reverse" v-model="casesens" class="custom-control-input mr-2 mb-2" @change="wordValue">
+          <label for="reverse" class="custom-control-label mb-2">{{$t('dialogsr.casesens')}}</label>
+        </div>
+      </div>
       <div class="row">
         <div class="col-6">
           <div class="form-row mb-2">
@@ -59,6 +65,7 @@
 import * as textHelper from '@/scripts/texthelper.js'
 
 export default {
+
   name: 'SmartReplace',
 
   props: {
@@ -79,6 +86,7 @@ export default {
       input: "",
       message: "",
       highlightflag: "red",
+      casesens: false,
       result: "",
       percentages : [],
       freq : "",
@@ -95,15 +103,18 @@ export default {
   },
 
   methods: {
+
     removeDiacr: function() {
       this.message = textHelper.removeDiacritics(this.message);
     },
+
     checkDouble: function (str) {
       for (let i=0; i < str.length; i++) {
         if (str.indexOf(str[i], i+1) > 0) return true;
       }
       return false;
     },
+
     setLanguage: function () {
 
       switch (this.language) {
@@ -145,23 +156,43 @@ export default {
 
       // Reset counts
       let countletters = [];
+      let percentages = [];
       let idx;
-      for (let i=0; i < this.alphabet.length; i++) countletters[i]=0;
+      let length = 0;
 
-      // Get counts of all the letters in the alphabet
+      // Get counts of all the letters / symbols in the encrypted text
       for (let i=0; i < this.message.length; i++) {
-        idx = this.alphabet.indexOf(this.message[i].toLowerCase());
-        if (idx >= 0) countletters[idx]++;
+
+        // Ignore whitespace
+        if (" \n\r\t".indexOf(this.message[i]) >= 0) continue;
+
+        // Increase character count
+        length++;
+
+        // Did we already found this character?
+        if (this.casesens)
+          idx = countletters.findIndex( (c) => c.char == this.message[i] );
+        else
+          idx = countletters.findIndex( (c) => c.char == this.message[i].toLowerCase() );
+        
+        // If not add it to the countletters, else add 1    
+        if (idx < 0)
+          countletters.push({
+            char : (this.casesens) ? this.message[i] : this.message[i].toLowerCase(), 
+            count: 1
+          });
+        else 
+          countletters[idx].count++
+
       }
 
       // Calculate percentages 
-      this.percentages = [];
-      for (let i=0; i < this.alphabet.length; i++) {
-        this.percentages[i] = { char : this.alphabet[i], count : countletters[i] / this.message.length * 100 };
+      for (let i=0; i < countletters.length; i++) {
+        percentages[i] = { char : countletters[i].char, count : countletters[i].count / length * 100 };
       }
 
-      // Sort array with percentages
-      this.percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
+      // Sort array with percentages descending
+      percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
 
       // Print hints
       let html = "<table class='table table-sm table-bordered text-center'><tr><td>Letter</td>";
@@ -169,9 +200,9 @@ export default {
       html += "</tr><tr><td>Frequency</td>";
       for (let i = 0; i < this.freqperc.length; i++) html+="<td>" + this.freqperc[i] + "</td>";
       html += "</tr><tr><td>Hint letters</td>";
-      for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].char + "</td>";
+      for (let i = 0; i < percentages.length; i++) html+="<td>" + percentages[i].char + "</td>";
       html += "</tr><tr><td>Hint freq</td>";
-      for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].count.toFixed(1) + "</td>";
+      for (let i = 0; i < percentages.length; i++) html+="<td>" + percentages[i].count.toFixed(1) + "</td>";
       html += "</tr></table>";
       this.hints = html;
 
@@ -195,8 +226,7 @@ export default {
       // Reset errors and lowercase input
       this.error1 = "";
       this.error2 = "";
-      this.from = this.from.toLowerCase();
-      this.to = this.to.toLowerCase();
+      let to = (!this.casesens) ? this.to.toLowerCase() : this.to;
 
       // Check inputs
       if (this.to.length != this.from.length) {
@@ -211,31 +241,54 @@ export default {
         // Inputs is okay, replace starts here
         let html = "";
         let idx = 0;
+        let c = "";
+
         for (let i=0; i < this.message.length; i++) {
 
           // Find the letter in the "to" array
-          idx = this.to.indexOf(this.message[i].toLowerCase());
+          if (this.casesens) {
+            // Case sensitive
+            idx = to.indexOf(this.message[i]);
+          } else {
+            // Case insensitive, to was converted to lowercase, so lookup also lowercase
+            idx = to.indexOf(this.message[i].toLowerCase());
+          }
 
           // If found print with selected highlighting
           if (idx >= 0) {
+
+            // If matching is casesinsensitive copy upper/lowercase from input
+            c = (!this.casesens && (this.message[i] == this.message[i].toUpperCase())) ? this.from[idx].toUpperCase() : this.from[idx];
+
+            // Apply highlighting
             switch (this.highlightflag) {
               case 'red' :
               case 'yellow' :
               case 'blue' :
-                html += '<span style="color: ' + this.highlightflag + '">' + ((this.message[i].toUpperCase() == this.message[i]) ? this.from[idx].toUpperCase() : this.from[idx]) + '</span>';
+                html += '<span style="color: ' + this.highlightflag + '">' + c + '</span>';
                 break;
               case 'bold' :
-                html += '<b>' + ((this.message[i].toUpperCase() == this.message[i]) ? this.from[idx].toUpperCase() : this.from[idx]) + '</b>';
+                html += '<b>' + this.from[idx] + '</b>';
                 break;
               case 'uppercase' :
-                html += this.from[idx].toUpperCase();
+                html += c.toUpperCase();
                 break;
             }
 
           } else {
 
-            // If not found print as is without highlighting
-            html += this.message[i];
+            // No match copy input but take care of characters that behave special in html
+            if (this.message[i] == "<") {
+              html += "&lt;"
+            } else if (this.message[i] == ">") {
+              html += "&gt;"
+            } else if (this.message[i] == "&") {
+              html += "&amp"
+            } else if (this.message[i] == "\n") {
+              html += "<br>"
+            } else {
+              html += this.message[i];
+            }
 
           }
         }

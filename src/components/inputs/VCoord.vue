@@ -1,10 +1,10 @@
 <template>
-  <div class="form-inline mb-2">
-    <label class="form-label col-sm-3 col-md-2 col-lg-1" for="coordinput">
+  <div class="form-inline">
+    <label class="form-label col-sm-3 col-md-2 col-lg-1 mb-2" for="coordinput">
       <slot name="label">{{$t('labels.coordinate')}}</slot>
     </label>
-    <input id="coordinput" type="text" class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2" :value='coord' @input="updateCoord($event.target.value)"/>
-    <div class="col-md-4">
+    <input id="coordinput" type="text" class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2" :value='coord' @input="updateCoord($event.target.value)"/>
+    <div class="col-md-4 mb-2">
       <select class="custom-select" :value='datum' @input="updateDatum($event.target.value)">
         <option value="WGS84">WGS84</option>
         <option value="EPSG:4269">NAD / North American Datum</option>

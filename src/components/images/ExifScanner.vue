@@ -28,6 +28,7 @@
                 <tr><td>{{$t('exifscanner.size')}}</td><td>{{Filesize}}</td></tr>
                 <tr><td>{{$t('exifscanner.width')}}</td><td>{{ImageWidth}}</td></tr>
                 <tr><td>{{$t('exifscanner.height')}}</td><td>{{ImageHeight}}</td></tr>
+                <tr><td>{{$t('exifscanner.npixels')}}</td><td>{{ImagePixels}}</td></tr>
                 <tr><td>{{$t('exifscanner.date')}}</td><td>{{DateTime}}</td></tr>
                 <tr><td>{{$t('exifscanner.datec')}}</td><td>{{DateTimeOriginal}}</td></tr>
               </table>
@@ -120,6 +121,7 @@ export default {
       DateTimeOriginal: "",
       ImageWidth: 0,
       ImageHeight: 0,
+      ImagePixels: 0,
       ImageDescription: "",
       Author: "",
       Artist: "",
@@ -163,6 +165,7 @@ export default {
       this.DateTimeOriginal = (Object.prototype.hasOwnProperty.call(this.tags, "DateTimeOriginal")) ? this.tags.DateTimeOriginal.description : this.$t('exifscanner.noinfo');
       this.ImageHeight = (Object.prototype.hasOwnProperty.call(this.tags, "Image Height")) ? this.tags["Image Height"].value : this.$t('exifscanner.noinfo');
       this.ImageWidth = (Object.prototype.hasOwnProperty.call(this.tags, "Image Width")) ? this.tags["Image Width"].value : this.$t('exifscanner.noinfo');
+      this.ImagePixels = this.ImageHeight * this.ImageWidth;
 
       // Get camera related info
       this.Camera = (Object.prototype.hasOwnProperty.call(this.tags, "Model")) ? this.tags.Model.description : this.$t('exifscanner.noinfo');

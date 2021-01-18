@@ -38,7 +38,6 @@
     "format": "Formatteer",
     "reset": "Reset",
     "cancel": "Annuleer",
-    "update": "Aanpassen",
     "save": "Opslaan",
     "get": "Haal op",
     "check": "Controleer",
@@ -526,6 +525,11 @@
       "short": "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud.",
       "long" : "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen."
     },
+    "formulasolver": {
+      "title": "Formule oplossen",
+      "short": "Oplossen van formules zoals THIS + IS + TOO = FUNNY",
+      "long": "Los formules op met letters in de plaats van cijfers, bijv. THIS + IS + TOO = FUNNY. Nummers kunnen uniek zijn of niet. Default rekenen is 10-tallig / decimaal, maar dit kan worden aangepast."
+    },
     "numberprop": {
       "title": "Eigenschappen van nummers",
       "short": "Toont de eigenschappen van een nummers, zoals priem, Fibonacci",
@@ -569,6 +573,7 @@
     "size": "Grootte",
     "width": "Breedte",
     "height": "Hoogte",
+    "npixels": "# pixels",
     "date": "Datum & tijd",
     "datec": "Aanmaakdatum & tijd",
     "camera": "Camera",
@@ -604,13 +609,12 @@
   },
 
   "filltool": {
-    "info": "<p>Vervang een kleur door een andere kleur. Converteer de afbeelding naar zwart wit of inverteer de afbeelding. Probeer grote vlakken van eenzelfde kleur te vervangen door een andere kleur om onzichtbare verschillen in kleur tevoorschijn te halen.</p><p>Gebruik de knoppen om de afbeelding om te zetten naar zwart/wit of te inverteren. Klik op een willekeurige plek in de afbeelding om die kleur te vullen. De vulkleur kan worden ingesteld. De tolerantie is standaard 0. Door de tolerantie aan te passen worden kleuren die lijken op de gekozen kleur ook vervangen. De maximum tolerantie is 255, in dat geval wordt de hele afbeelding gevuld. Gebruik de knop Origineel om de originele afbeelding weer te tonen.</p>",
+    "info": "<p>Vervang een kleur door een andere kleur. Probeer grote vlakken van eenzelfde kleur te vervangen door een andere kleur om onzichtbare verschillen in kleur tevoorschijn te halen. Converteer de afbeelding naar zwart wit, sepia of probeer een van de andere filters. Pas de helderheid of het contrast, of verminder de kleurdiepte. Spiegel de afbeelding.</p><p>Klik op een willekeurige plek in de afbeelding om die kleur te vullen. De vulkleur kan worden ingesteld. De tolerantie is standaard 0. Door de tolerantie aan te passen worden kleuren die lijken op de gekozen kleur ook vervangen. De maximum tolerantie is 255, in dat geval wordt de hele afbeelding gevuld. Gebruik de knop Origineel om de originele afbeelding weer te tonen.</p>",
     "selfill": "Vulkleur",
     "tol": "Tolerantie",
     "fill": "Vul kleur",
     "fillinfo": "Klik in de afbeelding om een gebied te vullen.",
     "filter": "Filter",
-    "filterinfo": "Selecteer een filter",
     "conbri": "Helderheid & contrast",
     "brigh": "Helderheid",
     "contr": "Contrast",
@@ -618,6 +622,8 @@
     "invert": "Inversie",
     "sepia": "Sepia",
     "transform": "Transformaties",
+    "colordepth": "Kleurdiepte aanpassen",
+    "colors": "kleuren",
     "fliph": "Spiegel horizontaal",
     "flipv": "Spiegel verticaal"
   },
@@ -1034,7 +1040,7 @@
   },
 
   "dialogic": {
-    "intro": "Vul het coordinaat in en vervang de ontbrekende cijfers door abcd (of een andere letter of gebruik !@#%). Vul de mogelijke waardes in om te proberen. Maximaal 500 coordinaten.",
+    "intro": "Vul het coordinaat in en vervang de ontbrekende cijfers door abcd (of een andere letter). Vul de mogelijke waardes in om te proberen. Maximaal 500 coordinaten.",
     "button": "Toon coördinaten",
     "error1": "Het maximale aantal coordinaten is 500. Beperk het aantal mogelijke waardes."
   },
@@ -1100,6 +1106,7 @@
     "highlight": "Highlight",
     "orig": "Originele letters",
     "repl": "Substituten",
+    "casesens": "Hoofdlettergevoelig",
     "get": "Hints ophalen",
     "apply": "Hints toepassen"
   },
@@ -1185,6 +1192,15 @@
     "t2": "Priemfactoren",
     "gcd": "De GGD is ",
     "lcm": "Het KGV is"
+  },
+
+  "dialogformulasolver": {
+    "info": "<p>Oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningn zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
+    "formula": "Formule",
+    "unique": "Nummers zijn uniek",
+    "base": "Getalstelsel",
+    "nosol": "Er zijn geen oplossingen",
+    "exprerror": "Fout bij het evalueren van de expressie. Controleer de formule."
   },
 
   "dialognim": {

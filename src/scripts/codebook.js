@@ -257,7 +257,7 @@ export var codepages = [
   { name: "Futurama",
     imagename: "futurama.png",
     description: "The Futurama Alien Alphabet appears in Matt Groening's animated series Futurama.",
-    tags: ["alphabet", "tv", "symbols"]
+    tags: ["alphabet", "tv", "symbols", "dots"]
   },
   { name: "Gargish Alphabet & Gargish Runes",
     imagename: "gargish.png",

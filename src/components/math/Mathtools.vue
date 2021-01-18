@@ -4,6 +4,7 @@
     <router-link to="/math/countdigits">{{$t('mathtools.decimals.title')}}</router-link> |
     <router-link to="/math/fibonacci">{{$t('mathtools.fibonacci.title')}}</router-link> |
     <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> |
+    <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> |
     <router-link to="/math/numberproperties">{{$t('mathtools.numberprop.title')}}</router-link> |
     <router-link to="/math/nimbers">{{$t('mathtools.nimbers.title')}}</router-link> |
     <router-link to="/math/sequences">{{$t('mathtools.sequences.title')}}</router-link> |
@@ -34,6 +35,12 @@
         <template v-slot:header>{{$t('mathtools.primegcdlcm.title')}}</template>
         <template v-slot:content>
           <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> - {{$t('mathtools.primegcdlcm.long')}}<br>
+        </template>
+      </va-item>
+      <va-item v-bind:showitem='show[8]' v-on:toggle='toggleItem(8)'>
+        <template v-slot:header>{{$t('mathtools.formulasolver.title')}}</template>
+        <template v-slot:content>
+          <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> - {{$t('mathtools.formulasolver.long')}}<br>
         </template>
       </va-item>
       <va-item v-bind:showitem='show[4]' v-on:toggle='toggleItem(4)'>
@@ -82,7 +89,7 @@ export default {
   data: function () {
     return {
       title: "Mathtools",
-      show: [true, true, true, true, true, true, true, true]
+      show: [true, true, true, true, true, true, true, true, true, true]
     }
   },
 

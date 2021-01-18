@@ -787,13 +787,19 @@ export function displayMarker (L, mymap, coord, text) {
  */
 export function geoFindMe () {
 
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 60000, // Time out after 60 seconds
+    maximumAge: 0
+  };
+
   if(!navigator.geolocation) {
     throw ('Geolocation is not supported by your browser');
   } else {
 
     // Return the promise
     return new Promise( function( resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
+      navigator.geolocation.getCurrentPosition(resolve, reject, options);
     });
   }
 }

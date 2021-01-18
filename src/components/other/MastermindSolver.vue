@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{this.$t('othertools.mmsolver.title')}}
+      {{$t('othertools.mmsolver.title')}}
     </div>
     <div class="mainpage">
       <div class="infoblock">
@@ -49,7 +49,7 @@
       </div>
       <p v-show="error" class="errormsg">{{errormsg}}</p>
       <div class="mt-2" v-show="solved">
-        {{$t('sudoku.thereare')}} {{numberofsolutions}} {{$t('sudoku.sols')}}
+        {{$t('sudoku.thereare')}} {{results.length}} {{$t('sudoku.sols')}}
         <div class="form-inline mt-2 mb-2">
           <label for="listofresults" class="form-label mr-2">Solutions</label>
           <select name="listofresults" id="listofresults" class="form-control" v-model="selectedsolution" @change="printSolution">
@@ -83,7 +83,6 @@ export default {
       nhints: 0,
       error: false,
       errormsg: "",
-      numberofsolutions : "",
       results: [],
       selectedsolution: "",
       solved: false,
@@ -215,7 +214,6 @@ export default {
       this.generatePins("", this.npin, this.ncolor, this.unique, this.checkpins, this.results);
 
       // Print the results
-      this.numberofsolutions = this.results.length;
       this.solved = true;
 
     },

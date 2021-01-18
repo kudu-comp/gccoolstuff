@@ -19,16 +19,19 @@
             <div class="box-header">{{$t('filltool.fill')}}</div>
             <div class="box-body">
               <p>{{$t('filltool.fillinfo')}}</p>
-              <select id="pick" class="custom-select mr-2 mb-2" v-model="selfill">
-                <option value="0">{{$t('colors.white')}}</option>
-                <option value="1">{{$t('colors.black')}}</option>
-                <option value="2">{{$t('colors.red')}}</option>
-                <option value="3">{{$t('colors.green')}}</option>
-                <option value="4">{{$t('colors.blue')}}</option>
-                <option value="5">{{$t('colors.yellow')}}</option>
-                <option value="6">{{$t('colors.cyan')}}</option>
-                <option value="7">{{$t('colors.magenta')}}</option>
-              </select>
+              <div class="form-inline">
+                <label class="form-label mr-2" for="pick">{{$t('filltool.selfill')}}</label>
+                <select id="pick" class="custom-select mr-2 mb-2" v-model="selfill">
+                  <option value="0">{{$t('colors.white')}}</option>
+                  <option value="1">{{$t('colors.black')}}</option>
+                  <option value="2">{{$t('colors.red')}}</option>
+                  <option value="3">{{$t('colors.green')}}</option>
+                  <option value="4">{{$t('colors.blue')}}</option>
+                  <option value="5">{{$t('colors.yellow')}}</option>
+                  <option value="6">{{$t('colors.cyan')}}</option>
+                  <option value="7">{{$t('colors.magenta')}}</option>
+                </select>
+              </div>
               <label class="form-label mr-2 mb-2" for="tol">{{$t('filltool.tol')}}: {{tol}}</label>
               <vue-slider v-model="tol" v-bind="toloptions" class="ml-2 mr-2"></vue-slider>
             </div>
@@ -40,35 +43,51 @@
               <vue-slider v-model="brigh" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
               <label class="form-label mr-2" for="contr">{{$t('filltool.contr')}}: {{contr}}</label>
               <vue-slider v-model="contr" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="conbri" name="conbri" :value="$t('buttons.update')" class="btn btn-primary mr-2 mb-2" v-on:click="contrastBrightness">
+              <input type="button" id="conbri" name="conbri" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="contrastBrightness">
             </div>
           </div>
           <div class="box">
             <div class="box-header">{{$t('filltool.filter')}}</div>
             <div class="box-body">
-              <p>{{$t('filltool.filterinfo')}}</p>
-              <label class="form-label mr-2 mb-2" for="filter">{{$t('filltool.selfilt')}}</label>
-              <select id="filter" class="custom-select mr-2 mb-2" v-model="selfilt">
-                <option value="0">{{$t('filltool.gray')}}</option>
-                <option value="1">{{$t('filltool.invert')}}</option>
-                <option value="2">{{$t('filltool.sepia')}}</option>
-                <option value="3">{{$t('colors.red')}}</option>
-                <option value="4">{{$t('colors.green')}}</option>
-                <option value="5">{{$t('colors.blue')}}</option>
-                <option value="6">{{$t('colors.cyan')}}</option>
-                <option value="7">{{$t('colors.magenta')}}</option>
-                <option value="8">{{$t('colors.yellow')}}</option>
-              </select>
-              <input type="button" id="filter" name="filter" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="filterColor">
+              <div class="form-inline">
+                <select id="filter" class="custom-select mr-2 mb-2" v-model="selfilt">
+                  <option value="0">{{$t('filltool.gray')}}</option>
+                  <option value="1">{{$t('filltool.invert')}}</option>
+                  <option value="2">{{$t('filltool.sepia')}}</option>
+                  <option value="3">{{$t('colors.red')}}</option>
+                  <option value="4">{{$t('colors.green')}}</option>
+                  <option value="5">{{$t('colors.blue')}}</option>
+                  <option value="6">{{$t('colors.cyan')}}</option>
+                  <option value="7">{{$t('colors.magenta')}}</option>
+                  <option value="8">{{$t('colors.yellow')}}</option>
+                </select>
+                <input type="button" id="filter" name="filter" :value="$t('buttons.apply')" class="btn btn-primary mb-2" v-on:click="filterColor">
+              </div>
             </div>
           </div>
-           <div class="box">
+          <div class="box">
+            <div class="box-header">{{$t('filltool.colordepth')}}</div>
+            <div class="box-body">
+              <div class="form-inline">
+                <select id="filter" class="custom-select mr-2 mb-2" v-model="cdepth">
+                  <option value="1">3 bits - 8 {{$t('filltool.colors')}}</option>
+                  <option value="2">6 bits - 64 {{$t('filltool.colors')}}</option>
+                  <option value="3">9 bits - 512 {{$t('filltool.colors')}}</option>
+                  <option value="4">12 bits - 4k {{$t('filltool.colors')}}</option>
+                  <option value="5">15 bits - 32k {{$t('filltool.colors')}}</option>
+                  <option value="6">18 bits - 256k {{$t('filltool.colors')}}</option>
+                </select>
+                <input type="button" id="conbri" name="conbri" :value="$t('buttons.apply')" class="btn btn-primary mb-2" v-on:click="colorDepth">
+              </div>
+            </div>
+          </div>
+          <div class="box">
             <div class="box-header">{{$t('filltool.transform')}}</div>
             <div class="box-body">
               <input type="button" id="fliph" :value="$t('filltool.fliph')" class="btn btn-primary mr-2 mb-2" v-on:click="flipH">
               <input type="button" id="flipv" :value="$t('filltool.flipv')" class="btn btn-primary mr-2 mb-2" v-on:click="flipV">
             </div>
-           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +119,7 @@ export default {
       img: null,
       width: 800,
       height: 800,
-      selfill: 2,
+      selfill: 1,
       selfilt: 0,
       tol: 0,
       toloptions: {
@@ -114,7 +133,8 @@ export default {
         min: -100,
         max: 100,
         height: 8
-      }
+      },
+      cdepth: 1
     }
   },
 
@@ -148,8 +168,7 @@ export default {
       let vRatio =  canvas.height / img.height  ;
       let ratio  = Math.min ( hRatio, vRatio );
       let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-      // let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-      let centerShift_y = 0;
+      let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
       this.ctx.clearRect(0,0,canvas.width, canvas.height);
       this.ctx.drawImage(img, 0, 0, img.width, img.height,
                          centerShift_x, centerShift_y, img.width*ratio, img.height*ratio); 
@@ -302,6 +321,28 @@ export default {
         data[i]     = 255 - data[i]; // red
         data[i + 1] = 255 - data[i+1]; // green
         data[i + 2] = 255 - data[i+2]; // blue
+      }
+
+      // Draw the new image
+      this.ctx.putImageData(imageData, 0, 0);
+    },
+
+    // Invert the image
+    colorDepth: function () {
+
+      // Make a copy of the imagedata
+      const imageData = this.ctx.getImageData(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      const data = imageData.data;
+
+      // Set color bandwidth
+      let bw = 2 ** (7 - this.cdepth);
+      console.log(bw);
+
+      // Invert the image
+      for (let i = 0; i < data.length; i += 4) {
+        data[i]     = Math.min ( Math.round(data[i]   / bw) * bw, 255); // red
+        data[i + 1] = Math.min ( Math.round(data[i+1] / bw) * bw, 255); // green
+        data[i + 2] = Math.min ( Math.round(data[i+2] / bw) * bw, 255); // blue
       }
 
       // Draw the new image

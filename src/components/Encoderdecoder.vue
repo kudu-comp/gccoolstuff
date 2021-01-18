@@ -129,6 +129,7 @@
         <label class="form-label mr-2 mb-2" for="key3">{{labelkey3}}</label>
         <input type='number' id="key3" name="key3" ref="key3" v-model="key3" class="form-control mb-2">
       </div>
+      <p v-show="error" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div class="col-6">
           <input type="button" id="encode" name="encode" :value="$t('cp.encode')" class="btn btn-primary mb-2" v-on:click="toEncode">
@@ -168,7 +169,6 @@
           <input type="button" id="unformat" name="unformat" :value="$t('cp.remform')" class="btn btn-primary mb-2" v-on:click="unformatMessage">
         </div>
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -265,21 +265,32 @@ export default {
         key3: this.key3
       };
 
-      // Call PHP script on server
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.message = data.message;
-            // console.log('Success', data)
-        })
-        .catch((error) => {
-            console.error('Error ', error);
-            this.errormsg = this.$t('cp.errdec');
-            this.error = true;
-        });
+      try {
+    
+        // Call PHP script on server
+        fetch(this.phpurl, {
+            method: 'POST',
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => {
+              this.message = data.message;
+              // console.log('Success', data)
+          })
+          .catch((error) => {
+              console.error('Error ', error);
+              this.errormsg = this.$t('cp.errdec');
+              this.error = true;
+          });
+
+      } catch (e) {
+
+        console.error('Error ', e);
+        this.errormsg = this.$t('cp.errdec');
+        this.error = true;
+
+      }
+
     },
 
     // Encode message
@@ -299,20 +310,31 @@ export default {
       };
 
       // Call PHP script on server
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.translatedmessage = data.transmessage;
-            // console.log('Success', data)
-        })
-        .catch((error) => {
-            console.error('Error ', error);
-            this.errormsg = this.$t('cp.errenc');
-            this.error = true;
-        });
+      try {
+
+        fetch(this.phpurl, {
+            method: 'POST',
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => {
+              this.translatedmessage = data.transmessage;
+              // console.log('Success', data)
+          })
+          .catch((error) => {
+              console.error('Error ', error);
+              this.errormsg = this.$t('cp.errenc');
+              this.error = true;
+          });
+
+      } catch (e) {
+
+          console.error('Error ', e);
+          this.errormsg = this.$t('cp.errenc');
+          this.error = true;
+
+      }
+
     },
 
     // Change the cipher, reset defaults and set required inputs

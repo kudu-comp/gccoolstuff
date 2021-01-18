@@ -27,7 +27,8 @@ import VVariable from '@/components/inputs/VVariable.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {
-  name: 'CoordProject',
+
+  name: 'CoordIncomplete',
 
   components: {
     VCoord,
@@ -63,7 +64,10 @@ export default {
       try {
 
         // Initialize variables and regular expressions
-        let newcoord, coord, marker, vars;
+        let newcoord;
+        let coord;
+        let marker;
+        let vars;
         let regex1 = new RegExp (this.var1, "g");
         let regex2 = new RegExp (this.var2, "g");
         let regex3 = new RegExp (this.var3, "g");
@@ -109,6 +113,7 @@ export default {
           }
           
         }
+        
       } catch (e) {
 
         console.log(e);

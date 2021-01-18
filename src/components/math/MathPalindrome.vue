@@ -11,9 +11,9 @@
 
       </div>
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="x">Start with</label>
+        <label class="form-label mr-2 mb-2" for="x">{{$t('dialogseq.start')}}</label>
         <input type='number' id="start" name="start" ref="start" v-model="start" class="form-control mb-2 mr-2">
-        <input type="button" id="palindrome" name="palindrome" value="Palindrome counter" class="btn btn-primary mb-2" v-on:click="palindromeCounter">
+        <input type="button" id="palindrome" name="palindrome" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="palindromeCounter">
       </div>
       <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
@@ -54,10 +54,13 @@ export default {
       hidebutton: true
     }
   },
+
   mounted: function() {
     this.$refs.start.focus();
   },
+
   methods: {
+    
     palindromeCounter: function() {
 
       // Reset error flag
