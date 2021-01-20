@@ -27,12 +27,11 @@
           <ul>
             <li>Fix refresh issue for Sudoku, Image tools, Math tools (only on hosting server)</li>
             <li>Fix resize HTML canvas, pick color and color editor</li>
-            <li>Math tools - primes</li>
+            <li>Unit convertor</li>
             <li>Math tools - postfix, infix and prefix</li>
             <li>Codebook - add more codes</li>
             <li>Coordinates - improve accuracy (do not use grid)</li>
             <li>Image Tools - load from URL</li>
-            <li>Unit convertor</li>
             <li>Browse codebook use srcset</li>
             <li>A tool to hack hashes of coordinates</li>
             <li>HTML Scanner - add option to retrieve with geocache id</li>

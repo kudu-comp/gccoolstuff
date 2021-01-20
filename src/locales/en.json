@@ -28,7 +28,9 @@
     "circumference": "Circumference",
     "result": "Result",
     "alphabet": "Alphabet",
-    "search": "Search for"
+    "search": "Search for",
+    "sum": "Sum",
+    "count": "Count"
   },
 
   "buttons": {
@@ -44,7 +46,9 @@
     "showtab": "Show/hide table",
     "showres": "Show/hide results",
     "apply": "Apply",
-    "original": "Original"
+    "original": "Original",
+    "count": "Count",
+    "sum": "Totals"
   },
 
   "colors": {
@@ -141,7 +145,7 @@
     },
     "charcodes": {
       "title": "Character codes",
-      "short": "Convert text to computer codes and vice versa",
+      "short": "Convert text to computer codes (e.g. ASCII) and vice versa",
       "long" : "Convert between text and computer codes. Computers internally use numbers which are translated into text using codepages. Supports ASCII, UTF, alt-codes and many more codepages. Also translates Baudot code and Murray code."
     },
     "smartreplace": {
@@ -181,6 +185,11 @@
       "title": "Color editor",
       "short": "Fill an area, apply a filter, change brightness and contrast or flip the image.",
       "long": "Fill an area with a selected color and a given tolerance. Adjust the brightness and contrast. Apply one of the filters, grayscale, invert, sepia and a few more. Flip the image vertically or horizontally. Try to replace large areas with the same color with another to reveal unseen differences in color."
+    },
+    "pixeldata": {
+      "title": "Pixel data",
+      "short": "Calculate total of R, G and B, count a specific RGB value",
+      "long": "Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image. Works perfectly with PNG files but seems to have an issue with JPG."
     }
   },
 
@@ -207,7 +216,7 @@
     }, 
     "countries": {
       "title": "Country codes",
-      "short": "List of all the countries and named territories",
+      "short": "List of all the countries and named territories with flags",
       "long": "List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes."
     },
     "usastates": {
@@ -223,7 +232,7 @@
   },
 
   "cp": {
-    "short": "Over 50 different ciphers and codes.",
+    "short": "Over 50 different ciphers and codes, such as",
     "info": "Select one of the ciphers or codes below. The appropriate keys will be shown. Fill in the keys and press decode or encode. In most cases converting to uppercase works best. You can remove all the characters that are not in the alphabet. This is often necessary. The encoded message can be formatted in blocks with a separator (which is common). To decode you have to remove the formatting in most cases.",
     "cipher": "Cipher",
     "gensq": "Generate square",
@@ -514,15 +523,20 @@
       "short": "Get the decimals of 𝜋, e, 𝜏, φ, γ, √2, √3, up to 1,000,000 decimals",
       "long" : "Get the decimals of 𝜋, e, 𝜏, φ, γ, √2, √3, up to 1,000,000 decimals."
     },
+    "primes": {
+      "title": "Primes",
+      "short": "Check if number is prime and more",
+      "long" : "Check if a number is prime. Check the position of a prime or get the prime number at position (the first 865,000 are available). Get prime factors."
+    },
     "fibonacci": {
       "title": "Fibonacci",
       "short": "Get one of the first 500 Fibonacci numbers.",
       "long" : "Choose one of the first 500 Fibonacci numbers or alternatively check if a number is a Fibonacci number"
     },
     "primegcdlcm": {
-      "title": "Prime factors, GCD and LCM",
-      "short": "Get the prime factors, greatest common divisor or least common muliple of one or more numbers",
-      "long" : "Get the prime factors, greatest common divisor or least common muliple of one or more numbers. Large numbers can take some time to calculate"
+      "title": "GCD and LCM",
+      "short": "Greatest common divisor or least common muliple of one or more numbers. Also gives the prime factors",
+      "long" : "Greatest common divisor or least common muliple of one or more numbers. Also calculates the prime factors. Large numbers can take some time to calculate"
     },
     "formulasolver": {
       "title": "Formula solver",
@@ -625,6 +639,12 @@
     "colors": "colors",
     "fliph": "Flip horizontal",
     "flipv": "Flip vertical"
+  },
+
+  "pixeldata": {
+    "info": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>",
+    "sum": "To calculate the sum of the red, green and blue values press Totals",
+    "count": "To count the number of pixels select values for red, green and blue and press Count"
   },
 
   "htmlscanner": {
@@ -1169,6 +1189,21 @@
     "res1": "The digits from ",
     "res2": "to",
     "res3": "are"
+  },
+
+  "dialogprimes" : {
+    "info": "Check if a number is prime or not. The max number to be checked is 2^53. Show the prime number at a given position. Show the position of a give prime. The first 865,000 primes are available.",
+    "check": "Check if this is a prime",
+    "pos": "Get prime at position",
+    "primepos": "Get position of prime",
+    "primefact": "Prime factors of",
+    "toobig": "Number is too big",
+    "isprime": "is a prime number",
+    "isnotprime": "is not a prime number",
+    "primeatpos": "The prime number at position",
+    "primeis": "is",
+    "primenotfound": "Prime number not found",
+    "posofprime": "The position of prime"
   },
 
   "dialogfib": {

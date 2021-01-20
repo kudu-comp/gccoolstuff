@@ -28,7 +28,9 @@
     "circumference": "Omtrek",
     "result": "Resultaat",
     "alphabet": "Alfabet",
-    "search": "Zoekterm"
+    "search": "Zoekterm",
+    "sum": "Som",
+    "count": "Aantal"
   },
 
   "buttons": {
@@ -44,7 +46,10 @@
     "apply": "Toepassen",
     "showtab": "Toon/verberg tabel",
     "showres": "Toon/verberg resultaat",
-    "original": "Origineel"
+    "original": "Origineel",
+    "count": "Tel",
+    "sum": "Totalen"
+
   },
 
   "colors": {
@@ -142,7 +147,7 @@
     },
     "charcodes": {
       "title": "Karakter codes",
-      "short": "Converteer tekst naar computer codes en vice versa",
+      "short": "Converteer tekst naar computer codes (o.a. ASCII) en vice versa",
       "long" : "Converteer tekst naar computer codes en vice versa. Computers vertalen tekst intern naar numbers met gebruik van codepages. De tool ondersteunt ASCII, UTF, alt-codes en een groot aantal codepages en converteert ook Baudotcode en Murraycode."
     },
     "smartreplace": {
@@ -182,7 +187,12 @@
       "title": "Kleuren aanpassen",
       "short": "Vul een gebied, pas de helderheid en het contrast aan, pas een filter toe of spiegel de afbeelding.",
       "long": "Vul een gebied met een geselecteerde kleur en gegeven tolerantie. Pas de helderheid of het contrast aan. Pas een filter toe, zoals zwart/wit, sepia, inversie of een van de andere filters. Spiegel de afbeelding horizontaal of verticaal. Probeer grote vlakken van eenzelfde kleur te vervangen door een ander om onzichtbare verschillen in kleur tevoorschijn te halen."
-      }
+    },
+    "pixeldata": {
+      "title": "Pixel data",
+      "short": "Berekend het totaal van R, G end B. Telt het aantal pixels met een bepaalde kleur (RGB)",
+      "long": "Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond. De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben."
+    }
   },
  
   "othertools" : {
@@ -208,7 +218,7 @@
     }, 
     "countries": {
       "title": "Landentabel",
-      "short": "Tabel met alle landen en autonome gebieden",
+      "short": "Tabel met alle landen en autonome gebieden inclusief vlag",
       "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie."
     },
     "usastates": {
@@ -224,7 +234,7 @@
   },
 
   "cp": {
-    "short": "Meer dan 50 verschillende geheimschriften en codes.",
+    "short": "Meer dan 50 verschillende geheimschriften en codes, bijvoorbeeld",
     "info": "Selecteer een geheimschrift hieronder. Vul de benodigde sleutels/ sleutelwoorden in. Kies coderen of decoderen. In de meeste gevallen is het handig naar hoofdletters te converteren. Het verwijderen van tekens die niet in het alfabet voorkomen geeft vaak het beste resultaat. Het gecodeerde bericht kan eventueel worden geformatteerd in blokken (dit is gebruikelijk in de cryptografie). Om te decoderen zal de formattering vaak verwijderd moeten worden.",
     "cipher": "Geheimschrift",
     "gensq": "Genereer vierkant",
@@ -515,15 +525,20 @@
       "short": "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar",
       "long" : "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar."
     },
+    "primes": {
+      "title": "Priemgetallen",
+      "short": "Controleer of een getal priem is, ontbind in priemfactoren",
+      "long" : "Controleer of een getal priem is. Geef het priemgetal op positie n, laat de positie zien van een priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar. Ontbind een getal in priemfactoren."
+    },
     "fibonacci": {
       "title": "Fibonacci",
       "short": "Toont één van de eerste 500 Fibonacci nummers",
       "long" : "Toont één van de eerste 500 Fibonacci nummers of controleert of het opgegeven nummer in de reeks voorkomt."
     },
     "primegcdlcm": {
-      "title": "Priem factoren, GGD en KGV",
-      "short": "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud.",
-      "long" : "Toont de priemfactoren, Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen."
+      "title": "GGD en KGV",
+      "short": "Grootste Gemene Deler, Kleinste Gemene Veelvoud en priemfactoren",
+      "long" : "Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen. Berekend ook de priemfactoren van elk getal."
     },
     "formulasolver": {
       "title": "Formule oplossen",
@@ -626,6 +641,12 @@
     "colors": "kleuren",
     "fliph": "Spiegel horizontaal",
     "flipv": "Spiegel verticaal"
+  },
+
+  "pixeldata": {
+    "info": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>",
+    "sum": "Bereken het totaal van alle rood, groen en blauw waardes.",
+    "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
   },
 
   "htmlscanner": {
@@ -1096,7 +1117,7 @@
     "input": "Type invoer",
     "output": "Gewenste uitvoer",
     "someinfo": "Informatie over codepages",
-    "someinfo2": "<p>Computers zijn binair, ze gebruiken alleen 0 en 1. Deze getallen kunnen natuurlijk ook worden omgezet naar decimaal, octaal of hexadecimaal. Deze tool accepteert ze allemaal en converteert desgewenst. De nummers worden gebruikt om het juiste karakter (glyph in nerd speak) op te zoeken in een codepage.</p><p>De allereerste codepage was ASCII en deze is nog steeds in gebruik. Het is nu een subset van UTF, en is ook een subset van de codepages die gebruikt werden in MS DOS en MS Windows. ASCII gebruikt slechts 7-bits (128 karakters). De codepages van Microsoft gebruiken 8 bits (zoals CP437, CP850, CP1252), 256 characters. Voor talen met andere karakters (Russich, Chinees, Oost Europese talen) moest een andere codepage gebruikt worden. Met de introductie van UTF kan dezelfde codepage gebruikt worden voor alle talen en ook voor emoji's ;-). <strong>Alt codes</strong>: afhankelijk van de versie van MS DOS of MS Windows en geïnstalleerde codepage kan door het intikken van getallen op het numerieke toetsenbord in combinatie met de Alt-toets en code worden ingevoerd, resulterend in een speciaal karakter.</p><p>Voor een geschiedenis van alle codepages zie <a href='https://en.wikipedia.org/wiki/List_of_information_system_character_sets'>Wikipedia's history of information system character sets</a> en <a href='https://en.wikipedia.org/wiki/Code_page'>Wikipedia codepages</a>.</p><p>In de tijden van telegraaf en telex werden er ook al binaire codes gebruikt zoals de Baudot code (ITA-1) en de Murray code (ITA-2). De tool converteert ook deze codes. De bits zijn normaal in de volgorde 54321, maar de omgekeerde volgorde 12345 komt ook voor. Er is ook een Cyrillische versie van de Murraycode genaamdas MTK-2. Voor meer informatie <a href='https://en.wikipedia.org/wiki/Baudot_code>Wikipedia</a>.</p>"
+    "someinfo2": "<p>Computers zijn binair, ze gebruiken alleen 0 en 1. Deze getallen kunnen natuurlijk ook worden omgezet naar decimaal, octaal of hexadecimaal. Deze tool accepteert ze allemaal en converteert desgewenst. De nummers worden gebruikt om het juiste karakter (glyph in nerd speak) op te zoeken in een codepage.</p><p>De allereerste codepage was ASCII en deze is nog steeds in gebruik. Het is nu een subset van UTF, en is ook een subset van de codepages die gebruikt werden in MS DOS en MS Windows. ASCII gebruikt slechts 7-bits (128 karakters). De codepages van Microsoft gebruiken 8 bits (zoals CP437, CP850, CP1252), 256 characters. Voor talen met andere karakters (Russich, Chinees, Oost Europese talen) moest een andere codepage gebruikt worden. Met de introductie van UTF kan dezelfde codepage gebruikt worden voor alle talen en ook voor emoji's ;-). <strong>Alt codes</strong>: afhankelijk van de versie van MS DOS of MS Windows en geïnstalleerde codepage kan door het intikken van getallen op het numerieke toetsenbord in combinatie met de Alt-toets en code worden ingevoerd, resulterend in een speciaal karakter.</p><p>Voor een geschiedenis van alle codepages zie <a href='https://en.wikipedia.org/wiki/List_of_information_system_character_sets'>Wikipedia's history of information system character sets</a> en <a href='https://en.wikipedia.org/wiki/Code_page'>Wikipedia codepages</a>.</p><p>In de tijden van telegraaf en telex werden er ook al binaire codes gebruikt zoals de Baudot code (ITA-1) en de Murray code (ITA-2). De tool converteert ook deze codes. De bits zijn normaal in de volgorde 54321, maar de omgekeerde volgorde 12345 komt ook voor. Er is ook een Cyrillische versie van de Murraycode genaamd MTK-2. Voor meer informatie <a href='https://en.wikipedia.org/wiki/Baudot_code>Wikipedia</a>.</p>"
   },
 
   "dialogsr": {
@@ -1171,6 +1192,21 @@
     "res2": "tot",
     "res3": "zijn"
   },
+  
+  "dialogprimes" : {
+    "info": "Controleer of een getal priem is of niet. Het maximum nummer is 2^53 wat kan worden gecontroleerd. Laat het priemgetal zien op de gegeven positie. Laat de positie zien van het gegeven priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar.",
+    "check": "Check priem of niet",
+    "pos": "Priemgetal op positie",
+    "primepos": "Positie van priemgetal",
+    "primefact": "Priemfactoren van",
+    "toobig": "Nummer is te hoog",
+    "isprime": "is een priemgetal",
+    "isnotprime": "is geen priemgetal",
+    "primeatpos": "Het priemgetal op positie",
+    "primeis": "is",
+    "primenotfound": "Priemgetal is niet gevonden",
+    "posofprime": "De positie van priemgetal"
+  },
 
   "dialogfib": {
     "info": "De Fibonacci reeks begint met 1, 1. Het volgede nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar.",
@@ -1195,7 +1231,7 @@
   },
 
   "dialogformulasolver": {
-    "info": "<p>Oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningn zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
+    "info": "<p>Oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
     "formula": "Formule",
     "unique": "Nummers zijn uniek",
     "base": "Getalstelsel",

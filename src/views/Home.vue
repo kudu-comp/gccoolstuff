@@ -24,20 +24,14 @@
       </div>
       <h3>{{$t('menu.ciphers')}}</h3>
       <div class="p mb-2">
-        Plenty of ciphers &amp; codes to crack encrypted messages. Try
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT13'}}">ROT13</router-link> or try
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT47'}}">ROT47</router-link> or try the
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Vigenere'}}">Vigenere</router-link> cipher.
-        Or just simply <router-link :to="{ name: 'Cipher', params: { cipher: 'Reverse'}}">reverse</router-link> a message.
-        Ever heard of the <router-link :to="{ name: 'Cipher', params: { cipher: 'Kenny code'}}">Kenny code</router-link>?
-        Or want to translate <router-link :to="{ name: 'Cipher', params: { cipher: 'Morse'}}">Morse</router-link>?
-        There are 49 different ciphers. You can quickly try different ciphers and keywords.
-        Supports binary encodings, such as <router-link :to="{ name: 'Cipher', params: { cipher: 'Base91'}}">Base91</router-link>,
+        {{$t('cp.short')}}
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT13'}}">ROT13</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT47'}}">ROT47</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Vigenere'}}">Vigenere</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Kenny code'}}">Kenny code</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Morse'}}">Morse</router-link>,
         <router-link :to="{ name: 'Cipher', params: { cipher: 'Base16'}}">Base16</router-link>,
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Base32'}}">Base32</router-link>,
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Base64'}}">Base64</router-link> and
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'UUencode'}}">UUencode</router-link>. It can also convert
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'GCId'}}">GC codes to GC id's</router-link>.
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Base64'}}">Base64</router-link>.
       </div>
       <h3>{{$t('menu.codebook')}}</h3>
       <div class="p mb-2">
@@ -47,7 +41,8 @@
       <div class="p mb-2">
         <router-link to="/images/exifscanner">{{$t('imagetools.exifscanner.title')}}</router-link> {{$t('imagetools.exifscanner.short')}}.<br>
         <router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link> {{$t('imagetools.colorpicker.short')}}.<br>
-        <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> {{$t('imagetools.filltool.short')}}.
+        <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> {{$t('imagetools.filltool.short')}}.<br>
+        <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> {{$t('imagetools.pixeldata.short')}}.
       </div>
       <h3>{{$t('menu.htmlscanner')}}</h3>
       <div class="p mb-2">
@@ -57,6 +52,7 @@
       <div class="p mb-2">
         <router-link to="/math/baseconvertor">{{$t('mathtools.baseconvert.title')}}</router-link> {{$t('mathtools.baseconvert.short')}}.<br>
         <router-link to="/math/countdigits">{{$t('mathtools.decimals.title')}}</router-link> {{$t('mathtools.decimals.short')}}.<br>
+        <router-link to="/math/primes">{{$t('mathtools.primes.title')}}</router-link> {{$t('mathtools.primes.short')}}.<br>
         <router-link to="/math/fibonacci">{{$t('mathtools.fibonacci.title')}}</router-link> {{$t('mathtools.fibonacci.short')}}.<br>
         <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> {{$t('mathtools.primegcdlcm.short')}}.<br>
         <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> {{$t('mathtools.formulasolver.short')}}.<br>

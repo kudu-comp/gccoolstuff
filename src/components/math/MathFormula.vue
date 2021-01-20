@@ -7,10 +7,10 @@
       <div class="infoblock" v-html="$t('dialogformulasolver.info')"></div>
       <div class="form-inline">
         <label class="form-label mr-2 mb-2" for="x">{{$t('dialogformulasolver.formula')}}</label>
-        <input type="text" length="30" id="formula" name="formula" ref="formula" v-model="formula" class="form-control mb-2 mr-2">
-        <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="solveFormula">
+        <input type="text" size="30" id="formula" name="formula" ref="formula" v-model="formula" class="form-control mb-2">
       </div>
       <div class="form-inline">
+        <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="solveFormula">
         <label class="form-label mr-2 mb-2" for="base">{{$t('dialogformulasolver.base')}}</label>
         <input type="number" min="2" max="16" id="base" name="base" v-model="base" class="form-control mb-2 mr-2">
         <div class="custom-control custom-checkbox">

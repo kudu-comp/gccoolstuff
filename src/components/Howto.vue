@@ -302,16 +302,16 @@
           The art of hiding information in an image can become really complex. The easy ones to try first are:
           <ul>
             <li><b>Barcode or QR code</b> - the image is a Barcode or QR code. There are many different formats. My favorite online
-              tool for cracking barcodes is the <a href="https://online-barcode-reader.inliteresearch.com/">Inlite Free Barcode reader</a>></li>
+              tool for cracking barcodes is the <a href="https://online-barcode-reader.inliteresearch.com/">Inlite Free Barcode reader</a>.</li>
             <li><b>Image information</b> - also called EXIF data. <router-link to="/images/exifscanner">Image tools</router-link> will retrieve this info. Not
               only look at the text fields, but also the dimensions and a possible GPS location in the image.</li>
-            <li><b>Zoom in</b> extremely and see what the image reveales.</li>
-            <li><b>Statistics</b> - get some statistics on the image, the number of pixels of each color, the sum of R, G and B values and so on.
-              The code might be hidden somewhere in these stats. (I still need to write a tool to help with this.)</li>
-            <li><b>Links</b> - there might be links attached to the image (or just to 1 pixel actually). Use <router-link to="/html">HTML scanner</router-link>
-              to find these links</li>
             <li><b>Fill areas</b> - if colors are really close the human eye cannot see the difference. For example a red area might be red text
               on a slightly different red background. Use <router-link to="/images/filltool">Color Editor</router-link> to reveal those messages.</li>
+            <li><b>Zoom in</b> extremely and see what the image reveales.</li>
+            <li><b>Links</b> - there might be links attached to the image (or just to 1 pixel actually). Use <router-link to="/html">HTML scanner</router-link>
+              to find these links</li>
+            <li><b>Statistics</b> - get some statistics on the image, the number of pixels of each color, the sum of R, G and B values and so on.
+              The code might be hidden somewhere in these stats. Try <router-link to="/images/pixeldata">Pixel Data</router-link>.</li>
           </ul>
           <p><b>Steganography</b> - is the art of encrypting a message within an image. There are many different ways. Data might be hidden
           in unused bits (try LSB or Least Significant Bits), it might be hidden using color depth (try to reduce color depth using an

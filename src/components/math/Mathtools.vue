@@ -2,6 +2,7 @@
   <div id="nav" class="text-center">
     <router-link to="/math/baseconvertor">{{$t('mathtools.baseconvert.title')}}</router-link> |
     <router-link to="/math/countdigits">{{$t('mathtools.decimals.title')}}</router-link> |
+    <router-link to="/math/primes">{{$t('mathtools.primes.title')}}</router-link> |
     <router-link to="/math/fibonacci">{{$t('mathtools.fibonacci.title')}}</router-link> |
     <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> |
     <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> |
@@ -23,6 +24,12 @@
         <template v-slot:header>{{$t('mathtools.decimals.title')}}</template>
         <template v-slot:content>
           <router-link to="/math/countdigits">{{$t('mathtools.decimals.title')}}</router-link> - {{$t('mathtools.decimals.long')}})<br>
+        </template>
+      </va-item>
+      <va-item v-bind:showitem='show[9]' v-on:toggle='toggleItem(9)'>
+        <template v-slot:header>{{$t('mathtools.primes.title')}}</template>
+        <template v-slot:content>
+            <router-link to="/math/primes">{{$t('mathtools.primes.title')}}</router-link> - {{$t('mathtools.primes.long')}}<br>
         </template>
       </va-item>
       <va-item v-bind:showitem='show[2]' v-on:toggle='toggleItem(2)'>

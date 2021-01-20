@@ -7,11 +7,12 @@
  *
  */
 export function primeFactorization (n) {
-  let a = [];
+  
+    let a = [];
 
     // Get all the 2 factors
     while (n % 2 == 0) {
-        a.push = 2;
+        a.push(2);
         n /= 2;
     }
 
@@ -291,6 +292,31 @@ function isniven (n) {
     sum += parseInt(s[i]);
 	}
 	return ((n % sum) == 0);
+}
+
+/*
+ * Check if the number is prime
+ *
+ * @param integer    n      number to check
+ *
+ * @return boolean   whether n is prime or not
+ * *
+ */
+export function checkprime (n) {
+
+  console.log(n);
+
+  // 0 and 1 are not prime
+  if (n < 2) return false;
+
+  // Simple algorithm
+  let max = Math.floor(Math.sqrt(n));
+  for (let i = 2; i <= max; i++) {
+    if (n % i == 0) return false
+  }
+
+  return true;
+
 }
 
 // export default {

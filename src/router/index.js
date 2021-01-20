@@ -21,6 +21,7 @@ import MathToolbox from '../views/MathToolbox.vue'
 import MathFib from '@/components/math/MathFib.vue'
 import MathDigits from '@/components/math/MathDigits.vue'
 import MathFormula from '@/components/math/MathFormula.vue'
+import MathPrimes from '@/components/math/MathPrimes.vue'
 import MathGCDandLCM from '@/components/math/MathGCDandLCM.vue'
 import MathNimbers from '@/components/math/MathNimbers.vue'
 import MathPalindrome from '@/components/math/MathPalindrome.vue'
@@ -31,6 +32,7 @@ import ImageTools from '@/components/images/ImageTools.vue'
 import ExifScanner from '@/components/images/ExifScanner.vue'
 import ColorPicker from '@/components/images/ColorPicker.vue'
 import FillTool from '@/components/images/FillTool.vue'
+import PixelData from '@/components/images/PixelData.vue'
 import HtmlToolbox from '@/views/HtmlToolbox'
 import Sudoku from '../views/Sudoku.vue'
 import OtherTools from '@/views/OtherTools.vue'
@@ -93,6 +95,7 @@ const routes = [
     children: [
       { path: "/math/baseconvertor", component: MathBase },
       { path: "/math/countdigits", component: MathDigits },
+      { path: "/math/primes", component: MathPrimes},
       { path: "/math/formulasolv", component: MathFormula},
       { path: "/math/numberproperties", component: MathProperties },
       { path: "/math/fibonacci", component: MathFib },
@@ -163,6 +166,11 @@ const routes = [
         path: '/images/filltool',
         name: 'FillTool',
         component: FillTool
+      },
+      {
+        path: '/images/pixeldata',
+        name: 'PixelData',
+        component: PixelData
       },
     ]
   },
