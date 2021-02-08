@@ -15,12 +15,12 @@
       </div>
       <h3>{{$t('menu.texttools')}}</h3>
       <div class="p mb-2">
-        <router-link to="/texttoolbox/textwordvalue">{{$t('texttools.wordvalue.title')}}</router-link> {{$t('texttools.wordvalue.short')}}<br>
-        <router-link to="/texttoolbox/textcodes">{{$t('texttools.charcodes.title')}}</router-link> {{$t('texttools.charcodes.short')}}<br>
-        <router-link to="/texttoolbox/smartreplace">{{$t('texttools.smartreplace.title')}}</router-link> {{$t('texttools.smartreplace.short')}}<br>
-        <router-link to="/texttoolbox/textanalyzer">{{$t('texttools.analyze.title')}}</router-link> {{$t('texttools.analyze.short')}}<br>
-        <router-link to="/texttoolbox/texttonumbers">{{$t('texttools.texttonumbers.title')}}</router-link> {{$t('texttools.texttonumbers.short')}}<br>
-        <router-link to="/texttoolbox/textkeyboards">{{$t('texttools.keyboards.title')}}</router-link> {{$t('texttools.keyboards.short')}}
+        <router-link to="/text/textwordvalue">{{$t('texttools.wordvalue.title')}}</router-link> {{$t('texttools.wordvalue.short')}}<br>
+        <router-link to="/text/textcodes">{{$t('texttools.charcodes.title')}}</router-link> {{$t('texttools.charcodes.short')}}<br>
+        <router-link to="/text/smartreplace">{{$t('texttools.smartreplace.title')}}</router-link> {{$t('texttools.smartreplace.short')}}<br>
+        <router-link to="/text/textanalyzer">{{$t('texttools.analyze.title')}}</router-link> {{$t('texttools.analyze.short')}}<br>
+        <router-link to="/text/texttonumbers">{{$t('texttools.texttonumbers.title')}}</router-link> {{$t('texttools.texttonumbers.short')}}<br>
+        <router-link to="/text/textkeyboards">{{$t('texttools.keyboards.title')}}</router-link> {{$t('texttools.keyboards.short')}}
       </div>
       <h3>{{$t('menu.ciphers')}}</h3>
       <div class="p mb-2">
@@ -46,7 +46,7 @@
       </div>
       <h3>{{$t('menu.htmlscanner')}}</h3>
       <div class="p mb-2">
-        <router-link to="/htmltools">{{$t('menu.htmlscanner')}}</router-link>  {{$t('htmlscanner.short')}}.
+        <router-link to="/html">{{$t('menu.htmlscanner')}}</router-link>  {{$t('htmlscanner.short')}}.
       </div>
       <h3>{{$t('menu.mathtools')}}</h3>
       <div class="p mb-2">
@@ -69,7 +69,8 @@
         <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> {{$t('othertools.countries.short')}}.<br>
         <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> {{$t('othertools.usastates.short')}}.<br>
         <router-link to="/other/nlprovinces">{{$t('othertools.nlprovinces.title')}}</router-link> {{$t('othertools.nlprovinces.short')}}.<br>
-        <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> {{$t('othertools.resistorcode.short')}}.
+        <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> {{$t('othertools.resistorcode.short')}}.<br>
+        <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> {{$t('othertools.unitconvertor.short')}}.
       </div>
     </div>
   </div>

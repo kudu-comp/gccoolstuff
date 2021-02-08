@@ -108,10 +108,10 @@ export default {
       // Split message in words
       let words = this.message.match(/([^\s.,:;]+)/ug);
 
-      // Calculate values for each word
+      // Calculate values for each word, skip values of 0
       for (let i=0; i < words.length; i++) {
         value = textHelper.wordValue(words[i], this.reverse, this.startatzero, this.selectedalphabet);
-        wordvalues.push ( { name : words[i], value : value, squareroot : textHelper.squareRoot(value)} );
+        if (value > 0) wordvalues.push ( { name : words[i], value : value, squareroot : textHelper.squareRoot(value)} );
       }
 
       // Display table with all values

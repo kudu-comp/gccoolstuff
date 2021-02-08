@@ -9,22 +9,22 @@
       </div>
       <div class="form-inline">
         <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.check')}}</label>
-        <input type='number' min="1" id="checkprime" ref="checkprime" v-model="checkprime" class="form-control mb-2 mr-2">
+        <input type='number' min="1" max="9007199254740992" id="checkprime" ref="checkprime" v-model="checkprime" class="form-control mb-2 mr-2">
         <input type="button" id="check" name="check" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="checkPrime">
       </div>
       <div class="form-inline">
         <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.pos')}}</label>
-        <input type='number' min="1" id="pos" ref="pos" v-model="pos" class="form-control mb-2 mr-2">
+        <input type='number' min="1" max="9007199254740992" id="pos" ref="pos" v-model="pos" class="form-control mb-2 mr-2">
         <input type="button" id="getprime" name="getprime" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="getPrime">
       </div>
       <div class="form-inline">
         <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.primepos')}}</label>
-        <input type='number' min="1" id="primepos" ref="primepos" v-model="primepos" class="form-control mb-2 mr-2">
+        <input type='number' min="1" max="9007199254740992" id="primepos" ref="primepos" v-model="primepos" class="form-control mb-2 mr-2">
         <input type="button" id="getpos" name="getpos" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="getPos">
       </div>
        <div class="form-inline">
         <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.primefact')}}</label>
-        <input type='number' min="1" id="primefact" ref="primefact" v-model="primefact" class="form-control mb-2 mr-2">
+        <input type='number' min="1" max="9007199254740992" id="primefact" ref="primefact" v-model="primefact" class="form-control mb-2 mr-2">
         <input type="button" id="primefact" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="primeFactors">
       </div>
       <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
@@ -89,7 +89,6 @@ export default {
       } else {
         
         let a = mathsequences.primeFactorization (this.primefact);
-        console.log(a);
         this.result = "";
         for (let p of a) this.result += p + " - ";
         this.result = this.result.slice(0, -3)

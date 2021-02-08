@@ -48,8 +48,8 @@
     "showres": "Toon/verberg resultaat",
     "original": "Origineel",
     "count": "Tel",
-    "sum": "Totalen"
-
+    "sum": "Totalen",
+    "showtable": "Toon tabel"
   },
 
   "colors": {
@@ -186,7 +186,7 @@
     "filltool": {
       "title": "Kleuren aanpassen",
       "short": "Vul een gebied, pas de helderheid en het contrast aan, pas een filter toe of spiegel de afbeelding.",
-      "long": "Vul een gebied met een geselecteerde kleur en gegeven tolerantie. Pas de helderheid of het contrast aan. Pas een filter toe, zoals zwart/wit, sepia, inversie of een van de andere filters. Spiegel de afbeelding horizontaal of verticaal. Probeer grote vlakken van eenzelfde kleur te vervangen door een ander om onzichtbare verschillen in kleur tevoorschijn te halen."
+      "long": "Vul een gebied met een geselecteerde kleur en gegeven tolerantie. Pas de helderheid of het contrast aan. Pas een filter toe, zoals zwart/wit, sepia, negatief of een van de andere filters. Spiegel de afbeelding horizontaal of verticaal. Probeer grote vlakken van eenzelfde kleur te vervangen door een ander om onzichtbare verschillen in kleur tevoorschijn te halen."
     },
     "pixeldata": {
       "title": "Pixel data",
@@ -217,7 +217,7 @@
       "long": "Berekent de waarde van een weerstand op basis van de gekleurde banden."
     }, 
     "countries": {
-      "title": "Landentabel",
+      "title": "Landen van de wereld",
       "short": "Tabel met alle landen en autonome gebieden inclusief vlag",
       "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie."
     },
@@ -230,7 +230,12 @@
       "title": "Provincies van Nederland",
       "short": "Lijst van provincies van Nederland met vlag",
       "long": "Lijst van provincies van Nederland met vlag, aantal gemeentes, ranking volgens oppervlakte en hoofdstad."
-    } 
+    },
+    "unitconvertor": {
+      "title": "Eenheden",
+      "short": "Converteert lengte, temperature en nog veel meer",
+      "long": "Eenheden conversie. Omrekenen van lengte, temperature, oppervlakte, snelheid en nog veel meer."  
+    }
   },
 
   "cp": {
@@ -634,7 +639,7 @@
     "brigh": "Helderheid",
     "contr": "Contrast",
     "gray": "Zwart/Wit",
-    "invert": "Inversie",
+    "invert": "Negatief",
     "sepia": "Sepia",
     "transform": "Transformaties",
     "colordepth": "Kleurdiepte aanpassen",
@@ -1001,6 +1006,53 @@
     "cap": "Hoofdstad"
   },
 
+  "unitconvertor" : {
+    "info": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund.",
+    "value": "Waarde",
+    "selcat": "Selecteer een categorie",
+    "unitfrom": "Van eenheid",
+    "unitto": "Naar eenheid",
+    "cat" : {
+      "length": {
+        "name": "Lengte & afstand",
+        "desc": "De standaard eenheid is meter (m). Alle bekende voorvoegels kilo (1000), hecta (100), deca (10), deci (1/10), centi (1/100) en milli (1/1000) zijn ook beschikbaar. Engels sprekende landen gebruiken imperial eenheden met als basis de yard (yd) en afgeleide eenheden zoals de inch, voet en mijl. Verder zijn er een groot aantal oude Engelse, Franse en Russische eenheden beschikbaar."
+      },
+      "temp": {
+        "name": "Temperatuur",
+        "desc": "De standaard eenheid (SI unit) van temperatuur is Kelvin (K), het absolute nulpunt. Celsius en Fahrenheit worden echter het meest gebruikt. Verder zijn er enkele nu niet meer gebruikte temperatuurschalen beschikbaar."
+      },
+      "area": {
+        "name": "Oppervlakte",
+        "desc": "De standaard eenheid van oppervlakte is de vierkante meter (m2). Een are is 10mx10m, een hectare 100mx100m. Engels sprekende landen gebruiken de square yard (yd2) als basis."
+      },
+      "vol": {
+        "name": "Volume",
+        "desc": "De standaard eenheid van volume is de kubieke meter (m3). De liter (l of dm3) wordt ook veel gebruikt. Het Engelse / Amerikaanse systeem is gebaseerd op de gallon (gal), maar gebruiken beiden een andere gallon. Het Engelse systeem heeft bovendien een gallon van voor 1824 en na 1824. Het Amerikaanse systeem voor voeding heeft ook weer afwijkende maten. Oorspronkelijk werden verschillende eenheden gebruikt voor droge en vloeibare volumes. Dit is met uitzondering van de US niet meer gebruikelijk. Verder zijn er traditionele volumes van bier- en wijnvaten beschikbaar."
+      },
+      "power": {
+        "name": "Vermogen",
+        "desc": "De standaard van vermogen is de Watt (W)."
+      },
+      "mass": {
+        "name": "Massa & gewicht",
+        "desc": "De standaard eenheid is de kilogram (kg). Het Engels / Amerikaanse systeem gebruik de pound (lb) als basis. Voor edelstenen en edelmetalen is de troy pound nog steeds de standaard. De Engelse apothecaire eenheden zijn grotendeels vervangen door het metrieke systeem. Verder zijn er oude Russische eenheden (van voor de introductie van het metrieke systeem in 1925) en historische Romeinse eenheden beschikbaar."
+      },
+      "angle": {
+        "name": "Hoek",
+        "desc": "De standaard eenheid voor hoek is radians (rad), maar graden zijn meer gebruikelijk."
+      },
+      "speed": {
+        "name": "Snelheid",
+        "desc": "De standaard eenheid van snelheid is meter per second (m/s). Het Engelse stelsel gebruikt yard per seconde (yd/s) als basis. De knoop (knot) is een maritieme eenheid."
+      },
+      "time": {
+        "name": "Tijd",
+        "desc": "De standaard eenheid voor tijd is de seconde (s). De meeste andere eenheden zijn ook veel in gebruik. Voor de lengte van een jaar zijn verschillende definities in omloop. De Hebreeuwse kalender heeft zijn eigen eenheden voor tijd."
+      }
+
+    }
+  },
+
   "dialogpb":{
     "title": "Polybiusvierkant",
     "start": "Startalfabet:",
@@ -1236,7 +1288,8 @@
     "unique": "Nummers zijn uniek",
     "base": "Getalstelsel",
     "nosol": "Er zijn geen oplossingen",
-    "exprerror": "Fout bij het evalueren van de expressie. Controleer de formule."
+    "exprerror": "Fout bij het evalueren van de expressie. Controleer de formule.",
+    "toomanyvars": "Te veel variabelen, verhoog getalstelsel of pas de formule aan."
   },
 
   "dialognim": {

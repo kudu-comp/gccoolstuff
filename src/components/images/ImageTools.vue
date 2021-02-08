@@ -3,7 +3,8 @@
     <router-link to="/images/exifscanner">{{$t('imagetools.exifscanner.title')}}</router-link> |
     <router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link> |
     <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> |
-    <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link>
+    <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> |
+    <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link>
   </div>
   <router-view :key="$route.path" />
   <div v-if="['ImageTools'].includes($route.name)">

@@ -1,10 +1,10 @@
 <template>
-  <div class="form-inline mb-2">
-    <label class="form-label col-sm-3 col-md-2 col-lg-2" for="distance">
+  <div class="form-inline">
+    <label class="form-label col-sm-3 col-md-2 col-lg-2 mb-2" for="distance">
       <slot name="label">{{$t('labels.distance')}}</slot>
     </label>
-    <input type="text" class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2" :value='dist' @input="updateDist($event.target.value)"/>
-    <div class="col-md-4">
+    <input type="text" class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2" :value='dist' @input="updateDist($event.target.value)"/>
+    <div class="col-md-4 mb-2">
       <select class="custom-select" :value='unit' @input="updateUnit($event.target.value)">
         <option value="1">Meter (m)</option>
         <option value="1000">Kilometer (km)</option>

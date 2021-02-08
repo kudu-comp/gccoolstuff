@@ -70,6 +70,7 @@
             <div class="box-body">
               <div class="form-inline">
                 <select id="filter" class="custom-select mr-2 mb-2" v-model="cdepth">
+                  <option value="0">1 bits - 2 {{$t('filltool.colors')}}</option>
                   <option value="1">3 bits - 8 {{$t('filltool.colors')}}</option>
                   <option value="2">6 bits - 64 {{$t('filltool.colors')}}</option>
                   <option value="3">9 bits - 512 {{$t('filltool.colors')}}</option>
@@ -336,13 +337,26 @@ export default {
 
       // Set color bandwidth
       let bw = 2 ** (7 - this.cdepth);
-      console.log(bw);
-
+      let bwcol = 0;
+      
       // Invert the image
       for (let i = 0; i < data.length; i += 4) {
-        data[i]     = Math.min ( Math.round(data[i]   / bw) * bw, 255); // red
-        data[i + 1] = Math.min ( Math.round(data[i+1] / bw) * bw, 255); // green
-        data[i + 2] = Math.min ( Math.round(data[i+2] / bw) * bw, 255); // blue
+        if (this.cdepth == 0) {
+
+          // 1 bit color (black white) if avg colors < or > than 3*128
+          bwcol = (data[i] + data[i+1] + data[i+2] < 384) ? 0 : 255;
+          data[i] = bwcol;
+          data[i+1] = bwcol;
+          data[i+2] = bwcol;
+
+        } else {
+
+          // Colordepth defined by dividing 256 positions in depth blocks
+          data[i]     = Math.min ( Math.round(data[i]   / bw) * bw, 255); // red
+          data[i + 1] = Math.min ( Math.round(data[i+1] / bw) * bw, 255); // green
+          data[i + 2] = Math.min ( Math.round(data[i+2] / bw) * bw, 255); // blue
+
+        }
       }
 
       // Draw the new image

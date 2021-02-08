@@ -33,12 +33,14 @@ import ExifScanner from '@/components/images/ExifScanner.vue'
 import ColorPicker from '@/components/images/ColorPicker.vue'
 import FillTool from '@/components/images/FillTool.vue'
 import PixelData from '@/components/images/PixelData.vue'
+import ImageTransform from '@/components/images/ImageTransform.vue'
 import HtmlToolbox from '@/views/HtmlToolbox'
 import Sudoku from '../views/Sudoku.vue'
 import OtherTools from '@/views/OtherTools.vue'
 import MastermindSolver from '@/components/other/MastermindSolver.vue'
 import PeriodicTable from '@/components/other/PeriodicTable.vue'
 import ResistorCode from '@/components/other/ResistorCode.vue'
+import UnitConvertor from '@/components/other/UnitConvertor'
 import Countries from '@/components/other/Countries.vue'
 import UsaStates from '@/components/other/UsaStates.vue'
 import NlProvinces from '@/components/other/NlProvinces.vue'
@@ -145,6 +147,11 @@ const routes = [
         name: 'NlProvinces',
         component: NlProvinces,
       },
+      {
+        path: '/other/unitconvertor',
+        name: 'UnitConvertor',
+        component: UnitConvertor,
+      },
     ]
   },
   {
@@ -171,6 +178,11 @@ const routes = [
         path: '/images/pixeldata',
         name: 'PixelData',
         component: PixelData
+      },
+      {
+        path: '/images/imagetransform',
+        name: 'ImageTransform',
+        component: ImageTransform
       },
     ]
   },

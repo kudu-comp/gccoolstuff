@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{this.$t('othertools.sudokusolver.title')}}
+      {{$t('othertools.sudokusolver.title')}}
     </div>
     <div class="mainpage">
       <div class="infoblock">

@@ -48,7 +48,8 @@
     "apply": "Apply",
     "original": "Original",
     "count": "Count",
-    "sum": "Totals"
+    "sum": "Totals",
+    "showtable": "Show table"
   },
 
   "colors": {
@@ -228,7 +229,12 @@
       "title": "Dutch Provinces",
       "short": "List of the provinces of the Netherlands including flags",
       "long": "List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital."  
-    } 
+    },
+    "unitconvertor": {
+      "title": "Units",
+      "short": "Convert length, area, volume, temperature, power, angle and speed",
+      "long": "Unit convertor, supports length, area, volume, temperature, power, angle and speed."  
+    }
   },
 
   "cp": {
@@ -999,6 +1005,52 @@
     "cap": "Capital"
   },
 
+  "unitconvertor" : {
+    "info": "Unit convertor converts a wide range of units. Units are organized in categories for units the measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units.",
+    "value": "Value",
+    "selcat": "Select a category",
+    "unitfrom": "From unit",
+    "unitto": "To unit",
+    "cat" : {
+      "length": {
+        "name": "Length & distance",
+        "desc": "The standard unit of length is meter (m). All the default prefixes like kilo (1000), hecta (100), deca (10), deci (1/10), centi (1/100) and milli (1/1000) are available. English speaking countries used / uses imperial units (inch, feet, yard, mile). Before the imperial system several other units were in use (e.g. furlong, rond or barleycorn). There are also former French and Russian units."
+      },
+      "temp": {
+        "name": "Temperature",
+        "desc": "The standard unit (SI unit) of temperature is Kelvin (K), the absolute zero. Celsius and Fahrenheit are the most frequently used. There is also a number of now obsolete temperature scales."
+      },
+      "area": {
+        "name": "Area",
+        "desc": "The standard unit of an area is the square meter (m2). An are is 10mx10m, a hectare 100mx100m. English speaking countries use imperial units like square inch, square feet, square yard and square mile."
+      },
+      "vol": {
+        "name": "Volume",
+        "desc": "The standard unit of volume is the cubic meter (m3). The liter (l or dm3) is frequently used. English speaking countries uses imperial measures like the fluid ounce (fl oz). Traditionally different volumes where used for fluid and dry goods, but this no longer the case, except for US customary volumes."
+      },
+      "power": {
+        "name": "Power",
+        "desc": "The standard unit of power is the Watt (W)."
+      },
+      "mass": {
+        "name": "Mass & weight",
+        "desc": "The standard unit of mass is the kilogram (kg). English speaking countries still use the ounce (oz) and pound (lb). The troy ounce and pound (and carat) are still used for precious stones and metals (troy). The apothecary are mostly replaced with the metric system. There are also old Russian units (before the adoption of the metric system in 1925) and anncient Roman units."
+      },
+      "angle": {
+        "name": "Angle",
+        "desc": "The standard unit of angle is radians (rad), but degrees are more commonly used."
+      },
+      "speed": {
+        "name": "Velocity & speed",
+        "desc": "The standard unit for speed is meter per second (m/s). English speaking countries still use imperial units such as feet per second (ft/s). The knot is a maritime unit."
+      },
+      "time": {
+        "name": "Time",
+        "desc": "The standard unit for time is the second (s). Most of the other units are common as well. When it comes to the exact duration of a year, there are many definitions. The Hebrew calendar also uses a few other definitions."
+      }
+    }
+  },
+
   "dialogpb":{
     "title": "Polybius square",
     "start": "Start with alphabet:",
@@ -1234,7 +1286,8 @@
     "unique": "Unique numbers",
     "base": "Base for calculations",
     "nosol": "There are no solutions",
-    "exprerror": "Error evaluating expression, please check the formula"
+    "exprerror": "Error evaluating expression, please check the formula",
+    "toomanyvars": "Too many variables, increase base or change formule"
   },
 
   "dialognim": {

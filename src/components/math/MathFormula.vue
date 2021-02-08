@@ -151,6 +151,11 @@ export default {
         if (this.varnames.indexOf(c) < 0 && "ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(c.toUpperCase()) >= 0 ) this.varnames += c
       }
     
+      if (this.varnames.length > this.base) {
+        this.error = true;
+        this.errormsg = this.$t('dialogformulasolver.toomanyvars')
+      }
+
       // Generate candidates
       try {
 

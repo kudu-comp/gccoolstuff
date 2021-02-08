@@ -304,8 +304,6 @@ function isniven (n) {
  */
 export function checkprime (n) {
 
-  console.log(n);
-
   // 0 and 1 are not prime
   if (n < 2) return false;
 

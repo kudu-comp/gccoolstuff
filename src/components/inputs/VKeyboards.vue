@@ -19,7 +19,6 @@ export default {
   },
   mounted: function() {
     this.keyboards = keyBoards.keyboards;
-    // this.alphabets.push ( { name : "Vanity code or phone keys", length : 0, alphabet : 'A=2,B=2,C=2,D=3,...' } )
   },
   methods: {
     updatKeyboard: function (value) {
