@@ -49,7 +49,8 @@
     "original": "Original",
     "count": "Count",
     "sum": "Totals",
-    "showtable": "Show table"
+    "showtable": "Show table",
+    "undo": "Undo"
   },
 
   "colors": {
@@ -184,13 +185,18 @@
     },
     "filltool": {
       "title": "Color editor",
-      "short": "Fill an area, apply a filter, change brightness and contrast or flip the image.",
+      "short": "Fill an area, apply a filter, change brightness and contrast or change color depth.",
       "long": "Fill an area with a selected color and a given tolerance. Adjust the brightness and contrast. Apply one of the filters, grayscale, invert, sepia and a few more. Flip the image vertically or horizontally. Try to replace large areas with the same color with another to reveal unseen differences in color."
     },
     "pixeldata": {
       "title": "Pixel data",
       "short": "Calculate total of R, G and B, count a specific RGB value",
       "long": "Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image. Works perfectly with PNG files but seems to have an issue with JPG."
+    },
+    "imagetransform": {
+      "title": "Transform",
+      "short": "Flip horizontal and vertical (whole picture or parts), shift rows or columns",
+      "long": "Flip horizontal and/or vertical (whole picture or alternating rows/columns). Shift each row or column a few pixels."
     }
   },
 
@@ -218,17 +224,17 @@
     "countries": {
       "title": "Country codes",
       "short": "List of all the countries and named territories with flags",
-      "long": "List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes."
+      "long": "List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes."
     },
     "usastates": {
       "title": "US States",
       "short": "List of the states of the US including flags",
       "long": "List of the states of the US including flags, number of representatives in the U.S. House, area ranking, joined as and capital."  
     },
-    "nlprovinces": {
-      "title": "Dutch Provinces",
-      "short": "List of the provinces of the Netherlands including flags",
-      "long": "List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital."  
+    "countryregions": {
+      "title": "Regions of nl, be, de and fr",
+      "short": "Regions of the Netherlands, Belgium, Germany and France including flags",
+      "long": "Regions of the Netherlands, Belgium, Germany and France with ISO code, name, capital and more including flags"  
     },
     "unitconvertor": {
       "title": "Units",
@@ -640,17 +646,29 @@
     "gray": "Grayscale",
     "invert": "Invert",
     "sepia": "Sepia",
-    "transform": "Transformations",
     "colordepth": "Reduce color depth",
-    "colors": "colors",
-    "fliph": "Flip horizontal",
-    "flipv": "Flip vertical"
+    "colors": "colors"
   },
 
   "pixeldata": {
     "info": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>",
     "sum": "To calculate the sum of the red, green and blue values press Totals",
     "count": "To count the number of pixels select values for red, green and blue and press Count"
+  },
+
+  "imagetransform": {
+    "info": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image.",
+    "shift": "Shift",
+    "shiftinfo": "Select the number of pixels to shift each row/column.",
+    "shiftr": "Shift row #pixels",
+    "shiftc": "Shift column #pixels",
+    "fliphalf": "Flip half",
+    "flipinfo": "Select the width in pixels of row/column.",
+    "flipr": "Flip rows of #pixels",
+    "flipc": "Flip columns of #pixels",
+    "transform": "Mirror image",
+    "fliph": "Flip horizontal",
+    "flipv": "Flip vertical"
   },
 
   "htmlscanner": {
@@ -718,7 +736,7 @@
   },
 
   "countries": {
-    "info": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 248 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>",
+    "info": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>",
     "ph": "Type multiple codes or numbers",
     "flag": "Flag",
     "ccode3": "ISO 3-letter code",
@@ -729,6 +747,7 @@
     "web": "Web TLD",
     "cur": "Currency",
     "ccur": "Currency code",
+    "lcp": "License plate",
     "names": {
       "abw": "Aruba",
       "afg": "Afghanistan",
@@ -994,15 +1013,26 @@
     "cap": "Capital"
   },
 
-  "nlprovinces": {
-    "info": "<p>List of the provinces of the Netherlands including flags, number of municipalities, area ranking and capital. The code is both the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>.</p><p>You can type multiple codes and numbers. The code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The province name contains a link to the wikipedia page in Dutch.</p>",
+  "countryregions": {
+    "info": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>",
     "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
+    "nl": "Netherlands",
+    "be": "Belgium",
+    "de": "Germany",
+    "fr": "France",
     "flag": "Flag",
     "code": "ISO3166:2 code",
     "name": "Province",
-    "mun": "Municipalities",
+    "mun": "#Municipalities",
     "area": "Area ranking",
-    "cap": "Capital"
+    "cap": "Capital",
+    "cat": "Type of region",
+    "dep": "#Departments",
+    "arr": "#Arrondisements",
+    "canton": "#Cantons",
+    "bundesrat": "Bundesrat reps",
+    "landkreise": "#Landkreise",
+    "stadtkreise": "#Kreisefreie stadt"
   },
 
   "unitconvertor" : {

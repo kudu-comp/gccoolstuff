@@ -27,10 +27,16 @@
           <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> - {{$t('imagetools.filltool.long')}}.<br>
         </template>
       </va-item>
-      <va-item v-bind:showitem='show[3]' v-on:toggle='show[2] = !show[3]'>
+      <va-item v-bind:showitem='show[3]' v-on:toggle='show[3] = !show[3]'>
         <template v-slot:header>{{$t('imagetools.pixeldata.title')}}</template>
         <template v-slot:content>
           <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> - {{$t('imagetools.pixeldata.long')}}.<br>
+        </template>
+      </va-item>
+      <va-item v-bind:showitem='show[3]' v-on:toggle='show[4] = !show[4]'>
+        <template v-slot:header>{{$t('imagetools.imagetransform.title')}}</template>
+        <template v-slot:content>
+          <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link> - {{$t('imagetools.imagetransform.long')}}.<br>
         </template>
       </va-item>
     </div>

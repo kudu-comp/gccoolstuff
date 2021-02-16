@@ -1,7 +1,7 @@
 <template>
   <div class="form-inline">
     <!-- <label for="listofalpha" class="form-label mr-2">Keyboards</label> -->
-    <select class="custom-select" :value='keyboard' @input="updatKeyboard($event.target.value)">
+    <select class="custom-select" :value='keyboard' @input="updateKeyboard($event.target.value)">
       <option v-for="k in keyboards" :key="k" :value="k.name">{{k.description}}</option>
     </select>
   </div>
@@ -21,7 +21,7 @@ export default {
     this.keyboards = keyBoards.keyboards;
   },
   methods: {
-    updatKeyboard: function (value) {
+    updateKeyboard: function (value) {
       this.$emit ('update:keyboard', value);
     },
   }

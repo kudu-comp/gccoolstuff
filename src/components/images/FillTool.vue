@@ -82,13 +82,6 @@
               </div>
             </div>
           </div>
-          <div class="box">
-            <div class="box-header">{{$t('filltool.transform')}}</div>
-            <div class="box-body">
-              <input type="button" id="fliph" :value="$t('filltool.fliph')" class="btn btn-primary mr-2 mb-2" v-on:click="flipH">
-              <input type="button" id="flipv" :value="$t('filltool.flipv')" class="btn btn-primary mr-2 mb-2" v-on:click="flipV">
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -356,56 +349,6 @@ export default {
           data[i + 1] = Math.min ( Math.round(data[i+1] / bw) * bw, 255); // green
           data[i + 2] = Math.min ( Math.round(data[i+2] / bw) * bw, 255); // blue
 
-        }
-      }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, 0, 0);
-    },
-
-    flipH: function () {
-
-      // Make a copy of the imagedata
-      const width = this.ctx.canvas.width;
-      const height = this.ctx.canvas.height;
-      const imageData = this.ctx.getImageData(0, 0, width, height);
-      const data = imageData.data;
-
-      // Invert the image
-      let idx1, idx2, h = 0;
-
-      for (let r = 0; r < height; r++) {
-        for (let c = 0; c < (width / 2); c++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((r + 1) * width - c - 1) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
-        }
-      }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, 0, 0);
-    },
-
-    flipV: function () {
-
-      // Make a copy of the imagedata
-      const width = this.ctx.canvas.width;
-      const height = this.ctx.canvas.height;
-      const imageData = this.ctx.getImageData(0, 0, width, height);
-      const data = imageData.data;
-
-      // Invert the image
-      let idx1, idx2, h = 0;
-
-      for (let c = 0; c < width; c++) {
-        for (let r = 0; r < (height / 2); r++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((height - r - 1) * width + c) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
         }
       }
 

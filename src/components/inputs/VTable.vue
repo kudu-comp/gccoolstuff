@@ -9,7 +9,7 @@
         <select class="custom-select mb-2 mr-2" style="width: 150px;" v-model='searchIndex'>
           <option v-for="(col, index) in cols" :key="index" :value="index" :disabled="col.image || col.nosearch">{{col.label}}</option>
         </select>
-        <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="initSortArr">
+        <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="reset">
         <input type="button" id="showhide" name="showhide" :value="$t('buttons.showtab')" class="btn btn-primary mb-2 mr-2" v-on:click="showtable = !showtable">
         <input type="button" id="showhide" name="showhide" :value="$t('buttons.showres')" class="btn btn-primary mb-2" v-on:click="showresults = !showresults">
       </div>
@@ -61,7 +61,10 @@
 
 <script>
 
-export default {
+import { defineComponent, ref, toRefs, watch } from 'vue'
+
+export default defineComponent ({
+
   name: "VTable",
 
   props: {
@@ -110,7 +113,7 @@ export default {
 
     // Example matchCol function
     // matchCol: (c)  => {
-    //   // Cannot use this.rows here so passed as parameter
+    //   // Use arrow notation to make this accessible
     //   // Case sensitive match on names
     //   return this.rows.findIndex( (e) => e.name == c.trim() )
     // },
@@ -127,18 +130,18 @@ export default {
     // }
 
     // Example src function for images columns
-    // src: function (row) {
+    // src: (row) => {
     //   const fileName = row.code.toLowerCase() + '.png';
     //   return require(`@/assets/usflags/${fileName}`);
     // },
 
     // Exampole href function for columns with link
-    // href: function (row) {
+    // href: (row) => {
     //   return "https:\\\\wikipedia.com\\" + row.code;
     // },
 
     // Example for computed columns
-    // computed: function (row) {
+    // computed: (row) => {
     //   return row.name.toUpperCase();
     // }
 
@@ -152,14 +155,43 @@ export default {
     // Rows is an array of objects
     // each object has the row fields, were the column names match those in cols.fields
     // cols that have a computed or image function are not included in rows
+    // fields that don't have a column are not displayed (but may be used in functions)
 
     rows: {
       type: Array,
       default: () => {
         return [];
       }
+    },
+
+  },
+
+  setup (props) {
+
+    // Ref creates on object with one property 'value'
+    const sortArr = ref([]);
+    let searchIndex = 0;
+    
+    // Create a reactive reference to 'rows' property of props
+    const { rows } = toRefs(props);
+
+    const initSortArr = function () {
+      sortArr.value = [];
+      for (let i = 0; i < rows.value.length; i++) sortArr.value[i] = i;
+      searchIndex = props.defsearch;
     }
 
+    // Upon creation init sorted arr
+    initSortArr();
+
+    // If rows change init sorted arr
+    watch (rows, initSortArr);
+
+    return {
+      sortArr,
+      initSortArr,
+      searchIndex
+    }
   },
 
   data() {
@@ -179,25 +211,13 @@ export default {
         sort: ""
       },
 
-      // Sorted array of indexes, needed because we cannot sort a prop
-      sortArr: [],
-
       // Search input
-      searchIndex: 0,
       searchInput: "",
 
       // Result box
       result: this.$t('labels.result')
 
     };
-  },
-
-  created: function () {
-    this.initSortArr();
-  },
-
-  mounted: function () {
-    this.searchIndex = this.defsearch;
   },
 
   methods: {
@@ -220,9 +240,12 @@ export default {
       }
     },
 
-    initSortArr: function () {
+    reset: function () {
+      this.initSortArr();
       this.error = false;
-      for (let i = 0; i < this.rows.length; i++) this.sortArr[i] = i;
+      this.result = this.$t('labels.result');
+      this.searchInput = "";
+      this.searchIndex = this.defsearch;
     },
 
     doSort: function(idx) {
@@ -367,7 +390,8 @@ export default {
 
   },
 
-}
+}); // end of defineComponent
+
 </script>
 
 <style scoped>

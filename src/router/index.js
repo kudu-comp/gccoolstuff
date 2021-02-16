@@ -43,7 +43,7 @@ import ResistorCode from '@/components/other/ResistorCode.vue'
 import UnitConvertor from '@/components/other/UnitConvertor'
 import Countries from '@/components/other/Countries.vue'
 import UsaStates from '@/components/other/UsaStates.vue'
-import NlProvinces from '@/components/other/NlProvinces.vue'
+import CountryRegions from '@/components/other/CountryRegions.vue'
 import Howtostart from '@/views/Howtostart.vue'
 
 const routes = [
@@ -138,20 +138,20 @@ const routes = [
         component: Countries,
       },
       {
+        path: '/other/unitconvertor',
+        name: 'UnitConvertor',
+        component: UnitConvertor,
+      },
+      {
         path: '/other/usastates',
         name: 'UsaStates',
         component: UsaStates,
       },
       {
-        path: '/other/nlprovinces',
-        name: 'NlProvinces',
-        component: NlProvinces,
-      },
-      {
-        path: '/other/unitconvertor',
-        name: 'UnitConvertor',
-        component: UnitConvertor,
-      },
+        path: '/other/countryregions',
+        name: 'CountryRegions',
+        component: CountryRegions,
+      }     
     ]
   },
   {

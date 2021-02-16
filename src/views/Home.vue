@@ -42,7 +42,8 @@
         <router-link to="/images/exifscanner">{{$t('imagetools.exifscanner.title')}}</router-link> {{$t('imagetools.exifscanner.short')}}.<br>
         <router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link> {{$t('imagetools.colorpicker.short')}}.<br>
         <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> {{$t('imagetools.filltool.short')}}.<br>
-        <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> {{$t('imagetools.pixeldata.short')}}.
+        <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> {{$t('imagetools.pixeldata.short')}}.<br>
+        <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link> {{$t('imagetools.imagetransform.short')}}.
       </div>
       <h3>{{$t('menu.htmlscanner')}}</h3>
       <div class="p mb-2">

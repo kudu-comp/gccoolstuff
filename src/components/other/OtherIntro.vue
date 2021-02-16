@@ -4,10 +4,10 @@
     <router-link to="/other/mmsolver">{{$t('othertools.mmsolver.title')}}</router-link> |
     <router-link to="/other/periodictable">{{$t('othertools.periodictable.title')}}</router-link> |
     <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> |
+    <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> |
     <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> |
-    <router-link to="/other/nlprovinces">{{$t('othertools.nlprovinces.title')}}</router-link> |
-    <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> |
-    <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link>
+    <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> |
+    <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> 
   </div>
   <router-view :key="$route.path" />
   <div v-if="['OtherTools'].includes($route.name)">
@@ -36,6 +36,12 @@
             <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> - {{$t('othertools.countries.long')}}<br>
         </template>
       </va-item>
+      <va-item v-bind:showitem='show[7]' v-on:toggle='toggleItem(7)'>
+        <template v-slot:header>{{$t('othertools.unitconvertor.title')}}</template>
+        <template v-slot:content>
+          <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> - {{$t('othertools.unitconvertor.long')}}<br>
+        </template>
+      </va-item>
       <va-item v-bind:showitem='show[4]' v-on:toggle='toggleItem(4)'>
         <template v-slot:header>{{$t('othertools.usastates.title')}}</template>
         <template v-slot:content>
@@ -43,9 +49,9 @@
         </template>
       </va-item>
       <va-item v-bind:showitem='show[5]' v-on:toggle='toggleItem(5)'>
-        <template v-slot:header>{{$t('othertools.nlprovinces.title')}}</template>
+        <template v-slot:header>{{$t('othertools.countryregions.title')}}</template>
         <template v-slot:content>
-            <router-link to="/other/nlprovinces">{{$t('othertools.nlprovinces.title')}}</router-link> - {{$t('othertools.nlprovinces.long')}}<br>
+            <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> - {{$t('othertools.countryregions.long')}}<br>
         </template>
       </va-item>
       <va-item v-bind:showitem='show[2]' v-on:toggle='toggleItem(2)'>
@@ -54,12 +60,7 @@
           <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> - {{$t('othertools.resistorcode.long')}}<br>
         </template>
       </va-item>
-      <va-item v-bind:showitem='show[7]' v-on:toggle='toggleItem(7)'>
-        <template v-slot:header>{{$t('othertools.unitconvertor.title')}}</template>
-        <template v-slot:content>
-          <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> - {{$t('othertools.unitconvertor.long')}}<br>
-        </template>
-      </va-item></div>
+    </div>
   </div>
 </template>
 
@@ -82,7 +83,7 @@ export default {
   data: function () {
     return {
       title: "Mathtools",
-      show: [true, true, true, true, true, true, true, true, true, true]
+      show: Array(10).fill(true)
     }
   },
 

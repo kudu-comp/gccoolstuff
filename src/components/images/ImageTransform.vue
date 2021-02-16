@@ -20,31 +20,39 @@
             <div class="box-header">{{$t('imagetransform.shift')}}</div>
             <div class="box-body">
               <p>{{$t('imagetransform.shiftinfo')}}</p>
-              <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{shiftr}}</label>
-              <vue-slider v-model="shiftr" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="shiftr" name="shiftr" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftRows">
-              <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{shiftc}}</label>
-              <vue-slider v-model="shiftc" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="shiftc" name="shiftc" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftCols">
+              <div>
+                <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{shiftr}}</label>
+                <vue-slider id="shiftr" v-model="shiftr" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
+                <input type="button" name="shiftrow" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftRows">
+              </div>
+              <div>
+                <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftc')}}: {{shiftc}}</label>
+                <vue-slider id="shiftc" v-model="shiftc" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
+                <input type="button" id="shiftcol" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftCols">
+              </div>
             </div>
           </div>
           <div class="box">
             <div class="box-header">{{$t('imagetransform.fliphalf')}}</div>
             <div class="box-body">
-              <p>{{$t('imagetransform.shiftinfo')}}</p>
-              <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{flipr}}</label>
-              <vue-slider v-model="flipr" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="shiftr" name="shiftr" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipRows">
-              <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{flipc}}</label>
-              <vue-slider v-model="flipc" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="shiftc" name="shiftc" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipCols">
+              <p>{{$t('imagetransform.flipinfo')}}</p>
+              <div>
+                <label class="form-label mr-2" for="flipr">{{$t('imagetransform.flipr')}}: {{flipr}}</label>
+                <vue-slider id="flipr" v-model="flipr" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
+                <input type="button" id="fliprow" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipRows">
+              </div>
+              <div>
+                <label class="form-label mr-2" for="halfflipc">{{$t('imagetransform.flipc')}}: {{flipc}}</label>
+                <vue-slider id="flipc" v-model="flipc" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
+                <input type="button" id="flipcol" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipCols">
+              </div>
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('filltool.transform')}}</div>
+            <div class="box-header">{{$t('imagetransform.transform')}}</div>
             <div class="box-body">
-              <input type="button" id="fliph" :value="$t('filltool.fliph')" class="btn btn-primary mr-2 mb-2" v-on:click="flipH">
-              <input type="button" id="flipv" :value="$t('filltool.flipv')" class="btn btn-primary mr-2 mb-2" v-on:click="flipV">
+              <input type="button" id="fliph" :value="$t('imagetransform.fliph')" class="btn btn-primary mr-2 mb-2" v-on:click="flipH">
+              <input type="button" id="flipv" :value="$t('imagetransform.flipv')" class="btn btn-primary mr-2 mb-2" v-on:click="flipV">
             </div>
           </div>
         </div>

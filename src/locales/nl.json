@@ -49,7 +49,8 @@
     "original": "Origineel",
     "count": "Tel",
     "sum": "Totalen",
-    "showtable": "Toon tabel"
+    "showtable": "Toon tabel",
+    "undo": "Ongedaan maken"
   },
 
   "colors": {
@@ -185,13 +186,18 @@
     },
     "filltool": {
       "title": "Kleuren aanpassen",
-      "short": "Vul een gebied, pas de helderheid en het contrast aan, pas een filter toe of spiegel de afbeelding.",
+      "short": "Vul een gebied, pas de helderheid en het contrast aan, pas een filter toe of pas de kleurdiepte aan.",
       "long": "Vul een gebied met een geselecteerde kleur en gegeven tolerantie. Pas de helderheid of het contrast aan. Pas een filter toe, zoals zwart/wit, sepia, negatief of een van de andere filters. Spiegel de afbeelding horizontaal of verticaal. Probeer grote vlakken van eenzelfde kleur te vervangen door een ander om onzichtbare verschillen in kleur tevoorschijn te halen."
     },
     "pixeldata": {
       "title": "Pixel data",
       "short": "Berekend het totaal van R, G end B. Telt het aantal pixels met een bepaalde kleur (RGB)",
       "long": "Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond. De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben."
+    },
+    "imagetransform": {
+      "title": "Transformeren",
+      "short": "Spiegel horizontaal en verticaal, verschuif rijen of kolommen",
+      "long": "Spiegel horizontaal en/of verticaal (geheel of gedeeltelijk), verschuif rijen en/of kolommen een aantal pixels."
     }
   },
  
@@ -219,17 +225,17 @@
     "countries": {
       "title": "Landen van de wereld",
       "short": "Tabel met alle landen en autonome gebieden inclusief vlag",
-      "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie."
+      "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie."
     },
     "usastates": {
       "title": "Staten van de VS",
       "short": "Lijst van staten van de VS inclusief vlag",
       "long": "Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum."
     },
-    "nlprovinces": {
-      "title": "Provincies van Nederland",
-      "short": "Lijst van provincies van Nederland met vlag",
-      "long": "Lijst van provincies van Nederland met vlag, aantal gemeentes, ranking volgens oppervlakte en hoofdstad."
+    "countryregions": {
+      "title": "Provincies",
+      "short": "Provincies van Nederland, België, Duitsland en Frankrijk met vlag",
+      "long": "Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag."
     },
     "unitconvertor": {
       "title": "Eenheden",
@@ -641,17 +647,29 @@
     "gray": "Zwart/Wit",
     "invert": "Negatief",
     "sepia": "Sepia",
-    "transform": "Transformaties",
     "colordepth": "Kleurdiepte aanpassen",
-    "colors": "kleuren",
-    "fliph": "Spiegel horizontaal",
-    "flipv": "Spiegel verticaal"
+    "colors": "kleuren"
   },
 
   "pixeldata": {
     "info": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>",
     "sum": "Bereken het totaal van alle rood, groen en blauw waardes.",
     "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
+  },
+
+  "imagetransform": {
+    "info": "Verschuif elke rij of kolom een aantal pixels (cumulatief). Spiegel de helft van de rijen of kolommen. Spiegel de totale afbeelding.",
+    "shift": "Verschuif",
+    "shiftinfo": "Selecteer het aantal pixels om rijen/kolommen te verschuifen",
+    "shiftr": "Verschuif rij #pixels",
+    "shiftc": "Verschuif kolom #pixels",
+    "fliphalf": "Spiegel de halve afbeelding",
+    "flipinfo": "Selecteer de breedte van een rij of kolom.",
+    "flipr": "Rijen van #pixels",
+    "flipc": "Kolommen van #pixels",
+    "transform": "Spiegelen",
+    "fliph": "Spiegel horizontal",
+    "flipv": "Spiegel vertical"
   },
 
   "htmlscanner": {
@@ -719,7 +737,7 @@
   },
 
   "countries": {
-    "info": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In total 248 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie. De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>",
+    "info": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie en registratiecode voor voertuigen (kenteken). De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>",
     "ph": "Voer meerdere codes, nummers of namen in",
     "flag": "Vlag",
     "ccode3": "ISO 3-letter code",
@@ -730,6 +748,7 @@
     "web": "Web TLD",
     "cur": "Munt",
     "ccur": "Munt code",
+    "lcp": "Kenteken",
     "names": {
       "abw": "Aruba",
       "afg": "Afghanistan",
@@ -872,7 +891,7 @@
       "mco": "Monaco",
       "mda": "Moldavië",
       "mdg": "Madagaskar",
-      "mdv": "aldiven",
+      "mdv": "Maldiven",
       "mex": "Mexico",
       "mhl": "Marshalleilanden",
       "mkd": "Noord-Macedonië",
@@ -995,15 +1014,26 @@
     "cap": "Hoofdstad"
   },
 
-  "nlprovinces": {
-    "info": "<p>Lijst van provincies van Nederland met vlag, aantal gemeentes, ranking volgens oppervlakte en hoofdstad. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>.</p><p>Het is mogelijk meerdere codes of nummers tegelijk in te voeren, gescheiden door spaties. Voor codes kan de spaties achterwege blijven. De naam van de provincie is een link naar de Wikipedia pagina, waar meer informatie over de provincie is te vinden.</p>",
+  "countryregions": {
+    "info": "<p>Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>. De naam van de provincie is een link naar de Wikipedia pagina in de taal van het betreffende land (Nederlands, Duits of Frans).</p>",
     "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "nl": "Nederland",
+    "be": "België",
+    "de": "Duitsland",
+    "fr": "Frankrijk",
     "flag": "Vlag",
     "code": "ISO3166:2 code",
     "name": "Provincie",
-    "mun": "Gemeentes",
+    "mun": "#Gemeentes",
     "area": "Opp. ranking",
-    "cap": "Hoofdstad"
+    "cap": "Hoofdstad",
+    "cat": "Type regio",
+    "dep": "#Departmenten",
+    "arr": "#Arrondisementem",
+    "canton": "#Cantons",
+    "bundesrat": "Bundesrat reps",
+    "landkreise": "#Landkreise",
+    "stadtkreise": "#Kreisefreie stadt"
   },
 
   "unitconvertor" : {
