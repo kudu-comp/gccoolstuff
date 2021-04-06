@@ -69,7 +69,7 @@
         <router-link to="/other/periodictable">{{$t('othertools.periodictable.title')}}</router-link> {{$t('othertools.periodictable.short')}}.<br>
         <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> {{$t('othertools.countries.short')}}.<br>
         <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> {{$t('othertools.usastates.short')}}.<br>
-        <router-link to="/other/nlprovinces">{{$t('othertools.nlprovinces.title')}}</router-link> {{$t('othertools.nlprovinces.short')}}.<br>
+        <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> {{$t('othertools.countryregions.short')}}.<br>
         <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> {{$t('othertools.resistorcode.short')}}.<br>
         <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> {{$t('othertools.unitconvertor.short')}}.
       </div>

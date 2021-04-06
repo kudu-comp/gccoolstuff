@@ -495,6 +495,11 @@
       "info": "Scytale is a very basique transposition cipher used in ancient Greece and by spartans. It uses a cylinder and a band characterized by its number of turns around the cylinder.",
       "k1": "Number of turns:"
     },
+    "skip": {
+      "info": "The skip cipher is a transposition cipher that consists of extracting the letters of a message every n characters (by jumping n characters). When the end of the message is reached, resume at the beginning (loop)..",
+      "k1": "Skip value:",
+      "k2": "Start at:"
+    },
     "substitution": {
       "info": "The generic substitution uses a random reordered alphabet. If you don't know it you can better use the Smart Replace tool.",
       "k1": "Substitutes:"
@@ -551,9 +556,9 @@
       "long" : "Greatest common divisor or least common muliple of one or more numbers. Also calculates the prime factors. Large numbers can take some time to calculate"
     },
     "formulasolver": {
-      "title": "Formula solver",
-      "short": "Solve funny formulas like THIS + IS + TOO = FUNNY",
-      "long": "Solve formulas where letters represent numbers, e.g. THIS + IS + TOO = FUNNY. You can select uniqueness of numbers and optionally change the number base (default is decimal)."
+      "title": "Cryptarithm",
+      "short": "Cryptarithm or alphametics solve formulas like SEND + MORE = MONEY",
+      "long": "Solve formulas where letters represent numbers, e.g. SEND + MORE = MONEY. You can select uniqueness of numbers and optionally change the number base (default is decimal)."
     },
     "numberprop": {
       "title": "Number properties",
@@ -1016,6 +1021,7 @@
   "countryregions": {
     "info": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>",
     "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
+    "list": "Countries",
     "nl": "Netherlands",
     "be": "Belgium",
     "de": "Germany",
@@ -1111,7 +1117,12 @@
     "satstreet": "Satellite/Street",
     "outdoors": "Outdoors",
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "hikebike": "Hike & bike",
+    "transport": "Public transport",
+    "cyclemap": "Cycle map",
+    "landscape": "Landscape",
+    "outdoors2": "Hiking routes"
   },
 
   "dialogcc": {
@@ -1311,7 +1322,7 @@
   },
 
   "dialogformulasolver": {
-    "info": "<p>Solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>",
+    "info": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>",
     "formula": "Formula",
     "unique": "Unique numbers",
     "base": "Base for calculations",

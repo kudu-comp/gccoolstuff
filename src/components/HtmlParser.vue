@@ -201,7 +201,6 @@ export default {
         // Find the comments using XPath
         let x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
         let comment = x.iterateNext();
-        this.showcomments = (comment != null);
         this.comments = "";
         while (comment) {
           this.comments += comment.textContent + "<br>";
@@ -212,9 +211,9 @@ export default {
         x = xmlTree.evaluate(
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='white'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#FFFFFF'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#FFFFFF')]", xmlTree, null, XPathResult.ANY_TYPE, null);
+          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='rgb(255, 255, 255)'] | " +
+          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#FFFFFF') or contains(@style,'color:rgb(255, 255, 255)')]", xmlTree, null, XPathResult.ANY_TYPE, null);
         let white = x.iterateNext();
-        this.showwhites = (white != null);
         this.whites = "";
         while (white) {
           this.whites += white.textContent + "<br>";

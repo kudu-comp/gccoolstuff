@@ -496,6 +496,11 @@
       "info": "Scytale is een simpele transpositiecijfer die al gebruikt werd in het oude Griekenland. Het bericht wordt geschreven op een lint dat om een rol wordt gewikkeld. Vervolgens wordt het regel voor regel afgelezen.",
       "k1": "Aantal wikkelingen"
     },
+    "skip": {
+      "info": "Een simpele transpositiecijfer. Sla steeds hetzelfde aantal letters over.",
+      "k1": "Skipwaarde",
+      "k2": "Beginpositie"
+    },
     "substitution": {
       "info": "Dit is de algemene substitutiecijfer. Elke letter wordt vervangen door de letter in het sleutelalfabet op dezelfde positie. Als je de sleutel niet kent is deze cijfer beter op te lossen met de Slimme Substitutie tool (zie Teksttools).",
       "k1": "Cijferalfabet"
@@ -552,8 +557,8 @@
       "long" : "Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen. Berekend ook de priemfactoren van elk getal."
     },
     "formulasolver": {
-      "title": "Formule oplossen",
-      "short": "Oplossen van formules zoals THIS + IS + TOO = FUNNY",
+      "title": "Cryptaritme",
+      "short": "Cryptaritmes zijn formules zoals THIS + IS + TOO = FUNNY",
       "long": "Los formules op met letters in de plaats van cijfers, bijv. THIS + IS + TOO = FUNNY. Nummers kunnen uniek zijn of niet. Default rekenen is 10-tallig / decimaal, maar dit kan worden aangepast."
     },
     "numberprop": {
@@ -1017,6 +1022,7 @@
   "countryregions": {
     "info": "<p>Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>. De naam van de provincie is een link naar de Wikipedia pagina in de taal van het betreffende land (Nederlands, Duits of Frans).</p>",
     "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "list": "Landen",
     "nl": "Nederland",
     "be": "België",
     "de": "Duitsland",
@@ -1113,7 +1119,12 @@
     "satstreet": "Satelliet/Straten",
     "outdoors": "Wandelen/Outdoor",
     "light": "Licht",
-    "dark": "Donker"
+    "dark": "Donker",
+    "hikebike": "Hike & bike",
+    "transport": "Openbaar vervoer",
+    "cyclemap": "Fietskaart",
+    "landscape": "Landschap",
+    "outdoors2": "Wandelroutes"
   },
 
   "dialogcc": {
@@ -1313,7 +1324,7 @@
   },
 
   "dialogformulasolver": {
-    "info": "<p>Oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
+    "info": "<p>Cryptaritmes, alphametics or letter rekenenen. Het oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
     "formula": "Formule",
     "unique": "Nummers zijn uniek",
     "base": "Getalstelsel",

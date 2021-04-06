@@ -62,6 +62,7 @@
         <input type="button" id="rot13" name="rot13" value="ROT13" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ROT13')">
         <input type="button" id="rot47" name="rot47" value="ROT47" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ROT47')">
         <input type="button" id="scytale" name="scytale" value="Scytale" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Scytale')">
+        <input type="button" id="skip" name="skip" value="Skip" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Skip')">
         <input type="button" id="substitution" name="substitution" value="Substitution" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Substitution')">
         <input type="button" id="trifid" name="trifid" value="Trifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trifid')">
         <input type="button" id="trisquare" name="trisquare" value="Trisquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trisquare')">
@@ -605,6 +606,12 @@ export default {
         case 'Scytale' :
           this.shownumkey1 = true;
           this.key1 = 3;
+          break;
+        case 'Skip' :
+          this.shownumkey1 = true;
+          this.key1 = 1;
+          this.shownumkey2 = true;
+          this.key2 = 0;
           break;
         case 'Substitution' :
           this.showkey1 = true;
