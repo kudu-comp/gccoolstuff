@@ -4,28 +4,26 @@
       {{$t('texttools.wordvalue.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogwv.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.wordvalue.long')" />
       <div class="form-inline mb-2">
         <v-alphabets-ext id="listofalpha" ref="listofalpha" v-model:alphabet="selectedalphabet" @change="wordValue"></v-alphabets-ext>
       </div>
       <div class="form-inline">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="reverse" id="reverse" v-model="reverse" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="reverse" class="custom-control-label mb-2">{{$t('dialogwv.reverse')}}</label>
+          <label for="reverse" class="custom-control-label mb-2">{{$t('txtwordval.reverse')}}</label>
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="startatzero" id="startatzero" v-model="startatzero" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="startatzero" class="custom-control-label mb-2">{{$t('dialogwv.startzero')}}</label>
+          <label for="startatzero" class="custom-control-label mb-2">{{$t('txtwordval.startzero')}}</label>
         </div>
       </div>
       <div class="form-row mb-2">
         <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="wordValue"></textarea>
       </div>
       <input type="button" id="analyze" name="analyze" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="wordValue">
-      <input type="button" id="remove" name="remove" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2 mr-2" v-on:click="removeDiacr">
-      <input type="button" id="remove" name="remove" :value="$t('dialogwv.showhide')" class="btn btn-primary mb-2 mr-2" v-on:click="showTable">
+      <input type="button" id="remove" name="remove" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2 mr-2" v-on:click="removeDiacr">
+      <input type="button" id="remove" name="remove" :value="$t('txtwordval.showhide')" class="btn btn-primary mb-2 mr-2" v-on:click="showTable">
       <p v-show="error" class="errormsg mb-2">{{errormsg}}.</p>
       <div v-show="showvalues">
         <table class="table table-borderless table-sm">
@@ -35,8 +33,8 @@
       </div>
       <div v-html="result" class = "card card-text p-2"></div>
       <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
-        <template v-slot:header>{{$t('dialogwv.someinfo')}}</template>
-        <template v-slot:content><div v-html="$t('dialogwv.someinfo2')"></div></template>
+        <template v-slot:header>{{$t('txtwordval.someinfo')}}</template>
+        <template v-slot:content><div v-html="$t('txtwordval.someinfo2')"></div></template>
       </va-item>
     </div>
   </div>

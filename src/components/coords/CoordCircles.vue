@@ -4,9 +4,7 @@
       {{$t('coordinates.circles.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogcircles.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.circles.long')" />
       <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1">
         <template v-slot:label>{{$t('labels.center')}} 1</template>
       </v-coord>
@@ -123,22 +121,22 @@ export default {
                 let p1 = coords.convertCoordToWGS( {lat: data.p1.y, lon: data.p1.x}, "RD");
                 let p2 = coords.convertCoordToWGS( {lat: data.p2.y, lon: data.p2.x}, "RD");
 
-                this.result = "<br>" + this.$t('dialogcircles.ip') + " 1: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p1, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-                this.result += this.$t('dialogcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
-                this.result += "<br>" + this.$t('dialogcircles.ip') + " 2: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p2, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-                this.result += this.$t('dialogcircles.or') + coords.printCoordinateFromDMS(p2, "N12 34.567 E1 23.456");
+                this.result = "<br>" + this.$t('cdcircles.ip') + " 1: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p1, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+                this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
+                this.result += "<br>" + this.$t('cdcircles.ip') + " 2: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p2, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+                this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p2, "N12 34.567 E1 23.456");
                 this.result += "<br>" + this.$t('labels.distance') + ": " + data.distance.toFixed(0) + "m";
-                this.result += "<br>" + this.$t('dialogcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
+                this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
                 // Display markers
-                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('dialogcircles.ip') + " 1");
-                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('dialogcircles.ip') + " 2");
+                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
+                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
 
               } else {
 
                 // No intersection one circle is inside the other or they don't overlap at all
-                this.result = this.$t('dialogcircles.ni');
-                this.result += "<br>" + this.$t('dialogcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
+                this.result = this.$t('cdcircles.ni');
+                this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
               }
 

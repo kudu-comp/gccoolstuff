@@ -5,26 +5,24 @@
     </div>
     <div class="mainpage">
       <div>
-        <div class="infoblock">
-          {{$t('dialogmm.info')}}
-        </div>
+        <div class="infoblock" v-html="$t('coordinates.mapmaker.long')" />
         <div class="form-row mb-2">
           <label class="form-label mr-2" for="from">{{$t('labels.coordformat')}}</label>
           <v-datums id="from" class="mr-2" v-model:datum="from"></v-datums>
-          <input type="button" id="encode" name="encode" :value="$t('dialogmm.makemap')" class="btn btn-primary" v-on:click="makeMap">
+          <input type="button" id="encode" name="encode" :value="$t('cdmapmaker.makemap')" class="btn btn-primary" v-on:click="makeMap">
         </div>
         <div class="form-row mb-2">
           <div class="custom-control custom-checkbox mr-2">
             <input type="checkbox" name="showmarkers" id="showmarkers" v-model="showmarkers" class="custom-control-input">
-            <label for="showmarkers" class="custom-control-label">{{$t('dialogmm.showmark')}}</label>
+            <label for="showmarkers" class="custom-control-label">{{$t('cdmapmaker.showmark')}}</label>
           </div>
           <div class="custom-control custom-checkbox  mr-2">
             <input type="checkbox" name="showlabels" id="showlabels" v-model="showlabels" class="custom-control-input">
-            <label for="showlabels" class="custom-control-label">{{$t('dialogmm.showlabel')}}</label>
+            <label for="showlabels" class="custom-control-label">{{$t('cdmapmaker.showlabel')}}</label>
           </div>
           <div class="custom-control custom-checkbox  mr-2">
             <input type="checkbox" name="drawcircles" id="drawcircles" v-model="drawcircles" class="custom-control-input">
-            <label for="drawcircles" class="custom-control-label">{{$t('dialogmm.drawcircle')}}</label>
+            <label for="drawcircles" class="custom-control-label">{{$t('cdmapmaker.drawcircle')}}</label>
           </div>
           <div>
             <v-distance v-model:dist="dist" v-model:unit="unit">
@@ -37,10 +35,10 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('dialogmm.phcoord')" rows=10 cols=20 v-model='coordfrom'></textarea>
+          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdmapmaker.phcoord')" rows=10 cols=20 v-model='coordfrom'></textarea>
         </div>
         <div class="col-6">
-          <textarea id="labels" name="labels" class="form-control mt-2" ref="x" :placeholder="$t('dialogmm.phlabel')" rows=10 cols=20 v-model='labels'></textarea>
+          <textarea id="labels" name="labels" class="form-control mt-2" ref="x" :placeholder="$t('cdmapmaker.phlabel')" rows=10 cols=20 v-model='labels'></textarea>
         </div>
       </div>
       <div class="errormsg" v-show="error">{{errormsg}}</div>
@@ -109,7 +107,7 @@ export default {
 
       // Check if there are enough Labels
       if (input.length != markertext.length) {
-        this.errormsg = this.$t('dialogmm.error1');
+        this.errormsg = this.$t('cdmapmaker.error1');
         this.error = true;
         return;
       }

@@ -4,13 +4,11 @@
       {{$t('coordinates.antipode.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogantipode.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.antipode.long')" />
       <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum"></v-coord>
       <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doCalc()">
       <div class="card">
-        <div class="card-text p-2">{{$t('dialogantipode.result')}}{{result}}</div>
+        <div class="card-text p-2">{{$t('cdantipode.result')}}{{result}}</div>
       </div>
       <div class="errormsg" v-show="error">{{errormsg}}</div>
       <v-map v-model:mylocation="coordinate"/>
@@ -61,7 +59,7 @@ export default {
 
         // Print the calculated coordinate in the right format
         this.result = coords.getTextFromCoord(coords.convertCoordFromWGS(anticoord, this.selecteddatum), this.selecteddatum, 7, this.coordinate);
-        this.result += this.$t('dialogantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
+        this.result += this.$t('cdantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
 
       } catch (e) {
 

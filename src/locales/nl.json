@@ -44,6 +44,7 @@
     "get": "Haal op",
     "check": "Controleer",
     "apply": "Toepassen",
+    "show": "Tonen",
     "showtab": "Toon/verberg tabel",
     "showres": "Toon/verberg resultaat",
     "original": "Origineel",
@@ -86,6 +87,7 @@
     "codebook": "Codebook",
     "imagetools": "Afbeeldingen",
     "mathtools": "Rekenen",
+    "comptools": "Programmeren",
     "htmlscanner": "HTML Scanner",
     "other": "Diverse tools",
     "howto": "Tips",
@@ -95,81 +97,76 @@
   "coordinates": {
     "convert": {
       "title": "Converteren",
-      "short": "Converteer van WGS84, RD, UTM, Maidenhead en meer",
-      "long" : "Converteren van een (of meerdere) coördinaten. O.a. RD, WGS84, UTM, Maidenhead. Geconverteerde coördinaten worden getoond op kaart."
+      "short": "WGS84, RD, UTM, Maidenhead, Geohash, Lambert, OGSM, MGRS, NAD and more",
+      "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash."
     },
     "project": {
       "title": "Projecteren",
       "short": "Projecteer een coördinaat",
-      "long" : "Projecteren van een coördinaat. Ondersteund verschillende formaten. Afstand in meter, kilometer, mijl, foot, yard. Hoek in graden, radialen of gon."
+      "long": "Een projectie is een coördinaat dat zich op een gegeven afstand en hoek bevindt van een ander coördinaat. De afstand kan worden opgegeven in meter, kilometer, voet, yard en mijlen. De hoek kan worden opgegeven in graden, radialen en gon."
     },
     "mapmaker": {
       "title": "Kaart maken",
-      "short": "Toon coördinaten met label en cirkel op kaart.",
-      "long" : "Toon meedere coördinaten op kaart met label. Desgewenst kan een cirkel om elk coördinaat worden getekend. Ideaal voor het spotten van mogelijk geocachelocaties."
+      "short": "Plot coördinaten met marker, label en cirkel",
+      "long" : "Plot een lijst van coördinaten met een marker en tekst op de kaart. Er kan eventueel een cirkel om de coördinaten worden getekend. Ideaal voor het vinden van mogelijk locaties voor een te plaatsen geocache of het vinden van een mystery cache. Het plaatsen van markers en tekst kan worden uitgezet."
     },
     "incomplete": {
       "title": "Incomplete coördinaten",
-      "short": "Bereken en toon coördinaten met onbekende cijfers.",
-      "long" : "Bereken en toon coördinaten met 1 tot 4 onbekende variabelen. Maximaal 500 locaties worden getoond op kaart, met een popup van de gebruikte waardes."
+      "short": "Plot coördinaten met onbekende cijfers.",
+      "long" : "Plot en berekenen mogelijke coördinaten waarvoor één tot vier cijfers ontbreken. Voor elk van de ontbrekende cijfers kunnen de beschikbare opties worden ingesteld. Er kunnen maximaal 500 locaties worden getoond op kaart. De gebruikte waardes worden getoond in een popup alsop het coördinaat wordt geklikt. De tool werkt met alle beschikbare coördinaatsystemen."
     },
     "lines": {
       "title": "Lijnen",
-      "short": "Middelpunt, lengte, richting en snijpunt van 1 of 2 lijnen.",
-      "long" : "Bereken het middelpunt, lengte en richting van een lijn. Bereken het dichtsbijzijnde punt op een lijn gezien vanaf een ander punt. Bereken het snijpunt van twee lijnen. Berekende punten worden getoond op kaart."
+      "short": "Middelpunt, lengte, richting en snijpunt van 1 of 2 lijnen",
+      "long" : "Bereken het middelpunt, lengte en richting van een lijn. Bereken het dichtsbijzijnde punt op een lijn gezien vanaf een ander punt. Bereken het snijpunt van twee lijnen. Berekende punten en lijnen worden getoond op kaart."
     },
     "triangles": {
       "title": "Driehoeken",
-      "short": "Oppervlakte, omtrek, zwaartepunt, hoogtepunt  en andere driehoekspunten.",
-      "long" : "Bereken het oppervlakte, omtrek, zwaartepunt, hoogtepunt, middelpunt ingeschreven cirkel, middelpunt omgeschreven circkel, negenpuntspunt van een driehoek. Berekende punten worden getoond op kaart."
+      "short": "Oppervlakte, omtrek, zwaartepunt, hoogtepunt  en andere driehoekspunten",
+      "long" : "Bereken het oppervlakte, omtrek, zwaartepunt, hoogtepunt, middelpunt ingeschreven cirkel, middelpunt omgeschreven circkel, negenpuntspunt van een driehoek. Berekende punten en driehoeken worden ook getoond op kaart."
     },
     "circles": {
       "title": "Cirkels",
-      "short": "Oppervlakte en snijpunten van twee cirkels.",
-      "long" : "Bereken de snijpunten van twee cirkels en de oppervlakte van het gezamenlijke deel. Berekende punten worden getoond op kaart."
+      "short": "Oppervlakte en snijpunten van twee cirkels",
+      "long" : "Bereken de snijpunten van twee cirkels en de oppervlakte van het gezamenlijke deel. Berekende punten en cirkels worden ook getoond op kaart."
     },
     "antipode": {
       "title": "Antipode",
-      "short": "Het punt exact aan de andere kant van de aarde.",
+      "short": "Het punt exact aan de andere kant van de aarde",
       "long" : "Bereken de antipode, het punt exact aan de andere kant van de aardbol."
-    },
-    "support": {
-      "title": "Ondersteunde coördinaten",
-      "short": "WGS84, UTM, MGRS, NAD, OSGB, RD (Dutch Grid), Lambert, Geohash, Maidenhead, Open Location Code.",
-      "long" : "Alle tools ondersteunen WGS84, UTM, MGRS, NAD, OSGB, RD (Dutch Grid), Lambert, Geohash, Maidenhead, Open Location Code en enkele andere. Voor WGS84 en NAD herkent de tool het juiste formaat. Accepteert N,S,Z en W,E,O."
     }
   },
 
   "texttools": {
     "wordvalue": {
-      "title": "Woordwaarde & stapeltellen",
-      "short": "Bereken de woordwaarde en stapeltelling van een tekst en van elk woord in de tekst",
-      "long" : "Bereken de woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon."
+      "title": "Woordwaarde",
+      "short": "Woordwaarde, stapeltellen, standaard alfabet, Scrabble, Vanity code en diverse anderen.",
+      "long" : "Een tool voor het berekenen van woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon. De telling kan ook in omgekeerde volgorde (bijv. Z=1 en A=26). De telling begint standaard met 1, maar kan ook met 0 beginnen (bijv. A=0 en Z=25). Vervang diakrieten indien gewenst, maar let erop dat in sommige alfabetten diakrieten een eigen letter vertegenwoordigen!"
     },
     "charcodes": {
       "title": "Karakter codes",
-      "short": "Converteer tekst naar computer codes (o.a. ASCII) en vice versa",
-      "long" : "Converteer tekst naar computer codes en vice versa. Computers vertalen tekst intern naar numbers met gebruik van codepages. De tool ondersteunt ASCII, UTF, alt-codes en een groot aantal codepages en converteert ook Baudotcode en Murraycode."
+      "short": "UTF8, UTF16, ASCII, Alt codes, codepages, Baudot, Murray en meer",
+      "long" : "<p>Computers werken intern met nummers en niet met letters. Een nummer wordt vertaald naar een karakter met gebruikmaking van een zogenaamde codepage. De meest gebruikte is tegenwoordig <b>UTF8</b>. <b>ASCII</b> is ook nog veel gebruikt. Er zijn nog veel meer varianten in gebruik. Voor MS-DOS en Microsoft Windows zijn er diverse codepages met regionale karakters. <b>Alt codes</b> refereren naar het intypen van een nummer op het numerieke keypad om een karakter to selecteren uit een Microsoft codepage. Er is ook een Atari version van Ascii en IBM's eigen EBCDIC code.</p><p>In telegrafie werden codes ook gebruikt. Deze <b>Baudot and Murray codes</b> bestaan uit 5 bits (of gaatjes in een papertape). De tool kan ook deze codes vertalen. De Cyrillische versie genaamd MTK2 wordt ook ondersteund.</p>"
     },
     "smartreplace": {
       "title": "Slimme Substitutie",
-      "short": "Een tool om substitutie geheimschriften op te lossen",
-      "long" : "Een tool om substitutie geheimschriften op te lossen. Analiseert de frequenties in de gegeven tekst en toont de beste match. Ondersteunt diverse talen waaronder Nederlands, Duits en Engels."
+      "short": "Oplossen van substitutie geheimschriften",
+      "long" : "Een tool om substitutie geheimschriften op te lossen met behulp van frequentieanalyse. Op basis van de frequenties in de gecodeerde tekst en die van de geselecteerde taal (Engels, Nederlands, Duits, Frans of Spaans) worden de beste matches voorgesteld. Specificeer de originele en de vervangende letters en de aangepaste tekst wordt getoond. De vervangen letters worden duidelijk gemarkeerrd. Eventueel kunnen de eerste 8 meest waarschijnlijke kandidaten automatisch worden vervangen."
     },
     "analyze": {
       "title": "Analiseer tekst",
       "short": "Telt het aantal zinnen, woorden, letters, cijfers, spaties en andere tekens",
-      "long" : "Telt het aantal zinnen, woorden, letters (hoofd- en kleine letters), cijfers, spaties en andere tekens. Geeft ook de percentages."
+      "long" : "Een tool om een tekst te analiseren. Telt het aantal zinnen, woorden, letters (hoofd- en kleine letters), cijfers, spaties en andere tekens. Geeft ook de percentages."
     },
     "texttonumbers": {
       "title": "Tekst naar nummers",
-      "short": "Vertaalt tekst naar nummers en vice versa op basis van de positie in het alfabet",
-      "long" : "Vertaalt tekst naar nummers en vice versa op basis van de positie in het alfabet. Ondersteunt diverse alfabetten. Eventueel in omgekeerde volgorde en/of beginnend op nul."
+      "short": "Tekst naar nummers en vice versa",
+      "long" : "Een tool die tekst naar nummers vertaalt en vice versa op basis van de positie in het alfabet. Ondersteunt diverse alfabetten. Eventueel in omgekeerde volgorde en/of beginnend op nul. De voorloopnul bij getallen onder de 10 is optioneel, indien deze eenduidig kan worden weggelaten."
     },
     "keyboards": {
       "title": "Toetsenborden",
       "short": "Vertaalt tekst alsof het op een ander toetsenbord was getikt.",
-      "long" : "Vertaalt tekst alsof het op een ander toetsenbord was getikt. Ondersteund Azerty, Dvorak, Cyrillisch, Colemak en enkele andere indelingen."
+      "long" : "Een tool om tekst te vertalen alsof het op een ander toetsenbord was getikt. Ondersteund Azerty, Dvorak, Cyrillisch en Colemak."
     }
   },
 
@@ -580,6 +577,29 @@
       "title": "Palindroom",
       "short": "Hoeveel omgekeerde optellingen maken een getal een palindroom",
       "long" : "Berekent hoelang het duurt voordat een getal een palindroom wordt door het omgekeerde getal erbij op te tellen. De meeste getallen worden verrassend snel een palindroom."
+    }
+  },
+
+  "comptools" : {
+    "compbrainfuck": {
+      "title": "Brainfuck",
+      "short": "Voert Brainfuck, Ook! en Spoon programma's uit",
+      "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's + - > < . , [ en ]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>"
+    },
+    "compbcd": {
+      "title": "BCD",
+      "short": "Binary Coded Decimals in verschillende notaties",
+      "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits. Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6 en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden."
+    },
+    "compdeadfish": {
+      "title": "Deadfish",
+      "short": "Deadfish is een programmeertaal met 4 instructies (idso).",
+      "long":  "<p>Deadfish is een programmeertaal met slechts 4 instructies. Optellen met 1 (i), aftrekken met 1 (d), kwadraat (s) en output (o). De teller begint op 0. Als de teller -1 of precies 256 is reset de teller naar 0. Soms worden xdkc gebruikt in plaats van idso. Beide varianten worden ondersteund.</p>"
+    },
+    "compbintotext": {
+      "title": "Binary encoding",
+      "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16",
+      "long": "<p>Binaire naar text encodings converteren elk byte (8 bits) van de input naar iets leesbaars. Dit is zorgt ervoor dat binaire data via mail of andere protocollen getransporteerd kan worden. Dit is met name bruikbaar voor het verzenden van afbeeldingen, videos of willekeurig andere files die anders in transmissie corrupt raken. Base64 is op dit moment de meest gebruikte encoding.</p><p>Carriage returns en linefeeds worden standaard verwijderd uit de invoer, dit is gebruikelijk voor binary encoding. Spaties blijven bewaard (behalve voor tekst, binaire, decimale en hexadecimale invoer). Binaire, decimale and hexadecimale invoer is precies 1 nummer. Spaties kunnen worden gebruikt voor leesbaarheid maar worden verder genegeerd. Dus 123 123 is hetzelfde als 123123. En 3A B4 is het hexadecimale number 3AB4. </p>"
     }
   },
 
@@ -1127,23 +1147,21 @@
     "outdoors2": "Wandelroutes"
   },
 
-  "dialogcc": {
-    "info": "Selecteer het formaat van de van en naar coördinaten. Selecteer eventueel de notatie voor WGS84 (en NAD). Alle geconverteerde coördinaten worden getoond op de kaart.",
+  "cdconvert": {
     "proj4jsmsg": "Je kan elk coördinaat systeem converteren door hieronder de proj4js definitie in te voeren. De definitie kan gevonden worden op <a href='http://epsg.io'>EPSG.io</a>. Neem de Proj4js.def (onderaan op de pagina) en kopieer de string die begint met + (zonder de aanhalingstekens).",
     "proj4jslabel": "Proj4js definitie",
     "phfrom": "Coördinaten om te converteren",
     "phto": "Geconverteerde coördinaten"
   },
 
-  "dialogcproj": {
+  "cdproj": {
     "info": "Een projectie is een coördinaat op een gegeven afstand en richting van het startcoördinaat. Voer het startcoördinaat in (selecteer het juiste formaat) en voer de richting en afstand in.",
     "projcoord": "Het geprojecteerde coördinaat is ",
     "startpoint": "Startpunt",
     "projpoint": "Geprojecteerde punt"
   },
 
-  "dialogmm": {
-    "info": "Kies het formaat van de te plotten coördinaten. Selecteer of er markers en labels getoond moeten worden. Selecteer of er cirkels (pas eventueel de straal aan) getekend moeten worden. Het invoeren van labels is optioneel (default label is het coördinaat).",
+  "cdmapmaker": {
     "phcoord": "Coördinaten hier invoeren",
     "phlabel": "Labels hier invoeren",
     "showmark": "Toon markers",
@@ -1159,8 +1177,7 @@
     "error1": "Het maximale aantal coordinaten is 500. Beperk het aantal mogelijke waardes."
   },
 
-  "dialoglines": {
-    "info": "Voer de coördinaten in en selecteer de gewenste berekening. Het resultaat wordt ook getoond op de kaart.",
+  "cdlines": {
     "calc1": "Bereken afstand, richting en middenpunt (gebruikt coördinaten 1 & 2)",
     "calc2": "Bereken punt het dichtste bij punt 3 op de lijn door punt 1 en punt 2.",
     "calc3": "Bereken het snijpunt van de lijn door punt 1 en punt 2 en de lijn door punt 3 en punt 4.",
@@ -1171,8 +1188,7 @@
     "intersection": "Snijpunt: "
   },
 
-  "dialogtriangles": {
-    "info": "Voer de coördinaten in. De berekening toont zwaartepunt, hoogtepunt, middelpunten van de ingeschreven en omgeschreven cirkels en het negenpuntspunt. Resultaten worden ook getoond op de kaart.",
+  "cdtriangles": {
     "centroid": "Zwaartepunt",
     "orthocenter": "Hoogtepunt",
     "incenter": "Middelpunt ingeschreven cirkel",
@@ -1181,22 +1197,19 @@
     "or": " of "
   },
 
-  "dialogcircles": {
-    "info": "Berekend de snijpunten en de oppervlakte van het snijvlak van twee cirkels. Selecteer het middelpunt (kies het gewenste formaat van het coordinaat) en de straal van beide cirkels.",
+  "cdcircles": {
     "ip": "Snijpunt",
     "ia": "Oppervlakte snijvlak",
     "ni": "Geen snijpunten",
     "or": " of "
   },
 
-  "dialogantipode": {
-    "info": "De antipode is het punt exact aan de andere kant van de aarde.",
+  "cdantipode": {
     "result": "Het antipode coördinaat is ",
     "or": " of "
   },
 
-  "dialogwv": {
-    "info": "Berekent de woordwaarde en stapeltelling van de tekst en van elk afzonderlijk woord. Selecteer het gewenste alfabet. Kies eventueel voor omgekeerde volgorde of beginnen met nul. Vervang de diakrieten indien nodig (maar let op want in sommige alfabetten zijn deze letters uniek).",
+  "txtwordval": {
     "reverse": "Omgekeerde volgorde Z→A",
     "startzero": "Begin met nul (A=0 of Z=0 indien omgekeerd)",
     "replacediac": "Vervang diakrieten",
@@ -1205,16 +1218,14 @@
     "someinfo2": "<p>Er wordt gerekend met de officiële alfabetten. In sommige talen zijn diakrieten aparte letters (zoals Ä in het Duits of Å in het Zweeds) en in sommige talen komen zij overeen met de originele letter (zoals é of ô in het Frans). <b>Vervang diakrieten</b> is echter genadeloos en vervangt alle diakrieten. Dat werkt goed in de meeste gevallen, maar niet voor talen waarbij deze letters deel zijn van het alfabet</p><p>De Griekse en Cyrillische alfabetten hebben letters die grote gelijkenis vertonen met de Westerse versies, zoals A of B. Maar ze zijn wel degelijk verschillend. Indien ingevoerd met een Westers toetsenbord komen ze niet overeen en krijgen een waarde 0. Indien je een Russische/Griekse tekst zou kopieren, bijvoorbeeld plaatsnamen van Wikipedia (zoals Амстердам) dan worden de juiste letters gebruikt en de berekening correct uitgevoerd.</p><p>De Scrabble waardes zijn die van de laatst bekende versies. Er zijn nog veel meer versies in omloop. Een goed overzicht is te vinden op <a href='https://en.wikipedia.org/wiki/Scrabble_letter_distributions'>Wikipedia</a>, maar je moet dan zelf de berekening uitvoeren.</p>"
   },
 
-  "dialogcharcodes": {
-    "info": "Computers kennen geen letters maar alleen cijfers. Cijfers worden door zogenaamde codepages omgezet in karakters. Er zijn honderden verschillende codepages. Deze tool kent de meest gangbare, inclusief de beruchte alt-codes.",
+  "txtcodes": {
     "input": "Type invoer",
     "output": "Gewenste uitvoer",
     "someinfo": "Informatie over codepages",
     "someinfo2": "<p>Computers zijn binair, ze gebruiken alleen 0 en 1. Deze getallen kunnen natuurlijk ook worden omgezet naar decimaal, octaal of hexadecimaal. Deze tool accepteert ze allemaal en converteert desgewenst. De nummers worden gebruikt om het juiste karakter (glyph in nerd speak) op te zoeken in een codepage.</p><p>De allereerste codepage was ASCII en deze is nog steeds in gebruik. Het is nu een subset van UTF, en is ook een subset van de codepages die gebruikt werden in MS DOS en MS Windows. ASCII gebruikt slechts 7-bits (128 karakters). De codepages van Microsoft gebruiken 8 bits (zoals CP437, CP850, CP1252), 256 characters. Voor talen met andere karakters (Russich, Chinees, Oost Europese talen) moest een andere codepage gebruikt worden. Met de introductie van UTF kan dezelfde codepage gebruikt worden voor alle talen en ook voor emoji's ;-). <strong>Alt codes</strong>: afhankelijk van de versie van MS DOS of MS Windows en geïnstalleerde codepage kan door het intikken van getallen op het numerieke toetsenbord in combinatie met de Alt-toets en code worden ingevoerd, resulterend in een speciaal karakter.</p><p>Voor een geschiedenis van alle codepages zie <a href='https://en.wikipedia.org/wiki/List_of_information_system_character_sets'>Wikipedia's history of information system character sets</a> en <a href='https://en.wikipedia.org/wiki/Code_page'>Wikipedia codepages</a>.</p><p>In de tijden van telegraaf en telex werden er ook al binaire codes gebruikt zoals de Baudot code (ITA-1) en de Murray code (ITA-2). De tool converteert ook deze codes. De bits zijn normaal in de volgorde 54321, maar de omgekeerde volgorde 12345 komt ook voor. Er is ook een Cyrillische versie van de Murraycode genaamd MTK-2. Voor meer informatie <a href='https://en.wikipedia.org/wiki/Baudot_code>Wikipedia</a>.</p>"
   },
 
-  "dialogsr": {
-    "info": "Voer de gecodeerde tekst in. Gebruik Hints ophalen voor het berekenen van mogelijke substituties op basis van frequentieanalyse. Selecteer de juiste taal voor het beste resultaat. Voer de originele en substituten in. De gedecodeerde tekst wordt getoond. Ga op zoek naar veel voorkomende woorden (zoals en, een, de en het). Je kan deze tool ook gebruiken om codepages op te lossen.",
+  "txtsr": {
     "errorlength": "Origineel en substituten moeten dezelfde lengte hebben",
     "errordouble": "Dubbele letters gevonden.",
     "highlight": "Highlight",
@@ -1225,8 +1236,7 @@
     "apply": "Hints toepassen"
   },
 
-  "dialoganal": {
-    "info": "Voer de tekst in voor analyse. Het aantal woorden, regels, karakters, letters, cijfers, witgebruik en symbolen wordt berekend. Ook de percentages worden getoond.",
+  "txtanalyze": {
     "analyze": "Analiseer tekst",
     "result": "Tabel met aantallen en percentages komt hier",
     "nwords": "Aantal woorden",
@@ -1248,15 +1258,13 @@
     "lower": "kleine"
   },
 
-  "dialogttn": {
-    "info": "Vertaal tekst naar nummers en vice versa op basis van de positie in het alfabet. Gebruik de omgekeerde volgorde of begin te tellen met nul (optioneel). Voor getallen onder de tien kan de nul in sommige gevallen worden weggelaten. Indien gewenst kan de nul altijd worden weergegeven.",
+  "txttonum": {
     "leadzero": "Gebruik altijd een 0 voor getallen <10",
     "btnttn": "Tekst naar getallen",
     "btnntt": "Getallen naar tekst"
   },
 
-  "dialogkb": {
-    "info": "Er zijn veel verschillende toetsenborden in gebruik. Een tekst getypt op het ene toetsenbord geeft een ander resultaat op een ander toetsenbord. Gebruik deze tool voor het vertalen.",
+  "txtkeyb": {
     "inputkb": "Invoer toetsenbord",
     "outputkb": "Uitvoer toetsenbord",
     "error": "Toetsenbord kan niet worden geconverteerd. Controleer de invoer."
@@ -1391,6 +1399,28 @@
     "start": "Startwaarde",
     "res1": "Het getal op positie",
     "res2": "De reeks is"
+  },
+
+  "compbf": {
+    "vars" : "Selecteer programmeertaal",
+    "shorthand" : "Verkorte notatie",
+    "code": "Programmacode",
+    "input": "Input variabelen",
+    "run": "Run code"
+  },
+
+  "compbcd": {
+    "bcdfrom": "BCD naar numbers",
+    "bcdto": "Nummers naar BCD",
+    "packed": "Packed BCD",
+    "fill": "Aanvullen met"
+  },
+
+  "compbintotext": {
+    "selfrom": "Encoding van",
+    "selfromtable": "Encoding table",
+    "selto": "Encoding naar",
+    "seltotable": "Encoding table"
   },
 
   "dialogabout": {

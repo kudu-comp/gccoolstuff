@@ -62,6 +62,13 @@
         <router-link to="/math/sequences">{{$t('mathtools.sequences.title')}}</router-link> {{$t('mathtools.sequences.short')}}.<br>
         <router-link to="/math/palindromecounter">{{$t('mathtools.palindrome.title')}}</router-link> {{$t('mathtools.palindrome.short')}}.<br>
       </div>
+      <h3>{{$t('menu.comptools')}}</h3>
+      <div class="p mb-2">
+        <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}</router-link> {{$t('comptools.compbintotext.short')}}.<br>
+        <router-link to="/comp/compbcd">{{$t('comptools.compbcd.title')}}</router-link> {{$t('comptools.compbcd.short')}}.<br>
+        <router-link to="/comp/compbrainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> {{$t('comptools.compbrainfuck.short')}}.<br>
+        <router-link to="/comp/compdeadfish">{{$t('comptools.compdeadfish.title')}}</router-link> {{$t('comptools.compdeadfish.short')}}.<br>
+      </div>
       <h3>{{$t('menu.other')}}</h3>
       <div class="p mb-2">
         <router-link to="/other/sudokusolver">{{$t('othertools.sudokusolver.title')}}</router-link> {{$t('othertools.sudokusolver.short')}}.<br>

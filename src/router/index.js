@@ -28,6 +28,11 @@ import MathPalindrome from '@/components/math/MathPalindrome.vue'
 import MathSequences from '@/components/math/MathSequences'
 import MathProperties from '@/components/math/MathProperties.vue'
 import MathBase from  '@/components/math/MathBase.vue'
+import CompToolbox from '../views/CompToolbox.vue'
+import CompBCD from '@/components/comp/CompBCD.vue'
+import CompBrainfuck from '@/components/comp/CompBrainfuck.vue'
+import CompDeadfish from '@/components/comp/CompDeadfish.vue'
+import CompBinToText from '@/components/comp/CompBinToText.vue'
 import ImageTools from '@/components/images/ImageTools.vue'
 import ExifScanner from '@/components/images/ExifScanner.vue'
 import ColorPicker from '@/components/images/ColorPicker.vue'
@@ -105,6 +110,18 @@ const routes = [
       { path: "/math/gcdandlcm", component: MathGCDandLCM },
       { path: "/math/palindromecounter", component: MathPalindrome },
       { name: "MathSequences", path: "/math/sequences", component: MathSequences },
+    ]
+  },
+  {
+    path: '/comp',
+    name: 'Comp',
+    component: CompToolbox,
+    children: [
+      { path: "/comp/charcodes", name: 'charcodes', component: TextCodes },
+      { path: "/comp/bcd", name: 'bcd', component: CompBCD },
+      { path: "/comp/brainfuck", name: 'brainfuck', component: CompBrainfuck },
+      { path: "/comp/deadfish", name: 'deadfish', component: CompDeadfish },
+      { path: "/comp/bintotext", name: 'compbintotext', component: CompBinToText }
     ]
   },
   {

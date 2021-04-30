@@ -4,23 +4,21 @@
       {{$t('coordinates.lines.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialoglines.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.lines.long')"/>
       <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 1</template></v-coord>
       <v-coord v-model:coord="coordinate2" v-model:datum="selecteddatum2" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 2</template></v-coord>
       <v-coord v-model:coord="coordinate3" v-model:datum="selecteddatum3" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 3</template></v-coord>
       <v-coord v-model:coord="coordinate4" v-model:datum="selecteddatum4" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 4</template></v-coord>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('dialoglines.calc1')}}</label>
+        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc1')}}</label>
         <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine1()">
       </div>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('dialoglines.calc2')}}</label>
+        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc2')}}</label>
         <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine2()">
       </div>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('dialoglines.calc3')}}</label>
+        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc3')}}</label>
         <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine3()">
       </div>
       <div class="card card-text p-2">
@@ -104,20 +102,20 @@ export default {
         // Set markers
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, midpoint, this.$t('dialoglines.midpoint'));
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, midpoint, this.$t('cdlines.midpoint'));
 
         // Draw a line on the map
         this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
 
         // Print the calculated coordinate in the format of coordinate1
-        this.result = this.$t('dialoglines.midpoint') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(midpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-        this.result += "<br>" + this.$t('dialoglines.midpoint') + ": " + coords.printCoordinateFromDMS(midpoint, "N12 34.567 E1 23.456");
+        this.result = this.$t('cdlines.midpoint') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(midpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+        this.result += "<br>" + this.$t('cdlines.midpoint') + ": " + coords.printCoordinateFromDMS(midpoint, "N12 34.567 E1 23.456");
 
         // Distance (Pythagoras) is square root of delta-x ** 2 _ delta-y ** 2
-        this.result += "<br>" + this.$t('dialoglines.distance') + this.getLength(gridcoord1, gridcoord2).toFixed(0) + " m.";
+        this.result += "<br>" + this.$t('cdlines.distance') + this.getLength(gridcoord1, gridcoord2).toFixed(0) + " m.";
 
         // Angle is the inverse tangens of delta-x / delta-y,  times 2*PI to convert to degrees
-        this.result += "<br>"+ this.$t('dialoglines.direction') + this.getDirection(gridcoord1, gridcoord2).toFixed(2) + "°";
+        this.result += "<br>"+ this.$t('cdlines.direction') + this.getDirection(gridcoord1, gridcoord2).toFixed(2) + "°";
 
       } catch (e) {
 
@@ -161,7 +159,7 @@ export default {
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('dialoglines.pointnearest'));
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('cdlines.pointnearest'));
 
         // Draw a line on the map between Point 1 and 2
         this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
@@ -170,11 +168,11 @@ export default {
         this.$store.state.L.polyline([coord3, intersectionpoint], {color: 'blue'}).addTo(this.$store.state.mymap);
 
         // Print the calculated coordinate in the format of coordinate1
-        this.result = this.$t('dialoglines.pointnearest') + coords.getTextFromCoord(coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-        this.result += "<br>" + this.$t('dialoglines.pointnearest') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
+        this.result = this.$t('cdlines.pointnearest') + coords.getTextFromCoord(coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+        this.result += "<br>" + this.$t('cdlines.pointnearest') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
 
-        this.result += "<br>"+ this.$t('dialoglines.distance') + this.getLength({lon: pmx, lat:pmy}, gridcoord3).toFixed(0) + " m.";
-        this.result += "<br>"+ this.$t('dialoglines.direction') + this.getDirection({lon: pmx, lat:pmy}, gridcoord3).toFixed(2) + " degrees";
+        this.result += "<br>"+ this.$t('cdlines.distance') + this.getLength({lon: pmx, lat:pmy}, gridcoord3).toFixed(0) + " m.";
+        this.result += "<br>"+ this.$t('cdlines.direction') + this.getDirection({lon: pmx, lat:pmy}, gridcoord3).toFixed(2) + " degrees";
 
       } catch (e) {
 
@@ -221,7 +219,7 @@ export default {
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
         coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord4, this.$t('labels.point') + " 4");
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('dialoglines.intersection'));
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('cdlines.intersection'));
 
         // Draw a line on the map between Point 1 and 2
         this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
@@ -230,8 +228,8 @@ export default {
         this.$store.state.L.polyline([coord3, coord4], {color: 'blue'}).addTo(this.$store.state.mymap);
 
         // Print the calculated coordinate in the format of coordinate1
-        this.result = this.$t('dialoglines.intersection') + coords.getTextFromCoord(coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-        this.result += "<br>" + this.$t('dialoglines.intersection') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
+        this.result = this.$t('cdlines.intersection') + coords.getTextFromCoord(coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+        this.result += "<br>" + this.$t('cdlines.intersection') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
 
       } catch (e) {
 

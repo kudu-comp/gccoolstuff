@@ -4,11 +4,9 @@
       {{$t('texttools.keyboards.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogkb.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.keyboards.long')" />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="keyboards">{{$t('dialogkb.inputkb')}}</label>
+        <label class="form-label mb-2 mr-2" for="keyboards">{{$t('txtkeyb.inputkb')}}</label>
         <v-keyboards class="mb-2" id="keyboards" v-model:keyboard="fromkeyboard"></v-keyboards>
       </div>
       <div>
@@ -17,7 +15,7 @@
         </div>
         <div class="form-inline">
           <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="translateKeyboard">
-          <label class="form-label mb-2 mr-2" for="keyboards2">{{$t('dialogkb.outputkb')}}</label>
+          <label class="form-label mb-2 mr-2" for="keyboards2">{{$t('txtkeyb.outputkb')}}</label>
           <v-keyboards class="mb-2" id="keyboards2" v-model:keyboard="tokeyboard" @change="translateKeyboard"></v-keyboards>
         </div>
       </div>
@@ -70,7 +68,7 @@ export default {
         this.result = keyboards.convertKeyboard (this.message, this.fromkeyboard, this.tokeyboard);
       } catch (e) {
         this.error = true;
-        this.errormsg = this.$t('dialogkb.error');
+        this.errormsg = this.$t('txtkeyb.error');
         console.log(e);
       }
     },

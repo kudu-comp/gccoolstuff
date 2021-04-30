@@ -4,15 +4,13 @@
       {{$t('coordinates.project.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogcproj.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.project.long')" />
       <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum" class="mr-2"></v-coord>
       <v-distance v-model:dist="dist" v-model:unit="unit"></v-distance>
       <v-angle v-model:angle="angle" v-model:unit="angleunit"></v-angle>
       <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary" v-on:click="doCalc()">
       <div class="card mt-2">
-        <div class="card-text p-2">{{$t('dialogcproj.projcoord')}}{{result}}</div>
+        <div class="card-text p-2">{{$t('cdproj.projcoord')}}{{result}}</div>
       </div>
       <div class="errormsg" v-show="error">{{errormsg}}</div>
       <v-map v-model:mylocation="coordinate"/>
@@ -73,8 +71,8 @@ export default {
             "RD");
         
         // Set marker for the starting point
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, startcoord, this.$t('dialogcproj.startpoint'));
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, projcoord, this.$t('dialogcproj.projpoint'));
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, startcoord, this.$t('cdproj.startpoint'));
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, projcoord, this.$t('cdproj.projpoint'));
         
         // Draw a line on the map
         this.$store.state.L.polyline([startcoord, projcoord], {color: 'red'}).addTo(this.$store.state.mymap);

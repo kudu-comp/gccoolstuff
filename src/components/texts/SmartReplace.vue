@@ -4,19 +4,17 @@
       {{$t('texttools.smartreplace.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogsr.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.smartreplace.long')" />
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="from">{{$t('dialogsr.orig')}}</label>
+        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="from">{{$t('txtsr.orig')}}</label>
         <input type='text' id="from" name="from" ref="from" v-model="from" size="50" class="form-control mb-2" v-on:keyup="replaceInput">{{error1}}
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="to">{{$t('dialogsr.repl')}}</label>
+        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="to">{{$t('txtsr.repl')}}</label>
         <input type='text' id="to" name="to" ref="to" v-model="to" size="50" class="form-control mb-2" v-on:keyup="replaceInput">{{error2}}
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="highlightflag">{{$t('dialogsr.highlight')}}</label>
+        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="highlightflag">{{$t('txtsr.highlight')}}</label>
         <select id="highlightflag" name="highlightflag" ref="highlightflag" v-model="highlightflag" class="form-control col-sm-4 col-md-3 col-lg-2 mb-2" @change="replaceInput">
           <option value="red">{{$t('colors.red')}}</option>
           <option value="blue">{{$t('colors.blue')}}</option>
@@ -37,7 +35,7 @@
         <input type="button" id="remdiacr" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="reverse" id="reverse" v-model="casesens" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="reverse" class="custom-control-label mb-2">{{$t('dialogsr.casesens')}}</label>
+          <label for="reverse" class="custom-control-label mb-2">{{$t('txtsr.casesens')}}</label>
         </div>
       </div>
       <div class="row">
@@ -49,8 +47,8 @@
         <p class="col-6 result" v-html="result"></p>
         <div class="col-12">
           <div class="form-inline">
-            <input type="button" id="hint" name="hint" :value="$t('dialogsr.get')" class="btn btn-primary mr-2 mb-2" v-on:click="printHints">
-            <input type="button" id="hint" name="hint" :value="$t('dialogsr.apply')" class="btn btn-primary mb-2" v-on:click="applyHints">
+            <input type="button" id="hint" name="hint" :value="$t('txtsr.get')" class="btn btn-primary mr-2 mb-2" v-on:click="printHints">
+            <input type="button" id="hint" name="hint" :value="$t('txtsr.apply')" class="btn btn-primary mb-2" v-on:click="applyHints">
           </div>
           <div>
             <div v-html="hints"></div>
@@ -230,12 +228,12 @@ export default {
 
       // Check inputs
       if (this.to.length != this.from.length) {
-        this.error1 = this.$t('dialogsr.errorlength');
-        this.error2 = this.$t('dialogsr.errorlength');
+        this.error1 = this.$t('txtsr.errorlength');
+        this.error2 = this.$t('txtsr.errorlength');
       } else if (this.checkDouble(this.to)) {
-        this.error2 = this.$t('dialogsr.errordouble');
+        this.error2 = this.$t('txtsr.errordouble');
       } else if (this.checkDouble(this.from)) {
-        this.error1 = this.$t('dialogsr.errordouble');
+        this.error1 = this.$t('txtsr.errordouble');
       } else {
 
         // Inputs is okay, replace starts here

@@ -4,9 +4,7 @@
       {{$t('texttools.texttonumbers.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogttn.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.texttonumbers.long')" />
       <div ref="listofalpha" class="form-inline mb-2">
         <v-alphabets v-model:alphabet="selectedalphabet"></v-alphabets>
       </div>
@@ -21,14 +19,14 @@
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="leadzero" id="leadzero" v-model="leadzero" class="custom-control-input mb-2 mr-2">
-          <label for="leadzero" class="custom-control-label mb-2">{{$t('dialogttn.leadzero')}}</label>
+          <label for="leadzero" class="custom-control-label mb-2">{{$t('txttonum.leadzero')}}</label>
         </div>
       </div>
       <div class="form-row mb-2">
         <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
       </div>
-      <input type="button" id="texttonumbers" name="texttonumbers" :value="$t('dialogttn.btnttn')" class="btn btn-primary mb-2 mr-2" v-on:click="textToNumbers">
-      <input type="button" id="numberstotext" name="numberstotext" :value="$t('dialogttn.btnntt')" class="btn btn-primary mb-2 mr-2" v-on:click="numbersToText">
+      <input type="button" id="texttonumbers" name="texttonumbers" :value="$t('txttonum.btnttn')" class="btn btn-primary mb-2 mr-2" v-on:click="textToNumbers">
+      <input type="button" id="numberstotext" name="numberstotext" :value="$t('txttonum.btnntt')" class="btn btn-primary mb-2 mr-2" v-on:click="numbersToText">
       <input type="button" id="remove" name="remove" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
       <div class="card card-text p-2">{{result}}</div>
     </div>

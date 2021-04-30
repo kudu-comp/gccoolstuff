@@ -4,15 +4,13 @@
       {{$t('coordinates.incomplete.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogic.intro')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.incomplete.long')" />
       <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum"></v-coord>
       <v-variable v-model:variable="var1" v-model:varoptions="var1options" class="mb-2"></v-variable>
       <v-variable v-model:variable="var2" v-model:varoptions="var2options" class="mb-2"></v-variable>
       <v-variable v-model:variable="var3" v-model:varoptions="var3options" class="mb-2"></v-variable>
       <v-variable v-model:variable="var4" v-model:varoptions="var4options" class="mb-2"></v-variable>
-      <input type="button" id="project" name="project" :value="$t('dialogic.button')" class="btn btn-primary mr-2" v-on:click="showCoordinates()">
+      <input type="button" id="project" name="project" :value="$t('buttons.show')" class="btn btn-primary mr-2" v-on:click="showCoordinates()">
       <div v-show="error" class="errormsg mt-2">{{errormsg}}</div>
       <v-map v-model:mylocation="coordinate"/>
     </div>
@@ -86,7 +84,7 @@ export default {
         if (totaloptions > 500) {
 
           this.error = true;
-          this.errormsg = this.$t('dialogic.error1')
+          this.errormsg = this.$t('cdincomplete.error1')
           
         } else {
 

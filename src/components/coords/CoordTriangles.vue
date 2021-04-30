@@ -4,9 +4,7 @@
       {{$t('coordinates.triangles.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogtriangles.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.triangles.long')" />
       <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1" class="mb-2">
         <template v-slot:label>{{$t('labels.point')}} 1</template>
       </v-coord>
@@ -111,23 +109,23 @@ export default {
               let ninepointcenter = coords.convertCoordToWGS( {lat: data.ninepointcenter.y, lon: data.ninepointcenter.x}, "RD");
 
               // Print results
-              this.result += "<br>" + this.$t('dialogtriangles.centroid') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(centroid, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-              this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(centroid, "N12 34.567 E1 23.456");
-              this.result += "<br>"+ this.$t('dialogtriangles.orthocenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(orthocenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-              this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(orthocenter, "N12 34.567 E1 23.456");
-              this.result += "<br>"+ this.$t('dialogtriangles.incenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(incenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-              this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(incenter, "N12 34.567 E1 23.456");
-              this.result += "<br>"+ this.$t('dialogtriangles.circumcenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(circumcenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-              this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(circumcenter, "N12 34.567 E1 23.456");
-              this.result += "<br>"+ this.$t('dialogtriangles.ninepoint') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(ninepointcenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-              this.result += this.$t('dialogtriangles.or') + coords.printCoordinateFromDMS(ninepointcenter, "N12 34.567 E1 23.456");
+              this.result += "<br>" + this.$t('cdtriangles.centroid') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(centroid, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+              this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(centroid, "N12 34.567 E1 23.456");
+              this.result += "<br>"+ this.$t('cdtriangles.orthocenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(orthocenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+              this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(orthocenter, "N12 34.567 E1 23.456");
+              this.result += "<br>"+ this.$t('cdtriangles.incenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(incenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+              this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(incenter, "N12 34.567 E1 23.456");
+              this.result += "<br>"+ this.$t('cdtriangles.circumcenter') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(circumcenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+              this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(circumcenter, "N12 34.567 E1 23.456");
+              this.result += "<br>"+ this.$t('cdtriangles.ninepoint') + ": " + coords.getTextFromCoord(coords.convertCoordFromWGS(ninepointcenter, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
+              this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(ninepointcenter, "N12 34.567 E1 23.456");
 
               // Display markers
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, centroid, this.$t('dialogtriangles.centroid'));
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, orthocenter, this.$t('dialogtriangles.orthocenter'));
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, incenter, this.$t('dialogtriangles.incenter'));
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, circumcenter, this.$t('dialogtriangles.circumcenter'));
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, ninepointcenter, this.$t('dialogtriangles.ninepoint'));
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, centroid, this.$t('cdtriangles.centroid'));
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, orthocenter, this.$t('cdtriangles.orthocenter'));
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, incenter, this.$t('cdtriangles.incenter'));
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, circumcenter, this.$t('cdtriangles.circumcenter'));
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, ninepointcenter, this.$t('cdtriangles.ninepoint'));
 
           })
           .catch((error) => {

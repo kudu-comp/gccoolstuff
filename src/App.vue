@@ -23,6 +23,7 @@
     <router-link to="/images">{{$t('menu.imagetools')}}</router-link> |
     <router-link to="/html">{{$t('menu.htmlscanner')}}</router-link> |
     <router-link to="/math">{{$t('menu.mathtools')}}</router-link> |
+    <router-link to="/comp">{{$t('menu.comptools')}}</router-link> |
     <router-link to="/other">{{$t('menu.other')}}</router-link> |
     <router-link to="/howtostart">{{$t('menu.howto')}}</router-link> |
     <router-link to="/about">{{$t('menu.about')}}</router-link>

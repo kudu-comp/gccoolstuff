@@ -4,25 +4,23 @@
       {{$t('texttools.analyze.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialoganal.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.analyze.long')" />
       <div class="form-row mb-2">
         <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="analyzeText"></textarea>
       </div>
-      <input type="button" id="analyze" name="analyze" :value="$t('dialoganal.analyze')" class="btn btn-primary mb-2 mr-2" v-on:click="analyzeText">
+      <input type="button" id="analyze" name="analyze" :value="$t('txtanalyze.analyze')" class="btn btn-primary mb-2 mr-2" v-on:click="analyzeText">
       <input type="button" id="analyze" name="analyze" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
       <table class="table table-sm">
-        <tr><td>{{$t('dialoganal.nwords')}}</td><td>{{totalwords}}</td></tr>
-        <tr><td>{{$t('dialoganal.nlines')}}</td><td>{{totallines}}</td></tr>
-        <tr><td>{{$t('dialoganal.nchar')}}</td><td>{{totalchar}}</td></tr>
-        <tr><td>{{$t('dialoganal.nalpha')}}</td><td>{{totalalphabet}}</td></tr>
-        <tr><td>{{$t('dialoganal.ndigit')}}</td><td>{{totaldigit}}</td></tr>
-        <tr><td>{{$t('dialoganal.nwhite')}}</td><td>{{totalwhite}}</td></tr>
-        <tr><td>{{$t('dialoganal.nupper')}}</td><td>{{totaluppercase}}</td></tr>
-        <tr><td>{{$t('dialoganal.nlower')}}</td><td>{{totallowercase}}</td></tr>
-        <tr><td>{{$t('dialoganal.nnonalpha')}}</td><td>{{totalnonalphabet}}</td></tr>
-        <tr><td>{{$t('dialoganal.nnonwhite')}}</td><td>{{totalnonwhite}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nwords')}}</td><td>{{totalwords}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nlines')}}</td><td>{{totallines}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nchar')}}</td><td>{{totalchar}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nalpha')}}</td><td>{{totalalphabet}}</td></tr>
+        <tr><td>{{$t('txtanalyze.ndigit')}}</td><td>{{totaldigit}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nwhite')}}</td><td>{{totalwhite}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nupper')}}</td><td>{{totaluppercase}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nlower')}}</td><td>{{totallowercase}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nnonalpha')}}</td><td>{{totalnonalphabet}}</td></tr>
+        <tr><td>{{$t('txtanalyze.nnonwhite')}}</td><td>{{totalnonwhite}}</td></tr>
       </table>
       <div v-html="result"></div>
     </div>
@@ -43,7 +41,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result: "<i>" + this.$t('dialoganal.result') + "</i>",
+      result: "<i>" + this.$t('txtanalyze.result') + "</i>",
       error : false,
       totalchar : 0,
       totalwords : 0,
@@ -151,24 +149,24 @@ export default {
       this.totalnonwhite = this.totalchar - this.totalwhite;
 
       // Print alphabets
-      let html = "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('dialoganal.letter') + "</th>";
+      let html = "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('txtanalyze.letter') + "</th>";
       for (let i = 0; i < UpperCaseAlphabet.length; i++) html+="<th scope='col'>" + UpperCaseAlphabet[i] + "</th>";
-      html += "</tr></thead><tr><td>" + this.$t('dialoganal.count') + "</td>";
+      html += "</tr></thead><tr><td>" + this.$t('txtanalyze.count') + "</td>";
       for (let i = 0; i < lowerchararr.length; i++) html+="<td>" + (lowerchararr[i]+upperchararr[i]) + "</td>";
-      html += "</tr><tr><td># " + this.$t('dialoganal.upper') + "</td>";
+      html += "</tr><tr><td># " + this.$t('txtanalyze.upper') + "</td>";
       for (let i = 0; i < upperchararr.length; i++) html+="<td>" + upperchararr[i] + "</td>";
-      html += "</tr><tr><td># "+ this.$t('dialoganal.lower') + "</td>";
+      html += "</tr><tr><td># "+ this.$t('txtanalyze.lower') + "</td>";
       for (let i = 0; i < lowerchararr.length; i++) html+="<td>" + lowerchararr[i] + "</td>";
-      html += "</tr><tr><td>" + this.$t('dialoganal.perc') + "</td>";
+      html += "</tr><tr><td>" + this.$t('txtanalyze.perc') + "</td>";
       for (let i = 0; i < upperchararr.length; i++) html+="<td>" + ((lowerchararr[i]+upperchararr[i])*100 / this.totalchar).toFixed(1) + "%</td>";
       html += "</tr></table>";
 
       // Print digits
-      html +=  "<table class='table table-sm table-bordered text-center mt-2'><thead><tr><th scope='col'>" + this.$t('dialoganal.digit') + "</th>";
+      html +=  "<table class='table table-sm table-bordered text-center mt-2'><thead><tr><th scope='col'>" + this.$t('txtanalyze.digit') + "</th>";
       for (let i = 0; i < DigitAlphabet.length; i++) html+="<th scope='col'>" + DigitAlphabet[i] + "</th>";
-      html += "</tr></thead><tr><td>" + this.$t('dialoganal.count') + "</td>";
+      html += "</tr></thead><tr><td>" + this.$t('txtanalyze.count') + "</td>";
       for (let i = 0; i < digitarr.length; i++) html+="<td>" + digitarr[i] + "</td>";
-      html += "</tr><tr><td>" + this.$t('dialoganal.perc') + "</td>";
+      html += "</tr><tr><td>" + this.$t('txtanalyze.perc') + "</td>";
       for (let i = 0; i < digitarr.length; i++) html+="<td>" + (digitarr[i]*100 / this.totalchar).toFixed(1) + "%</td>";
       html += "</tr></table>";
 
@@ -177,11 +175,11 @@ export default {
       for (let i=0; i < freqarr.length; i++) freqarr[i].perc = freqarr[i].count * 100 / this.totalchar;
 
       // Generate table with html
-      html += "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('dialoganal.symbol') + "</th>";
+      html += "<table class='table table-sm table-bordered text-center'><thead><tr><th scope='col'>" + this.$t('txtanalyze.symbol') + "</th>";
       for (let i = 0; i < freqarr.length; i++) html+="<th scope='col'>" + freqarr[i].char + "</th>";
-      html += "</tr></thead><tr><td>" + this.$t('dialoganal.count') + "</td>";
+      html += "</tr></thead><tr><td>" + this.$t('txtanalyze.count') + "</td>";
       for (let i = 0; i < freqarr.length; i++) html+="<td>" + freqarr[i].count + "</td>";
-      html += "</tr><tr><td>" + this.$t('dialoganal.perc') + "</td>";
+      html += "</tr><tr><td>" + this.$t('txtanalyze.perc') + "</td>";
       for (let i = 0; i < freqarr.length; i++) html+="<td>" + freqarr[i].perc.toFixed(1) + "%</td>";
       html += "</tr></table>";
 

@@ -611,7 +611,7 @@ export default {
           this.shownumkey1 = true;
           this.key1 = 1;
           this.shownumkey2 = true;
-          this.key2 = 0;
+          this.key2 = 1;
           break;
         case 'Substitution' :
           this.showkey1 = true;

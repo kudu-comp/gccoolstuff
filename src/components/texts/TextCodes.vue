@@ -4,11 +4,9 @@
       {{$t('texttools.charcodes.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogcharcodes.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('texttools.charcodes.long')" />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="codes">{{$t('dialogcharcodes.input')}}</label>
+        <label class="form-label mb-2 mr-2" for="codes">{{$t('txtcodes.input')}}</label>
         <v-code class="mb-2" id="codes" v-model:code="selectedcode"></v-code>
       </div>
       <div class="form-row mb-2">
@@ -16,13 +14,13 @@
       </div>
       <div class="form-inline">
         <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="translateInput">
-        <label class="form-label mb-2 mr-2" for="codes">{{$t('dialogcharcodes.output')}}</label>
+        <label class="form-label mb-2 mr-2" for="codes">{{$t('txtcodes.output')}}</label>
         <v-code class="mb-2" id="codes" v-model:code="selectedoutput" @change="translateInput"></v-code>
       </div>
       <div class="card card-text p-2">{{result}}</div>
       <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
-        <template v-slot:header>{{$t('dialogcharcodes.someinfo')}}</template>
-        <template v-slot:content><div v-html="$t('dialogcharcodes.someinfo2')"></div></template>
+        <template v-slot:header>{{$t('txtcodes.someinfo')}}</template>
+        <template v-slot:content><div v-html="$t('txtcodes.someinfo2')"></div></template>
       </va-item>
       <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
     </div>

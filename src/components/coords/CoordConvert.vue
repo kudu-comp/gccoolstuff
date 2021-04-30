@@ -4,9 +4,7 @@
       {{$t('coordinates.convert.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogcc.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('coordinates.convert.long')" />
       <div class="row">
         <div class="col-6">
           <div class="form-row mb-2">
@@ -31,14 +29,14 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('dialogcc.phfrom')" rows=10 cols=20 v-model='coordfrom'></textarea>
+          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phfrom')" rows=10 cols=20 v-model='coordfrom'></textarea>
         </div>
         <div class="col-6">
-          <textarea id="result" name="result" class="form-control mt-2" ref="x" :placeholder="$t('dialogcc.phto')" rows=10 cols=20 v-model='result'></textarea>
+          <textarea id="result" name="result" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phto')" rows=10 cols=20 v-model='result'></textarea>
         </div>
-        <div v-show="to == 'Proj4js' || from == 'Proj4js'" v-html="$t('dialogcc.proj4jsmsg')"></div>
+        <div v-show="to == 'Proj4js' || from == 'Proj4js'" v-html="$t('cdconvert.proj4jsmsg')"></div>
         <div class="form-inline mt-2" v-show="to == 'Proj4js' || from == 'Proj4js'">
-          <label class="form-label" for="key1">{{$t('dialogcc.proj4jslabel')}}</label>
+          <label class="form-label" for="key1">{{$t('cdconvert.proj4jslabel')}}</label>
           <input type='text' id="proj4jsdef" name="proj4jsdef" ref="proj4jsdef" v-model="proj4jsdef" size="80" class="form-control ml-2">
         </div>
       </div>

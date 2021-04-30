@@ -66,11 +66,13 @@ export default {
   padding: 5px;
 }
 
+.va-item-header a {
+  color: #E6D1AC;
+}
+
 .va-item-content {
   font-size: 1.0em;
   padding: 5px;
-  /* max-height: 500px;
-  transition: max-height 0.5s ease-in 0.1s; */
   overflow-y: hidden;
 }
 
