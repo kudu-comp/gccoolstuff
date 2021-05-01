@@ -4,16 +4,14 @@
       {{$t('mathtools.fibonacci.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogfib.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('mathtools.fibonacci.long')" />
       <div class="form-inline">
-        <label class="form-label col-sm-12 col-md-3 mb-2" for="pos">{{$t('dialogfib.pos')}}</label>
+        <label class="form-label col-sm-12 col-md-3 mb-2" for="pos">{{$t('mathfib.pos')}}</label>
         <input type='number' id="pos" name="pos" ref="pos" v-model="pos" min="1" max="500" class="form-control col-sm-5 col-md-5 mr-md-2 mb-2" v-on:keyup.enter="getFib">
         <input type="button" id="getfib" name="getfib" :value="$t('buttons.get')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="getFib">
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-12 col-md-3 mb-2" for="check">{{$t('dialogfib.check')}}</label>
+        <label class="form-label col-sm-12 col-md-3 mb-2" for="check">{{$t('mathfib.check')}}</label>
         <input type='text' id="check" name="check" ref="check" v-model="check" class="form-control col-sm-5 col-md-5 mr-md-2 mb-2" v-on:keyup.enter="checkFib">
         <input type="button" id="checkfib" name="checkfib" :value="$t('buttons.check')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="checkFib">
       </div>
@@ -308,18 +306,18 @@ export default {
       // Position must be greater than zero
       if (this.pos < 1) {
         this.error = true;
-        this.errormsg = this.$t('dialogfib.errorzero');
+        this.errormsg = this.$t('mathfib.errorzero');
         return;
       }
 
       // Position must be smaller or equal to 500
       if (this.pos > 500) {
         this.error = true;
-        this.errormsg = this.$t('dialogfib.toobig');
+        this.errormsg = this.$t('mathfib.toobig');
         return;
       }
 
-      this.result = this.$t('dialogfib.the') + this.pos + this.$t('dialogfib.nth') + this.fibnrs[this.pos-1];
+      this.result = this.$t('mathfib.the') + this.pos + this.$t('mathfib.nth') + this.fibnrs[this.pos-1];
     },
 
     // Check if the number is within the array of fibonacci numbers
@@ -330,8 +328,8 @@ export default {
 
       // Check if number is Fibonacci
       this.result = this.check;
-      if (this.fibnrs.indexOf(this.check) < 0) this.result += this.$t('dialogfib.not');
-      this.result += this.$t('dialogfib.fib');
+      if (this.fibnrs.indexOf(this.check) < 0) this.result += this.$t('mathfib.not');
+      this.result += this.$t('mathfib.fib');
     },
 
   },

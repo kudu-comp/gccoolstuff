@@ -4,9 +4,7 @@
         <div class="text-center">{{cipher}} {{$t('cp.cipher')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('cp.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('cp.info')" />
       <div class="form-inline mb-2">
         <input type="button" id="adfgxv" name="adfgxv" value="ADFGX(V)" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ADFGVX')">
         <input type="button" id="affine" name="affine" value="Affine" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Affine')">

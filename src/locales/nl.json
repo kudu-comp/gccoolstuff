@@ -173,27 +173,27 @@
   "imagetools": { 
     "exifscanner": {
       "title": "Exif Scanner",
-      "short": "haalt de metadata van een foto op, zoals GPS",
-      "long": "Exif Reader haalt de metadata (EXIF en andere informatie) van een foto op. Indien een GPS locatie aanwezig is wordt die getoond op de kaart. Het is ook mogelijk de foto te spiegelen of te draaien."
+      "short": "Metadata van een foto, zoals beschrijving, commentaar en GPS data.",
+      "long": "Exif Reader haalt de metadata (EXIF en andere informatie) van een foto op. Indien een GPS locatie aanwezig is wordt die getoond op de kaart."
     },
     "colorpicker": {
       "title": "Kleurenkiezer",
-      "short": "Kleurenkiezer toont de RGB, hex, CMYK, HSL en HSV waardes",
+      "short": "RGB, hex, CMYK, HSL en HSV waardes",
       "long": "Kleurenkiezer. Laad een afbeelding en selecteer een kleur. De tool toont de RGB, hex, CMY(K), HSL en HSV waardes van de geselecteerde kleur."
     },
     "filltool": {
       "title": "Kleuren aanpassen",
-      "short": "Vul een gebied, pas de helderheid en het contrast aan, pas een filter toe of pas de kleurdiepte aan.",
-      "long": "Vul een gebied met een geselecteerde kleur en gegeven tolerantie. Pas de helderheid of het contrast aan. Pas een filter toe, zoals zwart/wit, sepia, negatief of een van de andere filters. Spiegel de afbeelding horizontaal of verticaal. Probeer grote vlakken van eenzelfde kleur te vervangen door een ander om onzichtbare verschillen in kleur tevoorschijn te halen."
+      "short": "Gebied vullen, helderheid en contrast, B&W, sepia, filters, kleurdiepte.",
+      "long": "<p>Vervang een kleur door een andere kleur. Probeer grote vlakken van eenzelfde kleur te vervangen door een andere kleur om onzichtbare verschillen in kleur tevoorschijn te halen. Converteer de afbeelding naar zwart wit, sepia of probeer een van de andere filters. Pas de helderheid of het contrast, of verminder de kleurdiepte. Spiegel de afbeelding.</p><p>Klik op een willekeurige plek in de afbeelding om die kleur te vullen. De vulkleur kan worden ingesteld. De tolerantie is standaard 0. Door de tolerantie aan te passen worden kleuren die lijken op de gekozen kleur ook vervangen. De maximum tolerantie is 255, in dat geval wordt de hele afbeelding gevuld. Gebruik de knop Origineel om de originele afbeelding weer te tonen.</p>"
     },
     "pixeldata": {
       "title": "Pixel data",
-      "short": "Berekend het totaal van R, G end B. Telt het aantal pixels met een bepaalde kleur (RGB)",
-      "long": "Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond. De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben."
+      "short": "Totaal van R, G end B. Aantal pixels met een bepaalde kleur (RGB)",
+      "long": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>"
     },
     "imagetransform": {
       "title": "Transformeren",
-      "short": "Spiegel horizontaal en verticaal, verschuif rijen of kolommen",
+      "short": "Spiegelen (geheel of gedeeltelijk), verschuif rijen of kolommen",
       "long": "Spiegel horizontaal en/of verticaal (geheel of gedeeltelijk), verschuif rijen en/of kolommen een aantal pixels."
     }
   },
@@ -202,42 +202,42 @@
     "sudokusolver": {
       "title": "Sudoku oplosser",
       "short": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3",
-      "long": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3."
+      "long": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3. 4x4 uitgeschakeld vanwege belasting server. Vul het vierkant of voer de hints in als rij, kolom, cijfer gescheiden door komma's, bijv. 125,243,254"
     },
     "mmsolver": {
       "title": "Mastermind oplosser",
       "short": "Mastermind solver voor 3 t/m 6 pins en 4 t/m 9 kleuren",
-      "long": "Mastermind solver voor 3 t/m 6 pins en 4 t/m 9 kleuren."
+      "long": "<p>Mastermind is een logische puzzel. Het doel is een code (set kleuren) te achterhalen. Voor elke poging wordt het aantal correcte pins (kleur en positie) alsmede het aantal pins waarvan alleen de kleur juist is (maar de positie niet) gegeven. Door deze informatie logisch te gebruiken kan in een aantal pogingen de juiste combinatie worden gevonden. Het originele spel was 5 posities en 8 kleuren. De meeste populaire variant heeft 4 posities en 6 kleuren. De kleuren kunnen uniek zijn maar dat is meestal niet het geval. Deze tool gebruikt cijfers in plaats van kleuren. Voer het aantal pins, het aantal kleuren en de gedane pogingen in en de tool berekent de mogelijke combinaties.</p>"
     },
     "periodictable": {
       "title": "Periodiek systeem",
       "short": "Een tool om nummers, symbolen en namen van chemische elementen te vertalen",
-      "long": "Een tool om nummers, symbolen en namen van chemische elementen te vertalen."
+      "long": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een een- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen. De tool gebruikt de Engelse namen voor de elementen.</p>"
     },
     "resistorcode": {
       "title": "Weerstandscode",
       "short": "Weerstandscode berekenen",
-      "long": "Berekent de waarde van een weerstand op basis van de gekleurde banden."
+      "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
     }, 
     "countries": {
       "title": "Landen van de wereld",
-      "short": "Tabel met alle landen en autonome gebieden inclusief vlag",
-      "long": "Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie."
+      "short": "Landen, vlaggen, munteenheid, ISO codes, telefoon",
+      "long": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie en registratiecode voor voertuigen (kenteken). De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>"
     },
     "usastates": {
       "title": "Staten van de VS",
       "short": "Lijst van staten van de VS inclusief vlag",
-      "long": "Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum."
+      "long": "<p> Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum. De code is zowel de code gebruikt door de US Post als de code volgens <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. De naam van de staat is een link naar de Wikipedia.</p><p>Het is mogelijk meerdere codes, namen en nummers in te voeren gescheiden door spaties. Voor de USPS Code kan de spatie achterwege blijven.</p>"
     },
     "countryregions": {
       "title": "Provincies",
       "short": "Provincies van Nederland, België, Duitsland en Frankrijk met vlag",
-      "long": "Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag."
+      "long": "<p>Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>. De naam van de provincie is een link naar de Wikipedia pagina in de taal van het betreffende land (Nederlands, Duits of Frans).</p>"
     },
     "unitconvertor": {
       "title": "Eenheden",
       "short": "Converteert lengte, temperature en nog veel meer",
-      "long": "Eenheden conversie. Omrekenen van lengte, temperature, oppervlakte, snelheid en nog veel meer."  
+      "long": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund."  
     }
   },
 
@@ -530,53 +530,53 @@
   "mathtools": {
     "baseconvert": {
       "title": "Base conversie",
-      "short": "Conversie van en naar binair, decimaal, hexadecimaal en andere getalstelsels",
-      "long" : "Conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd."
+      "short": "Binair, decimaal, hexadecimaal en andere getalstelsels",
+      "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties."
     },
     "decimals": {
       "title": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3",
-      "short": "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar",
-      "long" : "Toont de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3. De eerste 1,000,000 decimal en zijn beschikbaar."
+      "short": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3",
+      "long" : "Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2 en √3 te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar."
     },
     "primes": {
       "title": "Priemgetallen",
-      "short": "Controleer of een getal priem is, ontbind in priemfactoren",
-      "long" : "Controleer of een getal priem is. Geef het priemgetal op positie n, laat de positie zien van een priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar. Ontbind een getal in priemfactoren."
+      "short": "Priemgetallen",
+      "long" : "Een tool die controleert of een getal priem is of niet. Het maximum nummer is 2^53 wat kan worden gecontroleerd. De tool toont het priemgetal op de gegeven positie of geeft de positie van een gegeven priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar."
     },
     "fibonacci": {
       "title": "Fibonacci",
-      "short": "Toont één van de eerste 500 Fibonacci nummers",
-      "long" : "Toont één van de eerste 500 Fibonacci nummers of controleert of het opgegeven nummer in de reeks voorkomt."
+      "short": "De eerste 500 Fibonacci nummers",
+      "long" : "De Fibonacci reeks begint met 1, 1. Het volgende nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar."
     },
     "primegcdlcm": {
       "title": "GGD en KGV",
       "short": "Grootste Gemene Deler, Kleinste Gemene Veelvoud en priemfactoren",
-      "long" : "Grootste Gemene Deler en Kleinste Gemene Veelvoud van een of meerdere getallen. Berekend ook de priemfactoren van elk getal."
+      "long" : "Deze tool berekent de Grootste Gemene Deler (GGD) en het Kleinste Gemene Veelvoud (KGV). Het geeft tevens de priemfactoren van elk getal. Let op want voor zeer grote getallen kan de berekening flink wat tijd kosten."
     },
     "formulasolver": {
       "title": "Cryptaritme",
-      "short": "Cryptaritmes zijn formules zoals THIS + IS + TOO = FUNNY",
-      "long": "Los formules op met letters in de plaats van cijfers, bijv. THIS + IS + TOO = FUNNY. Nummers kunnen uniek zijn of niet. Default rekenen is 10-tallig / decimaal, maar dit kan worden aangepast."
+      "short": "Cryptaritmes formules zoals THIS + IS + TOO = FUNNY",
+      "long": "<p>Cryptaritmes, alphametics or letter rekenenen. Het oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>"
     },
     "numberprop": {
       "title": "Eigenschappen van nummers",
-      "short": "Toont de eigenschappen van een nummers, zoals priem, Fibonacci",
-      "long" : "Toont de eigenschappen van een nummers, zoals priem, Fibonacci en enkele andere eigenschappen."
+      "short": "Prime, Fibonacci, evil, odious, perfect, aspiring and more",
+      "long" : "Deze tool checkt de eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. De eigenschappen zijn priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient and more."
     },
     "nimbers": {
       "title": "Nimbers",
-      "short": "Berekent het product en de som van twee nimbers",
-      "long" : "Nimbers zijn geen nummers maar ze kunnen worden opgeteld en vermenigvuldigd. Nimbers worden gebruikt in de Game Theorie."
+      "short": "Product en som twee nimbers",
+      "long" : "Een tool om de som (+) en het product (*) van twee nimbers te berekenen. Nimbers zijn geen nummers, maar je kan ze wel optellen en vermenigvuldigen. Nimbers worden gebruikt in combinatorial game theory (CGT). Voer twee getallen in en het product en de som worden berekend."
     },
     "sequences": {
       "title": "Reeksen",
       "short": "Geeft de n-de term van enkele reeksen",
-      "long" : "Toont ook de gehele reeks tot en met de gevraagde term van enkele bekende reeksen, zoals de Hailstone, Conway and Niven reeks. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. De meeste reeksen kunnen worden gevonden in de Online Encyclopedia of Integer Sequences. OEIS kan zoeken op woorden maar ook op delen van een reeks."
+      "long" : "Een tool om de n-de term te berekenen van enkele bekende reeksen zoals Conway, Hailstone, Golomb and Niven. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks."
     },
     "palindrome": {
       "title": "Palindroom",
       "short": "Hoeveel omgekeerde optellingen maken een getal een palindroom",
-      "long" : "Berekent hoelang het duurt voordat een getal een palindroom wordt door het omgekeerde getal erbij op te tellen. De meeste getallen worden verrassend snel een palindroom."
+      "long" : "Een palindroom getal is hetzelfde als het van rechts naar links wordt gelezen. De tool berekent hoeveel herhalingen nodig zijn om van een nummer een palindroom te maken, door er steeds het omgekeerde getal bij op te tellen. Voor de meeste getallen is dit opvallend weinig, maar sommige getallen duren aanzienlijk langer. Het algortime stopt na 100 herhalingen."
     }
   },
 
@@ -610,7 +610,6 @@
   },
 
   "exifscanner": {
-    "infoblock": "Metadata bevat informatie van de afbeelding, zoals titel, auteur of commentaren. Soms is ook de GPS locatie gegeven. Deze tool toont de meest relevante velden, zoek in de metadata naar aanwijzingen. Upload de afbeelding van je commentaar om de data te tonen. De tool toont EXIF, maar ook IPTC, XMP, ICC, en MPF.",
     "nogps": "Geen GPS van de camera",
     "gps": "GPS van de camera",
     "error": "Fout bij het laden van de foto of het ophalen van de EXIF data",
@@ -643,7 +642,6 @@
   },
 
   "colorpicker": {
-    "info": "Kleurenkiezer. Laad een afbeelding en selecteer een kleur. De tool toont de RGB, hex, CMY(K), HSL en HSV waardes van de geselecteerde kleur.",
     "selcolor": "Geselecteerde kleur",
     "rgbval": "RGB waardes",
     "alpha": "Alpha",
@@ -660,7 +658,6 @@
   },
 
   "filltool": {
-    "info": "<p>Vervang een kleur door een andere kleur. Probeer grote vlakken van eenzelfde kleur te vervangen door een andere kleur om onzichtbare verschillen in kleur tevoorschijn te halen. Converteer de afbeelding naar zwart wit, sepia of probeer een van de andere filters. Pas de helderheid of het contrast, of verminder de kleurdiepte. Spiegel de afbeelding.</p><p>Klik op een willekeurige plek in de afbeelding om die kleur te vullen. De vulkleur kan worden ingesteld. De tolerantie is standaard 0. Door de tolerantie aan te passen worden kleuren die lijken op de gekozen kleur ook vervangen. De maximum tolerantie is 255, in dat geval wordt de hele afbeelding gevuld. Gebruik de knop Origineel om de originele afbeelding weer te tonen.</p>",
     "selfill": "Vulkleur",
     "tol": "Tolerantie",
     "fill": "Vul kleur",
@@ -677,13 +674,11 @@
   },
 
   "pixeldata": {
-    "info": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>",
     "sum": "Bereken het totaal van alle rood, groen en blauw waardes.",
     "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
   },
 
   "imagetransform": {
-    "info": "Verschuif elke rij of kolom een aantal pixels (cumulatief). Spiegel de helft van de rijen of kolommen. Spiegel de totale afbeelding.",
     "shift": "Verschuif",
     "shiftinfo": "Selecteer het aantal pixels om rijen/kolommen te verschuifen",
     "shiftr": "Verschuif rij #pixels",
@@ -717,7 +712,6 @@
   },
 
   "sudoku": {
-    "info": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3. 4x4 uitgeschakeld vanwege belasting server. Vul het vierkant hieronder of voer de hints als rij, kolom, cijfer gescheiden door komma's, bijv. 125,243,254",
     "error": "Fout bij het oplossen van de sudoky. Te veel oplossing of timeout van de server",
     "type": "Sudoku type",
     "size": "Afmeting",
@@ -728,7 +722,6 @@
   },
 
   "mmsolver": {
-    "info": "Mastermind is een logische puzzel. Het doel is een code (set kleuren) te achterhalen. Voor elke poging wordt het aantal correcte pins (kleur en positie) alsmede het aantal pins waarvan alleen de kleur juist is (maar de positie niet) gegeven. Door deze informatie logisch te gebruiken kan in een aantal pogingen de juiste combinatie worden gevonden. Het originele spel was 5 posities en 8 kleuren. De meeste populaire variant heeft 4 posities en 6 kleuren. De kleuren kunnen uniek zijn maar dat is meestal niet het geval. Deze tool gebruikt cijfers in plaats van kleuren. Voer het aantal pins, het aantal kleuren en de gedane pogingen in en de tool berekent de mogelijke combinaties.",
     "npin": "Aantal pins",
     "ncolor": "Aantal kleuren",
     "unique": "Kleuren zijn uniek",
@@ -741,7 +734,6 @@
   },
 
   "periodictable": {
-    "info": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een een- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen. De tool gebruikt de Engelse namen voor de elementen.</p>",
     "ph": "Type nummers, namen of symbolen",
     "searchsym": "Zoek symbolen",
     "searchnum": "Zoek nummers",
@@ -755,14 +747,12 @@
   },
 
   "resistorcode": {
-    "info": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>",
     "band": "Band",
     "mult": "x Factor",
     "res": "De weerstand bedraagt:"
   },
 
   "countries": {
-    "info": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie en registratiecode voor voertuigen (kenteken). De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>",
     "ph": "Voer meerdere codes, nummers of namen in",
     "flag": "Vlag",
     "ccode3": "ISO 3-letter code",
@@ -1028,7 +1018,6 @@
   },
 
   "usastates": {
-    "info": "<p> Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum. De code is zowel de code gebruikt door de US Post als de code volgens <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. De naam van de staat is een link naar de Wikipedia.</p><p>Het is mogelijk meerdere codes, namen en nummers in te voeren gescheiden door spaties. Voor de USPS Code kan de spatie achterwege blijven.</p>",
     "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
     "flag": "Vlag",
     "code": "ISO3166:2 code",
@@ -1040,7 +1029,6 @@
   },
 
   "countryregions": {
-    "info": "<p>Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>. De naam van de provincie is een link naar de Wikipedia pagina in de taal van het betreffende land (Nederlands, Duits of Frans).</p>",
     "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
     "list": "Landen",
     "nl": "Nederland",
@@ -1063,7 +1051,6 @@
   },
 
   "unitconvertor" : {
-    "info": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund.",
     "value": "Waarde",
     "selcat": "Selecteer een categorie",
     "unitfrom": "Van eenheid",
@@ -1270,14 +1257,12 @@
     "error": "Toetsenbord kan niet worden geconverteerd. Controleer de invoer."
   },
 
-  "dialogbaseconv": {
-    "info": "Selecteer de base for links en rechts. Het is mogelijk meerdere nummers tegelijk te converteren. Pas eventueel de karakters aan die de getallen weergeven, bijvoorbeeld voor binair A en B in plaats van 0 en 1.",
+  "mathbase": {
     "base1": "Base links (2 t/m 36)",
     "base2": "Base rechts (2 t/m 36)"
   },
 
-  "dialogdeci": {
-    "info": "Deze tool zoekt de decimalen van enkele bekende nummers. De eerste decimaal achter de punt is positie 1. Selecteer de start- en einddecimaal. De eerste 1,000,000 decimalen zijn beschikbaar.",
+  "mathdeci": {
     "sel": "Selecteer een nummer",
     "pi": "π of pi, begint met 3.141592653589...",
   	"e": "e, begint met 2.718281828459...",
@@ -1294,8 +1279,7 @@
     "res3": "zijn"
   },
   
-  "dialogprimes" : {
-    "info": "Controleer of een getal priem is of niet. Het maximum nummer is 2^53 wat kan worden gecontroleerd. Laat het priemgetal zien op de gegeven positie. Laat de positie zien van het gegeven priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar.",
+  "mathprime" : {
     "check": "Check priem of niet",
     "pos": "Priemgetal op positie",
     "primepos": "Positie van priemgetal",
@@ -1309,8 +1293,7 @@
     "posofprime": "De positie van priemgetal"
   },
 
-  "dialogfib": {
-    "info": "De Fibonacci reeks begint met 1, 1. Het volgede nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar.",
+  "mathfib": {
     "pos": "Fibonacci nummer op positie",
     "check": "Controleer of dit een Fibonacci nummer is",
     "toobig": "Positie te hoog (max 500)",
@@ -1321,8 +1304,7 @@
     "fib": " een Fibonacci nummer"
   },
 
-  "dialoggcd": {
-    "info": "Deze tool berekent de Grootste Gemene Deler (GGD) en het Kleinste Gemene Veelvoud (KGV). Het geeft tevens de priemfactoren van elk getal. Let op want voor zeer grote getallen kan de berekening flink wat tijd kosten.",
+  "mathgcd": {
     "num": "Nummers",
     "inperror": "Ongeldige invoer, nummer moet groter dan 0 zijn",
     "t1": "Grootste Gemene Deler (GGD) & Kleinste Gemene Veelvoud (KGV)",
@@ -1331,8 +1313,7 @@
     "lcm": "Het KGV is"
   },
 
-  "dialogformulasolver": {
-    "info": "<p>Cryptaritmes, alphametics or letter rekenenen. Het oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>",
+  "mathcrypta": {
     "formula": "Formule",
     "unique": "Nummers zijn uniek",
     "base": "Getalstelsel",
@@ -1341,8 +1322,7 @@
     "toomanyvars": "Te veel variabelen, verhoog getalstelsel of pas de formule aan."
   },
 
-  "dialognim": {
-    "info": "Nimbers zijn geen nummers, maar je kan ze wel optellen en vermenigvuldigen. Nimbers worden gebruikt in combinatorial game theory (CGT). Voer twee getallen in en het product en de som worden berekend.",
+  "mathnim": {
     "num1": "Eerste nummer",
     "num2": "Tweede nummer",
     "t1": "Product & som",
@@ -1350,8 +1330,7 @@
     "sum": "De nimber som is"
   },
 
-  "dialogpali": {
-    "info": "Hoeveel herhalingen zijn nodig om van een nummer een palindroom te maken, door er steeds het omgekeerde getal bij opt te tellen. Voor de meeste getallen is dit opvallend weinig, maar sommige getallen duren aanzienlijk langer. Het algortime stopt na 100 herhalingen.",
+  "mathpali": {
     "t1": "Palindroom",
     "res1": "Het duurt",
     "res2": "herhalingen om een palindroom te worden.",
@@ -1359,8 +1338,7 @@
     "toomany": "Meer dan 100 iteraties"
   },
 
-  "dialognp": {
-    "info": "Deze tool checkt de eigenschappen van een nummer. Het maximum nummer is 1,000,000,000",
+  "mathprop": {
     "num": "Nummer",
     "t1": "Eigenschappen",
     "even": "Even: nummers deelbaar door 2",
@@ -1385,8 +1363,7 @@
     "toobig": "Nummer moet kleiner zijn dan 1,000,000,000"
   },
 
-  "dialogseq": {
-    "info": "Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks.",
+  "mathseq": {
     "sel": "Selecteer een reeks",
     "conway": "Conway reeks ook wel bekend als de hoor-en-spreek reeks",
     "revconway": "Reverse Conway reeks ook wel bekend als de hoor-en-spreek reeks",

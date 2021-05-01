@@ -4,7 +4,7 @@
         <div class="text-center">{{$t('othertools.resistorcode.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('resistorcode.info')"></div>
+      <div class="infoblock" v-html="$t('othertools.resistorcode.long')"></div>
       <div class="row" style="text-align:center">
         <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 1</div>
         <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 2</div>

@@ -4,18 +4,18 @@
       {{$t('mathtools.formulasolver.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('dialogformulasolver.info')"></div>
+      <div class="infoblock" v-html="$t('mathtools.formulasolver.long')"></div>
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="x">{{$t('dialogformulasolver.formula')}}</label>
+        <label class="form-label mr-2 mb-2" for="x">{{$t('mathcrypta.formula')}}</label>
         <input type="text" size="30" id="formula" name="formula" ref="formula" v-model="formula" class="form-control mb-2">
       </div>
       <div class="form-inline">
         <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="solveFormula">
-        <label class="form-label mr-2 mb-2" for="base">{{$t('dialogformulasolver.base')}}</label>
+        <label class="form-label mr-2 mb-2" for="base">{{$t('mathcrypta.base')}}</label>
         <input type="number" min="2" max="16" id="base" name="base" v-model="base" class="form-control mb-2 mr-2">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="unique" id="unique" v-model="unique" class="custom-control-input mb-2 mr-2">
-          <label for="unique" class="custom-control-label mb-2">{{$t('dialogformulasolver.unique')}}</label>
+          <label for="unique" class="custom-control-label mb-2">{{$t('mathcrypta.unique')}}</label>
         </div>
       </div>
       <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
@@ -153,7 +153,7 @@ export default {
     
       if (this.varnames.length > this.base) {
         this.error = true;
-        this.errormsg = this.$t('dialogformulasolver.toomanyvars')
+        this.errormsg = this.$t('mathcrypta.toomanyvars')
       }
 
       // Generate candidates
@@ -167,13 +167,13 @@ export default {
           this.selectedsolution = this.results[0];
           this.printSolution();
         } else {
-          this.result = this.$t('dialogformulasolver.nosol');
+          this.result = this.$t('mathcrypta.nosol');
         }
 
       } catch(e) {
 
         this.error = true;
-        this.errormsg = this.$t('dialogformulasolver.exprerror');
+        this.errormsg = this.$t('mathcrypta.exprerror');
         console.log(e);
 
       }

@@ -4,7 +4,7 @@
         <div class="text-center">{{$t('othertools.countries.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('countries.info')"></div>
+      <div class="infoblock" v-html="$t('othertools.countries.long')" />
       <v-table
         :phsearch="phsearch"
         :defsearch="defsearch"

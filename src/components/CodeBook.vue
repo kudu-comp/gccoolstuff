@@ -4,9 +4,7 @@
       {{$t('menu.codebook')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('codebook.long')}}
-      </div>
+      <div class="infoblock" v-html="$t('codebook.long')" />
       <div class="form-inline">
         <v-search id="searchstr" ref="searchstr" v-model:search="searchstr"></v-search>
         <label for="listoftags" class="form-label mr-2 mb-2">{{$t('codebook.availtags')}}:</label>

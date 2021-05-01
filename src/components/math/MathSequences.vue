@@ -4,50 +4,50 @@
       {{$t('mathtools.sequences.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('dialogseq.info')"></div>
+      <div class="infoblock" v-html="$t('mathtools.sequences.long')" />
       <div>
-        <label class="form-label" for="number">{{$t('dialogseq.sel')}}</label>
+        <label class="form-label" for="number">{{$t('mathseq.sel')}}</label>
         <div class="form-check">
           <input type="radio" id="number3" name="number" value="hail" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number2">{{$t('dialogseq.hailstone')}}</label>
+          <label class="form-check-label" for="number2">{{$t('mathseq.hailstone')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number1" name="number" value="cwy" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number1">{{$t('dialogseq.conway')}}</label>
+          <label class="form-check-label" for="number1">{{$t('mathseq.conway')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number2" name="number" value="revcwy" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number1">{{$t('dialogseq.revconway')}}</label>
+          <label class="form-check-label" for="number1">{{$t('mathseq.revconway')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number7" name="number" value="gol" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number6">{{$t('dialogseq.golomb')}}</label>
+          <label class="form-check-label" for="number6">{{$t('mathseq.golomb')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number4" name="number" value="niv" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number3">{{$t('dialogseq.niven')}}</label>
+          <label class="form-check-label" for="number3">{{$t('mathseq.niven')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number5" name="number" value="abun" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number4">{{$t('dialogseq.abundant')}}</label>
+          <label class="form-check-label" for="number4">{{$t('mathseq.abundant')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number6" name="number" value="defi" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number5">{{$t('dialogseq.deficient')}}</label>
+          <label class="form-check-label" for="number5">{{$t('mathseq.deficient')}}</label>
         </div>
       </div>
       <div class="form-inline mt-2">
-        <label class="form-label mr-2 mb-2" for="n">{{$t('dialogseq.niter')}}</label>
+        <label class="form-label mr-2 mb-2" for="n">{{$t('mathseq.niter')}}</label>
         <input type='number' id="n" ref="n" v-model="n" min="0" max="1000000" class="form-control mr-2 mb-2">
-        <label class="form-label mr-2 mb-2" for="start">{{$t('dialogseq.start')}}</label>
+        <label class="form-label mr-2 mb-2" for="start">{{$t('mathseq.start')}}</label>
         <input type='number' id="start" v-model="start" min="0" max="1000000" class="form-control mr-2 mb-2" v-show="number == 'hail' || number == 'cwy' || number == 'revcwy'" v-on:keyup.enter="sequence">
         <input type="button" id="product" name="product" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="sequence">
       </div>
       <p v-show="error" class="errormsg mb-2">{{errormsg}}.</p>
       <div class="card card-text p-2">
         <div class="monospace">
-          <p>{{$t('dialogseq.res1')}} {{n}}: {{result}}.</p>
-          <p>{{$t('dialogseq.res2')}} {{seq}}</p>
+          <p>{{$t('mathseq.res1')}} {{n}}: {{result}}.</p>
+          <p>{{$t('mathseq.res2')}} {{seq}}</p>
         </div>
       </div>
     </div>

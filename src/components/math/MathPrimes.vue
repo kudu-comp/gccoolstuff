@@ -4,26 +4,24 @@
       {{$t('mathtools.primes.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogprimes.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('mathtools.primes.long')" />
       <div class="form-inline">
-        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.check')}}</label>
+        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('mathprime.check')}}</label>
         <input type='number' min="1" max="9007199254740992" id="checkprime" ref="checkprime" v-model="checkprime" class="form-control mb-2 mr-2">
         <input type="button" id="check" name="check" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="checkPrime">
       </div>
       <div class="form-inline">
-        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.pos')}}</label>
+        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('mathprime.pos')}}</label>
         <input type='number' min="1" max="9007199254740992" id="pos" ref="pos" v-model="pos" class="form-control mb-2 mr-2">
         <input type="button" id="getprime" name="getprime" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="getPrime">
       </div>
       <div class="form-inline">
-        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.primepos')}}</label>
+        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('mathprime.primepos')}}</label>
         <input type='number' min="1" max="9007199254740992" id="primepos" ref="primepos" v-model="primepos" class="form-control mb-2 mr-2">
         <input type="button" id="getpos" name="getpos" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="getPos">
       </div>
        <div class="form-inline">
-        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('dialogprimes.primefact')}}</label>
+        <label class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2" for="pos">{{$t('mathprime.primefact')}}</label>
         <input type='number' min="1" max="9007199254740992" id="primefact" ref="primefact" v-model="primefact" class="form-control mb-2 mr-2">
         <input type="button" id="primefact" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="primeFactors">
       </div>
@@ -113,9 +111,9 @@ export default {
       } else {
         
         if (mathsequences.checkprime(this.checkprime)) {
-          this.result = this.checkprime + "  " +  this.$t('dialogprimes.isprime');
+          this.result = this.checkprime + "  " +  this.$t('mathprime.isprime');
         } else {
-          this.result = this.checkprime + "  " +  this.$t('dialogprimes.isnotprime');
+          this.result = this.checkprime + "  " +  this.$t('mathprime.isnotprime');
         }
 
       }
@@ -142,9 +140,9 @@ export default {
         .then(response => response.json())
         .then(data => {
           if (data.prime > 0)
-            this.result = this.$t('dialogprimes.primeatpos') + " " + this.pos + "  " +  this.$t('dialogprimes.primeis') + " " + data.prime;
+            this.result = this.$t('mathprime.primeatpos') + " " + this.pos + "  " +  this.$t('mathprime.primeis') + " " + data.prime;
           else
-            this.result = this.$t('dialogprimes.primenotfound')
+            this.result = this.$t('mathprime.primenotfound')
         })
         .catch((error) => {
           console.error('Error ', error);
@@ -173,9 +171,9 @@ export default {
         .then(response => response.json())
         .then(data => {
           if (data.pos > 0)
-            this.result = this.$t('dialogprimes.posofprime') + " " + this.primepos + "  " +  this.$t('dialogprimes.primeis') + " " + data.pos;
+            this.result = this.$t('mathprime.posofprime') + " " + this.primepos + "  " +  this.$t('mathprime.primeis') + " " + data.pos;
           else
-            this.result = this.primepos + " " + this.$t('dialogprimes.isnotprime')
+            this.result = this.primepos + " " + this.$t('mathprime.isnotprime')
         })
         .catch((error) => {
             console.error('Error ', error);

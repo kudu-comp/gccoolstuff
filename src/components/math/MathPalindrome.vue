@@ -4,12 +4,7 @@
       {{$t('mathtools.palindrome.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogpali.info')}}
-      </div>
-      <div class="mb-2">
-
-      </div>
+      <div class="infoblock" v-html="$t('mathtools.palindrome.long')" />
       <div class="form-inline">
         <label class="form-label mr-2 mb-2" for="x">{{$t('dialogseq.start')}}</label>
         <input type='number' id="start" name="start" ref="start" v-model="start" class="form-control mb-2 mr-2">
@@ -17,10 +12,10 @@
       </div>
       <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
-        <template v-slot:header>{{$t('dialogpali.t1')}}</template>
+        <template v-slot:header>{{$t('mathpali.t1')}}</template>
         <template v-slot:content>
-          {{$t('dialogpali.res1')}} {{n}} {{$t('dialogpali.res2')}}<br>
-          {{$t('dialogpali.res3')}} <br>
+          {{$t('mathpali.res1')}} {{n}} {{$t('mathpali.res2')}}<br>
+          {{$t('mathpali.res3')}} <br>
           {{seq}}
         </template>
       </va-item>
@@ -85,7 +80,7 @@ export default {
       // Set the counter or show error messages if above 100
       if (cnt > 100) {
         this.error = true;
-        this.errormsg = this.$t('dialogpali.toomany');
+        this.errormsg = this.$t('mathpali.toomany');
       } else {
         this.n = cnt;
       }

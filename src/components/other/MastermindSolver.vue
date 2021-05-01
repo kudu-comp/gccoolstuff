@@ -4,9 +4,7 @@
       {{$t('othertools.mmsolver.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('mmsolver.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('othertools.mmsolver.long')" />
       <div class="form-inline mb-2">
         <label for="npin" class="form-label mr-2">{{$t('mmsolver.npin')}}</label>
         <select name="npin" id="npin" ref="npin" class="form-control mr-2" v-model="npin">

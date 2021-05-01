@@ -4,18 +4,16 @@
       {{$t('mathtools.baseconvert.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogbaseconv.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('mathtools.baseconvert.long')" />
       <div class="form-inline mb-2">
-        <label class="form-label col-sm-6 col-md-2" for="base1">{{$t('dialogbaseconv.base1')}}</label>
+        <label class="form-label col-sm-6 col-md-2" for="base1">{{$t('mathbase.base1')}}</label>
         <input type='number' id="base1" name="base1" ref="base1" v-model="base1" min="2" max="36" class="form-control col-sm-6 col-md-2">
         <div class="col-md-4 p-2">
           <input type='text' id="basestr1" name="basestr1" ref="basestr1" v-model="basestr1" size="50" class="form-control">
         </div>
       </div>
       <div class="form-inline mb-2">
-        <label class="form-label col-sm-6 col-md-2" for="base2">{{$t('dialogbaseconv.base2')}}</label>
+        <label class="form-label col-sm-6 col-md-2" for="base2">{{$t('mathbase.base2')}}</label>
         <input type='number' id="base2" name="base2" ref="base2" v-model="base2" min="2" max="36" class="form-control col-sm-6 col-md-2">
         <div class="col-md-4 p-2">
           <input type='text' id="basestr2" name="basestr2" ref="basestr2" v-model="basestr2" size="50" class="form-control">

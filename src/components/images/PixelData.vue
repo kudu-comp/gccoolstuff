@@ -4,7 +4,7 @@
       {{$t('imagetools.pixeldata.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('pixeldata.info')"></div>
+      <div class="infoblock" v-html="$t('imagetools.pixeldata.long')"></div>
       <div class="form-inline">
         <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
       </div>

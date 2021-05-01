@@ -4,48 +4,46 @@
       {{$t('mathtools.decimals.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('dialogdeci.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('mathtools.decimals.long')" />
       <div>
-        <label class="form-label" for="number">{{$t('dialogdeci.sel')}}</label>
+        <label class="form-label" for="number">{{$t('mathdeci.sel')}}</label>
         <div class="form-check">
           <input type="radio" id="number1" name="number" value="pi" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number1">{{$t('dialogdeci.pi')}}</label>
+          <label class="form-check-label" for="number1">{{$t('mathdeci.pi')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number2" name="number" value="e" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number2">{{$t('dialogdeci.e')}}</label>
+          <label class="form-check-label" for="number2">{{$t('mathdeci.e')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number3" name="number" value="tau" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number3">{{$t('dialogdeci.tau')}}</label>
+          <label class="form-check-label" for="number3">{{$t('mathdeci.tau')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number4" name="number" value="phi" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number4">{{$t('dialogdeci.phi')}}</label>
+          <label class="form-check-label" for="number4">{{$t('mathdeci.phi')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number5" name="number" value="euler" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number5">{{$t('dialogdeci.euler')}}</label>
+          <label class="form-check-label" for="number5">{{$t('mathdeci.euler')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number6" name="number" value="sqrt2" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number6">{{$t('dialogdeci.sq2')}}</label>
+          <label class="form-check-label" for="number6">{{$t('mathdeci.sq2')}}</label>
         </div>
         <div class="form-check">
           <input type="radio" id="number7" name="number" value="sqrt3" class="form-check-input" v-model="number">
-          <label class="form-check-label" for="number7">{{$t('dialogdeci.sq3')}}</label>
+          <label class="form-check-label" for="number7">{{$t('mathdeci.sq3')}}</label>
         </div>
       </div>
       <div class="form-inline mt-4">
-        <label class="form-label mb-2 mr-2" for="start">{{$t('dialogdeci.from')}}</label>
+        <label class="form-label mb-2 mr-2" for="start">{{$t('mathdeci.from')}}</label>
         <input type='number' id="start" name="start" ref="start" v-model="start" min="0" max="1000000" class="form-control mb-2 mr-2">
-        <label class="form-label mb-2 mr-2" for="end">{{$t('dialogdeci.to')}}</label>
+        <label class="form-label mb-2 mr-2" for="end">{{$t('mathdeci.to')}}</label>
         <input type='number' id="end" name="end" ref="end" v-model="end" min="0" max="1000000" class="form-control mb-2 mr-2" v-on:keyup.enter="getDigits">
-        <input type="button" id="product" name="product" :value="$t('dialogdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
+        <input type="button" id="product" name="product" :value="$t('mathdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
       </div>
-      <div class="card card-text p-2">{{$t('dialogdeci.res1')}} {{start}} {{$t('dialogdeci.res2')}} {{end}} {{$t('dialogdeci.res3')}} {{result}}.</div>
+      <div class="card card-text p-2">{{$t('mathdeci.res1')}} {{start}} {{$t('mathdeci.res2')}} {{end}} {{$t('mathdeci.res3')}} {{result}}.</div>
       <p v-show="error" class="errormsg">{{errormsg}}</p>
     </div>
   </div>

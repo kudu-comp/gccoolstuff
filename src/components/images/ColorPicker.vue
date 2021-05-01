@@ -4,7 +4,7 @@
       {{$t('imagetools.colorpicker.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('colorpicker.info')"></div>
+      <div class="infoblock" v-html="$t('imagetools.colorpicker.long')"></div>
       <div class="form-inline">
         <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
       </div>

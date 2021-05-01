@@ -4,7 +4,7 @@
       <div class="text-center">{{$t('othertools.countryregions.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('countryregions.info')"></div>
+      <div class="infoblock" v-html="$t('othertools.countryregions.long')" />
       <div class="form-inline mb-2">
         <label for="countrylist" class="form-label mr-2">{{$t('countryregions.list')}}</label>
         <select id="countrylist" class="custom-select" v-model="country" @change="updateTable()">

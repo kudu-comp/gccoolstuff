@@ -4,7 +4,7 @@
       {{$t('imagetools.exifscanner.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('exifscanner.infoblock')"></div>
+      <div class="infoblock" v-html="$t('imagetools.exifscanner.long')"></div>
       <div class="form-inline">
         <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
         <!-- <label for="imgurl" class="form-label mr-2">Or enter URL</label>

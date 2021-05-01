@@ -177,23 +177,23 @@
     },
     "colorpicker": {
       "title": "Color Picker",
-      "short": "Show RGB, hex, CMYK, HSL and HSV values",
-      "long": "Color picker. Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color."
+      "short": "RGB, hex, CMYK, HSL and HSV color values",
+      "long": "A tool that shows the RGB, hexadecimal RGB, CMY(K), HSL and HSV value. Click anywhere in the image to display the values."
     },
     "filltool": {
       "title": "Color editor",
-      "short": "Fill an area, apply a filter, change brightness and contrast or change color depth.",
-      "long": "Fill an area with a selected color and a given tolerance. Adjust the brightness and contrast. Apply one of the filters, grayscale, invert, sepia and a few more. Flip the image vertically or horizontally. Try to replace large areas with the same color with another to reveal unseen differences in color."
+      "short": "Area fill, brightness and contrast, B&W, sepia, filters, color depth.",
+      "long": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>"
     },
     "pixeldata": {
       "title": "Pixel data",
       "short": "Total of R, G and B, count a specific RGB value",
-      "long": "Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image. Works perfectly with PNG files but seems to have an issue with JPG."
+      "long": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>"
     },
     "imagetransform": {
       "title": "Transform",
       "short": "Flip horizontal and vertical (whole picture or parts), shift rows or columns",
-      "long": "Flip horizontal and/or vertical (whole picture or alternating rows/columns). Shift each row or column a few pixels."
+      "long": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image."
     }
   },
 
@@ -201,42 +201,42 @@
     "sudokusolver": {
       "title": "Sudoku solver",
       "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
-      "long":  "Solver for Sudoku and Sudoku X, sizes 2 and 3."
+      "long":  "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares or alternatively type the hints as row column number separed by comma, e.g. 125,243,254"
     },
     "mmsolver": {
       "title": "Mastermind solver",
       "short": "Mastermind solver for 3 to 6 pins, 4 to 9 colors",
-      "long":  "Mastermind solver for 3 to 6 pins, 4 to 9 colors."
+      "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors. Instead of colors this solver uses numbers."
     },
     "periodictable": {
       "title": "Periodic table",
       "short": "Chemical element numbers, symbols and names",
-      "long": "Tool to translate chemical element numbers, symbols and names."
+      "long": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>"
     },
     "resistorcode": {
       "title": "Resistor colors",
       "short": "Resistor color code calculator",
-      "long": "Resistor color code. Calculate the value of a resistors from the colored bands."  
+      "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
     }, 
     "countries": {
       "title": "Country codes",
       "short": "Countries and named territories with flags",
-      "long": "List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags, 2- and 3-letter country codes, numeric country codes and international calling codes."
+      "long": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>"
     },
     "usastates": {
       "title": "US States",
       "short": "States of the US including flags",
-      "long": "List of the states of the US including flags, number of representatives in the U.S. House, area ranking, joined as and capital."  
+      "long": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>"  
     },
     "countryregions": {
       "title": "Regions of nl, be, de and fr",
       "short": "Regions of the Netherlands, Belgium, Germany and France including flags",
-      "long": "Regions of the Netherlands, Belgium, Germany and France with ISO code, name, capital and more including flags"  
+      "long": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>"  
     },
     "unitconvertor": {
       "title": "Units",
       "short": "Length, area, volume, temperature, power, angle and speed convertor",
-      "long": "Unit convertor, supports length, area, volume, temperature, power, angle and speed."  
+      "long": "Unit convertor converts a wide range of units. Units are organized in categories for units the measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units."  
     }
   },
 
@@ -529,53 +529,53 @@
   "mathtools": {
     "baseconvert": {
       "title": "Base converter",
-      "short": "Converts base (binary, decimal, hexadecimal or any from 2 to 36).",
-      "long" : "Converts from one base to another. Supports any base from 2 (binary) to 36. Optionally change the characters to use. Multiple numbers can be entered."
+      "short": "Binary, decimal, hexadecimal or any base from 2 to 36.",
+      "long" : "A tool to convert numbers from one base to another. Supports any base from 2 (binary) to 36. Optionally change the characters to use. Multiple numbers can be entered separated by spaces."
     },
     "decimals": {
       "title": "Decimals of 𝜋, e, 𝜏, φ, γ, √2, √3",
-      "short": "Decimals of 𝜋, e, 𝜏, φ, γ, √2, √3, up to 1,000,000 decimals",
-      "long" : "Get the decimals of 𝜋, e, 𝜏, φ, γ, √2, √3, up to 1,000,000 decimals."
+      "short": "Decimals of 𝜋, e, 𝜏, φ, γ, √2, √3",
+      "long" : "A tool to search decimals of 𝜋, e, 𝜏, φ, γ, √2 and √3. The count starts at the first decimal (so to say after the dot). The first 1,000,000 digits are available."
     },
     "primes": {
       "title": "Primes",
-      "short": "Check if number is prime and more",
-      "long" : "Check if a number is prime. Check the position of a prime or get the prime number at position (the first 865,000 are available). Get prime factors."
+      "short": "Primes",
+      "long" : "This tool checks if a number is prime or not. The max number to be checked is 2^53. It shows the prime number at a given position or shows the position of a given prime. The first 865,000 primes are available. Get prime factors."
     },
     "fibonacci": {
       "title": "Fibonacci",
       "short": "First 500 Fibonacci numbers.",
-      "long" : "Choose one of the first 500 Fibonacci numbers or alternatively check if a number is a Fibonacci number"
+      "long" : "The Fibonacci sequence starts with 1, 1. The next number is the addition of the previous two. So 1+1=2, 1+2=3, 2+3=5 and so on. The numbers get really large really quickly. The first 500 Fibonacci numbers are available."
     },
     "primegcdlcm": {
       "title": "GCD and LCM",
       "short": "Greatest common divisor or least common muliple of one or more numbers. Also gives the prime factors",
-      "long" : "Greatest common divisor or least common muliple of one or more numbers. Also calculates the prime factors. Large numbers can take some time to calculate"
+      "long" : "This tool finds the Greatest Common Divisor (GCD) and least common multiple (LCM). It will also list the prime factors of each number. You can type multiple numbers. Please be aware that very large numbers can take some time to calculate."
     },
     "formulasolver": {
       "title": "Cryptarithm",
-      "short": "Cryptarithm or alphametics solve formulas like SEND + MORE = MONEY",
-      "long": "Solve formulas where letters represent numbers, e.g. SEND + MORE = MONEY. You can select uniqueness of numbers and optionally change the number base (default is decimal)."
+      "short": "Cryptarithm or alphametics are formulas like SEND + MORE = MONEY",
+      "long": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>"
     },
     "numberprop": {
       "title": "Number properties",
       "short": "Properties of a number, e.g. prime, fibonacci, lucky, deficient, perfect, odd, even and more",
-      "long" : "Show the properties of a number, e.g. prime, fibonacci or others."
+      "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, odious, evil, lucky, perfect, deficient, pentagonal, squarefree and others."
     },
     "nimbers": {
       "title": "Nimbers",
       "short": "Product and sum of two nimbers",
-      "long" : "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT)."
+      "long" : "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT). Enter two numbers and the product and sum will be calculated."
     },
     "sequences": {
       "title": "Sequences",
-      "short": "Get the n-th term of a few sequences.",
-      "long" : "Also shows prints the entire sequence. These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the Online Encyclopedia of Integer Sequences. You can search OEIS on words, but also on the first few numbers of the sequence."
+      "short": "Hailstone, Conway, Niven, Golomb and others.",
+      "long" : "This tool generates the n-th term of some well known sequences, such as Hailstone, Conway, Golomb and Niven. These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. You can search OEIS on words, but also on the first few numbers of the sequence."
     },
     "palindrome": {
       "title": "Palindrome",
       "short": "How many reverse additions does it take to become a palindrome",
-      "long" : "Calculates how long it takes for a number to become a palindrome by adding the reversed number. A palindrome number is a number that is the same backwards. Most numbers get there rather quickly."
+      "long" : "A palindrome number is a number that is the same backwards. This tool calculates how many times does it takes for a number to become a palindrome by adding the reverse number. Most numbers get there rather quickly but some take longer (this algorithm stops after 100 tries)."      
     }
   },
 
@@ -609,7 +609,6 @@
   },
 
   "exifscanner": {
-    "infoblock": "Metadata shows information about the image, such as title, comments, author and sometimes also the GPS location. This tool shows the most important information. Read the metadat to look for clues. Load the image to display all the meta data of an info. The tool shows EXIF, but also IPTC, XMP, ICC, and MPF.",
     "nogps": "No GPS from camera",
     "gps": "GPS from camera",
     "error": "Error loading image or EXIF data",
@@ -642,7 +641,6 @@
   },
 
   "colorpicker": {
-    "info": "Load an image and pick a color. The tool shows the RGB, hex, CMY(K), HSL and HSV values of the selected color. You can load the image from your computer.",
     "selcolor": "Selected color",
     "rgbval": "RGB values",
     "alpha": "Alpha channel",
@@ -659,7 +657,6 @@
   },
 
   "filltool": {
-    "info": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness. Flip the image horizontally or vertically.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>",
     "selfill": "Fill color",
     "tol": "Tolerance",
     "fill": "Color fill",
@@ -676,13 +673,11 @@
   },
 
   "pixeldata": {
-    "info": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>",
     "sum": "To calculate the sum of the red, green and blue values press Totals",
     "count": "To count the number of pixels select values for red, green and blue and press Count"
   },
 
   "imagetransform": {
-    "info": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image.",
     "shift": "Shift",
     "shiftinfo": "Select the number of pixels to shift each row/column.",
     "shiftr": "Shift row #pixels",
@@ -716,7 +711,6 @@
   },
 
   "sudoku": {
-    "info": "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares below or alternatively type the hints as row column number separed by comma, e.g. 125,243,254",
     "error": "Error solving sudoku, too many solutions or server timeout",
     "type": "Sudoku type",
     "size": "Size",
@@ -727,7 +721,6 @@
   },
 
   "mmsolver": {
-    "info": "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors. Instead of colors this solver uses numbers.",
     "npin": "Number of pins",
     "ncolor": "Number of colors",
     "unique": "Colors must be unique",
@@ -740,7 +733,6 @@
   },
 
   "periodictable": {
-    "info": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>",
     "ph": "Type numbers, names or symbols",
     "searchsym": "Search symbols",
     "searchnum": "Search numbers",
@@ -754,14 +746,12 @@
   },
 
   "resistorcode": {
-    "info": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>",
     "band": "Band",
     "mult": "Multiplier",
     "res": "The resistance value is:"
   },
 
   "countries": {
-    "info": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>",
     "ph": "Type multiple codes or numbers",
     "flag": "Flag",
     "ccode3": "ISO 3-letter code",
@@ -1027,7 +1017,6 @@
   },
 
   "usastates": {
-    "info": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>",
     "ph": "Type searches divided by spaces, for state codes the spaces can be omitted",
     "flag": "Flag",
     "code": "ISO3166:2 code",
@@ -1039,7 +1028,6 @@
   },
 
   "countryregions": {
-    "info": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>",
     "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
     "list": "Countries",
     "nl": "Netherlands",
@@ -1062,7 +1050,6 @@
   },
 
   "unitconvertor" : {
-    "info": "Unit convertor converts a wide range of units. Units are organized in categories for units the measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units.",
     "value": "Value",
     "selcat": "Select a category",
     "unitfrom": "From unit",
@@ -1266,14 +1253,12 @@
     "error": "Keyboard could not be converted, please check"
   },
 
-  "dialogbaseconv": {
-    "info": "Select the range left and right. You can type multiple numbers divided by spaces. You can change the characters to represent the digits, e.g. instead of using 0 and 1 for binary you can choose A and B.",
+  "mathbase": {
     "base1": "Base left (2 to 36)",
     "base2": "Base right (2 to 36)"
   },
 
-  "dialogdeci": {
-    "info": "This tool allows you to get the decimals of some well known numbers. The count starts at the first decimal (so to say after the dot). Select the start and end digit. The first 1,000,000 digits are available.",
+  "mathdeci": {
     "sel": "Select a number",
     "pi": "π or pi, starts with 3.141592653589...",
   	"e": "e, starts with 2.718281828459...",
@@ -1290,8 +1275,7 @@
     "res3": "are"
   },
 
-  "dialogprimes" : {
-    "info": "Check if a number is prime or not. The max number to be checked is 2^53. Show the prime number at a given position. Show the position of a give prime. The first 865,000 primes are available.",
+  "mathprime" : {
     "check": "Check if this is a prime",
     "pos": "Get prime at position",
     "primepos": "Get position of prime",
@@ -1305,8 +1289,7 @@
     "posofprime": "The position of prime"
   },
 
-  "dialogfib": {
-    "info": "The Fibonacci sequence starts with 1, 1. The next number is the addition of the previous two. So 1+1=2, 1+2=3, 2+3=5 and so on. The numbers get really large really quickly. The first 500 Fibonacci numbers are available.",
+  "mathfib": {
     "pos": "Fibonacci number at position",
     "check": "Check if this is a Fibonaci number",
     "toobig": "Position too big (max 500)",
@@ -1317,8 +1300,7 @@
     "fib": " a Fibonacci number"
   },
 
-  "dialoggcd": {
-    "info": "This tool finds the Greatest Common Divisor (GCD) and least common multiple (LCM). It will also list the prime factors of each number. You can type multiple numbers. Please be aware that very large numbers can take some time to calculate.",
+  "mathgcd": {
     "num": "Numbers",
     "inperror": "Invalid input, must be a number and greater than zero",
     "t1": "Greatest Common Divisor (GCD) & Least Common Multiple (LCM)",
@@ -1327,8 +1309,7 @@
     "lcm": "The LCM is"
   },
 
-  "dialogformulasolver": {
-    "info": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>",
+  "mathcrypta": {
     "formula": "Formula",
     "unique": "Unique numbers",
     "base": "Base for calculations",
@@ -1337,8 +1318,7 @@
     "toomanyvars": "Too many variables, increase base or change formule"
   },
 
-  "dialognim": {
-    "info": "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT). Enter two numbers and the product and sum will be calculated.",
+  "mathnim": {
     "num1": "First number",
     "num2": "Second number",
     "t1": "Product & sum",
@@ -1346,8 +1326,7 @@
     "sum": "The nimber sum is"
   },
 
-  "dialogpali": {
-    "info": "How many times does it takes for a number to become a palindrome by adding the reverse number? Most numbers get there rather quickly but some take longer (this algorithm stops after 100 tries).",
+  "mathpali": {
     "t1": "Palindrome",
     "res1": "It takes",
     "res2": "iterations to become a palindrome.",
@@ -1355,8 +1334,7 @@
     "toomany": "More than 100 iterations are needed"
   },
 
-  "dialognp": {
-    "info": "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000",
+  "mathprop": {
     "num": "Number to check",
     "t1": "Properties",
     "even": "Even: numbers divisable by 2",
@@ -1381,8 +1359,7 @@
     "toobig": "Number must be smaller than 1,000,000,000"
   },
 
-  "dialogseq": {
-    "info": "These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. You can search OEIS on words, but also on the first few numbers of the sequence.",
+  "mathseq": {
     "sel": "Select a sequence",
     "conway": "Conway sequence a.k.a. the hear and say sequence",
     "revconway": "Reverse Conway sequence a.k.a. the hear and say sequence",

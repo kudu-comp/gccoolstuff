@@ -4,9 +4,7 @@
       {{$t('othertools.sudokusolver.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('sudoku.info')}}
-      </div>
+      <div class="infoblock" v-html="$t('othertools.sudokusolver.long')" />
       <div class="form-inline mb-2">
         <label for="sudokutype" class="form-label mr-2">{{$t('sudoku.type')}}</label>
         <select name="sudokutype" id="sudokutype" class="form-control mr-2" v-model="sudokutype" @change="changeType">

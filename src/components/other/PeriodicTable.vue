@@ -4,7 +4,7 @@
         <div class="text-center">{{$t('othertools.periodictable.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('periodictable.info')"></div>
+      <div class="infoblock" v-html="$t('othertools.periodictable.long')"></div>
       <v-table
         :phsearch="phsearch"
         :cols="cols"

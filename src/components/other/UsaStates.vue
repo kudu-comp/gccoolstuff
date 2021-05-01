@@ -4,7 +4,7 @@
         <div class="text-center">{{$t('othertools.usastates.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('usastates.info')"></div>
+      <div class="infoblock" v-html="$t('othertools.usastates.long')"></div>
       <v-table
         :phsearch="phsearch"
         :defsearch="defsearch"

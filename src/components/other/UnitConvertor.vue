@@ -4,7 +4,7 @@
       {{$t('othertools.unitconvertor.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">{{$t('unitconvertor.info')}}</div>
+      <div class="infoblock" v-html="$t('othertools.unitconvertor.long')" />
       <div class="form-inline">
         <label for="cats" class="form-label mr-2 mb-2">{{$t('unitconvertor.selcat')}}</label>
         <select class="custom-select mb-2" v-model="cat" @change="changeCat">

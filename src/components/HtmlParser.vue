@@ -4,9 +4,7 @@
       {{$t('menu.htmlscanner')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock">
-        {{$t('htmlscanner.long')}}
-      </div>
+      <div class="infoblock" v-html="$t('htmlscanner.long')" />
       <div class="form-row mb-2">
         <textarea id="gchtml" name="gchtml" class="form-control" ref="gchtml" :placeholder="$t('htmlscanner.ph')" rows=3 v-model='gchtml'></textarea>
       </div>
