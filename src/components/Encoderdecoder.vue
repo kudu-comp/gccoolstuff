@@ -12,11 +12,7 @@
         <input type="button" id="atbash" name="atbash" value="Atbash" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Atbash')">
         <input type="button" id="autokey" name="autokey" value="Autokey" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Autokey')">
         <input type="button" id="bacon" name="bacon" value="Bacon" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bacon')">
-        <input type="button" id="base16" name="base16" value="Base16" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Base16')">
         <input type="button" id="base31" name="base31" value="Base31" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('GCId')">
-        <input type="button" id="base32" name="base32" value="Base32" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Base32')">
-        <input type="button" id="base64" name="base64" value="Base64" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Base64')">
-        <input type="button" id="base91" name="base91" value="Base91" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Base91')">
         <input type="button" id="bazeries" name="bazeries" value="Bazeries" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bazeries')">
         <input type="button" id="beaufort" name="beaufort" value="Beaufort" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Beaufort')">
         <input type="button" id="bibibinary" name="bibibinary" value="Bibi-binary" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bibibinary')">
@@ -64,7 +60,6 @@
         <input type="button" id="substitution" name="substitution" value="Substitution" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Substitution')">
         <input type="button" id="trifid" name="trifid" value="Trifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trifid')">
         <input type="button" id="trisquare" name="trisquare" value="Trisquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trisquare')">
-        <input type="button" id="uuencode" name="uuencode" value="UUencode" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('UUencode')">
         <input type="button" id="vatsyayana" name="vatsyayana" value="Vatsyayana" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vatsyayana')">
         <input type="button" id="vigenere" name="vigenere" value="Vigenere" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vigenere')">
         <input type="button" id="zygazyfa" name="zygazyfa" value="Zygazyfa" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Zygazyfa')">
@@ -391,14 +386,6 @@ export default {
           this.showkey3 = true;
           this.key3= 'B';
           break;
-        case 'Base91':
-        case 'Base64':
-        case 'Base32':
-        case 'Base16':
-        case 'UUencode' :
-          this.showalphabet = false;
-          this.explanation = ''
-          break;
         case 'Bazeries' :
           this.alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
           this.showkey1 = true;
@@ -480,6 +467,7 @@ export default {
           this.showgenkey2 = true;
           break;
         case 'GCId' :
+        case 'Base31' :
           this.showalphabet = false;
           break;
         case 'Goldbug':

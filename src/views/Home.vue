@@ -24,14 +24,14 @@
       </div>
       <h3>{{$t('menu.ciphers')}}</h3>
       <div class="p mb-2">
-        {{$t('cp.short')}}
         <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT13'}}">ROT13</router-link>,
         <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT47'}}">ROT47</router-link>,
         <router-link :to="{ name: 'Cipher', params: { cipher: 'Vigenere'}}">Vigenere</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Polybius'}}">Polybius</router-link>,
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Playfair'}}">Playfair</router-link>,
         <router-link :to="{ name: 'Cipher', params: { cipher: 'Kenny code'}}">Kenny code</router-link>,
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Morse'}}">Morse</router-link>,
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Base16'}}">Base16</router-link>,
-        <router-link :to="{ name: 'Cipher', params: { cipher: 'Base64'}}">Base64</router-link>.
+        <router-link :to="{ name: 'Cipher', params: { cipher: 'Morse'}}">Morse</router-link>
+        {{$t('cp.short')}}
       </div>
       <h3>{{$t('menu.codebook')}}</h3>
       <div class="p mb-2">
@@ -64,10 +64,10 @@
       </div>
       <h3>{{$t('menu.comptools')}}</h3>
       <div class="p mb-2">
-        <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}</router-link> {{$t('comptools.compbintotext.short')}}.<br>
-        <router-link to="/comp/compbcd">{{$t('comptools.compbcd.title')}}</router-link> {{$t('comptools.compbcd.short')}}.<br>
-        <router-link to="/comp/compbrainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> {{$t('comptools.compbrainfuck.short')}}.<br>
-        <router-link to="/comp/compdeadfish">{{$t('comptools.compdeadfish.title')}}</router-link> {{$t('comptools.compdeadfish.short')}}.<br>
+        <router-link to="/comp/bintotext">{{$t('comptools.compbintotext.title')}}</router-link> {{$t('comptools.compbintotext.short')}}.<br>
+        <router-link to="/comp/bcd">{{$t('comptools.compbcd.title')}}</router-link> {{$t('comptools.compbcd.short')}}.<br>
+        <router-link to="/comp/brainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> {{$t('comptools.compbrainfuck.short')}}.<br>
+        <router-link to="/comp/deadfish">{{$t('comptools.compdeadfish.title')}}</router-link> {{$t('comptools.compdeadfish.short')}}.<br>
       </div>
       <h3>{{$t('menu.other')}}</h3>
       <div class="p mb-2">

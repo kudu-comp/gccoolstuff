@@ -241,7 +241,7 @@
   },
 
   "cp": {
-    "short": "Over 50 different ciphers and codes, such as",
+    "short": " and 50 other ciphers",
     "info": "Select one of the ciphers or codes below. The appropriate keys will be shown. Fill in the keys and press decode or encode. In most cases converting to uppercase works best. You can remove all the characters that are not in the alphabet. This is often necessary. The encoded message can be formatted in blocks with a separator (which is common). To decode you have to remove the formatting in most cases.",
     "cipher": "Cipher",
     "gensq": "Generate square",
@@ -282,21 +282,6 @@
       "k1": "Version (1 or 2)",
       "k2": "Value to use for A:",
       "k3": "Value to use for B:"
-    },
-    "base91": {
-      "info": "Base 91, Base 16, Base 32, Base 64 and UUEncode are all methods for encoding binary data as ASCII."
-    },
-    "base64": {
-      "info": "Base 91, Base 16, Base 32, Base 64 and UUEncode are all methods for encoding binary data as ASCII."
-    },
-    "base32": {
-      "info": "Base 91, Base 16, Base 32, Base 64 and UUEncode are all methods for encoding binary data as ASCII."
-    },
-    "base16": {
-      "info": "Base 91, Base 16, Base 32, Base 64 and UUEncode are all methods for encoding binary data as ASCII."
-    },
-    "uuencode": {
-      "info": "Base 91, Base 16, Base 32, Base 64 and UUEncode are all methods for encoding binary data as ASCII."
     },
     "bazeries": {
       "info": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters. It uses two squares. The keys are optional to generate the squares. The numeric key is used for transpositioning and to generate the 2nd square if key 2 is empty.",
@@ -692,12 +677,13 @@
   },
 
   "htmlscanner": {
-    "short": "HTML Scanner scans the page source for links, images and hidden information",
+    "short": "Scan the page source for links, images and hidden information",
     "long": "HTML Scanner scans the page source for links, images and hidden information, such as white text and comments. Copy & paste the page source below.",
     "ph": "Paste the page source here",
     "btnscan": "Scan",
     "links": "Links found - select to open the link",
     "images": "Images found - select to view the image",
+    "bgimages": "Background images found - select to view the image",
     "comms": "(Hidden) comments found",
     "white": "White text found",
     "strong": "Strong text",
@@ -705,6 +691,8 @@
     "ital": "Italic text",
     "sup": "Superscript text",
     "sub": "Subscript text",
+    "size": "Font sized",
+    "del": "Deleted text",
     "nocache": "No cache details found, please load correct page source",
     "complete": "Scan completed, details below (could be none)",
     "error": "Error loading or scanning the page source"

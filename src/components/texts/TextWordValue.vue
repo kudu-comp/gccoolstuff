@@ -11,7 +11,7 @@
       <div class="form-inline">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="reverse" id="reverse" v-model="reverse" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="reverse" class="custom-control-label mb-2">{{$t('txtwordval.reverse')}}</label>
+          <label for="reverse" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.reverse')}}</label>
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="startatzero" id="startatzero" v-model="startatzero" class="custom-control-input mr-2 mb-2" @change="wordValue">

@@ -27,7 +27,7 @@
           <ul>
             <li>Fix refresh issue for Sudoku, Image tools, Math tools (only on hosting server)</li>
             <li>Fix resize HTML canvas, pick color and color editor</li>
-            <li>Add background images to HTML scanner</li>
+            <li>Add background images of body to HTML scanner</li>
             <li>Math tools - postfix, infix and prefix</li>
             <li>Codebook - add more codes</li>
             <li>Coordinates - improve accuracy (do not use grid)</li>

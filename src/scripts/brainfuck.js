@@ -92,7 +92,7 @@ export function preprocess (code, sel) {
     default:
       // Just remove comments and return clean code
       for (let i = 0; i < code.length; i++)
-        if ("><+-.,[]".indexOf(code[i]) >= 0) res += code[i];
+        if ("0123456789><+-.,[]".indexOf(code[i]) >= 0) res += code[i];
       return res;    
   }
 
@@ -128,6 +128,7 @@ export function extendshorthand (bfcode) {
       while ("0123456789".indexOf(bfcode[i]) >= 0 && i < bfcode.length) {
         count += bfcode[i++];
       }
+
       for (let j = 0; j < parseInt(count) - 1; j++) result += lastop;
       i--;
       
@@ -227,7 +228,7 @@ export function run (bfcode, input) {
     }      
   }
 
-  console.log(regs);
+  // console.log(regs);
   // Return output
   return result;
   

@@ -155,7 +155,7 @@
     },
     "analyze": {
       "title": "Analiseer tekst",
-      "short": "Telt het aantal zinnen, woorden, letters, cijfers, spaties en andere tekens",
+      "short": "Aantal zinnen, woorden, letters, cijfers, spaties en andere tekens",
       "long" : "Een tool om een tekst te analiseren. Telt het aantal zinnen, woorden, letters (hoofd- en kleine letters), cijfers, spaties en andere tekens. Geeft ook de percentages."
     },
     "texttonumbers": {
@@ -242,7 +242,7 @@
   },
 
   "cp": {
-    "short": "Meer dan 50 verschillende geheimschriften en codes, bijvoorbeeld",
+    "short": " en 50 andere geheimschriften.",
     "info": "Selecteer een geheimschrift hieronder. Vul de benodigde sleutels/ sleutelwoorden in. Kies coderen of decoderen. In de meeste gevallen is het handig naar hoofdletters te converteren. Het verwijderen van tekens die niet in het alfabet voorkomen geeft vaak het beste resultaat. Het gecodeerde bericht kan eventueel worden geformatteerd in blokken (dit is gebruikelijk in de cryptografie). Om te decoderen zal de formattering vaak verwijderd moeten worden.",
     "cipher": "Geheimschrift",
     "gensq": "Genereer vierkant",
@@ -283,21 +283,6 @@
       "k1": "Versie (1 of 2)",
       "k2": "Vervang A door:",
       "k3": "Vervang B door:"
-    },
-    "base91": {
-      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
-    },
-    "base64": {
-      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
-    },
-    "base32": {
-      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
-    },
-    "base16": {
-      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
-    },
-    "uuencode": {
-      "info": "Base 91, Base 16, Base 32, Base 64 en UUEncode zijn manieren om binaire data te coderen als ASCII."
     },
     "bazeries": {
       "info": "De Bazeries cijfer codeert 2-letters per keer. Het gebruikte alfabet is 25 of 36 letters. Er worden twee vierkanten gebruikt. De sleutels voor het genereren van de vierkanten zijn optioneel. De numerieke sleutel wordt gebruikt voor transpositie van het gecodeerde bericht en eventueel om het tweede vierkant te genereren, indien de sleutel ontbreekt.",
@@ -555,7 +540,7 @@
     },
     "formulasolver": {
       "title": "Cryptaritme",
-      "short": "Cryptaritmes formules zoals THIS + IS + TOO = FUNNY",
+      "short": "Cryptaritmes zijn formules zoals THIS + IS + TOO = FUNNY",
       "long": "<p>Cryptaritmes, alphametics or letter rekenenen. Het oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>"
     },
     "numberprop": {
@@ -570,7 +555,7 @@
     },
     "sequences": {
       "title": "Reeksen",
-      "short": "Geeft de n-de term van enkele reeksen",
+      "short": "Conway, Hailstone, Golomb, Niven en andere reeksen",
       "long" : "Een tool om de n-de term te berekenen van enkele bekende reeksen zoals Conway, Hailstone, Golomb and Niven. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks."
     },
     "palindrome": {
@@ -583,7 +568,7 @@
   "comptools" : {
     "compbrainfuck": {
       "title": "Brainfuck",
-      "short": "Voert Brainfuck, Ook! en Spoon programma's uit",
+      "short": "Brainfuck, Ook! en Spoon programma's",
       "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's + - > < . , [ en ]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>"
     },
     "compbcd": {
@@ -693,12 +678,13 @@
   },
 
   "htmlscanner": {
-    "short": "HTML Scanner scant de paginabron op links, afbeeldingen en verborgen informatie",
+    "short": "Scan de paginabron op links, afbeeldingen en verborgen informatie",
     "long": "HTML Scanner scant de paginabron op links, afbeeldingen en verborgen informatie, zoals witte text en commentaar. Kopieer en plak de paginabron hieronder.",
     "ph": "Plak de paginabron hier",
     "btnscan": "Scan",
-    "links": "Links gevonden - selecteer om de link te openen",
-    "images": "Afbeeldingen found - selecteer om de afbeelding te bekijken",
+    "links": "Links - selecteer om de link te openen",
+    "images": "Afbeeldingen - selecteer om de afbeelding te bekijken",
+    "bgimages": "Achtergronden - selecteer om de afbeelding te bekijken",
     "comms": "(Verborgen) commentaren gevonden",
     "white": "Witte tekst gevonden",
     "strong": "Belangrijke tekst",
@@ -706,6 +692,8 @@
     "ital": "Cursieve tekst",
     "sup": "Superscript tekst",
     "sub": "Subscript tekst",
+    "size": "Afwijkende lettergrootte",
+    "del": "Verwijderde tekst",
     "nocache": "Geen cache details gevonden. Laad een correcte paginabron.",
     "complete": "Scan compleet, details hieronder (kan eventueel leeg zijn).",
     "error": "Fout bij het laden of scannen van de paginabron."

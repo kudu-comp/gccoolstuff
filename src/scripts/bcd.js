@@ -33,7 +33,7 @@ export function code2BCD (s, format = 0, packed = false, fill = "") {
         res += fill + formats.code[pos] + " ";
       } else {
         res += formats.code[pos];
-        if (i % 2 == 0 && i > 0) res += " ";
+        if (i % 2 == 1) res += " ";
       }
     }
   }

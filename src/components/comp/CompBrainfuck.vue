@@ -87,7 +87,7 @@ export default {
       } catch (e) {
 
         this.error = true;
-        this.errormsg = this.$t('errors.genericerror');
+        this.errormsg = this.$t('errors.generic');
         console.log(e);
 
       }

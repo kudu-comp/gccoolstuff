@@ -14,7 +14,7 @@
       <va-item v-show="links.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('htmlscanner.links')}}</template>
         <template v-slot:content>
-          <select class="custom-select" v-model="selectedlink" @change="openLink()">
+          <select class="custom-select" v-model="selectedlink" @change="openLink(selectedlink)">
             <option v-for="l in links" :key="l" :value="l.url">{{l.name}} - {{l.url}}</option>
           </select>
         </template>
@@ -22,12 +22,19 @@
       <va-item v-show="images.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('htmlscanner.images')}}</template>
         <template v-slot:content>
-          <select class="custom-select" v-model="selectedimage" @change="openImage()">
+          <select class="custom-select" v-model="selectedimage" @change="openLink(selectedimage)">
             <option v-for="i in images" :key="i" :value="i.url">{{i.name}} - {{i.url}}</option>
           </select>
         </template>
       </va-item>
-      <va-item v-show="comments.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
+      <va-item v-show="bgimages.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
+        <template v-slot:header>{{$t('htmlscanner.bgimages')}}</template>
+        <template v-slot:content>
+          <select class="custom-select" v-model="selectedbgimage" @change="openLink(selectedbgimage)">
+            <option v-for="i in bgimages" :key="i" :value="i.url">{{i.name}} - {{i.url}}</option>
+          </select>
+        </template>
+      </va-item><va-item v-show="comments.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('htmlscanner.comms')}}</template>
         <template v-slot:content>
           <div v-html="comments" />
@@ -37,6 +44,12 @@
         <template v-slot:header>{{$t('htmlscanner.white')}}</template>
         <template v-slot:content>
           <div v-html="whites" />
+        </template>
+      </va-item>
+      <va-item v-show="sizes.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
+        <template v-slot:header>{{$t('htmlscanner.size')}}</template>
+        <template v-slot:content>
+          <div v-html="sizes" />
         </template>
       </va-item>
       <va-item v-show="strongs.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
@@ -69,6 +82,12 @@
           <div v-html="subs" />
         </template>
       </va-item>
+      <va-item v-show="dels.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
+        <template v-slot:header>{{$t('htmlscanner.del')}}</template>
+        <template v-slot:content>
+          <div v-html="dels" />
+        </template>
+      </va-item>
       <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
@@ -98,15 +117,19 @@ export default {
       cacheNode: null,
       images: [],
       selectedimage: "",
+      bgimages: [],
+      selectedbgimage: "",
       links: [],
       selectedlink: "",
-      comments: [],
+      comments: "",
       strongs: "",
-      whites: [],
+      whites: "",
+      sizes: "",
       bolds: "",
       italics: "",
       sups: "",
       subs: "",
+      dels: "",
       showitem: true,
       hidebutton: true
     }
@@ -119,13 +142,8 @@ export default {
   methods: {
 
     // Open a selected link from the dropdown with links
-    openLink: function () {
-      window.open(this.selectedlink);
-    },
-
-    // Open an image from the dropdown with images
-    openImage: function () {
-      window.open(this.selectedimage);
+    openLink: function (link) {
+      window.open(link);
     },
 
     // Get all the nodes with a certain tag return a string
@@ -149,14 +167,17 @@ export default {
 
       // Clear previous scan
       this.images = [];
+      this.bgimages = [];
       this.links = [];
-      this.comments = [];
+      this.comments = "";
       this.strongs = "";
-      this.whites = [];
+      this.whites = "";
+      this.sizes = "";
       this.bolds = "";
       this.italics = "";
       this.sups = "";
       this.subs = "";
+      this.dels = "";
 
       try {
         // Scan the XML
@@ -174,7 +195,6 @@ export default {
         }
 
         // Find the links
-        this.links = [];
         let nodes = this.cacheNode.getElementsByTagName("a");
         for (let node of nodes) {
           // console.log(node);
@@ -189,17 +209,32 @@ export default {
         }
 
         // Find the images
-        this.images = [];
         nodes = this.cacheNode.getElementsByTagName("img");
         for (let node of nodes) {
           // console.log(node);
           this.images.push({ name: node.getAttribute("alt"), url: node.getAttribute("src") });
         }
 
+        // Find bgimages in styles
+        let x = xmlTree.evaluate(
+          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'background-image')]", xmlTree, null, XPathResult.ANY_TYPE, null);
+        let bgimage = x.iterateNext();
+        while (bgimage) {
+          // Parse url using regex
+          let url = bgimage.getAttribute('style').match(/background-image[:\s]*url\s*\(\s*['|"]*(\S*)['|"]\s*\)/);
+          this.bgimages.push({ name: bgimage.textContent, url: url[1] });
+          bgimage = x.iterateNext();
+        }
+
+        // Find background image in body tag
+        // let body = xmlTree.evaluate("//body", xmlTree, null, XPathResult.ANY_TYPE, null);
+        // if (body.size != 1) throw ("There should be exactly 1 body tag not " + body.size);
+        // let bgbody = body.getAttribute('background');
+        // console.log(bgbody);
+
         // Find the comments using XPath
-        let x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
+        x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
         let comment = x.iterateNext();
-        this.comments = "";
         while (comment) {
           this.comments += comment.textContent + "<br>";
           comment = x.iterateNext();
@@ -212,10 +247,18 @@ export default {
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='rgb(255, 255, 255)'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#FFFFFF') or contains(@style,'color:rgb(255, 255, 255)')]", xmlTree, null, XPathResult.ANY_TYPE, null);
         let white = x.iterateNext();
-        this.whites = "";
         while (white) {
           this.whites += white.textContent + "<br>";
           white = x.iterateNext();
+        }
+
+        // Find different sized text using XPath 
+        x = xmlTree.evaluate(
+          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'font-size')]", xmlTree, null, XPathResult.ANY_TYPE, null);
+        let size = x.iterateNext();
+        while (size) {
+          this.sizes += size.textContent + "<br>";
+          size = x.iterateNext();
         }
 
         // Find strong printed letters
@@ -228,6 +271,8 @@ export default {
         this.sups = this.listTags("sup");
         // Find subscript letters
         this.subs = this.listTags("sub");
+        // Find deleted letters
+        this.dels = this.listTags("del");
 
         // Display scan completed messages
         this.scanresult = this.$t('htmlscanner.complete');

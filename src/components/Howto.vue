@@ -259,16 +259,14 @@
           Again there are many possibilities. Try these ones:
           <ul>
             <li><b>Codebook</b> - search the <router-link to="/codebook">Code book</router-link> to see if there is a match.</li>
-            <li><b>Encoded text</b> - the text is encoded using <router-link :to="{ name: 'Cipher', params: { cipher: 'Base91'}}">Base91</router-link>,
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'Base16'}}">Base16</router-link>,
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'Base32'}}">Base32</router-link>,
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'Base64'}}">Base64</router-link> or
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'UUencode'}}">UUencode</router-link>. In these
-              cases the text is likely a combination of symbols, letters and digits.</li>
+            <li><b>Encoded text</b> - the text is binary encoded using <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}</router-link>
+              In these cases the text is likely a combination of symbols, letters and digits.</li>
             <li><b>Computer codes</b> - symbols might convert to numbers, or might convert to letters when using a different codepage.
               With <router-link to="/text/textcodes">Character &amp; codes</router-link> you can quickly try all the options.</li>
             <li><b>Cyrillic or Greek letters</b> - are actually normal text. The tools <router-link to="/text/textcodes">Character &amp; codes</router-link>
               and <router-link to="/text/textkeyboards">Keyboards</router-link> support Cyrillic and Greek.</li>
+            <li><b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/comp/compbrainfuck">{{$t('comptools.compbrainfuck.title')}}
+              </router-link> to solve the code.</li>
             <li><b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link :to="{ name: 'Cipher',
               params: { cipher: 'Goldbug'}}">here</router-link>.</li>
             <li><b>Another cipher</b> - use <router-link to="/text/smartreplace">Smart replace</router-link> to see if the frequencies

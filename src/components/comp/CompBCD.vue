@@ -11,10 +11,10 @@
         </select>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="packed" id="packed" v-model="packed" class="custom-control-input mr-2 mb-2">
-          <label for="packed" class="custom-control-label mr-2 mb-2">{{$t('compbcd.packed')}}</label>
+          <label for="packed" class="custom-control-label mb-2 mr-2">{{$t('compbcd.packed')}}</label>
         </div>
-        <label for="fill" class="custom-control-label mr-2 mb-2">{{$t('compbcd.fill')}}</label>
-        <select class="custom-select mb-2 mr-2" v-model='fill' @checked="fill = ''">
+        <label for="fill" class="form-label mr-2 mb-2">{{$t('compbcd.fill')}}</label>
+        <select class="custom-select mb-2" v-model='fill' @checked="fill = ''">
           <option value=""></option>
           <option value="0000">0000</option>
           <option value="1111">1111</option>
