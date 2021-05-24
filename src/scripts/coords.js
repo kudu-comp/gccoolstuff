@@ -1,6 +1,11 @@
 
 /**
- *
+ * Library to convert coordinates from one datum to another
+ * The calls to actually convert the coordinates are returning promises as some of the services they use are asynchronous (W3W, mapcode)
+ * - convertCoordFromWGS
+ * - convertCoordToWGS
+ * - convertCoordFromText
+ * - convertCoordFromLatLon
  */
 
  /** Explanation of longitude and latitude
@@ -15,6 +20,7 @@
   * QTH JO22hk51ll40je
   * MGRS 31UFU1076909307
   * What3words first.sensual.keyboard
+  * Mapcode 26.ZKL
   */
 
 import proj4 from 'proj4';
@@ -23,7 +29,9 @@ import * as qthlocator from '@/scripts/qthlocator.js';
 import Geohash from 'latlon-geohash';
 import OpenLocationCode from '@/scripts/openlocationcode.min.js';
 import * as geohash36 from '@/scripts/geohash36.js';
-import * as britishgrid from '@/scripts/britishgrid.js'
+import * as britishgrid from '@/scripts/britishgrid.js';
+import * as what3words from '@/scripts/what3words.js';
+import * as mapcode from '@/scripts/mapcode.js';
 
 // var coordutils = {
 //   convertCoordFromLatLon: convertCoordFromLatLon,
@@ -445,6 +453,7 @@ export function getCoordinateForDMS (s) {
     return getCoordinateForDMSFormat7(s);
   } else {
     console.log("Error - format " + s);
+    throw ("Error - format " + s)
   }
 }
 
@@ -483,6 +492,7 @@ export function printCoordinateFromDMS (coord, s) {
     return printCoordinateFromDMSFormat7(coord);
   } else {
     console.log("Error");
+    throw( "Error writing DMS format")
   }
 }
 /**
@@ -492,10 +502,10 @@ export function printCoordinateFromDMS (coord, s) {
  * @param {string} fromdatum  coordinate system of input
  * @param {string} proj4jsdef  definition of coordinate conversion for proj4, only used when fromdatum = proj4js
  *
- * @return {object} contains lat and lon
+ * @return {promise} when it resolves return object with lat and lon
  */
 
-export function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
+export async function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
 
   let temp = []     // Used as output from proj4
   let fromproj = "" // Defines the proj4 projection to be used
@@ -516,42 +526,59 @@ export function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
     case "Geohash36" :
       // Geohash36 returns and object with lon and lat
       return geohash36.geohash36_decode(coord.s.trim());
+    case "W3W" :
+      // W3W returns a promise and when it resolves an object with lon and lat
+      return what3words.W3WToWgs84(coord.s.trim());
+    case "MapcodeI" :
+    case "MapcodeL" :
+      // Mapcode returns a promise and when it resolves and object with lon and lat
+      // Input is object with mapcode and optional context for local
+      return mapcode.mapCodeToWgs84(coord)
     case "OLC" :
       // Google's Open Location Code, use publicly available scripts
       temp = OpenLocationCode.decode(coord.s.trim());
       return { lon: temp.longitudeCenter, lat: temp.latitudeCenter };
-    // all of the datums below use proj4, the case sets the right fromproj
-    case "UTM" :
-      // For southern hemisphere latitude should be negative
-      if (coord.letterdesignator <= 'M') coord.lat = coord.lat - 10000000;
-      fromproj = "+proj=utm +zone=" + coord.zone + " +ellps=GRS80 +units=m +no_defs";
-      // Longitude (easting)
-      break;
-    case "RD" :
-    case "EPSG:28992" :
-      fromproj = "EPSG:28992";
-      break;
-    case "OSGB" :
-      fromproj = "EPSG:27700";
-      break;
-    case "Proj4js" :
-      // use the provided definition
-      fromproj = proj4jsdef;
-      break;
-    default :
-      fromproj = fromdatum;
-      break;
-  }
+    
+      // all of the datums below use proj4
+      // They must be captured in a separate clause to prevent running after the async code
 
-  if (fromproj == 'WGS84')
-    temp = [coord.lon, coord.lat];
-  else {
-    // Use proj4 to convert to new datum
-    temp = proj4(fromproj, 'WGS84', [coord.lon, coord.lat]);
-  }
+    default : 
 
-  return { lon: temp[0], lat: temp[1]}
-}
+      switch (fromdatum) {
+        case "UTM" :
+          // For southern hemisphere latitude should be negative
+          if (coord.letterdesignator <= 'M') coord.lat = coord.lat - 10000000;
+          fromproj = "+proj=utm +zone=" + coord.zone + " +ellps=GRS80 +units=m +no_defs";
+          // Longitude (easting)
+          break;
+        case "RD" :
+        case "EPSG:28992" :
+          fromproj = "EPSG:28992";
+          break;
+        case "OSGB" :
+          fromproj = "EPSG:27700";
+          break;
+        case "Proj4js" :
+          // use the provided definition
+          fromproj = proj4jsdef;
+          break;
+        default :
+          fromproj = fromdatum;
+          break;
+      }
+  
+      if (fromproj == 'WGS84')
+        temp = [coord.lon, coord.lat];
+      else {
+        // Use proj4 to convert to new datum
+        temp = proj4(fromproj, 'WGS84', [coord.lon, coord.lat]);
+      }
+    
+      return { lon: temp[0], lat: temp[1]}
+
+    }
+
+  }
 
 /**
  * Conversion of coordinate from one datum to another
@@ -563,62 +590,88 @@ export function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
  * @return {object} contains lat and lon optionally zone or s
 */
 
-export function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
+export async function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
 
   let temp = [];    // Used to store coordiantes returned from proj4, array with [lon, lat]
   let toproj = "";  // String with the to be used projection for proj4
 
-  // Longitude (lengtegraad), X, easting, E/W are all the same and range from -180, +180
-  // Latitude (breedtegraag), Y, northing, N/S are all the same and range from -90, +90
   // Get the newcoord in the right format
   switch (todatum) {
-    // MGRS, QTH and Geohash don't use proj4 and return result immediately
+
     case "MGRS" :
       // mgrs.forward takes longitude first and latitude second, returns a string
       return { s: mgrs.forward( [coord.lon, coord.lat] ) };
+
     case "QTH" :
       // proj4 fromcoord has longtitude (EW, y) first and latitude (NS, x) second
       // Longitude then altitude to wgs2qth
       return { s: qthlocator.wgs2qth(coord.lon, coord.lat) };
+
     case "Geohash" :
       // Geohash takes latitude first, longitude second
       return { s: Geohash.encode(coord.lat, coord.lon, 11) };
+
     case "Geohash36" :
       // Geohash takes latitude first, longitude second
       return { s: geohash36.geohash36_encode(coord.lat, coord.lon, 11) };
-    // all of the datums below use proj4, the case sets the right fromproj
-    // UTM requires zone calculation using the longitude
+
     case "OLC" :
       return { s: OpenLocationCode.encode(coord.lat, coord.lon, OpenLocationCode.CODE_PRECISION_EXTRA) };
-    case "UTM" :
-      // For UTM calculate the zone from the WGS84 coord
-      var zone = Math.ceil((coord.lon+180)/6);
-      toproj = "+proj=utm +zone=" + zone + " +ellps=GRS80 +units=m +no_defs";
-      temp = proj4("WGS84", toproj, [coord.lon, coord.lat]);
-      // Southern hemisphere starts at the south pole at 1,000 000
-      var lat = (temp[1] < 0) ? 10000000 + temp[1] : temp[1];
-      return { lon: temp[0], lat, zone: zone, letterdesignator: mgrs.getLetterDesignator(coord.lat) };
-    case "EPSG:28992" :
-    case "RD" :
-      // RD uses EPSG:28992
-      toproj = "EPSG:28992";
-      break;
-    case "OSGB" :
-      // British grid (with zones) uses EPSG:27700
-      toproj = "EPSG:27700";
-      break;
-    case "Proj4js" :
-      // default the option value is the toproj to use
-      toproj = proj4jsdef;
-      break;
-    default :
-      // default the option value is the toproj to use
-      toproj = todatum;
-      break;
-  }
 
-  temp = proj4("WGS84", toproj, [coord.lon, coord.lat]);
-  return { lon: temp[0], lat: temp[1] };
+    case "W3W" :
+      // Asynchronous call returns Promise
+      return what3words.wgs84ToW3W(coord).then( data => {
+        return { s: data }
+      });
+
+    case "MapcodeI" :
+      // Asynchronous call returns Promise
+      // Returns and object with mapcode
+      return mapcode.wgs84ToMapcodeI(coord);
+
+    case "MapcodeL" :
+      // Asynchronous call returns Promise
+      // Returns and object with mapcode and context
+      return mapcode.wgs84ToMapcodeL(coord);
+
+    // all of the datums below use proj4, the case sets the right fromproj
+    default : {
+
+      switch(todatum) {
+        // UTM requires zone calculation using the longitude
+        case "UTM" :
+          // For UTM calculate the zone from the WGS84 coord
+          var zone = Math.ceil((coord.lon+180)/6);
+          toproj = "+proj=utm +zone=" + zone + " +ellps=GRS80 +units=m +no_defs";
+          temp = proj4("WGS84", toproj, [coord.lon, coord.lat]);
+          // Southern hemisphere starts at the south pole at 1,000 000
+          var lat = (temp[1] < 0) ? 10000000 + temp[1] : temp[1];
+          return { lon: temp[0], lat, zone: zone, letterdesignator: mgrs.getLetterDesignator(coord.lat) };
+        case "EPSG:28992" :
+        case "RD" :
+          // RD uses EPSG:28992
+          toproj = "EPSG:28992";
+          break;
+        case "OSGB" :
+          // British grid (with zones) uses EPSG:27700
+          toproj = "EPSG:27700";
+          break;
+        case "Proj4js" :
+          // default the option value is the toproj to use
+          toproj = proj4jsdef;
+          break;
+        default :
+          // default the option value is the toproj to use
+          toproj = todatum;
+          break;
+      }
+
+      temp = proj4("WGS84", toproj, [coord.lon, coord.lat]);
+      return { lon: temp[0], lat: temp[1] };
+
+    }
+    
+  }
 
 }
 
@@ -635,8 +688,6 @@ export function getCoordFromText (s, datum) {
 
   let temp = [];     // Used to store result from regex match
 
-  // Longitude (lengtegraad), X, easting, E/W are all the same and range from -180, +180
-  // Latitude (breedtegraag), Y, northing, N/S are all the same and range from -90, +90
   // Convert to coordinate
   switch (datum) {
     case "UTM" :
@@ -659,6 +710,18 @@ export function getCoordFromText (s, datum) {
     case "OLC" :
       // These coordinates are using strings
       return { s: s.trim() };
+    case "MapcodeI" :
+      // String no context, just one string
+      return { mapcode: s.trim() }
+    case "MapcodeL" :
+      // String and context, two strings separated by whitespace
+      temp = s.split(/\s+/g);
+      return { mapcode: temp[0], context: (temp.length > 1) ? temp[1] : "NLD"}
+    case "W3W" :
+      // 3 words separated by dots, commas or whitespace
+      // dot is the correct format and returned
+      temp = s.split(/[.,\s]+/g);
+      return { s : "" + temp[0] + "." + temp[1] + "." + temp[2] }
     case "OSGB" :
       // British national grid EPSG:27700 formatted as zones e.g. SV 98765 12342
       // toGrid returns an object with lat, lon
@@ -676,7 +739,7 @@ export function getCoordFromText (s, datum) {
 }
 
 /**
- * Convert coord objectto text
+ * Convert coord object to text
  *
  * @param {object}    coord has either lat, lon (with optional zone and letterdesignator) OR s
  * @param {string}    todatum datum of the to be generated text string
@@ -707,8 +770,14 @@ export function getTextFromCoord (coord, datum, round = 7, dmsformat = "") {
     case "Geohash" :
     case "Geohash36" :
     case "OLC" :
+    case "W3W" :
       // These coordinates are already using strings
       return coord.s.trim();
+    case "MapcodeI" :
+      return coord.mapcode.trim();
+    case "MapcodeL" :
+      // coord is an object with mapcode and optional context
+      return coord.mapcode.trim() + " " + coord.context.trim();
     case "OSGB" :
       return britishgrid.toGrid(coord);
     default :
@@ -733,13 +802,13 @@ export function getTextFromCoord (coord, datum, round = 7, dmsformat = "") {
  * @return {object} contains lat and lon
 */
 
-export function convertCoordFromLatLon (coord, fromdatum, todatum, proj4jsdef = "") {
+export async function convertCoordFromLatLon (coord, fromdatum, todatum, proj4jsdef = "") {
 
-  // Always convert first to WGS84
-  let wgs84coord = convertCoordToWGS (coord, fromdatum, proj4jsdef);
-
-  // Then convert WGS84 to the requested datum
-  return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
+  // Convert first to WGS84
+  return convertCoordToWGS (coord, fromdatum, proj4jsdef)
+    .then (wgs84coord => {
+      return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
+    });
 
 }
 
@@ -754,13 +823,16 @@ export function convertCoordFromLatLon (coord, fromdatum, todatum, proj4jsdef = 
  * @return {object} contains lat and lon optionally zone or s
 */
 
-export function convertCoordFromText (coord, fromdatum, todatum, proj4jsdef = "") {
+export async function convertCoordFromText (coord, fromdatum, todatum, proj4jsdef = "") {
 
   // Always convert first to WGS84
-  let wgs84coord = convertCoordToWGS ( getCoordFromText(coord, fromdatum), fromdatum, proj4jsdef);
-
   // Then convert WGS84 to the requested datum
-  return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
+  let c = getCoordFromText(coord, fromdatum);
+  
+  return convertCoordToWGS ( c, fromdatum, proj4jsdef)
+    .then (wgs84coord => {
+      return convertCoordFromWGS (wgs84coord, todatum, proj4jsdef);
+    });
 
 }
 
@@ -804,8 +876,3 @@ export function geoFindMe () {
   }
 }
 
-// exports['default'] = coordutils;
-// exports.convertCoordFromLatLon = convertCoordFromLatLon;
-// exports.convertCoordFromText = convertCoordFromText;
-//
-// Object.defineProperty(exports, '__esModule', { value: true });

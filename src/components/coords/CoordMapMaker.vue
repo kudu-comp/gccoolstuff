@@ -118,30 +118,34 @@ export default {
         try {
 
           // Get the coordinates
-          let mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84');
+          coords.convertCoordFromText(input[i], this.from, 'WGS84')
+            .then ( mapcoord => {
 
-          // Add a marker to the map for each coordinate
-          if (this.showmarkers) {
-            let marker = this.$store.state.L.marker(mapcoord).addTo(this.$store.state.mymap);
+              // Add a marker to the map for each coordinate
+              if (this.showmarkers) {
+                let marker = this.$store.state.L.marker(mapcoord).addTo(this.$store.state.mymap);
 
-            // Create a popup that doesn't close and bind it to the marker
-            if (this.showlabels) {
-              let p = new this.$store.state.L.Popup({ autoClose: false, closeOnClick: false })
-                    .setContent(markertext[i])
-                    .setLatLng(mapcoord);
-              marker.bindPopup(p).openPopup();
-            }
-          }
+                // Create a popup that doesn't close and bind it to the marker
+                if (this.showlabels) {
+                  let p = new this.$store.state.L.Popup({ autoClose: false, closeOnClick: false })
+                        .setContent(markertext[i])
+                        .setLatLng(mapcoord);
+                  marker.bindPopup(p).openPopup();
+                }
+              }
 
-          // Draw circles if requested
-          if (this.drawcircles) {
-            this.$store.state.L.circle(mapcoord, {
-              color: "#E72E1C",
-              fillColor: "#EC7F74",
-              fillOpacity: 0.5,
-              radius: this.dist * this.unit
-            }).addTo(this.$store.state.mymap);
-          }
+              // Draw circles if requested
+              if (this.drawcircles) {
+                this.$store.state.L.circle(mapcoord, {
+                  color: "#E72E1C",
+                  fillColor: "#EC7F74",
+                  fillOpacity: 0.5,
+                  radius: this.dist * this.unit
+                }).addTo(this.$store.state.mymap);
+                
+              }
+
+            });
 
         } catch(e) {
 

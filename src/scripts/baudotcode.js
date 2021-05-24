@@ -4,7 +4,7 @@
  * The codeToASCII functions take a binary 5-bit string as input and either switches from letters <> figures or return the character
  * The ASCIItoCode functions take a character and return the 5-bit string, optionally preceeded with the figure/letter switch
  *
- * Nomral order is 54321 bit order
+ * Normal order is 54321 bit order
  * Reversed order is 12345 bit order
  *
  * Supports ITA-1 Baudotcode

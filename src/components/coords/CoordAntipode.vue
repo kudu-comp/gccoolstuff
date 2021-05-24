@@ -46,21 +46,31 @@ export default {
 
       // Reset error
       this.error = false;
+      let anticoord;
 
       try {
         // Translate the inputed coordinates to WGS84 for display on map
-        let startcoord = coords.convertCoordFromText(this.coordinate, this.selecteddatum, "WGS84");
         
-        // Getting anitpode coordinate with some basic math
-        let anticoord =  { lat: -1 * startcoord.lat, lon: -1 * (180 - Math.abs(startcoord.lon)) }
-        
-        // Display marker
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, anticoord, "Antipode");
+        coords.convertCoordFromText(this.coordinate, this.selecteddatum, "WGS84")
+          .then (startcoord => {
 
-        // Print the calculated coordinate in the right format
-        this.result = coords.getTextFromCoord(coords.convertCoordFromWGS(anticoord, this.selecteddatum), this.selecteddatum, 7, this.coordinate);
-        this.result += this.$t('cdantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
+            // Getting anitpode coordinate with some basic math
+            anticoord = { lat: -1 * startcoord.lat, lon: -1 * (180 - Math.abs(startcoord.lon)) }
+          
+            // Display marker
+            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, anticoord, "Antipode");
 
+            // Convert antipode coordinate to input datum
+            return coords.convertCoordFromWGS(anticoord, this.selecteddatum);
+          })
+          .then (convcoord => {
+
+            // Print the antipode coordinate in the right format
+            this.result = coords.getTextFromCoord(convcoord, this.selecteddatum, 7, this.coordinate)
+            this.result += this.$t('cdantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
+
+          });
+          
       } catch (e) {
 
         this.error = true;

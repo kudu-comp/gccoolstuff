@@ -22,6 +22,9 @@
         <option value="QTH">Maidenhead / QTH locator</option>
         <option value="OLC">Open location code</option>
         <option value="Geohash">Geohash</option>
+        <option value="W3W">What3words</option>
+        <option value="MapcodeL">Mapcode local</option>
+        <option value="MapcodeI">Mapcode international</option>
         <option value="Geohash36">Geohash 36</option>
         <option disabled>--- Define your own ---</option>
         <option value="Proj4js">Proj4js definition</option>

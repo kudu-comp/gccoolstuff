@@ -68,70 +68,97 @@ export default {
       this.error = false;
       this.result = "Result";
 
+      let coord1, coord2, gridcoord1, gridcoord2;
+
       try {
 
-        // Translate the inputed coordinates to WGS84 for display on map
-        let coord1 = coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84");
-        let coord2 = coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-
-        // Getting grid coord using grid based coordinate to calculate projection
-        let gridcoord1 =  coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-        let gridcoord2 =  coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-        let r1 = this.radius1 * this.unit1;
-        let r2 = this.radius2 * this.unit2;
-
-        this.error = false;
-        let data = {
-          calc: 'circle',
-          c1: {x : gridcoord1.lon, y: gridcoord1.lat, rad: r1},
-          c2: {x : gridcoord2.lon, y: gridcoord2.lat, rad: r2 },
-        };
-
-        // Set markers
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, "Center 1");
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, "Center 2");
-
-        // Draw circles
-        this.$store.state.L.circle(coord1, {
-          color: "#E72E1C",
-          fillColor: "#EC7F74",
-          fillOpacity: 0.5,
-          radius: r1
-        }).addTo(this.$store.state.mymap);
-        this.$store.state.L.circle(coord2, {
-          color: "#E72E1C",
-          fillColor: "#EC7F74",
-          fillOpacity: 0.5,
-          radius: r2
-        }).addTo(this.$store.state.mymap);
-
-        // Call PHP script on server
-        fetch(this.phpurl, {
-            method: 'POST',
-            body: JSON.stringify(data)
+        coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84")
+          .then (data => {
+            coord1 = data;
+            return coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
           })
-          .then(response => response.json())
-          .then(data => {
+          .then (data => {
+            coord2 = data;
+            return coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
+          })
+          .then (data => {
+            gridcoord1 = data;
+            return coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+          })
+          .then (data => {
+            gridcoord2 = data;
 
+            let r1 = this.radius1 * this.unit1;
+            let r2 = this.radius2 * this.unit2;
+
+            // Set markers
+            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, "Center 1");
+            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, "Center 2");
+
+            // Draw circles
+            this.$store.state.L.circle(coord1, {
+              color: "#E72E1C",
+              fillColor: "#EC7F74",
+              fillOpacity: 0.5,
+              radius: r1
+            }).addTo(this.$store.state.mymap);
+            this.$store.state.L.circle(coord2, {
+              color: "#E72E1C",
+              fillColor: "#EC7F74",
+              fillOpacity: 0.5,
+              radius: r2
+            }).addTo(this.$store.state.mymap);
+
+            let inputdata = {
+              calc: 'circle',
+              c1: {x : gridcoord1.lon, y: gridcoord1.lat, rad: r1},
+              c2: {x : gridcoord2.lon, y: gridcoord2.lat, rad: r2 },
+            };
+
+            // Call PHP script to calculate circles intersection points
+            return fetch(this.phpurl, {
+              method: 'POST',
+              body: JSON.stringify(inputdata)
+            })
+            .then(response => response.json())
+            .then (data => {
+
+              // If circles intersect print coordinates of intersection points
               if (data.intersect) {
 
-                // Intersection
-
                 // Convert points to WGS84
-                let p1 = coords.convertCoordToWGS( {lat: data.p1.y, lon: data.p1.x}, "RD");
-                let p2 = coords.convertCoordToWGS( {lat: data.p2.y, lon: data.p2.x}, "RD");
+                let p1, p2, convp1, convp2;
+                coords.convertCoordToWGS( {lat: data.p1.y, lon: data.p1.x}, "RD")
+                  .then (datap1 => {
+                    p1 = datap1;
+                    return coords.convertCoordToWGS( {lat: data.p2.y, lon: data.p2.x}, "RD");
+                  })
+                  .then (datap2 => {
+                    p2 = datap2;
+                    // Convert p1 to input datum
+                    return coords.convertCoordFromWGS(p1, this.selecteddatum1)
+                  })
+                  .then (datacp1 => {
+                    convp1 = datacp1;
+                    // Convert p2 to input data
+                    return coords.convertCoordFromWGS(p2, this.selecteddatum1)
+                  })
+                  .then (datacp2 => {
 
-                this.result = "<br>" + this.$t('cdcircles.ip') + " 1: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p1, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-                this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
-                this.result += "<br>" + this.$t('cdcircles.ip') + " 2: " + coords.getTextFromCoord(coords.convertCoordFromWGS(p2, this.selecteddatum1), this.selecteddatum1, 7, this.coordinate1);
-                this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p2, "N12 34.567 E1 23.456");
-                this.result += "<br>" + this.$t('labels.distance') + ": " + data.distance.toFixed(0) + "m";
-                this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
+                    convp2 = datacp2;
+                    this.result = this.$t('cdcircles.ip') + " 1: " + coords.getTextFromCoord(convp1, this.selecteddatum1, 7, this.coordinate1);
+                    this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
+                    this.result += "<br>" + this.$t('cdcircles.ip') + " 2: " + coords.getTextFromCoord(convp2, this.selecteddatum1, 7, this.coordinate1);
+                    this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p2, "N12 34.567 E1 23.456");
+                    this.result += "<br>" + this.$t('labels.distance') + ": " + data.distance.toFixed(0) + "m";
+                    this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
-                // Display markers
-                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
-                coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
+                    // Display markers
+                    coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
+                    coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
 
+                  });
+                
               } else {
 
                 // No intersection one circle is inside the other or they don't overlap at all
@@ -141,13 +168,16 @@ export default {
               }
 
           })
-          .catch((error) => {
+            .catch( (error) => {
 
               console.error('Error ', error);
               this.errormsg = this.$t('errors.incorrectcoords');
               this.error = true;
               
-          });
+            });
+
+          })
+          ;          
 
         } catch (e) {
 

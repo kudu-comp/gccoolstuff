@@ -100,28 +100,48 @@ export default {
       this.result = "";
       this.count = 0;
       this.error = false;
+      let promises = [];
 
-      // Convert each coordinate
-      for (let i = 0; i < input.length; i++) {
+      try {
 
-        this.count++;
-        try {
+        // Convert each coordinate
+        // Create a promise for each coordinaat
+        for (let i = 0; i < input.length; i++)
+          promises.push (coords.convertCoordFromText(input[i], this.from, this.to, this.proj4jsdef));
 
-          this.result += coords.getTextFromCoord(coords.convertCoordFromText(input[i], this.from, this.to, this.proj4jsdef), this.to, 7, this.wgsformat) + "\n";
+        // If all promises are resolved write output
+        Promise.all (promises)
+          .then( convcoords => {
 
-          // Add a marker to the map for each coordinaat
-          let mapcoord = coords.convertCoordFromText(input[i], this.from, 'WGS84', this.proj4jsdef);
-          coords.displayMarker(this.$store.state.L, this.$store.state.mymap, mapcoord, "Point " + this.count);
+            // Add the converted coordinate to output
+            for (let c of convcoords)
+              this.result += coords.getTextFromCoord(c, this.to, 7, this.wgsformat) + "\n";
 
-        } catch(e) {
+          });
 
-          this.error = true;
-          this.errormsg = this.$t('errors.incorrectcoords');
-          console.log(e);
+        // Create promises to generate coordinates for markers
+        promises = [];
+        for (let i = 0; i < input.length; i++)
+          promises.push (coords.convertCoordFromText(input[i], this.from, 'WGS84', this.proj4jsdef));
 
-        }
+        // If all promises are resolved display markers
+        Promise.all(promises)
+          .then ( mapcoords => {
+
+            for (let m of mapcoords)
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, "Point " + this.count);
+
+          });
+
+      } catch(e) {
+
+        this.error = true;
+        this.errormsg = this.$t('errors.incorrectcoords');
+        console.log(e);
+
       }
     },
+
   },
 }
 </script>

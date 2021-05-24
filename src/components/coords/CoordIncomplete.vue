@@ -63,7 +63,6 @@ export default {
 
         // Initialize variables and regular expressions
         let newcoord;
-        let coord;
         let marker;
         let vars;
         let regex1 = new RegExp (this.var1, "g");
@@ -102,9 +101,11 @@ export default {
                   if (useVar4) { newcoord = newcoord.replace(regex4, this.var4options[v4]); vars += this.var4 + "=" + this.var4options[v4] + " "; }
 
                   // Set a marker on the map
-                  coord = coords.convertCoordFromText(newcoord, this.selecteddatum, "WGS84");
-                  marker = this.$store.state.L.marker(coord).addTo(this.$store.state.mymap);
-                  marker.bindPopup(newcoord + " " + vars).openPopup();
+                  coords.convertCoordFromText(newcoord, this.selecteddatum, "WGS84")
+                    .then( coord => {
+                      marker = this.$store.state.L.marker(coord).addTo(this.$store.state.mymap);
+                      marker.bindPopup(newcoord + " " + vars).openPopup();
+                    });
                 }
               }
             }
