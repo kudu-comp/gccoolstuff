@@ -31,14 +31,15 @@ async function helper (url) {
  * @return string         what3words string
  */
 
-export async function wgs84ToW3W (coord) {
+export async function wgs84ToW3W (coord, language = "en") {
 
-  let coordtext = "" + coord.lon.toFixed(5) + "," + coord.lat.toFixed(5);
-  let url = urlw3wencode + "?key=" + w3wapi + "&coordinates=" + coordtext + "&language=nl";
+  let url = urlw3wencode + "?key=" + w3wapi + "&coordinates=" + coord.lat.toFixed(5) + "," + coord.lon.toFixed(5) + "&language=" + language;
 
   return helper(url)
     .then( data => {
+
       return data.words;
+
     });
 
 }
@@ -59,8 +60,31 @@ export async function W3WToWgs84 (s) {
     .then( data => {
 
       // Looks like w3w has switched lon and lat?
-      return { lon: data.coordinates.lat, lat: data.coordinates.lng }
+      return { lat: data.coordinates.lat, lon: data.coordinates.lng }
       
     });
+
+}
+
+/*
+ * Convert what3words to coord object
+ * 
+ * @param string s      what3words string
+ * @return Object       object with lat and lon
+ * 
+ */
+
+export async function W3WSuggest (s, focus = "", clip = "", radius = 0, language = "", country = "") {
+
+  let url = "https://api.what3words.com/v3/autosuggest" + "?key=" + w3wapi + "&input=" + s;
+  if (language) url += "&language=" + language;
+  if (focus) url += "&focus=" + focus.lat.toFixed(5) + "," + focus.lon.toFixed(5);
+  if (clip) url += "&clip-to-circle=" + clip.lat.toFixed(5) + "," + clip.lon.toFixed(5) + "," + radius.toFixed(2);
+  if (country) url += "&clip-to-country=" + country
+  
+  return helper(url)
+    .then (data => {
+      return data.suggestions;
+    })
 
 }

@@ -8,6 +8,7 @@ import CoordCircles from '@/components/coords/CoordCircles'
 import CoordIncomplete from '@/components/coords/CoordIncomplete'
 import CoordAntipode from '@/components/coords/CoordAntipode'
 import CoordMapMaker from '@/components/coords/CoordMapMaker'
+import CoordW3W from '@/components/coords/CoordW3W.vue'
 import TextToolbox from '../views/TextToolbox.vue'
 import TextWordValue from '@/components/texts/TextWordValue.vue'
 import SmartReplace from '@/components/texts/SmartReplace.vue'
@@ -70,6 +71,7 @@ const routes = [
       { path: "/coord/coordincomplete", component: CoordIncomplete },
       { path: "/coord/coordantipode", component: CoordAntipode },
       { path: "/coord/coordmapmaker", component: CoordMapMaker },
+      { path: "/coord/coordw3w", component: CoordW3W }
     ]
   },
   {

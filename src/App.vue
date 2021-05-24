@@ -84,6 +84,10 @@ body {
   color: #815E22;
 }
 
+hr {
+	color: #2E1E03;
+}
+
 .flag:hover {
   box-shadow: 4px 4px #785E31;
   background-color: #E2AE15;

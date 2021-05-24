@@ -1,6 +1,6 @@
 <template>
   <div class="form-inline">
-    <label class="form-label col-sm-3 col-md-2 col-lg-2 mb-2" for="distance">
+    <label class="form-label col-sm-3 col-md-2 col-lg-1 mb-2" for="distance">
       <slot name="label">{{$t('labels.distance')}}</slot>
     </label>
     <input type="text" class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2" :value='dist' @input="updateDist($event.target.value)"/>

@@ -7,7 +7,8 @@
     <router-link to="/coord/coordlines">{{$t('coordinates.lines.title')}}</router-link> |
     <router-link to="/coord/coordtriangles">{{$t('coordinates.triangles.title')}}</router-link> |
     <router-link to="/coord/coordcircles">{{$t('coordinates.circles.title')}}</router-link> |
-    <router-link to="/coord/coordantipode">{{$t('coordinates.antipode.title')}}</router-link>
+    <router-link to="/coord/coordantipode">{{$t('coordinates.antipode.title')}}</router-link> |
+    <router-link to="/coord/coordw3w">{{$t('coordinates.w3w.title')}}</router-link>
   </div>
   <router-view :key="$route.path" />
   <div v-if="['Coord'].includes($route.name)">
@@ -58,6 +59,12 @@
         <template v-slot:header><router-link to="/coord/coordantipode">{{$t('coordinates.antipode.title')}}</router-link></template>
         <template v-slot:content>
           <span v-html="$t('coordinates.antipode.long')" />
+        </template>
+      </va-item>
+      <va-item v-bind:showitem="show[9]" v-on:toggle="toggleItem(9)">
+        <template v-slot:header><router-link to="/coord/coordw3w">{{$t('coordinates.w3w.title')}}</router-link></template>
+        <template v-slot:content>
+          <span v-html="$t('coordinates.w3w.long')" />
         </template>
       </va-item>
     </div>

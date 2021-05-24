@@ -721,6 +721,7 @@ export function getCoordFromText (s, datum) {
       // 3 words separated by dots, commas or whitespace
       // dot is the correct format and returned
       temp = s.split(/[.,\s]+/g);
+      if (temp.length != 3) throw ("Incorrect what3words format");
       return { s : "" + temp[0] + "." + temp[1] + "." + temp[2] }
     case "OSGB" :
       // British national grid EPSG:27700 formatted as zones e.g. SV 98765 12342

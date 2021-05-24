@@ -133,6 +133,11 @@
       "title": "Antipode",
       "short": "The point opposite on the globe.",
       "long" : "The antipode is the point exactly on the opposite side of the earth. To calculate the latitude of an antipode, change the sign and direction of the latitude of the reference point. To calculate the longitude of an antipode, subtract the absolute value of the reference-point longitude from 180 degrees and change the sign and direction of the answer with reference to the reference point."
+    },
+    "w3w" : {
+      "title": "What3words",
+      "short": "Convert to, convert from, auto suggest",
+      "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p>"
     }
   },
 
@@ -1177,6 +1182,21 @@
   "cdantipode": {
     "result": "The antipode coordinate is ",
     "or": " or "
+  },
+
+  "cdw3w" : {
+    "languages": "Available languages",
+    "convertto": "Convert to w3w",
+    "convertfrom": "Convert to ...",
+    "suggest": "Show suggestions",
+    "w3wcode": "What3words coordinate",
+    "w3wsugg": "What3words suggestion",
+    "countries": "Clip to country",
+    "focus": "Focus on coordinate",
+    "clip": "Clip to circle",
+    "words": "Words",
+    "country": "Country",
+    "nearest": "Nearest place"
   },
 
   "txtwordval": {

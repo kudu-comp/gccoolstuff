@@ -134,6 +134,11 @@
       "title": "Antipode",
       "short": "Het punt exact aan de andere kant van de aarde",
       "long" : "Bereken de antipode, het punt exact aan de andere kant van de aardbol."
+    },
+    "w3w" : {
+      "title": "What3words",
+      "short": "Converteer naar en van, auto suggesties",
+      "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot ee land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>"
     }
   },
 
@@ -1182,6 +1187,21 @@
   "cdantipode": {
     "result": "Het antipode coördinaat is ",
     "or": " of "
+  },
+
+  "cdw3w" : {
+    "languages": "Beschikbare talen",
+    "convertto": "Converteer naar w3w",
+    "convertfrom": "Convert naar ...",
+    "suggest": "Toon suggesties",
+    "w3wcode": "What3words coordinaat",
+    "w3wsugg": "What3words suggestie",
+    "countries": "Beperk to land",
+    "focus": "Focus op coördinaat",
+    "clip": "Beperk tot cirkel",
+    "words": "Woorden",
+    "country": "Land",
+    "nearest": "Dichtsbijzijnde plaats"
   },
 
   "txtwordval": {
