@@ -12,6 +12,7 @@
         <router-link to="/coord/coordtriangles">{{$t('coordinates.triangles.title')}}</router-link> {{$t('coordinates.triangles.short')}}<br>
         <router-link to="/coord/coordcircles">{{$t('coordinates.circles.title')}}</router-link> {{$t('coordinates.circles.short')}}<br>
         <router-link to="/coord/coordantipode">{{$t('coordinates.antipode.title')}}</router-link> {{$t('coordinates.antipode.short')}}
+        <router-link to="/coord/coordw3w">{{$t('coordinates.w3w.title')}}</router-link> {{$t('coordinates.w3w.short')}}
       </div>
       <h3>{{$t('menu.texttools')}}</h3>
       <div class="p mb-2">

@@ -1,20 +1,6 @@
 <template>
   <div class="d-flex flex-row-reverse">
     <div class="form-inline">
-      <label class="form-label mb-2 mr-2" for="coordinput">{{$t('dialogmap.mapstyle')}}</label>
-      <select class="custom-select mb-2 mr-2" v-model='mapstyle' @input="updateMap($event.target.value)">
-        <option value="streets-v11">{{$t('dialogmap.street')}}</option>
-        <option value="satellite-v9">{{$t('dialogmap.satellite')}}</option>
-        <option value="hikebike">{{$t('dialogmap.hikebike')}}</option>
-        <option value="satellite-streets-v11">{{$t('dialogmap.satstreet')}}</option>
-        <option value="outdoors-v11">{{$t('dialogmap.outdoors')}}</option>
-        <option value="transport">{{$t('dialogmap.transport')}}</option>
-        <option value="cyclemap">{{$t('dialogmap.cyclemap')}}</option>
-        <option value="landscape">{{$t('dialogmap.landscape')}}</option>
-        <option value="outdoors">{{$t('dialogmap.outdoors2')}}</option>
-        <option value="light-v10">{{$t('dialogmap.light')}}</option>
-        <option value="dark-v10">{{$t('dialogmap.dark')}}</option>
-      </select>
       <input type="button" id="getlocation" :value="$t('dialogmap.getloc')" class="btn btn-primary mb-2 " v-on:click="getLocation()">
     </div>
   </div>
@@ -34,21 +20,86 @@ export default {
       mapstyle: this.$store.state.mapstyle,
       L: null,
       mymap: null,
+      baseMaps: null
     }
   },
 
   // mount map
   mounted: function() {
+    
     this.L = window.L;
-    this.mymap = this.L.map('mapid').setView([52.40983, 4.72280], 13);
-    this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: this.$store.state.mapAttribution,
+
+    // Create the tile layers base map object
+    this.baseMaps = {
+      "Hike & Bike" : this.L.tileLayer('https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }),
+      "Streets" : this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
-        id: 'mapbox/' + this.$store.state.mapstyle,
+        id: 'mapbox/streets-v11',
         tileSize: 512,
         zoomOffset: -1,
         accessToken: this.$store.state.accessToken
-    }).addTo(this.mymap);
+      }),
+      "Satellite": this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/satellite-v9',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.accessToken
+      }),
+      "Cyclemap" : this.L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={accessToken}', {
+        attribution: 'Maps &copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.apikeyThunderforest
+      }),
+      "Transport" : this.L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={accessToken}', {
+        attribution: 'Maps &copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.apikeyThunderforest
+      }),
+      "Satellite/Streets": this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/satellite-streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.accessToken
+      }),
+      "Landscape" : this.L.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey={accessToken}', {
+        attribution: 'Maps &copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, Data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.apikeyThunderforest
+      }),
+      "Outdoors": this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/outdoors-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: this.$store.state.accessToken
+      })
+    }
+    
+    // Create the map and add the default layer
+    this.mymap = this.L.map('mapid', {
+      center : [52.40983, 4.72280],
+      zoom: 13,
+      layers: this.baseMaps["Hike & Bike"]
+    });
+
+    // Add layer control
+    this.L.control.layers(this.baseMaps, null).addTo(this.mymap);
+    this.L.control.scale().addTo(this.mymap);
 
     // Update global map vars for use in other
     this.$store.commit('initMap', {L: this.L, mymap: this.mymap} );
@@ -74,86 +125,10 @@ export default {
           this.error = true;
           this.errormsg = e;
         });
-    },
-
-    updateMap: function (value) {
-      // Update state variable mapstyle
-      this.$store.commit('setMapStyle', value);
-
-      // Retrieve current Tilelayer from store and remove from map
-      // currentTileLayer.removeFrom(this.mymap)
-
-
-      switch (value) {
-        case "hikebike" :
-
-          this.L.tileLayer('https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          }).addTo(this.mymap);
-          break;
-
-        case "transport" :
-
-          this.L.tileLayer('https://tile.thunderforest.com/transport/{z}/{x}/{y}.png?apikey={accessToken}', {
-            attribution: this.$store.state.mapAttribution,
-            maxZoom: 18,
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: this.$store.state.apikeyThunderforest
-          }).addTo(this.mymap);
-          break;
-
-        case "landscape" :
-
-          this.L.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey={accessToken}', {
-            attribution: this.$store.state.mapAttribution,
-            maxZoom: 18,
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: this.$store.state.apikeyThunderforest
-          }).addTo(this.mymap);
-          break;
-
-        case "outdoors" :
-
-          this.L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={accessToken}', {
-            attribution: this.$store.state.mapAttribution,
-            maxZoom: 18,
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: this.$store.state.apikeyThunderforest
-          }).addTo(this.mymap);
-          break;
-
-        case "cyclemap" :
-
-          this.L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={accessToken}', {
-            attribution: this.$store.state.mapAttribution,
-            maxZoom: 18,
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: this.$store.state.apikeyThunderforest
-          }).addTo(this.mymap);
-          break;
-
-        default :
-
-          this.L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-            attribution: this.$store.state.mapAttribution,
-            maxZoom: 18,
-            id: 'mapbox/' + this.$store.state.mapstyle,
-            tileSize: 512,
-            zoomOffset: -1,
-            accessToken: this.$store.state.accessToken
-          }).addTo(this.mymap);
-
-      } // end switch
-
-      // currentTileLayer.addTo(this.mymap)
-    },
+    }
 
   }
+
 }
 </script>
 

@@ -46,7 +46,7 @@
           and PHP. The front end is build as components and using Vue-cli. The front end compiler minimizes the code and does the tree shaking
           keeping the website as small and as fast as possible.
           Some tools (ciphers, some of the math, sudoku solver) runs on the server, either to keep the size of the HTML small (e.g. it wouldn't be smart to
-          load 7MB of digits) or because I had some PHP code that I wanted to reuse.
+          load 1GB of digits) or because I had some PHP code that I wanted to reuse.
         </template>
       </va-item>
     </div>
