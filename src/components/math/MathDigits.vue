@@ -41,7 +41,7 @@
         <input type='number' id="start" name="start" ref="start" v-model="start" min="0" max="1000000" class="form-control mb-2 mr-2">
         <label class="form-label mb-2 mr-2" for="end">{{$t('mathdeci.to')}}</label>
         <input type='number' id="end" name="end" ref="end" v-model="end" min="0" max="1000000" class="form-control mb-2 mr-2" v-on:keyup.enter="getDigits">
-        <input type="button" id="product" name="product" :value="$t('mathdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
+        <input type="button" id="getdec" name="getdec" :value="$t('mathdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
       </div>
       <div class="card card-text p-2">{{$t('mathdeci.res1')}} {{start}} {{$t('mathdeci.res2')}} {{end}} {{$t('mathdeci.res3')}} {{result}}.</div>
       <p v-show="error" class="errormsg">{{errormsg}}</p>

@@ -97,8 +97,8 @@
   "coordinates": {
     "convert": {
       "title": "Converteren",
-      "short": "WGS84, RD, UTM, Maidenhead, Geohash, Lambert, OGSM, MGRS, NAD and more",
-      "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash."
+      "short": "WGS84, RD, UTM, Maidenhead, Geohash, Mapcode, what3words, OGSM, MGRS, NAD en meer",
+      "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen."
     },
     "project": {
       "title": "Projecteren",

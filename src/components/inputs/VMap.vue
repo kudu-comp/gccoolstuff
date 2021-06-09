@@ -1,9 +1,4 @@
 <template>
-  <div class="d-flex flex-row-reverse">
-    <div class="form-inline">
-      <input type="button" id="getlocation" :value="$t('dialogmap.getloc')" class="btn btn-primary mb-2 " v-on:click="getLocation()">
-    </div>
-  </div>
   <div id="mapid"></div>
 </template>
 
@@ -17,10 +12,10 @@ export default {
   // data
   data: function() {
     return {
-      mapstyle: this.$store.state.mapstyle,
       L: null,
       mymap: null,
-      baseMaps: null
+      baseMaps: null,
+      locButton: null
     }
   },
 
@@ -101,8 +96,11 @@ export default {
     this.L.control.layers(this.baseMaps, null).addTo(this.mymap);
     this.L.control.scale().addTo(this.mymap);
 
-    // Update global map vars for use in other
+    // Update global map vars for use in other places
     this.$store.commit('initMap', {L: this.L, mymap: this.mymap} );
+
+    // Add fullscreen control (from leaflet-fullscreen, see index.html)
+    this.mymap.addControl(new this.L.Control.Fullscreen());
 
     // Add event listener for click on map
     this.mymap.on('click', (e) => {
@@ -110,12 +108,8 @@ export default {
       this.$emit('update:mylocation', e.latlng.lat.toFixed(5) + " " + e.latlng.lng.toFixed(5))
     })
 
-  },
-
-  methods: {
-
-    // Get location from browser
-    getLocation: function () {
+    // Use easybutton to add get location button
+    this.L.easyButton('fa-map-marker-alt', () => {
       coords.geoFindMe()
         .then ((position) => {
           coords.displayMarker(this.L, this.mymap, [position.coords.latitude, position.coords.longitude], "Your Location")
@@ -125,7 +119,13 @@ export default {
           this.error = true;
           this.errormsg = e;
         });
-    }
+    }).addTo(this.mymap);
+
+    
+
+  },
+
+  methods: {
 
   }
 
@@ -136,4 +136,25 @@ export default {
 #mapid {
   height: 600px;
 }
+
+.leaflet-grab {
+  cursor: crosshair;
+}
+
+.leaflet-dragging .leaflet-grab {
+  cursor: move;
+}
+
+.mapbtn {
+  background-color: white !important;
+  color: black !important;
+  font-size: 20px !important;
+  width: 50px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
 </style>
