@@ -8,7 +8,9 @@
     "nocoords": "Geen coördinaten ingevoerd. Voer een coördinaat in.",
     "incorrectcoords": "Fout bij converteren coordinaat, controleer het ingevoerde coordinaat en het geselecteerde formaat.",
     "invalidinput": "Invoer kan niet worden vertaald. Controleer het geselecteerde type invoer.",
-    "noresult": "Geen resultaten gevonden"
+    "noresult": "Geen resultaten gevonden",
+    "cannotparse": "Invoer ongeldig",
+    "unknowninput": "Onbekende invoer "
   },
 
   "labels": {
@@ -51,7 +53,9 @@
     "count": "Tel",
     "sum": "Totalen",
     "showtable": "Toon tabel",
-    "undo": "Ongedaan maken"
+    "undo": "Ongedaan maken",
+    "encode": "Codeer",
+    "decode": "Decodeer"
   },
 
   "colors": {
@@ -62,7 +66,8 @@
     "green": "Groen",
     "cyan": "Cyaan",
     "magenta": "Magenta",
-    "yellow": "Geel"
+    "yellow": "Geel",
+    "brown": "Bruin"
   },
 
 
@@ -84,7 +89,7 @@
     "coordinates": "Coördinaten",
     "texttools": "Tekst",
     "ciphers": "Geheimschriften",
-    "codebook": "Codebook",
+    "codes": "Codes",
     "imagetools": "Afbeeldingen",
     "mathtools": "Rekenen",
     "comptools": "Programmeren",
@@ -139,7 +144,40 @@
       "title": "What3words",
       "short": "Converteer naar en van, auto suggesties",
       "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot ee land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>"
+    },
+    "revwherigo" : {
+      "title": "Reverse Wherigo",
+      "short": "Reverse wherigo oplossen",
+      "long": "<p>Oplossen van reverse wherigos (Waltmeiser cartridge). De tool controleert niet de checksum! Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
     }
+  },
+
+  "codes": {
+    "codebook": {
+      "title": "Zoek codes",
+      "short": "vind de juiste codepage door te zoeken op tags en woorden",
+      "long": "Vind de juiste codepage door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
+    }, 
+    "fonts": {
+      "title": "Speciale fonts",
+      "short": "Speciale fonts, Klingon, Therwar, Wakandan en 40 anderen",
+      "long": "<p>Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>"  
+    },
+    "segment": {
+      "title": "Segment display",
+      "short": "Segment display, 7, 14 en 16 segmenten.",
+      "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is.</p><p>Kies het aantal segmenten: 7, 14 of 16. Kies de notatie van segmenten: letters of binair. Klik op Codeer om de invoer te vertalen naar segmenten, klik op Decodeer om segmentnotatie te vertalen naar tekst.</p>"
+    },
+    "resistorcode": {
+      "title": "Weerstandscode",
+      "short": "Weerstandscode berekenen",
+      "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
+    },
+    "decabit": {
+      "title": "Decabit",
+      "short": "Decabit gebruikt steeds tien + en - voor coderen.",
+      "long": "<p>Decabit is een protocol om data over het electriciteitsnet te transporteren door middel van een serie pulsen. Nummers tussen 0 en 126 worden door steeds 5 plus en 5 mintekens gecodeerd. De nummers kunnen geïnterpreteerd worden als nummers, als ASCII of iets anders, zoals de posities in het alfabet</p><p>Deze tool codeert en decodeert decabit. Invoer/uitvoer kan nummers of tekst zijn. Nummers moeten tussen de 0 en 126 zijn. Druk op Coderen om te vertalen naar decabit, druk op decoderen om decabit te vertalen naar tekst of nummers.</p>"
+    } 
   },
 
   "texttools": {
@@ -216,14 +254,9 @@
     },
     "periodictable": {
       "title": "Periodiek systeem",
-      "short": "Een tool om nummers, symbolen en namen van chemische elementen te vertalen",
+      "short": "Nummers, symbolen en namen van chemische elementen",
       "long": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een een- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen. De tool gebruikt de Engelse namen voor de elementen.</p>"
     },
-    "resistorcode": {
-      "title": "Weerstandscode",
-      "short": "Weerstandscode berekenen",
-      "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
-    }, 
     "countries": {
       "title": "Landen van de wereld",
       "short": "Landen, vlaggen, munteenheid, ISO codes, telefoon",
@@ -241,7 +274,7 @@
     },
     "unitconvertor": {
       "title": "Eenheden",
-      "short": "Converteert lengte, temperature en nog veel meer",
+      "short": "Converteert lengte, temperatuur en nog veel meer",
       "long": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund."  
     }
   },
@@ -253,8 +286,6 @@
     "gensq": "Genereer vierkant",
     "genalp": "Genereer alfabet",
     "phencmsg": "Gecodeerd bericht",
-    "encode": "Codeer",
-    "decode": "Decodeer",
     "toupper": "Hoofdletters",
     "remnonalp": "Verwijder niet alfabet",
     "repl": "Vervang",
@@ -550,8 +581,8 @@
     },
     "numberprop": {
       "title": "Eigenschappen van nummers",
-      "short": "Prime, Fibonacci, evil, odious, perfect, aspiring and more",
-      "long" : "Deze tool checkt de eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. De eigenschappen zijn priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient and more."
+      "short": "Prime, Fibonacci, evil, odious, perfect, aspiring en meer",
+      "long" : "Eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. Priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient en meer."
     },
     "nimbers": {
       "title": "Nimbers",
@@ -578,12 +609,12 @@
     },
     "compbcd": {
       "title": "BCD",
-      "short": "Binary Coded Decimals in verschillende notaties",
+      "short": "Binary Coded Decimals: BCD, Gray, Aiken, Glixon en meer",
       "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits. Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6 en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden."
     },
     "compdeadfish": {
       "title": "Deadfish",
-      "short": "Deadfish is een programmeertaal met 4 instructies (idso).",
+      "short": "Deadfish is een programmeertaal met 4 instructies (idso)",
       "long":  "<p>Deadfish is een programmeertaal met slechts 4 instructies. Optellen met 1 (i), aftrekken met 1 (d), kwadraat (s) en output (o). De teller begint op 0. Als de teller -1 of precies 256 is reset de teller naar 0. Soms worden xdkc gebruikt in plaats van idso. Beide varianten worden ondersteund.</p>"
     },
     "compbintotext": {
@@ -593,10 +624,21 @@
     }
   },
 
-  "codebook": {
-    "short": "vind de juiste codepage door te zoeken op tags en woorden",
-    "long": "Vind de juiste codepage door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar.",
+  "cdbook": {
     "availtags": "Beschikbare tags"
+  },
+  
+  "cdfonts": {
+    "selfont": "Selecteer font",
+    "fontsize": "Selecteer grootte",
+    "selcolor": "Selecteer kleur"
+  },
+  
+  "segment": {
+    "segsize": "Aantal segmenten",
+    "input": "Segmenten notatie letters of binair",
+    "letters": "Letternotatie",
+    "binary": "Binaire notatie"
   },
 
   "exifscanner": {
@@ -699,6 +741,7 @@
     "sub": "Subscript tekst",
     "size": "Afwijkende lettergrootte",
     "del": "Verwijderde tekst",
+    "em": "Benadrukte tekst",
     "nocache": "Geen cache details gevonden. Laad een correcte paginabron.",
     "complete": "Scan compleet, details hieronder (kan eventueel leeg zijn).",
     "error": "Fout bij het laden of scannen van de paginabron."
@@ -743,6 +786,13 @@
     "band": "Band",
     "mult": "x Factor",
     "res": "De weerstand bedraagt:"
+  },
+
+  "decabit": {
+    "selenc": "Selecteer codering",
+    "selnum": "Nummers (0 - 126)",
+    "selascii": "Tekst ASCII",
+    "selalpha": "Tekst alfabet (A=1, Z=26)"
   },
 
   "countries": {

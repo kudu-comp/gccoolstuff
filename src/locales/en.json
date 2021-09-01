@@ -8,7 +8,9 @@
     "nocoords": "No coordinates are specified. Please enter a coordinate.",
     "incorrectcoords": "Error calculating coordinates, please check input and selected format.",
     "invalidinput": "Input could not be converted. Please check selected input.",
-    "noresult": "No results found"
+    "noresult": "No results found",
+    "cannotparse": "Cannot parse input",
+    "unknowninput": "Unknown input "
   },
 
   "labels": {
@@ -51,7 +53,9 @@
     "count": "Count",
     "sum": "Totals",
     "showtable": "Show table",
-    "undo": "Undo"
+    "undo": "Undo",
+    "encode": "Encode",
+    "decode": "Decode"
   },
 
   "colors": {
@@ -62,7 +66,8 @@
     "green": "Green",
     "cyan": "Cyan",
     "magenta": "Magenta",
-    "yellow": "Yellow"
+    "yellow": "Yellow",
+    "brown": "Brown"
   },
 
   "languages": {
@@ -83,7 +88,7 @@
     "coordinates": "Coordinates",
     "texttools": "Text",
     "ciphers": "Ciphers",
-    "codebook": "Codebook",
+    "codes": "Codes",
     "imagetools": "Images",
     "htmlscanner": "HTML Scanner",
     "comptools": "Programming",
@@ -138,7 +143,40 @@
       "title": "What3words",
       "short": "Convert to, convert from, auto suggest",
       "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p>"
+    },
+    "revwherigo" : {
+      "title": "Reverse Wherigo",
+      "short": "Solve reverse wherigo",
+      "long": "<p>Resolves reverse wherigo (Waltmeiser cartridge only). The tool doesn't check the checksum! Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p>"
     }
+  },
+
+  "codes": {
+    "codebook": {
+      "title": "Search codebook",
+      "short": "find codes using keywords and tags",
+      "long": "Find a codepage using keywords and tages. Available tags refer to origin of the codebook, the shapes used and other ways to identify the codebook."
+    }, 
+    "fonts": {
+      "title": "Special fonts",
+      "short": "Special fonts, Klingon, Therwar, Wakandan and 40 others",
+      "long": "<p>Type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>"  
+    },
+    "segment": {
+      "title": "Segment display",
+      "short": "Segment display, 7, 14 and 16 segments.",
+      "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on.</p><p>Choose the number of segments: 7, 14 or 16. Select the notation of segments either letters or binary. Click Encode to translate input to segment notation, click Decode to translate segment notation back to text.</p>"
+    },
+    "resistorcode": {
+      "title": "Resistor colors",
+      "short": "Resistor color code calculator",
+      "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
+    },
+    "decabit": {
+      "title": "Decabit",
+      "short": "Decabit uses exactly ten + and - for encoding.",
+      "long": "<p>Decabit is a protocol to transmit data across power lines using a series of electronic pulses. It transmits numbers between 0 up to and including 126. The numbers can be interpreted as numbers, as ASCII or anything else, for example positions in the alphabet.</p><p>This tool encodes and decodes decabit. Input/output can be numbers or text. Numbers should be between 0 - 126. Press encode to translate to decabit. Press decode to translate decabit back to text or numbers.</p>"
+    } 
   },
 
   "texttools": {
@@ -218,11 +256,6 @@
       "short": "Chemical element numbers, symbols and names",
       "long": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>"
     },
-    "resistorcode": {
-      "title": "Resistor colors",
-      "short": "Resistor color code calculator",
-      "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
-    }, 
     "countries": {
       "title": "Country codes",
       "short": "Countries and named territories with flags",
@@ -252,8 +285,6 @@
     "gensq": "Generate square",
     "genalp": "Generate alphabet",
     "phencmsg": "Encrypted message",
-    "encode": "Encode",
-    "decode": "Decode",
     "toupper": "Uppercase",
     "remnonalp": "Remove non alphabet",
     "repl": "Replace",
@@ -592,10 +623,21 @@
     }
   },
 
-  "codebook": {
-    "short": "find codes using keywords and tags",
-    "long": "Find a codepage using keywords and tages. Available tags refer to origin of the codebook, the shapes used and other ways to identify the codebook.",
+  "cdbook": {
     "availtags": "Available tags"
+  },
+
+  "cdfonts": {
+    "selfont": "Select font",
+    "fontsize": "Select fontsize",
+    "selcolor": "Select color"
+  },
+
+  "segment": {
+    "segsize": "Number of segments",
+    "input": "Segments as letters or as binary",
+    "letters": "Letter notation",
+    "binary": "Binary notation"
   },
 
   "exifscanner": {
@@ -698,6 +740,7 @@
     "sub": "Subscript text",
     "size": "Font sized",
     "del": "Deleted text",
+    "em": "Emphasized text",
     "nocache": "No cache details found, please load correct page source",
     "complete": "Scan completed, details below (could be none)",
     "error": "Error loading or scanning the page source"
@@ -742,6 +785,13 @@
     "band": "Band",
     "mult": "Multiplier",
     "res": "The resistance value is:"
+  },
+
+  "decabit": {
+    "selenc": "Select encoding",
+    "selnum": "Numbers (0 - 126)",
+    "selascii": "Text ASCII",
+    "selalpha": "Text alphabet (A=1, Z=26)"
   },
 
   "countries": {

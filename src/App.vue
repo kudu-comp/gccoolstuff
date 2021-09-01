@@ -19,7 +19,7 @@
     <router-link to="/coord">{{$t('menu.coordinates')}}</router-link> |
     <router-link to="/text">{{$t('menu.texttools')}}</router-link> |
     <router-link to="/cipher">{{$t('menu.ciphers')}}</router-link> |
-    <router-link to="/codebook">{{$t('menu.codebook')}}</router-link> |
+    <router-link to="/codes">{{$t('menu.codes')}}</router-link> |
     <router-link to="/images">{{$t('menu.imagetools')}}</router-link> |
     <router-link to="/html">{{$t('menu.htmlscanner')}}</router-link> |
     <router-link to="/math">{{$t('menu.mathtools')}}</router-link> |

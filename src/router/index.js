@@ -9,6 +9,7 @@ import CoordIncomplete from '@/components/coords/CoordIncomplete'
 import CoordAntipode from '@/components/coords/CoordAntipode'
 import CoordMapMaker from '@/components/coords/CoordMapMaker'
 import CoordW3W from '@/components/coords/CoordW3W.vue'
+import ReverseWherigo from '@/components/coords/ReverseWherigo.vue'
 import TextToolbox from '../views/TextToolbox.vue'
 import TextWordValue from '@/components/texts/TextWordValue.vue'
 import SmartReplace from '@/components/texts/SmartReplace.vue'
@@ -17,7 +18,12 @@ import TextToNumbers from '@/components/texts/TextToNumbers.vue'
 import TextKeyboards from '@/components/texts/TextKeyboards.vue'
 import TextCodes from '@/components/texts/TextCodes.vue'
 import Cipher from '../views/Cipher.vue'
-import CodeBook from '@/components/CodeBook.vue'
+import CodesIntro from '@/components/codes/CodesIntro.vue'
+import CodeBook from '@/components/codes/CodeBook.vue'
+import FontSpecial from '@/components/codes/FontSpecial.vue'
+import SegmentCode from '@/components/codes/SegmentCode.vue'
+import ResistorCode from '@/components/codes/ResistorCode.vue'
+import Decabit from '@/components/codes/Decabit.vue'
 import MathToolbox from '../views/MathToolbox.vue'
 import MathFib from '@/components/math/MathFib.vue'
 import MathDigits from '@/components/math/MathDigits.vue'
@@ -45,7 +51,6 @@ import Sudoku from '../views/Sudoku.vue'
 import OtherTools from '@/views/OtherTools.vue'
 import MastermindSolver from '@/components/other/MastermindSolver.vue'
 import PeriodicTable from '@/components/other/PeriodicTable.vue'
-import ResistorCode from '@/components/other/ResistorCode.vue'
 import UnitConvertor from '@/components/other/UnitConvertor'
 import Countries from '@/components/other/Countries.vue'
 import UsaStates from '@/components/other/UsaStates.vue'
@@ -71,7 +76,8 @@ const routes = [
       { path: "/coord/coordincomplete", component: CoordIncomplete },
       { path: "/coord/coordantipode", component: CoordAntipode },
       { path: "/coord/coordmapmaker", component: CoordMapMaker },
-      { path: "/coord/coordw3w", component: CoordW3W }
+      { path: "/coord/coordw3w", component: CoordW3W },
+      { path: "/coord/reversewherigo", component: ReverseWherigo }
     ]
   },
   {
@@ -93,9 +99,16 @@ const routes = [
     component: Cipher
   },
   {
-    path: '/codebook',
-    name: 'CodeBook',
-    component: CodeBook
+    path: '/codes',
+    name: 'Codes',
+    component: CodesIntro,
+    children: [
+      { path: "/codes/codebook", component: CodeBook },
+      { path: "/codes/fonts", component: FontSpecial},
+      { path: "/codes/segment", component: SegmentCode},
+      { path: "/codes/resistorcode", component: ResistorCode},
+      { path: "/codes/decabit", component: Decabit}
+    ]
   },
   {
     path: '/math',
@@ -147,11 +160,6 @@ const routes = [
         component: PeriodicTable,
       },
       {
-        path: '/other/resistorcode',
-        name: 'ResistorCode',
-        component: ResistorCode,
-      },
-      {
         path: '/other/countries',
         name: 'Countries',
         component: Countries,
@@ -170,7 +178,7 @@ const routes = [
         path: '/other/countryregions',
         name: 'CountryRegions',
         component: CountryRegions,
-      }     
+      }
     ]
   },
   {

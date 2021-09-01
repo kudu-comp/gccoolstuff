@@ -126,7 +126,7 @@
       <p v-show="error" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div class="col-6">
-          <input type="button" id="encode" name="encode" :value="$t('cp.encode')" class="btn btn-primary mb-2" v-on:click="toEncode">
+          <input type="button" id="encode" name="encode" :value="$t('buttons.encode')" class="btn btn-primary mb-2" v-on:click="toEncode">
           <div class="form-row mb-2">
             <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 cols=50 v-model='message'></textarea>
           </div>
@@ -143,7 +143,7 @@
           </div>
         </div>
         <div class="col-6">
-          <input type="button" id="decode" name="decode" :value="$t('cp.decode')" class="btn btn-primary mb-2" @click="toDecode">
+          <input type="button" id="decode" name="decode" :value="$t('buttons.decode')" class="btn btn-primary mb-2" @click="toDecode">
           <div class="form-row mb-2">
             <textarea id="translatedmessage" name="translatedmessage" class="form-control" ref="translatedmessage" :placeholder="$t('cp.phencmsg')" cols=50 rows=10 v-model='translatedmessage'></textarea>
           </div>

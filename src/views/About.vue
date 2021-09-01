@@ -22,24 +22,6 @@
         </template>
       </va-item>
       <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
-        <template v-slot:header>To do list</template>
-        <template v-slot:content>
-          <ul>
-            <li>Fix refresh issue for Sudoku, Image tools, Math tools (only on hosting server)</li>
-            <li>Fix resize HTML canvas, pick color and color editor</li>
-            <li>Add background images of body to HTML scanner</li>
-            <li>Math tools - postfix, infix and prefix</li>
-            <li>Codebook - add more codes</li>
-            <li>Coordinates - improve accuracy (do not use grid)</li>
-            <li>Image Tools - load from URL</li>
-            <li>Browse codebook use srcset</li>
-            <li>A tool to hack hashes of coordinates</li>
-            <li>HTML Scanner - add option to retrieve with geocache id</li>
-            <li>Tooltips for ciphers to show the translation table for morse, kenny, etc</li>
-          </ul>
-        </template>
-      </va-item>
-      <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
         <template v-slot:header>Under construction</template>
         <template v-slot:content>
           This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue.js, Vue-router, Bootstrap

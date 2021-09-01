@@ -88,6 +88,12 @@
           <div v-html="dels" />
         </template>
       </va-item>
+      <va-item v-show="ems.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
+        <template v-slot:header>{{$t('htmlscanner.em')}}</template>
+        <template v-slot:content>
+          <div v-html="ems" />
+        </template>
+      </va-item>
       <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
@@ -130,6 +136,7 @@ export default {
       sups: "",
       subs: "",
       dels: "",
+      ems: "",
       showitem: true,
       hidebutton: true
     }
@@ -273,6 +280,8 @@ export default {
         this.subs = this.listTags("sub");
         // Find deleted letters
         this.dels = this.listTags("del");
+        // Find emphasized letters
+        this.dels = this.listTags("em");
 
         // Display scan completed messages
         this.scanresult = this.$t('htmlscanner.complete');

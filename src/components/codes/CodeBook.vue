@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('menu.codebook')}}
+      {{$t('codes.codebook.title')}}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('codebook.long')" />
+      <div class="infoblock" v-html="$t('codes.codebook.long')" />
       <div class="form-inline">
         <v-search id="searchstr" ref="searchstr" v-model:search="searchstr"></v-search>
-        <label for="listoftags" class="form-label mr-2 mb-2">{{$t('codebook.availtags')}}:</label>
+        <label for="listoftags" class="form-label mr-2 mb-2">{{$t('cdbook.availtags')}}:</label>
         <select id="listoftags" class="custom-select mr-2 mb-2" v-model="selectedtag">
           <option v-for="t in tags" :key="t" :value="t">{{t}}</option>
         </select>
@@ -33,7 +33,7 @@
           <input type="button" id="next" name="next" value="&rightarrow;" class="btn btn-primary" v-on:click="getNext">
         </div>
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}.</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}.</p>
     </div>
   </div>
 </template>
@@ -66,8 +66,7 @@ export default {
       codepagefile: "",
       foundpages: null,
       tags: null,
-      error: false,
-      errormsg: this.$t('errors.generic'),
+      errormsg: "",
       showitem: true,
       hidebutton: true,
     }

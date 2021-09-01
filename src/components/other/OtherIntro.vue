@@ -6,8 +6,7 @@
     <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> |
     <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> |
     <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> |
-    <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> |
-    <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> 
+    <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link>
   </div>
   <router-view :key="$route.path" />
   <div v-if="['OtherTools'].includes($route.name)">
@@ -52,12 +51,6 @@
         <template v-slot:header><router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link></template>
         <template v-slot:content>
             <span v-html="$t('othertools.countryregions.long')" />
-        </template>
-      </va-item>
-      <va-item v-bind:showitem='show[2]' v-on:toggle='toggleItem(2)'>
-        <template v-slot:header><router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link></template>
-        <template v-slot:content>
-           <span v-html="$t('othertools.resistorcode.long')" />
         </template>
       </va-item>
     </div>

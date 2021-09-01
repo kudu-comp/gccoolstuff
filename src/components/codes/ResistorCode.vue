@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">{{$t('othertools.resistorcode.title')}}</div>
+        <div class="text-center">{{$t('codes.resistorcode.title')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.resistorcode.long')"></div>
+      <div class="infoblock" v-html="$t('codes.resistorcode.long')"></div>
       <div class="row" style="text-align:center">
         <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 1</div>
         <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 2</div>

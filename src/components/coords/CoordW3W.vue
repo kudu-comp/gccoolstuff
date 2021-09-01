@@ -149,6 +149,15 @@ export default {
 
     suggestW3W: function () {
 
+      // Check 3 words are given
+      let words = this.str2.split(/[.,\s]/g);
+      if (words.length != 3) {
+        this.errormsg = this.$t('cdw3w.err3words');
+        return;
+      } else {
+        this.str2 = words[0] + "." + words[1] + "." + words[2];
+      }
+
       let clip = (this.coordclip);
       let focus = (this.coordfocus);
       let promises = [];
@@ -159,6 +168,8 @@ export default {
 
       if (focus) {
         promises.push(coords.convertCoordFromText(this.coordfocus, this.datumfocus, "WGS84"))
+      } else {
+        promises.push("No focus");
       }
       if (clip) {
         promises.push(coords.convertCoordFromText(this.coordclip, this.datumclip, "WGS84"))

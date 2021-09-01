@@ -12,7 +12,8 @@
         <router-link to="/coord/coordtriangles">{{$t('coordinates.triangles.title')}}</router-link> {{$t('coordinates.triangles.short')}}<br>
         <router-link to="/coord/coordcircles">{{$t('coordinates.circles.title')}}</router-link> {{$t('coordinates.circles.short')}}<br>
         <router-link to="/coord/coordantipode">{{$t('coordinates.antipode.title')}}</router-link> {{$t('coordinates.antipode.short')}}<br>
-        <router-link to="/coord/coordw3w">{{$t('coordinates.w3w.title')}}</router-link> {{$t('coordinates.w3w.short')}}
+        <router-link to="/coord/coordw3w">{{$t('coordinates.w3w.title')}}</router-link> {{$t('coordinates.w3w.short')}}<br>
+        <router-link to="/coord/reversewherigo">{{$t('coordinates.revwherigo.title')}}</router-link> {{$t('coordinates.revwherigo.short')}}
       </div>
       <h3>{{$t('menu.texttools')}}</h3>
       <div class="p mb-2">
@@ -34,9 +35,13 @@
         <router-link :to="{ name: 'Cipher', params: { cipher: 'Morse'}}">Morse</router-link>
         {{$t('cp.short')}}
       </div>
-      <h3>{{$t('menu.codebook')}}</h3>
+      <h3>{{$t('menu.codes')}}</h3>
       <div class="p mb-2">
-        <router-link to="/codebook">{{$t('menu.codebook')}}</router-link> {{$t('codebook.short')}}.
+        <router-link to="/codes/codebook">{{$t('codes.codebook.title')}}</router-link> {{$t('codes.codebook.short')}}.<br>
+        <router-link to="/codes/fonts">{{$t('codes.fonts.title')}}</router-link> {{$t('codes.fonts.short')}}.<br>
+        <router-link to="/codes/segment">{{$t('codes.segment.title')}}</router-link> {{$t('codes.segment.short')}}.<br>
+        <router-link to="/codes/resistorcode">{{$t('codes.resistorcode.title')}}</router-link> {{$t('codes.resistorcode.short')}}.<br>
+        <router-link to="/codes/segment">{{$t('codes.decabit.title')}}</router-link> {{$t('codes.decabit.short')}}.
       </div>
       <h3>{{$t('menu.imagetools')}}</h3>
       <div class="p mb-2">
@@ -78,7 +83,6 @@
         <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> {{$t('othertools.countries.short')}}.<br>
         <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> {{$t('othertools.usastates.short')}}.<br>
         <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> {{$t('othertools.countryregions.short')}}.<br>
-        <router-link to="/other/resistorcode">{{$t('othertools.resistorcode.title')}}</router-link> {{$t('othertools.resistorcode.short')}}.<br>
         <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> {{$t('othertools.unitconvertor.short')}}.
       </div>
     </div>
