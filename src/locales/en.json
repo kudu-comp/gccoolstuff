@@ -522,6 +522,9 @@
       "info": "The generic substitution uses a random reordered alphabet. If you don't know it you can better use the Smart Replace tool.",
       "k1": "Substitutes:"
     },
+    "tapir": {
+      "info": "TAPIR is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters, some digrams, numbers and some special characters."
+    },
     "trifid": {
       "info": "The trifid cipher uses a table to fractionate each plaintext letter into a trigram, mixes the constituents of the trigrams, and then applies the table in reverse to turn these mixed trigrams into ciphertext letters. The alphabet must be 27 long.",
       "k1": "Enter key:"
@@ -540,6 +543,9 @@
     "vigenere": {
       "info": "The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a (required) keyword. It employs a form of polyalphabetic substitution.",
       "k1": "Enter key:"
+    },
+    "zebra": {
+      "info": "ZEBRA is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters including German diacretics, some digrams, some trigrams, numbers and some special characters."
     },
     "zygazyfa": {
       "info": "The Zygazyfa cipher was created by Ray Crowther for fun. He uses it in some of his geocaches. It is a polyalphabetic cipher using a kind of autokey.",

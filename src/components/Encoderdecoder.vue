@@ -58,10 +58,12 @@
         <input type="button" id="scytale" name="scytale" value="Scytale" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Scytale')">
         <input type="button" id="skip" name="skip" value="Skip" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Skip')">
         <input type="button" id="substitution" name="substitution" value="Substitution" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Substitution')">
+        <input type="button" id="tapir" name="tapir" value="Tapir" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Tapir')">
         <input type="button" id="trifid" name="trifid" value="Trifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trifid')">
         <input type="button" id="trisquare" name="trisquare" value="Trisquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trisquare')">
         <input type="button" id="vatsyayana" name="vatsyayana" value="Vatsyayana" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vatsyayana')">
         <input type="button" id="vigenere" name="vigenere" value="Vigenere" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vigenere')">
+        <input type="button" id="zebra" name="zebra" value="Zebra" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Zebra')">
         <input type="button" id="zygazyfa" name="zygazyfa" value="Zygazyfa" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Zygazyfa')">
       </div>
       <div class="infoblock">
@@ -139,7 +141,7 @@
             <input type='text' id="replacements" placeholder="J=I, U=V" v-model="replacements" size="12" class="form-control mb-2">
           </div>
           <div>
-            <input type="button" id="replacediac" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+            <input type="button" id="replacediac" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
           </div>
         </div>
         <div class="col-6">
@@ -602,6 +604,9 @@ export default {
         case 'Substitution' :
           this.showkey1 = true;
           break;
+        case 'Tapir' :
+          this.showalphabet = false;
+          break;
         case 'Trifid' :
           this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#";
           this.showkey1 = true;
@@ -624,6 +629,9 @@ export default {
           break;
         case 'Vigenere' :
           this.showkey1 = true;
+          break;
+        case 'Zebra' :
+          this.showalphabet = false;
           break;
         case 'Zygazyfa' :
           this.showkey1 = true;

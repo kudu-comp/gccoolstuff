@@ -523,6 +523,9 @@
       "info": "Dit is de algemene substitutiecijfer. Elke letter wordt vervangen door de letter in het sleutelalfabet op dezelfde positie. Als je de sleutel niet kent is deze cijfer beter op te lossen met de Slimme Substitutie tool (zie Teksttools).",
       "k1": "Cijferalfabet"
     },
+    "tapir": {
+      "info": "TAPIR is de naam van een substitutietabel die gebruikt werd door het Volksleger en het Ministerie van Staatsveiligheid in de DDR. Het substitueert letters, enkele digrammen, cijfers en enkele speciale tekens."
+    },
     "trifid": {
       "info": "De Trifid cijfer gebruikt 3 vierkanten van 3x3 op basis van een alfabet van 27 letters. De sleutel wordt gebruikt om de vierkanten te genereren. Elke letter wordt gecodeerd op basis van vierkant, rij, kolom (3 cijfers). Die worden per kolom achter elkaar gezet en daarna per rij opgeschreven. Hierdoor onstaat fractionering.",
       "k1": "Sleutel"
@@ -541,6 +544,9 @@
     "vigenere": {
       "info": "De Vigenère cijfer is een klassieke polyalphabetische cijfer. Er worden 26 verschillende alfabetten gegenereerd, waarbij elk alfabet steeds een positie wordt verschoven. Het zo ontstane tableau heet ook wel tableau recta. De sleutel bepaald in welke volgorde de verschillende alfabetten worden gebruikt.",
       "k1": "Sleutel"
+    },
+    "zebra": {
+      "info": "ZEBRA is de naam van een substitutietabel die gebruikt werd door het Volksleger en het Ministerie van Staatsveiligheid in de DDR. Het substitueert letters, inclusief Ä, Ü en Ö, enkele digrammen, enkele trigrammen, cijfers en enkele speciale tekens."
     },
     "zygazyfa": {
       "info": "De Zygazyfa cijfer is bedacht door Ray Crowther die hem gebruikt in sommige van zijn geocaches. Het is een polyalphabetische cijfer, waarbij het volgende alfabet steeds wordt gegenereerd op basis van de te coderen letter.",
