@@ -623,6 +623,21 @@
       "short": "Deadfish is een programmeertaal met 4 instructies (idso)",
       "long":  "<p>Deadfish is een programmeertaal met slechts 4 instructies. Optellen met 1 (i), aftrekken met 1 (d), kwadraat (s) en output (o). De teller begint op 0. Als de teller -1 of precies 256 is reset de teller naar 0. Soms worden xdkc gebruikt in plaats van idso. Beide varianten worden ondersteund.</p>"
     },
+    "encryption": {
+      "title": "Encryptie",
+      "short": "Okto3, AES, DES, Rabbit, HMAC en andere digitale encrypties",
+      "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>"
+    },
+    "cow": {
+      "title": "Cow",
+      "short": "COW programmmeertaal",
+      "long": "<p>De COW programmeeertaal is bedacht door Sean Heber in 2003. Het is een humoristische Brainfuck variant speciaal bedoeld voor koeien. COW heeft twaalf instructies (vier meer dan Brainfuck) en is Turing-compleet. De meeste instructies zijn moos (in Engeland zeggen koeien moo), waarbij alleen de hoofdletters, kleine letters veranderen: mOo, moO, mOO, Moo, enzovoorts. De uitzonderingen zijn MMM, OOO, oom en OOM. Alle andere input is genegereerd als commentaar. De debug optie schrijft informatie tijdens de uitvoering van het programma naar de Developers console van de browser. Zo kan de code gecontroleerd worden.</p>"
+    },
+    "beatnik": {
+      "title": "Beatnik",
+      "short": "Beatnik programmmeertaal",
+      "long": "Beatnik berekent de Scrabble waarde van elk woord. De waarde is het commando dat wordt uitgevoerd. Woorden bestaan alleen uit letters, dus Boeing787Dreamliner geeft twee woorden (en dus twee commando's). Er zijn meerdere Scrabble versies beschikbaar, maar Engels is de meest waarschijnlijke keuze. Meer info is te vinden op <a href='https://esolangs.org/wiki/Beatnik'>Esolangs</a>.</p><p>De debug optie schrijft informatie tijdens de uitvoering van het programma naar de Developers console van de browser. Zo kan de code gecontroleerd worden.</p>"
+    },
     "compbintotext": {
       "title": "Binary encoding",
       "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16",
@@ -1447,7 +1462,8 @@
     "shorthand" : "Verkorte notatie",
     "code": "Programmacode",
     "input": "Input variabelen",
-    "run": "Run code"
+    "run": "Run code",
+    "debug": "Debug info naar console"
   },
 
   "compbcd": {
@@ -1463,6 +1479,14 @@
     "selto": "Encoding naar",
     "seltotable": "Encoding table"
   },
+
+  "compenc": {
+    "codes": "Kies een encryptie",
+    "key": "Sleutel",
+    "coded": "Gecodeerd bericht",
+    "advanced": "Geavanceerde opties",
+    "modes": "Mode",
+    "padding": "Padding"  },
 
   "dialogabout": {
     "info": "Deze pagina is helaas alleen beschikbaar in het Engels."

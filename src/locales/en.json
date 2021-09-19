@@ -622,11 +622,27 @@
       "short": "Deadfish is a pretty useless programming language",
       "long":  "<p>Deadfish is a programming language with only 4 instructions. Increment with 1 (i), decrement with 1 (d), square (s) and output (o). The counter start at 0, if it reaches -1 or exactly 256 it resets to 0. Sometimes xdkc are used instead of idso. Both instruction sets are supported.</p>"
     },
+    "encryption": {
+      "title": "Encryption",
+      "short": "Okto3, AES, DES, Rabbit, HMAC and other digitial encryptions",
+      "long": "<p>All of these are basically very complex ciphers used by computers to transmit and store information safely. They are the successors of the handciphers of the 20th century. All of these codes require a key. There are also advanced options which control the alghorithm, but on most occassions you should keep the default settings.</p><p>DES used to be the standard in computer encryption but has found to be insecure. AES is most common these days. Rabbit and RC4 are also in use. Okto3 encrypts the input to a series of decimal numbers and is pretty useless for anything else but geocaches.</p>"
+    },
+    "cow": {
+      "title": "COW",
+      "short": "COW programming language",
+      "long": "<p>The COW programming language is an esoteric programming language created by Sean Heber in 2003. It is a Brainfuck variant designed humorously with Bovinae in mind. COW has twelve instructions (four more than Brainfuck) and is Turing-complete. Most instructions are moos, only the capitalization varies: mOo, moO, mOO, Moo, and so on. MMM, OOO, oom and OOM are the exceptions. All other character combinations are ignored and treated as comments. The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
+    },
+    "beatnik": {
+      "title": "Beatnik",
+      "short": "Beatnik programming language",
+      "long": "Beatnik calculates the Scrabble value of each word. The value is then treated as a command. Words consist only of letters, so Boeing747Dreamliner gives two words (and two commands). Multiple Scrabble versions are available, but English is the most likely choice. More info can be found <a href='https://esolangs.org/wiki/Beatnik'>here.</a></p><p>The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
+    },
     "compbintotext": {
-      "title": "Binary encoding",
+      "title": "Binary to text",
       "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91",
       "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>"
     }
+
   },
 
   "cdbook": {
@@ -1443,7 +1459,8 @@
     "shorthand" : "Shorthand notation",
     "code": "Program code",
     "input": "Input variables",
-    "run": "Run code"
+    "run": "Run code",
+    "debug": "Debug to console"
   },
 
   "compbcd": {
@@ -1458,6 +1475,15 @@
     "selfromtable": "Encoding table",
     "selto": "Encoding to",
     "seltotable": "Encoding table"
+  },
+
+  "compenc": {
+    "codes": "Choose encryption",
+    "key": "Key",
+    "coded": "Coded message",
+    "advanced": "Advanced options",
+    "modes": "Mode",
+    "padding": "Padding"
   },
 
   "dialogabout": {

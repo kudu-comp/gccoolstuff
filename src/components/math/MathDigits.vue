@@ -44,7 +44,7 @@
         <input type="button" id="getdec" name="getdec" :value="$t('mathdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
       </div>
       <div class="card card-text p-2">{{$t('mathdeci.res1')}} {{start}} {{$t('mathdeci.res2')}} {{end}} {{$t('mathdeci.res3')}} {{result}}.</div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -62,7 +62,6 @@ export default {
       number: "pi",
       start: 1,
       end: 1,
-      error: false,
       errormsg: "",
       result: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/getdigits.php",
@@ -77,7 +76,7 @@ export default {
 
     // Get the digits
     getDigits: function() {
-      this.error = false;
+      this.errormsg = "";
       let data = {
         number: this.number,
         start: this.start,
@@ -98,7 +97,6 @@ export default {
         .catch((error) => {
             console.error('Error ', error);
             this.errormsg = this.$t('errors.generic');
-            this.error = true;
         });
     },
 

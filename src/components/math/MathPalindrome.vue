@@ -10,7 +10,7 @@
         <input type='number' id="start" name="start" ref="start" v-model="start" class="form-control mb-2 mr-2">
         <input type="button" id="palindrome" name="palindrome" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="palindromeCounter">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('mathpali.t1')}}</template>
         <template v-slot:content>
@@ -42,7 +42,6 @@ export default {
       start: 0,
       n: 0,
       seq: "",
-      error: false,
       errormsg: "",
       phpurl: window.location.protocol + "//" + window.location.hostname + "/math/palindromecounter.php",
       showitem: true,
@@ -59,7 +58,7 @@ export default {
     palindromeCounter: function() {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Set counters and initial reversed number
       let cnt = 0;
@@ -79,7 +78,6 @@ export default {
 
       // Set the counter or show error messages if above 100
       if (cnt > 100) {
-        this.error = true;
         this.errormsg = this.$t('mathpali.toomany');
       } else {
         this.n = cnt;

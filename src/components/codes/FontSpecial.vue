@@ -72,6 +72,10 @@ export default {
         { id: 'FaceIt', font: 'Face it!' },
         { id: 'Fetish', font: 'Fetish (shoes)' },
         { id: 'Futurama', font: 'Futurama alien' },
+        { id: 'Hylian64', font: 'Hylian 64 (Zelda)'},
+        { id: 'HylianAn', font: 'Hylian, Ancient (Zelda)'},
+        { id: 'HylianSS', font: 'Hylian, Skyward Sword (Zelda)'},
+        { id: 'HylianTP', font: 'Hylian, Twilight Princess (Zelda)'},
         { id: 'Kix', font: 'Kix Code (PostNL)' },
         { id: 'Klingon', font: 'Klingon (Star Trek)' },
         { id: 'Klinzhai', font: 'Klinzhai (Star Trek)' },
@@ -97,6 +101,7 @@ export default {
 
   mounted: function() {
     this.$refs.message.focus();
+    if (this.$route.params.font) this.styleObject.fontFamily = this.$route.params.font
   },
 
   methods: {
@@ -122,6 +127,10 @@ export default {
 @font-face { font-family: FaceIt;     src: url('~@/assets/fonts/Faceit.woff'); }
 @font-face { font-family: Fetish;     src: url('~@/assets/fonts/WCFetish.otf'); }
 @font-face { font-family: Futurama;   src: url('~@/assets/fonts/FuturamaAlienAlphabetOne.woff'); }
+@font-face { font-family: Hylian64;   src: url('~@/assets/fonts/Hylian64.woff'); }
+@font-face { font-family: HylianAn;   src: url('~@/assets/fonts/AncientHylian-English.woff'); }
+@font-face { font-family: HylianSS;   src: url('~@/assets/fonts/SSAncientHylian.woff'); }
+@font-face { font-family: HylianTP;   src: url('~@/assets/fonts/TPHylian-GCNRegular.woff'); }
 @font-face { font-family: Kix;        src: url('~@/assets/fonts/KIXBarcode.woff'); }
 @font-face { font-family: Klingon;    src: url('~@/assets/fonts/klingonfont.woff'); }
 @font-face { font-family: Klinzhai;   src: url('~@/assets/fonts/Klinzhai.woff'); }

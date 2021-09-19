@@ -33,7 +33,7 @@
           </div>
         </div>
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -56,7 +56,6 @@ export default {
       base1: 2,
       base2: 10,
       phpurl: window.location.protocol + "//" + window.location.hostname + "/cipher-toolkit/encoderdecoder.php",
-      error: false,
       errormsg: ""
     }
   },
@@ -69,7 +68,7 @@ export default {
 
     // Convert the base using the ciphertoolkit
     toConvert: function(enordecode) {
-      this.error = false;
+      this.errormsg = "";
       let data = {
         alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         enordecode: enordecode,
@@ -93,7 +92,6 @@ export default {
         })
         .catch((error) => {
           console.error('Error ', error);
-          this.error = true;
           this.errormsg = this.$t('errors.generic')
         });
     },

@@ -27,7 +27,7 @@
         <input type="button" id="bcdfrom" name="bcdfrom" :value="$t('compbcd.bcdfrom')" class="btn btn-primary mb-2 mr-2" v-on:click="fromBCD">
         <input type="button" id="bcdto" name="bcdto" :value="$t('compbcd.bcdto')" class="btn btn-primary mb-2 mr-2" v-on:click="toBCD">
       </div>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div class="card card-text p-2">{{result}}</div>
     </div>
   </div>
@@ -52,7 +52,6 @@ export default {
       packed : false,
       bcdformats: [],
       fill: "",
-      error: false,
       errormsg: "",
       showinfo: true,
     }
@@ -69,7 +68,7 @@ export default {
     fromBCD : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       this.result = "";
 
       try {
@@ -99,7 +98,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
         console.log(e);
 

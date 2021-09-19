@@ -10,7 +10,7 @@
         <input type='text' id="input" name="input" ref="input" v-model="input" min="0" class="form-control col-sm-7 col-md-6 mb-2 mr-2" v-on:keyup.enter="getGCDandLCM">
         <input type="button" id="gcdlcm" name="gcdlcm" :value="$t('buttons.calc')" class="col-md-2 btn btn-primary mb-2" v-on:click="getGCDandLCM">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('mathgcd.t1')}}</template>
         <template v-slot:content>
@@ -48,7 +48,6 @@ export default {
   data: function () {
     return {
       input: "",
-      error: false,
       errormsg: "",
       gcd: 0,
       lcm: 0,
@@ -101,14 +100,13 @@ export default {
     getGCDandLCM: function() {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Convert input to array of numbers
       let a = this.input.match(/[0-9]+/g);
 
       // Check for empty input
       if (a === null) {
-        this.error = true;
         this.errormsg = this.$t('errors.noinput');
         return;
       }
@@ -116,7 +114,6 @@ export default {
       // Check for zeroes (GCD is undefined for zero)
       for (let i=0; i < a.length; i++) {
         if (parseInt(a[i]) == 0) {
-          this.error = true;
           this.errormsg = this.$t('mathgcd.inperror');
           return;
         }

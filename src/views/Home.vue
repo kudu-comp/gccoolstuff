@@ -72,7 +72,10 @@
       <div class="p mb-2">
         <router-link to="/comp/bintotext">{{$t('comptools.compbintotext.title')}}</router-link> {{$t('comptools.compbintotext.short')}}.<br>
         <router-link to="/comp/bcd">{{$t('comptools.compbcd.title')}}</router-link> {{$t('comptools.compbcd.short')}}.<br>
+        <router-link to="/comp/encryption">{{$t('comptools.encryption.title')}}</router-link> {{$t('comptools.encryption.short')}}.<br>
         <router-link to="/comp/brainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> {{$t('comptools.compbrainfuck.short')}}.<br>
+        <router-link to="/comp/cow">{{$t('comptools.cow.title')}}</router-link> {{$t('comptools.cow.short')}}.<br>
+        <router-link to="/comp/beatnik">{{$t('comptools.beatnik.title')}}</router-link> {{$t('comptools.beatnik.short')}}.<br>
         <router-link to="/comp/deadfish">{{$t('comptools.compdeadfish.title')}}</router-link> {{$t('comptools.compdeadfish.short')}}.<br>
       </div>
       <h3>{{$t('menu.other')}}</h3>

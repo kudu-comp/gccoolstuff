@@ -25,7 +25,7 @@
       <div class="form-inline">
         <input type="button" id="run" name="run" :value="$t('compbf.run')" class="btn btn-primary mb-2 mr-2" v-on:click="runBrainfuck">
       </div>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div class="card card-text p-2">{{result}}</div>
     </div>
   </div>
@@ -51,15 +51,17 @@ export default {
       shorthand: false,
       bfvars: [],
       fill: "",
-      error: false,
-      errormsg: "",
-      showinfo: true,
+      errormsg: ""
     }
   },
 
   mounted: function() {
     this.$refs.code.focus();
     this.bfvars = bf.vars;
+    if (this.$route.params.bfvar) {
+      for (let i = 0; i < this.bfvars.length; i++)
+        if (this.bfvars[i] == this.$route.params.bfvar) this.selBF = i;
+    }
   },
 
   methods: {
@@ -68,7 +70,7 @@ export default {
     runBrainfuck : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       let bfcode = "";
 
       try {
@@ -86,7 +88,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.generic');
         console.log(e);
 

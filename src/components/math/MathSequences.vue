@@ -43,7 +43,7 @@
         <input type='number' id="start" v-model="start" min="0" max="1000000" class="form-control mr-2 mb-2" v-show="number == 'hail' || number == 'cwy' || number == 'revcwy'" v-on:keyup.enter="sequence">
         <input type="button" id="product" name="product" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="sequence">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}.</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}.</p>
       <div class="card card-text p-2">
         <div class="monospace">
           <p>{{$t('mathseq.res1')}} {{n}}: {{result}}.</p>
@@ -72,7 +72,6 @@ export default {
       start: 1,
       result: 0,
       seq: "",
-      error: false,
       errormsg: "",
     }
   },
@@ -84,32 +83,46 @@ export default {
 
   methods: {
     sequence: function() {
+
       let seq = null;
-      switch (this.number) {
-        case 'hail' :
-          seq = mathsequences.hailstone (this.start, this.n);
-          break;
-        case "gol" :
-          seq = mathsequences.golomb (this.n);
-          break;
-        case "abun" :
-          seq = mathsequences.abundant (this.n);
-          break;
-        case "defi" :
-          seq = mathsequences.deficient (this.n);
-          break;
-        case "cwy" :
-          seq = mathsequences.conway (this.start, this.n);
-          break;
-        case "revcwy" :
-          seq = mathsequences.revconway (this.start, this.n);
-          break;
-        case "niv" :
-          seq = mathsequences.niven (this.n);
-          break;
+      this.errormsg = "";
+      this.result = "";
+
+      try {
+
+        switch (this.number) {
+          case 'hail' :
+            seq = mathsequences.hailstone (this.start, this.n);
+            break;
+          case "gol" :
+            seq = mathsequences.golomb (this.n);
+            break;
+          case "abun" :
+            seq = mathsequences.abundant (this.n);
+            break;
+          case "defi" :
+            seq = mathsequences.deficient (this.n);
+            break;
+          case "cwy" :
+            seq = mathsequences.conway (this.start, this.n);
+            break;
+          case "revcwy" :
+            seq = mathsequences.revconway (this.start, this.n);
+            break;
+          case "niv" :
+            seq = mathsequences.niven (this.n);
+            break;
+        }
+        this.result = seq.n;
+        this.seq = seq.seq;
+        
+      } catch (error) {
+
+          console.error('Error ', error);
+          this.errormsg = this.$t('errors.generic');
+
       }
-      this.result = seq.n;
-      this.seq = seq.seq;
+      
     },
   },
 }

@@ -42,7 +42,6 @@ export default {
     return {
       message: "",
       result: "<i>" + this.$t('txtanalyze.result') + "</i>",
-      error : false,
       totalchar : 0,
       totalwords : 0,
       totallines: 0,
@@ -82,7 +81,6 @@ export default {
       let freqarr = [];
 
       // Reset all individual counters
-      this.error = "";
       this.totalchar = 0;
       this.totalwhite = 0;
       this.totalnonwhite = 0;

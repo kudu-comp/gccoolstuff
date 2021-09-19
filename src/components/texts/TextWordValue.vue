@@ -24,7 +24,7 @@
       <input type="button" id="analyze" name="analyze" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="wordValue">
       <input type="button" id="remove" name="remove" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2 mr-2" v-on:click="removeDiacr">
       <input type="button" id="remove" name="remove" :value="$t('txtwordval.showhide')" class="btn btn-primary mb-2 mr-2" v-on:click="showTable">
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}.</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}.</p>
       <div v-show="showvalues">
         <table class="table table-borderless table-sm">
           <tr><td v-for="s in values" :key="s">{{s[0]}}</td></tr>
@@ -63,7 +63,6 @@ export default {
       startatzero : false,
       result : this.$t('labels.result'),
       showinfo: true,
-      error: false,
       errormsg: ""
     }
   },
@@ -93,34 +92,46 @@ export default {
     // Calculate the word values and square root of the entire text and each word individually
     wordValue : function() {
 
-      // Check if we need to display table with values first
-      if (this.showvalues) { this.showTable(); this.showvalues = !this.showvalues }
+      this.errormsg = "";
+      this.result = "";
 
-      // Do nothing if message is empty
-      if (this.message.length == 0) return;
+      try {
 
-      //  Calculate value of the entire text
-      let value = textHelper.wordValue(this.message, this.reverse, this.startatzero, this.selectedalphabet);
-      let wordvalues = [ { name : "All text", value : value, squareroot : textHelper.squareRoot(value)} ];
+        // Check if we need to display table with values first
+        if (this.showvalues) { this.showTable(); this.showvalues = !this.showvalues }
 
-      // Split message in words
-      let words = this.message.match(/([^\s.,:;]+)/ug);
+        // Do nothing if message is empty
+        if (this.message.length == 0) return;
 
-      // Calculate values for each word, skip values of 0
-      for (let i=0; i < words.length; i++) {
-        value = textHelper.wordValue(words[i], this.reverse, this.startatzero, this.selectedalphabet);
-        if (value > 0) wordvalues.push ( { name : words[i], value : value, squareroot : textHelper.squareRoot(value)} );
-      }
+        //  Calculate value of the entire text
+        let value = textHelper.wordValue(this.message, this.reverse, this.startatzero, this.selectedalphabet);
+        let wordvalues = [ { name : "All text", value : value, squareroot : textHelper.squareRoot(value)} ];
 
-      // Display table with all values
-      let html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
-      for (let i = 0; i < wordvalues.length; i++) {
-        html += "<tr";
-        if (i==0) html += " style='color:red'";
-        html += "><th scope='row'>" + wordvalues[i].name + "</th><td class='text-center'>" + wordvalues[i].value + "</td><td class='text-center'>" + wordvalues[i].squareroot + "</td></tr>";
-      }
-      html += "</table>";
-      this.result = html;
+        // Split message in words
+        let words = this.message.match(/([^\s.,:;]+)/ug);
+
+        // Calculate values for each word, skip values of 0
+        for (let i=0; i < words.length; i++) {
+          value = textHelper.wordValue(words[i], this.reverse, this.startatzero, this.selectedalphabet);
+          if (value > 0) wordvalues.push ( { name : words[i], value : value, squareroot : textHelper.squareRoot(value)} );
+        }
+
+        // Display table with all values
+        let html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
+        for (let i = 0; i < wordvalues.length; i++) {
+          html += "<tr";
+          if (i==0) html += " style='color:red'";
+          html += "><th scope='row'>" + wordvalues[i].name + "</th><td class='text-center'>" + wordvalues[i].value + "</td><td class='text-center'>" + wordvalues[i].squareroot + "</td></tr>";
+        }
+        html += "</table>";
+        this.result = html;
+
+      } catch (e) {
+
+        console.log(e);
+        this.errormsg = this.$t('errors.generic');
+        
+      }      
 
     },
   },

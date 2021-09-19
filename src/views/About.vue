@@ -18,15 +18,15 @@
       <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
         <template v-slot:header>Contact</template>
         <template v-slot:content>
-          If you have suggestions or remarks please contact me. Our geocaching name is Team Chaenaan or you can send an email to info@gccooltools.nl.
+          If you have suggestions or remarks please contact me. Our geocaching name is Team Chaenaan.
         </template>
       </va-item>
       <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
         <template v-slot:header>Under construction</template>
         <template v-slot:content>
-          This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue.js, Vue-router, Bootstrap
-          and PHP. The front end is build as components and using Vue-cli. The front end compiler minimizes the code and does the tree shaking
-          keeping the website as small and as fast as possible.
+          This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue.js, Vue-router, Vuex
+          and PHP. The front end is build as components and using Vue-cli. There is a great set of Javascript modules in use. Leaflet is used for maps, proj4 is
+          used for coordinate conversions, crypto-js for digital encryptions. I use the vue-i18n plugin to support multiple languages.
           Some tools (ciphers, some of the math, sudoku solver) runs on the server, either to keep the size of the HTML small (e.g. it wouldn't be smart to
           load 1GB of digits) or because I had some PHP code that I wanted to reuse.
         </template>

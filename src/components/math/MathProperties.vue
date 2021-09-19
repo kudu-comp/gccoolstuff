@@ -10,7 +10,7 @@
         <input type='number' id="n" name="n" ref="n" v-model="n" min="1" max="1000000000" class="form-control col-sm-10 col-md-6 mr-2 mb-2" v-on:keyup.enter="getProperties">
         <input type="button" id="props" name="props" :value="$t('buttons.calc')" class="col-md-2 btn btn-primary mb-2" v-on:click="getProperties">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('mathprop.t1')}}</template>
         <template v-slot:content>
@@ -79,7 +79,6 @@ export default {
     return {
       n: 0,
       result: 0,
-      error: false,
       ispalindrome: false,
       isfibonacci: false,
       isprime: false,
@@ -111,11 +110,10 @@ export default {
     getProperties: function() {
 
       // Reset error
-      this.error = false;
+      this.errormsg = "";
 
       // Check if n is too big
       if (this.n > 1000000000) {
-          this.error = true;
           this.errormsg = this.$t('mathprop.toobig');
           return;
       }
@@ -150,7 +148,6 @@ export default {
         })
         .catch((error) => {
           console.error('Error ', error);
-          this.error = true;
           this.errormsg = this.$t('errors.generic');
         });
     },

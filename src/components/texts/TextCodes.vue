@@ -22,7 +22,7 @@
         <template v-slot:header>{{$t('txtcodes.someinfo')}}</template>
         <template v-slot:content><div v-html="$t('txtcodes.someinfo2')"></div></template>
       </va-item>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@ export default {
       result : this.$t('labels.result'),
       selectedcode : "Decimal",
       selectedoutput: "UTF16",
-      error: false,
       errormsg: "",
       showinfo: true,
     }
@@ -143,7 +142,6 @@ export default {
             return [codepages.codeToChar(parseInt(w), cp)];
           else {
             // This should never happen
-            this.error = true;
             this.errormsg = this.$t('errors.generic');
             return [""];
           }
@@ -212,7 +210,6 @@ export default {
           if (cp >= 0)
             return codepages.charToCode(w, cp);
           else {
-            this.error = true;
             this.errormsg = this.$t('errors.generic');
             return -1;
           }
@@ -223,7 +220,7 @@ export default {
     translateInput : function () {
 
       // Reset error flag and reset baudotcode flag to letters
-      this.error = false;
+      this.errormsg = "" ;
       baudotcode.reset();
 
       try {
@@ -250,7 +247,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
         console.log(e);
 

@@ -2,17 +2,7 @@
  *
  */
 
-var textHelper = {
-  alphabets : alphabets,
-  removeDiacritics : removeDiacritics,
-  getAlphabet: getAlphabet,
-  wordValue: wordValue,
-  squareRoot: squareRoot,
-  getExtAlphabets: getExtAlphabets,
-  getTable: getTable,
-};
-
-const alphabets = [
+export const alphabets = [
   // Western alphabets
   { name : "English",   length : 26, alphabet : "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},
   { name : "Germany",   length : 30, alphabet : "ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜß"},
@@ -42,7 +32,7 @@ const alphabets = [
   // { name : "Georgia",   alphabet : "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ"},
 ]
 
-const extalphabets = [
+export const extalphabets = [
     { name: "Vanity code", length : 26, alphabet : "A=2, B=2, C=2, D=3, .... Z=9",
       charlist: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", values: [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,8,8,8,9,9,9,9] },
     { name: "Scrabble English", length: 26, alphabet: "A=1, B=3, C=3, D=2, ... Z=10",
@@ -59,7 +49,7 @@ const extalphabets = [
       charlist: "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ", values: [1,8,4,4,1,10,1,10,1,2,3,3,1,10,1,2,2,1,1,2,8,8,10,3] },
 ]
 
-const defaultMap = [
+export const defaultMap = [
     {'base':'A', 'letters':/[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g},
     {'base':'AA','letters':/[\uA732]/g},
     {'base':'AE','letters':/[\u00C6\u01FC\u01E2]/g},
@@ -146,25 +136,25 @@ const defaultMap = [
     {'base':'z','letters':/[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/g}
 ];
 
-function removeDiacritics (str) {
+export function removeDiacritics (str) {
   for(let i=0; i<defaultMap.length; i++) {
     str = str.replace(defaultMap[i].letters, defaultMap[i].base);
   }
   return str;
 }
 
-function getAlphabet(name) {
+export function getAlphabet(name) {
   return alphabets[alphabets.findIndex( (a) => a.name == name )].alphabet;
 }
 
-function getExtAlphabets() {
+export function getExtAlphabets() {
   let a = alphabets.slice();
   for (let ext of extalphabets)
     a.push ( { name : ext.name, length : ext.length, alphabet : ext.alphabet } );
   return a;
 }
 
-function getTable (x, reverse = false, startatzero = false) {
+export function getTable (x, reverse = false, startatzero = false) {
 
   let t = [];
   let val = 0;
@@ -197,7 +187,12 @@ function getTable (x, reverse = false, startatzero = false) {
   return t;
 }
 
-function wordValue (str, reverse = false, startatzero = false, x = "English") {
+export function wordValue (str, reverse = false, startatzero = false, x = "English") {
+  
+  // Empty, undefined return 0
+  if (!str) return 0;
+
+  // Initialize
   let total = 0;
   let idx = 0;
   let alphabetidx = alphabets.findIndex( (a) => a.name == x );
@@ -243,7 +238,7 @@ function wordValue (str, reverse = false, startatzero = false, x = "English") {
 }
 
 // Calculate the square root of a number
-function squareRoot (n) {
+export function squareRoot (n) {
   let total = n;
   while (total > 9) {
     n = total;
@@ -257,13 +252,3 @@ function squareRoot (n) {
   return total;
 }
 
-exports['default'] = textHelper;
-exports.removeDiacritics = removeDiacritics;
-exports.alphabets = alphabets;
-exports.wordValue = wordValue;
-exports.getAlphabet = getAlphabet;
-exports.getExtAlphabets = getExtAlphabets;
-exports.getTable = getTable;
-exports.squareRoot = squareRoot;
-
-Object.defineProperty(exports, '__esModule', { value: true });

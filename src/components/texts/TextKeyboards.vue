@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="card card-text p-2">{{result}}</div>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -42,7 +42,6 @@ export default {
       result : this.$t('labels.result'),
       fromkeyboard : "QWERTY",
       tokeyboard: "DVORAK2",
-      error: false,
       errormsg: "",
     }
   },
@@ -61,13 +60,12 @@ export default {
     translateKeyboard : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       try {
         // Convert the input
         this.result = keyboards.convertKeyboard (this.message, this.fromkeyboard, this.tokeyboard);
       } catch (e) {
-        this.error = true;
         this.errormsg = this.$t('txtkeyb.error');
         console.log(e);
       }

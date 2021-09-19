@@ -99,8 +99,17 @@ export default {
     }
     tags.add("");
     this.tags = Array.from(tags).sort();
-    this.selectCodepage(this.currentpage-1);
+    this.currentpage = 0;
+
+    // If code is passed as a param make that the current page
+    if (this.$route.params.code) {
+      for (let i=0; i < codepages.length; i++) {
+        if (codepages[i].name == this.$route.params.code) this.currentpage = i;
+      }
+    }
+    this.selectCodepage();
   },
+
   methods: {
 
     // Display the codepage with the right index in the array of found pages

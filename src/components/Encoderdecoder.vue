@@ -28,7 +28,6 @@
         <input type="button" id="foursquare" name="foursquare" value="Foursquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Foursquare')">
         <input type="button" id="gcid" name="gcid" value="Geocache ID" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('GCId')">
         <input type="button" id="goldbug" name="goldbug" value="Goldbug" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Goldbug')">
-        <input type="button" id="graycode" name="graycode" value="Graycode" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Graycode')">
         <input type="button" id="gromark" name="gromark" value="Gromark" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Gromark')">
         <input type="button" id="gronsfeld" name="gronsfeld" value="Gronsfeld" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Gronsfeld')">
         <input type="button" id="vatsyayana" name="vatsyayana" value="Kamasutra" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vatsyayana')">
@@ -125,7 +124,7 @@
         <label class="form-label mr-2 mb-2" for="key3">{{labelkey3}}</label>
         <input type='number' id="key3" name="key3" ref="key3" v-model="key3" class="form-control mb-2">
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div class="col-6">
           <input type="button" id="encode" name="encode" :value="$t('buttons.encode')" class="btn btn-primary mb-2" v-on:click="toEncode">
@@ -191,7 +190,6 @@ export default {
       showModal3: false,
       message: "",
       translatedmessage: "",
-      error: false,
       errormsg: "",
       separator: ' ',
       blocksize: 5,
@@ -232,7 +230,8 @@ export default {
 
   mounted: function() {
     //this.$refs.message.focus();
-    if (typeof(this.$route.params.cipher) != "undefined")
+    // if (typeof(this.$route.params.cipher) != "undefined")
+    if (this.$route.params.cipher)
       this.changeCipher(this.$route.params.cipher);
     else
       this.changeCipher('Atbash');
@@ -247,7 +246,7 @@ export default {
 
     // Decode transmsg
     toDecode: function() {
-      this.error = false;
+      this.errormsg = "";
       let data = {
         alphabet: this.alphabet,
         removeunknown: this.removeunknown,
@@ -276,14 +275,12 @@ export default {
           .catch((error) => {
               console.error('Error ', error);
               this.errormsg = this.$t('cp.errdec');
-              this.error = true;
           });
 
       } catch (e) {
 
         console.error('Error ', e);
         this.errormsg = this.$t('cp.errdec');
-        this.error = true;
 
       }
 
@@ -291,7 +288,7 @@ export default {
 
     // Encode message
     toEncode: function() {
-      this.error = false;
+      this.errormsg = "";
       let data = {
           alphabet: this.alphabet,
           removeunknown: this.removeunknown,
@@ -320,14 +317,12 @@ export default {
           .catch((error) => {
               console.error('Error ', error);
               this.errormsg = this.$t('cp.errenc');
-              this.error = true;
           });
 
       } catch (e) {
 
           console.error('Error ', e);
           this.errormsg = this.$t('cp.errenc');
-          this.error = true;
 
       }
 
@@ -473,11 +468,6 @@ export default {
           this.showalphabet = false;
           break;
         case 'Goldbug':
-          break;
-        case 'Graycode':
-          this.shownumkey1 = true;
-          this.key1 = 4;
-          this.alphabet = "0123456789";
           break;
         case 'Gromark':
           this.showkey1 = true;
@@ -664,7 +654,7 @@ export default {
       let s = "";
       for (let i = 0; i < this.translatedmessage.length; i++) {
         if ((i % this.blocksize == 0) && (i>0)) s += this.separator;
-          s += this.translatedmessage[i];
+        s += this.translatedmessage[i];
       }
       if (s[s.length-1] == this.separator) s = s.slice(0, s.length-2);
       this.translatedmessage = s;
@@ -675,7 +665,7 @@ export default {
       let s = "";
       let block = parseInt(this.blocksize);
       for (let i = 0; i < this.translatedmessage.length; i++)
-			if ((i+1) % (block+1) != 0) s += this.translatedmessage[i];
+        if ((i+1) % (block+1) != 0) s += this.translatedmessage[i];
       this.translatedmessage = s;
     },
 
@@ -685,25 +675,11 @@ export default {
       let arr = this.replacements.match(/[A-Za-z]=[A-Za-z]/g);
 
       if (arr !== null) 
-        for (let i=0; i<arr.length; i++) {
-          let s = "";
-          for (let j=0; j<this.message.length; j++)
-            if (this.message[j] === arr[i][0])
-              s += arr[i][2];
-            else
-              s += this.message[j];
-          this.message = s;
-        }
+        for (let a of arr)
+          this.message = this.message.replace(new RegExp(a[0], "g"), a[2]);
 
     }
   },
 }
 </script>
 
-<style scoped>
-
-#explanation {
-  font-size: 1.2em;
-}
-
-</style>

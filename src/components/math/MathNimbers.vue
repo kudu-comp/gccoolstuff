@@ -14,7 +14,7 @@
       <div>
         <input type="button" id="product" name="product" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="nimberProduct">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('mathnim.t1')}}</template>
         <template v-slot:content>
@@ -43,7 +43,6 @@ export default {
 
   data: function () {
     return {
-      error: false,
       errormsg: "",
       x: 0,
       y: 0,
@@ -63,7 +62,7 @@ export default {
 
     // Calculate the nimber product and sum
     nimberProduct: function() {
-      this.error = false;
+      this.errormsg = "";
       let data = {
         x: this.x,
         y: this.y,
@@ -82,7 +81,6 @@ export default {
         })
         .catch((error) => {
             console.error('Error ', error);
-            this.error = true;
             this.errormsg = this.$t('errors.generic');
         });
     },

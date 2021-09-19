@@ -38,8 +38,11 @@ import MathBase from  '@/components/math/MathBase.vue'
 import CompToolbox from '../views/CompToolbox.vue'
 import CompBCD from '@/components/comp/CompBCD.vue'
 import CompBrainfuck from '@/components/comp/CompBrainfuck.vue'
+import CompEncryption from '@/components/comp/CompEncryption.vue'
 import CompDeadfish from '@/components/comp/CompDeadfish.vue'
 import CompBinToText from '@/components/comp/CompBinToText.vue'
+import CompCow from '@/components/comp/CompCow.vue'
+import CompBeatnik from '@/components/comp/CompBeatnik.vue'
 import ImageTools from '@/components/images/ImageTools.vue'
 import ExifScanner from '@/components/images/ExifScanner.vue'
 import ColorPicker from '@/components/images/ColorPicker.vue'
@@ -68,16 +71,16 @@ const routes = [
     name: 'Coord',
     component: Coord,
     children: [
-      { path: "/coord/coordconvert", component: CoordConvert },
-      { path: "/coord/coordproj", component: CoordProject },
-      { path: "/coord/coordlines", component: CoordLines },
-      { path: "/coord/coordtriangles", component: CoordTriangles },
-      { path: "/coord/coordcircles", component: CoordCircles },
-      { path: "/coord/coordincomplete", component: CoordIncomplete },
-      { path: "/coord/coordantipode", component: CoordAntipode },
-      { path: "/coord/coordmapmaker", component: CoordMapMaker },
-      { path: "/coord/coordw3w", component: CoordW3W },
-      { path: "/coord/reversewherigo", component: ReverseWherigo }
+      { path: "/coord/coordconvert", name: 'CoordConvert', component: CoordConvert },
+      { path: "/coord/coordproj", name: 'CoordProj', component: CoordProject },
+      { path: "/coord/coordlines", name: 'CoordLines', component: CoordLines },
+      { path: "/coord/coordtriangles", name: 'CoordTriangels', component: CoordTriangles },
+      { path: "/coord/coordcircles", name: 'CoordCircles', component: CoordCircles },
+      { path: "/coord/coordincomplete", name: 'CoordIncomplete', component: CoordIncomplete },
+      { path: "/coord/coordantipode", name: 'CoordAntipode', component: CoordAntipode },
+      { path: "/coord/coordmapmaker", name: 'MapMaker', component: CoordMapMaker },
+      { path: "/coord/coordw3w", name: 'CoordW3W', component: CoordW3W },
+      { path: "/coord/reversewherigo", name: 'ReverseWherigo', component: ReverseWherigo }
     ]
   },
   {
@@ -85,29 +88,30 @@ const routes = [
     name: 'TextToolbox',
     component: TextToolbox,
     children: [
-      { path: "/text/textwordvalue", component: TextWordValue },
-      { path: "/text/smartreplace", component: SmartReplace },
-      { path: "/text/textanalyzer", component: TextAnalyze },
-      { path: "/text/texttonumbers", component: TextToNumbers },
-      { path: "/text/textcodes", component: TextCodes },
-      { path: "/text/textkeyboards", component: TextKeyboards },
+      { path: "/text/textwordvalue", name: 'WordValue', component: TextWordValue },
+      { path: "/text/smartreplace", name: 'SmartReplace', component: SmartReplace },
+      { path: "/text/textanalyzer", name: 'TextAnalyzer', component: TextAnalyze },
+      { path: "/text/texttonumbers", name: 'TextToNumbers', component: TextToNumbers },
+      { path: "/text/textcodes", name: 'TextCodes', component: TextCodes },
+      { path: "/text/textkeyboards", name: 'Keyboards', component: TextKeyboards },
     ]
   },
   {
     path: '/cipher',
     name: 'Cipher',
     component: Cipher
+    // Param: cipher is name of selected cipher initially
   },
   {
     path: '/codes',
     name: 'Codes',
     component: CodesIntro,
     children: [
-      { path: "/codes/codebook", component: CodeBook },
-      { path: "/codes/fonts", component: FontSpecial},
-      { path: "/codes/segment", component: SegmentCode},
-      { path: "/codes/resistorcode", component: ResistorCode},
-      { path: "/codes/decabit", component: Decabit}
+      { path: "/codes/codebook",     name: 'Codebook', component: CodeBook },   // Param: code is name of the initial code
+      { path: "/codes/fonts",        name: 'Fonts',    component: FontSpecial}, // Param: font is name of the initial font
+      { path: "/codes/segment",      name: 'Segment',  component: SegmentCode},
+      { path: "/codes/resistorcode", name: 'Resistor', component: ResistorCode},
+      { path: "/codes/decabit",      name: 'Decabit',  component: Decabit}
     ]
   },
   {
@@ -115,16 +119,16 @@ const routes = [
     name: 'Math',
     component: MathToolbox,
     children: [
-      { path: "/math/baseconvertor", component: MathBase },
-      { path: "/math/countdigits", component: MathDigits },
-      { path: "/math/primes", component: MathPrimes},
-      { path: "/math/formulasolv", component: MathFormula},
-      { path: "/math/numberproperties", component: MathProperties },
-      { path: "/math/fibonacci", component: MathFib },
-      { path: "/math/nimbers", component: MathNimbers },
-      { path: "/math/gcdandlcm", component: MathGCDandLCM },
-      { path: "/math/palindromecounter", component: MathPalindrome },
-      { name: "MathSequences", path: "/math/sequences", component: MathSequences },
+      { path: "/math/baseconvertor",     name: 'BaseConvertor',         component: MathBase },
+      { path: "/math/countdigits",       name: 'Digits',                component: MathDigits },
+      { path: "/math/primes",            name: 'Primes',                component: MathPrimes},
+      { path: "/math/formulasolv",       name: 'FormulaSolver',         component: MathFormula},
+      { path: "/math/numberproperties",  name: 'NumberProperties',      component: MathProperties },
+      { path: "/math/fibonacci",         name: 'Fibonacci',             component: MathFib },
+      { path: "/math/nimbers",           name: 'Nimbers',               component: MathNimbers },
+      { path: "/math/gcdandlcm",         name: 'GCDAndLCM',             component: MathGCDandLCM },
+      { path: "/math/palindromecounter", name: 'Palindrome',            component: MathPalindrome },
+      { path: "/math/sequences",         name: 'Sequences',             component: MathSequences },
     ]
   },
   {
@@ -132,11 +136,14 @@ const routes = [
     name: 'Comp',
     component: CompToolbox,
     children: [
-      { path: "/comp/charcodes", name: 'charcodes', component: TextCodes },
-      { path: "/comp/bcd", name: 'bcd', component: CompBCD },
-      { path: "/comp/brainfuck", name: 'brainfuck', component: CompBrainfuck },
-      { path: "/comp/deadfish", name: 'deadfish', component: CompDeadfish },
-      { path: "/comp/bintotext", name: 'compbintotext', component: CompBinToText }
+      { path: "/comp/charcodes",  name: 'charcodes',       component: TextCodes },
+      { path: "/comp/bcd",        name: 'bcd',             component: CompBCD },
+      { path: "/comp/encryption", name: 'encryption',      component: CompEncryption }, //Param: enc is name of the initial encryption
+      { path: "/comp/brainfuck",  name: 'brainfuck',       component: CompBrainfuck },  //Param: bfvar is name of the initial BF variation
+      { path: "/comp/deadfish",   name: 'deadfish',        component: CompDeadfish },
+      { path: "/comp/cow",        name: 'cow',             component: CompCow },
+      { path: "/comp/beatnik",    name: 'beatnik',         component: CompBeatnik },
+      { path: "/comp/bintotext",  name: 'compbintotext',   component: CompBinToText }
     ]
   },
   {
@@ -144,41 +151,13 @@ const routes = [
     name: "OtherTools",
     component: OtherTools,
     children: [
-      {
-        path: '/other/sudokusolver',
-        name: 'SudokuSolver',
-        component: Sudoku
-      },
-      {
-        path: '/other/mmsolver',
-        name: 'MastermindSolver',
-        component: MastermindSolver,
-      },
-      {
-        path: '/other/periodictable',
-        name: 'PeriodicTable',
-        component: PeriodicTable,
-      },
-      {
-        path: '/other/countries',
-        name: 'Countries',
-        component: Countries,
-      },
-      {
-        path: '/other/unitconvertor',
-        name: 'UnitConvertor',
-        component: UnitConvertor,
-      },
-      {
-        path: '/other/usastates',
-        name: 'UsaStates',
-        component: UsaStates,
-      },
-      {
-        path: '/other/countryregions',
-        name: 'CountryRegions',
-        component: CountryRegions,
-      }
+      { path: '/other/sudokusolver',    name: 'SudokuSolver',     component: Sudoku            },
+      { path: '/other/mmsolver',        name: 'MastermindSolver', component: MastermindSolver, },
+      { path: '/other/periodictable',   name: 'PeriodicTable',    component: PeriodicTable,    },
+      { path: '/other/countries',       name: 'Countries',        component: Countries,        },
+      { path: '/other/unitconvertor',   name: 'UnitConvertor',    component: UnitConvertor,    },
+      { path: '/other/usastates',       name: 'UsaStates',        component: UsaStates,        },
+      { path: '/other/countryregions',  name: 'CountryRegions',   component: CountryRegions,   }
     ]
   },
   {
@@ -186,31 +165,11 @@ const routes = [
     name: "ImageTools",
     component: ImageTools,
     children: [
-      {
-        path: '/images/exifscanner',
-        name: 'ExifScanner',
-        component: ExifScanner
-      },
-      {
-        path: '/images/colorpicker',
-        name: 'ColorPicker',
-        component: ColorPicker
-      },
-      {
-        path: '/images/filltool',
-        name: 'FillTool',
-        component: FillTool
-      },
-      {
-        path: '/images/pixeldata',
-        name: 'PixelData',
-        component: PixelData
-      },
-      {
-        path: '/images/imagetransform',
-        name: 'ImageTransform',
-        component: ImageTransform
-      },
+      { path: '/images/exifscanner',     name: 'ExifScanner',     component: ExifScanner      },
+      { path: '/images/colorpicker',     name: 'ColorPicker',     component: ColorPicker      },
+      { path: '/images/filltool',        name: 'FillTool',        component: FillTool      },
+      { path: '/images/pixeldata',       name: 'PixelData',       component: PixelData      },
+      { path: '/images/imagetransform',  name: 'ImageTransform',  component: ImageTransform      },
     ]
   },
   {

@@ -25,7 +25,7 @@
         <input type='number' min="1" max="9007199254740992" id="primefact" ref="primefact" v-model="primefact" class="form-control mb-2 mr-2">
         <input type="button" id="primefact" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="primeFactors">
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <va-item v-bind:showitem='true' v-bind:hidebutton='true'>
         <template v-slot:header>{{$t('labels.result')}}</template>
         <template v-slot:content>
@@ -54,7 +54,6 @@ export default {
 
   data: function () {
     return {
-      error: false,
       errormsg: "",
       pos: 1,
       primepos: 1,
@@ -77,11 +76,10 @@ export default {
 
       // Reset errors
       this.result = this.$t('labels.result');
-      this.error = false;
+      this.errormsg = "";
         
       if (this.checkprime > Number.MAX_SAFE_INTEGER) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.toobig');
 
       } else {
@@ -101,11 +99,10 @@ export default {
 
       // Reset errors
       this.result = this.$t('labels.result');
-      this.error = false;
+      this.errormsg = "";
         
       if (this.checkprime > Number.MAX_SAFE_INTEGER) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.toobig');
 
       } else {
@@ -125,7 +122,7 @@ export default {
 
       // Reset errors
       this.result = this.$t('labels.result');
-      this.error = false;
+      this.errormsg = "";
 
       let data = {
         action: "get",
@@ -146,7 +143,6 @@ export default {
         })
         .catch((error) => {
           console.error('Error ', error);
-          this.error = true;
           this.errormsg = this.$t('errors.generic');
         });
     },
@@ -156,7 +152,7 @@ export default {
 
       // Reset errors
       this.result = this.$t('labels.result');
-      this.error = false;
+      this.errormsg = "";
 
       let data = {
         action: "pos",
@@ -177,7 +173,6 @@ export default {
         })
         .catch((error) => {
             console.error('Error ', error);
-            this.error = true;
             this.errormsg = this.$t('errors.generic');
         });
     },

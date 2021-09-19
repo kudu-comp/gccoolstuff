@@ -16,7 +16,7 @@
         <input type="button" id="checkfib" name="checkfib" :value="$t('buttons.check')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="checkFib">
       </div>
       <div class="card card-text p-2">{{result}}</div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -301,18 +301,16 @@ export default {
     // Get the fibonacci at a given position
     getFib: function() {
 
-      this.error=false;
+      this.errormsg = "";
 
       // Position must be greater than zero
       if (this.pos < 1) {
-        this.error = true;
         this.errormsg = this.$t('mathfib.errorzero');
         return;
       }
 
       // Position must be smaller or equal to 500
       if (this.pos > 500) {
-        this.error = true;
         this.errormsg = this.$t('mathfib.toobig');
         return;
       }
@@ -324,7 +322,7 @@ export default {
     checkFib: function() {
 
       // Reset errormsg
-      this.error = false;
+      this.errormsg = "";
 
       // Check if number is Fibonacci
       this.result = this.check;

@@ -18,7 +18,7 @@
           <label for="unique" class="custom-control-label mb-2">{{$t('mathcrypta.unique')}}</label>
         </div>
       </div>
-      <p v-show="error" class="errormsg mb-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
       <div class="mt-2" v-show="results.length > 0">
         {{$t('sudoku.thereare')}} {{results.length}} {{$t('sudoku.sols')}}
         <div class="form-inline mt-2 mb-2">
@@ -53,7 +53,6 @@ export default {
       varnames: "",
       base: 10,
       unique: true,
-      error: false,
       errormsg: "",
       result: this.$t('labels.result'),
       results: [],
@@ -142,7 +141,7 @@ export default {
 
       // Reset everything
       this.result = "";
-      this.error = false;
+      this.errormsg = "";
       this.results = [];
       this.varnames = [];
 
@@ -152,7 +151,6 @@ export default {
       }
     
       if (this.varnames.length > this.base) {
-        this.error = true;
         this.errormsg = this.$t('mathcrypta.toomanyvars')
       }
 
@@ -172,7 +170,6 @@ export default {
 
       } catch(e) {
 
-        this.error = true;
         this.errormsg = this.$t('mathcrypta.exprerror');
         console.log(e);
 

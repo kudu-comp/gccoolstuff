@@ -55,7 +55,7 @@
           {{seltotable}}
         </p>
       </div>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div class="card card-text p-2">{{result}}</div>
     </div>
   </div>
@@ -84,7 +84,6 @@ export default {
       result : this.$t('labels.result'),
       basefrom: "bin",
       baseto: "bin",
-      error: false,
       errormsg: "",
       seltoenc : "b64",
       totables : [],
@@ -142,7 +141,7 @@ export default {
     convertBase : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       this.result = "";
       let buffer = [];
 
@@ -212,7 +211,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
         console.log(e);
 

@@ -10,8 +10,12 @@
       </div>
       <div class="form-inline">
         <input type="button" id="run" name="run" :value="$t('compbf.run')" class="btn btn-primary mb-2 mr-2" v-on:click="runCode">
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" name="debug" id="debug" v-model="debug" class="custom-control-input mr-2 mb-2">
+          <label for="debug" class="custom-control-label mb-2">{{$t('compbf.debug')}}</label>
+        </div>
       </div>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div class="card card-text p-2">{{result}}</div>
     </div>
   </div>
@@ -31,8 +35,8 @@ export default {
     return {
       message: "",
       result : this.$t('labels.result'),
-      error: false,
-      errormsg: ""
+      errormsg: "",
+      debug: false
     }
   },
 
@@ -76,23 +80,23 @@ export default {
             res += "\n";
         }
         if (acc == 256 || acc == -1) acc = 0;
-      
+        if (this.debug) {
+          console.log(`Command: ${c} - Accumulator after command: ${acc}`)
+        }
       }
       return res;
     },
 
     runCode : function () {
 
-      // Reset error flag
-      this.error = false;
-
+      this.errormsg = "";
+      
       try {
         
         this.result = this.runDeadfish(this.message);
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.genericerror');
         console.log(e);
 
