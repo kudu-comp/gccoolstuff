@@ -8,7 +8,7 @@
       <div class="form-inline">
         <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div id="preview" class="col-9">
           <canvas id="canvas" v-bind:width="width" v-bind:height="height" @click="fillColor"></canvas>
@@ -80,7 +80,6 @@ export default {
   data: function() {
     return {
       fileurl: "",
-      error: false,
       errormsg: "",
       ctx: null,
       img: null,
@@ -368,7 +367,7 @@ export default {
     selectFile: function (event) {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Get the input file
       let input = event.target;
@@ -391,7 +390,6 @@ export default {
             } catch(err) {
 
               console.log(err);
-              this.error = true;
               this.errormsg = this.$t('colorpicker.error')
             
             }
@@ -403,6 +401,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

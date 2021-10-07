@@ -35,6 +35,22 @@
           <input type="radio" id="number7" name="number" value="sqrt3" class="form-check-input" v-model="number">
           <label class="form-check-label" for="number7">{{$t('mathdeci.sq3')}}</label>
         </div>
+        <div class="form-check">
+          <input type="radio" id="number8" name="number" value="zeta3" class="form-check-input" v-model="number">
+          <label class="form-check-label" for="number8">{{$t('mathdeci.zeta3')}}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="number9" name="number" value="gauss" class="form-check-input" v-model="number">
+          <label class="form-check-label" for="number9">{{$t('mathdeci.gauss')}}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="number10" name="number" value="lemni" class="form-check-input" v-model="number">
+          <label class="form-check-label" for="number10">{{$t('mathdeci.lemni')}}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="number11" name="number" value="cat" class="form-check-input" v-model="number">
+          <label class="form-check-label" for="number11">{{$t('mathdeci.cat')}}</label>
+        </div>
       </div>
       <div class="form-inline mt-4">
         <label class="form-label mb-2 mr-2" for="start">{{$t('mathdeci.from')}}</label>

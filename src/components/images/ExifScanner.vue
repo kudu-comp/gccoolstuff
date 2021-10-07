@@ -10,7 +10,7 @@
         <!-- <label for="imgurl" class="form-label mr-2">Or enter URL</label>
         <input type="text" ref="imgurl" name="imagurl" id="imgurl" v-model="fileurl" class="form-control" @change="selectURL"> -->
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div class="col-8">
           <div class="text-center mb-2" v-if="imageData.length > 0">
@@ -103,7 +103,6 @@ export default {
       isRotate90: false,
       isRotate180: false,
       isRotate270: false,
-      error: false,
       errormsg: "",
       exifdata: "",
       tags: null,
@@ -205,7 +204,7 @@ export default {
     selectFile: function (event) {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Get the input file
       let input = event.target;
@@ -236,7 +235,6 @@ export default {
 
             } catch(err) {
               console.log(err);
-              this.error = true;
               this.errormsg = this.$t('exifscanner.error')
             }
         }

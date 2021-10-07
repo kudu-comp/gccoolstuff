@@ -30,7 +30,7 @@
             </div>
             <input type="button" id="restore" name="btnsearch" :value="$t('buttons.count')" class="btn btn-primary mr-2 mb-2" v-on:click="pixelCount(img)">
           </div>
-          <p v-show="error" class="errormsg">{{errormsg}}</p>
+          <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
           <div class="card card-text p-2" v-html="result"></div>
         </div>
         <div id="preview" class="col-6">
@@ -54,7 +54,6 @@ export default {
   data: function() {
     return {
       fileurl: "",
-      error: false,
       errormsg: "",
       ctx: null,
       img: null,
@@ -183,7 +182,7 @@ export default {
     selectFile: function (event) {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Get the input file
       let input = event.target;
@@ -207,7 +206,6 @@ export default {
             } catch(err) {
 
               console.log(err);
-              this.error = true;
               this.errormsg = this.$t('errors.generic')
             
             }

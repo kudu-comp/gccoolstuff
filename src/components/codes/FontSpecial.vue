@@ -58,20 +58,27 @@ export default {
         color: 'black'
       },
       fontdef: [
-        { id: 'Antiker', font: 'Antiker (Star Gate)' },
+        { id: 'Antiker', font: 'Ancient (Star Gate)' },
+        { id: 'Applebeech', font: 'Applebeech (runes)' },
         { id: 'Aurebesh', font: 'Aurebesh (Star Wars)' },
         { id: 'Barbook', font: 'Barbook' },
         { id: 'Betamaze', font: 'Betamaze' },
+        { id: 'Braille', font: 'Braille' },
         { id: 'Centauri', font: 'Centauri (Babylon 5)' },
         { id: 'Code128', font: 'Code 128 (barcode)' },
         { id: 'Code39', font: 'Code 39 (barcode)' },
         { id: 'Cirth', font: 'Cirth Erebor (Tolkien)' },
+        { id: 'Daedra', font: 'Daedra (The Elder Scrolls)' },
         { id: 'Dagger', font: 'Dagger' },
+        { id: 'Dovahkiin', font: 'Dovahzul (The Elder Scrolls)' },
         { id: 'Drazi', font: 'Drazi (Babylon 5)' },
         { id: 'Eldfuth', font: 'Elder Futhark (runes)' },
+        { id: 'Efkolia', font: 'Efkolia' },
         { id: 'FaceIt', font: 'Face it!' },
+        { id: 'Fakoo', font: 'Fakoo (braille)' },
         { id: 'Fetish', font: 'Fetish (shoes)' },
         { id: 'Futurama', font: 'Futurama alien' },
+        { id: 'Gallifreyan', font: 'Gallifreyan (Dr. Who)' },
         { id: 'Hylian64', font: 'Hylian 64 (Zelda)'},
         { id: 'HylianAn', font: 'Hylian, Ancient (Zelda)'},
         { id: 'HylianSS', font: 'Hylian, Skyward Sword (Zelda)'},
@@ -82,13 +89,17 @@ export default {
         { id: 'Mandalor', font: 'Mandalorian (Star Wars)' },
         { id: 'Matoran', font: 'Matoran (Lego Bionicles)' },
         { id: 'Minbari', font: 'Minbari (Babylon 5)' },
+        { id: 'Moonalpha', font: 'Moon Alphabet' },
         { id: 'Moonrunes', font: 'Moon Runes' },
         { id: 'Narn', font: 'Narn (Babylon 5)' },
+        { id: 'Ogham', font: 'Ogham (Medieval)' },
         { id: 'Pigpen', font: 'Pigpen cipher' },
         { id: 'Quadoo', font: 'Quadoo' },
         { id: 'Semaphore', font: 'Semaphore (flags)' },
         { id: 'TengwarA', font: 'Tengwar Annatar (Tolkien)' },
         { id: 'Templar', font: 'Templar Cipher' },
+        { id: 'Tengo', font: 'Tengo' },
+        { id: 'Theban', font: 'Theban' },
         { id: 'Unown', font: 'Unown' },
         { id: 'Utopian', font: 'Utopian' },
         { id: 'Visitor', font: 'Visitor (2009)' },
@@ -114,19 +125,26 @@ export default {
 <style scoped>
 
 @font-face { font-family: Antiker;    src: url('~@/assets/fonts/Ancient-Black.woff'); }
+@font-face { font-family: Applebeech; src: url('~@/assets/fonts/AppleBeech.woff'); }
 @font-face { font-family: Aurebesh;   src: url('~@/assets/fonts/Aurebesh.otf'); }
 @font-face { font-family: Barbook;    src: url('~@/assets/fonts/BarBook.woff'); }
 @font-face { font-family: Betamaze;   src: url('~@/assets/fonts/BetaMaze-0-180.woff'); }
+@font-face { font-family: Braille;    src: url('~@/assets/fonts/Braille.woff'); }
 @font-face { font-family: Centauri;   src: url('~@/assets/fonts/Centauri.woff'); }
 @font-face { font-family: Code128;    src: url('~@/assets/fonts/Code128.woff'); }
 @font-face { font-family: Code39;     src: url('~@/assets/fonts/Code39Regular.woff'); }
 @font-face { font-family: Cirth;      src: url('~@/assets/fonts/CirthEreborCaps.woff'); }
+@font-face { font-family: Daedra;     src: url('~@/assets/fonts/Daedra.otf'); }
 @font-face { font-family: Dagger;     src: url('~@/assets/fonts/AlphabetofDaggers.woff'); }
+@font-face { font-family: Dovahkiin;  src: url('~@/assets/fonts/dovahkiin.otf'); }
 @font-face { font-family: Drazi;      src: url('~@/assets/fonts/Drazi.woff'); }
 @font-face { font-family: Eldfuth;    src: url('~@/assets/fonts/ElderFuthark.woff'); }
+@font-face { font-family: Efkolia;    src: url('~@/assets/fonts/Efkolia.woff'); }
 @font-face { font-family: FaceIt;     src: url('~@/assets/fonts/Faceit.woff'); }
+@font-face { font-family: Fakoo;      src: url('~@/assets/fonts/Fakoo.woff'); }
 @font-face { font-family: Fetish;     src: url('~@/assets/fonts/WCFetish.otf'); }
 @font-face { font-family: Futurama;   src: url('~@/assets/fonts/FuturamaAlienAlphabetOne.woff'); }
+@font-face { font-family: Gallifreyan;src: url('~@/assets/fonts/WSSimpleGallifreyan.woff'); }
 @font-face { font-family: Hylian64;   src: url('~@/assets/fonts/Hylian64.woff'); }
 @font-face { font-family: HylianAn;   src: url('~@/assets/fonts/AncientHylian-English.woff'); }
 @font-face { font-family: HylianSS;   src: url('~@/assets/fonts/SSAncientHylian.woff'); }
@@ -137,13 +155,17 @@ export default {
 @font-face { font-family: Mandalor;   src: url('~@/assets/fonts/Mandalorian.woff'); }
 @font-face { font-family: Matoran;    src: url('~@/assets/fonts/Matoran.woff'); }
 @font-face { font-family: Minbari;    src: url('~@/assets/fonts/Minbari.woff'); }
+@font-face { font-family: Moonalpha;  src: url('~@/assets/fonts/RNIBMOON.woff'); }
 @font-face { font-family: Moonrunes;  src: url('~@/assets/fonts/MoonRunes.woff'); }
 @font-face { font-family: Narn;       src: url('~@/assets/fonts/Narn.woff'); }
+@font-face { font-family: Ogham;      src: url('~@/assets/fonts/Beth-Luis-Fearn.woff'); }
 @font-face { font-family: Pigpen;     src: url('~@/assets/fonts/PigpenCipher.woff'); }
 @font-face { font-family: Quadoo;     src: url('~@/assets/fonts/Quadoo.woff'); }
 @font-face { font-family: Semaphore;  src: url('~@/assets/fonts/Semaphore.woff'); }
 @font-face { font-family: Templar;    src: url('~@/assets/fonts/TemplarsCipherPlusRegular.woff'); }
 @font-face { font-family: TengwarA;   src: url('~@/assets/fonts/TengwarAnnatar.woff'); }
+@font-face { font-family: Tengo;      src: url('~@/assets/fonts/Tengo.woff'); }
+@font-face { font-family: Theban;     src: url('~@/assets/fonts/ThebanAlphabet.woff'); }
 @font-face { font-family: Unown;      src: url('~@/assets/fonts/Unown.woff'); }
 @font-face { font-family: Utopian;    src: url('~@/assets/fonts/Utopian.woff'); }
 @font-face { font-family: Visitor;    src: url('~@/assets/fonts/VisitorScript.otf'); }

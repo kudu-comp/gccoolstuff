@@ -10,7 +10,7 @@
       </div>
       <div class="form-inline mb-2">
         <label class="form-label mr-2" for="input">{{$t('compbf.input')}}</label>
-        <input type="text" id="input" name="input" class="form-control" size="40" ref="input" rows=10 v-model='input'>
+        <input type="text" id="input" name="input" class="form-control" size="40" ref="input" v-model='input'>
       </div>
       <div class="form-inline">
         <input type="button" id="run" name="run" :value="$t('compbf.run')" class="btn btn-primary mb-2 mr-2" v-on:click="runCow">

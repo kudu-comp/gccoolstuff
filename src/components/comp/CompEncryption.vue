@@ -45,12 +45,12 @@
         <input type="text" id="key" name="key" class="form-control" size="40" ref="key" v-model='key'>
       </div>
       <div class="form-inline">
-        <input type="button" id="bcdfrom" name="bcdfrom" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encryptMessage">
-        <input type="button" id="bcdfrom" name="bcdfrom" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decryptMessage">
+        <input type="button" id="encrypt" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encryptMessage">
+        <input type="button" id="decrypt" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decryptMessage">
       </div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div class="form-row mb-2">
-        <textarea id="coded" name="coded" class="form-control" ref="coded" :placeholder="$t('compenc.coded')" rows=10 v-model='result'></textarea>
+        <textarea id="coded" class="form-control" ref="coded" :placeholder="$t('compenc.coded')" rows=10 v-model='result'></textarea>
       </div>
     </div>
   </div>
@@ -192,7 +192,7 @@ export default {
     encryptMessage : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       this.result = "";
       let options = { 
         mode: this.modes[this.selmode],
@@ -204,7 +204,11 @@ export default {
         switch (this.selenc) {
 
           case "Okto3" :
-            this.result = this.encryptOkto3 (this.message, this.key);
+            if (this.key.length <10) {
+              this.errormsg = this.$t('compenc.keytooshort')            
+            } else {
+              this.result = this.encryptOkto3 (this.message, this.key);
+            }
             break;
           case "AES" :
             this.result = CryptoJS.AES.encrypt(this.message, this.key, options).toString();
@@ -230,7 +234,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.genericerror');
         console.log(e);
 
@@ -241,7 +244,7 @@ export default {
     decryptMessage : function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       this.message = "";
       let options = { 
         mode: this.modes[this.selmode],
@@ -253,7 +256,11 @@ export default {
         switch (this.selenc) {
 
           case "Okto3" :
-            this.message = this.decryptOkto3 (this.result, this.key);
+            if (this.key.length <10) {
+              this.errormsg = this.$t('compenc.keytooshort')            
+            } else {
+              this.message = this.decryptOkto3 (this.result, this.key);
+            }
             break;
           case "AES" :
             this.message = CryptoJS.AES.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
@@ -279,7 +286,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.genericerror');
         console.log(e);
 

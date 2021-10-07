@@ -44,9 +44,9 @@ export var codepages = [
     description: "There really is no such thing as an alchemy alphabet. But there are several around on the internet. This is another one.",
     tags: ["alphabet", "alchemy", "script"]
   },
-  { name: "Antiker Code",
+  { name: "Ancient Code",
     imagename: "antikercode.png",
-    description: "Deze Antiker code is afkomstig uit de Science Fiction Serie Stargate en daarom krijgt deze soms ook de benaming Stargate code.",
+    description: "This codes originates in the Science Fiction Serie Stargate and is sometimes called Stargate code.",
     tags: ["alphabet", "tv", "blocks"]
   },
   { name: "Applebeech Alphabet",

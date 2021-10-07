@@ -23,6 +23,7 @@
     "angle": "Richting",
     "radius": "Straal",
     "variable": "Variabele",
+    "color": "Kleur",
     "option": "Waardes",
     "point": "Punt",
     "surface": "Oppervlakte",
@@ -67,9 +68,10 @@
     "cyan": "Cyaan",
     "magenta": "Magenta",
     "yellow": "Geel",
-    "brown": "Bruin"
+    "brown": "Bruin",
+    "grey": "Grijs",
+    "darkgrey": "Donkergrijs"
   },
-
 
   "languages": {
     "english": "Engels",
@@ -143,12 +145,12 @@
     "w3w" : {
       "title": "What3words",
       "short": "Converteer naar en van, auto suggesties",
-      "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot ee land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>"
+      "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>"
     },
     "revwherigo" : {
       "title": "Reverse Wherigo",
       "short": "Reverse wherigo oplossen",
-      "long": "<p>Oplossen van reverse wherigos (Waltmeiser cartridge). De tool controleert niet de checksum! Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
+      "long": "<p>Oplossen van reverse wherigos (Waltmeister cartridge). De tool controleert niet de checksum! Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
     }
   },
 
@@ -210,6 +212,11 @@
       "title": "Toetsenborden",
       "short": "Vertaalt tekst alsof het op een ander toetsenbord was getikt.",
       "long" : "Een tool om tekst te vertalen alsof het op een ander toetsenbord was getikt. Ondersteund Azerty, Dvorak, Cyrillisch en Colemak."
+    },
+    "texttoss": {
+      "title": "Hussel",
+      "short": "Alle woorden in een tekst husselen",
+      "long": "Verander de volgorde van de letters van elk woord in een tekst. De optie met behoud van de eerste en laatste letter van elk woord heet ook wel typoglycemia."
     }
   },
 
@@ -233,6 +240,11 @@
       "title": "Pixel data",
       "short": "Totaal van R, G end B. Aantal pixels met een bepaalde kleur (RGB)",
       "long": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>"
+    },
+    "pixelbuild": {
+      "title": "Pixelbeeld",
+      "short": "Teken aan de hand van een tekst",
+      "long": "<p>Pixlebeed is een tool om een afbeelding op te bouwen aan de hand van een tekst met maximaal 10 verschillende karakters. Elk karakter staat voor één bepaalde kleur. Een voorbeeld is een bestand met 0 en 1 wat een QR code voorstelt. Een ander voorbeeld is kleurplaat.</p><p>Hoogte en breedte zijn optioneel. Als de hoogte leeg is wordt het aantal regels van de tekst gebruikt. Als de breedte leeg is wordt de lengte van de eerste regel gebruikt. Het is mogelijk om voor elk karakter de te gebruiken kleur in te stellen.</p>"
     },
     "imagetransform": {
       "title": "Transformeren",
@@ -309,6 +321,9 @@
     },
     "atbash": {
       "info": "Atbash is een simpele substitutiecijfer. Elke letter wordt vervangen door die in het omgekeerde alfabet. Dus A=Z, B=Y, enzovoorts."
+    },
+    "atomtom": {
+      "info": "A-tom-tom code is een simpele subtitutiecijfer. Elke letter wordt vervangen door een combinatie van forward / and backward \\ slashes."
     },
     "autokey": {
       "info": "Een autokeycijfer is een polyalfabetische cijfer (er worden meerdere alfabetten gebruikt). In eerste instantie wordt begonnen met de gegeven sleutel, die steeds wordt aangevuld met het gecodeerde bericht. Deze autokey gebruikt de Vigenerecijfer.",
@@ -523,6 +538,12 @@
       "info": "Dit is de algemene substitutiecijfer. Elke letter wordt vervangen door de letter in het sleutelalfabet op dezelfde positie. Als je de sleutel niet kent is deze cijfer beter op te lossen met de Slimme Substitutie tool (zie Teksttools).",
       "k1": "Cijferalfabet"
     },
+    "syllabary": {
+      "info": "De Syllabary cijfer is geintroduceerd door G-MAN (Robert J Friedman) in 2012 in Cryptogram Magazine. De cijfer is gebaseerd op een 10 x 10 tabel met daarin alle 26 letters, de 10 cijfers en een groot aantal digrammen en trigrammen. Het is vaak mogelijk woorden op meerdere manieren te coderen door. Zo kan AMSTERDAM gecodeerd worden als A M ST ER DA M maar ook als A M S TER D A M. Dit algoritme zoekt eerst de trigrammen, daarna de digrammen en tenslotte losse letters. Bij het decoderen maakt dit niet uit. Elk correct gecodeerd bericht kan worden vertaald. De rijen en kolommen hebben standaard de nummers 0123456789 maar dit kan worden aangepast.",
+      "k1": "Sleutel voor tabel",
+      "k2": "Linker (rij) labels",
+      "k3": "Top (kolom) labels"
+    },
     "tapir": {
       "info": "TAPIR is de naam van een substitutietabel die gebruikt werd door het Volksleger en het Ministerie van Staatsveiligheid in de DDR. Het substitueert letters, enkele digrammen, cijfers en enkele speciale tekens."
     },
@@ -561,9 +582,9 @@
       "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties."
     },
     "decimals": {
-      "title": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3",
-      "short": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3",
-      "long" : "Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2 en √3 te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar."
+      "title": "Decimalen",
+      "short": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3, ζ(3)",
+      "long" : "<p>Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2 en √3 te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar.</p><p>Alle getallen zijn irrationeel. Dit impliceert dat elke opvolging van nummers vroeg of laat voorkomt tussen de decimalen. De volgende getallen zijn beschikbaar. Pi of 𝜋. Het natuurlijke getal e. Tau of 2𝜋. De gouden ratio of φ of phi. De Euler-Mascheroni constante of γ. De wortels van 2 en 3 (√2 en √3). De constante van Apéry of ζ(3) of zeta(3). De constanten van Gauss en Catalan, allebei soms ook aangeduid als G. De constante van Catalan.</p>"
     },
     "primes": {
       "title": "Priemgetallen",
@@ -627,6 +648,11 @@
       "title": "Encryptie",
       "short": "Okto3, AES, DES, Rabbit, HMAC en andere digitale encrypties",
       "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>"
+    },
+    "hashes": {
+      "title": "Hashes",
+      "short": "MD5, SHA-1, SHA-2 (SHA256 en SHA512), SHA-3 en RIPEMD160 hashes",
+      "long": "<p>Hashes zijn een soort van digitale handtekening. Ze werken maar één kant op. De hash van het oorspronkelijke bericht wordt berekend en samen met het bericht verstuurd. De echtheid van het bericht kan vervolgens worden gecontroleerd door de hash opnieuw te berekenen en te vergelijken met de meegesturude hash. De hash wordt hier getoond als een hexadecimale string. MD5 is al lange tijd in gebruik, maar wordt nu als onveilig gezien. SHA-1 is nu de meest gebruikte hash. SHA-3 is de laatste en meest veilige versie.</p><p>Voer het bericht in en klik op Bereken om de hash te tonen. Indien er een hash ingevoerd is om te controleren dan wordt het resultaat van de controle ook getoond.</p>"
     },
     "cow": {
       "title": "Cow",
@@ -719,7 +745,8 @@
     "conbri": "Helderheid & contrast",
     "brigh": "Helderheid",
     "contr": "Contrast",
-    "gray": "Zwart/Wit",
+    "gray1": "Zwart/Wit (Gemiddelden)",
+    "gray2": "Zwart/Wit (Luminanctie)",
     "invert": "Negatief",
     "sepia": "Sepia",
     "colordepth": "Kleurdiepte aanpassen",
@@ -729,6 +756,11 @@
   "pixeldata": {
     "sum": "Bereken het totaal van alle rood, groen en blauw waardes.",
     "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
+  },
+
+  "pixelbuild": {
+    "input": "Tekstinvoer",
+    "options": "Instellingen"
   },
 
   "imagetransform": {
@@ -1336,6 +1368,13 @@
     "error": "Toetsenbord kan niet worden geconverteerd. Controleer de invoer."
   },
 
+  "txttoss": {
+    "mode": "Selecteer wijze van woorden husselen",
+    "mode3": "Behoud de eerste en de laatste letter (typoglycemia)",
+    "mode2": "Behoud alleen de eerste letter",
+    "mode1": "Hussel alle letters"
+  },
+
   "mathbase": {
     "base1": "Base links (2 t/m 36)",
     "base2": "Base rechts (2 t/m 36)"
@@ -1350,6 +1389,10 @@
     "euler": "γ of de Euler–Mascheroni constante, begint met 0.577215664901...",
     "sq2": "√2, begint met 1.414213562373095...",
     "sq3": "√3, begint met 1.7320508075...",
+    "zeta3": "ζ(3) of zeta(3) of Constante van Apéry, begint met 1.202056903...",
+    "gauss": "Constante van Gaus, begint met 0.8346268416...",
+    "lemni": "Lemniscate constante, begint met 5.2441151085...",
+    "cat": "Catalan constante, begint met 0.915965594... ",
     "from": "Vanaf decimaal",
     "to": "tot decimaal",
     "get": "Haal op",
@@ -1486,7 +1529,17 @@
     "coded": "Gecodeerd bericht",
     "advanced": "Geavanceerde opties",
     "modes": "Mode",
-    "padding": "Padding"  },
+    "padding": "Padding",
+    "keytooshort": "Sleutel voor Okto3 moet tenminste 10 karakters zijn"
+  },
+    
+  "comphash": {
+    "hashes": "Selecteer hash",
+    "hash": "Hash verschijnt hier",
+    "verify": "Tik een hash hier om het bericht te verifiëren",
+    "errorok": "Hash is correct, bericht is oké",
+    "errornok": "Hash is incorrect, bericht is corrupt"
+  },
 
   "dialogabout": {
     "info": "Deze pagina is helaas alleen beschikbaar in het Engels."

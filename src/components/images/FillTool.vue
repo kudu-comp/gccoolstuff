@@ -8,7 +8,7 @@
       <div class="form-inline">
         <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="row">
         <div id="preview" class="col-9">
           <canvas id="canvas" v-bind:width="width" v-bind:height="height" @click="fillColor"></canvas>
@@ -51,15 +51,16 @@
             <div class="box-body">
               <div class="form-inline">
                 <select id="filter" class="custom-select mr-2 mb-2" v-model="selfilt">
-                  <option value="0">{{$t('filltool.gray')}}</option>
-                  <option value="1">{{$t('filltool.invert')}}</option>
-                  <option value="2">{{$t('filltool.sepia')}}</option>
-                  <option value="3">{{$t('colors.red')}}</option>
-                  <option value="4">{{$t('colors.green')}}</option>
-                  <option value="5">{{$t('colors.blue')}}</option>
-                  <option value="6">{{$t('colors.cyan')}}</option>
-                  <option value="7">{{$t('colors.magenta')}}</option>
-                  <option value="8">{{$t('colors.yellow')}}</option>
+                  <!-- <option value="0">{{$t('filltool.gray1')}}</option>
+                  <option value="1">{{$t('filltool.gray2')}}</option> -->
+                  <option value="2">{{$t('filltool.invert')}}</option>
+                  <option value="3">{{$t('filltool.sepia')}}</option>
+                  <option value="4">{{$t('colors.red')}}</option>
+                  <option value="5">{{$t('colors.green')}}</option>
+                  <option value="6">{{$t('colors.blue')}}</option>
+                  <option value="7">{{$t('colors.cyan')}}</option>
+                  <option value="8">{{$t('colors.magenta')}}</option>
+                  <option value="9">{{$t('colors.yellow')}}</option>
                 </select>
                 <input type="button" id="filter" name="filter" :value="$t('buttons.apply')" class="btn btn-primary mb-2" v-on:click="filterColor">
               </div>
@@ -107,7 +108,6 @@ export default {
   data: function() {
     return {
       fileurl: "",
-      error: false,
       errormsg: "",
       ctx: null,
       img: null,
@@ -174,49 +174,25 @@ export default {
       this.drawImageScaled(this.img);
     },
 
-    // Draw grayscale
-    grayScale: function () {
-
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-      const data = imageData.data;
-
-      // Grayscale is average of RGB
-      for (let i = 0; i < data.length; i += 4) {
-        let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-        data[i]     = avg; // red
-        data[i + 1] = avg; // green
-        data[i + 2] = avg; // blue
-      }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, 0, 0);
-
-    },
-
     // Apply color filter
     filterColor: function () {
 
-      if (this.selfilt == 0) {
-        this.grayScale();
-        return;
-      }
-
-      if (this.selfilt == 1) {
+      if (this.selfilt == 2) {
         this.invertImage();
         return;
       }
 
       const filters = [
-        ["gray"],      // grayscale not defined
-        ["invert"],    // invert not defined
+        [ [0.333, 0.333, 0.333], [0.333, 0.333, 0.333], [0.333, 0.333, 0.333] ], // grayscale average
+        [ [0.299, 0.587, 0.114], [0.299, 0.587, 0.114], [0.299, 0.587, 0.114] ], // Gray scale luminance PAL
+        [ "invert" ],    // invert not defined
         [ [0.393, 0.769, 0.189], [0.349, 0.686, 0.168], [0.272, 0.534, 0.131] ], // sepia
-        [ [1,0,0], [0, 0, 0], [0, 0, 0] ],    // red
-        [ [0,0,0], [0, 1, 0], [0, 0, 0] ],    // green
-        [ [0,0,0], [0, 0, 0], [0, 0, 1] ],    // blue
-        [ [0,0,0], [0, 1, 0], [0, 0, 1] ],    // cyan
-        [ [1,0,0], [0, 0, 0], [0, 0, 1] ],    // magenta
-        [ [1,0,0], [0, 1, 0], [0, 0, 0] ],    // yellow
+        [ [1,0,0], [0, 0, 0], [0, 0, 0] ],    // reds only
+        [ [0,0,0], [0, 1, 0], [0, 0, 0] ],    // greens only
+        [ [0,0,0], [0, 0, 0], [0, 0, 1] ],    // blues only
+        [ [0,0,0], [0, 1, 0], [0, 0, 1] ],    // cyan (no red)
+        [ [1,0,0], [0, 0, 0], [0, 0, 1] ],    // magenta (no green)
+        [ [1,0,0], [0, 1, 0], [0, 0, 0] ],    // yellow (no blue)
       ];
 
       // Set fill color
@@ -262,7 +238,7 @@ export default {
     },
 
     // Fill color
-    fillColor: function () {
+    fillColor: function (event) {
 
       const colors = [
         [255, 255, 255],    // white
@@ -360,7 +336,7 @@ export default {
     selectFile: function (event) {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
 
       // Get the input file
       let input = event.target;
@@ -383,7 +359,6 @@ export default {
             } catch(err) {
 
               console.log(err);
-              this.error = true;
               this.errormsg = this.$t('colorpicker.error')
             
             }

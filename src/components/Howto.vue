@@ -199,6 +199,16 @@
         <template v-slot:content>
           <p>There are quite a few possibilities to make sense out of a bunch of random numbers. Here are a few options</p>
           <ul>
+            <li><b>Binary</b>. If you see just 0 and 1 you're likely dealing with some kind of binary code. Try <router-link to="/math/baseconvertor">
+              Base converter</router-link>. It might also be a slightly different binary code. Try <router-link to="/comptools/compbcd">
+              Binary Coded Decimals</router-link>. Or try to convert to ASCII using <router-link to="/comp/charcodes">Character codes</router-link></li>
+            <li><b>Decimal</b>. If you see the numbers 0 to 9 it's decimal. Try to convert to ASCII using <router-link to="/comp/charcodes">
+              Character codes</router-link>. Or try <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}
+              </router-link> with the input set to decimal.</li>
+            <li><b>Hexadecimal</b>. If you see 0 to 9 and A to Z it's hexadecimal. Try to convert to ASCII using <router-link to="/comp/charcodes">
+              Character codes</router-link>. Or try <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}
+              </router-link> with the input set to hexadecimal. Or it might be a hash. Try <router-link to="/comp/hashes">
+              {{$t('comptools.hashes.title')}}</router-link></li>
             <li><b>UTF or ASCII</b>. The numbers are the numbers used by the computer internally (also known as ASCII, UTF,
               codepages or alt codes). There are many different options here. The input could be decimal, but also binary or
               hexadecimal. The used codepage could be one of many. With <router-link to="/text/textcodes">Character &amp; codes</router-link>
@@ -214,6 +224,8 @@
             </li>
             <li><b>ROT5</b>. Actually a cipher with all the digits shifted 5 positions. Use <router-link :to="{ name: 'Cipher',
               params: { cipher: 'ROT5' }}">ROT5</router-link> to solve or just calculate it yourself.</li>
+            <li><b>Polybius</b>. A cipher that encodes digrams in to numbers between 11 and 55. use <router-link :to="{ name: 'Cipher',
+              params: { cipher: 'Polybius' }}">Polybius</router-link> to solve.</li>
             <li><b>Vanity code</b>. The numbers represent letters on the keyboard of your phone, e.g. 2 is a, 22 is b, 333 is f.</li>
             <li><b>Base conversion using letters</b>. The cache owner has translated the text using Base 26 with values A-Z to base 10
               with digits 0-9. This is pretty rare, but you can easily convert it using <router-link to="/math/baseconvertor">Base
@@ -258,7 +270,8 @@
         <template v-slot:content>
           Again there are many possibilities. Try these ones:
           <ul>
-            <li><b>Codebook</b> - search the <router-link to="/codebook">Code book</router-link> to see if there is a match.</li>
+            <li><b>Codebook</b> - search the <router-link to="/codes/codebook">Code book</router-link> to see if there is a match.</li>
+            <li><b>Special fonts</b> - or try <router-link to="/codes/fonts">Special fonts</router-link> to see if there is a match.</li>
             <li><b>Encoded text</b> - the text is binary encoded using <router-link to="/comp/compbintotext">{{$t('comptools.compbintotext.title')}}</router-link>
               In these cases the text is likely a combination of symbols, letters and digits.</li>
             <li><b>Computer codes</b> - symbols might convert to numbers, or might convert to letters when using a different codepage.
@@ -267,13 +280,16 @@
               and <router-link to="/text/textkeyboards">Keyboards</router-link> support Cyrillic and Greek.</li>
             <li><b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/comp/compbrainfuck">{{$t('comptools.compbrainfuck.title')}}
               </router-link> to solve the code.</li>
+            <li><b>Decabit</b> - if you see a lot of + and - you might be looking at <router-link to="/codes/decabit">{{$t('codes.decabit.title')}}
+              </router-link></li>
             <li><b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link :to="{ name: 'Cipher',
               params: { cipher: 'Goldbug'}}">here</router-link>.</li>
             <li><b>Another cipher</b> - use <router-link to="/text/smartreplace">Smart replace</router-link> to see if the frequencies
               are similar to those of natural language. If so, you can use the tool to find the right replacements.</li>
-            <li><b>Hashed text</b> - hashes are used for example to encrypt passwords. They only work one way. The coded hash can not be
-              converted back to the original text. The only way to solve it is trying all options and find the one that matches. There are
-              a few websites that can help, but none are really easy. (I still need to write a tool to help with this.)</li>
+            <li><b>Hashed text</b> - hashes are used for example to encrypt passwords. They are normally hexadecimal and would use the numbers 0 to 9 and A to F.
+              The coded hash can not be converted back to the original text. The only way to solve it is trying all options and find the one that matches. 
+              You can try your luck with <router-link to="/comp/hashes">{{$t('comptools.hashes.title')}}
+              </router-link></li>
             <li><b>Geohash</b> - read the topic on coordinates to recognize geohashes.</li>
           </ul>
           <p>If none of this works, please let me know!</p>

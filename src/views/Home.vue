@@ -22,7 +22,8 @@
         <router-link to="/text/smartreplace">{{$t('texttools.smartreplace.title')}}</router-link> {{$t('texttools.smartreplace.short')}}<br>
         <router-link to="/text/textanalyzer">{{$t('texttools.analyze.title')}}</router-link> {{$t('texttools.analyze.short')}}<br>
         <router-link to="/text/texttonumbers">{{$t('texttools.texttonumbers.title')}}</router-link> {{$t('texttools.texttonumbers.short')}}<br>
-        <router-link to="/text/textkeyboards">{{$t('texttools.keyboards.title')}}</router-link> {{$t('texttools.keyboards.short')}}
+        <router-link to="/text/textkeyboards">{{$t('texttools.keyboards.title')}}</router-link> {{$t('texttools.keyboards.short')}}<br>
+        <router-link to="/text/texttoss">{{$t('texttools.texttoss.title')}}</router-link> {{$t('texttools.texttoss.short')}}
       </div>
       <h3>{{$t('menu.ciphers')}}</h3>
       <div class="p mb-2">
@@ -49,6 +50,7 @@
         <router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link> {{$t('imagetools.colorpicker.short')}}.<br>
         <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> {{$t('imagetools.filltool.short')}}.<br>
         <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> {{$t('imagetools.pixeldata.short')}}.<br>
+        <router-link to="/images/pixelbuild">{{$t('imagetools.pixelbuild.title')}}</router-link> {{$t('imagetools.pixelbuild.short')}}.<br>
         <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link> {{$t('imagetools.imagetransform.short')}}.
       </div>
       <h3>{{$t('menu.htmlscanner')}}</h3>
@@ -73,6 +75,7 @@
         <router-link to="/comp/bintotext">{{$t('comptools.compbintotext.title')}}</router-link> {{$t('comptools.compbintotext.short')}}.<br>
         <router-link to="/comp/bcd">{{$t('comptools.compbcd.title')}}</router-link> {{$t('comptools.compbcd.short')}}.<br>
         <router-link to="/comp/encryption">{{$t('comptools.encryption.title')}}</router-link> {{$t('comptools.encryption.short')}}.<br>
+        <router-link to="/comp/hashes">{{$t('comptools.hashes.title')}}</router-link> {{$t('comptools.hashes.short')}}.<br>
         <router-link to="/comp/brainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> {{$t('comptools.compbrainfuck.short')}}.<br>
         <router-link to="/comp/cow">{{$t('comptools.cow.title')}}</router-link> {{$t('comptools.cow.short')}}.<br>
         <router-link to="/comp/beatnik">{{$t('comptools.beatnik.title')}}</router-link> {{$t('comptools.beatnik.short')}}.<br>

@@ -4,6 +4,7 @@
     <router-link to="/comp/bintotext">{{$t('comptools.compbintotext.title')}}</router-link> |
     <router-link to="/comp/bcd">{{$t('comptools.compbcd.title')}}</router-link> | 
     <router-link to="/comp/encryption">{{$t('comptools.encryption.title')}}</router-link> |
+    <router-link to="/comp/hashes">{{$t('comptools.hashes.title')}}</router-link> |
     <router-link to="/comp/brainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link> |
     <router-link to="/comp/cow">{{$t('comptools.cow.title')}}</router-link> |
     <router-link to="/comp/beatnik">{{$t('comptools.beatnik.title')}}</router-link> |
@@ -36,6 +37,12 @@
            <span v-html="$t('comptools.encryption.long')" />
         </template>
       </va-item>
+      <va-item v-bind:showitem='show[8]' v-on:toggle='show[8] = !show[8]'>
+        <template v-slot:header><router-link to="/comp/hashes">{{$t('comptools.hashes.title')}}</router-link></template>
+        <template v-slot:content>
+           <span v-html="$t('comptools.hashes.long')" />
+        </template>
+      </va-item>
       <va-item v-bind:showitem='show[3]' v-on:toggle='show[3] = !show[3]'>
         <template v-slot:header><router-link to="/comp/brainfuck">{{$t('comptools.compbrainfuck.title')}}</router-link></template>
         <template v-slot:content>
@@ -51,7 +58,7 @@
       <va-item v-bind:showitem='show[7]' v-on:toggle='show[7] = !show[7]'>
         <template v-slot:header><router-link to="/comp/beatnik">{{$t('comptools.beatnik.title')}}</router-link></template>
         <template v-slot:content>
-           <span v-html="$t('comptools.cow.long')" />
+           <span v-html="$t('comptools.beatnik.long')" />
         </template>
       </va-item>     
       <va-item v-bind:showitem='show[5]' v-on:toggle='show[5] = !show[5]'>

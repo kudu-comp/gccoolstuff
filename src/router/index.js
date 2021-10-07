@@ -17,6 +17,7 @@ import TextAnalyze from '@/components/texts/TextAnalyze.vue'
 import TextToNumbers from '@/components/texts/TextToNumbers.vue'
 import TextKeyboards from '@/components/texts/TextKeyboards.vue'
 import TextCodes from '@/components/texts/TextCodes.vue'
+import TextToss from '@/components/texts/TextToss.vue'
 import Cipher from '../views/Cipher.vue'
 import CodesIntro from '@/components/codes/CodesIntro.vue'
 import CodeBook from '@/components/codes/CodeBook.vue'
@@ -39,6 +40,7 @@ import CompToolbox from '../views/CompToolbox.vue'
 import CompBCD from '@/components/comp/CompBCD.vue'
 import CompBrainfuck from '@/components/comp/CompBrainfuck.vue'
 import CompEncryption from '@/components/comp/CompEncryption.vue'
+import CompHashes from '@/components/comp/CompHashes.vue'
 import CompDeadfish from '@/components/comp/CompDeadfish.vue'
 import CompBinToText from '@/components/comp/CompBinToText.vue'
 import CompCow from '@/components/comp/CompCow.vue'
@@ -48,6 +50,7 @@ import ExifScanner from '@/components/images/ExifScanner.vue'
 import ColorPicker from '@/components/images/ColorPicker.vue'
 import FillTool from '@/components/images/FillTool.vue'
 import PixelData from '@/components/images/PixelData.vue'
+import PixelBuild from '@/components/images/PixelBuild.vue'
 import ImageTransform from '@/components/images/ImageTransform.vue'
 import HtmlToolbox from '@/views/HtmlToolbox'
 import Sudoku from '../views/Sudoku.vue'
@@ -94,6 +97,7 @@ const routes = [
       { path: "/text/texttonumbers", name: 'TextToNumbers', component: TextToNumbers },
       { path: "/text/textcodes", name: 'TextCodes', component: TextCodes },
       { path: "/text/textkeyboards", name: 'Keyboards', component: TextKeyboards },
+      { path: "/text/texttoss", name: 'TextToss', component: TextToss }
     ]
   },
   {
@@ -139,6 +143,7 @@ const routes = [
       { path: "/comp/charcodes",  name: 'charcodes',       component: TextCodes },
       { path: "/comp/bcd",        name: 'bcd',             component: CompBCD },
       { path: "/comp/encryption", name: 'encryption',      component: CompEncryption }, //Param: enc is name of the initial encryption
+      { path: "/comp/hashes",     name: 'hashes',          component: CompHashes },     //Param: hash is name of the initial encryption
       { path: "/comp/brainfuck",  name: 'brainfuck',       component: CompBrainfuck },  //Param: bfvar is name of the initial BF variation
       { path: "/comp/deadfish",   name: 'deadfish',        component: CompDeadfish },
       { path: "/comp/cow",        name: 'cow',             component: CompCow },
@@ -169,6 +174,7 @@ const routes = [
       { path: '/images/colorpicker',     name: 'ColorPicker',     component: ColorPicker      },
       { path: '/images/filltool',        name: 'FillTool',        component: FillTool      },
       { path: '/images/pixeldata',       name: 'PixelData',       component: PixelData      },
+      { path: '/images/pixelbuild',      name: 'PixelBuild',      component: PixelBuild      },
       { path: '/images/imagetransform',  name: 'ImageTransform',  component: ImageTransform      },
     ]
   },

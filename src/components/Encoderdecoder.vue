@@ -10,6 +10,7 @@
         <input type="button" id="affine" name="affine" value="Affine" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Affine')">
         <input type="button" id="asmco" name="asmco" value="Amsco" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Amsco')">
         <input type="button" id="atbash" name="atbash" value="Atbash" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Atbash')">
+        <input type="button" id="atomtom" name="atomtom" value="A-tom-tom" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Atomtom')">
         <input type="button" id="autokey" name="autokey" value="Autokey" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Autokey')">
         <input type="button" id="bacon" name="bacon" value="Bacon" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bacon')">
         <input type="button" id="base31" name="base31" value="Base31" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('GCId')">
@@ -57,6 +58,7 @@
         <input type="button" id="scytale" name="scytale" value="Scytale" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Scytale')">
         <input type="button" id="skip" name="skip" value="Skip" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Skip')">
         <input type="button" id="substitution" name="substitution" value="Substitution" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Substitution')">
+        <input type="button" id="syllabary" name="syllabary" value="Syllabary" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Syllabary')">
         <input type="button" id="tapir" name="tapir" value="Tapir" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Tapir')">
         <input type="button" id="trifid" name="trifid" value="Trifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trifid')">
         <input type="button" id="trisquare" name="trisquare" value="Trisquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trisquare')">
@@ -312,7 +314,7 @@ export default {
           .then(response => response.json())
           .then(data => {
               this.translatedmessage = data.transmessage;
-              // console.log('Success', data)
+              console.log('Success', data)
           })
           .catch((error) => {
               console.error('Error ', error);
@@ -371,6 +373,7 @@ export default {
           this.showkey1 = true;
           break;
         case 'Atbash':
+        case 'Atomtom' :
           break;
         case 'Autokey' :
           this.showkey1 = true;
@@ -593,6 +596,15 @@ export default {
           break;
         case 'Substitution' :
           this.showkey1 = true;
+          break;
+        case 'Syllabary' :
+          this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+          this.showkey1 = true;
+          this.key1 = "KEY",
+          this.showkey2 = true;
+          this.key2 = "0123456789";
+          this.showkey3 = true;
+          this.key3 = "0123456789";
           break;
         case 'Tapir' :
           this.showalphabet = false;

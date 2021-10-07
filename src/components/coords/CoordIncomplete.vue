@@ -11,7 +11,7 @@
       <v-variable v-model:variable="var3" v-model:varoptions="var3options" class="mb-2"></v-variable>
       <v-variable v-model:variable="var4" v-model:varoptions="var4options" class="mb-2"></v-variable>
       <input type="button" id="project" name="project" :value="$t('buttons.show')" class="btn btn-primary mr-2" v-on:click="showCoordinates()">
-      <div v-show="error" class="errormsg mt-2">{{errormsg}}</div>
+      <div v-show="errormsg" class="errormsg mt-2">{{errormsg}}</div>
       <v-map v-model:mylocation="coordinate"/>
     </div>
   </div>
@@ -46,24 +46,31 @@ export default {
       var3options: "0123456789",
       var4: "d",
       var4options: "0123456789",
-      error: false,
       errormsg: "",
     }
   },
 
   methods: {
 
+    // Print the marker
+    printMarker: function (newcoord, vars) {
+      coords.convertCoordFromText(newcoord, this.selecteddatum, "WGS84")
+        .then( coord => {
+          let marker = this.$store.state.L.marker(coord).addTo(this.$store.state.mymap);
+          marker.bindPopup(newcoord + " " + vars).openPopup();
+        });
+    },
+
     // Show the possible coordinates
     showCoordinates: function () {
 
       // Initialize
-      this.error = false;
+      this.errormsg = "";
 
       try {
 
         // Initialize variables and regular expressions
         let newcoord;
-        let marker;
         let vars;
         let regex1 = new RegExp (this.var1, "g");
         let regex2 = new RegExp (this.var2, "g");
@@ -82,7 +89,6 @@ export default {
 
         if (totaloptions > 500) {
 
-          this.error = true;
           this.errormsg = this.$t('cdincomplete.error1')
           
         } else {
@@ -100,12 +106,8 @@ export default {
                   if (useVar3) { newcoord = newcoord.replace(regex3, this.var3options[v3]); vars += this.var3 + "=" + this.var3options[v3] + " "; }
                   if (useVar4) { newcoord = newcoord.replace(regex4, this.var4options[v4]); vars += this.var4 + "=" + this.var4options[v4] + " "; }
 
-                  // Set a marker on the map
-                  coords.convertCoordFromText(newcoord, this.selecteddatum, "WGS84")
-                    .then( coord => {
-                      marker = this.$store.state.L.marker(coord).addTo(this.$store.state.mymap);
-                      marker.bindPopup(newcoord + " " + vars).openPopup();
-                    });
+                  // Set a marker on the map wrapped in a function to use variables async
+                  this.printMarker(newcoord, vars);
                 }
               }
             }
@@ -116,7 +118,6 @@ export default {
       } catch (e) {
 
         console.log(e);
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
 
       }
