@@ -18,10 +18,8 @@
         <template v-slot:label>{{$t('labels.radius')}}</template>
       </v-distance>
       <input type="button" id="go" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="getPoints()">
-      <div class="card card-text p-2">
-        <div v-html="result"></div>
-      </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div v-if="result" v-html="result" class="resultbox"></div>
       <v-map v-model:mylocation="coordinate1"/>
     </div>
   </div>
@@ -53,8 +51,7 @@ export default {
       unit1: 1,
       radius2: 0,
       unit2: 1,
-      result: this.$t('labels.result'),
-      error: false,
+      result: "",
       errormsg: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/coordcalc/coordcalc.php",
     }
@@ -65,8 +62,8 @@ export default {
     getPoints: function () {
 
       // Reset error
-      this.error = false;
-      this.result = "Result";
+      this.errormsg = "";
+      this.result = "";
 
       let coord1, coord2, gridcoord1, gridcoord2;
 
@@ -120,8 +117,14 @@ export default {
               method: 'POST',
               body: JSON.stringify(inputdata)
             })
-            .then(response => response.json())
+            .then (response => response.json())
             .then (data => {
+
+              // First print area and circumference of both circles
+              this.result = this.$t('cdcircles.surf') + "1: " + data.c1.surface.toFixed(0) + " m<br>";
+              this.result += this.$t('cdcircles.circ') + "1: " + data.c1.circumference.toFixed(0) + " m<sup>2</sup><br>";
+              this.result += this.$t('cdcircles.surf') + "2: " + data.c2.surface.toFixed(0) + " m<br>";
+              this.result += this.$t('cdcircles.circ') + "2: " + data.c2.circumference.toFixed(0) + " m<sup>2</sup><br>";
 
               // If circles intersect print coordinates of intersection points
               if (data.intersect) {
@@ -146,43 +149,50 @@ export default {
                   .then (datacp2 => {
 
                     convp2 = datacp2;
-                    this.result = this.$t('cdcircles.ip') + " 1: " + coords.getTextFromCoord(convp1, this.selecteddatum1, 7, this.coordinate1);
+                    this.result += this.$t('cdcircles.ip') + " 1: " + coords.getTextFromCoord(convp1, this.selecteddatum1, 7, this.coordinate1);
                     this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p1, "N12 34.567 E1 23.456");
                     this.result += "<br>" + this.$t('cdcircles.ip') + " 2: " + coords.getTextFromCoord(convp2, this.selecteddatum1, 7, this.coordinate1);
                     this.result += this.$t('cdcircles.or') + coords.printCoordinateFromDMS(p2, "N12 34.567 E1 23.456");
-                    this.result += "<br>" + this.$t('labels.distance') + ": " + data.distance.toFixed(0) + "m";
+                    this.result += "<br>" + this.$t('cdcircles.distance') + ": " + data.distance.toFixed(0) + "m";
                     this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
                     // Display markers
                     coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
                     coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
 
+                  })
+                  .catch (e => {
+
+                    this.errormsg = this.$t('errors.incorrectcoords');
+                    console.error(e.message);
+
                   });
                 
               } else {
 
                 // No intersection one circle is inside the other or they don't overlap at all
-                this.result = this.$t('cdcircles.ni');
+                this.result += this.$t('cdcircles.ni');
                 this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
               }
 
           })
-            .catch( (error) => {
+            .catch ( (error) => {
 
               console.error('Error ', error);
               this.errormsg = this.$t('errors.incorrectcoords');
-              this.error = true;
               
             });
 
           })
-          ;          
+          .catch ( (error) => {
+            console.error('Error ', error);
+            this.errormsg = this.$t('errors.incorrectcoords');
+          });
 
         } catch (e) {
 
           console.log(e);
-          this.error = true;
           this.errormsg =  this.$t('errors.incorrectcoords');
           
         }

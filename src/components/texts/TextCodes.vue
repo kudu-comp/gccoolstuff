@@ -17,12 +17,12 @@
         <label class="form-label mb-2 mr-2" for="codes">{{$t('txtcodes.output')}}</label>
         <v-code class="mb-2" id="codes" v-model:code="selectedoutput" @change="translateInput"></v-code>
       </div>
-      <div class="card card-text p-2">{{result}}</div>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <div v-if="result" class="resultbox">{{result}}</div>
       <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
         <template v-slot:header>{{$t('txtcodes.someinfo')}}</template>
         <template v-slot:content><div v-html="$t('txtcodes.someinfo2')"></div></template>
       </va-item>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
 </template>

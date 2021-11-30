@@ -5,7 +5,7 @@
     </div>
     <div class="mainpage">
       <div class="infoblock" v-html="$t('codes.segment.long')" />
-      <img src="https://www.maximintegrated.com/content/dam/images/design/tech-docs/1131/1131Fig01.gif" />
+      <img src="~@\assets\images\segment2.png" />
       <div class="form-inline mt-2">
         <label class="form-label mb-2 mr-2" for="ofs">{{$t('segment.segsize')}}</label>
         <select id="ofs" class="custom-select mb-2 mr-2" 
@@ -29,10 +29,10 @@
       </div>
       <input type="button" id="enc" name="enc" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encodeSeg">
       <input type="button" id="dec" name="dec" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decodeSeg">
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <div id="result" class="form-row">
         <textarea id="message2" name="message2" spellcheck="false" class="form-control" v-bind:style="styleObj" rows=10 v-model='result'></textarea>
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       errormsg: "",
       seg: 0,
       inp: 1,

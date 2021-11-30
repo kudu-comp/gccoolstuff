@@ -102,6 +102,7 @@
   },
 
   "coordinates": {
+    "intro": "A collection of tools to convert and calculate coordinates. All tools support a wide range of coordinate systems and notations. You can make projections, calculate lines, triangles and circles. You can make maps or find incomplete coordinates. There is a special tool to help you find the right words for what3words coordinates. You can also solve Reverse Wherigo caches.",
     "convert": {
       "title": "Convert",
       "short": "WGS84, UTM, MGRS, NAD, Dutch Grid, Maidenhead, Geohash, Mapcode, what3words and more",
@@ -155,15 +156,16 @@
   },
 
   "codes": {
+    "intro": "Codes are simple ways to translate text or numbers. They do not require a key to be solved. The only thing to do is recognize the right code. However recognizing the code might not be that easy. You can use the search tool or browse through the special fonts. Resistor, segment and decabit are codes used for special purposes.",
     "codebook": {
       "title": "Search codebook",
-      "short": "find codes using keywords and tags",
-      "long": "Find a codepage using keywords and tages. Available tags refer to origin of the codebook, the shapes used and other ways to identify the codebook."
+      "short": "Find codes using keywords and tags",
+      "long": "Find a code using keywords and tages. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
     }, 
     "fonts": {
       "title": "Special fonts",
-      "short": "Special fonts, Klingon, Therwar, Wakandan and 40 others",
-      "long": "<p>Type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>"  
+      "short": "More than 50 different codes are available as fonts.",
+      "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>"  
     },
     "segment": {
       "title": "Segment display",
@@ -172,8 +174,8 @@
     },
     "resistorcode": {
       "title": "Resistor colors",
-      "short": "Resistor color code calculator",
-      "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
+      "short": "Resistor calculator",
+      "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
     },
     "decabit": {
       "title": "Decabit",
@@ -183,6 +185,7 @@
   },
 
   "texttools": {
+    "intro": "Tools for text. Calculates word values. Converts ASCII or other codes. Analyze a text. Smart replace helps in solving ciphers. Convert text to numbers and back. Switch between keyboards such as Dvorak. A tool to hussle words.",
     "wordvalue": {
       "title": "Word value & square root",
       "short": "Word value and square root, supports many alphabets, including Scrabble and Vanity code",
@@ -220,7 +223,8 @@
     }
   },
 
-  "imagetools": { 
+  "imagetools": {
+    "intro": "Some tools to quickly edit or scan images. Exif scanner shows the metadata of an image. The color picker will show all the details of a selected color. The color editor can do many things, such as filling an area, change contrast or brightness and apply filters. There is a tool to draw an image from number input. And a tool to do crazy things such as flipping half the rows or shifting parts of the image.",
     "exifscanner": {
       "title": "Exif Scanner",
       "short": "Metadata (EXIF) of an image, like GPS, comments, description",
@@ -250,10 +254,16 @@
       "title": "Transform",
       "short": "Flip horizontal and vertical (whole picture or parts), shift rows or columns",
       "long": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image."
+    },
+    "textextractor": {
+      "title": "Text extractor",
+      "short": "Find possible texts in any file",
+      "long": "The tool tries to locate text by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely."
     }
   },
 
   "othertools" : {
+    "intro": "Another collection of tools for various topics. Solving Sudoku or Mastermind. A unit convertor for hundreds of units. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes.",
     "sudokusolver": {
       "title": "Sudoku solver",
       "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
@@ -262,7 +272,7 @@
     "mmsolver": {
       "title": "Mastermind solver",
       "short": "Mastermind solver for 3 to 6 pins, 4 to 9 colors",
-      "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors. Instead of colors this solver uses numbers."
+      "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors."
     },
     "periodictable": {
       "title": "Periodic table",
@@ -288,6 +298,11 @@
       "title": "Units",
       "short": "Length, area, volume, temperature, power, angle and speed convertor",
       "long": "Unit convertor converts a wide range of units. Units are organized in categories for units the measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units."  
+    },
+    "dnacode": {
+      "title": "DNA Code",
+      "short": "Three letter codes of DNA and RNA",
+      "long": "<p>DNA or RNA codons are represented with 3 letters. Whenever you see a bunch of letters with lots of A, C, G, T or U you could be dealing with codons. Sometimes other letters are used as well to indicate combinations of codons. For example Y means T or C, so TAY means TAT or TAC. Type the codons in three letter chunks and press search.</p><p>Some background info. Codons are a combination of three nucleo acids. DNA are composed of A (Adenine), C (Cytosine)and G (Guanine) and T (Thymine). RNA shares three of the four nucleo acids but T is replaced with and U (Uracil). Most codons define an amino acid, which have a name, a three letter abbreviation and a single letter. Some codons are start and stop signals. Some codons are used for the same amino acid. A piece of RNA or DNA contains several codons, each representing an amino acid. The resulting chain of amino acids builds a proteine. For more information read <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>this</a>.</p>"
     }
   },
 
@@ -576,6 +591,7 @@
   },
 
   "mathtools": {
+    "intro": "Mathematical and arithmetic tools. Decimals of constants like pi. Calculator for very large binary, octal, decimal and hexadecimal numbers. Some well known series like Fibonacci and Hailstone. Primes, GCD and LCM and prime factors. A solver for cryptarithms.",    
     "baseconvert": {
       "title": "Base converter",
       "short": "Binary, decimal, hexadecimal or any base from 2 to 36.",
@@ -611,6 +627,11 @@
       "short": "Properties of a number, e.g. prime, fibonacci, lucky, deficient, perfect, odd, even and more",
       "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, odious, evil, lucky, perfect, deficient, pentagonal, squarefree and others."
     },
+    "bignum": {
+      "title": "Big number calculator",
+      "short": "Calculator for very very large integers",
+      "long": "<p>A calculator for very large numbers. Only integers are accepted. You can either enter decimal, binary, octal or hexadecimal numbers. All operators work als you would expect, except division. Division always truncates the result (instead of rounding to the nearest integer). All logical functions are bitwise logical operations.</p>"
+    },
     "nimbers": {
       "title": "Nimbers",
       "short": "Product and sum of two nimbers",
@@ -629,6 +650,7 @@
   },
 
   "comptools" : {
+    "intro": "A collection of tools used in programming and computers. There are severals way of coding numbers, characters and binary data. Encryptions and hashes are also supported. Several so called esoterioc programming languages (esolangs) can be executed as well.",
     "compbrainfuck": {
       "title": "Brainfuck",
       "short": "Brainfuck, Ook! and Spoon programs",
@@ -673,13 +695,16 @@
   },
 
   "cdbook": {
-    "availtags": "Available tags"
+    "availtags": "Available tags",
+    "pagesfound": "codes found"
   },
 
   "cdfonts": {
     "selfont": "Select font",
     "fontsize": "Select fontsize",
-    "selcolor": "Select color"
+    "selcolor": "Select color",
+    "lineheight": "Line height",
+    "standard": "Standard"
   },
 
   "segment": {
@@ -778,9 +803,17 @@
     "flipv": "Flip vertical"
   },
 
+  "textextractor": {
+    "length": "Minimum string length",
+    "max": "Maximum number of results",
+    "start": "Start at position",
+    "maxexceeded": "Maximum number of results found. Use start position to continue search.",
+    "fileerror": "Error loading file."
+  },
+
   "htmlscanner": {
     "short": "Scan the page source for links, images and hidden information",
-    "long": "HTML Scanner scans the page source for links, images and hidden information, such as white text and comments. Copy & paste the page source below.",
+    "long": "Sometimes information is hidden inside the cache listing using HTML. For example using white or very small text, or marking letters as bold, italic or in some other way. Links can be hidden inside images or in other places. HTML Scanner scans the page source for links, images and hidden information. This tool only works with the official pages from geocaching.com. Copy & paste the page source below.",
     "ph": "Paste the page source here",
     "btnscan": "Scan",
     "links": "Links found - select to open the link",
@@ -1192,6 +1225,15 @@
     }
   },
 
+  "dnacode": {
+    "ph": "Type searches, e.g. three letter RNA codes",
+    "letter": "Letter",
+    "abbr": "Abbr.",
+    "aminoacid": "Amino acid",
+    "rna": "RNA codons",
+    "dna": "DNA codons"
+  },
+
   "dialogpb":{
     "title": "Polybius square",
     "start": "Start with alphabet:",
@@ -1281,7 +1323,10 @@
     "ip": "Intersection point",
     "ia": "Intersection area",
     "ni": "No intersection",
-    "or": " or "
+    "distance": "Distance between intersection points",
+    "or": " or ",
+    "surf": "Surface of circle ",
+    "circ": "Circumference of circle "
   },
 
   "cdantipode": {
@@ -1391,6 +1436,7 @@
     "gauss": "Gauss's constant, starts with 0.8346268416...",
     "lemni": "Lemniscate constant, starts with 5.2441151085...",
     "cat": "Catalan's constant, starts with 0.915965594... ",
+    "champ": "Champernowne constant, starts with 0.12345678910111213...",
     "from": "From digit",
     "to": "to digit",
     "get": "Get digits",
@@ -1448,6 +1494,18 @@
     "t1": "Product & sum",
     "prod": "The nimber product is",
     "sum": "The nimber sum is"
+  },
+
+  "bignum": {
+    "selnum": "Number base",
+    "num1": "Number A",
+    "num2": "Number B",
+    "decimal": "Decimal",
+    "binary": "Binary",
+    "octal": "Octal",
+    "hexadecimal": "Hexadecimal",
+    "arithmetic": "Arithmetic operations",
+    "logical": "Logical operations"
   },
 
   "mathpali": {

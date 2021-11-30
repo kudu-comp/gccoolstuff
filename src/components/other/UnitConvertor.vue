@@ -36,7 +36,8 @@
           <input type="button" id="calc" :value="$t('buttons.showtable')" class="btn btn-primary mb-2" v-on:click="convertTable('left')">
         </div>
       </div>
-      <div v-html="result" class="mt-2" />
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <div v-if="result" v-html="result" class="resultbox" />
     </div>
   </div>
 </template>
@@ -60,7 +61,6 @@ export default {
       cat: 0,
       idto: 0,
       idfrom: 0,
-      error: false,
       errormsg: "",
       showinfo: true,
       units: [],
@@ -87,7 +87,8 @@ export default {
     convertInput : function (direction) {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
+      this.result = "";
 
       try {
 
@@ -101,7 +102,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.generic');
         console.log(e);
 

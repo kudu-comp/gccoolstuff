@@ -60,7 +60,7 @@ export default {
       checkprime: 1,
       primefact: 1,
       prime: 2,
-      result: this.$t('labels.result'),
+      result: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/primes.php",
     }
   },
@@ -75,7 +75,7 @@ export default {
     primeFactors: function () {
 
       // Reset errors
-      this.result = this.$t('labels.result');
+      this.result = "";
       this.errormsg = "";
         
       if (this.checkprime > Number.MAX_SAFE_INTEGER) {

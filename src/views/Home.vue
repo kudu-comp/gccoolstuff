@@ -1,7 +1,7 @@
 <template>
   <div class="mainpage home">
     <div class="container h-100">
-      <div class="infoblock" v-html="$t('intro')" />
+      <div class="intro" v-html="$t('intro')" />
       <h3>{{$t('menu.coordinates')}}</h3>
       <div class="p mb-2">
         <router-link to="/coord/coordconvert">{{$t('coordinates.convert.title')}}</router-link> {{$t('coordinates.convert.short')}}<br>
@@ -66,6 +66,7 @@
         <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> {{$t('mathtools.primegcdlcm.short')}}.<br>
         <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> {{$t('mathtools.formulasolver.short')}}.<br>
         <router-link to="/math/numberproperties">{{$t('mathtools.numberprop.title')}}</router-link> {{$t('mathtools.numberprop.short')}}.<br>
+        <router-link to="/math/bignumbers">{{$t('mathtools.bignum.title')}}</router-link> {{$t('mathtools.bignum.short')}}.<br>
         <router-link to="/math/nimbers">{{$t('mathtools.nimbers.title')}}</router-link> {{$t('mathtools.nimbers.short')}}.<br>
         <router-link to="/math/sequences">{{$t('mathtools.sequences.title')}}</router-link> {{$t('mathtools.sequences.short')}}.<br>
         <router-link to="/math/palindromecounter">{{$t('mathtools.palindrome.title')}}</router-link> {{$t('mathtools.palindrome.short')}}.<br>
@@ -89,7 +90,8 @@
         <router-link to="/other/countries">{{$t('othertools.countries.title')}}</router-link> {{$t('othertools.countries.short')}}.<br>
         <router-link to="/other/usastates">{{$t('othertools.usastates.title')}}</router-link> {{$t('othertools.usastates.short')}}.<br>
         <router-link to="/other/countryregions">{{$t('othertools.countryregions.title')}}</router-link> {{$t('othertools.countryregions.short')}}.<br>
-        <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> {{$t('othertools.unitconvertor.short')}}.
+        <router-link to="/other/unitconvertor">{{$t('othertools.unitconvertor.title')}}</router-link> {{$t('othertools.unitconvertor.short')}}.<br>
+        <router-link to="/other/dnacode">{{$t('othertools.dnacode.title')}}</router-link> {{$t('othertools.dnacode.short')}}.
       </div>
     </div>
   </div>

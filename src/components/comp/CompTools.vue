@@ -13,6 +13,7 @@
   <router-view :key="$route.path" />
   <div v-if="['Comp'].includes($route.name)">
     <div class="container">
+      <p class="intro" v-html="$t('comptools.intro')"></p>
       <va-item v-bind:showitem='show[0]' v-on:toggle='show[0] = !show[0]'>
         <template v-slot:header><router-link to="/comp/charcodes">{{$t('texttools.charcodes.title')}}</router-link></template>
         <template v-slot:content>

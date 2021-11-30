@@ -6,25 +6,31 @@
     <div class="mainpage">
       <div class="infoblock" v-html="$t('codes.resistorcode.long')"></div>
       <div class="row" style="text-align:center">
-        <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 1</div>
-        <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 2</div>
-        <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.band')}} 3</div>
-        <div class="col-3 col-md-2 col-xl-1">{{this.$t('resistorcode.mult')}}</div>
-      </div>
-      <div class="form-inline">
-        <vd-color class="col-3 col-md-2 col-xl-1" v-model:color="band1" @change="calcResistance"></vd-color>
-        <vd-color class="col-3 col-md-2 col-xl-1" v-model:color="band2" @change="calcResistance"></vd-color>
-        <vd-color class="col-3 col-md-2 col-xl-1" v-model:color="band3" @change="calcResistance"></vd-color>
-        <vd-color class="col-3 col-md-2 col-xl-1" v-model:color="mult" @change="calcResistance">
-          <template v-slot:addcolors>
-            <option value="-1" style="background-color: gold; color: black">Gold</option>
-            <option value="-2" style="background-color: silver; color: black">Silver</option>
-          </template>
-        </vd-color>
+        <div class="col-sm-3 col-md-2">
+          {{this.$t('resistorcode.band')}} 1
+          <vd-color v-model:color="band1" @change="calcResistance"></vd-color>
+        </div>
+        <div class="col-sm-3 col-md-2">
+          {{this.$t('resistorcode.band')}} 2
+          <vd-color v-model:color="band2" @change="calcResistance"></vd-color>
+        </div>
+        <div class="col-sm-3 col-md-2">
+          {{this.$t('resistorcode.band')}} 3
+          <vd-color v-model:color="band3" @change="calcResistance"></vd-color>
+        </div>
+        <div class="col-sm-3 col-md-2">
+          {{this.$t('resistorcode.mult')}}
+          <vd-color v-model:color="mult" @change="calcResistance">
+            <template v-slot:addcolors>
+              <option value="-1" style="background-color: gold; color: black">Gold</option>
+              <option value="-2" style="background-color: silver; color: black">Silver</option>
+            </template>
+          </vd-color>
+        </div>
       </div>
       <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="calcResistance">
       <p v-show="error" class="errormsg">{{errormsg}}</p>
-      <div class="card card-text p-2 mb-2" v-html="result"></div>
+      <div v-if="result" class="resultbox" v-html="result"></div>
     </div>
   </div>
 </template>
@@ -49,7 +55,7 @@ export default {
       translatedmessage: "",
       error: false,
       errormsg: "",
-      result: this.$t('labels.result'),
+      result: "",
       band1: 0,
       band2: 0,
       band3: 0,

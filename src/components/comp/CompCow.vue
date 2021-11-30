@@ -20,7 +20,7 @@
         </div>
       </div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div class="card card-text p-2">{{result}}</div>
+      <div v-if="result" class="resultbox">{{result}}</div>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       selBF : 0,
       input: "",
       debug: false,

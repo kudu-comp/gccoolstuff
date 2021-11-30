@@ -41,7 +41,7 @@
           <textarea id="labels" name="labels" class="form-control mt-2" ref="x" :placeholder="$t('cdmapmaker.phlabel')" rows=10 cols=20 v-model='labels'></textarea>
         </div>
       </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
       <v-map v-model:mylocation="coordfrom" />
     </div>
   </div>
@@ -62,7 +62,6 @@ export default {
 
   data: function() {
     return {
-      error : false,
       errormsg: "",
       from: "WGS84",
       coordfrom : "",
@@ -87,7 +86,8 @@ export default {
     makeMap: function() {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "" ;
+      this.result = "";
 
       // No input
       if (!this.coordfrom) {
@@ -145,11 +145,14 @@ export default {
                 
               }
 
+            })
+            .catch ( (e) => {
+              this.errormsg = this.$t('errors.incorrectcoords')
+              console.log(e);
             });
 
         } catch(e) {
 
-          this.error = true;
           this.errormsg = this.$t('errors.incorrectcoords')
           console.log(e);
           

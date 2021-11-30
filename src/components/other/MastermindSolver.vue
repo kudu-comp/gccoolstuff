@@ -45,7 +45,7 @@
         <input type="button" id="solve" name="solve" :value="$t('sudoku.solve')" class="btn btn-primary mb-2 mr-2" v-on:click="solveMM">
         <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="resetMM">
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="mt-2" v-show="solved">
         {{$t('sudoku.thereare')}} {{results.length}} {{$t('sudoku.sols')}}
         <div class="form-inline mt-2 mb-2">
@@ -79,7 +79,6 @@ export default {
       pos: [],
       col: [],
       nhints: 0,
-      error: false,
       errormsg: "",
       results: [],
       selectedsolution: "",
@@ -171,7 +170,7 @@ export default {
     solveMM : function () {
 
       // reset
-      this.error = false;
+      this.errormsg = "";
       this.results = [];
       this.solved = false;
 
@@ -186,7 +185,6 @@ export default {
 
         // Check if #pins is correct
         if (this.pins[i].length != this.npin) {
-          this.error = true;
           this.errormsg = this.$t('mmsolver.invalidhint1');
           return;
         }
@@ -194,7 +192,6 @@ export default {
         // Check if pins are correct colors
         for (let j=0; j < this.npin; j++) {
           if (this.pins[i][j] < 1 ||  this.pins[i][j] > this.ncolor) {
-            this.error = true;
             this.errormsg = this.$t('mmsolver.invalidhint2');
             return;
           }
@@ -202,7 +199,6 @@ export default {
 
         // Check if pos and col are okay
         if ( parseInt(this.pos[i]) + parseInt(this.col[i]) > this.ncolor ) {
-          this.error = true;
           this.errormsg = this.$t('mmsolver.invalidhint3');
           return;
         }

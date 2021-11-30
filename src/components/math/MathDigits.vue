@@ -51,6 +51,10 @@
           <input type="radio" id="number11" name="number" value="cat" class="form-check-input" v-model="number">
           <label class="form-check-label" for="number11">{{$t('mathdeci.cat')}}</label>
         </div>
+        <div class="form-check">
+          <input type="radio" id="number12" name="number12" value="champ" class="form-check-input" v-model="number">
+          <label class="form-check-label" for="number12">{{$t('mathdeci.champ')}}</label>
+        </div>
       </div>
       <div class="form-inline mt-4">
         <label class="form-label mb-2 mr-2" for="start">{{$t('mathdeci.from')}}</label>
@@ -59,8 +63,10 @@
         <input type='number' id="end" name="end" ref="end" v-model="end" min="0" max="1000000" class="form-control mb-2 mr-2" v-on:keyup.enter="getDigits">
         <input type="button" id="getdec" name="getdec" :value="$t('mathdeci.get')" class="btn btn-primary mb-2" v-on:click="getDigits">
       </div>
-      <div class="card card-text p-2">{{$t('mathdeci.res1')}} {{start}} {{$t('mathdeci.res2')}} {{end}} {{$t('mathdeci.res3')}} {{result}}.</div>
       <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <div v-if="result" class="resultbox">
+        {{$t('mathdeci.res1')}} {{start}} {{$t('mathdeci.res2')}} {{end}} {{$t('mathdeci.res3')}} {{result}}.
+      </div>
     </div>
   </div>
 </template>

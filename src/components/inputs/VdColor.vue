@@ -1,10 +1,10 @@
 <template>
   <div class="form-inline mb-2">
-    <label class="form-label col-sm-3 col-md-2 col-lg-1" for="angle">
+    <label class="form-label col-sm-3 col-md-2 col-lg-1" for="color">
       <slot name="label"></slot>
     </label>
-    <div class="col-md-4">
-      <select class="custom-select" :value='color' @input="updateColor($event.target.value)">
+    <div>
+      <select id="color" class="custom-select" :value='color' @input="updateColor($event.target.value)">
         <option value="0" style="background-color: black; color: white">Black</option>
         <option value="1" style="background-color: brown; color: white">Brown</option>
         <option value="2" style="background-color: red; color: black">Red</option>

@@ -21,10 +21,8 @@
         <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc3')}}</label>
         <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine3()">
       </div>
-      <div class="card card-text p-2">
-        <div v-html="result"></div>
-      </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div v-if="result" v-html="result" class="resultbox"></div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
       <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
@@ -54,8 +52,7 @@ export default {
       selecteddatum2: "WGS84",
       selecteddatum3: "WGS84",
       selecteddatum4: "WGS84",
-      result: this.result = this.$t('labels.result'),
-      error: false,
+      result: "",
       errormsg: "",
     }
   },
@@ -81,8 +78,8 @@ export default {
     doLine1: function () {
 
       // Reset error
-      this.error = false;
-      this.result = this.$t('labels.result');
+      this.errormsg = "";
+      this.result = "";
       let coord1, coord2, gridcoord1, gridcoord2, midpoint;
 
       try {
@@ -149,7 +146,6 @@ export default {
       } catch (e) {
 
         console.log(e);
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
 
       }
@@ -157,7 +153,8 @@ export default {
 
     doLine2: function () {
       // Reset error
-      this.error = false;
+      this.errormsg = "";
+      this.result = "";
 
       let coord1, coord2, coord3, gridcoord1, gridcoord2, gridcoord3, intersectionpoint, pmx, pmy;
 
@@ -236,13 +233,13 @@ export default {
 
           })
           .catch (error => {
-            throw (error)
+            console.log(e);
+            this.errormsg = this.$t('errors.incorrectcoords');
           });
 
       } catch (e) {
 
         console.log(e);
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
 
       }
@@ -250,7 +247,8 @@ export default {
 
     doLine3: function () {
       // Reset error
-      this.error = false;
+      this.errormsg = "";
+      this.result = "";
 
       let coord1, coord2, coord3, coord4, gridcoord1, gridcoord2, gridcoord3, gridcoord4, intersectionpoint;
 
@@ -333,14 +331,14 @@ export default {
             this.result += "<br>" + this.$t('cdlines.intersection') + coords.printCoordinateFromDMS(intersectionpoint, "N12 34.567 E1 23.456");
 
           })
-          .catch (error => {
-            throw(error)
+          .catch (e => {
+            console.log(e);
+            this.errormsg = this.$t('errors.incorrectcoords');
           }) ;
        
       } catch (e) {
 
         console.log(e);
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
         
       }

@@ -15,8 +15,10 @@
         <input type='text' id="check" name="check" ref="check" v-model="check" class="form-control col-sm-5 col-md-5 mr-md-2 mb-2" v-on:keyup.enter="checkFib">
         <input type="button" id="checkfib" name="checkfib" :value="$t('buttons.check')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="checkFib">
       </div>
-      <div class="card card-text p-2">{{result}}</div>
       <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <div v-if="result" class="resultbox">
+        {{result}}
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +37,7 @@ export default {
       check: "",
       error: false,
       errormsg: "",
-      result: this.$t('labels.result'),
+      result: "",
       fibnrs : ["1", "1", "2", "3", "5", "8",'13','21','34','55','89','144','233','377','610','987','1597','2584','4181','6765','10946','17711','28657',
         '46368','75025','121393','196418','317811','514229','832040','1346269','2178309','3524578','5702887','9227465','14930352','24157817',
         '39088169','63245986','102334155','165580141','267914296','433494437','701408733','1134903170','1836311903','2971215073','4807526976',

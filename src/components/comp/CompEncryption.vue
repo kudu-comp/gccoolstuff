@@ -49,7 +49,7 @@
         <input type="button" id="decrypt" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decryptMessage">
       </div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div class="form-row mb-2">
+      <div v-if="result" class="form-row mb-2">
         <textarea id="coded" class="form-control" ref="coded" :placeholder="$t('compenc.coded')" rows=10 v-model='result'></textarea>
       </div>
     </div>

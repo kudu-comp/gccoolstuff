@@ -18,8 +18,8 @@
       </div>
       <input type="button" id="enc" name="enc" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encodeDeca">
       <input type="button" id="dec" name="dec" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decodeDeca">
-      <div class="card card-text p-2">{{result}}</div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <div v-if="result" class="resultbox">{{result}}</div>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       errormsg: "",
       format: 0,
       decabit: [

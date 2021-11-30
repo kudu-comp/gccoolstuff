@@ -11,11 +11,11 @@
       <div class="form-inline">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="reverse" id="reverse" v-model="reverse" class="custom-control-input mb-2 mr-2">
-          <label for="reverse" class="custom-control-label mb-2 mr-2">{{$t('dialogwv.reverse')}}</label>
+          <label for="reverse" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.reverse')}}</label>
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="startatzero" id="startatzero" v-model="startatzero" class="custom-control-input mb-2 mr-2">
-          <label for="startatzero" class="custom-control-label mb-2 mr-2">{{$t('dialogwv.startzero')}}</label>
+          <label for="startatzero" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.startzero')}}</label>
         </div>
         <div class="custom-control custom-checkbox">
           <input type="checkbox" name="leadzero" id="leadzero" v-model="leadzero" class="custom-control-input mb-2 mr-2">
@@ -28,7 +28,7 @@
       <input type="button" id="texttonumbers" name="texttonumbers" :value="$t('txttonum.btnttn')" class="btn btn-primary mb-2 mr-2" v-on:click="textToNumbers">
       <input type="button" id="numberstotext" name="numberstotext" :value="$t('txttonum.btnntt')" class="btn btn-primary mb-2 mr-2" v-on:click="numbersToText">
       <input type="button" id="remove" name="remove" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
-      <div class="card card-text p-2">{{result}}</div>
+      <div v-if="result" class="resultbox">{{result}}</div>
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
       reverse : false,
       startatzero : false,
       leadzero: false,
-      result : this.$t('labels.result'),
+      result : "",
     }
   },
 
@@ -73,6 +73,10 @@ export default {
     // Convert text to numbers
     textToNumbers : function () {
 
+      // Reset
+      this.errormsg = "";
+      this.result = "";
+      
       // Get the selected alphabet using the name
       let alpha = textHelper.getAlphabet(this.selectedalphabet);
       let mod = Math.floor(alpha.length / 10);
@@ -80,7 +84,7 @@ export default {
       let html = "";
       let idx = 0;
       for (let i=0; i < this.message.length; i++) {
-        idx = alpha.indexOf(this.message[i]);
+        idx = alpha.indexOf(this.message[i].toUpperCase());
         if (idx >= 0) {
           //if (!this.reverse && this.startatzedo) do nothing
           if (!this.reverse && !this.startatzero) idx++;
@@ -99,6 +103,11 @@ export default {
 
     // Convert numbers to text
     numbersToText : function() {
+
+      // Reset
+      this.errormsg = "";
+      this.result = "";
+
       let alpha = textHelper.getAlphabet(this.selectedalphabet);
       let mod = Math.floor(alpha.length / 10);
       if (this.startatzero) mod--;
@@ -111,7 +120,8 @@ export default {
           d1 = parseInt(this.message[i]);
           if (d1 <= mod) {
             d2 = parseInt(this.message[++i]);
-            pos = d1 * 10 + d2;
+            // If last number accept one digit always
+            pos = (d2) ? d1 * 10 + d2 : d1;
           } else {
             pos = d1;
           }

@@ -31,6 +31,7 @@ import MathDigits from '@/components/math/MathDigits.vue'
 import MathFormula from '@/components/math/MathFormula.vue'
 import MathPrimes from '@/components/math/MathPrimes.vue'
 import MathGCDandLCM from '@/components/math/MathGCDandLCM.vue'
+import MathBigNumbers from '@/components/math/MathBigNumbers.vue'
 import MathNimbers from '@/components/math/MathNimbers.vue'
 import MathPalindrome from '@/components/math/MathPalindrome.vue'
 import MathSequences from '@/components/math/MathSequences'
@@ -52,6 +53,7 @@ import FillTool from '@/components/images/FillTool.vue'
 import PixelData from '@/components/images/PixelData.vue'
 import PixelBuild from '@/components/images/PixelBuild.vue'
 import ImageTransform from '@/components/images/ImageTransform.vue'
+import TextExtractor from '@/components/images/TextExtractor.vue'
 import HtmlToolbox from '@/views/HtmlToolbox'
 import Sudoku from '../views/Sudoku.vue'
 import OtherTools from '@/views/OtherTools.vue'
@@ -61,6 +63,7 @@ import UnitConvertor from '@/components/other/UnitConvertor'
 import Countries from '@/components/other/Countries.vue'
 import UsaStates from '@/components/other/UsaStates.vue'
 import CountryRegions from '@/components/other/CountryRegions.vue'
+import DNACode from '@/components/other/DNACode.vue'
 import Howtostart from '@/views/Howtostart.vue'
 
 const routes = [
@@ -129,6 +132,7 @@ const routes = [
       { path: "/math/formulasolv",       name: 'FormulaSolver',         component: MathFormula},
       { path: "/math/numberproperties",  name: 'NumberProperties',      component: MathProperties },
       { path: "/math/fibonacci",         name: 'Fibonacci',             component: MathFib },
+      { path: "/math/bignumbers",        name: 'BigNumbers',            component: MathBigNumbers },
       { path: "/math/nimbers",           name: 'Nimbers',               component: MathNimbers },
       { path: "/math/gcdandlcm",         name: 'GCDAndLCM',             component: MathGCDandLCM },
       { path: "/math/palindromecounter", name: 'Palindrome',            component: MathPalindrome },
@@ -162,7 +166,8 @@ const routes = [
       { path: '/other/countries',       name: 'Countries',        component: Countries,        },
       { path: '/other/unitconvertor',   name: 'UnitConvertor',    component: UnitConvertor,    },
       { path: '/other/usastates',       name: 'UsaStates',        component: UsaStates,        },
-      { path: '/other/countryregions',  name: 'CountryRegions',   component: CountryRegions,   }
+      { path: '/other/countryregions',  name: 'CountryRegions',   component: CountryRegions,   },
+      { path: '/other/dnacode',         name: 'DNACode',          component: DNACode,          }
     ]
   },
   {
@@ -172,10 +177,11 @@ const routes = [
     children: [
       { path: '/images/exifscanner',     name: 'ExifScanner',     component: ExifScanner      },
       { path: '/images/colorpicker',     name: 'ColorPicker',     component: ColorPicker      },
-      { path: '/images/filltool',        name: 'FillTool',        component: FillTool      },
-      { path: '/images/pixeldata',       name: 'PixelData',       component: PixelData      },
-      { path: '/images/pixelbuild',      name: 'PixelBuild',      component: PixelBuild      },
-      { path: '/images/imagetransform',  name: 'ImageTransform',  component: ImageTransform      },
+      { path: '/images/filltool',        name: 'FillTool',        component: FillTool         },
+      { path: '/images/pixeldata',       name: 'PixelData',       component: PixelData        },
+      { path: '/images/pixelbuild',      name: 'PixelBuild',      component: PixelBuild       },
+      { path: '/images/imagetransform',  name: 'ImageTransform',  component: ImageTransform   },
+      { path: '/images/textextractor',   name: 'TextExtractor',   component: TextExtractor    }
     ]
   },
   {

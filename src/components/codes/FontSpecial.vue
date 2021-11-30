@@ -21,18 +21,26 @@
           <option value="72px">72</option>
         </select>
         <label class="form-label mb-2 mr-2" for="ofs">{{$t('cdfonts.selcolor')}}</label>
-        <select id="ofs" class="custom-select mb-2" v-model='styleObject.color'>
+        <select id="ofs" class="custom-select mb-2 mr-2" v-model='styleObject.color'>
           <option value="black">{{$t('colors.black')}}</option>
           <option value="blue">{{$t('colors.blue')}}</option>
           <option value="red">{{$t('colors.red')}}</option>
           <option value="green">{{$t('colors.green')}}</option>
           <option value="brown">{{$t('colors.brown')}}</option>
         </select>
-      </div>
-      <div id="result" class="form-row">
-        <textarea id="message2" name="message2" spellcheck="false" class="form-control" v-bind:style="styleObject" rows=10 v-model='message'></textarea>
+        <label class="form-label mb-2 mr-2" for="ofs">{{$t('cdfonts.lineheight')}}</label>
+        <select id="ofs" class="custom-select mb-2" v-model='styleObject.lineHeight'>
+          <option value="normal">{{$t('cdfonts.standard')}}</option>
+          <option value="1">1.0</option>
+          <option value="1.2">1.2</option>
+          <option value="1.5">1.5</option>
+          <option value="2">2.0</option>
+        </select>
       </div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <div class="form-row">
+        <textarea id="message2" name="message2" spellcheck="false" class="form-control" v-bind:style="styleObject" rows=10 v-model='message'></textarea>
+      </div>
     </div>
   </div>
 </template>
@@ -49,13 +57,13 @@ export default {
   data: function () {
     return {
       message: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\n!?.,:;@#$%^&*(){}[]-_=+<>/\\~\"`'|",
-      result : this.$t('labels.result'),
       errormsg: "",
       selectedfont: 'Antiker',
       styleObject: {
         fontFamily: 'Antiker',
         fontSize: '24px',
-        color: 'black'
+        color: 'black',
+        lineHeight: 'normal'
       },
       fontdef: [
         { id: 'Antiker', font: 'Ancient (Star Gate)' },

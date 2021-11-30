@@ -11,15 +11,20 @@
         <select id="listoftags" class="custom-select mr-2 mb-2" v-model="selectedtag">
           <option v-for="t in tags" :key="t" :value="t">{{t}}</option>
         </select>
-        <input type="button" id="btnsearch" name="btnsearch" :value="$t('buttons.search')" class="btn btn-primary mb-2" v-on:click="goSearch">
+        <input type="button" id="btnsearch" name="btnsearch" :value="$t('buttons.search')" class="btn btn-primary mb-2 mr-2" v-on:click="goSearch">
+        <span class="form-label mb-2">{{foundpages.length}}&nbsp;{{$t('cdbook.pagesfound')}}</span>
       </div>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}.</p>
       <div class="row">
         <div class="col-2 col-sm-1">
           <input type="button" id="prev" name="prev" value="&leftarrow;" class="btn btn-primary" v-on:click="getPrev">
         </div>
         <div class="imagearea col-8 col-sm-10">
           <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
-            <template v-slot:header>{{codepageheader}}</template>
+            <template v-slot:header>
+              {{codepageheader}}
+              <span style="text-align: right; float: right; right: 10px;">{{currentpage+1}} / {{foundpages.length}}</span>
+            </template>
             <template v-slot:content>
               {{codepagedescription}}<hr>
               {{codepagetags}}
@@ -33,7 +38,6 @@
           <input type="button" id="next" name="next" value="&rightarrow;" class="btn btn-primary" v-on:click="getNext">
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}.</p>
     </div>
   </div>
 </template>
@@ -64,7 +68,7 @@ export default {
       codepagedescription: "",
       codepagetags: "",
       codepagefile: "",
-      foundpages: null,
+      foundpages: [],
       tags: null,
       errormsg: "",
       showitem: true,

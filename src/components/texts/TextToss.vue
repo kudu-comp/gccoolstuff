@@ -27,7 +27,7 @@
         <input type="button" id="toss" name="toss" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="tossWords">
       </div>
       <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <div class="card card-text p-2">{{result}}</div>
+      <div v-if="result" class="resultbox">{{result}}</div>
     </div>
   </div>
 </template>

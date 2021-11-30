@@ -6,11 +6,11 @@
     <div class="mainpage">
       <div class="infoblock" v-html="$t('coordinates.revwherigo.long')" />
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=3 v-model='message'></textarea>
       </div>
       <input type="button" id="enc" name="enc" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="solveReverse">
-      <div class="card card-text p-2" v-html="result" />
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <div v-if="result" class="resultbox" v-html="result" />
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       errormsg: "",
       format: 0,
       
@@ -47,6 +47,8 @@ export default {
       d1 = "" + d1; d1 = d1.padStart(6,'0');
       d2 = "" + d2; d2 = d2.padStart(6,'0');
       d3 = "" + d3; d3 = d3.padStart(6,'0'); 
+
+      if (d1.length != 6 || d2.length != 6 || d3.length != 6) throw(this.$t('errors.invalidinput'))
       
       // Get signs of lat and lon
       switch (d1[3]) {
@@ -84,9 +86,10 @@ export default {
 
         // Parse input
         let d = this.message.split(/[-\s,.]+/g);
-        console.log(d);
 
         // Some error handling
+        if (!d) throw (this.$t('errors.invalidinput'));
+        if (d.length != 3) throw (this.$t('errors.invalidinput'));
 
         // Solve
         let c = this.reverseWherigo2Coord (d[0], d[1], d[2]);

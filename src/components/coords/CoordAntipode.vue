@@ -7,10 +7,8 @@
       <div class="infoblock" v-html="$t('coordinates.antipode.long')" />
       <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum"></v-coord>
       <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doCalc()">
-      <div class="card">
-        <div class="card-text p-2">{{$t('cdantipode.result')}}{{result}}</div>
-      </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div v-if="result" class="resultbox">{{$t('cdantipode.result')}}{{result}}</div>
       <v-map v-model:mylocation="coordinate"/>
     </div>
   </div>
@@ -35,7 +33,6 @@ export default {
       coordinate: "",
       selecteddatum: "WGS84",
       result: "",
-      error: false,
       errormsg: "",
     }
   },
@@ -45,7 +42,7 @@ export default {
     doCalc: function () {
 
       // Reset error
-      this.error = false;
+      this.errormsg = "";
       let anticoord;
 
       try {
@@ -69,11 +66,16 @@ export default {
             this.result = coords.getTextFromCoord(convcoord, this.selecteddatum, 7, this.coordinate)
             this.result += this.$t('cdantipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456");
 
+          })
+          .catch ( (e) => {
+
+            this.errormsg = this.$t('errors.incorrectcoords');
+            console.log(e.message);
+
           });
           
       } catch (e) {
 
-        this.error = true;
         console.log(e);
         this.errormsg = this.$t('errors.incorrectcoords');
         

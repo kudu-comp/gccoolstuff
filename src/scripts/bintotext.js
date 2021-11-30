@@ -406,7 +406,7 @@ export function bufferToAscii85 (b, enc = ascii85encodings[0].value) {
  */
 
 export const base64encodings = [
-  { name: "Standard",   value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" },
+  { name: "Standard base64",   value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" },
   { name: "UUencode",   value: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" }
 ]
 

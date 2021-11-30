@@ -11,6 +11,7 @@
       <div class="form-inline mb-2">
         <input type="button" id="scan" name="scan" :value="$t('htmlscanner.btnscan')" class="btn btn-primary mr-2" v-on:click="scanHTML">{{scanresult}}
       </div>
+      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
       <va-item v-show="links.length>0" v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
         <template v-slot:header>{{$t('htmlscanner.links')}}</template>
         <template v-slot:content>
@@ -94,7 +95,6 @@
           <div v-html="ems" />
         </template>
       </va-item>
-      <p v-show="error" class="errormsg mt-2">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -118,7 +118,6 @@ export default {
     return {
       gchtml: "",
       scanresult: "",
-      error: false,
       errormsg: "",
       cacheNode: null,
       images: [],
@@ -168,7 +167,7 @@ export default {
     scanHTML: function () {
 
       // Reset error flag
-      this.error = false;
+      this.errormsg = "";
       this.result = "";
       this.scanresult = "";
 
@@ -196,7 +195,6 @@ export default {
 
         // Check if cacheNode exists
         if (!this.cacheNode) {
-          this.error = true;
           this.errormsg = this.$t("htmlscanner.nocache");
           return;
         }
@@ -288,7 +286,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('htmlscanner.error');
         console.log(e);
 

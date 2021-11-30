@@ -28,7 +28,7 @@
           </select>
         </div>
       </div>
-      <div class="card card-text p-2">
+      <div v-if="result" class="resultbox">
         {{result}}
       </div>
     </div>
@@ -54,7 +54,7 @@ export default {
       base: 10,
       unique: true,
       errormsg: "",
-      result: this.$t('labels.result'),
+      result: "",
       results: [],
       selectedsolution: ""
     }

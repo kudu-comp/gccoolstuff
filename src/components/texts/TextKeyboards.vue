@@ -19,8 +19,8 @@
           <v-keyboards class="mb-2" id="keyboards2" v-model:keyboard="tokeyboard" @change="translateKeyboard"></v-keyboards>
         </div>
       </div>
-      <div class="card card-text p-2">{{result}}</div>
       <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <div v-if="result" class="resultbox">{{result}}</div>
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       fromkeyboard : "QWERTY",
       tokeyboard: "DVORAK2",
       errormsg: "",
@@ -61,6 +61,7 @@ export default {
 
       // Reset error flag
       this.errormsg = "";
+      this.result = "";
 
       try {
         // Convert the input

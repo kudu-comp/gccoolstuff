@@ -15,10 +15,8 @@
         <template v-slot:label>{{$t('labels.point')}} 3</template>
       </v-coord>
       <input type="button" id="go" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="getPoints()">
-      <div class="card card-text p-2">
-        <div v-html="result"></div>
-      </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div v-if="result" v-html="result" class="resultbox"></div>
       <v-map v-model:mylocation="coordinate1"/>
     </div>
   </div>
@@ -46,8 +44,7 @@ export default {
       selecteddatum1: "WGS84",
       selecteddatum2: "WGS84",
       selecteddatum3: "WGS84",
-      result: this.result = this.$t('labels.result'),
-      error: false,
+      result: "",
       errormsg: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/coordcalc/coordcalc.php",
     }
@@ -58,8 +55,8 @@ export default {
     getPoints: function () {
 
       // Reset error
-      this.error = false;
-      this.result = this.$t('labels.result');
+      this.errormsg = "";
+      this.result = "";
       let coord1, coord2, coord3, gridcoord1, gridcoord2, gridcoord3;
 
       try {
@@ -176,16 +173,18 @@ export default {
 
                   console.error('Error ', error);
                   this.errormsg = this.$t('errors.incorrectcoords');
-                  this.error = true;
 
               });
 
+          })
+          .catch ( (e) => {
+            console.log(e);
+            this.errormsg = this.$t('errors.incorrectcoords');
           });
         
         } catch (e) {
 
           console.log(e);
-          this.error = true;
           this.errormsg = this.$t('errors.incorrectcoords');
           
         }

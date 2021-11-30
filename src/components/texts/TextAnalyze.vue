@@ -9,7 +9,7 @@
         <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="analyzeText"></textarea>
       </div>
       <input type="button" id="analyze" name="analyze" :value="$t('txtanalyze.analyze')" class="btn btn-primary mb-2 mr-2" v-on:click="analyzeText">
-      <input type="button" id="analyze" name="analyze" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+      <input type="button" id="analyze" name="analyze" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
       <table class="table table-sm">
         <tr><td>{{$t('txtanalyze.nwords')}}</td><td>{{totalwords}}</td></tr>
         <tr><td>{{$t('txtanalyze.nlines')}}</td><td>{{totallines}}</td></tr>
@@ -22,7 +22,7 @@
         <tr><td>{{$t('txtanalyze.nnonalpha')}}</td><td>{{totalnonalphabet}}</td></tr>
         <tr><td>{{$t('txtanalyze.nnonwhite')}}</td><td>{{totalnonwhite}}</td></tr>
       </table>
-      <div v-html="result"></div>
+      <div v-if="result" v-html="result" class="resultbox"></div>
     </div>
   </div>
 </template>
@@ -41,7 +41,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result: "<i>" + this.$t('txtanalyze.result') + "</i>",
+      result: "",
       totalchar : 0,
       totalwords : 0,
       totallines: 0,

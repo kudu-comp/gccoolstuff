@@ -44,7 +44,7 @@
         <input type="button" id="product" name="product" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="sequence">
       </div>
       <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}.</p>
-      <div class="card card-text p-2">
+      <div v-if="result" class="resultbox">
         <div class="monospace">
           <p>{{$t('mathseq.res1')}} {{n}}: {{result}}.</p>
           <p>{{$t('mathseq.res2')}} {{seq}}</p>

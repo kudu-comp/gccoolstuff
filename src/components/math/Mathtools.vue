@@ -7,6 +7,7 @@
     <router-link to="/math/gcdandlcm">{{$t('mathtools.primegcdlcm.title')}}</router-link> |
     <router-link to="/math/formulasolv">{{$t('mathtools.formulasolver.title')}}</router-link> |
     <router-link to="/math/numberproperties">{{$t('mathtools.numberprop.title')}}</router-link> |
+    <router-link to="/math/bignumbers">{{$t('mathtools.bignum.title')}}</router-link> |
     <router-link to="/math/nimbers">{{$t('mathtools.nimbers.title')}}</router-link> |
     <router-link to="/math/sequences">{{$t('mathtools.sequences.title')}}</router-link> |
     <router-link to="/math/palindromecounter">{{$t('mathtools.palindrome.title')}}</router-link>
@@ -14,6 +15,7 @@
   <router-view :key="$route.path" />
   <div v-if="['Math'].includes($route.name)">
     <div class="container">
+      <p class="intro" v-html="$t('mathtools.intro')"></p>
       <va-item v-bind:showitem='show[0]' v-on:toggle='toggleItem(0)'>
         <template v-slot:header><router-link to="/math/baseconvertor">{{$t('mathtools.baseconvert.title')}}</router-link></template>
         <template v-slot:content>
@@ -54,6 +56,12 @@
         <template v-slot:header><router-link to="/math/numberproperties">{{$t('mathtools.numberprop.title')}}</router-link></template>
         <template v-slot:content>
           <span v-html="$t('mathtools.numberprop.long')" />
+        </template>
+      </va-item>
+      <va-item v-bind:showitem='show[8]' v-on:toggle='toggleItem(8)'>
+        <template v-slot:header><router-link to="/math/bignumbers">{{$t('mathtools.bignum.title')}}</router-link></template>
+        <template v-slot:content>
+          <span v-html="$t('mathtools.bignum.long')" />
         </template>
       </va-item>
       <va-item v-bind:showitem='show[5]' v-on:toggle='toggleItem(5)'>

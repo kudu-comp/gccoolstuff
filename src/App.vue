@@ -107,6 +107,25 @@ hr {
   margin-bottom: 10px;
 }
 
+.resultbox {
+  border-style: solid;
+  border-color: #785E31;
+  background-color: #f7f5f3;
+  border-width: 2px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 90%;
+}
+
+.intro {
+  color: #E6D1AC;
+  background-color: #785E31;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
 .btn {
   background-color: #2E1E03;
   border-style: none;
@@ -126,6 +145,10 @@ hr {
 .btn.btn-primary:active {
   box-shadow: 4px 4px #785E31;
   background-color: #E2AE15 !important;
+}
+
+.btn.btn-primary:disabled {
+  background-color: #352a17
 }
 
 .btn-sm {
@@ -154,31 +177,6 @@ hr {
 .box-body {
   font-size: 1.0em;
   padding: 5px;
-}
-
-.card {
-  border-style: solid;
-  border-width: 2px;
-  border-color: #785E31;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-.card-header {
-  color: #E6D1AC;
-  background-color: #785E31;
-	text-align: left;
-	font-size: 1.1em;
-  padding: 5px;
-}
-
-.card-body {
-  background-color: #E6D1AC;
-  padding: 5px;
-}
-
-.card-text {
-  font-size: 0.95em;
 }
 
 .form-control {

@@ -40,7 +40,7 @@
           <input type='text' id="proj4jsdef" name="proj4jsdef" ref="proj4jsdef" v-model="proj4jsdef" size="80" class="form-control ml-2">
         </div>
       </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
       <v-map v-model:mylocation="coordfrom"/>
     </div>
   </div>
@@ -61,7 +61,6 @@ export default {
 
   data: function() {
     return {
-      error : false,
       errormsg: "",
       coordfrom : "",
       to: "WGS84",
@@ -84,9 +83,13 @@ export default {
     // Convert the coordinates
     convertCoordinates: function() {
 
+      // Reset
+      this.result = "";
+      this.errormsg = "";
+    
       // No input
-      if (this.coordfrom == null) { this.error = true; this.errormsg = this.$t('errors.nocoords'); return; }
-      if (this.coordfrom == "") { this.error = true; this.errormsg = this.$t('errors.nocoords'); return; }
+      if (this.coordfrom == null) { this.errormsg = this.$t('errors.nocoords'); return; }
+      if (this.coordfrom == "") { this.errormsg = this.$t('errors.nocoords'); return; }
 
       // Get all the lines form input and convert them one by one
       let input = this.coordfrom.match(/[^\r\n]+/g);
@@ -97,9 +100,7 @@ export default {
       // });
 
       // Parse input line by line
-      this.result = "";
       this.count = 0;
-      this.error = false;
       let promises = [];
 
       try {
@@ -117,6 +118,12 @@ export default {
             for (let c of convcoords)
               this.result += coords.getTextFromCoord(c, this.to, 7, this.wgsformat) + "\n";
 
+          })
+          .catch ( (e) => {
+
+            this.errormsg = this.$t('errors.incorrectcoords');
+            console.log(e);
+
           });
 
         // Create promises to generate coordinates for markers
@@ -131,11 +138,16 @@ export default {
             for (let m of mapcoords)
               coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, "Point " + this.count);
 
+          })
+          .catch ( (e) => {
+
+            this.errormsg = this.$t('errors.incorrectcoords');
+            console.log(e);
+
           });
 
       } catch(e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
         console.log(e);
 

@@ -35,10 +35,8 @@
       <v-coord v-model:coord="coordfocus" v-model:datum="datumfocus" class="mr-2 mb-2"><template v-slot:label>{{$t('cdw3w.focus')}}</template></v-coord>
       <v-coord v-model:coord="coordclip" v-model:datum="datumclip" class="mr-2 mb-2"><template v-slot:label>{{$t('cdw3w.clip')}}</template></v-coord>
       <v-distance v-model:dist="clipradius" v-model:unit="clipunit"><template v-slot:label>{{$t('labels.radius')}}</template></v-distance>
-      <div class="card">
-        <div class="card-text p-2" v-html="result" />
-      </div>
       <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div v-if="result" class="resultbox" v-html="result" />
       <v-map v-model:mylocation="coordinate1"/>
     </div>
   </div>
@@ -79,7 +77,7 @@ export default {
       clipradius: 0,
       clipunit: 1,
       country: "NL,DE,BE,GB",
-      result: this.$t('labels.result'),
+      result: "",
       errormsg: ""
     }
   },

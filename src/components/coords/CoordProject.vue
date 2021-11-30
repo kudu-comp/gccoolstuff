@@ -8,11 +8,9 @@
       <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum" class="mr-2"></v-coord>
       <v-distance v-model:dist="dist" v-model:unit="unit"></v-distance>
       <v-angle v-model:angle="angle" v-model:unit="angleunit"></v-angle>
-      <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary" v-on:click="doCalc()">
-      <div class="card mt-2">
-        <div class="card-text p-2">{{$t('cdproj.projcoord')}}{{result}}</div>
-      </div>
-      <div class="errormsg" v-show="error">{{errormsg}}</div>
+      <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="doCalc()">
+      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div v-if="result" class="resultbox">{{$t('cdproj.projcoord')}}{{result}}</div>
       <v-map v-model:mylocation="coordinate"/>
     </div>
   </div>
@@ -45,7 +43,6 @@ export default {
       dist: 0,
       unit: 1,
       result: "",
-      error: false,
       errormsg: "",
     }
   },
@@ -55,7 +52,9 @@ export default {
     doCalc: function () {
 
       // Reset error
-      this.error = false;
+      this.errormsg = "";
+      this.result = "";
+
       let startcoord, gridcoord, projcoord;
 
       try {
@@ -99,12 +98,15 @@ export default {
             this.result = coords.getTextFromCoord(data, this.selecteddatum, 7, this.coordinate);
             this.result += " or " + coords.printCoordinateFromDMS(projcoord, "N12 34.567 E1 23.456");
 
+          })
+          .catch ( (e) => {
+            console.log(e);
+            this.errormsg = this.$t('errors.incorrectcoords');
           });
 
       } catch (e) {
 
         console.log(e);
-        this.error = true;
         this.errormsg = this.$t('errors.incorrectcoords');
         
       }

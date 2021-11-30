@@ -28,6 +28,7 @@
         <input type="button" id="solve" name="solve" :value="$t('sudoku.solve')" class="btn btn-primary mb-2 mr-2" v-on:click="solveSudoku">
         <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="resetSudoku">
       </div>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
       <div class="mb-2" v-show="solved">
         {{$t('sudoku.thereare')}} {{numberofsolutions}} {{$t('sudoku.sols')}}
         <div class="form-inline mb-2">
@@ -37,7 +38,6 @@
           </select>
         </div>
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
     </div>
   </div>
 </template>
@@ -53,7 +53,6 @@ export default {
   data: function() {
     return {
       codes : "123456789ABCDEFG",
-      error : false,
       errormsg: "",
       size : 3,
       size2 : 9,
@@ -152,7 +151,7 @@ export default {
     // Solve the sudoku by calling the PHP script on the server
     solveSudoku : function () {
 
-      this.error = false;
+      this.errormsg = "";
       this.solved = false;
       let data = {
         sudokutype: this.sudokutype,
@@ -174,7 +173,6 @@ export default {
         })
         .catch((error) => {
           console.error('Error ', error);
-          this.error = true;
           this.errormsg = this.$t('sudoku.error');
         });
     },

@@ -102,6 +102,7 @@
   },
 
   "coordinates": {
+    "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en circles. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. What3words wordt uitgebreid ondersteund. Het is ook mogelijk Reverse Wherigo caches op te lossen.",
     "convert": {
       "title": "Converteren",
       "short": "WGS84, RD, UTM, Maidenhead, Geohash, Mapcode, what3words, OGSM, MGRS, NAD en meer",
@@ -155,15 +156,16 @@
   },
 
   "codes": {
+    "intro": "Codes zijn een simpele manier om tekst of nummers te coderen. Er wordt geen sleutel bij gebruikt. Het enige wat nodig is om de code op te lossen is deze te herkennen. Dat is soms niet eenvoudig. De zoek tool kan helpen of blader door de speciale fonts. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden.",
     "codebook": {
       "title": "Zoek codes",
-      "short": "vind de juiste codepage door te zoeken op tags en woorden",
-      "long": "Vind de juiste codepage door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
+      "short": "Vind de juiste code door te zoeken op tags en woorden",
+      "long": "Vind de juiste code door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
     }, 
     "fonts": {
       "title": "Speciale fonts",
-      "short": "Speciale fonts, Klingon, Therwar, Wakandan en 40 anderen",
-      "long": "<p>Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>"  
+      "short": "Meer dan 50 fonts / codes zijn beschikbaar.",
+      "long": "<p>Een code is soms niet veel meer dan het gebruik van een ander font, bijvoorbeeld Webdings. Ook zijn veel codes uit bijvoorbeeld games en televisieseries beschikbaar als font. Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>"  
     },
     "segment": {
       "title": "Segment display",
@@ -172,8 +174,8 @@
     },
     "resistorcode": {
       "title": "Weerstandscode",
-      "short": "Weerstandscode berekenen",
-      "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:</p><div style='text-align: center'><div style='background-color: black; color: white'>0</div><div style='background-color: brown; color: white'>1</div><div style='background-color: red; color: black'>2</div><div style='background-color: orange; color: black'>3</div><div style='background-color: yellow; color: black'>4</div><div style='background-color: green; color: black'>5</div><div style='background-color: blue; color: white'>6</div><div style='background-color: violet; color: black'>7</div><div style='background-color: gray; color: black'>8</div><div style='background-color: white; color: black'>9</div></div><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
+      "short": "Weerstand berekenen",
+      "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
     },
     "decabit": {
       "title": "Decabit",
@@ -183,6 +185,7 @@
   },
 
   "texttools": {
+    "intro": "Tools voor tekst. Het berekenen van woordwaardes. Het converteren van ASCII of andere codes. Een tool om tekst te analiseren. Slimme substitutie helpt met het kraken van geheimschriften. Converteren van tekst van en naar nummers. Het wisselen van toetsenborden zoals Dvorak. En een tool om woorden door elkaar te husselen.",
     "wordvalue": {
       "title": "Woordwaarde",
       "short": "Woordwaarde, stapeltellen, standaard alfabet, Scrabble, Vanity code en diverse anderen.",
@@ -221,6 +224,7 @@
   },
 
   "imagetools": { 
+    "intro": "Tools om afbeeldingen snel te bewerken of te scannen. De EXIF scanner toont de gegevens van een afbeelding. De kleurenkiezer geeft de details van een geseleteerde kleur. De editor kan snel een gebied vullen, helderheid of contrast aanpassen of een filter toepassen. Er is een tool om een afbeelding te genereren uit getallen. Transformeren doet rare dingen als een afbeelding gedeeltelijk spiegelen of verschuiven. Tekst zoeker vindt mogelijke teksten in willekeurige files, zoals afbeeldingen.",
     "exifscanner": {
       "title": "Exif Scanner",
       "short": "Metadata van een foto, zoals beschrijving, commentaar en GPS data.",
@@ -250,10 +254,16 @@
       "title": "Transformeren",
       "short": "Spiegelen (geheel of gedeeltelijk), verschuif rijen of kolommen",
       "long": "Spiegel horizontaal en/of verticaal (geheel of gedeeltelijk), verschuif rijen en/of kolommen een aantal pixels."
+    },
+    "textextractor": {
+      "title": "Tekst in file",
+      "short": "Zoek mogelijke teksten in een file",
+      "long": "De tool zoekt mogelijke teksten door te zoeken naar aaneengesloten afdrukbare karakters (ASCII 32 t/m 126). De minimale hoeveelheid aaneengesloten tekens kan worden ingesteld. Het maximale aantal zoekresultaten en de startpositie om te beginnen met zoeken zijn ook instelbaar. Door bijvoorbeeld eerst te zoeken op langere teksten kan vervolgens met de startpositie worden ingezoomd op een bepaald gebied met mogelijke kortere teksten. Grote files scannen kan enige tijd duren of deze kunnen in het geheel niet worden geladen."
     }
   },
  
   "othertools" : {
+    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes",
     "sudokusolver": {
       "title": "Sudoku oplosser",
       "short": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3",
@@ -267,7 +277,7 @@
     "periodictable": {
       "title": "Periodiek systeem",
       "short": "Nummers, symbolen en namen van chemische elementen",
-      "long": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een een- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen. De tool gebruikt de Engelse namen voor de elementen.</p>"
+      "long": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een één- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen). De tool gebruikt de Engelse namen voor de elementen.</p>"
     },
     "countries": {
       "title": "Landen van de wereld",
@@ -288,6 +298,11 @@
       "title": "Eenheden",
       "short": "Converteert lengte, temperatuur en nog veel meer",
       "long": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund."  
+    },
+    "dnacode": {
+      "title": "DNA Code",
+      "short": "Drie lettercodes van DNA of RNA",
+      "long": "<p>DNA of RNA codons worden weergegeven door 3 letters. Als je een code ziet met veel A, C, G, T of U is dat waarschijnlijk DNA of RNA. Soms worden er ook andere letters gebruikt. Die zijn staan voor een combinatie. Bijvoorbeeld Y betekent T of C, dus TAY betekent TAT of TAC. Type de codons and druk op Zoek.</p><p>Achtergrondinformatie. Codons zijn een combinatie van steeds drie nucleobasen. DNA is samengesteld uit A (Adenine), C (Cytosine)and G (Guanine) en T (Thymine). RNA deelt drie van de vier, maar T is vervangen door U (Uracil). De meeste codons definieren een aminozuur. Aminozuren hebben een naam, een drie letter afkorting of een één-letterige code. Enkele codons werken als start en stop signaal. Een stuk RNA of DNA bevat een reeks codons, elke codon triggert een specifiek aminozuur. De opgebouwde keten vormt een eiwit. Voor meer informatie lees <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>hier</a>.</p>"
     }
   },
 
@@ -576,6 +591,7 @@
   },
 
   "mathtools": {
+    "intro": "Rekenkundige en wiskundige tools. Decimalen van wiskundige constantes zoals pi. Rekenen met gigantische binaire, octale, hexadecimale of decimale getallen. Priemgetallen, GGD en KGV, ontbinden in priemfactoren. Enkele bekende reeksen zoals Fibonacci of Hailstone. Het oplossen van cryptaritmes.",
     "baseconvert": {
       "title": "Base conversie",
       "short": "Binair, decimaal, hexadecimaal en andere getalstelsels",
@@ -611,6 +627,11 @@
       "short": "Prime, Fibonacci, evil, odious, perfect, aspiring en meer",
       "long" : "Eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. Priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient en meer."
     },
+    "bignum": {
+      "title": "Giganummer calculator",
+      "short": "Calculator voor heel erg grote gehele getallen",
+      "long": "<p>Een rekenmachine voor heel erg grote getallen. Werkt alleen met gehele getallen. Er kan gerekend worden met decimaal, binair, octaal of hexadecimaal getallen. Alle operaties werken zoals je mag verwachten, behalve delen. Bij delen wordt niet afgerond, maar de decimalen worden afgekapt. Alle logische operaties werken bit voor bit</p>"
+    },
     "nimbers": {
       "title": "Nimbers",
       "short": "Product en som twee nimbers",
@@ -629,6 +650,7 @@
   },
 
   "comptools" : {
+    "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Tenslotte kunnen enkele zogenaamde esoterische talen (esolangs) worden uitgevoerd.",
     "compbrainfuck": {
       "title": "Brainfuck",
       "short": "Brainfuck, Ook! en Spoon programma's",
@@ -672,13 +694,16 @@
   },
 
   "cdbook": {
-    "availtags": "Beschikbare tags"
+    "availtags": "Beschikbare tags",
+    "pagesfound": "codes gevonden"
   },
   
   "cdfonts": {
     "selfont": "Selecteer font",
     "fontsize": "Selecteer grootte",
-    "selcolor": "Selecteer kleur"
+    "selcolor": "Selecteer kleur",
+    "lineheight": "Regelafstand",
+    "standard": "Standaard"
   },
   
   "segment": {
@@ -777,9 +802,17 @@
     "flipv": "Spiegel vertical"
   },
 
+  "textextractor": {
+    "length": "Minimale lengte",
+    "max": "Maximaal aantal resultaten",
+    "start": "Start op positie",
+    "maxexceeded": "Maximaal aantal zoekresultaten bereikt. Om verder te zoeken gebruik startpositie.",
+    "fileerror": "Fout tijdens het laden van de file"
+  },
+
   "htmlscanner": {
     "short": "Scan de paginabron op links, afbeeldingen en verborgen informatie",
-    "long": "HTML Scanner scant de paginabron op links, afbeeldingen en verborgen informatie, zoals witte text en commentaar. Kopieer en plak de paginabron hieronder.",
+    "long": "Soms wordt informatie verstop in de listing van de geocache met gebruik van HTML. Bijvoorbeeld door commentaar toe te voegen, witte tekst te gebruiken of heel erg kleine letters. Of er worden letters gemarkeerd door ze vet of schuin te maken of op een andere manier te onderscheiden. HTML Scanner scant de paginabron op links, afbeeldingen en andere verborgen informatie. De tool werkt alleen met de officiële listing van geocaching.com. Kopieer en plak de paginabron hieronder.",
     "ph": "Plak de paginabron hier",
     "btnscan": "Scan",
     "links": "Links - selecteer om de link te openen",
@@ -1192,6 +1225,15 @@
     }
   },
 
+  "dnacode": {
+    "ph": "Type zoektermen, bijvoorbeeld 3-letter RNA codons",
+    "letter": "Letter",
+    "abbr": "Afk.",
+    "aminoacid": "Aminozuur",
+    "rna": "RNA codons",
+    "dna": "DNA codons"
+  },
+
   "dialogpb":{
     "title": "Polybiusvierkant",
     "start": "Startalfabet:",
@@ -1284,7 +1326,10 @@
     "ip": "Snijpunt",
     "ia": "Oppervlakte snijvlak",
     "ni": "Geen snijpunten",
-    "or": " of "
+    "distance": "Afstand tussen snijpunten",
+    "or": " of ",
+    "surf": "Oppervlakte van cirkel ",
+    "circ": "Omtrek van cirkel  "
   },
 
   "cdantipode": {
@@ -1390,9 +1435,10 @@
     "sq2": "√2, begint met 1.414213562373095...",
     "sq3": "√3, begint met 1.7320508075...",
     "zeta3": "ζ(3) of zeta(3) of Constante van Apéry, begint met 1.202056903...",
-    "gauss": "Constante van Gaus, begint met 0.8346268416...",
+    "gauss": "Constante van Gauss, begint met 0.8346268416...",
     "lemni": "Lemniscate constante, begint met 5.2441151085...",
-    "cat": "Catalan constante, begint met 0.915965594... ",
+    "cat": "Catalan constante, begint met 0.915965594...",
+    "champ": "Champernowne constante, begint met 0.12345678910111213...",
     "from": "Vanaf decimaal",
     "to": "tot decimaal",
     "get": "Haal op",
@@ -1450,6 +1496,18 @@
     "t1": "Product & som",
     "prod": "Het nimber product is",
     "sum": "De nimber som is"
+  },
+  
+  "bignum": {
+    "selnum": "Rekenstelsel",
+    "num1": "Getal A",
+    "num2": "Getal B",
+    "decimal": "Decimaal",
+    "binary": "Binair",
+    "octal": "Octaal",
+    "hexadecimal": "Hexadecimaal",
+    "arithmetic": "Rekenkundige bewerkingen",
+    "logical": "Logische bewerkingen"
   },
 
   "mathpali": {

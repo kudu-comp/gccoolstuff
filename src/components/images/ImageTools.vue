@@ -5,11 +5,13 @@
     <router-link to="/images/filltool">{{$t('imagetools.filltool.title')}}</router-link> |
     <router-link to="/images/pixeldata">{{$t('imagetools.pixeldata.title')}}</router-link> |
     <router-link to="/images/pixelbuild">{{$t('imagetools.pixelbuild.title')}}</router-link> |
-    <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link>
+    <router-link to="/images/imagetransform">{{$t('imagetools.imagetransform.title')}}</router-link> |
+    <router-link to="/images/textextractor">{{$t('imagetools.textextractor.title')}}</router-link>
   </div>
   <router-view :key="$route.path" />
   <div v-if="['ImageTools'].includes($route.name)">
     <div class="container">
+      <p class="intro" v-html="$t('imagetools.intro')"></p>
       <va-item v-bind:showitem='show[0]' v-on:toggle='show[0] = !show[0]'>
         <template v-slot:header><router-link to="/images/colorpicker">{{$t('imagetools.colorpicker.title')}}</router-link></template>
         <template v-slot:content>

@@ -13,8 +13,8 @@
         <input type="button" id="showhide" name="showhide" :value="$t('buttons.showtab')" class="btn btn-primary mb-2 mr-2" v-on:click="showtable = !showtable">
         <input type="button" id="showhide" name="showhide" :value="$t('buttons.showres')" class="btn btn-primary mb-2" v-on:click="showresults = !showresults">
       </div>
-      <p v-show="error" class="errormsg">{{errormsg}}</p>
-      <div class="card card-text p-2" v-show="showresults" v-html="result"></div>
+      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <div class="resultbox" v-show="showresults" v-html="result"></div>
       <table v-show="showtable" class="table table-sm table-responsive v-table">
         <thead class="v-table-header">
           <tr>
@@ -82,6 +82,13 @@ export default defineComponent ({
       type: Number,
       default: () => {
         return 0;
+      }
+    },
+
+    fieldsep: {
+      type: String,
+      default: () => {
+        return " ";
       }
     },
 
@@ -202,7 +209,6 @@ export default defineComponent ({
       showresults: true,
 
       // Error handling
-      error: false,
       errormsg: "",
 
       // Sortable
@@ -230,10 +236,10 @@ export default defineComponent ({
         for (let r of this.sortArr) {
           if (c.computed) {
             // for computed columns call function computed
-            this.result += c.computed(this.rows[r]) + " ";
+            this.result += c.computed(this.rows[r]) + this.fieldsep;
           } else {
             // for non computed columns print field
-            this.result += this.rows[r][c.field] + " ";
+            this.result += this.rows[r][c.field] + this.fieldsep;
           }
         }
         this.result += "<br>";
@@ -242,7 +248,7 @@ export default defineComponent ({
 
     reset: function () {
       this.initSortArr();
-      this.error = false;
+      this.errormsg = "" 
       this.result = this.$t('labels.result');
       this.searchInput = "";
       this.searchIndex = this.defsearch;
@@ -323,7 +329,7 @@ export default defineComponent ({
     search: function () {
 
       // Reset error, init variables
-      this.error = false;
+      this.errormsg = "";
       let idx = 0;
       let codes = [];
 
@@ -373,7 +379,6 @@ export default defineComponent ({
         // Reset if no results found
         if (this.sortArr.length == 0) {
           this.initSortArr();
-          this.error = true;
           this.errormsg = this.$t('errors.noresult');
         } else {
           if (this.showresults) this.printResults();
@@ -382,7 +387,6 @@ export default defineComponent ({
       } else {
 
         // Nothing to search for
-        this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
       }
 

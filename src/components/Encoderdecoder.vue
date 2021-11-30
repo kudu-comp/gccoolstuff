@@ -1,10 +1,10 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">{{cipher}} {{$t('cp.cipher')}}</div>
+      <div class="text-center">{{cipher}} {{$t('cp.cipher')}}</div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('cp.info')" />
+      <div class="intro" v-html="$t('cp.info')" />
       <div class="form-inline mb-2">
         <input type="button" id="adfgxv" name="adfgxv" value="ADFGX(V)" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ADFGVX')">
         <input type="button" id="affine" name="affine" value="Affine" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Affine')">

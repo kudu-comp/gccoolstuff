@@ -31,7 +31,7 @@
           <tr><td v-for="s in values" :key="s">{{s[1]}}</td></tr>
         </table>
       </div>
-      <div v-html="result" class = "card card-text p-2"></div>
+      <div v-if="result" v-html="result" class = "resultbox"></div>
       <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
         <template v-slot:header>{{$t('txtwordval.someinfo')}}</template>
         <template v-slot:content><div v-html="$t('txtwordval.someinfo2')"></div></template>
@@ -61,7 +61,7 @@ export default {
       selectedalphabet: "English",
       reverse : false,
       startatzero : false,
-      result : this.$t('labels.result'),
+      result : "",
       showinfo: true,
       errormsg: ""
     }

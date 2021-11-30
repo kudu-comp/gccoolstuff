@@ -23,8 +23,8 @@
         <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="hashMessage">
       </div>
       <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <div class="card card-text p-2">{{result}}</div>
-      <div class="form-row mb-2">
+      <div v-if="result" class="card card-text p-2">{{result}}</div>
+      <div v-if="result" class="form-row mb-2">
         <label class="form-label mb-2 mr-2" for="verify">{{$t('comphash.verify')}} </label>
         <input type="text" id="verify" name="verify" class="form-control" rows=5 v-model='verify'/>
       </div>
