@@ -100,6 +100,7 @@ export default {
         { id: 'Moonalpha', font: 'Moon Alphabet' },
         { id: 'Moonrunes', font: 'Moon Runes' },
         { id: 'Narn', font: 'Narn (Babylon 5)' },
+        { id: 'Nycto', font: 'Nyctographic (Alice in Wonderland)'},
         { id: 'Ogham', font: 'Ogham (Medieval)' },
         { id: 'Pigpen', font: 'Pigpen cipher' },
         { id: 'Quadoo', font: 'Quadoo' },
@@ -166,6 +167,7 @@ export default {
 @font-face { font-family: Moonalpha;  src: url('~@/assets/fonts/RNIBMOON.woff'); }
 @font-face { font-family: Moonrunes;  src: url('~@/assets/fonts/MoonRunes.woff'); }
 @font-face { font-family: Narn;       src: url('~@/assets/fonts/Narn.woff'); }
+@font-face { font-family: Nycto;      src: url('~@/assets/fonts/Nyctographic.otf'); }
 @font-face { font-family: Ogham;      src: url('~@/assets/fonts/Beth-Luis-Fearn.woff'); }
 @font-face { font-family: Pigpen;     src: url('~@/assets/fonts/PigpenCipher.woff'); }
 @font-face { font-family: Quadoo;     src: url('~@/assets/fonts/Quadoo.woff'); }

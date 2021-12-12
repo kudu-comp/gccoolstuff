@@ -29,10 +29,10 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phfrom')" rows=10 cols=20 v-model='coordfrom'></textarea>
+          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phfrom')" rows=5 cols=20 v-model='coordfrom'></textarea>
         </div>
         <div class="col-6">
-          <textarea id="result" name="result" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phto')" rows=10 cols=20 v-model='result'></textarea>
+          <textarea id="result" name="result" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phto')" rows=5 cols=20 v-model='result'></textarea>
         </div>
         <div v-show="to == 'Proj4js' || from == 'Proj4js'" v-html="$t('cdconvert.proj4jsmsg')"></div>
         <div class="form-inline mt-2" v-show="to == 'Proj4js' || from == 'Proj4js'">
@@ -40,7 +40,7 @@
           <input type='text' id="proj4jsdef" name="proj4jsdef" ref="proj4jsdef" v-model="proj4jsdef" size="80" class="form-control ml-2">
         </div>
       </div>
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div class="errormsg mb-2" v-show="errormsg">{{errormsg}}</div>
       <v-map v-model:mylocation="coordfrom"/>
     </div>
   </div>
@@ -136,7 +136,7 @@ export default {
           .then ( mapcoords => {
 
             for (let m of mapcoords)
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, "Point " + this.count);
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, "Point " + ++this.count);
 
           })
           .catch ( (e) => {

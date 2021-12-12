@@ -87,6 +87,11 @@ export default {
       errormsg: "",
       result: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/getdigits.php",
+      // squareroots: [2,3,5,6,7,8,10,11,12,13,14,15]
+      // <select class="custom-select" v-model="sqrt">
+      //   <option v-for="s in squareroots" :key="s" :value="s" width="50px">{{s}}</option>
+      // </select>
+
     }
   },
 
