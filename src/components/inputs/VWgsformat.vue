@@ -31,7 +31,17 @@
 
 <script>
 export default {
-  props: ['format'],
+  props: {
+    format: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:format'
+  ],
+  
   methods: {
     updateFormat: function (value) {
       this.$emit ('update:format', value);

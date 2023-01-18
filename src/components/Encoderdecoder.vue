@@ -888,8 +888,11 @@ export default {
 
   // Prop initcipher is parameter passed by route (optional)
   props: {
-    msg: String,
-    initcipher: String,
+    initcipher: {
+      type: String,
+      required: false,
+      default: "Atbash"
+    },
   },
 
   // Data include variables to dynamically set appearnce and labels

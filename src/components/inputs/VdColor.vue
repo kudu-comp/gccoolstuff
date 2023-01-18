@@ -81,11 +81,20 @@
 
 <script>
 export default {
-  props: ['color'],
-  methods: {
+  props : {
+    color: {
+      type: Number,
+      required: true
+    }
+  },
+  
+  emits : ['update:color'],
+
+  methods : {
     updateColor: function (value) {
       this.$emit ('update:color', value);
     },
   }
+  
 }
 </script>

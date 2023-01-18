@@ -80,7 +80,17 @@
 
 <script>
 export default {
-  props: ['code'],
+  props: {
+    code: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:code'
+  ],
+  
   methods: {
     updateCode: function (value) {
       this.$emit ('update:code', value);

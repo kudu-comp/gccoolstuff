@@ -21,19 +21,33 @@
 import * as keyBoards from '@/scripts/keyboards.js';
 
 export default {
-  props: ['keyboard'],
+
+  props: {
+    keyboard: {
+      type: String,
+      required: true
+    }
+  },
+  
+  emits: [
+    'update:keyboard'
+  ],
+
   data : function () {
     return {
       keyboards : null,
     }
   },
+
   mounted: function() {
     this.keyboards = keyBoards.keyboards;
   },
+
   methods: {
     updateKeyboard: function (value) {
       this.$emit ('update:keyboard', value);
     },
   }
+  
 }
 </script>

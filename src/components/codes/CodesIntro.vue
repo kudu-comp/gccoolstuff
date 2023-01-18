@@ -108,7 +108,6 @@ export default {
 
   data: function () {
     return {
-      title: "CodesIntro",
       show: [true, true, true, true, true, true, true, true, true, true]
     }
   }

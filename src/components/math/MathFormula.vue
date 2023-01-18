@@ -83,8 +83,8 @@
             @change="printSolution"
           >
             <option
-              v-for="result in results"
-              :key="result"
+              v-for="r in results"
+              :key="r"
             >
               {{ result }}
             </option>

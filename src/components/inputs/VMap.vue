@@ -7,9 +7,17 @@
 import * as coords from '@/scripts/coords.js';
 
 export default {
-  props: ["mylocation"],
+  props: {
+    mylocation: {
+      type: String,
+      required: true
+    }
+  },
 
-  // data
+  emits: [
+    'update:mylocation'
+  ],
+
   data: function() {
     return {
       L: null,

@@ -18,7 +18,17 @@
 <script>
 
 export default {
-  props: ['search'],
+  props: {
+    search: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:search'
+  ],
+
   methods: {
     updateSearch: function (value) {
       this.$emit ('update:search', value);

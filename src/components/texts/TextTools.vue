@@ -26,7 +26,7 @@
     </router-link>
   </div>
   <router-view :key="$route.path" />
-  <div v-if="['TextToolbox'].includes($route.name)">
+  <div v-if="['TextTools'].includes($route.name)">
     <div class="container">
       <p
         class="intro"

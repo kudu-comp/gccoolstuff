@@ -134,7 +134,7 @@ const routes = [
   },
   {
     path: '/comp',
-    name: 'Comp',
+    name: 'CompTools',
     component: () => import('@/components/comp/CompTools.vue'),
     children: [
       { path: "/comp/charcodes",  name: 'charcodes',       component: TextCodes },

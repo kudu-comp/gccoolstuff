@@ -141,7 +141,6 @@ export default {
 
   data: function () {
     return {
-      title: "Mathtools",
       show: [true, true, true, true, true, true, true, true, true]
     }
   },

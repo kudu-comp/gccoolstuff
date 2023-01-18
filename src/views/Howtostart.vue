@@ -749,15 +749,11 @@
 import VaItem from '@/components/inputs/VaItem.vue'
 
 export default {
+  
   name: 'HowToStart',
 
   components: {
     VaItem,
-  },
-
-  props: {
-    msg: String,
-    itemnr: Number,
   },
 
   data: function () {

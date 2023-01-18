@@ -173,8 +173,18 @@ export default {
 
   name: "VPolybius",
 
-  props: ['polybiussquare'],
+  props: {
+    polybiussquare: {
+      type: String,
+      required: true
+    }
+  },
   
+  emits: [
+    'close',
+    'update:polybiussquare'
+  ],
+
   data() {
     return {
       startalphabet: "",

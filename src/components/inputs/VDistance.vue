@@ -43,7 +43,23 @@
 
 <script>
 export default {
-  props: ['dist', 'unit'],
+
+  props: {
+    dist: {
+      type: Number,
+      required: true
+    },
+    unit: {
+      type: Number,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:dist',
+    'update:unit'
+  ],
+
   methods: {
     updateDist: function (value) {
       this.$emit ('update:dist', value);
@@ -52,5 +68,6 @@ export default {
       this.$emit ('update:unit', value);
     }
   }
+
 }
 </script>

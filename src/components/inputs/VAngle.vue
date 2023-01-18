@@ -35,7 +35,23 @@
 
 <script>
 export default {
-  props: ['angle', 'unit'],
+
+  props: {
+    angle: {
+      type: Number,
+      required: true
+    },
+    unit: {
+      type: Number,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:angle',
+    'update:unit'
+  ],
+
   methods: {
     updateAngle: function (value) {
       this.$emit ('update:angle', value);

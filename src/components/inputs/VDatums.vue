@@ -77,7 +77,17 @@
 
 <script>
 export default {
-  props: ['datum'],
+  props: {
+    datum: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:datum'
+  ],
+
   methods: {
     updateDatum: function (value) {
       this.$emit ('update:datum', value);

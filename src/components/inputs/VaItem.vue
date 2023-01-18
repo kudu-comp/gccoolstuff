@@ -30,6 +30,7 @@
 <script>
 
 export default {
+  
   name: "VaItem",
 
   props: {
@@ -40,6 +41,10 @@ export default {
     hidebutton: Boolean,
 
   },
+
+  emits: [
+    'toggle',
+  ],
 
   data() {
     return {

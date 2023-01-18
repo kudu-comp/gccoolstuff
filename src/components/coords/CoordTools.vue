@@ -35,7 +35,7 @@
     </router-link>
   </div>
   <router-view :key="$route.path" />
-  <div v-if="['Coord'].includes($route.name)">
+  <div v-if="['CoordTools'].includes($route.name)">
     <div class="container">
       <p
         class="intro"
@@ -189,7 +189,6 @@ export default {
 
   data: function () {
     return {
-      hidebutton: true,
       show: [true, true, true, true, true, true, true, true, true, true, true, true]
     }
   },

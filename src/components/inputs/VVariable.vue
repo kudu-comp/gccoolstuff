@@ -27,14 +27,32 @@
 
 <script>
 export default {
-  props: ['variable', 'varoptions'],
+  props: {
+    variable: {
+      type: String,
+      required: true
+    },
+    varoptions: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:variable',
+  	'update:varoptions'
+  ],
+
   methods: {
+
     updateVar: function (value) {
       this.$emit ('update:variable', value);
     },
+
     updateVarOptions: function (value) {
       this.$emit ('update:varoptions', value);
     }
+
   }
 }
 </script>

@@ -25,7 +25,12 @@ import * as textHelper from '@/scripts/texthelper.js';
 
 export default {
   
-  props: ['alphabet'],
+  props: {
+    alphabet: {
+      type: String,
+      required: true
+    } 
+  },
 
   emits: ['update:alphabet'],
 

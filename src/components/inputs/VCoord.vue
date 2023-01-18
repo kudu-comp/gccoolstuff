@@ -93,7 +93,22 @@
 <script>
 
 export default {
-  props: ['coord', 'datum'],
+  props: {
+    coord: {
+      type: String,
+      required: true
+    },
+    datum: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:coord',
+    'update:datum'
+  ],
+
   methods: {
     updateCoord: function (value) {
       this.$emit ('update:coord', value);

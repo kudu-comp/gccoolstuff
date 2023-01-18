@@ -24,19 +24,33 @@
 import * as textHelper from '@/scripts/texthelper.js';
 
 export default {
-  props: ['alphabet'],
+
+  props: {
+    alphabet: {
+      type: String,
+      required: true
+    }
+  },
+
+  emits: [
+    'update:alphabet'
+  ],
+
   data : function () {
     return {
       alphabets : null,
     }
   },
+
   mounted: function() {
     this.alphabets = textHelper.getExtAlphabets();
   },
+
   methods: {
     updateAlphabet: function (value) {
       this.$emit ('update:alphabet', value);
     },
   }
+
 }
 </script>
