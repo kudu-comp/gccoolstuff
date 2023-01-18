@@ -1,37 +1,100 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('codes.segment.title')}}
+      {{ $t('codes.segment.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('codes.segment.long')" />
-      <img src="~@\assets\images\segment2.png" />
+      <div
+        class="infoblock"
+        v-html="$t('codes.segment.long')"
+      />
+      <img src="~@\assets\images\segment2.png">
       <div class="form-inline mt-2">
-        <label class="form-label mb-2 mr-2" for="ofs">{{$t('segment.segsize')}}</label>
-        <select id="ofs" class="custom-select mb-2 mr-2" 
-            v-model='seg' 
-            @change="styleObj.fontFamily = (seg == 0) ? 'Segment7'  : 'Segment14'"
-          >
-          <option value="0">7 Segment display</option>
-          <option value="1">14 Segment display</option>
-          <option value="2">16 Segment display</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ofs"
+        >{{ $t('segment.segsize') }}</label>
+        <select
+          id="ofs"
+          v-model="seg" 
+          class="custom-select mb-2 mr-2" 
+          @change="styleObj.fontFamily = (seg == 0) ? 'Segment7' : 'Segment14'"
+        >
+          <option value="0">
+            7 Segment display
+          </option>
+          <option value="1">
+            14 Segment display
+          </option>
+          <option value="2">
+            16 Segment display
+          </option>
         </select>
       </div>
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="ofs">{{$t('segment.input')}}</label>
-        <select id="ofs" class="custom-select mb-2 mr-2" v-model='inp'>
-          <option value="1">{{$t('segment.letters')}}</option>
-          <option value="2">{{$t('segment.binary')}}</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ofs"
+        >{{ $t('segment.input') }}</label>
+        <select
+          id="ofs"
+          v-model="inp"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="1">
+            {{ $t('segment.letters') }}
+          </option>
+          <option value="2">
+            {{ $t('segment.binary') }}
+          </option>
         </select>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
-      <input type="button" id="enc" name="enc" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encodeSeg">
-      <input type="button" id="dec" name="dec" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decodeSeg">
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div id="result" class="form-row">
-        <textarea id="message2" name="message2" spellcheck="false" class="form-control" v-bind:style="styleObj" rows=10 v-model='result'></textarea>
+      <input
+        id="enc"
+        type="button"
+        name="enc"
+        :value="$t('buttons.encode')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="encodeSeg"
+      >
+      <input
+        id="dec"
+        type="button"
+        name="dec"
+        :value="$t('buttons.decode')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="decodeSeg"
+      >
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        id="result"
+        class="form-row"
+      >
+        <textarea
+          id="message2"
+          v-model="result"
+          name="message2"
+          spellcheck="false"
+          class="form-control"
+          :style="styleObj"
+          rows="10"
+        />
       </div>
     </div>
   </div>
@@ -41,10 +104,6 @@
 
 export default {
   name: 'SegmentCode',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {
@@ -107,7 +166,9 @@ export default {
         ["BCEFG",   "HJKM",         "HJKM",               "X"],
         ["BCDFG",   "HJL",          "HJL",                "Y"],
         ["ABDE",    "ADJM",         "A1A2D1D2JM",         "Z"],
-        ["ABFG",    "ABFG1G2",      "A1A2BFG1G2",         "°"]
+        ["ABFG",    "ABFG1G2",      "A1A2BFG1G2",         "°"],
+        ["BC", 		  "BCJ",				  "BCJ",                "1"],
+        ["ABC", 	  "AJL",    			"A1A2JL",             "7"]
       ]
     }
   },
@@ -121,7 +182,17 @@ export default {
     bin2Letters: function (msg) {
     
       let input = "";
-      let bins = msg.match(/[01]+/g);
+      let bins = null;
+      
+      switch (this.seg) {
+        case 0 :
+          bins = msg.match(/[01]{7}/g); break;
+        case 1 :
+          bins = msg.match(/[01]{14}/g); break;
+        case 2 :
+          bins = msg.match(/[01]{16}/g); break;
+      }
+
       for (let s of bins) {
         for (let c = 0; c < s.length; c++) {
           if (s[c] == 1)  input += this.segdef[this.seg].letters[c];
@@ -136,11 +207,19 @@ export default {
 
       let input = "";
       let regex = new RegExp(this.segdef[this.seg].regex, "g");
+
+      // Split message into characters
       let bins = msg.split(/\s+/g);
+
+      // For each character
       for (let b of bins) {
+
+        // Split each character into segments
         let ltrs = b.match(regex);
-        for (let i = 0; i < this.segdef[this.seg].letters.length; i++) {
-          input += (ltrs.find(this.segdef[this.seg].letters[i])) ? "1" : "0"
+
+        // Scan all segments, if present add 1 else 0
+        for (let l of this.segdef[this.seg].letters) {
+          input += (ltrs.indexOf(l) >= 0) ? "1" : "0"
         }
         input += " ";
       }
@@ -198,6 +277,7 @@ export default {
       // Reset
       this.errormsg = "";
       this.result = "";
+      let tempstr = "";
         
       try {
       
@@ -206,15 +286,19 @@ export default {
           let s = this.mapseg.find( (s) => {
             return s[3] == this.message[i].toUpperCase();
           })
-          if (s) this.result += s[this.seg] + " ";
+          if (s) tempstr += s[this.seg] + " ";
           
         }
 
-        if (this.inp == 2) this.result = this.letters2Bin(this.result);
+        tempstr = tempstr.slice(0,-1);
+        if (this.inp == 2) 
+          this.result = this.letters2Bin(tempstr);
+        else
+          this.result = tempstr;
         
       } catch (e) {
       
-        this.errormsg = this.$t('error.generic');
+        this.errormsg = this.$t('errors.generic');
         console.log(e);
 
       }

@@ -1,8 +1,21 @@
 <template>
   <div class="form-inline">
-    <label for="listofalpha" class="form-label mr-2">{{$t('labels.alphabet')}}</label>
-    <select class="custom-select" :value='alphabet' @input="updateAlphabet($event.target.value)">
-      <option v-for="a in alphabets" :key="a" :value="a.name">{{a.name}} - {{a.alphabet}}</option>
+    <label
+      for="listofalpha"
+      class="form-label mr-2"
+    >{{ $t('labels.alphabet') }}</label>
+    <select
+      class="custom-select"
+      :value="alphabet"
+      @input="updateAlphabet($event.target.value)"
+    >
+      <option
+        v-for="a in alphabets"
+        :key="a"
+        :value="a.name"
+      >
+        {{ a.name }} - {{ a.alphabet }}
+      </option>
     </select>
   </div>
 </template>

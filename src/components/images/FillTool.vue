@@ -1,85 +1,230 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.filltool.title')}}
+      {{ $t('imagetools.filltool.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.filltool.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.filltool.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div class="row">
-        <div id="preview" class="col-9">
-          <canvas id="canvas" v-bind:width="width" v-bind:height="height" @click="fillColor"></canvas>
+        <div
+          id="preview"
+          class="col-9"
+        >
+          <canvas
+            id="canvas"
+            :width="width"
+            :height="height"
+            @click="fillColor"
+          />
         </div>
         <div class="col-3">
-          <input type="button" id="restore" name="btnsearch" :value="$t('buttons.original')" class="btn btn-primary mr-2 mb-2" v-on:click="restore">
+          <input
+            id="restore"
+            type="button"
+            name="btnsearch"
+            :value="$t('buttons.original')"
+            class="btn btn-primary mr-2 mb-2"
+            @click="restore"
+          >
           <div class="box">
-            <div class="box-header">{{$t('filltool.fill')}}</div>
+            <div class="box-header">
+              {{ $t('filltool.fill') }}
+            </div>
             <div class="box-body">
-              <p>{{$t('filltool.fillinfo')}}</p>
+              <p>{{ $t('filltool.fillinfo') }}</p>
               <div class="form-inline">
-                <label class="form-label mr-2" for="pick">{{$t('filltool.selfill')}}</label>
-                <select id="pick" class="custom-select mr-2 mb-2" v-model="selfill">
-                  <option value="0">{{$t('colors.white')}}</option>
-                  <option value="1">{{$t('colors.black')}}</option>
-                  <option value="2">{{$t('colors.red')}}</option>
-                  <option value="3">{{$t('colors.green')}}</option>
-                  <option value="4">{{$t('colors.blue')}}</option>
-                  <option value="5">{{$t('colors.yellow')}}</option>
-                  <option value="6">{{$t('colors.cyan')}}</option>
-                  <option value="7">{{$t('colors.magenta')}}</option>
+                <label
+                  class="form-label mr-2"
+                  for="pick"
+                >{{ $t('filltool.selfill') }}</label>
+                <select
+                  id="pick"
+                  v-model="selfill"
+                  class="custom-select mr-2 mb-2"
+                >
+                  <option value="0">
+                    {{ $t('colors.white') }}
+                  </option>
+                  <option value="1">
+                    {{ $t('colors.black') }}
+                  </option>
+                  <option value="2">
+                    {{ $t('colors.red') }}
+                  </option>
+                  <option value="3">
+                    {{ $t('colors.green') }}
+                  </option>
+                  <option value="4">
+                    {{ $t('colors.blue') }}
+                  </option>
+                  <option value="5">
+                    {{ $t('colors.yellow') }}
+                  </option>
+                  <option value="6">
+                    {{ $t('colors.cyan') }}
+                  </option>
+                  <option value="7">
+                    {{ $t('colors.magenta') }}
+                  </option>
                 </select>
               </div>
-              <label class="form-label mr-2 mb-2" for="tol">{{$t('filltool.tol')}}: {{tol}}</label>
-              <vue-slider v-model="tol" v-bind="toloptions" class="ml-2 mr-2"></vue-slider>
+              <label
+                class="form-label mr-2 mb-2"
+                for="tol"
+              >{{ $t('filltool.tol') }}: {{ tol }}</label>
+              <vue-slider
+                v-model="tol"
+                v-bind="toloptions"
+                class="ml-2 mr-2"
+              />
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('filltool.conbri')}}</div>
+            <div class="box-header">
+              {{ $t('filltool.conbri') }}
+            </div>
             <div class="box-body">
-              <label class="form-label mr-2" for="brigh">{{$t('filltool.brigh')}}: {{brigh}}</label>
-              <vue-slider v-model="brigh" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-              <label class="form-label mr-2" for="contr">{{$t('filltool.contr')}}: {{contr}}</label>
-              <vue-slider v-model="contr" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-              <input type="button" id="conbri" name="conbri" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="contrastBrightness">
+              <label
+                class="form-label mr-2"
+                for="brigh"
+              >{{ $t('filltool.brigh') }}: {{ brigh }}</label>
+              <vue-slider
+                v-model="brigh"
+                v-bind="controptions"
+                class="ml-2 mr-2 mb-2"
+              />
+              <label
+                class="form-label mr-2"
+                for="contr"
+              >{{ $t('filltool.contr') }}: {{ contr }}</label>
+              <vue-slider
+                v-model="contr"
+                v-bind="controptions"
+                class="ml-2 mr-2 mb-2"
+              />
+              <input
+                id="conbri"
+                type="button"
+                name="conbri"
+                :value="$t('buttons.apply')"
+                class="btn btn-primary mr-2 mb-2"
+                @click="contrastBrightness"
+              >
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('filltool.filter')}}</div>
+            <div class="box-header">
+              {{ $t('filltool.filter') }}
+            </div>
             <div class="box-body">
               <div class="form-inline">
-                <select id="filter" class="custom-select mr-2 mb-2" v-model="selfilt">
-                  <!-- <option value="0">{{$t('filltool.gray1')}}</option>
-                  <option value="1">{{$t('filltool.gray2')}}</option> -->
-                  <option value="2">{{$t('filltool.invert')}}</option>
-                  <option value="3">{{$t('filltool.sepia')}}</option>
-                  <option value="4">{{$t('colors.red')}}</option>
-                  <option value="5">{{$t('colors.green')}}</option>
-                  <option value="6">{{$t('colors.blue')}}</option>
-                  <option value="7">{{$t('colors.cyan')}}</option>
-                  <option value="8">{{$t('colors.magenta')}}</option>
-                  <option value="9">{{$t('colors.yellow')}}</option>
+                <select
+                  id="filter"
+                  v-model="selfilt"
+                  class="custom-select mr-2 mb-2"
+                >
+                  <option value="0">
+                    {{ $t('filltool.gray1') }}
+                  </option>
+                  <option value="1">
+                    {{ $t('filltool.gray2') }}
+                  </option>
+                  <option value="2">
+                    {{ $t('filltool.invert') }}
+                  </option>
+                  <option value="3">
+                    {{ $t('filltool.sepia') }}
+                  </option>
+                  <option value="4">
+                    {{ $t('colors.red') }}
+                  </option>
+                  <option value="5">
+                    {{ $t('colors.green') }}
+                  </option>
+                  <option value="6">
+                    {{ $t('colors.blue') }}
+                  </option>
+                  <option value="7">
+                    {{ $t('colors.cyan') }}
+                  </option>
+                  <option value="8">
+                    {{ $t('colors.magenta') }}
+                  </option>
+                  <option value="9">
+                    {{ $t('colors.yellow') }}
+                  </option>
                 </select>
-                <input type="button" id="filter" name="filter" :value="$t('buttons.apply')" class="btn btn-primary mb-2" v-on:click="filterColor">
+                <input
+                  id="filter"
+                  type="button"
+                  name="filter"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mb-2"
+                  @click="filterColor"
+                >
               </div>
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('filltool.colordepth')}}</div>
+            <div class="box-header">
+              {{ $t('filltool.colordepth') }}
+            </div>
             <div class="box-body">
               <div class="form-inline">
-                <select id="filter" class="custom-select mr-2 mb-2" v-model="cdepth">
-                  <option value="0">1 bits - 2 {{$t('filltool.colors')}}</option>
-                  <option value="1">3 bits - 8 {{$t('filltool.colors')}}</option>
-                  <option value="2">6 bits - 64 {{$t('filltool.colors')}}</option>
-                  <option value="3">9 bits - 512 {{$t('filltool.colors')}}</option>
-                  <option value="4">12 bits - 4k {{$t('filltool.colors')}}</option>
-                  <option value="5">15 bits - 32k {{$t('filltool.colors')}}</option>
-                  <option value="6">18 bits - 256k {{$t('filltool.colors')}}</option>
+                <select
+                  id="filter"
+                  v-model="cdepth"
+                  class="custom-select mr-2 mb-2"
+                >
+                  <option value="0">
+                    1 bits - 2 {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="1">
+                    3 bits - 8 {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="2">
+                    6 bits - 64 {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="3">
+                    9 bits - 512 {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="4">
+                    12 bits - 4k {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="5">
+                    15 bits - 32k {{ $t('filltool.colors') }}
+                  </option>
+                  <option value="6">
+                    18 bits - 256k {{ $t('filltool.colors') }}
+                  </option>
                 </select>
-                <input type="button" id="conbri" name="conbri" :value="$t('buttons.apply')" class="btn btn-primary mb-2" v-on:click="colorDepth">
+                <input
+                  id="conbri"
+                  type="button"
+                  name="conbri"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mb-2"
+                  @click="colorDepth"
+                >
               </div>
             </div>
           </div>
@@ -95,17 +240,13 @@ import VueSlider from 'vue-slider-component'
 import '@/components/css/slidertheme.css'
 
 export default {
-  name: 'ColorPicker',
-
-  props: {
-    msg: String
-  },
+  name: 'FillTool',
 
   components: {
     VueSlider,
   },
 
-  data: function() {
+ data: function() {
     return {
       fileurl: "",
       errormsg: "",
@@ -349,6 +490,11 @@ export default {
         this.img.crossOrigin = 'anonymous';
         this.img.src = URL.createObjectURL(input.files[0]);
 
+        // Define a callback function to run, when image has errors loading
+        this.img.onerror = () => {
+          this.errormsg = this.$t('errors.loadingimage')        
+        }
+
         // Define a callback function to run, when image has loaded finishes its job
         this.img.onload = () => {
 
@@ -358,12 +504,11 @@ export default {
 
             } catch(err) {
 
-              console.log(err);
               this.errormsg = this.$t('colorpicker.error')
             
             }
         }
-
+          
       }
     },
 

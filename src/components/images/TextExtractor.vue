@@ -1,23 +1,76 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.textextractor.title')}}
+      {{ $t('imagetools.textextractor.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.textextractor.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.textextractor.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
-        <label class="form-label mr-2 mb-2" for="length">{{$t('textextractor.length')}}</label>
-        <input type='number' id="length" ref="length" v-model="length" class="form-control mb-2 mr-2">
-        <label class="form-label mr-2 mb-2" for="max">{{$t('textextractor.max')}}</label>
-        <input type='number' id="max" ref="max" v-model="max" class="form-control mb-2 mr-2">
-        <label class="form-label mr-2 mb-2" for="start">{{$t('textextractor.start')}}</label>
-        <input type='number' id="max" ref="start" v-model="start" class="form-control mb-2">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="length"
+        >{{ $t('textextractor.length') }}</label>
+        <input
+          id="length"
+          ref="length"
+          v-model="length"
+          type="number"
+          class="form-control mb-2 mr-2"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="max"
+        >{{ $t('textextractor.max') }}</label>
+        <input
+          id="max"
+          ref="max"
+          v-model="max"
+          type="number"
+          class="form-control mb-2 mr-2"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="start"
+        >{{ $t('textextractor.start') }}</label>
+        <input
+          id="max"
+          ref="start"
+          v-model="start"
+          type="number"
+          class="form-control mb-2"
+        >
       </div>
-      <input type="button" id="go" name="go" :disabled="!loaded" :value="$t('buttons.search')" class="btn btn-primary mr-2 mb-2" v-on:click="scanFile()">
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <input
+        id="go"
+        type="button"
+        name="go"
+        :disabled="!loaded"
+        :value="$t('buttons.search')"
+        class="btn btn-primary mr-2 mb-2"
+        @click="scanFile()"
+      >
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div>
-        <div class="card card-text p-2" v-html="result"></div>
+        <div
+          class="card card-text p-2"
+          v-html="result"
+        />
       </div>
     </div>
   </div>
@@ -35,7 +88,7 @@ export default {
       result: this.$t('labels.result'),
       errormsg: "",
       loaded: false,
-      length: 5,
+      length: 8,
       max: 999,
       start: 0,
       a : null
@@ -111,6 +164,11 @@ export default {
 
         // create a new FileReader to read this image
         let reader = new FileReader();
+
+        // Define a callback function to run, when image has errors loading
+        reader.onerror = () => {
+          this.errormsg = this.$t('errors.loadingfile')        
+        }
 
         // Define a callback function to run, when FileReader finishes its job
         reader.onloadend = (e) => {

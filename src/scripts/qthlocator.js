@@ -98,8 +98,10 @@ function wgs2qth (lon = 0, lat = 0, prec = 7) {
 
 }
 
-exports['default'] = qthlocator;
-exports.qth2wgs = qth2wgs;
-exports.wgs2qth = wgs2qth;
+// exports['default'] = qthlocator;
+// exports.qth2wgs = qth2wgs;
+// exports.wgs2qth = wgs2qth;
 
-Object.defineProperty(exports, '__esModule', { value: true });
+// Object.defineProperty(exports, '__esModule', { value: true });
+
+export { qth2wgs, wgs2qth }

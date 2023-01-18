@@ -1,35 +1,101 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.formulasolver.title')}}
+      {{ $t('mathtools.formulasolver.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.formulasolver.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.formulasolver.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="x">{{$t('mathcrypta.formula')}}</label>
-        <input type="text" size="30" id="formula" name="formula" ref="formula" v-model="formula" class="form-control mb-2">
+        <label
+          class="form-label mr-2 mb-2"
+          for="x"
+        >{{ $t('mathcrypta.formula') }}</label>
+        <input
+          id="formula"
+          ref="formula"
+          v-model="formula"
+          type="text"
+          size="30"
+          name="formula"
+          class="form-control mb-2"
+        >
       </div>
       <div class="form-inline">
-        <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="solveFormula">
-        <label class="form-label mr-2 mb-2" for="base">{{$t('mathcrypta.base')}}</label>
-        <input type="number" min="2" max="16" id="base" name="base" v-model="base" class="form-control mb-2 mr-2">
+        <input
+          id="calc"
+          type="button"
+          name="calc"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="solveFormula"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="base"
+        >{{ $t('mathcrypta.base') }}</label>
+        <input
+          id="base"
+          v-model="base"
+          type="number"
+          min="2"
+          max="16"
+          name="base"
+          class="form-control mb-2 mr-2"
+        >
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="unique" id="unique" v-model="unique" class="custom-control-input mb-2 mr-2">
-          <label for="unique" class="custom-control-label mb-2">{{$t('mathcrypta.unique')}}</label>
+          <input
+            id="unique"
+            v-model="unique"
+            type="checkbox"
+            name="unique"
+            class="custom-control-input mb-2 mr-2"
+          >
+          <label
+            for="unique"
+            class="custom-control-label mb-2"
+          >{{ $t('mathcrypta.unique') }}</label>
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <div class="mt-2" v-show="results.length > 0">
-        {{$t('sudoku.thereare')}} {{results.length}} {{$t('sudoku.sols')}}
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-show="results.length > 0"
+        class="mt-2"
+      >
+        {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
         <div class="form-inline mt-2 mb-2">
-          <label for="listofresults" class="form-label mr-2">{{$t('sudoku.sols')}}</label>
-          <select name="listofresults" id="listofresults" class="form-control" v-model="selectedsolution" @change="printSolution">
-            <option v-for="result in results" :key="result">{{result}}</option>
+          <label
+            for="listofresults"
+            class="form-label mr-2"
+          >{{ $t('sudoku.sols') }}</label>
+          <select
+            id="listofresults"
+            v-model="selectedsolution"
+            name="listofresults"
+            class="form-control"
+            @change="printSolution"
+          >
+            <option
+              v-for="result in results"
+              :key="result"
+            >
+              {{ result }}
+            </option>
           </select>
         </div>
       </div>
-      <div v-if="result" class="resultbox">
-        {{result}}
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
       </div>
     </div>
   </div>
@@ -41,11 +107,7 @@ import { evalInfix } from '@/scripts/formulas.js'
 
 export default {
 
-  name: 'FormulaSolver',
-
-  props: {
-    msg: String
-  },
+  name: 'MathFormula',
 
   data: function () {
     return {

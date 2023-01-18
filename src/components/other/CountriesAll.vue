@@ -1,10 +1,15 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">{{$t('othertools.countries.title')}}</div>
+      <div class="text-center">
+        {{ $t('othertools.countries.title') }}
+      </div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.countries.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('othertools.countries.long')"
+      />
       <v-table
         :phsearch="phsearch"
         :defsearch="defsearch"
@@ -21,12 +26,7 @@ import VTable from '@/components/inputs/VTable.vue'
 
 export default {
 
-  name: 'Countries',
-
-  // Prop initcipher is parameter passed by route (optional)
-  props: {
-    msg: String
-  },
+  name: 'CountriesAll',
 
   components: {
     VTable
@@ -57,7 +57,7 @@ export default {
           image: {
             src: function (row) {
               const fileName = row.ccode3.toLowerCase() + '.png';
-              return require(`@/assets/flags/${fileName}`);
+              return new URL(`../../assets/flags/${fileName}`, import.meta.url).href;
             },
             width: "30",
             height: "20"

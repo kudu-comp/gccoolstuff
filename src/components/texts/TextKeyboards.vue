@@ -1,26 +1,70 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.keyboards.title')}}
+      {{ $t('texttools.keyboards.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.keyboards.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('texttools.keyboards.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="keyboards">{{$t('txtkeyb.inputkb')}}</label>
-        <v-keyboards class="mb-2" id="keyboards" v-model:keyboard="fromkeyboard"></v-keyboards>
+        <label
+          class="form-label mb-2 mr-2"
+          for="keyboards"
+        >{{ $t('txtkeyb.inputkb') }}</label>
+        <v-keyboards
+          id="keyboards"
+          v-model:keyboard="fromkeyboard"
+          class="mb-2"
+        />
       </div>
       <div>
         <div class="form-row mb-2">
-          <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="translateKeyboard"></textarea>
+          <textarea
+            id="message"
+            ref="message"
+            v-model="message"
+            name="message"
+            class="form-control"
+            :placeholder="$t('labels.message')"
+            rows="10"
+            @input="translateKeyboard"
+          />
         </div>
         <div class="form-inline">
-          <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="translateKeyboard">
-          <label class="form-label mb-2 mr-2" for="keyboards2">{{$t('txtkeyb.outputkb')}}</label>
-          <v-keyboards class="mb-2" id="keyboards2" v-model:keyboard="tokeyboard" @change="translateKeyboard"></v-keyboards>
+          <input
+            id="convert"
+            type="button"
+            name="convert"
+            :value="$t('buttons.convert')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="translateKeyboard"
+          >
+          <label
+            class="form-label mb-2 mr-2"
+            for="keyboards2"
+          >{{ $t('txtkeyb.outputkb') }}</label>
+          <v-keyboards
+            id="keyboards2"
+            v-model:keyboard="tokeyboard"
+            class="mb-2"
+            @change="translateKeyboard"
+          />
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -32,8 +76,8 @@ import * as keyboards from '@/scripts/keyboards.js'
 export default {
   name: 'TextKeyboards',
 
-  props: {
-    msg: String,
+  components: {
+    VKeyboards,
   },
 
   data: function () {
@@ -44,10 +88,6 @@ export default {
       tokeyboard: "DVORAK2",
       errormsg: "",
     }
-  },
-
-  components: {
-    VKeyboards,
   },
 
   mounted: function() {

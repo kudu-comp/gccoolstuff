@@ -1,32 +1,95 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('comptools.compbrainfuck.title')}}
+      {{ $t('comptools.compbrainfuck.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('comptools.compbrainfuck.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('comptools.compbrainfuck.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="bfvar">{{$t('compbf.vars')}}</label>
-        <select id="bfvar" class="custom-select mb-2 mr-2" style="width: 150px;" v-model='selBF'>
-          <option v-for="(bfvar, index) in bfvars" :key="index" :value="index">{{bfvar}}</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="bfvar"
+        >{{ $t('compbf.vars') }}</label>
+        <select
+          id="bfvar"
+          v-model="selBF"
+          class="custom-select mb-2 mr-2"
+          style="width: 150px;"
+        >
+          <option
+            v-for="(bfvar, index) in bfvars"
+            :key="index"
+            :value="index"
+          >
+            {{ bfvar }}
+          </option>
         </select>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="shorthand" id="shorthand" v-model="shorthand" class="custom-control-input mr-2 mb-2">
-          <label for="shorthand" class="custom-control-label mb-2">{{$t('compbf.shorthand')}}</label>
+          <input
+            id="shorthand"
+            v-model="shorthand"
+            type="checkbox"
+            name="shorthand"
+            class="custom-control-input mr-2 mb-2"
+          >
+          <label
+            for="shorthand"
+            class="custom-control-label mb-2"
+          >{{ $t('compbf.shorthand') }}</label>
         </div>
       </div>
       <div class="form-row mb-2">
-        <textarea id="code" name="code" class="form-control" ref="code" :placeholder="$t('compbf.code')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="code"
+          ref="code"
+          v-model="message"
+          name="code"
+          class="form-control"
+          :placeholder="$t('compbf.code')"
+          rows="10"
+        />
       </div>
       <div class="form-inline mb-2">
-        <label class="form-label mr-2" for="input">{{$t('compbf.input')}}</label>
-        <input type="text" id="input" name="input" class="form-control" size="40" ref="input" rows=10 v-model='input'>
+        <label
+          class="form-label mr-2"
+          for="input"
+        >{{ $t('compbf.input') }}</label>
+        <input
+          id="input"
+          ref="input"
+          v-model="input"
+          type="text"
+          name="input"
+          class="form-control"
+          size="40"
+          rows="10"
+        >
       </div>
       <div class="form-inline">
-        <input type="button" id="run" name="run" :value="$t('compbf.run')" class="btn btn-primary mb-2 mr-2" v-on:click="runBrainfuck">
+        <input
+          id="run"
+          type="button"
+          name="run"
+          :value="$t('compbf.run')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="runBrainfuck"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -37,10 +100,6 @@ import * as bf from '@/scripts/brainfuck.js'
 export default {
 
   name: 'CompBrainfuck',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

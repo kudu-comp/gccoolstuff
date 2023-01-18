@@ -1,17 +1,46 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.project.title')}}
+      {{ $t('coordinates.project.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.project.long')" />
-      <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum" class="mr-2"></v-coord>
-      <v-distance v-model:dist="dist" v-model:unit="unit"></v-distance>
-      <v-angle v-model:angle="angle" v-model:unit="angleunit"></v-angle>
-      <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="doCalc()">
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
-      <div v-if="result" class="resultbox">{{$t('cdproj.projcoord')}}{{result}}</div>
-      <v-map v-model:mylocation="coordinate"/>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.project.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate"
+        v-model:datum="selecteddatum"
+        class="mr-2"
+      />
+      <v-distance
+        v-model:dist="dist"
+        v-model:unit="unit"
+      />
+      <v-angle
+        v-model:angle="angle"
+        v-model:unit="angleunit"
+      />
+      <input
+        id="project"
+        type="button"
+        :value="$t('buttons.calc')"
+        class="btn btn-primary mb-2"
+        @click="doCalc()"
+      >
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ $t('cdproj.projcoord') }}{{ result }}
+      </div>
+      <v-map v-model:mylocation="coordinate" />
     </div>
   </div>
 </template>

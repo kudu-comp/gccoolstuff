@@ -1,62 +1,174 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('comptools.compbintotext.title')}}
+      {{ $t('comptools.compbintotext.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('comptools.compbintotext.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('comptools.compbintotext.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="selenc">{{$t('compbintotext.selfrom')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="selfromenc" id="selfromenc" @change="selFromEncoding">
-          <option value="b85">Ascii85 (a.k.a. Base85)</option>
-          <option value="b32">Base32 (e.g. RFC4648)</option>
-          <option value="b58">Base58 (e.g. Bitcoin)</option>
-          <option value="b64">Base64 (Base64 and uuencode)</option>
-          <option value="b91">Base91</option>
-          <option value="bin">Binary number</option>
-          <option value="dec">Decimal number</option>
-          <option value="hex">Hexadecimal number (a.k.a. Base16)</option>
-          <option value="txt">Text (ASCII UTF8)</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="selenc"
+        >{{ $t('compbintotext.selfrom') }} </label>
+        <select
+          id="selfromenc"
+          v-model="selfromenc"
+          class="custom-select mb-2 mr-2"
+          @change="selFromEncoding"
+        >
+          <option value="b85">
+            Ascii85 (a.k.a. Base85)
+          </option>
+          <option value="b32">
+            Base32 (e.g. RFC4648)
+          </option>
+          <option value="b58">
+            Base58 (e.g. Bitcoin)
+          </option>
+          <option value="b64">
+            Base64 (Base64 and uuencode)
+          </option>
+          <option value="b91">
+            Base91
+          </option>
+          <option value="bin">
+            Binary number
+          </option>
+          <option value="dec">
+            Decimal number
+          </option>
+          <option value="hex">
+            Hexadecimal number (a.k.a. Base16)
+          </option>
+          <option value="txt">
+            Text (ASCII UTF8)
+          </option>
         </select>
       </div>
-      <div class="form-inline mb-2" v-show="fromtables">
-        <label class="form-label mb-2 mr-2" for="table">{{$t('compbintotext.selfromtable')}}</label>
-        <select class="custom-select mb-2 mr-2" v-model="selfromtable" id="table">
-          <option v-for="tb in fromtables" :key="tb" :value="tb.value">{{tb.name}}</option>
+      <div
+        v-show="fromtables"
+        class="form-inline mb-2"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="table"
+        >{{ $t('compbintotext.selfromtable') }}</label>
+        <select
+          id="table"
+          v-model="selfromtable"
+          class="custom-select mb-2 mr-2"
+        >
+          <option
+            v-for="tb in fromtables"
+            :key="tb"
+            :value="tb.value"
+          >
+            {{ tb.name }}
+          </option>
         </select>
         <p>
-          {{selfromtable}}
+          {{ selfromtable }}
         </p>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
       <div class="form-inline">
-        <input type="button" id="bcdfrom" name="bcdfrom" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="convertBase">
-        <label class="form-label mb-2 mr-2" for="selenc">{{$t('compbintotext.selto')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="seltoenc" id="seltoenc" @change="selToEncoding">
-          <option value="b85">Ascii85 (a.k.a. Base85)</option>
-          <option value="b32">Base32 (e.g. RFC4648)</option>
-          <option value="b58">Base58 (e.g. Bitcoin)</option>
-          <option value="b64">Base64 (Base64 and uuencode)</option>
-          <option value="b91">Base91</option>
-          <option value="bin">Binary number</option>
-          <option value="dec">Decimal number</option>
-          <option value="hex">Hexadecimal number (a.k.a. Base16)</option>
-          <option value="txt">Text (ASCII UTF8)</option>
+        <input
+          id="bcdfrom"
+          type="button"
+          name="bcdfrom"
+          :value="$t('buttons.convert')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="convertBase"
+        >
+        <label
+          class="form-label mb-2 mr-2"
+          for="selenc"
+        >{{ $t('compbintotext.selto') }} </label>
+        <select
+          id="seltoenc"
+          v-model="seltoenc"
+          class="custom-select mb-2 mr-2"
+          @change="selToEncoding"
+        >
+          <option value="b85">
+            Ascii85 (a.k.a. Base85)
+          </option>
+          <option value="b32">
+            Base32 (e.g. RFC4648)
+          </option>
+          <option value="b58">
+            Base58 (e.g. Bitcoin)
+          </option>
+          <option value="b64">
+            Base64 (Base64 and uuencode)
+          </option>
+          <option value="b91">
+            Base91
+          </option>
+          <option value="bin">
+            Binary number
+          </option>
+          <option value="dec">
+            Decimal number
+          </option>
+          <option value="hex">
+            Hexadecimal number (a.k.a. Base16)
+          </option>
+          <option value="txt">
+            Text (ASCII UTF8)
+          </option>
         </select>
       </div>
-      <div class="form-inline mb-2" v-show="totables">
-        <label class="form-label mb-2 mr-2" for="table">{{$t('compbintotext.seltotable')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="seltotable" id="table">
-          <option v-for="tb in totables" :key="tb" :value="tb.value">{{tb.name}}</option>
+      <div
+        v-show="totables"
+        class="form-inline mb-2"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="table"
+        >{{ $t('compbintotext.seltotable') }} </label>
+        <select
+          id="table"
+          v-model="seltotable"
+          class="custom-select mb-2 mr-2"
+        >
+          <option
+            v-for="tb in totables"
+            :key="tb"
+            :value="tb.value"
+          >
+            {{ tb.name }}
+          </option>
         </select>
         <p>
-          {{seltotable}}
+          {{ seltotable }}
         </p>
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -73,10 +185,6 @@ import * as bt from '@/scripts/bintotext.js'
 export default {
 
   name: 'CompBinToText',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

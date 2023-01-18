@@ -1,57 +1,167 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.smartreplace.title')}}
+      {{ $t('texttools.smartreplace.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.smartreplace.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('texttools.smartreplace.long')"
+      />
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="from">{{$t('txtsr.orig')}}</label>
-        <input type='text' id="from" name="from" ref="from" v-model="from" size="50" class="form-control mb-2" v-on:keyup="replaceInput">{{error1}}
+        <label
+          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          for="from"
+        >{{ $t('txtsr.orig') }}</label>
+        <input
+          id="from"
+          ref="from"
+          v-model="from"
+          type="text"
+          name="from"
+          size="50"
+          class="form-control mb-2"
+          @keyup="replaceInput"
+        >{{ error1 }}
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="to">{{$t('txtsr.repl')}}</label>
-        <input type='text' id="to" name="to" ref="to" v-model="to" size="50" class="form-control mb-2" v-on:keyup="replaceInput">{{error2}}
+        <label
+          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          for="to"
+        >{{ $t('txtsr.repl') }}</label>
+        <input
+          id="to"
+          ref="to"
+          v-model="to"
+          type="text"
+          name="to"
+          size="50"
+          class="form-control mb-2"
+          @keyup="replaceInput"
+        >{{ error2 }}
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="highlightflag">{{$t('txtsr.highlight')}}</label>
-        <select id="highlightflag" name="highlightflag" ref="highlightflag" v-model="highlightflag" class="form-control col-sm-4 col-md-3 col-lg-2 mb-2" @change="replaceInput">
-          <option value="red">{{$t('colors.red')}}</option>
-          <option value="blue">{{$t('colors.blue')}}</option>
-          <option value="yellow">{{$t('colors.yellow')}}</option>
-          <option value="bold">{{$t('highlights.bold')}}</option>
-          <option value="uppercase">{{$t('highlights.upper')}}</option>
+        <label
+          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          for="highlightflag"
+        >{{ $t('txtsr.highlight') }}</label>
+        <select
+          id="highlightflag"
+          ref="highlightflag"
+          v-model="highlightflag"
+          name="highlightflag"
+          class="form-control col-sm-4 col-md-3 col-lg-2 mb-2"
+          @change="replaceInput"
+        >
+          <option value="red">
+            {{ $t('colors.red') }}
+          </option>
+          <option value="blue">
+            {{ $t('colors.blue') }}
+          </option>
+          <option value="yellow">
+            {{ $t('colors.yellow') }}
+          </option>
+          <option value="bold">
+            {{ $t('highlights.bold') }}
+          </option>
+          <option value="uppercase">
+            {{ $t('highlights.upper') }}
+          </option>
         </select>
-        <label class="form-label col-sm-4 col-md-3 col-lg-2 mb-2" for="language">{{$t('language')}}</label>
-        <select id="language" name="language" ref="language" v-model="language" class="form-control col-sm-3 mb-2" @change="setLanguage">
-          <option value="en">{{$t('languages.english')}}</option>
-          <option value="nl">{{$t('languages.dutch')}}</option>
-          <option value="de">{{$t('languages.german')}}</option>
-          <option value="fr">{{$t('languages.french')}}</option>
-          <option value="es">{{$t('languages.spanish')}}</option>
+        <label
+          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          for="language"
+        >{{ $t('language') }}</label>
+        <select
+          id="language"
+          ref="language"
+          v-model="language"
+          name="language"
+          class="form-control col-sm-3 mb-2"
+          @change="setLanguage"
+        >
+          <option value="en">
+            {{ $t('languages.english') }}
+          </option>
+          <option value="nl">
+            {{ $t('languages.dutch') }}
+          </option>
+          <option value="de">
+            {{ $t('languages.german') }}
+          </option>
+          <option value="fr">
+            {{ $t('languages.french') }}
+          </option>
+          <option value="es">
+            {{ $t('languages.spanish') }}
+          </option>
         </select>
       </div>
       <div>
-        <input type="button" id="remdiacr" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+        <input
+          id="remdiacr"
+          type="button"
+          :value="$t('dialogwv.replacediac')"
+          class="btn btn-primary mb-2"
+          @click="removeDiacr"
+        >
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="reverse" id="reverse" v-model="casesens" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="reverse" class="custom-control-label mb-2">{{$t('txtsr.casesens')}}</label>
+          <input
+            id="reverse"
+            v-model="casesens"
+            type="checkbox"
+            name="reverse"
+            class="custom-control-input mr-2 mb-2"
+            @change="wordValue"
+          >
+          <label
+            for="reverse"
+            class="custom-control-label mb-2"
+          >{{ $t('txtsr.casesens') }}</label>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
           <div class="form-row mb-2">
-            <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 cols=50 v-model='message' v-on:keyup="replaceInput"></textarea>
+            <textarea
+              id="message"
+              ref="message"
+              v-model="message"
+              name="message"
+              class="form-control"
+              :placeholder="$t('labels.message')"
+              rows="10"
+              cols="50"
+              @keyup="replaceInput"
+            />
           </div>
         </div>
-        <p class="col-6 result" v-html="result"></p>
+        <p
+          class="col-6 result"
+          v-html="result"
+        />
         <div class="col-12">
           <div class="form-inline">
-            <input type="button" id="hint" name="hint" :value="$t('txtsr.get')" class="btn btn-primary mr-2 mb-2" v-on:click="printHints">
-            <input type="button" id="hint" name="hint" :value="$t('txtsr.apply')" class="btn btn-primary mb-2" v-on:click="applyHints">
+            <input
+              id="hint"
+              type="button"
+              name="hint"
+              :value="$t('txtsr.get')"
+              class="btn btn-primary mr-2 mb-2"
+              @click="printHints"
+            >
+            <input
+              id="hint"
+              type="button"
+              name="hint"
+              :value="$t('txtsr.apply')"
+              class="btn btn-primary mb-2"
+              @click="applyHints"
+            >
           </div>
           <div>
-            <div v-html="hints"></div>
+            <div v-html="hints" />
           </div>
         </div>
       </div>
@@ -65,10 +175,6 @@ import * as textHelper from '@/scripts/texthelper.js'
 export default {
 
   name: 'SmartReplace',
-
-  props: {
-    msg: String
-  },
 
   components: {
     //No components

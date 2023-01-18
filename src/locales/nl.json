@@ -10,7 +10,9 @@
     "invalidinput": "Invoer kan niet worden vertaald. Controleer het geselecteerde type invoer.",
     "noresult": "Geen resultaten gevonden",
     "cannotparse": "Invoer ongeldig",
-    "unknowninput": "Onbekende invoer "
+    "unknowninput": "Onbekende invoer ",
+    "loadingimage": "Fout bij het laden van de afbeelding",
+    "loadingfile": "Fout bij het laden van het bestand"
   },
 
   "labels": {
@@ -33,7 +35,8 @@
     "alphabet": "Alfabet",
     "search": "Zoekterm",
     "sum": "Som",
-    "count": "Aantal"
+    "count": "Aantal",
+    "number": "Nummer"
   },
 
   "buttons": {
@@ -607,7 +610,12 @@
       "short": "Priemgetallen",
       "long" : "Een tool die controleert of een getal priem is of niet. Het maximum nummer is 2^53 wat kan worden gecontroleerd. De tool toont het priemgetal op de gegeven positie of geeft de positie van een gegeven priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar."
     },
-    "fibonacci": {
+    "romans": {
+      "title": "Romeinse getallen",
+      "short": "Romeinse getallen",
+      "long": "Een tool die Romeinse getallen converteert naar normale getallen en andersom. Het maximale Romeins getal is 3999. Romeinse getallen bestaan uit de volgende letters MDCLXVI. Het is mogelijk meerdere getallen tegelijk in te voeren gescheiden door spaties of iets anders."
+    },
+  	"fibonacci": {
       "title": "Fibonacci",
       "short": "De eerste 500 Fibonacci nummers",
       "long" : "De Fibonacci reeks begint met 1, 1. Het volgende nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar."
@@ -690,6 +698,11 @@
       "title": "Binary encoding",
       "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16",
       "long": "<p>Binaire naar text encodings converteren elk byte (8 bits) van de input naar iets leesbaars. Dit is zorgt ervoor dat binaire data via mail of andere protocollen getransporteerd kan worden. Dit is met name bruikbaar voor het verzenden van afbeeldingen, videos of willekeurig andere files die anders in transmissie corrupt raken. Base64 is op dit moment de meest gebruikte encoding.</p><p>Carriage returns en linefeeds worden standaard verwijderd uit de invoer, dit is gebruikelijk voor binary encoding. Spaties blijven bewaard (behalve voor tekst, binaire, decimale en hexadecimale invoer). Binaire, decimale and hexadecimale invoer is precies 1 nummer. Spaties kunnen worden gebruikt voor leesbaarheid maar worden verder genegeerd. Dus 123 123 is hetzelfde als 123123. En 3A B4 is het hexadecimale number 3AB4. </p>"
+    },
+    "duckspeak" : {
+      "title": "Duckspeak",
+      "short": "Heel veel Nak, alsof je een eend hoort praten.",
+      "long": "Duckspeak klinkt alsof een eend loopt te kwaken. De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde."
     }
   },
 
@@ -1461,6 +1474,13 @@
     "posofprime": "De positie van priemgetal"
   },
 
+  "mathroman" : {
+    "btndtr": "Decimaal naar Romeins",
+    "btnrtd": "Romeins naar Decimaal",
+    "notroman": "Ongeldig Romeins getal, alleen MDCLXVI zijn toegestaan",
+    "invalidint": "Ongeldig getal, het maximale Romeinse getal is 3999"
+  },
+
   "mathfib": {
     "pos": "Fibonacci nummer op positie",
     "check": "Controleer of dit een Fibonacci nummer is",
@@ -1579,6 +1599,15 @@
     "selfromtable": "Encoding table",
     "selto": "Encoding naar",
     "seltotable": "Encoding table"
+  },
+
+  "compds": {
+    "invalidint": " is een ongeldig getal\n",
+    "format": "Invoer/uitvoer formaat",
+    "ascii": "Tekst (ASCII)",
+    "hex": "Hexadecimaal",
+    "dec": "Getallen (decimaal",
+    "invalidcmd": " is geen duckspeak\n"
   },
 
   "compenc": {

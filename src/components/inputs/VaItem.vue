@@ -1,19 +1,28 @@
 <template>
   <div class="va-item">
     <div class="va-item-header">
-      <input type="button" id="toggle" value="+|-" class="btn btn-sm btn-primary mr-2" v-on:click="$emit('toggle')" v-show="!hidebutton">
+      <input
+        v-show="!hidebutton"
+        id="toggle"
+        type="button"
+        value="+|-"
+        class="btn btn-sm btn-primary mr-2"
+        @click="$emit('toggle')"
+      >
       <slot name="header">
         <h2>Item header</h2>
       </slot>
     </div>
-    <div class="va-item-content" v-show='showitem'>
+    <div
+      v-show="showitem"
+      class="va-item-content"
+    >
       <slot name="content">
         <h2>Item content</h2>
       </slot>
     </div>
     <div class="va-item-footer">
-      <slot name="footer">
-      </slot>
+      <slot name="footer" />
     </div>
   </div>
 </template>

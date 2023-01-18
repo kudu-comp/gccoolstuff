@@ -1,43 +1,148 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.w3w.title')}}
+      {{ $t('coordinates.w3w.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.w3w.long')" />
-      <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1" class="mr-2"></v-coord>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.w3w.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate1"
+        v-model:datum="selecteddatum1"
+        class="mr-2"
+      />
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="language">{{$t('cdw3w.languages')}}</label>
-        <select id="language" class="custom-select mr-2 mb-2" v-model="sellanguage">
-          <option value="en">English</option>
-          <option value="nl">Nederlands</option>
-          <option value="de">Deutsch</option>
-          <option value="es">Espagnol</option>
-          <option value="fr">Français</option>
+        <label
+          class="form-label mr-2 mb-2"
+          for="language"
+        >{{ $t('cdw3w.languages') }}</label>
+        <select
+          id="language"
+          v-model="sellanguage"
+          class="custom-select mr-2 mb-2"
+        >
+          <option value="en">
+            English
+          </option>
+          <option value="nl">
+            Nederlands
+          </option>
+          <option value="de">
+            Deutsch
+          </option>
+          <option value="es">
+            Espagnol
+          </option>
+          <option value="fr">
+            Français
+          </option>
         </select>
-        <input type="button" id="calc1" :value="$t('cdw3w.convertto')" class="btn btn-primary mb-2" v-on:click="doConv()">
+        <input
+          id="calc1"
+          type="button"
+          :value="$t('cdw3w.convertto')"
+          class="btn btn-primary mb-2"
+          @click="doConv()"
+        >
       </div>
       <hr class="mt-0 mb-2">
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="str">{{$t('cdw3w.w3wcode')}}</label>
-        <input type="text" id="str" v-model="str" size="30" class="form-control mr-2 mb-2">
-        <input type="button" id="calc2" :value="$t('cdw3w.convertfrom')" class="btn btn-primary mr-2 mb-2" v-on:click="doConv2()">
-        <v-datums class="mb-2" id="from" v-model:datum="selecteddatum2"></v-datums>
+        <label
+          class="form-label mr-2 mb-2"
+          for="str"
+        >{{ $t('cdw3w.w3wcode') }}</label>
+        <input
+          id="str"
+          v-model="str"
+          type="text"
+          size="30"
+          class="form-control mr-2 mb-2"
+        >
+        <input
+          id="calc2"
+          type="button"
+          :value="$t('cdw3w.convertfrom')"
+          class="btn btn-primary mr-2 mb-2"
+          @click="doConv2()"
+        >
+        <v-datums
+          id="from"
+          v-model:datum="selecteddatum2"
+          class="mb-2"
+        />
       </div>
       <hr class="mt-0 mb-2">
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="str2">{{$t('cdw3w.w3wsugg')}}</label>
-        <input type="text" id="str2" v-model="str2" size="30" class="form-control mr-2 mb-2">
-        <label class="form-label mr-2 mb-2" for="country">{{$t('cdw3w.countries')}}</label>
-        <input type="text" id="country" v-model="country" size="30" class="form-control mr-2 mb-2">
-        <input type="button" id="calc2" :value="$t('cdw3w.suggest')" class="btn btn-primary mb-2" v-on:click="suggestW3W()">
+        <label
+          class="form-label mr-2 mb-2"
+          for="str2"
+        >{{ $t('cdw3w.w3wsugg') }}</label>
+        <input
+          id="str2"
+          v-model="str2"
+          type="text"
+          size="30"
+          class="form-control mr-2 mb-2"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="country"
+        >{{ $t('cdw3w.countries') }}</label>
+        <input
+          id="country"
+          v-model="country"
+          type="text"
+          size="30"
+          class="form-control mr-2 mb-2"
+        >
+        <input
+          id="calc2"
+          type="button"
+          :value="$t('cdw3w.suggest')"
+          class="btn btn-primary mb-2"
+          @click="suggestW3W()"
+        >
       </div>
-      <v-coord v-model:coord="coordfocus" v-model:datum="datumfocus" class="mr-2 mb-2"><template v-slot:label>{{$t('cdw3w.focus')}}</template></v-coord>
-      <v-coord v-model:coord="coordclip" v-model:datum="datumclip" class="mr-2 mb-2"><template v-slot:label>{{$t('cdw3w.clip')}}</template></v-coord>
-      <v-distance v-model:dist="clipradius" v-model:unit="clipunit"><template v-slot:label>{{$t('labels.radius')}}</template></v-distance>
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
-      <div v-if="result" class="resultbox" v-html="result" />
-      <v-map v-model:mylocation="coordinate1"/>
+      <v-coord
+        v-model:coord="coordfocus"
+        v-model:datum="datumfocus"
+        class="mr-2 mb-2"
+      >
+        <template #label>
+          {{ $t('cdw3w.focus') }}
+        </template>
+      </v-coord>
+      <v-coord
+        v-model:coord="coordclip"
+        v-model:datum="datumclip"
+        class="mr-2 mb-2"
+      >
+        <template #label>
+          {{ $t('cdw3w.clip') }}
+        </template>
+      </v-coord>
+      <v-distance
+        v-model:dist="clipradius"
+        v-model:unit="clipunit"
+      >
+        <template #label>
+          {{ $t('labels.radius') }}
+        </template>
+      </v-distance>
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
 </template>

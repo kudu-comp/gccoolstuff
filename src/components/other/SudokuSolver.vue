@@ -1,40 +1,116 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('othertools.sudokusolver.title')}}
+      {{ $t('othertools.sudokusolver.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.sudokusolver.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('othertools.sudokusolver.long')"
+      />
       <div class="form-inline mb-2">
-        <label for="sudokutype" class="form-label mr-2">{{$t('sudoku.type')}}</label>
-        <select name="sudokutype" id="sudokutype" class="form-control mr-2" v-model="sudokutype" @change="changeType">
-          <option value="Sudoku">Sudoku</option>
-          <option value="SudokuX">Sudoku X</option>
+        <label
+          for="sudokutype"
+          class="form-label mr-2"
+        >{{ $t('sudoku.type') }}</label>
+        <select
+          id="sudokutype"
+          v-model="sudokutype"
+          name="sudokutype"
+          class="form-control mr-2"
+          @change="changeType"
+        >
+          <option value="Sudoku">
+            Sudoku
+          </option>
+          <option value="SudokuX">
+            Sudoku X
+          </option>
         </select>
-        <label for="sudokutype" class="form-label mr-2">{{$t('sudoku.size')}}</label>
-        <select name="sudokutype" id="sudokutype" class="form-control" v-model="size" @change="changeSize">
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
+        <label
+          for="sudokutype"
+          class="form-label mr-2"
+        >{{ $t('sudoku.size') }}</label>
+        <select
+          id="sudokutype"
+          v-model="size"
+          name="sudokutype"
+          class="form-control"
+          @change="changeSize"
+        >
+          <option value="2">
+            2
+          </option>
+          <option value="3">
+            3
+          </option>
+          <option value="4">
+            4
+          </option>
         </select>
       </div>
-      <table id="sudokutable">
-      </table>
-      <div class="mt-2 mb-2 mr-2">{{$t('sudoku.alt')}}</div>
+      <table id="sudokutable" />
+      <div class="mt-2 mb-2 mr-2">
+        {{ $t('sudoku.alt') }}
+      </div>
       <div class="form-inline mb-2">
-        <input type='text' id="knownnumbers" name="knownnumbers" ref="knownnumbers" v-model="knownnumbers" size="50" class="form-control">
+        <input
+          id="knownnumbers"
+          ref="knownnumbers"
+          v-model="knownnumbers"
+          type="text"
+          name="knownnumbers"
+          size="50"
+          class="form-control"
+        >
       </div>
       <div>
-        <input type="button" id="solve" name="solve" :value="$t('sudoku.solve')" class="btn btn-primary mb-2 mr-2" v-on:click="solveSudoku">
-        <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="resetSudoku">
+        <input
+          id="solve"
+          type="button"
+          name="solve"
+          :value="$t('sudoku.solve')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="solveSudoku"
+        >
+        <input
+          id="reset"
+          type="button"
+          name="reset"
+          :value="$t('buttons.reset')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="resetSudoku"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-      <div class="mb-2" v-show="solved">
-        {{$t('sudoku.thereare')}} {{numberofsolutions}} {{$t('sudoku.sols')}}
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-show="solved"
+        class="mb-2"
+      >
+        {{ $t('sudoku.thereare') }} {{ numberofsolutions }} {{ $t('sudoku.sols') }}
         <div class="form-inline mb-2">
-          <label for="listofresults" class="form-label mr-2">Solutions</label>
-          <select name="listofresults" id="listofresults" class="form-control" v-model="selectedsolution" @change="printSolution">
-            <option v-for="result in results" :key="result">{{result}}</option>
+          <label
+            for="listofresults"
+            class="form-label mr-2"
+          >Solutions</label>
+          <select
+            id="listofresults"
+            v-model="selectedsolution"
+            name="listofresults"
+            class="form-control"
+            @change="printSolution"
+          >
+            <option
+              v-for="result in results"
+              :key="result"
+            >
+              {{ result }}
+            </option>
           </select>
         </div>
       </div>
@@ -45,10 +121,6 @@
 <script>
 export default {
   name: 'SudokuSolver',
-
-  props: {
-    msg: String
-  },
 
   data: function() {
     return {

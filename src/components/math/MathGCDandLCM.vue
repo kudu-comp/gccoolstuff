@@ -1,28 +1,71 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.primegcdlcm.title')}}
+      {{ $t('mathtools.primegcdlcm.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.primegcdlcm.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.primegcdlcm.long')"
+      />
       <div class="form-inline">
-        <label class="form-label col-sm-5 col-md-2 mb-2" for="input">{{$t('mathgcd.num')}}</label>
-        <input type='text' id="input" name="input" ref="input" v-model="input" min="0" class="form-control col-sm-7 col-md-6 mb-2 mr-2" v-on:keyup.enter="getGCDandLCM">
-        <input type="button" id="gcdlcm" name="gcdlcm" :value="$t('buttons.calc')" class="col-md-2 btn btn-primary mb-2" v-on:click="getGCDandLCM">
+        <label
+          class="form-label col-sm-5 col-md-2 mb-2"
+          for="input"
+        >{{ $t('mathgcd.num') }}</label>
+        <input
+          id="input"
+          ref="input"
+          v-model="input"
+          type="text"
+          name="input"
+          min="0"
+          class="form-control col-sm-7 col-md-6 mb-2 mr-2"
+          @keyup.enter="getGCDandLCM"
+        >
+        <input
+          id="gcdlcm"
+          type="button"
+          name="gcdlcm"
+          :value="$t('buttons.calc')"
+          class="col-md-2 btn btn-primary mb-2"
+          @click="getGCDandLCM"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
-        <template v-slot:header>{{$t('mathgcd.t1')}}</template>
-        <template v-slot:content>
-          {{$t('mathgcd.gcd')}} <strong>{{gcd}}</strong>.<br>
-          {{$t('mathgcd.lcm')}} <strong>{{lcm}}</strong>.
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </p>
+      <va-item
+        :showitem="showitem"
+        :hidebutton="hidebutton"
+      >
+        <template #header>
+          {{ $t('mathgcd.t1') }}
+        </template>
+        <template #content>
+          {{ $t('mathgcd.gcd') }} <strong>{{ gcd }}</strong>.<br>
+          {{ $t('mathgcd.lcm') }} <strong>{{ lcm }}</strong>.
         </template>
       </va-item>
-      <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
-        <template v-slot:header>{{$t('mathgcd.t2')}}</template>
-        <template v-slot:content>
+      <va-item
+        :showitem="showitem"
+        :hidebutton="hidebutton"
+      >
+        <template #header>
+          {{ $t('mathgcd.t2') }}
+        </template>
+        <template #content>
           <table class="table table-sm table-borderless">
-            <tr v-for="a in primes" :key="a" :value="a.n"><td>{{a.n}}</td><td>{{a.primes}}</td></tr>
+            <tr
+              v-for="a in primes"
+              :key="a"
+              :value="a.n"
+            >
+              <td>{{ a.n }}</td><td>{{ a.primes }}</td>
+            </tr>
           </table>
         </template>
       </va-item>
@@ -36,10 +79,6 @@ import VaItem from '@/components/inputs/VaItem.vue'
 
 export default {
   name: 'MathGCDandLCM',
-
-  props: {
-    msg: String
-  },
 
   components: {
     VaItem,

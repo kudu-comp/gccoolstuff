@@ -1,22 +1,59 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('comptools.compdeadfish.title')}}
+      {{ $t('comptools.compdeadfish.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('comptools.compdeadfish.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('comptools.compdeadfish.long')"
+      />
       <div class="form-row">
-        <textarea id="code" name="code" class="form-control mb-2" ref="code" :placeholder="$t('compbf.code')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="code"
+          ref="code"
+          v-model="message"
+          name="code"
+          class="form-control mb-2"
+          :placeholder="$t('compbf.code')"
+          rows="10"
+        />
       </div>
       <div class="form-inline">
-        <input type="button" id="run" name="run" :value="$t('compbf.run')" class="btn btn-primary mb-2 mr-2" v-on:click="runCode">
+        <input
+          id="run"
+          type="button"
+          name="run"
+          :value="$t('compbf.run')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="runCode"
+        >
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="debug" id="debug" v-model="debug" class="custom-control-input mr-2 mb-2">
-          <label for="debug" class="custom-control-label mb-2">{{$t('compbf.debug')}}</label>
+          <input
+            id="debug"
+            v-model="debug"
+            type="checkbox"
+            name="debug"
+            class="custom-control-input mr-2 mb-2"
+          >
+          <label
+            for="debug"
+            class="custom-control-label mb-2"
+          >{{ $t('compbf.debug') }}</label>
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -26,10 +63,6 @@
 export default {
 
   name: 'CompDeadfish',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

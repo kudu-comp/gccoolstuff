@@ -1,39 +1,119 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.baseconvert.title')}}
+      {{ $t('mathtools.baseconvert.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.baseconvert.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.baseconvert.long')"
+      />
       <div class="form-inline mb-2">
-        <label class="form-label col-sm-6 col-md-2" for="base1">{{$t('mathbase.base1')}}</label>
-        <input type='number' id="base1" name="base1" ref="base1" v-model="base1" min="2" max="36" class="form-control col-sm-6 col-md-2">
+        <label
+          class="form-label col-sm-6 col-md-2"
+          for="base1"
+        >{{ $t('mathbase.base1') }}</label>
+        <input
+          id="base1"
+          ref="base1"
+          v-model="base1"
+          type="number"
+          name="base1"
+          min="2"
+          max="36"
+          class="form-control col-sm-6 col-md-2"
+        >
         <div class="col-md-4 p-2">
-          <input type='text' id="basestr1" name="basestr1" ref="basestr1" v-model="basestr1" size="50" class="form-control">
+          <input
+            id="basestr1"
+            ref="basestr1"
+            v-model="basestr1"
+            type="text"
+            name="basestr1"
+            size="50"
+            class="form-control"
+          >
         </div>
       </div>
       <div class="form-inline mb-2">
-        <label class="form-label col-sm-6 col-md-2" for="base2">{{$t('mathbase.base2')}}</label>
-        <input type='number' id="base2" name="base2" ref="base2" v-model="base2" min="2" max="36" class="form-control col-sm-6 col-md-2">
+        <label
+          class="form-label col-sm-6 col-md-2"
+          for="base2"
+        >{{ $t('mathbase.base2') }}</label>
+        <input
+          id="base2"
+          ref="base2"
+          v-model="base2"
+          type="number"
+          name="base2"
+          min="2"
+          max="36"
+          class="form-control col-sm-6 col-md-2"
+        >
         <div class="col-md-4 p-2">
-          <input type='text' id="basestr2" name="basestr2" ref="basestr2" v-model="basestr2" size="50" class="form-control">
+          <input
+            id="basestr2"
+            ref="basestr2"
+            v-model="basestr2"
+            type="text"
+            name="basestr2"
+            size="50"
+            class="form-control"
+          >
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="toConvert('encode')">
+          <input
+            id="convert"
+            type="button"
+            name="convert"
+            :value="$t('buttons.convert')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="toConvert('encode')"
+          >
           <div class="form-group">
-            <textarea id="message" name="message" class="form-control" ref="message" placeholder="Message" rows=10 cols=50 v-model='message'></textarea>
+            <textarea
+              id="message"
+              ref="message"
+              v-model="message"
+              name="message"
+              class="form-control"
+              placeholder="Message"
+              rows="10"
+              cols="50"
+            />
           </div>
         </div>
         <div class="col-6">
-          <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="toConvert('decode')">
+          <input
+            id="convert"
+            type="button"
+            name="convert"
+            :value="$t('buttons.convert')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="toConvert('decode')"
+          >
           <div class="form-group">
-            <textarea id="translatedmessage" name="translatedmessage" class="form-control" ref="translatedmessage" placeholder="Translation" cols=50 rows=10 v-model='translatedmessage'></textarea>
+            <textarea
+              id="translatedmessage"
+              ref="translatedmessage"
+              v-model="translatedmessage"
+              name="translatedmessage"
+              class="form-control"
+              placeholder="Translation"
+              cols="50"
+              rows="10"
+            />
           </div>
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
     </div>
   </div>
 </template>
@@ -41,10 +121,6 @@
 <script>
 export default {
   name: 'MathBase',
-
-  props: {
-    msg: String
-  },
 
   data: function () {
     return {

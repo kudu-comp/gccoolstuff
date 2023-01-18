@@ -1,7 +1,7 @@
 module.exports = {
-  devServer: {
-    // https: true // needed for Get location but crashes php server calls
-  },
+  // devServer: {
+  //   // https: true // needed for Get location but crashes php server calls
+  // },
   pluginOptions: {
     i18n: {
       locale: 'en',
@@ -10,7 +10,7 @@ module.exports = {
       enableInSFC: true
     }
   },
-  configureWebpack: {
-    devtool: 'source-map'
-  }
+  // configureWebpack: {
+  //   devtool: 'source-map'
+  // }
 }

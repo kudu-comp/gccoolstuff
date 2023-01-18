@@ -1,8 +1,18 @@
 <template>
   <div class="form-inline">
     <!-- <label for="listofalpha" class="form-label mr-2">Keyboards</label> -->
-    <select class="custom-select" :value='keyboard' @input="updateKeyboard($event.target.value)">
-      <option v-for="k in keyboards" :key="k" :value="k.name">{{k.description}}</option>
+    <select
+      class="custom-select"
+      :value="keyboard"
+      @input="updateKeyboard($event.target.value)"
+    >
+      <option
+        v-for="k in keyboards"
+        :key="k"
+        :value="k.name"
+      >
+        {{ k.description }}
+      </option>
     </select>
   </div>
 </template>

@@ -1,27 +1,60 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.revwherigo.title')}}
+      {{ $t('coordinates.revwherigo.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.revwherigo.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.revwherigo.long')"
+      />
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=3 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="3"
+        />
       </div>
-      <input type="button" id="enc" name="enc" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="solveReverse">
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox" v-html="result" />
+      <input
+        id="enc"
+        type="button"
+        name="enc"
+        :value="$t('buttons.convert')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="solveReverse"
+      >
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
 </template>
 
 <script>
 
+import VMap from '@/components/inputs/VMap.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {
 
   name: 'ReverseWherigo',
+
+  components: {
+    VMap
+  },
 
   data: function () {
     return {
@@ -29,7 +62,7 @@ export default {
       result : "",
       errormsg: "",
       format: 0,
-      
+      coordinate1: null
     }
   },
 
@@ -99,6 +132,9 @@ export default {
         this.result += coords.printCoordinateFromDMS (c, "N12.12345 E123.12345") + "<br>";
         this.result += coords.printCoordinateFromDMS (c, "N12 34.567 E123 45.678") + "<br>";
         this.result += coords.printCoordinateFromDMS (c, "N12 34 56.789 E123 45 67.678");
+
+        // Display marker
+        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, c, this.$t('labels.point'));
 
       } catch (e) {
       

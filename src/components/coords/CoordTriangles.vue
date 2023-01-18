@@ -1,23 +1,59 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.triangles.title')}}
+      {{ $t('coordinates.triangles.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.triangles.long')" />
-      <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1" class="mb-2">
-        <template v-slot:label>{{$t('labels.point')}} 1</template>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.triangles.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate1"
+        v-model:datum="selecteddatum1"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 1
+        </template>
       </v-coord>
-      <v-coord v-model:coord="coordinate2" v-model:datum="selecteddatum2" class="mb-2">
-        <template v-slot:label>{{$t('labels.point')}} 2</template>
+      <v-coord
+        v-model:coord="coordinate2"
+        v-model:datum="selecteddatum2"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 2
+        </template>
       </v-coord>
-      <v-coord v-model:coord="coordinate3" v-model:datum="selecteddatum3" class="mb-2">
-        <template v-slot:label>{{$t('labels.point')}} 3</template>
+      <v-coord
+        v-model:coord="coordinate3"
+        v-model:datum="selecteddatum3"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 3
+        </template>
       </v-coord>
-      <input type="button" id="go" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="getPoints()">
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
-      <div v-if="result" v-html="result" class="resultbox"></div>
-      <v-map v-model:mylocation="coordinate1"/>
+      <input
+        id="go"
+        type="button"
+        :value="$t('buttons.calc')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="getPoints()"
+      >
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
 </template>

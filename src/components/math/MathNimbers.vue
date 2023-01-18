@@ -1,25 +1,66 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.nimbers.title')}}
+      {{ $t('mathtools.nimbers.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.nimbers.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.nimbers.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mr-2 mb-2" for="x">{{$t('mathnim.num1')}}</label>
-        <input type='number' id="x" name="x" ref="x" v-model="x" class="form-control mr-2 mb-2">
-        <label class="form-label mr-2 mb-2" for="y">{{$t('mathnim.num2')}}</label>
-        <input type='number' id="y" name="y" ref="y" v-model="y" class="form-control mb-2" v-on:keyup.enter="nimberProduct">
+        <label
+          class="form-label mr-2 mb-2"
+          for="x"
+        >{{ $t('mathnim.num1') }}</label>
+        <input
+          id="x"
+          ref="x"
+          v-model="x"
+          type="number"
+          name="x"
+          class="form-control mr-2 mb-2"
+        >
+        <label
+          class="form-label mr-2 mb-2"
+          for="y"
+        >{{ $t('mathnim.num2') }}</label>
+        <input
+          id="y"
+          ref="y"
+          v-model="y"
+          type="number"
+          name="y"
+          class="form-control mb-2"
+          @keyup.enter="nimberProduct"
+        >
       </div>
       <div>
-        <input type="button" id="product" name="product" :value="$t('buttons.calc')" class="btn btn-primary mb-2" v-on:click="nimberProduct">
+        <input
+          id="product"
+          type="button"
+          name="product"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2"
+          @click="nimberProduct"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <va-item v-bind:showitem='showitem' v-bind:hidebutton='hidebutton'>
-        <template v-slot:header>{{$t('mathnim.t1')}}</template>
-        <template v-slot:content>
-          {{$t('mathnim.prod')}} <strong>{{prod}}</strong>.<br>
-          {{$t('mathnim.sum')}} <strong>{{sum}}</strong>.
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </p>
+      <va-item
+        :showitem="showitem"
+        :hidebutton="hidebutton"
+      >
+        <template #header>
+          {{ $t('mathnim.t1') }}
+        </template>
+        <template #content>
+          {{ $t('mathnim.prod') }} <strong>{{ prod }}</strong>.<br>
+          {{ $t('mathnim.sum') }} <strong>{{ sum }}</strong>.
         </template>
       </va-item>
     </div>
@@ -32,10 +73,6 @@ import VaItem from '@/components/inputs/VaItem.vue'
 
 export default {
   name: 'MathNimbers',
-
-  props: {
-    msg: String
-  },
 
   components: {
     VaItem,

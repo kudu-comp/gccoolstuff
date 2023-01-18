@@ -1,32 +1,92 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('comptools.hashes.title')}}
+      {{ $t('comptools.hashes.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('comptools.hashes.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('comptools.hashes.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="selenc">{{$t('comphash.hashes')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="selhash" id="selhash">
-          <option value="MD5">MD5</option>
-          <option value="SHA1">SHA-1</option>
-          <option value="SHA256">SHA-2 (SHA256)</option>
-          <option value="SHA512">SHA-2 (SHA512)</option>
-          <option value="SHA3">SHA-3</option>
-          <option value="RIPEMD160">RIPEMD160</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="selenc"
+        >{{ $t('comphash.hashes') }} </label>
+        <select
+          id="selhash"
+          v-model="selhash"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="MD5">
+            MD5
+          </option>
+          <option value="SHA1">
+            SHA-1
+          </option>
+          <option value="SHA256">
+            SHA-2 (SHA256)
+          </option>
+          <option value="SHA512">
+            SHA-2 (SHA512)
+          </option>
+          <option value="SHA3">
+            SHA-3
+          </option>
+          <option value="RIPEMD160">
+            RIPEMD160
+          </option>
         </select>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=5 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="5"
+        />
       </div>
       <div class="form-inline">
-        <input type="button" id="calc" name="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="hashMessage">
+        <input
+          id="calc"
+          type="button"
+          name="calc"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="hashMessage"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <div v-if="result" class="card card-text p-2">{{result}}</div>
-      <div v-if="result" class="form-row mb-2">
-        <label class="form-label mb-2 mr-2" for="verify">{{$t('comphash.verify')}} </label>
-        <input type="text" id="verify" name="verify" class="form-control" rows=5 v-model='verify'/>
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="card card-text p-2"
+      >
+        {{ result }}
+      </div>
+      <div
+        v-if="result"
+        class="form-row mb-2"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="verify"
+        >{{ $t('comphash.verify') }} </label>
+        <input
+          id="verify"
+          v-model="verify"
+          type="text"
+          name="verify"
+          class="form-control"
+          rows="5/"
+        >
       </div>
     </div>
   </div>
@@ -39,10 +99,6 @@ import CryptoJS from 'crypto-js';
 export default {
 
   name: 'CompHashes',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

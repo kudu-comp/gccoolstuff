@@ -1,28 +1,58 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.analyze.title')}}
+      {{ $t('texttools.analyze.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.analyze.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('texttools.analyze.long')"
+      />
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="analyzeText"></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+          @input="analyzeText"
+        />
       </div>
-      <input type="button" id="analyze" name="analyze" :value="$t('txtanalyze.analyze')" class="btn btn-primary mb-2 mr-2" v-on:click="analyzeText">
-      <input type="button" id="analyze" name="analyze" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+      <input
+        id="analyze"
+        type="button"
+        name="analyze"
+        :value="$t('txtanalyze.analyze')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="analyzeText"
+      >
+      <input
+        id="analyze"
+        type="button"
+        name="analyze"
+        :value="$t('txtwordval.replacediac')"
+        class="btn btn-primary mb-2"
+        @click="removeDiacr"
+      >
       <table class="table table-sm">
-        <tr><td>{{$t('txtanalyze.nwords')}}</td><td>{{totalwords}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nlines')}}</td><td>{{totallines}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nchar')}}</td><td>{{totalchar}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nalpha')}}</td><td>{{totalalphabet}}</td></tr>
-        <tr><td>{{$t('txtanalyze.ndigit')}}</td><td>{{totaldigit}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nwhite')}}</td><td>{{totalwhite}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nupper')}}</td><td>{{totaluppercase}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nlower')}}</td><td>{{totallowercase}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nnonalpha')}}</td><td>{{totalnonalphabet}}</td></tr>
-        <tr><td>{{$t('txtanalyze.nnonwhite')}}</td><td>{{totalnonwhite}}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nwords') }}</td><td>{{ totalwords }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nlines') }}</td><td>{{ totallines }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nchar') }}</td><td>{{ totalchar }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nalpha') }}</td><td>{{ totalalphabet }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.ndigit') }}</td><td>{{ totaldigit }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nwhite') }}</td><td>{{ totalwhite }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nupper') }}</td><td>{{ totaluppercase }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nlower') }}</td><td>{{ totallowercase }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nnonalpha') }}</td><td>{{ totalnonalphabet }}</td></tr>
+        <tr><td>{{ $t('txtanalyze.nnonwhite') }}</td><td>{{ totalnonwhite }}</td></tr>
       </table>
-      <div v-if="result" v-html="result" class="resultbox"></div>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
     </div>
   </div>
 </template>
@@ -34,10 +64,6 @@ export default {
 
   name: 'TextAnalyze',
 
-  props: {
-    msg: String,
-  },
-  
   data: function () {
     return {
       message: "",

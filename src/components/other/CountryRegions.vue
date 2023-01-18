@@ -1,14 +1,33 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      <div class="text-center">{{$t('othertools.countryregions.title')}}</div>
+      <div class="text-center">
+        {{ $t('othertools.countryregions.title') }}
+      </div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.countryregions.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('othertools.countryregions.long')"
+      />
       <div class="form-inline mb-2">
-        <label for="countrylist" class="form-label mr-2">{{$t('countryregions.list')}}</label>
-        <select id="countrylist" class="custom-select" v-model="country" @change="updateTable()">
-          <option v-for="c in countries" :key="c.code" :value="c.code">{{c.description}}</option>
+        <label
+          for="countrylist"
+          class="form-label mr-2"
+        >{{ $t('countryregions.list') }}</label>
+        <select
+          id="countrylist"
+          v-model="country"
+          class="custom-select"
+          @change="updateTable()"
+        >
+          <option
+            v-for="c in countries"
+            :key="c.code"
+            :value="c.code"
+          >
+            {{ c.description }}
+          </option>
         </select>
       </div>
       <v-table
@@ -27,11 +46,7 @@ import VTable from '@/components/inputs/VTable.vue'
 
 export default {
 
-  name: 'Countries',
-
-  props: {
-    msg: String
-  },
+  name: 'CountryRegions',
 
   components: {
     VTable,

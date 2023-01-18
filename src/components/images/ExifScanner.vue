@@ -1,73 +1,106 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.exifscanner.title')}}
+      {{ $t('imagetools.exifscanner.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.exifscanner.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.exifscanner.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
         <!-- <label for="imgurl" class="form-label mr-2">Or enter URL</label>
         <input type="text" ref="imgurl" name="imagurl" id="imgurl" v-model="fileurl" class="form-control" @change="selectURL"> -->
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div class="row">
         <div class="col-8">
-          <div class="text-center mb-2" v-if="imageData.length > 0">
-            <img id="imgpreview" class="img-fluid rounded" v-bind:class="{ flipY : isFlipY, flipX : isFlipX, rotate90 : isRotate90, rotate180: isRotate180, rotate270: isRotate270 }" :src="imageData">
+          <div
+            v-if="imageData.length > 0"
+            class="text-center mb-2"
+          >
+            <img
+              id="imgpreview"
+              class="img-fluid rounded"
+              :class="{ flipY : isFlipY, flipX : isFlipX, rotate90 : isRotate90, rotate180: isRotate180, rotate270: isRotate270 }"
+              :src="imageData"
+            >
           </div>
           <v-map />
         </div>
         <div class="col-4">
           <div class="exifinfo card mb-2">
-            <div class="card-header">{{$t('exifscanner.info')}}</div>
+            <div class="card-header">
+              {{ $t('exifscanner.info') }}
+            </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{$t('exifscanner.filename')}}</td><td>{{Filename}}</td></tr>
-                <tr><td>{{$t('exifscanner.filetype')}}</td><td>{{Filetype}}</td></tr>
-                <tr><td>{{$t('exifscanner.size')}}</td><td>{{Filesize}}</td></tr>
-                <tr><td>{{$t('exifscanner.width')}}</td><td>{{ImageWidth}}</td></tr>
-                <tr><td>{{$t('exifscanner.height')}}</td><td>{{ImageHeight}}</td></tr>
-                <tr><td>{{$t('exifscanner.npixels')}}</td><td>{{ImagePixels}}</td></tr>
-                <tr><td>{{$t('exifscanner.date')}}</td><td>{{DateTime}}</td></tr>
-                <tr><td>{{$t('exifscanner.datec')}}</td><td>{{DateTimeOriginal}}</td></tr>
+                <tr><td>{{ $t('exifscanner.filename') }}</td><td>{{ Filename }}</td></tr>
+                <tr><td>{{ $t('exifscanner.filetype') }}</td><td>{{ Filetype }}</td></tr>
+                <tr><td>{{ $t('exifscanner.size') }}</td><td>{{ Filesize }}</td></tr>
+                <tr><td>{{ $t('exifscanner.width') }}</td><td>{{ ImageWidth }}</td></tr>
+                <tr><td>{{ $t('exifscanner.height') }}</td><td>{{ ImageHeight }}</td></tr>
+                <tr><td>{{ $t('exifscanner.npixels') }}</td><td>{{ ImagePixels }}</td></tr>
+                <tr><td>{{ $t('exifscanner.date') }}</td><td>{{ DateTime }}</td></tr>
+                <tr><td>{{ $t('exifscanner.datec') }}</td><td>{{ DateTimeOriginal }}</td></tr>
               </table>
             </div>
-            <div class="card-header">{{$t('exifscanner.cinfo')}}</div>
+            <div class="card-header">
+              {{ $t('exifscanner.cinfo') }}
+            </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{$t('exifscanner.camera')}}</td><td>{{Camera}}</td></tr>
-                <tr><td>{{$t('exifscanner.lens')}}</td><td>{{LensModel}}</td></tr>
-                <tr><td>{{$t('exifscanner.aperture')}}</td><td>{{Aperture}}</td></tr>
-                <tr><td>{{$t('exifscanner.shutter')}}</td><td>{{Shutter}}</td></tr>
+                <tr><td>{{ $t('exifscanner.camera') }}</td><td>{{ Camera }}</td></tr>
+                <tr><td>{{ $t('exifscanner.lens') }}</td><td>{{ LensModel }}</td></tr>
+                <tr><td>{{ $t('exifscanner.aperture') }}</td><td>{{ Aperture }}</td></tr>
+                <tr><td>{{ $t('exifscanner.shutter') }}</td><td>{{ Shutter }}</td></tr>
               </table>
             </div>
-            <div class="card-header">{{$t('exifscanner.desc')}}</div>
+            <div class="card-header">
+              {{ $t('exifscanner.desc') }}
+            </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{$t('exifscanner.title')}}</td><td>{{Title}}</td></tr>
-                <tr><td>{{$t('exifscanner.title')}} 2</td><td>{{XPTitle}}</td></tr>
-                <tr><td>{{$t('exifscanner.desc')}}</td><td>{{Description}}</td></tr>
-                <tr><td>{{$t('exifscanner.desc')}} 2</td><td>{{ImageDescription}}</td></tr>
-                <tr><td>{{$t('exifscanner.subject')}}</td><td>{{XPSubject}}</td></tr>
-                <tr><td>{{$t('exifscanner.about')}}</td><td>{{About}}</td></tr>
-                <tr><td>{{$t('exifscanner.keywords')}}</td><td>{{XPKeywords}}</td></tr>
-                <tr><td>{{$t('exifscanner.comment')}}</td><td>{{XPComment}}</td></tr>
+                <tr><td>{{ $t('exifscanner.title') }}</td><td>{{ Title }}</td></tr>
+                <tr><td>{{ $t('exifscanner.title') }} 2</td><td>{{ XPTitle }}</td></tr>
+                <tr><td>{{ $t('exifscanner.desc') }}</td><td>{{ Description }}</td></tr>
+                <tr><td>{{ $t('exifscanner.desc') }} 2</td><td>{{ ImageDescription }}</td></tr>
+                <tr><td>{{ $t('exifscanner.subject') }}</td><td>{{ XPSubject }}</td></tr>
+                <tr><td>{{ $t('exifscanner.about') }}</td><td>{{ About }}</td></tr>
+                <tr><td>{{ $t('exifscanner.keywords') }}</td><td>{{ XPKeywords }}</td></tr>
+                <tr><td>{{ $t('exifscanner.comment') }}</td><td>{{ XPComment }}</td></tr>
               </table>
             </div>
-            <div class="card-header">{{$t('exifscanner.ainfo')}}</div>
+            <div class="card-header">
+              {{ $t('exifscanner.ainfo') }}
+            </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{$t('exifscanner.artist')}}</td><td>{{Artist}}</td></tr>
-                <tr><td>{{$t('exifscanner.creator')}}</td><td>{{Creator}}</td></tr>
-                <tr><td>{{$t('exifscanner.author')}}</td><td>{{XPAuthor}}</td></tr>
-                <tr><td>{{$t('exifscanner.copyright')}}</td><td>{{Copyright}}</td></tr>
+                <tr><td>{{ $t('exifscanner.artist') }}</td><td>{{ Artist }}</td></tr>
+                <tr><td>{{ $t('exifscanner.creator') }}</td><td>{{ Creator }}</td></tr>
+                <tr><td>{{ $t('exifscanner.author') }}</td><td>{{ XPAuthor }}</td></tr>
+                <tr><td>{{ $t('exifscanner.copyright') }}</td><td>{{ Copyright }}</td></tr>
               </table>
             </div>
-            <div class="card-header">{{$t('exifscanner.gps')}}</div>
+            <div class="card-header">
+              {{ $t('exifscanner.gps') }}
+            </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{$t('exifscanner.gps')}}</td><td>{{GPSfromCamera}}</td></tr>
+                <tr><td>{{ $t('exifscanner.gps') }}</td><td>{{ GPSfromCamera }}</td></tr>
               </table>
             </div>
           </div>
@@ -85,10 +118,6 @@ import * as coords from '@/scripts/coords.js';
 
 export default {
   name: 'ExifScanner',
-
-  props: {
-    msg: String
-  },
 
   components: {
     VMap,
@@ -213,6 +242,12 @@ export default {
       if (input.files && input.files[0]) {
         // create a new FileReader to read this image and convert to base64 format
         let reader = new FileReader();
+
+        // Define a callback function to run, when image has errors loading
+        reader.onerror = () => {
+          this.errormsg = this.$t('errors.loadingimage')        
+        }
+
         // Define a callback function to run, when FileReader finishes its job
         reader.onloadend = (e) => {
 
@@ -229,8 +264,7 @@ export default {
               this.Filesize = input.files[0].size;
 
               // Now get the EXIF data (image has to be loaded first) and display it
-              this.tags = ExifReader
-              .load(e.target.result);
+              this.tags = ExifReader.load(e.target.result);
               this.displayExif();
 
             } catch(err) {

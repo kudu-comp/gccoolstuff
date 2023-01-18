@@ -1,5 +1,5 @@
 <template>
-  <div id="mapid"></div>
+  <div id="mapid" />
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
 
     // Create the tile layers base map object
     this.baseMaps = {
-      "Hike & Bike" : this.L.tileLayer('https://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png', {
+      "OpenStreetMap" : this.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }),
@@ -89,7 +89,7 @@ export default {
     this.mymap = this.L.map('mapid', {
       center : [52.40983, 4.72280],
       zoom: 13,
-      layers: this.baseMaps["Hike & Bike"]
+      layers: this.baseMaps["OpenStreetMap"]
     });
 
     // Add layer control

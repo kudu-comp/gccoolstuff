@@ -3,10 +3,9 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
           <div class="modal-header">
             <slot name="header">
-              <h2>{{$t('dialogpb.title')}}</h2>
+              <h2>{{ $t('dialogpb.title') }}</h2>
             </slot>
           </div>
 
@@ -14,57 +13,152 @@
             <slot name="body">
               <div class="row mr-2">
                 <div class="form-inline mb-2">
-                  <label class="form-label" for="startalphabet">{{$t('dialogpb.start')}}</label>
-                  <select id="startalphabet" class="custom-select" v-model="startalphabet" @change="genCleanSquare">
-                    <option value="ABCDEFGHIKLMNOPQRSTUVWXYZ">ABCDEFGHIKLMNOPQRSTUVWXYZ</option>
-                    <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789">ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</option>
-                    <option value="A1B2C3D4E5F6G7H8I9J0KLMNOPQRSTUVWXYZ">A1B2C3D4E5F6G7H8I9J0KLMNOPQRSTUVWXYZ</option>
+                  <label
+                    class="form-label"
+                    for="startalphabet"
+                  >{{ $t('dialogpb.start') }}</label>
+                  <select
+                    id="startalphabet"
+                    v-model="startalphabet"
+                    class="custom-select"
+                    @change="genCleanSquare"
+                  >
+                    <option value="ABCDEFGHIKLMNOPQRSTUVWXYZ">
+                      ABCDEFGHIKLMNOPQRSTUVWXYZ
+                    </option>
+                    <option value="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789">
+                      ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+                    </option>
+                    <option value="A1B2C3D4E5F6G7H8I9J0KLMNOPQRSTUVWXYZ">
+                      A1B2C3D4E5F6G7H8I9J0KLMNOPQRSTUVWXYZ
+                    </option>
                   </select>
                 </div>
                 <div class="col-8">
                   <div class="form-inline mb-2">
-                    <label class="form-label" for="key1">{{$t('dialogpb.key')}}</label>
-                    <input type='text' id="key" v-model="key" class="form-control ml-2" @input="genSquare">
+                    <label
+                      class="form-label"
+                      for="key1"
+                    >{{ $t('dialogpb.key') }}</label>
+                    <input
+                      id="key"
+                      v-model="key"
+                      type="text"
+                      class="form-control ml-2"
+                      @input="genSquare"
+                    >
                   </div>
                   <div class="form-inline mb-2">
-                    <label class="form-label" for="direction">{{$t('dialogpb.dir')}}</label>
-                    <select id="direction" class="custom-select ml-2" v-model="dir" @change="genSquare">
-                      <option value="HOR">{{$t('dialogpb.d.hor')}}</option>
-                      <option value="VER">{{$t('dialogpb.d.ver')}}</option>
-                      <option value="DIAH">{{$t('dialogpb.d.diah')}}</option>
-                      <option value="DIAV">{{$t('dialogpb.d.diav')}}</option>
-                      <option value="SI">{{$t('dialogpb.d.si')}}</option>
+                    <label
+                      class="form-label"
+                      for="direction"
+                    >{{ $t('dialogpb.dir') }}</label>
+                    <select
+                      id="direction"
+                      v-model="dir"
+                      class="custom-select ml-2"
+                      @change="genSquare"
+                    >
+                      <option value="HOR">
+                        {{ $t('dialogpb.d.hor') }}
+                      </option>
+                      <option value="VER">
+                        {{ $t('dialogpb.d.ver') }}
+                      </option>
+                      <option value="DIAH">
+                        {{ $t('dialogpb.d.diah') }}
+                      </option>
+                      <option value="DIAV">
+                        {{ $t('dialogpb.d.diav') }}
+                      </option>
+                      <option value="SI">
+                        {{ $t('dialogpb.d.si') }}
+                      </option>
                     </select>
                   </div>
                   <div class="form-inline mb-2">
-                    <label class="form-label" for="start">{{$t('dialogpb.corner')}}</label>
-                    <select id="start" class="custom-select ml-2" v-model="start" @change="genSquare">
-                      <option value="TL">{{$t('dialogpb.c.tl')}}</option>
-                      <option value="TR">{{$t('dialogpb.c.tr')}}</option>
-                      <option value="BL">{{$t('dialogpb.c.bl')}}</option>
-                      <option value="BR">{{$t('dialogpb.c.br')}}</option>
+                    <label
+                      class="form-label"
+                      for="start"
+                    >{{ $t('dialogpb.corner') }}</label>
+                    <select
+                      id="start"
+                      v-model="start"
+                      class="custom-select ml-2"
+                      @change="genSquare"
+                    >
+                      <option value="TL">
+                        {{ $t('dialogpb.c.tl') }}
+                      </option>
+                      <option value="TR">
+                        {{ $t('dialogpb.c.tr') }}
+                      </option>
+                      <option value="BL">
+                        {{ $t('dialogpb.c.bl') }}
+                      </option>
+                      <option value="BR">
+                        {{ $t('dialogpb.c.br') }}
+                      </option>
                     </select>
                   </div>
                   <div class="form-inline mb-2">
                     <div class="custom-control custom-checkbox">
-                      <input type="checkbox" id="flip" v-model="flip" class="custom-control-input ml-2" @change="genSquare">
-                      <label for="flip" class="custom-control-label ml-2">{{$t('dialogpb.flip')}}</label>
+                      <input
+                        id="flip"
+                        v-model="flip"
+                        type="checkbox"
+                        class="custom-control-input ml-2"
+                        @change="genSquare"
+                      >
+                      <label
+                        for="flip"
+                        class="custom-control-label ml-2"
+                      >{{ $t('dialogpb.flip') }}</label>
                     </div>
                   </div>
                 </div>
-                <div id="thesquare" class="col-4">
-                  <div v-for="l in squaredisp" :key="l">{{l}}<br></div>
+                <div
+                  id="thesquare"
+                  class="col-4"
+                >
+                  <div
+                    v-for="l in squaredisp"
+                    :key="l"
+                  >
+                    {{ l }}<br>
+                  </div>
                 </div>
               </div>
             </slot>
           </div>
 
           <div class="modal-footer">
-            <p class="errormsg mr-2" v-show="error">{{errormsg}}</p>
+            <p
+              v-show="error"
+              class="errormsg mr-2"
+            >
+              {{ errormsg }}
+            </p>
             <slot name="footer">
-              <input type="button" id="reset" :value="$t('buttons.reset')" class="btn btn-secondary ml-2" v-on:click="genReset">
-              <button class="btn btn-secondary" @click="$emit('close')">{{$t('buttons.cancel')}}</button>
-              <button class="btn btn-primary" @click="closeModal()">{{$t('buttons.save')}}</button>
+              <input
+                id="reset"
+                type="button"
+                :value="$t('buttons.reset')"
+                class="btn btn-secondary ml-2"
+                @click="genReset"
+              >
+              <button
+                class="btn btn-secondary"
+                @click="$emit('close')"
+              >
+                {{ $t('buttons.cancel') }}
+              </button>
+              <button
+                class="btn btn-primary"
+                @click="closeModal()"
+              >
+                {{ $t('buttons.save') }}
+              </button>
             </slot>
           </div>
         </div>

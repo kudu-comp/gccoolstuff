@@ -1,47 +1,116 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.convert.title')}}
+      {{ $t('coordinates.convert.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.convert.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.convert.long')"
+      />
       <div class="row">
         <div class="col-6">
           <div class="form-row mb-2">
-            <label class="form-label col-sm-4 col-md-2 col-lg-1" for="from">{{$t('labels.from')}}</label>
-            <v-datums class="col-sm-8 col-md-6 col-lg-4" id="from" v-model:datum="from"></v-datums>
+            <label
+              class="form-label col-sm-4 col-md-2 col-lg-1"
+              for="from"
+            >{{ $t('labels.from') }}</label>
+            <v-datums
+              id="from"
+              v-model:datum="from"
+              class="col-sm-8 col-md-6 col-lg-4"
+            />
           </div>
         </div>
         <div class="col-6">
           <div class="form-row mb-2">
-            <label class="form-label col-sm-4 col-md-2 col-lg-1" for="to">{{$t('labels.to')}}</label>
-            <v-datums class="col-sm-8 col-md-6 col-lg-4" id="to" v-model:datum="to" @change="convertCoordinates"></v-datums>
+            <label
+              class="form-label col-sm-4 col-md-2 col-lg-1"
+              for="to"
+            >{{ $t('labels.to') }}</label>
+            <v-datums
+              id="to"
+              v-model:datum="to"
+              class="col-sm-8 col-md-6 col-lg-4"
+              @change="convertCoordinates"
+            />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <input type="button" id="encode" name="encode" :value="$t('buttons.convert')" class="btn btn-primary mr-2" v-on:click="convertCoordinates">
+          <input
+            id="encode"
+            type="button"
+            name="encode"
+            :value="$t('buttons.convert')"
+            class="btn btn-primary mr-2"
+            @click="convertCoordinates"
+          >
         </div>
         <div class="col-6">
-          <v-wgsformat id="wgsformat" v-model:format="wgsformat" @change="convertCoordinates"></v-wgsformat>
+          <v-wgsformat
+            id="wgsformat"
+            v-model:format="wgsformat"
+            @change="convertCoordinates"
+          />
         </div>
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phfrom')" rows=5 cols=20 v-model='coordfrom'></textarea>
+          <textarea
+            id="coordfrom"
+            ref="x"
+            v-model="coordfrom"
+            name="coordfrom"
+            class="form-control mt-2"
+            :placeholder="$t('cdconvert.phfrom')"
+            rows="5"
+            cols="20"
+          />
         </div>
         <div class="col-6">
-          <textarea id="result" name="result" class="form-control mt-2" ref="x" :placeholder="$t('cdconvert.phto')" rows=5 cols=20 v-model='result'></textarea>
+          <textarea
+            id="result"
+            ref="x"
+            v-model="result"
+            name="result"
+            class="form-control mt-2"
+            :placeholder="$t('cdconvert.phto')"
+            rows="5"
+            cols="20"
+          />
         </div>
-        <div v-show="to == 'Proj4js' || from == 'Proj4js'" v-html="$t('cdconvert.proj4jsmsg')"></div>
-        <div class="form-inline mt-2" v-show="to == 'Proj4js' || from == 'Proj4js'">
-          <label class="form-label" for="key1">{{$t('cdconvert.proj4jslabel')}}</label>
-          <input type='text' id="proj4jsdef" name="proj4jsdef" ref="proj4jsdef" v-model="proj4jsdef" size="80" class="form-control ml-2">
+        <div
+          v-show="to == 'Proj4js' || from == 'Proj4js'"
+          v-html="$t('cdconvert.proj4jsmsg')"
+        />
+        <div
+          v-show="to == 'Proj4js' || from == 'Proj4js'"
+          class="form-inline mt-2"
+        >
+          <label
+            class="form-label"
+            for="key1"
+          >{{ $t('cdconvert.proj4jslabel') }}</label>
+          <input
+            id="proj4jsdef"
+            ref="proj4jsdef"
+            v-model="proj4jsdef"
+            type="text"
+            name="proj4jsdef"
+            size="80"
+            class="form-control ml-2"
+          >
         </div>
       </div>
-      <div class="errormsg mb-2" v-show="errormsg">{{errormsg}}</div>
-      <v-map v-model:mylocation="coordfrom"/>
+      <div
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </div>
+      <v-map v-model:mylocation="coordfrom" />
     </div>
   </div>
 </template>
@@ -55,8 +124,10 @@ import VMap from '@/components/inputs/VMap.vue'
 export default {
   name: 'CoordConvert',
 
-  props: {
-    msg: String
+  components: {
+    VDatums,
+    VWgsformat,
+    VMap,
   },
 
   data: function() {
@@ -70,12 +141,6 @@ export default {
       count : 0,
       wgsformat : "N52 12.345 E4 12.345"
     }
-  },
-
-  components: {
-    VDatums,
-    VWgsformat,
-    VMap,
   },
 
   methods: {
@@ -136,7 +201,7 @@ export default {
           .then ( mapcoords => {
 
             for (let m of mapcoords)
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, "Point " + ++this.count);
+              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, this.$t('labels.point') + ++this.count);
 
           })
           .catch ( (e) => {

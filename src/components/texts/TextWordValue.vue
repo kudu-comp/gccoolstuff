@@ -1,40 +1,128 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.wordvalue.title')}}
+      {{ $t('texttools.wordvalue.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.wordvalue.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('texttools.wordvalue.long')"
+      />
       <div class="form-inline mb-2">
-        <v-alphabets-ext id="listofalpha" ref="listofalpha" v-model:alphabet="selectedalphabet" @change="wordValue"></v-alphabets-ext>
+        <v-alphabets-ext
+          id="listofalpha"
+          ref="listofalpha"
+          v-model:alphabet="selectedalphabet"
+          @change="wordValue"
+        />
       </div>
       <div class="form-inline">
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="reverse" id="reverse" v-model="reverse" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="reverse" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.reverse')}}</label>
+          <input
+            id="reverse"
+            v-model="reverse"
+            type="checkbox"
+            name="reverse"
+            class="custom-control-input mr-2 mb-2"
+            @change="wordValue"
+          >
+          <label
+            for="reverse"
+            class="custom-control-label mb-2 mr-2"
+          >{{ $t('txtwordval.reverse') }}</label>
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="startatzero" id="startatzero" v-model="startatzero" class="custom-control-input mr-2 mb-2" @change="wordValue">
-          <label for="startatzero" class="custom-control-label mb-2">{{$t('txtwordval.startzero')}}</label>
+          <input
+            id="startatzero"
+            v-model="startatzero"
+            type="checkbox"
+            name="startatzero"
+            class="custom-control-input mr-2 mb-2"
+            @change="wordValue"
+          >
+          <label
+            for="startatzero"
+            class="custom-control-label mb-2"
+          >{{ $t('txtwordval.startzero') }}</label>
         </div>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message' @input="wordValue"></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+          @input="wordValue"
+        />
       </div>
-      <input type="button" id="analyze" name="analyze" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="wordValue">
-      <input type="button" id="remove" name="remove" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2 mr-2" v-on:click="removeDiacr">
-      <input type="button" id="remove" name="remove" :value="$t('txtwordval.showhide')" class="btn btn-primary mb-2 mr-2" v-on:click="showTable">
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}.</p>
+      <input
+        id="analyze"
+        type="button"
+        name="analyze"
+        :value="$t('buttons.calc')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="wordValue"
+      >
+      <input
+        id="remove"
+        type="button"
+        name="remove"
+        :value="$t('txtwordval.replacediac')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="removeDiacr"
+      >
+      <input
+        id="remove"
+        type="button"
+        name="remove"
+        :value="$t('txtwordval.showhide')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="showTable"
+      >
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}.
+      </p>
       <div v-show="showvalues">
         <table class="table table-borderless table-sm">
-          <tr><td v-for="s in values" :key="s">{{s[0]}}</td></tr>
-          <tr><td v-for="s in values" :key="s">{{s[1]}}</td></tr>
+          <tr>
+            <td
+              v-for="s in values"
+              :key="s"
+            >
+              {{ s[0] }}
+            </td>
+          </tr>
+          <tr>
+            <td
+              v-for="s in values"
+              :key="s"
+            >
+              {{ s[1] }}
+            </td>
+          </tr>
         </table>
       </div>
-      <div v-if="result" v-html="result" class = "resultbox"></div>
-      <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
-        <template v-slot:header>{{$t('txtwordval.someinfo')}}</template>
-        <template v-slot:content><div v-html="$t('txtwordval.someinfo2')"></div></template>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <va-item
+        :showitem="showinfo"
+        @toggle="showinfo = !showinfo"
+      >
+        <template #header>
+          {{ $t('txtwordval.someinfo') }}
+        </template>
+        <template #content>
+          <div v-html="$t('txtwordval.someinfo2')" />
+        </template>
       </va-item>
     </div>
   </div>
@@ -48,8 +136,9 @@ import VaItem from '@/components/inputs/VaItem.vue'
 export default {
   name: 'TextAnalyze',
 
-  props: {
-    msg: String,
+  components: {
+    VAlphabetsExt,
+    VaItem,
   },
 
   data: function () {
@@ -65,11 +154,6 @@ export default {
       showinfo: true,
       errormsg: ""
     }
-  },
-
-  components: {
-    VAlphabetsExt,
-    VaItem,
   },
 
   mounted: function() {

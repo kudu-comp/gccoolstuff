@@ -1,43 +1,135 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('othertools.unitconvertor.title')}}
+      {{ $t('othertools.unitconvertor.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.unitconvertor.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('othertools.unitconvertor.long')"
+      />
       <div class="form-inline">
-        <label for="cats" class="form-label mr-2 mb-2">{{$t('unitconvertor.selcat')}}</label>
-        <select class="custom-select mb-2" v-model="cat" @change="changeCat">
-          <option v-for="(c, index) in units" :key="index" :value="index">{{$t('unitconvertor.cat.' + c.category + '.name')}}</option>
+        <label
+          for="cats"
+          class="form-label mr-2 mb-2"
+        >{{ $t('unitconvertor.selcat') }}</label>
+        <select
+          v-model="cat"
+          class="custom-select mb-2"
+          @change="changeCat"
+        >
+          <option
+            v-for="(c, index) in units"
+            :key="index"
+            :value="index"
+          >
+            {{ $t('unitconvertor.cat.' + c.category + '.name') }}
+          </option>
         </select>
       </div>
       <div class="infoblock">
-        {{$t('unitconvertor.cat.' + units[cat].category + '.desc')}}
+        {{ $t('unitconvertor.cat.' + units[cat].category + '.desc') }}
       </div>
       <div class="row">
         <div class="col-6">
-          <label class="form-label mb-2 mr-2" for="unitfrom">{{$t('unitconvertor.unitfrom')}}</label>
-          <select class="custom-select" id="unitform" v-model="idfrom" @change="convertInput('right')">
-            <option v-for="(u, index) in units[cat].units" :key="index" :value="index">{{u.name}} - {{u.symbol}}</option>
+          <label
+            class="form-label mb-2 mr-2"
+            for="unitfrom"
+          >{{ $t('unitconvertor.unitfrom') }}</label>
+          <select
+            id="unitform"
+            v-model="idfrom"
+            class="custom-select"
+            @change="convertInput('right')"
+          >
+            <option
+              v-for="(u, index) in units[cat].units"
+              :key="index"
+              :value="index"
+            >
+              {{ u.name }} - {{ u.symbol }}
+            </option>
           </select>
-          <label class="form-label mb-2 mr-2" for="valfrom">{{$t('unitconvertor.value')}}</label>
-          <input type='number' id="valfrom" v-model="from" class="form-control mb-2">
-          <input type="button" id="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="convertInput('right')">
-          <input type="button" id="calc" :value="$t('buttons.showtable')" class="btn btn-primary mb-2" v-on:click="convertTable('right')">
+          <label
+            class="form-label mb-2 mr-2"
+            for="valfrom"
+          >{{ $t('unitconvertor.value') }}</label>
+          <input
+            id="valfrom"
+            v-model="from"
+            type="number"
+            class="form-control mb-2"
+          >
+          <input
+            id="calc"
+            type="button"
+            :value="$t('buttons.calc')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="convertInput('right')"
+          >
+          <input
+            id="calc"
+            type="button"
+            :value="$t('buttons.showtable')"
+            class="btn btn-primary mb-2"
+            @click="convertTable('right')"
+          >
         </div>
         <div class="col-6">
-          <label class="form-label mb-2 mr-2" for="unitfrom">{{$t('unitconvertor.unitto')}}</label>
-          <select class="custom-select" v-model="idto" @change="convertInput('left')">
-            <option v-for="(u, index) in units[cat].units" :key="index" :value="index">{{u.name}} - {{u.symbol}}</option>
+          <label
+            class="form-label mb-2 mr-2"
+            for="unitfrom"
+          >{{ $t('unitconvertor.unitto') }}</label>
+          <select
+            v-model="idto"
+            class="custom-select"
+            @change="convertInput('left')"
+          >
+            <option
+              v-for="(u, index) in units[cat].units"
+              :key="index"
+              :value="index"
+            >
+              {{ u.name }} - {{ u.symbol }}
+            </option>
           </select>
-          <label class="form-label mb-2 mr-2" for="valto">{{$t('unitconvertor.value')}}</label>
-          <input type='number' id="valto" v-model="to" class="form-control mb-2">
-          <input type="button" id="calc" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="convertInput('left')">
-          <input type="button" id="calc" :value="$t('buttons.showtable')" class="btn btn-primary mb-2" v-on:click="convertTable('left')">
+          <label
+            class="form-label mb-2 mr-2"
+            for="valto"
+          >{{ $t('unitconvertor.value') }}</label>
+          <input
+            id="valto"
+            v-model="to"
+            type="number"
+            class="form-control mb-2"
+          >
+          <input
+            id="calc"
+            type="button"
+            :value="$t('buttons.calc')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="convertInput('left')"
+          >
+          <input
+            id="calc"
+            type="button"
+            :value="$t('buttons.showtable')"
+            class="btn btn-primary mb-2"
+            @click="convertTable('left')"
+          >
         </div>
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-      <div v-if="result" v-html="result" class="resultbox" />
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
     </div>
   </div>
 </template>
@@ -49,10 +141,6 @@ import { definedUnits, convertUnit } from '@/scripts/unitconvertor.js'
 export default {
 
   name: 'TextCodes',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

@@ -1,58 +1,167 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.imagetransform.title')}}
+      {{ $t('imagetools.imagetransform.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.imagetransform.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.imagetransform.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div class="row">
-        <div id="preview" class="col-9">
-          <canvas id="canvas" v-bind:width="width" v-bind:height="height" @click="fillColor"></canvas>
+        <div
+          id="preview"
+          class="col-9"
+        >
+          <canvas
+            id="canvas"
+            :width="width"
+            :height="height"
+            @click="fillColor"
+          />
         </div>
         <div class="col-3">
-          <input type="button" id="restore" :value="$t('buttons.original')" class="btn btn-primary mr-2 mb-2" v-on:click="restore">
-          <input type="button" id="undo" :value="$t('buttons.undo')" class="btn btn-primary mr-2 mb-2" v-on:click="undoEdit">
+          <input
+            id="restore"
+            type="button"
+            :value="$t('buttons.original')"
+            class="btn btn-primary mr-2 mb-2"
+            @click="restore"
+          >
+          <input
+            id="undo"
+            type="button"
+            :value="$t('buttons.undo')"
+            class="btn btn-primary mr-2 mb-2"
+            @click="undoEdit"
+          >
           <div class="box">
-            <div class="box-header">{{$t('imagetransform.shift')}}</div>
+            <div class="box-header">
+              {{ $t('imagetransform.shift') }}
+            </div>
             <div class="box-body">
-              <p>{{$t('imagetransform.shiftinfo')}}</p>
+              <p>{{ $t('imagetransform.shiftinfo') }}</p>
               <div>
-                <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftr')}}: {{shiftr}}</label>
-                <vue-slider id="shiftr" v-model="shiftr" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
-                <input type="button" name="shiftrow" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftRows">
+                <label
+                  class="form-label mr-2"
+                  for="shiftr"
+                >{{ $t('imagetransform.shiftr') }}: {{ shiftr }}</label>
+                <vue-slider
+                  id="shiftr"
+                  v-model="shiftr"
+                  v-bind="controptions2"
+                  class="ml-2 mr-2 mb-2"
+                />
+                <input
+                  type="button"
+                  name="shiftrow"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mr-2 mb-2"
+                  @click="shiftRows"
+                >
               </div>
               <div>
-                <label class="form-label mr-2" for="shiftr">{{$t('imagetransform.shiftc')}}: {{shiftc}}</label>
-                <vue-slider id="shiftc" v-model="shiftc" v-bind="controptions2" class="ml-2 mr-2 mb-2"></vue-slider>
-                <input type="button" id="shiftcol" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="shiftCols">
+                <label
+                  class="form-label mr-2"
+                  for="shiftr"
+                >{{ $t('imagetransform.shiftc') }}: {{ shiftc }}</label>
+                <vue-slider
+                  id="shiftc"
+                  v-model="shiftc"
+                  v-bind="controptions2"
+                  class="ml-2 mr-2 mb-2"
+                />
+                <input
+                  id="shiftcol"
+                  type="button"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mr-2 mb-2"
+                  @click="shiftCols"
+                >
               </div>
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('imagetransform.fliphalf')}}</div>
+            <div class="box-header">
+              {{ $t('imagetransform.fliphalf') }}
+            </div>
             <div class="box-body">
-              <p>{{$t('imagetransform.flipinfo')}}</p>
+              <p>{{ $t('imagetransform.flipinfo') }}</p>
               <div>
-                <label class="form-label mr-2" for="flipr">{{$t('imagetransform.flipr')}}: {{flipr}}</label>
-                <vue-slider id="flipr" v-model="flipr" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-                <input type="button" id="fliprow" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipRows">
+                <label
+                  class="form-label mr-2"
+                  for="flipr"
+                >{{ $t('imagetransform.flipr') }}: {{ flipr }}</label>
+                <vue-slider
+                  id="flipr"
+                  v-model="flipr"
+                  v-bind="controptions"
+                  class="ml-2 mr-2 mb-2"
+                />
+                <input
+                  id="fliprow"
+                  type="button"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mr-2 mb-2"
+                  @click="flipRows"
+                >
               </div>
               <div>
-                <label class="form-label mr-2" for="halfflipc">{{$t('imagetransform.flipc')}}: {{flipc}}</label>
-                <vue-slider id="flipc" v-model="flipc" v-bind="controptions" class="ml-2 mr-2 mb-2"></vue-slider>
-                <input type="button" id="flipcol" :value="$t('buttons.apply')" class="btn btn-primary mr-2 mb-2" v-on:click="flipCols">
+                <label
+                  class="form-label mr-2"
+                  for="halfflipc"
+                >{{ $t('imagetransform.flipc') }}: {{ flipc }}</label>
+                <vue-slider
+                  id="flipc"
+                  v-model="flipc"
+                  v-bind="controptions"
+                  class="ml-2 mr-2 mb-2"
+                />
+                <input
+                  id="flipcol"
+                  type="button"
+                  :value="$t('buttons.apply')"
+                  class="btn btn-primary mr-2 mb-2"
+                  @click="flipCols"
+                >
               </div>
             </div>
           </div>
           <div class="box">
-            <div class="box-header">{{$t('imagetransform.transform')}}</div>
+            <div class="box-header">
+              {{ $t('imagetransform.transform') }}
+            </div>
             <div class="box-body">
-              <input type="button" id="fliph" :value="$t('imagetransform.fliph')" class="btn btn-primary mr-2 mb-2" v-on:click="flipH">
-              <input type="button" id="flipv" :value="$t('imagetransform.flipv')" class="btn btn-primary mr-2 mb-2" v-on:click="flipV">
+              <input
+                id="fliph"
+                type="button"
+                :value="$t('imagetransform.fliph')"
+                class="btn btn-primary mr-2 mb-2"
+                @click="flipH"
+              >
+              <input
+                id="flipv"
+                type="button"
+                :value="$t('imagetransform.flipv')"
+                class="btn btn-primary mr-2 mb-2"
+                @click="flipV"
+              >
             </div>
           </div>
         </div>
@@ -68,10 +177,6 @@ import '@/components/css/slidertheme.css'
 
 export default {
   name: 'ColorPicker',
-
-  props: {
-    msg: String
-  },
 
   components: {
     VueSlider,
@@ -379,6 +484,11 @@ export default {
         this.img = new Image();
         this.img.crossOrigin = 'anonymous';
         this.img.src = URL.createObjectURL(input.files[0]);
+
+        // Define a callback function to run, when image has errors loading
+        this.img.onerror = () => {
+          this.errormsg = this.$t('errors.loadingimage')        
+        }
 
         // Define a callback function to run, when image has loaded finishes its job
         this.img.onload = () => {

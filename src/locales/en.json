@@ -10,7 +10,9 @@
     "invalidinput": "Input could not be converted. Please check selected input.",
     "noresult": "No results found",
     "cannotparse": "Cannot parse input",
-    "unknowninput": "Unknown input "
+    "unknowninput": "Unknown input ",
+    "loadingimage": "Error loading image",
+    "loadingfile": "Error loading file"
   },
 
   "labels": {
@@ -33,7 +35,8 @@
     "alphabet": "Alphabet",
     "search": "Search for",
     "sum": "Sum",
-    "count": "Count"
+    "count": "Count",
+    "number": "Number"
   },
 
   "buttons": {
@@ -297,7 +300,7 @@
     "unitconvertor": {
       "title": "Units",
       "short": "Length, area, volume, temperature, power, angle and speed convertor",
-      "long": "Unit convertor converts a wide range of units. Units are organized in categories for units the measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units."  
+      "long": "Unit convertor converts a wide range of units. Units are organized in categories for units that measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units."  
     },
     "dnacode": {
       "title": "DNA Code",
@@ -607,6 +610,11 @@
       "short": "Primes",
       "long" : "This tool checks if a number is prime or not. The max number to be checked is 2^53. It shows the prime number at a given position or shows the position of a given prime. The first 865,000 primes are available. Get prime factors."
     },
+    "romans": {
+      "title": "Roman numbers",
+      "short": "Roman numbers",
+      "long": "This tool converts roman numbers to decimal numbers and back. The maximum roman number is 3999. Roman numbers use the following characters MDCLXVI. It is possible to enter multiple numbers divided by spaces or something else."
+    },
     "fibonacci": {
       "title": "Fibonacci",
       "short": "First 500 Fibonacci numbers.",
@@ -690,6 +698,11 @@
       "title": "Binary to text",
       "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91",
       "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>"
+    },
+    "duckspeak" : {
+      "title": "Duckspeak",
+      "short": "A lot of nak",
+      "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
     }
 
   },
@@ -1459,6 +1472,13 @@
     "posofprime": "The position of prime"
   },
 
+  "mathroman" : {
+    "btndtr": "Decimal to Roman",
+    "btnrtd": "Roman To Decimal",
+    "notroman": "Invalid roman number, only MDCLXVI are allowed",
+    "invalidint": "Invalid number, the maximum roman number is 3999"
+  },
+
   "mathfib": {
     "pos": "Fibonacci number at position",
     "check": "Check if this is a Fibonaci number",
@@ -1577,6 +1597,15 @@
     "selfromtable": "Encoding table",
     "selto": "Encoding to",
     "seltotable": "Encoding table"
+  },
+
+  "compds": {
+    "invalidint": " is not valid number\n",
+    "format": "Input/output format",
+    "ascii": "Text (ASCII)",
+    "hex": "Hexadecimal",
+    "dec": "Numbers (decimal",
+    "invalidcmd": " it not duckspeak\n"
   },
 
   "compenc": {

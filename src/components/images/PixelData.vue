@@ -1,40 +1,109 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.pixeldata.title')}}
+      {{ $t('imagetools.pixeldata.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.pixeldata.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.pixeldata.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
       </div>
       <div class="row">
         <div class="col-6">
           <div class="form-group">
-            <p>{{$t('pixeldata.sum')}}</p>
-            <input type="button" id="sum" name="btnsearch" :value="$t('buttons.sum')" class="btn btn-primary mr-2 mb-2" v-on:click="pixelSum(img)">
+            <p>{{ $t('pixeldata.sum') }}</p>
+            <input
+              id="sum"
+              type="button"
+              name="btnsearch"
+              :value="$t('buttons.sum')"
+              class="btn btn-primary mr-2 mb-2"
+              @click="pixelSum(img)"
+            >
           </div>
           <div class="form-group">
-            <p>{{$t('pixeldata.count')}}</p>
+            <p>{{ $t('pixeldata.count') }}</p>
             <div class="form-inline">
-              <label class="form-label col-2 mb-2" for="red">{{$t('colors.red')}}</label>
-              <input type='number' id="red" min="0" max="255" v-model="red" class="form-control mr-2 mb-2">
+              <label
+                class="form-label col-2 mb-2"
+                for="red"
+              >{{ $t('colors.red') }}</label>
+              <input
+                id="red"
+                v-model="red"
+                type="number"
+                min="0"
+                max="255"
+                class="form-control mr-2 mb-2"
+              >
             </div>
             <div class="form-inline">
-              <label class="form-label col-2 mb-2" for="green">{{$t('colors.green')}}</label>
-              <input type='number' id="green" min="0" max="255" v-model="green" class="form-control mr-2 mb-2">
+              <label
+                class="form-label col-2 mb-2"
+                for="green"
+              >{{ $t('colors.green') }}</label>
+              <input
+                id="green"
+                v-model="green"
+                type="number"
+                min="0"
+                max="255"
+                class="form-control mr-2 mb-2"
+              >
             </div>
             <div class="form-inline">
-              <label class="form-label col-2 mb-2" for="blue">{{$t('colors.blue')}}</label>
-              <input type='number' id="blue" min="0" max="255" v-model="blue" class="form-control mr-2 mb-2">
+              <label
+                class="form-label col-2 mb-2"
+                for="blue"
+              >{{ $t('colors.blue') }}</label>
+              <input
+                id="blue"
+                v-model="blue"
+                type="number"
+                min="0"
+                max="255"
+                class="form-control mr-2 mb-2"
+              >
             </div>
-            <input type="button" id="restore" name="btnsearch" :value="$t('buttons.count')" class="btn btn-primary mr-2 mb-2" v-on:click="pixelCount(img)">
+            <input
+              id="restore"
+              type="button"
+              name="btnsearch"
+              :value="$t('buttons.count')"
+              class="btn btn-primary mr-2 mb-2"
+              @click="pixelCount(img)"
+            >
           </div>
-          <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-          <div class="card card-text p-2" v-html="result"></div>
+          <p
+            v-show="errormsg"
+            class="errormsg"
+          >
+            {{ errormsg }}
+          </p>
+          <div
+            class="card card-text p-2"
+            v-html="result"
+          />
         </div>
-        <div id="preview" class="col-6">
-          <canvas id="canvas" v-bind:width="width" v-bind:height="height"></canvas>
+        <div
+          id="preview"
+          class="col-6"
+        >
+          <canvas
+            id="canvas"
+            :width="width"
+            :height="height"
+          />
         </div>
       </div>
     </div>
@@ -46,10 +115,6 @@
 export default {
 
   name: 'PixelData',
-
-  props: {
-    msg: String
-  },
 
   data: function() {
     return {
@@ -194,6 +259,11 @@ export default {
         this.img = new Image();
         this.img.crossOrigin = 'anonymous';
         this.img.src = URL.createObjectURL(input.files[0]);
+
+        // Define a callback function to run, when image has errors loading
+        this.img.onerror = () => {
+          this.errormsg = this.$t('errors.loadingimage')        
+        }
 
         // Define a callback function to run, when image has loaded finishes its job
         this.img.onload = () => {

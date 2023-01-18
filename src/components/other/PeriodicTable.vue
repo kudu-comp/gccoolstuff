@@ -1,10 +1,15 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-        <div class="text-center">{{$t('othertools.periodictable.title')}}</div>
+      <div class="text-center">
+        {{ $t('othertools.periodictable.title') }}
+      </div>
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.periodictable.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('othertools.periodictable.long')"
+      />
       <v-table
         :phsearch="phsearch"
         :cols="cols"
@@ -21,11 +26,6 @@ import VTable from '@/components/inputs/VTable.vue'
 export default {
 
   name: 'PeriodicTable',
-
-  // Prop initcipher is parameter passed by route (optional)
-  props: {
-    msg: String
-  },
 
   components: {
     VTable

@@ -1,169 +1,874 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      <div class="text-center">{{cipher}} {{$t('cp.cipher')}}</div>
+      <div class="text-center">
+        {{ cipher }} {{ $t('cp.cipher') }}
+      </div>
     </div>
     <div class="mainpage">
-      <div class="intro" v-html="$t('cp.info')" />
+      <div
+        class="intro"
+        v-html="$t('cp.info')"
+      />
       <div class="form-inline mb-2">
-        <input type="button" id="adfgxv" name="adfgxv" value="ADFGX(V)" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ADFGVX')">
-        <input type="button" id="affine" name="affine" value="Affine" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Affine')">
-        <input type="button" id="asmco" name="asmco" value="Amsco" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Amsco')">
-        <input type="button" id="atbash" name="atbash" value="Atbash" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Atbash')">
-        <input type="button" id="atomtom" name="atomtom" value="A-tom-tom" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Atomtom')">
-        <input type="button" id="autokey" name="autokey" value="Autokey" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Autokey')">
-        <input type="button" id="bacon" name="bacon" value="Bacon" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bacon')">
-        <input type="button" id="base31" name="base31" value="Base31" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('GCId')">
-        <input type="button" id="bazeries" name="bazeries" value="Bazeries" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bazeries')">
-        <input type="button" id="beaufort" name="beaufort" value="Beaufort" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Beaufort')">
-        <input type="button" id="bibibinary" name="bibibinary" value="Bibi-binary" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bibibinary')">
-        <input type="button" id="bifid" name="bifid" value="Bifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Bifid')">
-        <input type="button" id="burrowswheeler" name="burrowswheeler" value="Burrows-Wheeler" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Burrowswheeler')">
-        <input type="button" id="cadenus" name="cadenus" value="Cadenus" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Cadenus')">
-        <input type="button" id="caesar" name="caesar" value="Caesar" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Caesar')">
-        <input type="button" id="chaocipher" name="chaocipher" value="Chaocipher" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Chaocipher')">
-        <input type="button" id="colloncipher" name="colloncipher" value="Collon" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Collon')">
-        <input type="button" id="columnartransposition" name="columnartransposition" value="Columnar Transposition" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Columnartransposition')">
-        <input type="button" id="condi" name="condi" value="Condi" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Condi')">
-        <input type="button" id="digrafid" name="digrafid" value="Digrafid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Digrafid')">
-        <input type="button" id="foursquare" name="foursquare" value="Foursquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Foursquare')">
-        <input type="button" id="gcid" name="gcid" value="Geocache ID" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('GCId')">
-        <input type="button" id="goldbug" name="goldbug" value="Goldbug" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Goldbug')">
-        <input type="button" id="gromark" name="gromark" value="Gromark" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Gromark')">
-        <input type="button" id="gronsfeld" name="gronsfeld" value="Gronsfeld" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Gronsfeld')">
-        <input type="button" id="vatsyayana" name="vatsyayana" value="Kamasutra" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vatsyayana')">
-        <input type="button" id="kennycode" name="kennycode" value="Kenny code" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Kennycode')">
-        <input type="button" id="monomedinome" name="monomedinome" value="Monome-dinome" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Monomedinome')">
-        <input type="button" id="morbit" name="morbit" value="Morbit" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Morbit')">
-        <input type="button" id="morse" name="morse" value="Morse" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Morse')">
-        <input type="button" id="myszkowski" name="myszkowski" value="Myszkowski" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Myszkowski')">
-        <input type="button" id="nicodemus" name="nicodemus" value="Nicodemus" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Nicodemus')">
-        <input type="button" id="nihilist" name="nihilist" value="Nihilist" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Nihilist')">
-        <input type="button" id="nihilisttransposition" name="nihilisttransposition" value="Nihilist transposition" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Nihilisttransposition')">
-        <input type="button" id="onetimepad" name="onetimepad" value="One time pad" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Onetimepad')">
-        <input type="button" id="phillips" name="phillips" value="Phillips" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Phillips')">
-        <input type="button" id="playfair" name="playfair" value="Playfair" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Playfair')">
-        <input type="button" id="pollux" name="pollux" value="Pollux" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Pollux')">
-        <input type="button" id="polybius" name="polybius" value="Polybius" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Polybius')">
-        <input type="button" id="porta" name="porta" value="Porta" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Porta')">
-        <input type="button" id="portax" name="portax" value="Portax" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Portax')">
-        <input type="button" id="ragbaby" name="ragbaby" value="Ragbaby" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Ragbaby')">
-        <input type="button" id="railfence" name="railfence" value="Railfence" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Railfence')">
-        <input type="button" id="redefence" name="redefence" value="Redefence" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Redefence')">
-        <input type="button" id="reverse" name="reverse" value="Reverse" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Reverse')">
-        <input type="button" id="reversewords" name="reversewords" value="Reverse words" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Reversewords')">
-        <input type="button" id="rot5" name="rot5" value="ROT5" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ROT5')">
-        <input type="button" id="rot13" name="rot13" value="ROT13" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ROT13')">
-        <input type="button" id="rot47" name="rot47" value="ROT47" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('ROT47')">
-        <input type="button" id="scytale" name="scytale" value="Scytale" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Scytale')">
-        <input type="button" id="skip" name="skip" value="Skip" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Skip')">
-        <input type="button" id="substitution" name="substitution" value="Substitution" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Substitution')">
-        <input type="button" id="syllabary" name="syllabary" value="Syllabary" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Syllabary')">
-        <input type="button" id="tapir" name="tapir" value="Tapir" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Tapir')">
-        <input type="button" id="trifid" name="trifid" value="Trifid" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trifid')">
-        <input type="button" id="trisquare" name="trisquare" value="Trisquare" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Trisquare')">
-        <input type="button" id="vatsyayana" name="vatsyayana" value="Vatsyayana" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vatsyayana')">
-        <input type="button" id="vigenere" name="vigenere" value="Vigenere" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Vigenere')">
-        <input type="button" id="zebra" name="zebra" value="Zebra" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Zebra')">
-        <input type="button" id="zygazyfa" name="zygazyfa" value="Zygazyfa" class="btn btn-sm btn-primary mb-2 mr-2" v-on:click="changeCipher('Zygazyfa')">
+        <input
+          id="adfgxv"
+          type="button"
+          name="adfgxv"
+          value="ADFGX(V)"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('ADFGVX')"
+        >
+        <input
+          id="affine"
+          type="button"
+          name="affine"
+          value="Affine"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Affine')"
+        >
+        <input
+          id="asmco"
+          type="button"
+          name="asmco"
+          value="Amsco"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Amsco')"
+        >
+        <input
+          id="atbash"
+          type="button"
+          name="atbash"
+          value="Atbash"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Atbash')"
+        >
+        <input
+          id="atomtom"
+          type="button"
+          name="atomtom"
+          value="A-tom-tom"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Atomtom')"
+        >
+        <input
+          id="autokey"
+          type="button"
+          name="autokey"
+          value="Autokey"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Autokey')"
+        >
+        <input
+          id="bacon"
+          type="button"
+          name="bacon"
+          value="Bacon"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Bacon')"
+        >
+        <input
+          id="base31"
+          type="button"
+          name="base31"
+          value="Base31"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('GCId')"
+        >
+        <input
+          id="bazeries"
+          type="button"
+          name="bazeries"
+          value="Bazeries"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Bazeries')"
+        >
+        <input
+          id="beaufort"
+          type="button"
+          name="beaufort"
+          value="Beaufort"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Beaufort')"
+        >
+        <input
+          id="bibibinary"
+          type="button"
+          name="bibibinary"
+          value="Bibi-binary"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Bibibinary')"
+        >
+        <input
+          id="bifid"
+          type="button"
+          name="bifid"
+          value="Bifid"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Bifid')"
+        >
+        <input
+          id="burrowswheeler"
+          type="button"
+          name="burrowswheeler"
+          value="Burrows-Wheeler"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Burrowswheeler')"
+        >
+        <input
+          id="cadenus"
+          type="button"
+          name="cadenus"
+          value="Cadenus"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Cadenus')"
+        >
+        <input
+          id="caesar"
+          type="button"
+          name="caesar"
+          value="Caesar"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Caesar')"
+        >
+        <input
+          id="chaocipher"
+          type="button"
+          name="chaocipher"
+          value="Chaocipher"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Chaocipher')"
+        >
+        <input
+          id="colloncipher"
+          type="button"
+          name="colloncipher"
+          value="Collon"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Collon')"
+        >
+        <input
+          id="columnartransposition"
+          type="button"
+          name="columnartransposition"
+          value="Columnar Transposition"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Columnartransposition')"
+        >
+        <input
+          id="condi"
+          type="button"
+          name="condi"
+          value="Condi"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Condi')"
+        >
+        <input
+          id="digrafid"
+          type="button"
+          name="digrafid"
+          value="Digrafid"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Digrafid')"
+        >
+        <input
+          id="foursquare"
+          type="button"
+          name="foursquare"
+          value="Foursquare"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Foursquare')"
+        >
+        <input
+          id="gcid"
+          type="button"
+          name="gcid"
+          value="Geocache ID"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('GCId')"
+        >
+        <input
+          id="goldbug"
+          type="button"
+          name="goldbug"
+          value="Goldbug"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Goldbug')"
+        >
+        <input
+          id="gromark"
+          type="button"
+          name="gromark"
+          value="Gromark"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Gromark')"
+        >
+        <input
+          id="gronsfeld"
+          type="button"
+          name="gronsfeld"
+          value="Gronsfeld"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Gronsfeld')"
+        >
+        <input
+          id="vatsyayana"
+          type="button"
+          name="vatsyayana"
+          value="Kamasutra"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Vatsyayana')"
+        >
+        <input
+          id="kennycode"
+          type="button"
+          name="kennycode"
+          value="Kenny code"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Kennycode')"
+        >
+        <input
+          id="monomedinome"
+          type="button"
+          name="monomedinome"
+          value="Monome-dinome"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Monomedinome')"
+        >
+        <input
+          id="morbit"
+          type="button"
+          name="morbit"
+          value="Morbit"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Morbit')"
+        >
+        <input
+          id="morse"
+          type="button"
+          name="morse"
+          value="Morse"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Morse')"
+        >
+        <input
+          id="myszkowski"
+          type="button"
+          name="myszkowski"
+          value="Myszkowski"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Myszkowski')"
+        >
+        <input
+          id="nicodemus"
+          type="button"
+          name="nicodemus"
+          value="Nicodemus"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Nicodemus')"
+        >
+        <input
+          id="nihilist"
+          type="button"
+          name="nihilist"
+          value="Nihilist"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Nihilist')"
+        >
+        <input
+          id="nihilisttransposition"
+          type="button"
+          name="nihilisttransposition"
+          value="Nihilist transposition"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Nihilisttransposition')"
+        >
+        <input
+          id="onetimepad"
+          type="button"
+          name="onetimepad"
+          value="One time pad"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Onetimepad')"
+        >
+        <input
+          id="phillips"
+          type="button"
+          name="phillips"
+          value="Phillips"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Phillips')"
+        >
+        <input
+          id="playfair"
+          type="button"
+          name="playfair"
+          value="Playfair"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Playfair')"
+        >
+        <input
+          id="pollux"
+          type="button"
+          name="pollux"
+          value="Pollux"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Pollux')"
+        >
+        <input
+          id="polybius"
+          type="button"
+          name="polybius"
+          value="Polybius"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Polybius')"
+        >
+        <input
+          id="porta"
+          type="button"
+          name="porta"
+          value="Porta"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Porta')"
+        >
+        <input
+          id="portax"
+          type="button"
+          name="portax"
+          value="Portax"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Portax')"
+        >
+        <input
+          id="ragbaby"
+          type="button"
+          name="ragbaby"
+          value="Ragbaby"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Ragbaby')"
+        >
+        <input
+          id="railfence"
+          type="button"
+          name="railfence"
+          value="Railfence"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Railfence')"
+        >
+        <input
+          id="redefence"
+          type="button"
+          name="redefence"
+          value="Redefence"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Redefence')"
+        >
+        <input
+          id="reverse"
+          type="button"
+          name="reverse"
+          value="Reverse"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Reverse')"
+        >
+        <input
+          id="reversewords"
+          type="button"
+          name="reversewords"
+          value="Reverse words"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Reversewords')"
+        >
+        <input
+          id="rot5"
+          type="button"
+          name="rot5"
+          value="ROT5"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('ROT5')"
+        >
+        <input
+          id="rot13"
+          type="button"
+          name="rot13"
+          value="ROT13"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('ROT13')"
+        >
+        <input
+          id="rot47"
+          type="button"
+          name="rot47"
+          value="ROT47"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('ROT47')"
+        >
+        <input
+          id="scytale"
+          type="button"
+          name="scytale"
+          value="Scytale"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Scytale')"
+        >
+        <input
+          id="skip"
+          type="button"
+          name="skip"
+          value="Skip"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Skip')"
+        >
+        <input
+          id="substitution"
+          type="button"
+          name="substitution"
+          value="Substitution"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Substitution')"
+        >
+        <input
+          id="syllabary"
+          type="button"
+          name="syllabary"
+          value="Syllabary"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Syllabary')"
+        >
+        <input
+          id="tapir"
+          type="button"
+          name="tapir"
+          value="Tapir"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Tapir')"
+        >
+        <input
+          id="trifid"
+          type="button"
+          name="trifid"
+          value="Trifid"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Trifid')"
+        >
+        <input
+          id="trisquare"
+          type="button"
+          name="trisquare"
+          value="Trisquare"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Trisquare')"
+        >
+        <input
+          id="vatsyayana"
+          type="button"
+          name="vatsyayana"
+          value="Vatsyayana"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Vatsyayana')"
+        >
+        <input
+          id="vigenere"
+          type="button"
+          name="vigenere"
+          value="Vigenere"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Vigenere')"
+        >
+        <input
+          id="zebra"
+          type="button"
+          name="zebra"
+          value="Zebra"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Zebra')"
+        >
+        <input
+          id="zygazyfa"
+          type="button"
+          name="zygazyfa"
+          value="Zygazyfa"
+          class="btn btn-sm btn-primary mb-2 mr-2"
+          @click="changeCipher('Zygazyfa')"
+        >
       </div>
       <div class="infoblock">
-        {{explanation}}
+        {{ explanation }}
       </div>
-      <div class="form-inline" v-show="showalphabet">
-        <label class="form-label mb-2 mr-2" for="alphabet">Alphabet</label>
-        <input type='text' id="alphabet" name="alphabet" ref="alphabet" v-model="alphabet" size="52" class="form-control mr-2 mb-2">
+      <div
+        v-show="showalphabet"
+        class="form-inline"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="alphabet"
+        >Alphabet</label>
+        <input
+          id="alphabet"
+          ref="alphabet"
+          v-model="alphabet"
+          type="text"
+          name="alphabet"
+          size="52"
+          class="form-control mr-2 mb-2"
+        >
         <div v-show="showgenalphabet">
-          <input type="button" id="show-modal" name="show-modal" :value="$t('cp.genalp')" class="btn btn-primary mb-2" v-on:click="showModal = true">
-          <v-polybius v-model:polybiussquare="alphabet" v-if="showModal" @close="showModal = false"></v-polybius>
+          <input
+            id="show-modal"
+            type="button"
+            name="show-modal"
+            :value="$t('cp.genalp')"
+            class="btn btn-primary mb-2"
+            @click="showModal = true"
+          >
+          <v-polybius
+            v-if="showModal"
+            v-model:polybiussquare="alphabet"
+            @close="showModal = false"
+          />
         </div>
       </div>
-      <div class="form-inline" v-show="showkey1">
-        <label class="form-label mb-2 mr-2" for="key1">{{labelkey1}}</label>
-        <input type='text' id="key1" name="key1" ref="key1" v-model="key1" class="form-control mb-2 mr-2">
+      <div
+        v-show="showkey1"
+        class="form-inline"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="key1"
+        >{{ labelkey1 }}</label>
+        <input
+          id="key1"
+          ref="key1"
+          v-model="key1"
+          type="text"
+          name="key1"
+          class="form-control mb-2 mr-2"
+        >
         <div v-show="showgenkey1">
-          <input type="button" id="show-modal" name="show-modal" :value="$t('cp.gensq')" class="btn btn-primary mb-2 mr-2" v-on:click="showModal1 = true">
-          <v-polybius v-model:polybiussquare="key1" v-if="showModal1" @close="showModal1 = false"></v-polybius>
+          <input
+            id="show-modal"
+            type="button"
+            name="show-modal"
+            :value="$t('cp.gensq')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="showModal1 = true"
+          >
+          <v-polybius
+            v-if="showModal1"
+            v-model:polybiussquare="key1"
+            @close="showModal1 = false"
+          />
         </div>
       </div>
-      <div class="form-inline" v-show="shownumkey1">
-        <label class="form-label mr-2 mb-2" for="key1">{{labelkey1}}</label>
-        <input type='number' id="key1" name="key1" ref="key1" v-model="key1" class="form-control mb-2">
+      <div
+        v-show="shownumkey1"
+        class="form-inline"
+      >
+        <label
+          class="form-label mr-2 mb-2"
+          for="key1"
+        >{{ labelkey1 }}</label>
+        <input
+          id="key1"
+          ref="key1"
+          v-model="key1"
+          type="number"
+          name="key1"
+          class="form-control mb-2"
+        >
       </div>
-      <div class="form-inline" v-show="showselectkey1">
-        <label for="key1" class="form-label mb-2 mr-2">{{labelkey1}}</label>
-        <select id="key1" name="key1" ref="key1" class="custom-select mb-2" v-model="key1">
-          <option v-for="v in key1values" :key="v" :value="v.id">{{v.name}} - {{v.id}}</option>
+      <div
+        v-show="showselectkey1"
+        class="form-inline"
+      >
+        <label
+          for="key1"
+          class="form-label mb-2 mr-2"
+        >{{ labelkey1 }}</label>
+        <select
+          id="key1"
+          ref="key1"
+          v-model="key1"
+          name="key1"
+          class="custom-select mb-2"
+        >
+          <option
+            v-for="v in key1values"
+            :key="v"
+            :value="v.id"
+          >
+            {{ v.name }} - {{ v.id }}
+          </option>
         </select>
       </div>
-      <div class="form-inline" v-show="showkey2">
-        <label class="form-label mb-2 mr-2" for="key2">{{labelkey2}}</label>
-        <input type='text' id="key2" name="key2" ref="key2" v-model="key2" class="form-control mb-2 mr-2">
+      <div
+        v-show="showkey2"
+        class="form-inline"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="key2"
+        >{{ labelkey2 }}</label>
+        <input
+          id="key2"
+          ref="key2"
+          v-model="key2"
+          type="text"
+          name="key2"
+          class="form-control mb-2 mr-2"
+        >
         <div v-show="showgenkey2">
-          <input type="button" id="show-modal" name="show-modal" :value="$t('cp.gensq')" class="btn btn-primary mb-2 mr-2" v-on:click="showModal2 = true">
-          <v-polybius v-model:polybiussquare="key2" v-if="showModal2" @close="showModal2 = false"></v-polybius>
+          <input
+            id="show-modal"
+            type="button"
+            name="show-modal"
+            :value="$t('cp.gensq')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="showModal2 = true"
+          >
+          <v-polybius
+            v-if="showModal2"
+            v-model:polybiussquare="key2"
+            @close="showModal2 = false"
+          />
         </div>
       </div>
-      <div class="form-inline" v-show="shownumkey2">
-        <label class="form-label mb-2 mr-2" for="key2">{{labelkey2}}</label>
-        <input type='number' id="key2" name="key2" ref="key2" v-model="key2" class="form-control mb-2">
+      <div
+        v-show="shownumkey2"
+        class="form-inline"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="key2"
+        >{{ labelkey2 }}</label>
+        <input
+          id="key2"
+          ref="key2"
+          v-model="key2"
+          type="number"
+          name="key2"
+          class="form-control mb-2"
+        >
       </div>
-      <div class="form-inline" v-show="showselectkey2">
-        <label for="key2" class="form-label mr-2 mb-2">{{labelkey2}}</label>
-        <select id="key2" name="key2" ref="key2" class="custom-select mb-2" v-model="key2">
-          <option v-for="v in key2values" :key="v" :value="v.id">{{v.name}} - {{v.id}}</option>
+      <div
+        v-show="showselectkey2"
+        class="form-inline"
+      >
+        <label
+          for="key2"
+          class="form-label mr-2 mb-2"
+        >{{ labelkey2 }}</label>
+        <select
+          id="key2"
+          ref="key2"
+          v-model="key2"
+          name="key2"
+          class="custom-select mb-2"
+        >
+          <option
+            v-for="v in key2values"
+            :key="v"
+            :value="v.id"
+          >
+            {{ v.name }} - {{ v.id }}
+          </option>
         </select>
       </div>
-      <div class="form-inline" v-show="showkey3">
-        <label class="form-label mb-2 mr-2" for="key3">{{labelkey3}}</label>
-        <input type='text' id="key3" name="key3" ref="key3" v-model="key3" class="form-control mb-2 mr-2">
+      <div
+        v-show="showkey3"
+        class="form-inline"
+      >
+        <label
+          class="form-label mb-2 mr-2"
+          for="key3"
+        >{{ labelkey3 }}</label>
+        <input
+          id="key3"
+          ref="key3"
+          v-model="key3"
+          type="text"
+          name="key3"
+          class="form-control mb-2 mr-2"
+        >
         <div v-show="showgenkey3">
-          <input type="button" id="show-modal" name="show-modal" :value="$t('cp.gensq')" class="btn btn-primary mb-2 mr-2" v-on:click="showModal3 = true">
-          <v-polybius v-model:polybiussquare="key3" v-if="showModal3" @close="showModal3 = false"></v-polybius>
+          <input
+            id="show-modal"
+            type="button"
+            name="show-modal"
+            :value="$t('cp.gensq')"
+            class="btn btn-primary mb-2 mr-2"
+            @click="showModal3 = true"
+          >
+          <v-polybius
+            v-if="showModal3"
+            v-model:polybiussquare="key3"
+            @close="showModal3 = false"
+          />
         </div>
       </div>
-      <div class="form-inline" v-show="shownumkey3">
-        <label class="form-label mr-2 mb-2" for="key3">{{labelkey3}}</label>
-        <input type='number' id="key3" name="key3" ref="key3" v-model="key3" class="form-control mb-2">
+      <div
+        v-show="shownumkey3"
+        class="form-inline"
+      >
+        <label
+          class="form-label mr-2 mb-2"
+          for="key3"
+        >{{ labelkey3 }}</label>
+        <input
+          id="key3"
+          ref="key3"
+          v-model="key3"
+          type="number"
+          name="key3"
+          class="form-control mb-2"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div class="row">
         <div class="col-6">
-          <input type="button" id="encode" name="encode" :value="$t('buttons.encode')" class="btn btn-primary mb-2" v-on:click="toEncode">
+          <input
+            id="encode"
+            type="button"
+            name="encode"
+            :value="$t('buttons.encode')"
+            class="btn btn-primary mb-2"
+            @click="toEncode"
+          >
           <div class="form-row mb-2">
-            <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 cols=50 v-model='message'></textarea>
+            <textarea
+              id="message"
+              ref="message"
+              v-model="message"
+              name="message"
+              class="form-control"
+              :placeholder="$t('labels.message')"
+              rows="10"
+              cols="50"
+            />
           </div>
           <div>
-            <input type="button" id="uppercase" name="uppercase" :value="$t('cp.toupper')" class="btn btn-primary mr-2 mb-2" v-on:click="convertUpper">
-            <input type="button" id="remove" name="remove" :value="$t('cp.remnonalp')" class="btn btn-primary mb-2" v-on:click="removeUnknown">
+            <input
+              id="uppercase"
+              type="button"
+              name="uppercase"
+              :value="$t('cp.toupper')"
+              class="btn btn-primary mr-2 mb-2"
+              @click="convertUpper"
+            >
+            <input
+              id="remove"
+              type="button"
+              name="remove"
+              :value="$t('cp.remnonalp')"
+              class="btn btn-primary mb-2"
+              @click="removeUnknown"
+            >
           </div>
-          <div class="form-inline" v-show="showreplacements">
-            <input type="button" id="replace" :value="$t('cp.repl')" class="btn btn-primary mr-2 mb-2" v-on:click="replaceCharacters">
-            <input type='text' id="replacements" placeholder="J=I, U=V" v-model="replacements" size="12" class="form-control mb-2">
+          <div
+            v-show="showreplacements"
+            class="form-inline"
+          >
+            <input
+              id="replace"
+              type="button"
+              :value="$t('cp.repl')"
+              class="btn btn-primary mr-2 mb-2"
+              @click="replaceCharacters"
+            >
+            <input
+              id="replacements"
+              v-model="replacements"
+              type="text"
+              placeholder="J=I, U=V"
+              size="12"
+              class="form-control mb-2"
+            >
           </div>
           <div>
-            <input type="button" id="replacediac" :value="$t('txtwordval.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
+            <input
+              id="replacediac"
+              type="button"
+              :value="$t('txtwordval.replacediac')"
+              class="btn btn-primary mb-2"
+              @click="removeDiacr"
+            >
           </div>
         </div>
         <div class="col-6">
-          <input type="button" id="decode" name="decode" :value="$t('buttons.decode')" class="btn btn-primary mb-2" @click="toDecode">
+          <input
+            id="decode"
+            type="button"
+            name="decode"
+            :value="$t('buttons.decode')"
+            class="btn btn-primary mb-2"
+            @click="toDecode"
+          >
           <div class="form-row mb-2">
-            <textarea id="translatedmessage" name="translatedmessage" class="form-control" ref="translatedmessage" :placeholder="$t('cp.phencmsg')" cols=50 rows=10 v-model='translatedmessage'></textarea>
+            <textarea
+              id="translatedmessage"
+              ref="translatedmessage"
+              v-model="translatedmessage"
+              name="translatedmessage"
+              class="form-control"
+              :placeholder="$t('cp.phencmsg')"
+              cols="50"
+              rows="10"
+            />
           </div>
           <div class="form-inline">
-            <input type="button" id="format" name="format" :value="$t('buttons.format')" class="btn btn-primary mb-2 mr-2" v-on:click="formatMessage">
-            <label class="form-label mb-2 mr-2" for="separator">{{$t('cp.sep')}}</label>
-            <select id="separator" name="separator" ref="separator" v-model="separator" class="custom-select mb-2">
-              <option> </option>
+            <input
+              id="format"
+              type="button"
+              name="format"
+              :value="$t('buttons.format')"
+              class="btn btn-primary mb-2 mr-2"
+              @click="formatMessage"
+            >
+            <label
+              class="form-label mb-2 mr-2"
+              for="separator"
+            >{{ $t('cp.sep') }}</label>
+            <select
+              id="separator"
+              ref="separator"
+              v-model="separator"
+              name="separator"
+              class="custom-select mb-2"
+            >
+              <option />
               <option>-</option>
               <option>/</option>
             </select>
           </div>
           <div class="form-inline">
-            <label class="form-label mb-2 mr-2" for="blocksize">{{$t('cp.bs')}}</label>
-            <input type='number' id="blocksize" name="blocksize" ref="blocksize" v-model="blocksize" min="1" max="9" class="form-control mb-2">
+            <label
+              class="form-label mb-2 mr-2"
+              for="blocksize"
+            >{{ $t('cp.bs') }}</label>
+            <input
+              id="blocksize"
+              ref="blocksize"
+              v-model="blocksize"
+              type="number"
+              name="blocksize"
+              min="1"
+              max="9"
+              class="form-control mb-2"
+            >
           </div>
-          <input type="button" id="unformat" name="unformat" :value="$t('cp.remform')" class="btn btn-primary mb-2" v-on:click="unformatMessage">
+          <input
+            id="unformat"
+            type="button"
+            name="unformat"
+            :value="$t('cp.remform')"
+            class="btn btn-primary mb-2"
+            @click="unformatMessage"
+          >
         </div>
       </div>
     </div>
@@ -175,7 +880,11 @@ import * as textHelper from '@/scripts/texthelper.js';
 import VPolybius from '@/components/inputs/VPolybius.vue'
 
 export default {
-  name: 'Encoderdecoder',
+  name: 'EncoderDecoder',
+
+  components: {
+    VPolybius,
+  },
 
   // Prop initcipher is parameter passed by route (optional)
   props: {
@@ -226,15 +935,9 @@ export default {
     }
   },
 
-  components: {
-    VPolybius,
-  },
-
   mounted: function() {
-    //this.$refs.message.focus();
-    // if (typeof(this.$route.params.cipher) != "undefined")
-    if (this.$route.params.cipher)
-      this.changeCipher(this.$route.params.cipher);
+    if (this.$route.params.initcipher)
+      this.changeCipher(this.$route.params.initcipher);
     else
       this.changeCipher('Atbash');
   },
@@ -255,8 +958,8 @@ export default {
         replacements: this.replacements,
         cipher: this.cipher,
         enordecode: 'decode',
-        message: this.message,
-        transmessage: this.translatedmessage,
+        message: this.message.trim(),
+        transmessage: this.translatedmessage.trim(),
         key1: this.key1,
         key2: this.key2,
         key3: this.key3
@@ -275,13 +978,13 @@ export default {
               // console.log('Success', data)
           })
           .catch((error) => {
-              console.error('Error ', error);
+              console.log('Error ', error);
               this.errormsg = this.$t('cp.errdec');
           });
 
       } catch (e) {
 
-        console.error('Error ', e);
+        console.log('Error ', e);
         this.errormsg = this.$t('cp.errdec');
 
       }
@@ -297,8 +1000,8 @@ export default {
           replacements: this.replacements,
           cipher: this.cipher,
           enordecode: 'encode',
-          message: this.message,
-          transmessage: this.translatedmessage,
+          message: this.message.trim(),
+          transmessage: this.translatedmessage.trim(),
           key1: this.key1,
           key2: this.key2,
           key3: this.key3
@@ -314,16 +1017,16 @@ export default {
           .then(response => response.json())
           .then(data => {
               this.translatedmessage = data.transmessage;
-              console.log('Success', data)
+              //console.log('Success', data)
           })
           .catch((error) => {
-              console.error('Error ', error);
+              console.log('Error ', error);
               this.errormsg = this.$t('cp.errenc');
           });
 
       } catch (e) {
 
-          console.error('Error ', e);
+          console.log('Error ', e);
           this.errormsg = this.$t('cp.errenc');
 
       }

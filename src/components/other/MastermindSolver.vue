@@ -1,57 +1,180 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('othertools.mmsolver.title')}}
+      {{ $t('othertools.mmsolver.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('othertools.mmsolver.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('othertools.mmsolver.long')"
+      />
       <div class="form-inline mb-2">
-        <label for="npin" class="form-label mr-2">{{$t('mmsolver.npin')}}</label>
-        <select name="npin" id="npin" ref="npin" class="form-control mr-2" v-model="npin">
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
+        <label
+          for="npin"
+          class="form-label mr-2"
+        >{{ $t('mmsolver.npin') }}</label>
+        <select
+          id="npin"
+          ref="npin"
+          v-model="npin"
+          name="npin"
+          class="form-control mr-2"
+        >
+          <option value="3">
+            3
+          </option>
+          <option value="4">
+            4
+          </option>
+          <option value="5">
+            5
+          </option>
+          <option value="6">
+            6
+          </option>
         </select>
-        <label for="ncolor" class="form-label mr-2">{{$t('mmsolver.ncolor')}}</label>
-        <select name="ncolor" id="ncolor" class="form-control" v-model="ncolor">
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
+        <label
+          for="ncolor"
+          class="form-label mr-2"
+        >{{ $t('mmsolver.ncolor') }}</label>
+        <select
+          id="ncolor"
+          v-model="ncolor"
+          name="ncolor"
+          class="form-control"
+        >
+          <option value="4">
+            4
+          </option>
+          <option value="5">
+            5
+          </option>
+          <option value="6">
+            6
+          </option>
+          <option value="7">
+            7
+          </option>
+          <option value="8">
+            8
+          </option>
+          <option value="9">
+            9
+          </option>
         </select>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="unique" id="unique" v-model="unique" class="custom-control-input ml-2">
-          <label for="unique" class="custom-control-label ml-2">{{$t('mmsolver.unique')}}</label>
+          <input
+            id="unique"
+            v-model="unique"
+            type="checkbox"
+            name="unique"
+            class="custom-control-input ml-2"
+          >
+          <label
+            for="unique"
+            class="custom-control-label ml-2"
+          >{{ $t('mmsolver.unique') }}</label>
         </div>
       </div>
       <div class="mb-2">
         <table class="table-sm table-borderless">
-          <thead><tr>
-            <th scope="col">{{$t('mmsolver.pins')}}</th>
-            <th scope="col">{{$t('mmsolver.pos')}}</th>
-            <th scope="col">{{$t('mmsolver.col')}}</th>
-          </tr></thead>
-          <tr v-for="(str, index) in pins" :key="index">
-            <td><input type="number" size="4" min="1" max="999999" v-model="pins[index]" class="form-control"/></td>
-            <td><input type="number" size="1" min="1" max="9" v-model="pos[index]" class="form-control"/></td>
-            <td><input type="number" size="1" min="1" max="9" v-model="col[index]" class="form-control"/></td>
+          <thead>
+            <tr>
+              <th scope="col">
+                {{ $t('mmsolver.pins') }}
+              </th>
+              <th scope="col">
+                {{ $t('mmsolver.pos') }}
+              </th>
+              <th scope="col">
+                {{ $t('mmsolver.col') }}
+              </th>
+            </tr>
+          </thead>
+          <tr
+            v-for="(str, index) in pins"
+            :key="index"
+          >
+            <td>
+              <input
+                v-model="pins[index]"
+                type="number"
+                size="4"
+                min="1"
+                max="999999"
+                class="form-control"
+              >
+            </td>
+            <td>
+              <input
+                v-model="pos[index]"
+                type="number"
+                size="1"
+                min="1"
+                max="9"
+                class="form-control"
+              >
+            </td>
+            <td>
+              <input
+                v-model="col[index]"
+                type="number"
+                size="1"
+                min="1"
+                max="9"
+                class="form-control"
+              >
+            </td>
           </tr>
         </table>
       </div>
       <div>
-        <input type="button" id="solve" name="solve" :value="$t('sudoku.solve')" class="btn btn-primary mb-2 mr-2" v-on:click="solveMM">
-        <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="resetMM">
+        <input
+          id="solve"
+          type="button"
+          name="solve"
+          :value="$t('sudoku.solve')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="solveMM"
+        >
+        <input
+          id="reset"
+          type="button"
+          name="reset"
+          :value="$t('buttons.reset')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="resetMM"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-      <div class="mt-2" v-show="solved">
-        {{$t('sudoku.thereare')}} {{results.length}} {{$t('sudoku.sols')}}
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-show="solved"
+        class="mt-2"
+      >
+        {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
         <div class="form-inline mt-2 mb-2">
-          <label for="listofresults" class="form-label mr-2">Solutions</label>
-          <select name="listofresults" id="listofresults" class="form-control" v-model="selectedsolution" @change="printSolution">
-            <option v-for="result in results" :key="result">{{result}}</option>
+          <label
+            for="listofresults"
+            class="form-label mr-2"
+          >Solutions</label>
+          <select
+            id="listofresults"
+            v-model="selectedsolution"
+            name="listofresults"
+            class="form-control"
+            @change="printSolution"
+          >
+            <option
+              v-for="result in results"
+              :key="result"
+            >
+              {{ result }}
+            </option>
           </select>
         </div>
       </div>
@@ -63,10 +186,6 @@
 export default {
 
   name: 'MastermindSolver',
-
-  props: {
-    msg: String
-  },
 
   data: function() {
     return {

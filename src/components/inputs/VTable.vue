@@ -2,24 +2,88 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="phsearch" rows=2 v-model='searchInput'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="searchInput"
+          name="message"
+          class="form-control"
+          :placeholder="phsearch"
+          rows="2"
+        />
       </div>
       <div class="flex-row align-left">
-        <input type="button" id="searchweb" name="searchweb" :value="$t('buttons.search')" class="btn btn-primary mb-2 mr-2" v-on:click="search(sel)">
-        <select class="custom-select mb-2 mr-2" style="width: 150px;" v-model='searchIndex'>
-          <option v-for="(col, index) in cols" :key="index" :value="index" :disabled="col.image || col.nosearch">{{col.label}}</option>
+        <input
+          id="searchweb"
+          type="button"
+          name="searchweb"
+          :value="$t('buttons.search')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="search(sel)"
+        >
+        <select
+          v-model="searchIndex"
+          class="custom-select mb-2 mr-2"
+          style="width: 150px;"
+        >
+          <option
+            v-for="(col, index) in cols"
+            :key="index"
+            :value="index"
+            :disabled="col.image || col.nosearch"
+          >
+            {{ col.label }}
+          </option>
         </select>
-        <input type="button" id="reset" name="reset" :value="$t('buttons.reset')" class="btn btn-primary mb-2 mr-2" v-on:click="reset">
-        <input type="button" id="showhide" name="showhide" :value="$t('buttons.showtab')" class="btn btn-primary mb-2 mr-2" v-on:click="showtable = !showtable">
-        <input type="button" id="showhide" name="showhide" :value="$t('buttons.showres')" class="btn btn-primary mb-2" v-on:click="showresults = !showresults">
+        <input
+          id="reset"
+          type="button"
+          name="reset"
+          :value="$t('buttons.reset')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="reset"
+        >
+        <input
+          id="showhide"
+          type="button"
+          name="showhide"
+          :value="$t('buttons.showtab')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="showtable = !showtable"
+        >
+        <input
+          id="showhide"
+          type="button"
+          name="showhide"
+          :value="$t('buttons.showres')"
+          class="btn btn-primary mb-2"
+          @click="showresults = !showresults"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-      <div class="resultbox" v-show="showresults" v-html="result"></div>
-      <table v-show="showtable" class="table table-sm table-responsive v-table">
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-show="showresults"
+        class="resultbox"
+        v-html="result"
+      />
+      <table
+        v-show="showtable"
+        class="table table-sm table-responsive v-table"
+      >
         <thead class="v-table-header">
           <tr>
-            <th v-for="(col, index) in cols" :key="index" :style="{ width: col.width ? col.width : 'auto' }">
-              <div :class="{
+            <th
+              v-for="(col, index) in cols"
+              :key="index"
+              :style="{ width: col.width ? col.width : 'auto' }"
+            >
+              <div
+                :class="{
                   sortable: col.sortable,
                   both: col.sortable,
                   asc: sortable.order == col.field && sortable.sort == 'asc',
@@ -33,8 +97,14 @@
           </tr>
         </thead>
         <tbody class="v-table-body">
-          <tr v-for="(row, index) in sortArr" :key="index">
-            <td v-for="(col, ci) in cols" :key="ci">
+          <tr
+            v-for="(row, index) in sortArr"
+            :key="index"
+          >
+            <td
+              v-for="(col, ci) in cols"
+              :key="ci"
+            >
               <div
                 v-if="col.computed"
                 v-html="col.computed(rows[row])"

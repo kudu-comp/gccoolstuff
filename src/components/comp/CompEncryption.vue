@@ -1,56 +1,165 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('comptools.encryption.title')}}
+      {{ $t('comptools.encryption.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('comptools.encryption.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('comptools.encryption.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="selenc">{{$t('compenc.codes')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="selenc" id="selenc">
-          <option value="Okto3">Okto3</option>
-          <option value="AES">AES</option>
-          <option value="DES">DES</option>
-          <option value="TripleDES">TripleDES</option>
-          <option value="Rabbit">Rabbit</option>
-          <option value="RC4">RC4</option>
-          <option value="RC4Drop">RC4Drop</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="selenc"
+        >{{ $t('compenc.codes') }} </label>
+        <select
+          id="selenc"
+          v-model="selenc"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="Okto3">
+            Okto3
+          </option>
+          <option value="AES">
+            AES
+          </option>
+          <option value="DES">
+            DES
+          </option>
+          <option value="TripleDES">
+            TripleDES
+          </option>
+          <option value="Rabbit">
+            Rabbit
+          </option>
+          <option value="RC4">
+            RC4
+          </option>
+          <option value="RC4Drop">
+            RC4Drop
+          </option>
         </select>
       </div>
-      <div v-show="selenc != 'Okto3'" class="form-inline">
-        <label class="form-label mb-2 mr-2">{{$t('compenc.advanced')}}</label>
-        <label class="form-label mb-2 mr-2" for="selmode">{{$t('compenc.modes')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="selmode" id="selmode">
-          <option value=0>CBC</option>
-          <option value=1>CFB</option>
-          <option value=2>CTR</option>
-          <option value=3>OFB</option>
-          <option value=4>ECB</option>
+      <div
+        v-show="selenc != 'Okto3'"
+        class="form-inline"
+      >
+        <label class="form-label mb-2 mr-2">{{ $t('compenc.advanced') }}</label>
+        <label
+          class="form-label mb-2 mr-2"
+          for="selmode"
+        >{{ $t('compenc.modes') }} </label>
+        <select
+          id="selmode"
+          v-model="selmode"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="0">
+            CBC
+          </option>
+          <option value="1">
+            CFB
+          </option>
+          <option value="2">
+            CTR
+          </option>
+          <option value="3">
+            OFB
+          </option>
+          <option value="4">
+            ECB
+          </option>
         </select>
-        <label class="form-label mb-2 mr-2" for="selpad">{{$t('compenc.padding')}} </label>
-        <select class="custom-select mb-2 mr-2" v-model="selpad" id="selpad">
-          <option value=0>Pkcs7</option>
-          <option value=1>Iso97971</option>
-          <option value=2>AnsiX923</option>
-          <option value=3>Iso10126</option>
-          <option value=4>ZeroPadding</option>
-          <option value=5>NoPadding</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="selpad"
+        >{{ $t('compenc.padding') }} </label>
+        <select
+          id="selpad"
+          v-model="selpad"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="0">
+            Pkcs7
+          </option>
+          <option value="1">
+            Iso97971
+          </option>
+          <option value="2">
+            AnsiX923
+          </option>
+          <option value="3">
+            Iso10126
+          </option>
+          <option value="4">
+            ZeroPadding
+          </option>
+          <option value="5">
+            NoPadding
+          </option>
         </select>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
       <div class="form-inline mb-2">
-        <label class="form-label mr-2" for="key">{{$t('compenc.key')}}</label>
-        <input type="text" id="key" name="key" class="form-control" size="40" ref="key" v-model='key'>
+        <label
+          class="form-label mr-2"
+          for="key"
+        >{{ $t('compenc.key') }}</label>
+        <input
+          id="key"
+          ref="key"
+          v-model="key"
+          type="text"
+          name="key"
+          class="form-control"
+          size="40"
+        >
       </div>
       <div class="form-inline">
-        <input type="button" id="encrypt" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encryptMessage">
-        <input type="button" id="decrypt" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decryptMessage">
+        <input
+          id="encrypt"
+          type="button"
+          :value="$t('buttons.encode')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="encryptMessage"
+        >
+        <input
+          id="decrypt"
+          type="button"
+          :value="$t('buttons.decode')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="decryptMessage"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="form-row mb-2">
-        <textarea id="coded" class="form-control" ref="coded" :placeholder="$t('compenc.coded')" rows=10 v-model='result'></textarea>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="form-row mb-2"
+      >
+        <textarea
+          id="coded"
+          ref="coded"
+          v-model="result"
+          class="form-control"
+          :placeholder="$t('compenc.coded')"
+          rows="10"
+        />
       </div>
     </div>
   </div>
@@ -63,10 +172,6 @@ import CryptoJS from 'crypto-js';
 export default {
 
   name: 'CompBinToText',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

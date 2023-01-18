@@ -743,10 +743,13 @@ function getMinNorthing(zoneLetter) {
 
 }
 
-exports['default'] = mgrs;
-exports.forward = forward;
-exports.inverse = inverse;
-exports.toPoint = toPoint;
-exports.getLetterDesignator = getLetterDesignator;
 
-Object.defineProperty(exports, '__esModule', { value: true });
+// exports['default'] = mgrs;
+// exports.forward = forward;
+// exports.inverse = inverse;
+// exports.toPoint = toPoint;
+// exports.getLetterDesignator = getLetterDesignator;
+
+// Object.defineProperty(exports, '__esModule', { value: true });
+
+export { forward, inverse, toPoint, getLetterDesignator }

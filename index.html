@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="Tools to solve geocaching puzzles and mysteries">
-    <meta name="keywords" content="geocaching mystery mysteries mysterycache puzzle cipher toolbox geocache coordinate convert ">
+    <meta name="keywords" content="geocachingtoolbox gctools geocaching toolbox geocache mystery mysteries mysterycache puzzle coordinate convert cipher">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <link rel="icon" href="/favicon.png">
     <!-- Include bootstrap CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <!-- Include leaflet map js -->
@@ -24,13 +24,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
     <!-- Include awesome font for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <title>GC Cool Tools</title>
+    <title>GCTools.nl</title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but GCTools.nl doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
-    <!-- built files will be auto injected -->
+    <!-- no auto injection with vite -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

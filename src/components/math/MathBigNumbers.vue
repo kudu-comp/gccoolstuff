@@ -1,43 +1,145 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.bignum.title')}}
+      {{ $t('mathtools.bignum.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.bignum.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.bignum.long')"
+      />
       <div class="form-inline">
-        <label for="selnum" class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2 mr-2">{{$t('bignum.selnum')}}</label>
-        <select id="selnum" class="custom-select mb-2" v-model="base">
-          <option value=10>{{$t('bignum.decimal')}}</option>
-          <option value=2>{{$t('bignum.binary')}}</option>
-          <option value=8>{{$t('bignum.octal')}}</option>
-          <option value=16>{{$t('bignum.hexadecimal')}}</option>
+        <label
+          for="selnum"
+          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2 mr-2"
+        >{{ $t('bignum.selnum') }}</label>
+        <select
+          id="selnum"
+          v-model="base"
+          class="custom-select mb-2"
+        >
+          <option value="10">
+            {{ $t('bignum.decimal') }}
+          </option>
+          <option value="2">
+            {{ $t('bignum.binary') }}
+          </option>
+          <option value="8">
+            {{ $t('bignum.octal') }}
+          </option>
+          <option value="16">
+            {{ $t('bignum.hexadecimal') }}
+          </option>
         </select>
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2" size="40" for="n1">{{$t('bignum.num1')}}</label>
-        <input type='number' id="n1" ref="n1" v-model="n1" class="form-control mr-2 mb-2">
+        <label
+          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2"
+          size="40"
+          for="n1"
+        >{{ $t('bignum.num1') }}</label>
+        <input
+          id="n1"
+          ref="n1"
+          v-model="n1"
+          type="number"
+          class="form-control mr-2 mb-2"
+        >
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2" size="40" for="n2">{{$t('bignum.num2')}}</label>
-        <input type='number' id="n2" ref="n2" v-model="n2" class="form-control mb-2">
+        <label
+          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2"
+          size="40"
+          for="n2"
+        >{{ $t('bignum.num2') }}</label>
+        <input
+          id="n2"
+          ref="n2"
+          v-model="n2"
+          type="number"
+          class="form-control mb-2"
+        >
       </div>
       <div>
-        <h6>{{$t('bignum.arithmetic')}}</h6>
-        <input type="button" id="add" value="A + B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('ADD')">
-        <input type="button" id="sub" value="A - B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('SUB')">
-        <input type="button" id="mul" value="A * B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('MUL')">
-        <input type="button" id="div" value="A \ B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('DIV')">
-        <input type="button" id="mod" value="A % B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('MOD')">
-        <input type="button" id="pow" value="A ** B" class="btn btn-primary mb-2" v-on:click="calcBig('POW')">
-        <h6>{{$t('bignum.logical')}}</h6>
-        <input type="button" id="and" value="A and B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('AND')">
-        <input type="button" id="or"  value="A or B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('OR')">
-        <input type="button" id="xor" value="A xor B" class="btn btn-primary mb-2 mr-2" v-on:click="calcBig('XOR')">
-        <input type="button" id="not" value="not A" class="btn btn-primary mb-2" v-on:click="calcBig('NOT')">
+        <h6>{{ $t('bignum.arithmetic') }}</h6>
+        <input
+          id="add"
+          type="button"
+          value="A + B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('ADD')"
+        >
+        <input
+          id="sub"
+          type="button"
+          value="A - B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('SUB')"
+        >
+        <input
+          id="mul"
+          type="button"
+          value="A * B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('MUL')"
+        >
+        <input
+          id="div"
+          type="button"
+          value="A \ B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('DIV')"
+        >
+        <input
+          id="mod"
+          type="button"
+          value="A % B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('MOD')"
+        >
+        <!-- <input type="button" id="pow" value="A ** B" class="btn btn-primary mb-2" v-on:click="calcBig('POW')"> -->
+        <h6>{{ $t('bignum.logical') }}</h6>
+        <input
+          id="and"
+          type="button"
+          value="A and B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('AND')"
+        >
+        <input
+          id="or"
+          type="button"
+          value="A or B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('OR')"
+        >
+        <input
+          id="xor"
+          type="button"
+          value="A xor B"
+          class="btn btn-primary mb-2 mr-2"
+          @click="calcBig('XOR')"
+        >
+        <input
+          id="not"
+          type="button"
+          value="not A"
+          class="btn btn-primary mb-2"
+          @click="calcBig('NOT')"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg mb-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}.</div>
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}.
+      </div>
     </div>
   </div>
 </template>

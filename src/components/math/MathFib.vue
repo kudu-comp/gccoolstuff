@@ -1,23 +1,72 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('mathtools.fibonacci.title')}}
+      {{ $t('mathtools.fibonacci.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('mathtools.fibonacci.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('mathtools.fibonacci.long')"
+      />
       <div class="form-inline">
-        <label class="form-label col-sm-12 col-md-3 mb-2" for="pos">{{$t('mathfib.pos')}}</label>
-        <input type='number' id="pos" name="pos" ref="pos" v-model="pos" min="1" max="500" class="form-control col-sm-5 col-md-5 mr-md-2 mb-2" v-on:keyup.enter="getFib">
-        <input type="button" id="getfib" name="getfib" :value="$t('buttons.get')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="getFib">
+        <label
+          class="form-label col-sm-12 col-md-3 mb-2"
+          for="pos"
+        >{{ $t('mathfib.pos') }}</label>
+        <input
+          id="pos"
+          ref="pos"
+          v-model="pos"
+          type="number"
+          name="pos"
+          min="1"
+          max="500"
+          class="form-control col-sm-5 col-md-5 mr-md-2 mb-2"
+          @keyup.enter="getFib"
+        >
+        <input
+          id="getfib"
+          type="button"
+          name="getfib"
+          :value="$t('buttons.get')"
+          class="btn btn-primary col-sm-7 col-md-2 mb-2"
+          @click="getFib"
+        >
       </div>
       <div class="form-inline">
-        <label class="form-label col-sm-12 col-md-3 mb-2" for="check">{{$t('mathfib.check')}}</label>
-        <input type='text' id="check" name="check" ref="check" v-model="check" class="form-control col-sm-5 col-md-5 mr-md-2 mb-2" v-on:keyup.enter="checkFib">
-        <input type="button" id="checkfib" name="checkfib" :value="$t('buttons.check')" class="btn btn-primary col-sm-7 col-md-2 mb-2" v-on:click="checkFib">
+        <label
+          class="form-label col-sm-12 col-md-3 mb-2"
+          for="check"
+        >{{ $t('mathfib.check') }}</label>
+        <input
+          id="check"
+          ref="check"
+          v-model="check"
+          type="text"
+          name="check"
+          class="form-control col-sm-5 col-md-5 mr-md-2 mb-2"
+          @keyup.enter="checkFib"
+        >
+        <input
+          id="checkfib"
+          type="button"
+          name="checkfib"
+          :value="$t('buttons.check')"
+          class="btn btn-primary col-sm-7 col-md-2 mb-2"
+          @click="checkFib"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">
-        {{result}}
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
       </div>
     </div>
   </div>
@@ -26,10 +75,6 @@
 <script>
 export default {
   name: 'MathFib',
-
-  props: {
-    msg: String
-  },
 
   data: function () {
     return {

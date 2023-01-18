@@ -2,11 +2,16 @@
   <div class="container">
     <div class="mainpage">
       <div class="infoblock">
-        {{$t('dialogabout.info')}}
+        {{ $t('dialogabout.info') }}
       </div>
-      <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
-        <template v-slot:header>About</template>
-        <template v-slot:content>
+      <va-item
+        :hidebutton="hidebutton"
+        :showitem="show"
+      >
+        <template #header>
+          About
+        </template>
+        <template #content>
           I love to solve mystery geocaches. I've been doing it for years. There are some great websites out there to help you,
           but sometimes I needed tools for unknown problems. So I started programming. Then I got the idea to make a
           website out of it. There are a few tools here which I haven't seen before such as the HTML scanner, the Map Maker, quite a
@@ -15,15 +20,25 @@
           This website is also optimized for mobile. It is small and responsive.
         </template>
       </va-item>
-      <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
-        <template v-slot:header>Contact</template>
-        <template v-slot:content>
+      <va-item
+        :hidebutton="hidebutton"
+        :showitem="show"
+      >
+        <template #header>
+          Contact
+        </template>
+        <template #content>
           If you have suggestions or remarks please contact me. Our geocaching name is Team Chaenaan.
         </template>
       </va-item>
-      <va-item v-bind:hidebutton='hidebutton' v-bind:showitem="show">
-        <template v-slot:header>Under construction</template>
-        <template v-slot:content>
+      <va-item
+        :hidebutton="hidebutton"
+        :showitem="show"
+      >
+        <template #header>
+          Under construction
+        </template>
+        <template #content>
           This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue.js, Vue-router, Vuex
           and PHP. The front end is build as components and using Vue-cli. There is a great set of Javascript modules in use. Leaflet is used for maps, proj4 is
           used for coordinate conversions, crypto-js for digital encryptions. I use the vue-i18n plugin to support multiple languages.
@@ -32,7 +47,9 @@
         </template>
       </va-item>
     </div>
-    <h6 class="text-center"> &copy; 2021 Kool Interim</h6>
+    <h6 class="text-center">
+      &copy; 2021 Kool Interim
+    </h6>
   </div>
 </template>
 

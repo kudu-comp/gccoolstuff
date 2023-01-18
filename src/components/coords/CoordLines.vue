@@ -1,28 +1,99 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.lines.title')}}
+      {{ $t('coordinates.lines.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.lines.long')"/>
-      <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 1</template></v-coord>
-      <v-coord v-model:coord="coordinate2" v-model:datum="selecteddatum2" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 2</template></v-coord>
-      <v-coord v-model:coord="coordinate3" v-model:datum="selecteddatum3" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 3</template></v-coord>
-      <v-coord v-model:coord="coordinate4" v-model:datum="selecteddatum4" class="mb-2"><template v-slot:label>{{$t('labels.point')}} 4</template></v-coord>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.lines.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate1"
+        v-model:datum="selecteddatum1"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 1
+        </template>
+      </v-coord>
+      <v-coord
+        v-model:coord="coordinate2"
+        v-model:datum="selecteddatum2"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 2
+        </template>
+      </v-coord>
+      <v-coord
+        v-model:coord="coordinate3"
+        v-model:datum="selecteddatum3"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 3
+        </template>
+      </v-coord>
+      <v-coord
+        v-model:coord="coordinate4"
+        v-model:datum="selecteddatum4"
+        class="mb-2"
+      >
+        <template #label>
+          {{ $t('labels.point') }} 4
+        </template>
+      </v-coord>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc1')}}</label>
-        <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine1()">
+        <label
+          for="line1"
+          class="col-10 col-md-8 col-lg-6"
+        >{{ $t('cdlines.calc1') }}</label>
+        <input
+          id="line1"
+          type="button"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="doLine1()"
+        >
       </div>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc2')}}</label>
-        <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine2()">
+        <label
+          for="line1"
+          class="col-10 col-md-8 col-lg-6"
+        >{{ $t('cdlines.calc2') }}</label>
+        <input
+          id="line1"
+          type="button"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="doLine2()"
+        >
       </div>
       <div>
-        <label for="line1" class="col-10 col-md-8 col-lg-6">{{$t('cdlines.calc3')}}</label>
-        <input type="button" id="line1" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doLine3()">
+        <label
+          for="line1"
+          class="col-10 col-md-8 col-lg-6"
+        >{{ $t('cdlines.calc3') }}</label>
+        <input
+          id="line1"
+          type="button"
+          :value="$t('buttons.calc')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="doLine3()"
+        >
       </div>
-      <div v-if="result" v-html="result" class="resultbox"></div>
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
       <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
@@ -232,7 +303,7 @@ export default {
             this.result += "<br>"+ this.$t('cdlines.direction') + this.getDirection({lon: pmx, lat:pmy}, gridcoord3).toFixed(2) + " degrees";
 
           })
-          .catch (error => {
+          .catch (e => {
             console.log(e);
             this.errormsg = this.$t('errors.incorrectcoords');
           });

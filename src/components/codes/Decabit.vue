@@ -1,25 +1,73 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('codes.decabit.title')}}
+      {{ $t('codes.decabit.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('codes.decabit.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('codes.decabit.long')"
+      />
       <div class="form-inline mt-2">
-        <label for="selenc" class="form-label mb-2 mr-2">{{$t('decabit.selenc')}}</label>
-        <select v-model="format" id="selenc" class="custom-select mb-2 mr-2">
-          <option value="0">{{$t('decabit.selnum')}}</option>
-          <option value="1">{{$t('decabit.selascii')}}</option>
-          <option value="2">{{$t('decabit.selalpha')}}</option>
+        <label
+          for="selenc"
+          class="form-label mb-2 mr-2"
+        >{{ $t('decabit.selenc') }}</label>
+        <select
+          id="selenc"
+          v-model="format"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="0">
+            {{ $t('decabit.selnum') }}
+          </option>
+          <option value="1">
+            {{ $t('decabit.selascii') }}
+          </option>
+          <option value="2">
+            {{ $t('decabit.selalpha') }}
+          </option>
         </select>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
-      <input type="button" id="enc" name="enc" :value="$t('buttons.encode')" class="btn btn-primary mb-2 mr-2" v-on:click="encodeDeca">
-      <input type="button" id="dec" name="dec" :value="$t('buttons.decode')" class="btn btn-primary mb-2 mr-2" v-on:click="decodeDeca">
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <input
+        id="enc"
+        type="button"
+        name="enc"
+        :value="$t('buttons.encode')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="encodeDeca"
+      >
+      <input
+        id="dec"
+        type="button"
+        name="dec"
+        :value="$t('buttons.decode')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="decodeDeca"
+      >
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +76,7 @@
 
 export default {
 
-  name: 'Decabit',
+  name: 'DecaBit',
 
   data: function () {
     return {

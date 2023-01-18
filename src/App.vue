@@ -3,35 +3,82 @@
     <div class="container">
       <div class="row">
         <div class="col-9 text-center">
-          <h1 class="font-weight-heavy">GC Cool Tools</h1>
+          <h1 class="font-weight-heavy">
+            GCTools.nl
+          </h1>
         </div>
         <div class="col-3 locale-changer">
           <div class="d-flex flex-row-reverse">
-            <img src="@/assets/nl.png" @click="$i18n.locale='nl'" class="flag ml-2">
-            <img src="@/assets/uk.png" @click="$i18n.locale='en'" class="flag">
+            <img
+              src="@/assets/nl.png"
+              class="flag ml-2"
+              @click="$i18n.locale='nl'"
+            >
+            <img
+              src="@/assets/uk.png"
+              class="flag"
+              @click="$i18n.locale='en'"
+            >
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="nav" class="col-12 text-center">
-    <router-link to="/">{{$t('menu.home')}}</router-link> |
-    <router-link to="/coord">{{$t('menu.coordinates')}}</router-link> |
-    <router-link to="/text">{{$t('menu.texttools')}}</router-link> |
-    <router-link to="/cipher">{{$t('menu.ciphers')}}</router-link> |
-    <router-link to="/codes">{{$t('menu.codes')}}</router-link> |
-    <router-link to="/images">{{$t('menu.imagetools')}}</router-link> |
-    <router-link to="/html">{{$t('menu.htmlscanner')}}</router-link> |
-    <router-link to="/math">{{$t('menu.mathtools')}}</router-link> |
-    <router-link to="/comp">{{$t('menu.comptools')}}</router-link> |
-    <router-link to="/other">{{$t('menu.other')}}</router-link> |
-    <router-link to="/howtostart">{{$t('menu.howto')}}</router-link> |
-    <router-link to="/about">{{$t('menu.about')}}</router-link>
+  <div
+    id="nav"
+    class="col-12 text-center"
+  >
+    <router-link to="/">
+      {{ $t('menu.home') }}
+    </router-link> |
+    <router-link to="/coord">
+      {{ $t('menu.coordinates') }}
+    </router-link> |
+    <router-link to="/text">
+      {{ $t('menu.texttools') }}
+    </router-link> |
+    <router-link to="/cipher">
+      {{ $t('menu.ciphers') }}
+    </router-link> |
+    <router-link to="/codes">
+      {{ $t('menu.codes') }}
+    </router-link> |
+    <router-link to="/images">
+      {{ $t('menu.imagetools') }}
+    </router-link> |
+    <router-link to="/html">
+      {{ $t('menu.htmlscanner') }}
+    </router-link> |
+    <router-link to="/math">
+      {{ $t('menu.mathtools') }}
+    </router-link> |
+    <router-link to="/comp">
+      {{ $t('menu.comptools') }}
+    </router-link> |
+    <router-link to="/other">
+      {{ $t('menu.other') }}
+    </router-link> |
+    <router-link to="/howtostart">
+      {{ $t('menu.howto') }}
+    </router-link> |
+    <router-link to="/about">
+      {{ $t('menu.about') }}
+    </router-link>
   </div>
   <router-view />
 </template>
 
 <style>
+
+/* New color scheme */
+/* 
+--dark-olive-green: #3d6a2fff;
+--goldenrod: #d5a021ff;
+--alabaster: #ede7d9ff;
+--spanish-gray: #a49694ff;
+--purple-navy: #4e598cff; 
+*/
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -53,12 +100,12 @@
 }
 
 a {
-  color: #473868;
+  color: #196a08;
   font-weight: bold;
 }
 
 a:hover {
-  color: #1D1A15;
+  color: #064514;
 }
 
 body {
@@ -76,11 +123,10 @@ hr {
 }
 
 .masthead {
-	color: #2E1E03;
-  height: 100px;
+	height: 50px;
   padding: 10px;
-  font-family: cursive;
-  background-color: #E6D1AC;
+  margin-bottom: 10px;
+  color: #196a08;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

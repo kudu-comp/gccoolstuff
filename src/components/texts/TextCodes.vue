@@ -1,27 +1,77 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.charcodes.title')}}
+      {{ $t('texttools.charcodes.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.charcodes.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('texttools.charcodes.long')"
+      />
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="codes">{{$t('txtcodes.input')}}</label>
-        <v-code class="mb-2" id="codes" v-model:code="selectedcode"></v-code>
+        <label
+          class="form-label mb-2 mr-2"
+          for="codes"
+        >{{ $t('txtcodes.input') }}</label>
+        <v-code
+          id="codes"
+          v-model:code="selectedcode"
+          class="mb-2"
+        />
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
       <div class="form-inline">
-        <input type="button" id="convert" name="convert" :value="$t('buttons.convert')" class="btn btn-primary mb-2 mr-2" v-on:click="translateInput">
-        <label class="form-label mb-2 mr-2" for="codes">{{$t('txtcodes.output')}}</label>
-        <v-code class="mb-2" id="codes" v-model:code="selectedoutput" @change="translateInput"></v-code>
+        <input
+          id="convert"
+          type="button"
+          name="convert"
+          :value="$t('buttons.convert')"
+          class="btn btn-primary mb-2 mr-2"
+          @click="translateInput"
+        >
+        <label
+          class="form-label mb-2 mr-2"
+          for="codes"
+        >{{ $t('txtcodes.output') }}</label>
+        <v-code
+          id="codes"
+          v-model:code="selectedoutput"
+          class="mb-2"
+          @change="translateInput"
+        />
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
-      <div v-if="result" class="resultbox">{{result}}</div>
-      <va-item v-bind:showitem='showinfo' v-on:toggle='showinfo = !showinfo'>
-        <template v-slot:header>{{$t('txtcodes.someinfo')}}</template>
-        <template v-slot:content><div v-html="$t('txtcodes.someinfo2')"></div></template>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
+      <va-item
+        :showitem="showinfo"
+        @toggle="showinfo = !showinfo"
+      >
+        <template #header>
+          {{ $t('txtcodes.someinfo') }}
+        </template>
+        <template #content>
+          <div v-html="$t('txtcodes.someinfo2')" />
+        </template>
       </va-item>
     </div>
   </div>
@@ -38,8 +88,9 @@ export default {
 
   name: 'TextCodes',
 
-  props: {
-    msg: String,
+  components: {
+    VCode,
+    VaItem,
   },
 
   data: function () {
@@ -51,11 +102,6 @@ export default {
       errormsg: "",
       showinfo: true,
     }
-  },
-
-  components: {
-    VCode,
-    VaItem,
   },
 
   mounted: function() {

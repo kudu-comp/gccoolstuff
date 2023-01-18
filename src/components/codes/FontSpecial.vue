@@ -1,45 +1,131 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('codes.fonts.title')}}
+      {{ $t('codes.fonts.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('codes.fonts.long')" />
+      <div
+        class="infoblock"
+        v-html="$t('codes.fonts.long')"
+      />
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
       <div class="form-inline">
-        <label class="form-label mb-2 mr-2" for="ift">{{$t('cdfonts.selfont')}}</label>
-        <select class="custom-select mb-2 mr-2" id="ift" v-model='styleObject.fontFamily'>
-          <option v-for="f in fontdef" :key="f" :value="f.id">{{f.font}}</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ift"
+        >{{ $t('cdfonts.selfont') }}</label>
+        <select
+          id="ift"
+          v-model="styleObject.fontFamily"
+          class="custom-select mb-2 mr-2"
+        >
+          <option
+            v-for="f in fontdef"
+            :key="f"
+            :value="f.id"
+          >
+            {{ f.font }}
+          </option>
         </select>
-        <label class="form-label mb-2 mr-2" for="ofs">{{$t('cdfonts.fontsize')}}</label>
-        <select id="ofs" class="custom-select mb-2 mr-2" v-model='styleObject.fontSize'>
-          <option value="12px">12</option>
-          <option value="24px">24</option>
-          <option value="48px">48</option>
-          <option value="72px">72</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ofs"
+        >{{ $t('cdfonts.fontsize') }}</label>
+        <select
+          id="ofs"
+          v-model="styleObject.fontSize"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="12px">
+            12
+          </option>
+          <option value="24px">
+            24
+          </option>
+          <option value="48px">
+            48
+          </option>
+          <option value="72px">
+            72
+          </option>
         </select>
-        <label class="form-label mb-2 mr-2" for="ofs">{{$t('cdfonts.selcolor')}}</label>
-        <select id="ofs" class="custom-select mb-2 mr-2" v-model='styleObject.color'>
-          <option value="black">{{$t('colors.black')}}</option>
-          <option value="blue">{{$t('colors.blue')}}</option>
-          <option value="red">{{$t('colors.red')}}</option>
-          <option value="green">{{$t('colors.green')}}</option>
-          <option value="brown">{{$t('colors.brown')}}</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ofs"
+        >{{ $t('cdfonts.selcolor') }}</label>
+        <select
+          id="ofs"
+          v-model="styleObject.color"
+          class="custom-select mb-2 mr-2"
+        >
+          <option value="black">
+            {{ $t('colors.black') }}
+          </option>
+          <option value="blue">
+            {{ $t('colors.blue') }}
+          </option>
+          <option value="red">
+            {{ $t('colors.red') }}
+          </option>
+          <option value="green">
+            {{ $t('colors.green') }}
+          </option>
+          <option value="brown">
+            {{ $t('colors.brown') }}
+          </option>
         </select>
-        <label class="form-label mb-2 mr-2" for="ofs">{{$t('cdfonts.lineheight')}}</label>
-        <select id="ofs" class="custom-select mb-2" v-model='styleObject.lineHeight'>
-          <option value="normal">{{$t('cdfonts.standard')}}</option>
-          <option value="1">1.0</option>
-          <option value="1.2">1.2</option>
-          <option value="1.5">1.5</option>
-          <option value="2">2.0</option>
+        <label
+          class="form-label mb-2 mr-2"
+          for="ofs"
+        >{{ $t('cdfonts.lineheight') }}</label>
+        <select
+          id="ofs"
+          v-model="styleObject.lineHeight"
+          class="custom-select mb-2"
+        >
+          <option value="normal">
+            {{ $t('cdfonts.standard') }}
+          </option>
+          <option value="1">
+            1.0
+          </option>
+          <option value="1.2">
+            1.2
+          </option>
+          <option value="1.5">
+            1.5
+          </option>
+          <option value="2">
+            2.0
+          </option>
         </select>
       </div>
-      <p v-show="errormsg" class="errormsg mt-2">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
       <div class="form-row">
-        <textarea id="message2" name="message2" spellcheck="false" class="form-control" v-bind:style="styleObject" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message2"
+          v-model="message"
+          name="message2"
+          spellcheck="false"
+          class="form-control"
+          :style="styleObject"
+          rows="10"
+        />
       </div>
     </div>
   </div>
@@ -49,10 +135,6 @@
 
 export default {
   name: 'FontSpecial',
-
-  props: {
-    msg: String,
-  },
 
   data: function () {
     return {

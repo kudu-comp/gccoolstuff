@@ -71,12 +71,13 @@
         { name: "Point (EU)",                  symbol: "point",      factor: 0.37606500000,       offset: 0       },
         { name: "Pole (imperial)",             symbol: "rd",         factor: 5.02920000000,       offset: 0       },
         { name: "Poppyseed (imperial)",        symbol: "pt",         factor: 0.00211666667,       offset: 0       },
-        { name: "Potrzebie (comic)",           symbol: "potrzebie",  factor: 2.263348517438173216473E-3, offset: 0,        },
+        { name: "Potrzebie (comic)",           symbol: "potrzebie",  factor: 2.263348517438173216473E-3, offset: 0     },
         { name: "Pouce (old French)",          symbol: "pouce",      factor: 0.027066667,         offset: 0       },
         { name: "Quarter (imperial)",          symbol: "qt",         factor: 0.2286,              offset: 0       },
         { name: "Rod (imperial)",              symbol: "rd",         factor: 5.02920000000,       offset: 0       },
         { name: "Rope (imperial)",             symbol: "rope",       factor: 6.096,               offset: 0       },
         { name: "Sazhen (old Russian)",        symbol: "sazhen",     factor: 2.13360000000,       offset: 0       },
+        { name: "Shackle (imperial)",          symbol: "shackle",    factor: 27.432,              offset: 0       },
         { name: "Shaftment (imperial)",        symbol: "shaftment",  factor: 0.15240000000,       offset: 0       },
         { name: "Shaku (Japan)",               symbol: "尺",         factor: 0.3030303,           offset: 0       },
         { name: "Skein (imperial)",            symbol: "skein",      factor: 109.72800000000,     offset: 0       },
@@ -88,7 +89,7 @@
         { name: "Toise (old French)",          symbol: "toise",      factor: 1.94903631,          offset: 0       },
         { name: "Thou (imperial)",             symbol: "thou",       factor: 0.0254E-3,           offset: 0       },
         { name: "Twip (imperial)",             symbol: "twip",       factor: 0.000017638,         offset: 0       },
-        { name: "Verst (old Russian)",         symbol: "verst",      factor: 1066.8,              offset: 0,        }, 
+        { name: "Verst (old Russian)",         symbol: "verst",      factor: 1066.8,              offset: 0       }, 
         { name: "Yard",                        symbol: "yd",         factor: 0.9144,              offset: 0       }
       ]
     },

@@ -1,26 +1,64 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.circles.title')}}
+      {{ $t('coordinates.circles.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.circles.long')" />
-      <v-coord v-model:coord="coordinate1" v-model:datum="selecteddatum1">
-        <template v-slot:label>{{$t('labels.center')}} 1</template>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.circles.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate1"
+        v-model:datum="selecteddatum1"
+      >
+        <template #label>
+          {{ $t('labels.center') }} 1
+        </template>
       </v-coord>
-      <v-distance v-model:dist="radius1" v-model:unit="unit1">
-        <template v-slot:label>{{$t('labels.radius')}}</template>
+      <v-distance
+        v-model:dist="radius1"
+        v-model:unit="unit1"
+      >
+        <template #label>
+          {{ $t('labels.radius') }}
+        </template>
       </v-distance>
-      <v-coord v-model:coord="coordinate2" v-model:datum="selecteddatum2">
-        <template v-slot:label>{{$t('labels.center')}} 2</template>
+      <v-coord
+        v-model:coord="coordinate2"
+        v-model:datum="selecteddatum2"
+      >
+        <template #label>
+          {{ $t('labels.center') }} 2
+        </template>
       </v-coord>
-      <v-distance v-model:dist="radius2" v-model:unit="unit2">
-        <template v-slot:label>{{$t('labels.radius')}}</template>
+      <v-distance
+        v-model:dist="radius2"
+        v-model:unit="unit2"
+      >
+        <template #label>
+          {{ $t('labels.radius') }}
+        </template>
       </v-distance>
-      <input type="button" id="go" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="getPoints()">
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
-      <div v-if="result" v-html="result" class="resultbox"></div>
-      <v-map v-model:mylocation="coordinate1"/>
+      <input
+        id="go"
+        type="button"
+        :value="$t('buttons.calc')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="getPoints()"
+      >
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
+      <div
+        v-if="result"
+        class="resultbox"
+        v-html="result"
+      />
+      <v-map v-model:mylocation="coordinate1" />
     </div>
   </div>
 </template>

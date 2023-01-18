@@ -1,46 +1,123 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('imagetools.colorpicker.title')}}
+      {{ $t('imagetools.colorpicker.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('imagetools.colorpicker.long')"></div>
+      <div
+        class="infoblock"
+        v-html="$t('imagetools.colorpicker.long')"
+      />
       <div class="form-inline">
-        <input type="file" ref="file" name="file" id="file" class="form-control-file mb-2" @change="selectFile">
+        <input
+          id="file"
+          ref="file"
+          type="file"
+          name="file"
+          class="form-control-file mb-2"
+          @change="selectFile"
+        >
       </div>
-      <p v-show="errormsg" class="errormsg">{{errormsg}}</p>
+      <p
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </p>
       <div class="row">
-        <div id="preview" class="col-9">
-          <canvas id="canvas" v-bind:width="width" v-bind:height="height" @click="selColor"></canvas>
+        <div
+          id="preview"
+          class="col-9"
+        >
+          <canvas
+            id="canvas"
+            :width="width"
+            :height="height"
+            @click="selColor"
+          />
         </div>
         <div class="col-3">
           <table class="table table-sm table-borderless">
-            <thead><tr class="subhead"><th colspan="2">{{$t('colorpicker.selcolor')}}</th></tr></thead>
-            <tr><td id="selcolor" colspan="2" style="height: 50px"></td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.rgbval')}}</td></tr>
-            <tr><td>{{$t('colors.red')}}</td><td>{{slr}}</td></tr>
-            <tr><td>{{$t('colors.green')}}</td><td>{{slg}}</td></tr>
-            <tr><td>{{$t('colors.blue')}}</td><td>{{slb}}</td></tr>
-            <tr><td>{{$t('colorpicker.alpha')}}</td><td>{{sla}}</td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.hexval')}}</td></tr>
-            <tr><td>{{$t('colorpicker.hex')}}</td><td>{{slx}}</td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.hslval')}}</td></tr>
-            <tr><td>{{$t('colorpicker.hue')}}</td><td>{{hue}}</td></tr>
-            <tr><td>{{$t('colorpicker.sat')}}</td><td>{{sat}}</td></tr>
-            <tr><td>{{$t('colorpicker.lum')}}</td><td>{{lum}}</td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.hsvval')}}</td></tr>
-            <tr><td>{{$t('colorpicker.hue')}}</td><td>{{hue2}}</td></tr>
-            <tr><td>{{$t('colorpicker.sat')}}</td><td>{{sat2}}</td></tr>
-            <tr><td>{{$t('colorpicker.bri')}}</td><td>{{bri}}</td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.cmykval')}}</td></tr>
-            <tr><td>{{$t('colors.cyan')}}</td><td>{{c}}</td></tr>
-            <tr><td>{{$t('colors.magenta')}}</td><td>{{m}}</td></tr>
-            <tr><td>{{$t('colors.yellow')}}</td><td>{{y}}</td></tr>
-            <tr><td>{{$t('colors.black')}}</td><td>{{k}}</td></tr>
-            <tr><td colspan="2" class="subhead">{{$t('colorpicker.cmyval')}}</td></tr>
-            <tr><td>{{$t('colors.cyan')}}</td><td>{{c2}}</td></tr>
-            <tr><td>{{$t('colors.magenta')}}</td><td>{{m2}}</td></tr>
-            <tr><td>{{$t('colors.yellow')}}</td><td>{{y2}}</td></tr>
+            <thead>
+              <tr class="subhead">
+                <th colspan="2">
+                  {{ $t('colorpicker.selcolor') }}
+                </th>
+              </tr>
+            </thead>
+            <tr>
+              <td
+                id="selcolor"
+                colspan="2"
+                style="height: 50px"
+              />
+            </tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.rgbval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colors.red') }}</td><td>{{ slr }}</td></tr>
+            <tr><td>{{ $t('colors.green') }}</td><td>{{ slg }}</td></tr>
+            <tr><td>{{ $t('colors.blue') }}</td><td>{{ slb }}</td></tr>
+            <tr><td>{{ $t('colorpicker.alpha') }}</td><td>{{ sla }}</td></tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.hexval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colorpicker.hex') }}</td><td>{{ slx }}</td></tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.hslval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue }}</td></tr>
+            <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat }}</td></tr>
+            <tr><td>{{ $t('colorpicker.lum') }}</td><td>{{ lum }}</td></tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.hsvval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue2 }}</td></tr>
+            <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat2 }}</td></tr>
+            <tr><td>{{ $t('colorpicker.bri') }}</td><td>{{ bri }}</td></tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.cmykval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c }}</td></tr>
+            <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m }}</td></tr>
+            <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y }}</td></tr>
+            <tr><td>{{ $t('colors.black') }}</td><td>{{ k }}</td></tr>
+            <tr>
+              <td
+                colspan="2"
+                class="subhead"
+              >
+                {{ $t('colorpicker.cmyval') }}
+              </td>
+            </tr>
+            <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c2 }}</td></tr>
+            <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m2 }}</td></tr>
+            <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y2 }}</td></tr>
           </table>
         </div>
       </div>
@@ -52,10 +129,6 @@
 
 export default {
   name: 'ColorPicker',
-
-  props: {
-    msg: String
-  },
 
   data: function() {
     return {
@@ -297,6 +370,11 @@ export default {
         this.img.crossOrigin = 'anonymous';
         this.img.src = URL.createObjectURL(input.files[0]);
 
+        // Define a callback function to run, when image has errors loading
+        this.img.onerror = () => {
+          this.errormsg = this.$t('errors.loadingimage')        
+        }
+
         // Define a callback function to run, when image has loaded finishes its job
         this.img.onload = () => {
 
@@ -306,7 +384,6 @@ export default {
 
             } catch(err) {
 
-              console.log(err);
               this.errormsg = this.$t('colorpicker.error')
             
             }

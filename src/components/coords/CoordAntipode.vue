@@ -1,15 +1,37 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.antipode.title')}}
+      {{ $t('coordinates.antipode.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.antipode.long')" />
-      <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum"></v-coord>
-      <input type="button" id="project" :value="$t('buttons.calc')" class="btn btn-primary mb-2 mr-2" v-on:click="doCalc()">
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
-      <div v-if="result" class="resultbox">{{$t('cdantipode.result')}}{{result}}</div>
-      <v-map v-model:mylocation="coordinate"/>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.antipode.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate"
+        v-model:datum="selecteddatum"
+      />
+      <input
+        id="project"
+        type="button"
+        :value="$t('buttons.calc')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="doCalc()"
+      >
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ $t('cdantipode.result') }}{{ result }}
+      </div>
+      <v-map v-model:mylocation="coordinate" />
     </div>
   </div>
 </template>

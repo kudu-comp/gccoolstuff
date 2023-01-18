@@ -1,18 +1,52 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.incomplete.title')}}
+      {{ $t('coordinates.incomplete.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('coordinates.incomplete.long')" />
-      <v-coord v-model:coord="coordinate" v-model:datum="selecteddatum"></v-coord>
-      <v-variable v-model:variable="var1" v-model:varoptions="var1options" class="mb-2"></v-variable>
-      <v-variable v-model:variable="var2" v-model:varoptions="var2options" class="mb-2"></v-variable>
-      <v-variable v-model:variable="var3" v-model:varoptions="var3options" class="mb-2"></v-variable>
-      <v-variable v-model:variable="var4" v-model:varoptions="var4options" class="mb-2"></v-variable>
-      <input type="button" id="project" name="project" :value="$t('buttons.show')" class="btn btn-primary mr-2" v-on:click="showCoordinates()">
-      <div v-show="errormsg" class="errormsg mt-2">{{errormsg}}</div>
-      <v-map v-model:mylocation="coordinate"/>
+      <div
+        class="infoblock"
+        v-html="$t('coordinates.incomplete.long')"
+      />
+      <v-coord
+        v-model:coord="coordinate"
+        v-model:datum="selecteddatum"
+      />
+      <v-variable
+        v-model:variable="var1"
+        v-model:varoptions="var1options"
+        class="mb-2"
+      />
+      <v-variable
+        v-model:variable="var2"
+        v-model:varoptions="var2options"
+        class="mb-2"
+      />
+      <v-variable
+        v-model:variable="var3"
+        v-model:varoptions="var3options"
+        class="mb-2"
+      />
+      <v-variable
+        v-model:variable="var4"
+        v-model:varoptions="var4options"
+        class="mb-2"
+      />
+      <input
+        id="project"
+        type="button"
+        name="project"
+        :value="$t('buttons.show')"
+        class="btn btn-primary mr-2"
+        @click="showCoordinates()"
+      >
+      <div
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </div>
+      <v-map v-model:mylocation="coordinate" />
     </div>
   </div>
 </template>

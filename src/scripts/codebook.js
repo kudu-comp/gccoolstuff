@@ -94,6 +94,11 @@ export var codepages = [
     description: "A popular code used in geocaches, but its origin is unknown.",
     tags: ["alphabet", "animals"]
   },
+  { name: "Bokscript",
+    imagename: "bokscript.png",
+    description: "Blokscript was invented in 2008 in Croatia by Vicko Bezić who was 12 years old at the time. It can be used to write English, particularly American and British English.",
+    tags: ["alphabet", "sqaures" ]
+  },
   { name: "Braille",
     imagename: "braille.png",
     description: "The braille alphabet is writing system for visually impaired people. Braille is named after its creator, Louis Braille",
@@ -114,15 +119,25 @@ export var codepages = [
     description: "Optical telegraph / semaphore system invented by Chappe and used in France.",
     tags: ["alphabet", "semaphore", "lines"]
   },
+  { name: "Chinese Code",
+    imagename: "chinesecode.png",
+    description: "Encryption with chinese code uses the positions of vowels and consonants in the alphabet. Each vowel adds a horizontal line. Each consonant adds a vertical line.",
+    tags: ["alphabet", "lines"]
+  },
   { name: "Cirth or Erebor runes",
     imagename: "runescirth.png",
     description: "Cirth was invented by J.R.R. Tolkien for use in his novels. It is modelled on the Anglo-Saxon Runic alphabet, and is used to write the language of the Dwarves (Khuzdul).",
     tags: ["alphabet", "book", "runes"]
   },
-    { name: "Cistercian numerals",
+  { name: "Cistercian numerals",
     imagename: "cisterciannumerals.png",
     description: "The medieval Cistercian numerals were developed by the Cistercian monastic order in the early 13th century.",
     tags: ["numbers", "lines"]
+  },
+  { name: "Clocks",
+    imagename: "clocks.png",
+    description: "A simple code based on an analogue clock.",
+    tags: ["alphabet", "circles"]
   },
   { name: "Color Tokkie",
     imagename: "colortokki.png",
@@ -169,6 +184,16 @@ export var codepages = [
     description: "Dives Akuru is a script that was once used in the Maldive Islands. The earliest known inscription, found on Landhū Island, dates back to the 8th century AD.",
     tags: ["alphabet", "language", "curves"]
   },
+  { name: "DLI Lightscript",
+    imagename: "dlilight.png",
+    description: "DLI Lightscript and Darkscript are designed by Dark Light Interactive for an alternative reality game in 2010.",
+    tags: ["alphabet", "games", "circles"]
+  },
+  { name: "DLI Darkscript",
+    imagename: "dlidark.png",
+    description: "DLI Lightscript and Darkscript are designed by Dark Light Interactive for an alternative reality game in 2010.",
+    tags: ["alphabet", "games", "lines", "triangles"]
+  },
   { name: "DNA based code",
     imagename: "dna.png",
     description: "Coding letters using the ACTG DNA codes, essentialy a base 4 numbering.",
@@ -194,6 +219,11 @@ export var codepages = [
     description: "Alphabet used in the BBC Television Series Dr. Who",
     tags: ["alphabet", "tv", "circles"]
   },
+  { name: "Drazi",
+    imagename: "drazi.png",
+    description: "Another language from the TV Series Babylon 5.",
+    tags: ["alphabet", "tv", "symbols", "spikes"]
+  },
   { name: "Driehoekjes (Triangles)",
     imagename: "driehoekjes.png",
     description: "Triangles (in Dutch driehoekjes) is another creation of Drabkikker (also see Polkadot).",
@@ -203,6 +233,11 @@ export var codepages = [
     imagename: "efkolia.png",
     description: "The Efkolia script was invented by Rafael Machado, to be easier to read texts in Germanic, Romance and Uralic languages",
     tags: ["alphabet", "squares", "dots"]
+  },
+  { name: "Ewok",
+    imagename: "ewok.png",
+    description: "Ewok is the language spoken by the Ewoks in the Star Wars movies.",
+    tags: ["alphabet", "movie", "symbols"]
   },
   { name: "Enochian alphabet",
     imagename: "enochian.png",
@@ -362,7 +397,7 @@ export var codepages = [
   { name: "Hymnnos",
     imagename: "hymnnos.png",
     description: "The Hymmnos alphabet was created by Akira Tsuchiya for the video game series Ar tonelico",
-    tags: ["alphabet", "games", "pulse"]
+    tags: ["alphabet", "games",  "circles", "pulse"]
   },
   { name: "Hylian",
     imagename: "hylian.png",
@@ -464,6 +499,11 @@ export var codepages = [
     description: "Minbari is an alphabet used in the series Babylon 5, Science fiction TV series. There are many more, also see Centauri, Vorlon.",
     tags: ["alphabet", "tv", "script", "curves"]
   },
+  { name: "Minimoys",
+    imagename: "minimoys.png",
+    description: "From the movie Arthur and the Minimoys (2006), a French movie.",
+    tags: ["alphabet", "movie", "circles" ]
+  },
   { name: "Moon",
     imagename: "moon.png",
     description: "The Moon alphabet was invented by Dr. William Moon and is a writing system for visually impaired people.",
@@ -484,6 +524,11 @@ export var codepages = [
     description: "The Orkhon alphabet, or the Old Turkic script, the Göktürk script, or the Orkhon-Yenisey script is the earliest known example of writing Turkish.",
     tags: ["alphabet", "language", "runes", "symbols"]
   },
+  { name: "Pakmara",
+    imagename: "pakmara.png",
+    description: "Pakmara is the language spoken by a species in the Babylon5 Sci-Fi series.",
+    tags: ["alphabet", "tv", "spikes", "triangles"]
+  },
   { name: "Passing the river alphabet",
     imagename: "ptr.png",
     description: "Passing the River is an occult alphabet derived from the Hebrew alphabet and first described in the Third Book of Occult Philosophy (1553) by Heinrich Cornelius Agrippa.",
@@ -498,6 +543,11 @@ export var codepages = [
     imagename: "pigpen.png",
     description: "The pigpen cipher (als known as the masonic cipher, Freemason's cipher, Napoleon cipher and tic-tac-toe cipher) is believed to be an ancient origin.",
     tags: ["alphabet", "squares", "triangles"]
+  },
+  { name: "Pixel code",
+    imagename: "pixelcode.png",
+    description: "Pixel code consists of a 4 by 3 square. It is ideal for hiding text in pictures.",
+    tags: ["alphabet", "squares", "pixels"]
   },
   { name: "Planetary symbols",
     imagename: "planetarysymbols.png",
@@ -532,7 +582,7 @@ export var codepages = [
   { name: "Reality",
     imagename: "reality.png",
     description: "The Reality alphabet, which was invented by Michael Gibson, is a simple alphabetic script designed to mimic the aesthetics of the glyphs seen in the Blade movie franchise.",
-    tags: ["alphabet", "movie", "blocks"]
+    tags: ["alphabet", "movie", "blocks", "squares"]
   },
   { name: "Red Herring numbers",
     imagename: "redherring.png",
@@ -548,6 +598,16 @@ export var codepages = [
     imagename: "royalnavyflags.gif",
     description: "Signal flags used in HM Royal Navy.",
     tags: ["alphabet", "flag"]
+  },
+  { name: "San Luca Code",
+    imagename: "sanlucacode.png",
+    description: "This code was used by the Maffia in Calabria, Italy.",
+    tags: ["alphabet", "symbols" ]
+  },
+  { name: "Shutter or Optical Telegraph",
+    imagename: "shuttertelegraph.png",
+    description: "Also known as Murray shutters these semaphores or telegraphs were once used in the Royal Navy.",
+    tags: ["alphabet", "semaphore", "squares" ]
   },
   { name: "Sign Language American",
     imagename: "signlanguageamerican.png",
@@ -584,6 +644,11 @@ export var codepages = [
     description: "Spintype is a phonetic/sylabic writing system invented by Bryan Day which he uses in music composition and for his record label and projects.",
     tags: ["alphabet", "squares"]
   },
+  { name: "Tau language",
+    imagename: "tau.png",
+    description: "Tau is a language spoken in the tabletop game Warhammer 40,000.",
+    tags: ["alphabet", "triangles", "diamonds"]
+  },
   { name: "Templar code",
     imagename: "templarcode.png",
     description: "One of the secret codes that might have been used by the knights templar.",
@@ -603,6 +668,11 @@ export var codepages = [
     imagename: "tomtom.png",
     description: "A-tom-tom Code is a simple alternative alphabet for English made up of different combinations of forward and back slashes. ",
     tags: ["alphabet", "slashes"]
+  },
+  { name: "Triangle Cipher",
+    imagename: "trianglecipher2.png",
+    description: "A very old code that originated in the 17th century.",
+    tags: ["alphabet", "triangles"]
   },
   { name: "Trousers Semaphore",
     imagename: "trousers.png",
@@ -638,6 +708,11 @@ export var codepages = [
     imagename: "wakanda.png",
     description: "Wakandan is an alphabet used in the 2018 film Black Panther. It is based on Nsibidi, a system of symbols used in southeastern Nigeria between about 400 and 1400 AD.",
     tags: ["alphabet", "movie", "symbols"]
+  },
+  { name: "Webdings",
+    imagename: "webdings.png",
+    description: "Microsoft Windows font with symbols",
+    tags: ["alphabet", "font", "symbols"]
   },
   { name: "Wingdings 1",
     imagename: "wingdings1.png",
@@ -679,4 +754,9 @@ export var codepages = [
     description: "Symbols representing the zodiac signs",
     tags: ["symbols"]
   },
+  { name: "Zu language signs",
+    imagename: "zuish.png",
+    description: "The Zu is the ancient language of the Zu Folk in the game Fez. The alphabet and numerals of the language are used to solve many puzzles in the game.",
+    tags: ["alphabet", "squares", "games" ]
+  }
 ];

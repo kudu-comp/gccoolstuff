@@ -1,34 +1,101 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('texttools.texttonumbers.title')}}
+      {{ $t('texttools.texttonumbers.title') }}
     </div>
     <div class="mainpage">
-      <div class="infoblock" v-html="$t('texttools.texttonumbers.long')" />
-      <div ref="listofalpha" class="form-inline mb-2">
-        <v-alphabets v-model:alphabet="selectedalphabet"></v-alphabets>
+      <div
+        class="infoblock"
+        v-html="$t('texttools.texttonumbers.long')"
+      />
+      <div
+        ref="listofalpha"
+        class="form-inline mb-2"
+      >
+        <v-alphabets v-model:alphabet="selectedalphabet" />
       </div>
       <div class="form-inline">
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="reverse" id="reverse" v-model="reverse" class="custom-control-input mb-2 mr-2">
-          <label for="reverse" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.reverse')}}</label>
+          <input
+            id="reverse"
+            v-model="reverse"
+            type="checkbox"
+            name="reverse"
+            class="custom-control-input mb-2 mr-2"
+          >
+          <label
+            for="reverse"
+            class="custom-control-label mb-2 mr-2"
+          >{{ $t('txtwordval.reverse') }}</label>
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="startatzero" id="startatzero" v-model="startatzero" class="custom-control-input mb-2 mr-2">
-          <label for="startatzero" class="custom-control-label mb-2 mr-2">{{$t('txtwordval.startzero')}}</label>
+          <input
+            id="startatzero"
+            v-model="startatzero"
+            type="checkbox"
+            name="startatzero"
+            class="custom-control-input mb-2 mr-2"
+          >
+          <label
+            for="startatzero"
+            class="custom-control-label mb-2 mr-2"
+          >{{ $t('txtwordval.startzero') }}</label>
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" name="leadzero" id="leadzero" v-model="leadzero" class="custom-control-input mb-2 mr-2">
-          <label for="leadzero" class="custom-control-label mb-2">{{$t('txttonum.leadzero')}}</label>
+          <input
+            id="leadzero"
+            v-model="leadzero"
+            type="checkbox"
+            name="leadzero"
+            class="custom-control-input mb-2 mr-2"
+          >
+          <label
+            for="leadzero"
+            class="custom-control-label mb-2"
+          >{{ $t('txttonum.leadzero') }}</label>
         </div>
       </div>
       <div class="form-row mb-2">
-        <textarea id="message" name="message" class="form-control" ref="message" :placeholder="$t('labels.message')" rows=10 v-model='message'></textarea>
+        <textarea
+          id="message"
+          ref="message"
+          v-model="message"
+          name="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="10"
+        />
       </div>
-      <input type="button" id="texttonumbers" name="texttonumbers" :value="$t('txttonum.btnttn')" class="btn btn-primary mb-2 mr-2" v-on:click="textToNumbers">
-      <input type="button" id="numberstotext" name="numberstotext" :value="$t('txttonum.btnntt')" class="btn btn-primary mb-2 mr-2" v-on:click="numbersToText">
-      <input type="button" id="remove" name="remove" :value="$t('dialogwv.replacediac')" class="btn btn-primary mb-2" v-on:click="removeDiacr">
-      <div v-if="result" class="resultbox">{{result}}</div>
+      <input
+        id="texttonumbers"
+        type="button"
+        name="texttonumbers"
+        :value="$t('txttonum.btnttn')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="textToNumbers"
+      >
+      <input
+        id="numberstotext"
+        type="button"
+        name="numberstotext"
+        :value="$t('txttonum.btnntt')"
+        class="btn btn-primary mb-2 mr-2"
+        @click="numbersToText"
+      >
+      <input
+        id="remove"
+        type="button"
+        name="remove"
+        :value="$t('txtwordval.replacediac')"
+        class="btn btn-primary mb-2"
+        @click="removeDiacr"
+      >
+      <div
+        v-if="result"
+        class="resultbox"
+      >
+        {{ result }}
+      </div>
     </div>
   </div>
 </template>
@@ -40,8 +107,8 @@ import VAlphabets from '@/components/inputs/VAlphabets.vue'
 export default {
   name: 'TextAnalyze',
 
-  props: {
-    msg: String,
+  components: {
+    VAlphabets,
   },
 
   data: function () {
@@ -53,10 +120,6 @@ export default {
       leadzero: false,
       result : "",
     }
-  },
-
-  components: {
-    VAlphabets,
   },
 
   mounted: function() {

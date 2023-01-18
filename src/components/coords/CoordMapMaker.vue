@@ -1,33 +1,83 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{$t('coordinates.mapmaker.title')}}
+      {{ $t('coordinates.mapmaker.title') }}
     </div>
     <div class="mainpage">
       <div>
-        <div class="infoblock" v-html="$t('coordinates.mapmaker.long')" />
+        <div
+          class="infoblock"
+          v-html="$t('coordinates.mapmaker.long')"
+        />
         <div class="form-row mb-2">
-          <label class="form-label mr-2" for="from">{{$t('labels.coordformat')}}</label>
-          <v-datums id="from" class="mr-2" v-model:datum="from"></v-datums>
-          <input type="button" id="encode" name="encode" :value="$t('cdmapmaker.makemap')" class="btn btn-primary" v-on:click="makeMap">
+          <label
+            class="form-label mr-2"
+            for="from"
+          >{{ $t('labels.coordformat') }}</label>
+          <v-datums
+            id="from"
+            v-model:datum="from"
+            class="mr-2"
+          />
+          <input
+            id="encode"
+            type="button"
+            name="encode"
+            :value="$t('cdmapmaker.makemap')"
+            class="btn btn-primary"
+            @click="makeMap"
+          >
         </div>
         <div class="form-row mb-2">
           <div class="custom-control custom-checkbox mr-2">
-            <input type="checkbox" name="showmarkers" id="showmarkers" v-model="showmarkers" class="custom-control-input">
-            <label for="showmarkers" class="custom-control-label">{{$t('cdmapmaker.showmark')}}</label>
+            <input
+              id="showmarkers"
+              v-model="showmarkers"
+              type="checkbox"
+              name="showmarkers"
+              class="custom-control-input"
+            >
+            <label
+              for="showmarkers"
+              class="custom-control-label"
+            >{{ $t('cdmapmaker.showmark') }}</label>
           </div>
           <div class="custom-control custom-checkbox  mr-2">
-            <input type="checkbox" name="showlabels" id="showlabels" v-model="showlabels" class="custom-control-input">
-            <label for="showlabels" class="custom-control-label">{{$t('cdmapmaker.showlabel')}}</label>
+            <input
+              id="showlabels"
+              v-model="showlabels"
+              type="checkbox"
+              name="showlabels"
+              class="custom-control-input"
+            >
+            <label
+              for="showlabels"
+              class="custom-control-label"
+            >{{ $t('cdmapmaker.showlabel') }}</label>
           </div>
           <div class="custom-control custom-checkbox  mr-2">
-            <input type="checkbox" name="drawcircles" id="drawcircles" v-model="drawcircles" class="custom-control-input">
-            <label for="drawcircles" class="custom-control-label">{{$t('cdmapmaker.drawcircle')}}</label>
+            <input
+              id="drawcircles"
+              v-model="drawcircles"
+              type="checkbox"
+              name="drawcircles"
+              class="custom-control-input"
+            >
+            <label
+              for="drawcircles"
+              class="custom-control-label"
+            >{{ $t('cdmapmaker.drawcircle') }}</label>
           </div>
           <div>
-            <v-distance v-model:dist="dist" v-model:unit="unit">
-              <template v-slot:label>
-                <label class="form-label" for="distance">{{$t('labels.radius')}}</label>
+            <v-distance
+              v-model:dist="dist"
+              v-model:unit="unit"
+            >
+              <template #label>
+                <label
+                  class="form-label"
+                  for="distance"
+                >{{ $t('labels.radius') }}</label>
               </template>
             </v-distance>
           </div>
@@ -35,13 +85,36 @@
       </div>
       <div class="row mb-2">
         <div class="col-6">
-          <textarea id="coordfrom" name="coordfrom" class="form-control mt-2" ref="x" :placeholder="$t('cdmapmaker.phcoord')" rows=10 cols=20 v-model='coordfrom'></textarea>
+          <textarea
+            id="coordfrom"
+            ref="x"
+            v-model="coordfrom"
+            name="coordfrom"
+            class="form-control mt-2"
+            :placeholder="$t('cdmapmaker.phcoord')"
+            rows="10"
+            cols="20"
+          />
         </div>
         <div class="col-6">
-          <textarea id="labels" name="labels" class="form-control mt-2" ref="x" :placeholder="$t('cdmapmaker.phlabel')" rows=10 cols=20 v-model='labels'></textarea>
+          <textarea
+            id="labels"
+            ref="x"
+            v-model="labels"
+            name="labels"
+            class="form-control mt-2"
+            :placeholder="$t('cdmapmaker.phlabel')"
+            rows="10"
+            cols="20"
+          />
         </div>
       </div>
-      <div class="errormsg" v-show="errormsg">{{errormsg}}</div>
+      <div
+        v-show="errormsg"
+        class="errormsg"
+      >
+        {{ errormsg }}
+      </div>
       <v-map v-model:mylocation="coordfrom" />
     </div>
   </div>
@@ -56,8 +129,10 @@ import VDistance from '@/components/inputs/VDistance.vue';
 export default {
   name: 'CoordConvert',
 
-  props: {
-    msg: String
+  components: {
+    VDatums,
+    VDistance,
+    VMap,
   },
 
   data: function() {
@@ -72,12 +147,6 @@ export default {
       unit: 1,
       dist: 165,
     }
-  },
-
-  components: {
-    VDatums,
-    VDistance,
-    VMap,
   },
 
   methods: {
