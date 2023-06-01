@@ -80,7 +80,7 @@ export default {
               image: {
                 src: (r) => {
                   const fileName = this.country + "-" + r.code.toLowerCase() + '.png';
-                  return require(`@/assets/regions/${fileName}`);
+                  return new URL(`../../assets/regions/${fileName}`, import.meta.url).href;
                 },
                 width: "30",
                 height: "20"
@@ -127,7 +127,7 @@ export default {
               image: {
                 src: (r) => {
                   const fileName = this.country + "-" + r.code.toLowerCase() + '.png';
-                  return require(`@/assets/regions/${fileName}`);
+                  return new URL(`../../assets/regions/${fileName}`, import.meta.url).href;
                 },
                 width: "30",
                 height: "20"
@@ -185,7 +185,7 @@ export default {
               image: {
                 src: (r) => {
                   const fileName = this.country + "-" + r.code.toLowerCase() + '.png';
-                  return require(`@/assets/regions/${fileName}`);
+                  return new URL(`../../assets/regions/${fileName}`, import.meta.url).href;
                 },
                 width: "30",
                 height: "20"
@@ -233,7 +233,7 @@ export default {
               image: {
                 src: (r) => {
                   const fileName = this.country + "-" + r.code.toLowerCase() + '.png';
-                  return require(`@/assets/regions/${fileName}`);
+                  return new URL(`../../assets/regions/${fileName}`, import.meta.url).href;
                 },
                 width: "30",
 

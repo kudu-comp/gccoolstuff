@@ -34,6 +34,9 @@
             class="btn btn-primary mr-2 mb-2"
             @click="drawPixels"
           >
+          <v-download 
+            v-model:canvas ="canvas"
+          />
           <div class="box">
             <div class="box-header">
               {{ $t('pixelbuild.input') }}
@@ -361,10 +364,16 @@
 
 <script>
 
+import VDownload from '@/components/inputs/VDownload.vue'
+
 export default {
 
   name: 'PixelBuild',
 
+  components: {
+    VDownload
+  },
+  
   data: function() {
     return {
       errormsg: "",

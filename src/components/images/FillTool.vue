@@ -45,6 +45,9 @@
             class="btn btn-primary mr-2 mb-2"
             @click="restore"
           >
+          <v-download 
+            v-model:canvas ="canvas"
+          />
           <div class="box">
             <div class="box-header">
               {{ $t('filltool.fill') }}
@@ -237,6 +240,7 @@
 <script>
 
 import VueSlider from 'vue-slider-component'
+import VDownload from '@/components/inputs/VDownload.vue'
 import '@/components/css/slidertheme.css'
 
 export default {
@@ -244,6 +248,7 @@ export default {
 
   components: {
     VueSlider,
+    VDownload
   },
 
  data: function() {
@@ -251,6 +256,7 @@ export default {
       fileurl: "",
       errormsg: "",
       ctx: null,
+      canvas: null,
       img: null,
       width: 800,
       height: 800,
@@ -278,8 +284,8 @@ export default {
     // Set focus on file input
     // this.$refs.file.focus();
 
-    const canvas = document.getElementById('canvas');
-    this.ctx = canvas.getContext('2d');
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
 
     // Resize canvas
     this.resizeCanvas();

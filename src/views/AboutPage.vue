@@ -48,7 +48,7 @@
       </va-item>
     </div>
     <h6 class="text-center">
-      &copy; 2021 Kool Interim
+      &copy; 2023 Kool Interim
     </h6>
   </div>
 </template>

@@ -1,63 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CoordConvert from '@/components/coords/CoordConvert.vue'
-import CoordProject from '@/components/coords/CoordProject.vue'
-import CoordLines from '@/components/coords/CoordLines.vue'
-import CoordTriangles from '@/components/coords/CoordTriangles.vue'
-import CoordCircles from '@/components/coords/CoordCircles.vue'
-import CoordIncomplete from '@/components/coords/CoordIncomplete.vue'
-import CoordAntipode from '@/components/coords/CoordAntipode.vue'
-import CoordMapMaker from '@/components/coords/CoordMapMaker.vue'
-import CoordW3W from '@/components/coords/CoordW3W.vue'
-import ReverseWherigo from '@/components/coords/ReverseWherigo.vue'
-import TextWordValue from '@/components/texts/TextWordValue.vue'
-import SmartReplace from '@/components/texts/SmartReplace.vue'
-import TextAnalyze from '@/components/texts/TextAnalyze.vue'
-import TextToNumbers from '@/components/texts/TextToNumbers.vue'
-import TextKeyboards from '@/components/texts/TextKeyboards.vue'
-import TextCodes from '@/components/texts/TextCodes.vue'
-import TextToss from '@/components/texts/TextToss.vue'
-import CodeBook from '@/components/codes/CodeBook.vue'
-import FontSpecial from '@/components/codes/FontSpecial.vue'
-import SegmentCode from '@/components/codes/SegmentCode.vue'
-import ResistorCode from '@/components/codes/ResistorCode.vue'
-import DecaBit from '@/components/codes/DecaBit.vue'
-import MathFib from '@/components/math/MathFib.vue'
-import MathDigits from '@/components/math/MathDigits.vue'
-import MathFormula from '@/components/math/MathFormula.vue'
-import MathPrimes from '@/components/math/MathPrimes.vue'
-import MathRomans from '@/components/math/MathRomans.vue'
-import MathGCDandLCM from '@/components/math/MathGCDandLCM.vue'
-import MathBigNumbers from '@/components/math/MathBigNumbers.vue'
-import MathNimbers from '@/components/math/MathNimbers.vue'
-import MathPalindrome from '@/components/math/MathPalindrome.vue'
-import MathSequences from '@/components/math/MathSequences.vue'
-import MathProperties from '@/components/math/MathProperties.vue'
-import MathBase from  '@/components/math/MathBase.vue'
-import CompBCD from '@/components/comp/CompBCD.vue'
-import CompBrainfuck from '@/components/comp/CompBrainfuck.vue'
-import CompEncryption from '@/components/comp/CompEncryption.vue'
-import CompHashes from '@/components/comp/CompHashes.vue'
-import CompDeadfish from '@/components/comp/CompDeadfish.vue'
-import CompBinToText from '@/components/comp/CompBinToText.vue'
-import CompCow from '@/components/comp/CompCow.vue'
-import CompBeatnik from '@/components/comp/CompBeatnik.vue'
-import CompDuckspeak from '@/components/comp/CompDuckspeak.vue'
-import ExifScanner from '@/components/images/ExifScanner.vue'
-import ColorPicker from '@/components/images/ColorPicker.vue'
-import FillTool from '@/components/images/FillTool.vue'
-import PixelData from '@/components/images/PixelData.vue'
-import PixelBuild from '@/components/images/PixelBuild.vue'
-import ImageTransform from '@/components/images/ImageTransform.vue'
-import TextExtractor from '@/components/images/TextExtractor.vue'
-import HtmlParser from '@/components/HtmlParser.vue'
-import MastermindSolver from '@/components/other/MastermindSolver.vue'
-import PeriodicTable from '@/components/other/PeriodicTable.vue'
-import SudokuSolver from '@/components/other/SudokuSolver.vue'
-import UnitConvertor from '@/components/other/UnitConvertor.vue'
-import CountriesAll from '@/components/other/CountriesAll.vue'
-import UsaStates from '@/components/other/UsaStates.vue'
-import CountryRegions from '@/components/other/CountryRegions.vue'
-import DNACode from '@/components/other/DNACode.vue'
 
 const routes = [
   {
@@ -70,16 +11,16 @@ const routes = [
     name: 'CoordTools',
     component: () => import('@/components/coords/CoordTools.vue'),
     children: [
-      { path: "/coord/coordconvert", name: 'CoordConvert', component: CoordConvert },
-      { path: "/coord/coordproj", name: 'CoordProj', component: CoordProject },
-      { path: "/coord/coordlines", name: 'CoordLines', component: CoordLines },
-      { path: "/coord/coordtriangles", name: 'CoordTriangels', component: CoordTriangles },
-      { path: "/coord/coordcircles", name: 'CoordCircles', component: CoordCircles },
-      { path: "/coord/coordincomplete", name: 'CoordIncomplete', component: CoordIncomplete },
-      { path: "/coord/coordantipode", name: 'CoordAntipode', component: CoordAntipode },
-      { path: "/coord/coordmapmaker", name: 'MapMaker', component: CoordMapMaker },
-      { path: "/coord/coordw3w", name: 'CoordW3W', component: CoordW3W },
-      { path: "/coord/reversewherigo", name: 'ReverseWherigo', component: ReverseWherigo }
+      { path: "/coord/coordconvert",    name: 'CoordConvert',     component: () => import('@/components/coords/CoordConvert.vue') },
+      { path: "/coord/coordproj",       name: 'CoordProj',        component: () => import('@/components/coords/CoordProject.vue') },
+      { path: "/coord/coordlines",      name: 'CoordLines',       component: () => import('@/components/coords/CoordLines.vue') },
+      { path: "/coord/coordtriangles",  name: 'CoordTriangles',   component: () => import('@/components/coords/CoordTriangles.vue') },
+      { path: "/coord/coordcircles",    name: 'CoordCircles',     component: () => import('@/components/coords/CoordCircles.vue') },
+      { path: "/coord/coordincomplete", name: 'CoordIncomplete',  component: () => import('@/components/coords/CoordIncomplete.vue') },
+      { path: "/coord/coordantipode",   name: 'CoordAntipode',    component: () => import('@/components/coords/CoordAntipode.vue') },
+      { path: "/coord/coordmapmaker",   name: 'MapMaker',         component: () => import('@/components/coords/CoordMapMaker.vue') },
+      { path: "/coord/coordw3w",        name: 'CoordW3W',         component: () => import('@/components/coords/CoordW3W.vue') },
+      { path: "/coord/reversewherigo",  name: 'ReverseWherigo',   component: () => import('@/components/coords/ReverseWherigo.vue') }
     ]
   },
   {
@@ -87,13 +28,13 @@ const routes = [
     name: 'TextTools',
     component: () => import('@/components/texts/TextTools.vue'),
     children: [
-      { path: "/text/textwordvalue", name: 'WordValue', component: TextWordValue },
-      { path: "/text/smartreplace", name: 'SmartReplace', component: SmartReplace },
-      { path: "/text/textanalyzer", name: 'TextAnalyzer', component: TextAnalyze },
-      { path: "/text/texttonumbers", name: 'TextToNumbers', component: TextToNumbers },
-      { path: "/text/textcodes", name: 'TextCodes', component: TextCodes },
-      { path: "/text/textkeyboards", name: 'Keyboards', component: TextKeyboards },
-      { path: "/text/texttoss", name: 'TextToss', component: TextToss }
+      { path: "/text/textwordvalue",  name: 'WordValue',      component: () => import('@/components/texts/TextWordValue.vue') },
+      { path: "/text/smartreplace",   name: 'SmartReplace',   component: () => import('@/components/texts/SmartReplace.vue') },
+      { path: "/text/textanalyzer",   name: 'TextAnalyzer',   component: () => import('@/components/texts/TextAnalyze.vue') },
+      { path: "/text/texttonumbers",  name: 'TextToNumbers',  component: () => import('@/components/texts/TextToNumbers.vue') },
+      { path: "/text/textcodes",      name: 'TextCodes',      component: () => import('@/components/texts/TextCodes.vue') },
+      { path: "/text/textkeyboards",  name: 'Keyboards',      component: () => import('@/components/texts/TextKeyboards.vue') },
+      { path: "/text/texttoss",       name: 'TextToss',       component: () => import('@/components/texts/TextToss.vue') }
     ]
   },
   {
@@ -106,11 +47,11 @@ const routes = [
     name: 'Codes',
     component: () => import('@/components/codes/CodesIntro.vue'),
     children: [
-      { path: "/codes/codebook",     name: 'Codebook', component: CodeBook },   
-      { path: "/codes/fonts",        name: 'Fonts',    component: FontSpecial},
-      { path: "/codes/segment",      name: 'Segment',  component: SegmentCode},
-      { path: "/codes/resistorcode", name: 'Resistor', component: ResistorCode},
-      { path: "/codes/decabit",      name: 'DecaBit',  component: DecaBit}
+      { path: "/codes/codebook",     name: 'Codebook', component: () => import('@/components/codes/CodeBook.vue') },   
+      { path: "/codes/fonts",        name: 'Fonts',    component: () => import('@/components/codes/FontSpecial.vue')},
+      { path: "/codes/segment",      name: 'Segment',  component: () => import('@/components/codes/SegmentCode.vue')},
+      { path: "/codes/resistorcode", name: 'Resistor', component: () => import('@/components/codes/ResistorCode.vue')},
+      { path: "/codes/decabit",      name: 'DecaBit',  component: () => import('@/components/codes/DecaBit.vue')}
     ]
   },
   {
@@ -118,18 +59,18 @@ const routes = [
     name: 'Math',
     component: () => import('@/components/math/MathTools.vue'),
     children: [
-      { path: "/math/baseconvertor",     name: 'BaseConvertor',         component: MathBase },
-      { path: "/math/countdigits",       name: 'Digits',                component: MathDigits },
-      { path: "/math/primes",            name: 'Primes',                component: MathPrimes},
-      { path: "/math/romans",            name: 'Romans',                component: MathRomans},
-      { path: "/math/formulasolv",       name: 'FormulaSolver',         component: MathFormula},
-      { path: "/math/numberproperties",  name: 'NumberProperties',      component: MathProperties },
-      { path: "/math/fibonacci",         name: 'Fibonacci',             component: MathFib },
-      { path: "/math/bignumbers",        name: 'BigNumbers',            component: MathBigNumbers },
-      { path: "/math/nimbers",           name: 'Nimbers',               component: MathNimbers },
-      { path: "/math/gcdandlcm",         name: 'GCDAndLCM',             component: MathGCDandLCM },
-      { path: "/math/palindromecounter", name: 'Palindrome',            component: MathPalindrome },
-      { path: "/math/sequences",         name: 'Sequences',             component: MathSequences },
+      { path: "/math/baseconvertor",     name: 'BaseConvertor',         component: () => import('@/components/math/MathBase.vue') },
+      { path: "/math/countdigits",       name: 'Digits',                component: () => import('@/components/math/MathDigits.vue') },
+      { path: "/math/primes",            name: 'Primes',                component: () => import('@/components/math/MathPrimes.vue')},
+      { path: "/math/romans",            name: 'Romans',                component: () => import('@/components/math/MathRomans.vue')},
+      { path: "/math/formulasolv",       name: 'FormulaSolver',         component: () => import('@/components/math/MathFormula.vue')},
+      { path: "/math/numberproperties",  name: 'NumberProperties',      component: () => import('@/components/math/MathProperties.vue') },
+      { path: "/math/fibonacci",         name: 'Fibonacci',             component: () => import('@/components/math/MathFib.vue') },
+      { path: "/math/bignumbers",        name: 'BigNumbers',            component: () => import('@/components/math/MathBigNumbers.vue') },
+      { path: "/math/nimbers",           name: 'Nimbers',               component: () => import('@/components/math/MathNimbers.vue') },
+      { path: "/math/gcdandlcm",         name: 'GCDAndLCM',             component: () => import('@/components/math/MathGCDandLCM.vue') },
+      { path: "/math/palindromecounter", name: 'Palindrome',            component: () => import('@/components/math/MathPalindrome.vue') },
+      { path: "/math/sequences",         name: 'Sequences',             component: () => import('@/components/math/MathSequences.vue') },
     ]
   },
   {
@@ -137,16 +78,16 @@ const routes = [
     name: 'CompTools',
     component: () => import('@/components/comp/CompTools.vue'),
     children: [
-      { path: "/comp/charcodes",  name: 'charcodes',       component: TextCodes },
-      { path: "/comp/bcd",        name: 'bcd',             component: CompBCD },
-      { path: "/comp/encryption", name: 'encryption',      component: CompEncryption }, //Param: enc is name of the initial encryption
-      { path: "/comp/hashes",     name: 'hashes',          component: CompHashes },     //Param: hash is name of the initial encryption
-      { path: "/comp/brainfuck",  name: 'brainfuck',       component: CompBrainfuck },  //Param: bfvar is name of the initial BF variation
-      { path: "/comp/deadfish",   name: 'deadfish',        component: CompDeadfish },
-      { path: "/comp/cow",        name: 'cow',             component: CompCow },
-      { path: "/comp/beatnik",    name: 'beatnik',         component: CompBeatnik },
-      { path: "/comp/bintotext",  name: 'compbintotext',   component: CompBinToText },
-      { path: "/comp/duckspeak",  name: 'duckspeak',       component: CompDuckspeak }
+      { path: "/comp/charcodes",  name: 'charcodes',       component: () => import('@/components/texts/TextCodes.vue') },
+      { path: "/comp/bcd",        name: 'bcd',             component: () => import('@/components/comp/CompBCD.vue') },
+      { path: "/comp/encryption", name: 'encryption',      component: () => import('@/components/comp/CompEncryption.vue') }, //Param: enc is name of the initial encryption
+      { path: "/comp/hashes",     name: 'hashes',          component: () => import('@/components/comp/CompHashes.vue') },     //Param: hash is name of the initial encryption
+      { path: "/comp/brainfuck",  name: 'brainfuck',       component: () => import('@/components/comp/CompBrainfuck.vue') },  //Param: bfvar is name of the initial BF variation
+      { path: "/comp/deadfish",   name: 'deadfish',        component: () => import('@/components/comp/CompDeadfish.vue') },
+      { path: "/comp/cow",        name: 'cow',             component: () => import('@/components/comp/CompCow.vue') },
+      { path: "/comp/beatnik",    name: 'beatnik',         component: () => import('@/components/comp/CompBeatnik.vue') },
+      { path: "/comp/bintotext",  name: 'compbintotext',   component: () => import('@/components/comp/CompBinToText.vue') },
+      { path: "/comp/duckspeak",  name: 'duckspeak',       component: () => import('@/components/comp/CompDuckspeak.vue') }
     ]
   },
   {
@@ -154,14 +95,14 @@ const routes = [
     name: "OtherIntro",
     component: () => import('@/components/other/OtherIntro.vue'),
     children: [
-      { path: '/other/sudokusolver',    name: 'SudokuSolver',     component: SudokuSolver      },
-      { path: '/other/mmsolver',        name: 'MastermindSolver', component: MastermindSolver, },
-      { path: '/other/periodictable',   name: 'PeriodicTable',    component: PeriodicTable,    },
-      { path: '/other/countries',       name: 'CountriesAll',     component: CountriesAll,     },
-      { path: '/other/unitconvertor',   name: 'UnitConvertor',    component: UnitConvertor,    },
-      { path: '/other/usastates',       name: 'UsaStates',        component: UsaStates,        },
-      { path: '/other/countryregions',  name: 'CountryRegions',   component: CountryRegions,   },
-      { path: '/other/dnacode',         name: 'DNACode',          component: DNACode,          }
+      { path: '/other/sudokusolver',    name: 'SudokuSolver',     component: () => import('@/components/other/SudokuSolver.vue')      },
+      { path: '/other/mmsolver',        name: 'MastermindSolver', component: () => import('@/components/other/MastermindSolver.vue'), },
+      { path: '/other/periodictable',   name: 'PeriodicTable',    component: () => import('@/components/other/PeriodicTable.vue'),    },
+      { path: '/other/countries',       name: 'CountriesAll',     component: () => import('@/components/other/CountriesAll.vue'),     },
+      { path: '/other/unitconvertor',   name: 'UnitConvertor',    component: () => import('@/components/other/UnitConvertor.vue'),    },
+      { path: '/other/usastates',       name: 'UsaStates',        component: () => import('@/components/other/UsaStates.vue'),        },
+      { path: '/other/countryregions',  name: 'CountryRegions',   component: () => import('@/components/other/CountryRegions.vue'),   },
+      { path: '/other/dnacode',         name: 'DNACode',          component: () => import('@/components/other/DNACode.vue'),          }
     ]
   },
   {
@@ -169,19 +110,19 @@ const routes = [
     name: "ImageTools",
     component: () => import('@/components/images/ImageTools.vue'),
     children: [
-      { path: '/images/exifscanner',     name: 'ExifScanner',     component: ExifScanner      },
-      { path: '/images/colorpicker',     name: 'ColorPicker',     component: ColorPicker      },
-      { path: '/images/filltool',        name: 'FillTool',        component: FillTool         },
-      { path: '/images/pixeldata',       name: 'PixelData',       component: PixelData        },
-      { path: '/images/pixelbuild',      name: 'PixelBuild',      component: PixelBuild       },
-      { path: '/images/imagetransform',  name: 'ImageTransform',  component: ImageTransform   },
-      { path: '/images/textextractor',   name: 'TextExtractor',   component: TextExtractor    }
+      { path: '/images/exifscanner',     name: 'ExifScanner',     component: () => import('@/components/images/ExifScanner.vue')      },
+      { path: '/images/colorpicker',     name: 'ColorPicker',     component: () => import('@/components/images/ColorPicker.vue')      },
+      { path: '/images/filltool',        name: 'FillTool',        component: () => import('@/components/images/FillTool.vue')         },
+      { path: '/images/pixeldata',       name: 'PixelData',       component: () => import('@/components/images/PixelData.vue')        },
+      { path: '/images/pixelbuild',      name: 'PixelBuild',      component: () => import('@/components/images/PixelBuild.vue')       },
+      { path: '/images/imagetransform',  name: 'ImageTransform',  component: () => import('@/components/images/ImageTransform.vue')   },
+      { path: '/images/textextractor',   name: 'TextExtractor',   component: () => import('@/components/images/TextExtractor.vue')    }
     ]
   },
   {
     path: '/html',
     name: 'HtmlParser',
-    component: HtmlParser
+    component: () => import('@/components/HtmlParser.vue')
   },
   {
     path: '/howtostart',

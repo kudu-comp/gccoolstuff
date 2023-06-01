@@ -44,13 +44,9 @@
             class="btn btn-primary mr-2 mb-2"
             @click="restore"
           >
-          <input
-            id="undo"
-            type="button"
-            :value="$t('buttons.undo')"
-            class="btn btn-primary mr-2 mb-2"
-            @click="undoEdit"
-          >
+          <v-download 
+            v-model:canvas ="canvas"
+          />
           <div class="box">
             <div class="box-header">
               {{ $t('imagetransform.shift') }}
@@ -173,19 +169,23 @@
 <script>
 
 import VueSlider from 'vue-slider-component'
+import VDownload from '@/components/inputs/VDownload.vue'
 import '@/components/css/slidertheme.css'
 
 export default {
-  name: 'ColorPicker',
+
+  name: 'ImageTransform',
 
   components: {
     VueSlider,
+    VDownload
   },
 
   data: function() {
     return {
       fileurl: "",
       errormsg: "",
+      canvas: null,
       ctx: null,
       img: null,
       width: 800,
@@ -214,11 +214,8 @@ export default {
 
   mounted: function() {
 
-    // Set focus on file input
-    // this.$refs.file.focus();
-
-    const canvas = document.getElementById('canvas');
-    this.ctx = canvas.getContext('2d');
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
 
     // Resize canvas
     this.resizeCanvas();
@@ -229,24 +226,20 @@ export default {
 
     resizeCanvas: function () {
 
-      // Resize canvas called
       let pv = document.getElementById("preview");
       this.width = pv.offsetWidth - 10;
       this.heigth = pv.offsetHeigth - 10;
 
-      // if (this.img) this.drawImageScaled(this.img);
-      
     },
 
     drawImageScaled: function (img) {
 
-      let canvas = this.ctx.canvas ;
-      let hRatio = canvas.width  / img.width    ;
-      let vRatio =  canvas.height / img.height  ;
+      let hRatio = this.canvas.width  / img.width    ;
+      let vRatio = this.canvas.height / img.height  ;
       let ratio  = Math.min ( hRatio, vRatio );
 
       // Upperleft corner coordinates
-      this.dx = Math.floor(( canvas.width - img.width*ratio ) / 2);
+      this.dx = Math.floor(( this.canvas.width - img.width*ratio ) / 2);
       // this.dy = Math.floor(( canvas.height - img.height*ratio ) / 2);
       this.dy = 0;
       this.dw = Math.floor(img.width*ratio);
@@ -263,7 +256,7 @@ export default {
       // console.log('Dw ' + this.dw);
       // console.log('Dh ' + this.dh);
 
-      this.ctx.clearRect(0,0,canvas.width, canvas.height);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.drawImage(img, 0, 0, img.width, img.height,
                          this.dx, this.dy, this.dw, this.dh); 
 

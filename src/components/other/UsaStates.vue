@@ -45,7 +45,7 @@ export default {
           image: {
             src: function (row) {
               const fileName = row.code.toLowerCase() + '.png';
-              return require(`@/assets/usflags/${fileName}`);
+              return new URL(`../../assets/usflags/${fileName}`, import.meta.url).href;
             },
             width: "30",
             height: "20"

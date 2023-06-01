@@ -297,14 +297,15 @@ export default {
       for (let i=0; i < this.maxhints; i++) {
 
         // On first empty hint stop and set number of hints
-        if (this.pins[i] === "") {
+        if (this.pins[i].length === 0) {
           this.nhints = i;
           break;
         }
 
         // Check if #pins is correct
-        if (this.pins[i].length != this.npin) {
+        if (this.pins[i].length !== this.npin) {
           this.errormsg = this.$t('mmsolver.invalidhint1');
+          console.log(this.pins[i]);
           return;
         }
 

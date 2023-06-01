@@ -29,7 +29,7 @@
     </router-link>
   </div>
   <router-view :key="$route.path" />
-  <div v-if="['OtherTools'].includes($route.name)">
+  <div v-if="['OtherIntro'].includes($route.name)">
     <div class="container">
       <p
         class="intro"

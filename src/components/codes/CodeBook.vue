@@ -136,7 +136,7 @@ export default {
       const fileName = this.codepagefile.toLowerCase();
 
       // Request the image as a webpack module
-      return require(`@/assets/codebook/${fileName}`);
+      return new URL(`../../assets/codebook/${fileName}`, import.meta.url).href;
     },
   },
 

@@ -59,7 +59,8 @@
     "showtable": "Show table",
     "undo": "Undo",
     "encode": "Encode",
-    "decode": "Decode"
+    "decode": "Decode",
+    "download": "Download"
   },
 
   "colors": {
