@@ -12,7 +12,8 @@
     "cannotparse": "Cannot parse input",
     "unknowninput": "Unknown input ",
     "loadingimage": "Error loading image",
-    "loadingfile": "Error loading file"
+    "loadingfile": "Error loading file",
+    "notanumber": "Input is not a number"
   },
 
   "labels": {
@@ -704,6 +705,11 @@
       "title": "Duckspeak",
       "short": "A lot of nak",
       "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
+    },
+    "checksum" : {
+      "title": "Checkdigit",
+      "short": "Calculate the check digit for IBAN, credit card, social security and other numbers",
+      "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark.</p><p>For IBAN the check digits are the 3rd and 4th positions, replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>"
     }
 
   },
@@ -1607,6 +1613,13 @@
     "hex": "Hexadecimal",
     "dec": "Numbers (decimal",
     "invalidcmd": " it not duckspeak\n"
+  },
+
+  "compcsum": {
+    "checkres": "The check digit is: ",
+    "checkmethod": "Method",
+    "checkpar1": "0 (even parity) or 1 (odd parity)",
+    "checkpar2": "1 (even parity) or 0 (odd parity)"
   },
 
   "compenc": {

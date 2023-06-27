@@ -12,7 +12,8 @@
     "cannotparse": "Invoer ongeldig",
     "unknowninput": "Onbekende invoer ",
     "loadingimage": "Fout bij het laden van de afbeelding",
-    "loadingfile": "Fout bij het laden van het bestand"
+    "loadingfile": "Fout bij het laden van het bestand",
+    "notanumber": "Invoer is geen getal"
   },
 
   "labels": {
@@ -704,6 +705,11 @@
       "title": "Duckspeak",
       "short": "Heel veel Nak, alsof je een eend hoort praten.",
       "long": "Duckspeak klinkt alsof een eend loopt te kwaken. De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde."
+    },
+    "checksum" : {
+      "title": "Controlegetal",
+      "short": "Bereken het controlecijfer for IBAN, credit card, BSN en andere nummers",
+      "long": ",p>Controlecijfers worden gebruikt om te controleren of een nummer geldig is. Hierdoor kunnen bijvoorbeeld typefouten worden gedetecteerd. Er zijn diverse manieren om een controlecijfer te berekenen.</p><p>In de meeste gevallen is het controlecijfer het laatste cijfer. Je kan het weglaten of vervangen door een vraagteken.</p><p>In IBAN nummers is het controlegetal de 3e en 4e positie. Vervang deze bij het invoeren door vraagtekens, bijv. NL??ABNA0373510122."
     }
   },
 
@@ -1611,7 +1617,14 @@
     "invalidcmd": " is geen duckspeak\n"
   },
 
-  "compenc": {
+  "compcsum": {
+    "checkres": "Het controlegetal is: ",
+    "checkmethod": "Methode",
+    "checkpar1": "0 (even parity) of 1 (oneven parity)",
+    "checkpar2": "1 (even parity) of 0 (oneven parity)"
+  },
+
+"compenc": {
     "codes": "Kies een encryptie",
     "key": "Sleutel",
     "coded": "Gecodeerd bericht",

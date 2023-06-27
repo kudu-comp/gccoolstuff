@@ -203,6 +203,9 @@
         <router-link to="/comp/duckspeak">
           {{ $t('comptools.duckspeak.title') }}
         </router-link> {{ $t('comptools.duckspeak.short') }}.<br>
+        <router-link to="/comp/checksum">
+          {{ $t('comptools.checksum.title') }}
+        </router-link> {{ $t('comptools.checksum.short') }}.<br>
       </div>
       <h3>{{ $t('menu.other') }}</h3>
       <div class="p mb-2">

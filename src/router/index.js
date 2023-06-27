@@ -87,7 +87,8 @@ const routes = [
       { path: "/comp/cow",        name: 'cow',             component: () => import('@/components/comp/CompCow.vue') },
       { path: "/comp/beatnik",    name: 'beatnik',         component: () => import('@/components/comp/CompBeatnik.vue') },
       { path: "/comp/bintotext",  name: 'compbintotext',   component: () => import('@/components/comp/CompBinToText.vue') },
-      { path: "/comp/duckspeak",  name: 'duckspeak',       component: () => import('@/components/comp/CompDuckspeak.vue') }
+      { path: "/comp/duckspeak",  name: 'duckspeak',       component: () => import('@/components/comp/CompDuckspeak.vue') },
+      { path: "/comp/checksum",   name: 'checksum',        component: () => import('@/components/comp/CompChecksum.vue') }
     ]
   },
   {

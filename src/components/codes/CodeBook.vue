@@ -40,6 +40,22 @@
           class="btn btn-primary mb-2 mr-2"
           @click="goSearch"
         >
+        <input
+          id="prev"
+          type="button"
+          name="prev"
+          value="&leftarrow;"
+          class="btn btn-primary mb-2 mr-2"
+          @click="getPrev"
+        >
+        <input
+          id="next"
+          type="button"
+          name="next"
+          value="&rightarrow;"
+          class="btn btn-primary mb-2 mr-2"
+          @click="getNext"
+        >
         <span class="form-label mb-2">{{ foundpages.length }}&nbsp;{{ $t('cdbook.pagesfound') }}</span>
       </div>
       <p
@@ -48,18 +64,8 @@
       >
         {{ errormsg }}.
       </p>
-      <div class="row">
-        <div class="col-2 col-sm-1">
-          <input
-            id="prev"
-            type="button"
-            name="prev"
-            value="&leftarrow;"
-            class="btn btn-primary"
-            @click="getPrev"
-          >
-        </div>
-        <div class="imagearea col-8 col-sm-10">
+      <div class="text-center">       
+        <div class="imagearea">
           <va-item
             :showitem="showitem"
             :hidebutton="hidebutton"
@@ -73,23 +79,13 @@
               {{ codepagetags }}
             </template>
           </va-item>
-          <div class="text-center">
+          <div>
             <img
               class="img-fluid rounded"
               :src="codepageImage"
               :alt="codepageheader"
             >
           </div>
-        </div>
-        <div class="col-2 col-sm-1">
-          <input
-            id="next"
-            type="button"
-            name="next"
-            value="&rightarrow;"
-            class="btn btn-primary"
-            @click="getNext"
-          >
         </div>
       </div>
     </div>

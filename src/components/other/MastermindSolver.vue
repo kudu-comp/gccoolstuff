@@ -98,7 +98,7 @@
             <td>
               <input
                 v-model="pins[index]"
-                type="number"
+                type="text"
                 size="4"
                 min="1"
                 max="999999"
@@ -166,6 +166,7 @@
             id="listofresults"
             v-model="selectedsolution"
             name="listofresults"
+            size="10"
             class="form-control"
             @change="printSolution"
           >
@@ -296,6 +297,8 @@ export default {
       // Check the hints
       for (let i=0; i < this.maxhints; i++) {
 
+        // console.log(this.pins[i]);
+
         // On first empty hint stop and set number of hints
         if (this.pins[i].length === 0) {
           this.nhints = i;
@@ -305,7 +308,6 @@ export default {
         // Check if #pins is correct
         if (this.pins[i].length !== this.npin) {
           this.errormsg = this.$t('mmsolver.invalidhint1');
-          console.log(this.pins[i]);
           return;
         }
 

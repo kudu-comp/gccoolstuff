@@ -32,6 +32,9 @@
     </router-link> |
     <router-link to="/comp/duckspeak">
       {{ $t('comptools.duckspeak.title') }}
+    </router-link> |
+    <router-link to="/comp/checksum">
+      {{ $t('comptools.checksum.title') }}
     </router-link>
   </div>
   <router-view :key="$route.path" />
@@ -171,6 +174,19 @@
           <span v-html="$t('comptools.duckspeak.long')" />
         </template>
       </va-item>
+      <va-item
+        :showitem="show[10]"
+        @toggle="show[10] = !show[10]"
+      >
+        <template #header>
+          <router-link to="/comp/checksum">
+            {{ $t('comptools.checksum.title') }}
+          </router-link>
+        </template>
+        <template #content>
+          <span v-html="$t('comptools.checksum.long')" />
+        </template>
+      </va-item>    
     </div>
   </div>
 </template>
