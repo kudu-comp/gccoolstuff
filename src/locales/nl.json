@@ -709,7 +709,7 @@
     "checksum" : {
       "title": "Controlegetal",
       "short": "Bereken het controlecijfer for IBAN, credit card, BSN en andere nummers",
-      "long": ",p>Controlecijfers worden gebruikt om te controleren of een nummer geldig is. Hierdoor kunnen bijvoorbeeld typefouten worden gedetecteerd. Er zijn diverse manieren om een controlecijfer te berekenen.</p><p>In de meeste gevallen is het controlecijfer het laatste cijfer. Je kan het weglaten of vervangen door een vraagteken.</p><p>In IBAN nummers is het controlegetal de 3e en 4e positie. Vervang deze bij het invoeren door vraagtekens, bijv. NL??ABNA0373510122."
+      "long": "<p>Controlecijfers worden gebruikt om te controleren of een nummer geldig is. Hierdoor kunnen bijvoorbeeld typefouten worden gedetecteerd. Er zijn diverse manieren om een controlecijfer te berekenen.</p><p>In de meeste gevallen is het controlecijfer het laatste cijfer. Je kan het weglaten of vervangen door een vraagteken. In IBAN nummers is het controlegetal de 3e en 4e positie. Vervang deze bij het invoeren atlijd door vraagtekens, bijv. NL??ABNA0373510122."
     }
   },
 

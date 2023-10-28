@@ -350,7 +350,7 @@ export default {
 
       // Reset error flag
       this.errormsg = "";
-      this.message = "";
+      this.result = "";
       let options = { 
         mode: this.modes[this.selmode],
         padding: this.pads[this.selpad]
@@ -364,26 +364,26 @@ export default {
             if (this.key.length <10) {
               this.errormsg = this.$t('compenc.keytooshort')            
             } else {
-              this.message = this.decryptOkto3 (this.result, this.key);
+              this.result = this.decryptOkto3 (this.message, this.key);
             }
             break;
           case "AES" :
-            this.message = CryptoJS.AES.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.AES.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           case "DES" :
-            this.message = CryptoJS.DES.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.DES.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           case "TripleDES" :
-            this.message = CryptoJS.TripleDES.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.TripleDES.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           case "Rabbit" :
-            this.message = CryptoJS.Rabbit.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.Rabbit.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           case "RC4" :
-            this.message = CryptoJS.RC4.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.RC4.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           case "RC4Drop" :
-            this.message = CryptoJS.RC4Drop.decrypt (this.result, this.key, options).toString(CryptoJS.enc.Utf8);
+            this.result = CryptoJS.RC4Drop.decrypt (this.message, this.key, options).toString(CryptoJS.enc.Utf8);
             break;
           default :
             // Unknown, raise error

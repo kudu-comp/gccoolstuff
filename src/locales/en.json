@@ -709,7 +709,7 @@
     "checksum" : {
       "title": "Checkdigit",
       "short": "Calculate the check digit for IBAN, credit card, social security and other numbers",
-      "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark.</p><p>For IBAN the check digits are the 3rd and 4th positions, replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>"
+      "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark. For IBAN the check digits are the 3rd and 4th positions, always replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>"
     }
 
   },

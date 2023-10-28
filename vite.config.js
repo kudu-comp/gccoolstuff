@@ -20,11 +20,11 @@ export default defineConfig({
     host: true
   },
 
-  // server: {
-  //   watch: {
-  //     usePolling: true,
-  //     origin: 'http://192.168.68.104:8080'
-  //   }
-  // }
+  server: {
+    watch: {
+      usePolling: true,
+      origin: "~/src"
+    }
+  }
 
 })

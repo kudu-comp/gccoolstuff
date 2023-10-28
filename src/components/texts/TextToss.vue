@@ -102,7 +102,7 @@ export default {
   data: function () {
     return {
       message: "",
-      result : this.$t('labels.result'),
+      result : "",
       mode : 3,
       errormsg: ""
     }

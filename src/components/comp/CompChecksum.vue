@@ -34,7 +34,7 @@
         <label
           class="form-label mr-2"
           for="input"
-        >{{ $t('labels.nummer') }}</label>
+        >{{ $t('labels.number') }}</label>
         <input
           id="input"
           v-model="txt"
