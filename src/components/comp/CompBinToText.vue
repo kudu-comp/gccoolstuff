@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.compbintotext.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
-          for="selenc"
+          class="form-label mb-2 sm-size"
+          for="selfromenc"
         >{{ $t('compbintotext.selfrom') }} </label>
         <select
           id="selfromenc"
           v-model="selfromenc"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
           @change="selFromEncoding"
         >
           <option value="b85">
@@ -50,16 +50,16 @@
       </div>
       <div
         v-show="fromtables"
-        class="form-inline mb-2"
+        class="row mb-2"
       >
         <label
-          class="form-label mb-2 mr-2"
-          for="table"
+          class="form-label mb-2 sm-size"
+          for="fromtable"
         >{{ $t('compbintotext.selfromtable') }}</label>
         <select
-          id="table"
+          id="fromtable"
           v-model="selfromtable"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option
             v-for="tb in fromtables"
@@ -69,38 +69,19 @@
             {{ tb.name }}
           </option>
         </select>
-        <p>
+        <p class="xl-size">
           {{ selfromtable }}
         </p>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline">
-        <input
-          id="bcdfrom"
-          type="button"
-          name="bcdfrom"
-          :value="$t('buttons.convert')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="convertBase"
-        >
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
-          for="selenc"
+          class="form-label mb-2 sm-size"
+          for="seltoenc"
         >{{ $t('compbintotext.selto') }} </label>
         <select
           id="seltoenc"
           v-model="seltoenc"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
           @change="selToEncoding"
         >
           <option value="b85">
@@ -134,16 +115,16 @@
       </div>
       <div
         v-show="totables"
-        class="form-inline mb-2"
+        class="row mb-2"
       >
         <label
-          class="form-label mb-2 mr-2"
-          for="table"
+          class="form-label mb-2 sm-size"
+          for="totable"
         >{{ $t('compbintotext.seltotable') }} </label>
         <select
-          id="table"
+          id="totable"
           v-model="seltotable"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option
             v-for="tb in totables"
@@ -153,16 +134,26 @@
             {{ tb.name }}
           </option>
         </select>
-        <p>
+        <p class="xl-size">
           {{ seltotable }}
         </p>
       </div>
+      <button id="convert" class="btn mb-2"  @click="convertBase">{{ $t('buttons.convert') }}</button>
       <p
         v-show="errormsg"
         class="errormsg mt-2"
       >
         {{ errormsg }}
       </p>
+      <div class="form-row mb-2">
+        <textarea
+          id="message"
+          v-model="message"
+          class="form-control"
+          :placeholder="$t('labels.message')"
+          rows="5"
+        />
+      </div>
       <div
         v-if="result"
         class="resultbox"
@@ -203,7 +194,6 @@ export default {
   },
 
   mounted: function() {
-    this.$refs.message.focus();
     this.fromtables = null;
     this.selfromtable = "";
     this.totables = bt.base64encodings;

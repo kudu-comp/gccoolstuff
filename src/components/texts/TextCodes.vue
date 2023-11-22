@@ -8,18 +8,39 @@
         class="infoblock"
         v-html="$t('texttools.charcodes.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label sm-size mb-2"
           for="codes"
         >{{ $t('txtcodes.input') }}</label>
         <v-code
           id="codes"
           v-model:code="selectedcode"
           class="mb-2"
+          @change="translateInput"
         />
       </div>
-      <div class="form-row mb-2">
+      <div class="row">
+        <label
+          class="form-label sm-size mb-2"
+          for="codesout"
+        >{{ $t('txtcodes.output') }}</label>
+        <v-code
+          id="codesout"
+          v-model:code="selectedoutput"
+          class="mb-2"
+          @change="translateInput"
+        />
+      </div>
+      <input
+        id="convert"
+        type="button"
+        name="convert"
+        :value="$t('buttons.convert')"
+        class="btn col mb-2 me-2"
+        @click="translateInput"
+      >
+      <div class="mb-2">
         <textarea
           id="message"
           ref="message"
@@ -27,27 +48,7 @@
           name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline">
-        <input
-          id="convert"
-          type="button"
-          name="convert"
-          :value="$t('buttons.convert')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="translateInput"
-        >
-        <label
-          class="form-label mb-2 mr-2"
-          for="codes"
-        >{{ $t('txtcodes.output') }}</label>
-        <v-code
-          id="codes"
-          v-model:code="selectedoutput"
-          class="mb-2"
-          @change="translateInput"
+          rows="5"
         />
       </div>
       <p

@@ -13,7 +13,6 @@
           id="gchtml"
           ref="gchtml"
           v-model="gchtml"
-          name="gchtml"
           class="form-control"
           :placeholder="$t('htmlscanner.ph')"
           rows="3"
@@ -23,9 +22,8 @@
         <input
           id="scan"
           type="button"
-          name="scan"
           :value="$t('htmlscanner.btnscan')"
-          class="btn btn-primary mr-2"
+          class="btn mr-2"
           @click="scanHTML"
         >{{ scanresult }}
       </div>
@@ -46,7 +44,7 @@
         <template #content>
           <select
             v-model="selectedlink"
-            class="custom-select"
+            class="form-select"
             @change="openLink(selectedlink)"
           >
             <option
@@ -70,7 +68,7 @@
         <template #content>
           <select
             v-model="selectedimage"
-            class="custom-select"
+            class="form-select"
             @change="openLink(selectedimage)"
           >
             <option
@@ -94,7 +92,7 @@
         <template #content>
           <select
             v-model="selectedbgimage"
-            class="custom-select"
+            class="form-select"
             @change="openLink(selectedbgimage)"
           >
             <option

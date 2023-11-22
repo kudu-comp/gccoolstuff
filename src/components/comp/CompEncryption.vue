@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.encryption.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 sm-size"
           for="selenc"
         >{{ $t('compenc.codes') }} </label>
         <select
           id="selenc"
           v-model="selenc"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option value="Okto3">
             Okto3
@@ -41,126 +41,110 @@
           </option>
         </select>
       </div>
-      <div
-        v-show="selenc != 'Okto3'"
-        class="form-inline"
-      >
-        <label class="form-label mb-2 mr-2">{{ $t('compenc.advanced') }}</label>
+      <div class="row mb-2">
         <label
-          class="form-label mb-2 mr-2"
-          for="selmode"
-        >{{ $t('compenc.modes') }} </label>
-        <select
-          id="selmode"
-          v-model="selmode"
-          class="custom-select mb-2 mr-2"
-        >
-          <option value="0">
-            CBC
-          </option>
-          <option value="1">
-            CFB
-          </option>
-          <option value="2">
-            CTR
-          </option>
-          <option value="3">
-            OFB
-          </option>
-          <option value="4">
-            ECB
-          </option>
-        </select>
-        <label
-          class="form-label mb-2 mr-2"
-          for="selpad"
-        >{{ $t('compenc.padding') }} </label>
-        <select
-          id="selpad"
-          v-model="selpad"
-          class="custom-select mb-2 mr-2"
-        >
-          <option value="0">
-            Pkcs7
-          </option>
-          <option value="1">
-            Iso97971
-          </option>
-          <option value="2">
-            AnsiX923
-          </option>
-          <option value="3">
-            Iso10126
-          </option>
-          <option value="4">
-            ZeroPadding
-          </option>
-          <option value="5">
-            NoPadding
-          </option>
-        </select>
-      </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline mb-2">
-        <label
-          class="form-label mr-2"
+          class="form-label sm-size"
           for="key"
         >{{ $t('compenc.key') }}</label>
         <input
           id="key"
-          ref="key"
           v-model="key"
           type="text"
-          name="key"
-          class="form-control"
+          class="form-control md-size"
           size="40"
         >
       </div>
-      <div class="form-inline">
-        <input
-          id="encrypt"
-          type="button"
-          :value="$t('buttons.encode')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="encryptMessage"
-        >
-        <input
-          id="decrypt"
-          type="button"
-          :value="$t('buttons.decode')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="decryptMessage"
-        >
+      <div v-show="selenc != 'Okto3'" >
+        <h7>{{ $t('compenc.advanced') }}</h7>
+        <div class="row">
+          <label
+            class="form-label sm-size mb-2 me-2"
+            for="selmode"
+          >{{ $t('compenc.modes') }} </label>
+          <select
+            id="selmode"
+            v-model="selmode"
+            class="form-select sm-size mb-2 me-2"
+          >
+            <option value="0">
+              CBC
+            </option>
+            <option value="1">
+              CFB
+            </option>
+            <option value="2">
+              CTR
+            </option>
+            <option value="3">
+              OFB
+            </option>
+            <option value="4">
+              ECB
+            </option>
+          </select>
+        </div>
+        <div class="row">
+          <label
+            class="form-label sm-size mb-2 me-2"
+            for="selpad"
+          >{{ $t('compenc.padding') }} </label>
+          <select
+            id="selpad"
+            v-model="selpad"
+            class="form-select sm-size mb-2"
+          >
+            <option value="0">
+              Pkcs7
+            </option>
+            <option value="1">
+              Iso97971
+            </option>
+            <option value="2">
+              AnsiX923
+            </option>
+            <option value="3">
+              Iso10126
+            </option>
+            <option value="4">
+              ZeroPadding
+            </option>
+            <option value="5">
+              NoPadding
+            </option>
+          </select>
+        </div>
       </div>
+      <input
+        id="encrypt"
+        type="button"
+        :value="$t('buttons.encode')"
+        class="btn mb-2 me-2"
+        @click="encryptMessage"
+      >
+      <input
+        id="decrypt"
+        type="button"
+        :value="$t('buttons.decode')"
+        class="btn mb-2"
+        @click="decryptMessage"
+      >
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
         class="errormsg mt-2"
       >
         {{ errormsg }}
       </p>
-      <div
-        v-if="result"
-        class="form-row mb-2"
-      >
-        <textarea
-          id="coded"
-          ref="coded"
-          v-model="result"
-          class="form-control"
-          :placeholder="$t('compenc.coded')"
-          rows="10"
-        />
-      </div>
+      <p v-if="result" class="resultbox">
+        {{ result }}
+      </p>
     </div>
   </div>
 </template>
@@ -403,4 +387,8 @@ export default {
 </script>
 
 <style scoped>
+
+h7 {
+  font-weight: bolder;
+}
 </style>

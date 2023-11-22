@@ -9,33 +9,30 @@
         v-html="$t('texttools.analyze.long')"
       />
       <div class="form-row mb-2">
+        <input
+          id="analyze"
+          type="button"
+          :value="$t('txtanalyze.analyze')"
+          class="btn mb-2 me-2"
+          @click="analyzeText"
+        >
+        <input
+          id="repldiacr"
+          type="button"
+          :value="$t('txtwordval.replacediac')"
+          class="btn mb-2"
+          @click="removeDiacr"
+        >
         <textarea
           id="message"
           ref="message"
           v-model="message"
-          name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
-          rows="10"
+          rows="5"
           @input="analyzeText"
         />
       </div>
-      <input
-        id="analyze"
-        type="button"
-        name="analyze"
-        :value="$t('txtanalyze.analyze')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="analyzeText"
-      >
-      <input
-        id="analyze"
-        type="button"
-        name="analyze"
-        :value="$t('txtwordval.replacediac')"
-        class="btn btn-primary mb-2"
-        @click="removeDiacr"
-      >
       <table class="table table-sm">
         <tr><td>{{ $t('txtanalyze.nwords') }}</td><td>{{ totalwords }}</td></tr>
         <tr><td>{{ $t('txtanalyze.nlines') }}</td><td>{{ totallines }}</td></tr>

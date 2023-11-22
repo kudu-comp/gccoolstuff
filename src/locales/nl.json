@@ -1,6 +1,6 @@
 {
   "language": "Taal",
-  "intro": "Dit is een collectie tools voor het oplossen van geocaching puzzels. Ga naar <a href='https://www.geocaching.com/'>Geocaching.com</a> voor meer informatie over geoaching. Meer informatie over geocaching puzzels is te vinden bij <a href='./howtostart'>Tips</a>.",
+  "intro": "Dit is een collectie tools voor het oplossen van geocaching puzzels. Ga naar <a href='https://www.geocaching.com/'>Geocaching.com</a> voor meer informatie over geoaching. Meer informatie over geocaching puzzels is te vinden bij <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -13,7 +13,11 @@
     "unknowninput": "Onbekende invoer ",
     "loadingimage": "Fout bij het laden van de afbeelding",
     "loadingfile": "Fout bij het laden van het bestand",
-    "notanumber": "Invoer is geen getal"
+    "notanumber": "Invoer is geen getal",
+    "notbinary" : "Ongeldig binair getal",
+    "notdecimal" : "Ongeldig decimaal getal",
+    "nothexadecimal": "Ongeldig hexadecimaal getal"
+
   },
 
   "labels": {
@@ -37,7 +41,14 @@
     "search": "Zoekterm",
     "sum": "Som",
     "count": "Aantal",
-    "number": "Nummer"
+    "perc": "Percentage",
+    "number": "Nummer",
+    "welcome": "Welkom",
+    "whatsnew": "Wat is er nieuw",
+    "featured": "Uitgelicht",
+    "help": "Help ",
+    "moreinfo": "Lees verder",
+    "letsgo": "Aan de slag" 
   },
 
   "buttons": {
@@ -95,13 +106,14 @@
     "home": "Home",
     "coordinates": "Coördinaten",
     "texttools": "Tekst",
-    "ciphers": "Geheimschriften",
     "codes": "Codes",
+    "ciphers": "Geheimschriften",
     "imagetools": "Afbeeldingen",
     "mathtools": "Rekenen",
     "comptools": "Programmeren",
-    "htmlscanner": "HTML Scanner",
-    "other": "Diverse tools",
+    "htmlscanner": "Scan HTML",
+    "other": "Diversen",
+    "help": "Help",
     "howto": "Tips",
     "about": "Info"
   },
@@ -161,7 +173,7 @@
   },
 
   "codes": {
-    "intro": "Codes zijn een simpele manier om tekst of nummers te coderen. Er wordt geen sleutel bij gebruikt. Het enige wat nodig is om de code op te lossen is deze te herkennen. Dat is soms niet eenvoudig. De zoek tool kan helpen of blader door de speciale fonts. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden.",
+    "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden.",
     "codebook": {
       "title": "Zoek codes",
       "short": "Vind de juiste code door te zoeken op tags en woorden",
@@ -268,7 +280,7 @@
   },
  
   "othertools" : {
-    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes",
+    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes",
     "sudokusolver": {
       "title": "Sudoku oplosser",
       "short": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3",
@@ -313,19 +325,24 @@
 
   "cp": {
     "short": " en 50 andere geheimschriften.",
-    "info": "Selecteer een geheimschrift hieronder. Vul de benodigde sleutels/ sleutelwoorden in. Kies coderen of decoderen. In de meeste gevallen is het handig naar hoofdletters te converteren. Het verwijderen van tekens die niet in het alfabet voorkomen geeft vaak het beste resultaat. Het gecodeerde bericht kan eventueel worden geformatteerd in blokken (dit is gebruikelijk in de cryptografie). Om te decoderen zal de formattering vaak verwijderd moeten worden.",
+    "long": "Geheimschriften of beter gezegd Cijfers coderen berichten door substitutie en transpositie. Bij substitutie worden letters of combinaties van letters vervangen door iets anders. Bij transpositie wordt de volgorde van de letters aangepast. Cijfers die maar één alfabet gebruiken zijn eenvoudig te kraken, zoals ROT13 of Atbash. Cijfers die meerdere alfabetten gebruiken zijn bijvoorbeeld Vigenere en Beaufort. Sommige cijfers coderen één letter per keer, maar veel werken ook met bigrams van twee letters, zoals Polybius, Bazeries en Condi. Cijfers die transpositie toepassen om de volgorde van de letters te veranderen zijn er ook in allerlei variaties zoals Railfence, Cadenus or Skip. De meest complexe en dus moeilijk te kraken cijfers gebruiken een combinatie van al deze technieken. Bifid, Trifid en Digrafid zijn daarvan enkele voorbeelden.",
+    "info": "Selecteer een geheimschrift uit de lijst. Vul het bericht in en codeer of decodeer. In de meeste gevallen volstaan de standaardinstelling. In expert mode kunnen die worden aangepast.",
     "cipher": "Geheimschrift",
+    "selcipher": "Selecteer cipher",
+    "keepcase": "Behoud kleine letters",
+    "keepdiacrit": "Behoud diakrieten (vervang niet door normale letters)",
+    "keepunknown": "Behoud letters die niet voorkomen in het alfabet",
+    "replacechars": "Vervang de letters zoals hieronder opgegeven",
+    "formatoutput": "Verdeel de output in blokken zoals hieronder opgegeven",
+    "expertmode": "Expert mode",
+    "hideexpertmode": "Standaard mode",
     "gensq": "Genereer vierkant",
     "genalp": "Genereer alfabet",
-    "phencmsg": "Gecodeerd bericht",
-    "toupper": "Hoofdletters",
-    "remnonalp": "Verwijder niet alfabet",
-    "repl": "Vervang",
     "errdec": "Bericht kan niet worden gedecodeerd. Er gaat iets fout.",
     "errenc": "Bericht kan niet worden gecodeerd. Er gaat iets fout.",
     "sep": "Scheidingsteken",
-    "remform": "Verwijder formattering",
     "bs": "Lengte blokken",
+    "repl": "Vervangingen",
     "adfgvx": {
       "info": "De ADFGX(V) cijfer gebruikt een Polybiusvierkant (van 5 bij 5 of 6 bij 6). Daarna worden de kolommen verplaatst volgens de gegeven sleutel. Hierdoor wordt de code gefractioneerd.",
       "k1": "Transpositiesleutel"
@@ -352,24 +369,24 @@
     "bacon": {
       "info": "Elk karakter wordt vervangen door 5 letters (normaliter A en B). In versie 1 wordt dezelfde combinatie gebruikt voor I/J en U/V. Versie 2 is uniek voor het hele alfabet. Je kan de Bacon cijfer ook in een willekeurige tekst verstoppen door voor A en B een ander font te gebruiken of te wisselen tussen hoofd- en kleine letters.",
       "k1": "Versie (1 of 2)",
-      "k2": "Vervang A door:",
-      "k3": "Vervang B door:"
+      "k2": "Vervang A door",
+      "k3": "Vervang B door"
     },
     "bazeries": {
       "info": "De Bazeries cijfer codeert 2-letters per keer. Het gebruikte alfabet is 25 of 36 letters. Er worden twee vierkanten gebruikt. De sleutels voor het genereren van de vierkanten zijn optioneel. De numerieke sleutel wordt gebruikt voor transpositie van het gecodeerde bericht en eventueel om het tweede vierkant te genereren, indien de sleutel ontbreekt.",
-      "k1": "Sleutel 1",
-      "k2": "Sleutel 2",
+      "k1": "Vierkant 1",
+      "k2": "Vierkant 2",
       "k3": "Transpositiesleutel (numeriek)"
     },
     "beaufort": {
       "info": "De Beaufort cijfer, (genoemd naar zijn bedenker by Sir Francis Beaufort), is een substitutiecijfer vergelijkbaar met de Vigenere cijfer, met een enigszins aangepast tableau. De sleutel is verplicht",
-      "k1": "Sleutel"
+      "k1": "Sleutel (verplicht)"
     },
     "bibibinary": {
       "info": "Bibi-binary is systeem voor het coderen van getallen. Het getal wordt geconverteerd naar hexadecimaal en dan omgezet naar een grappig klinkende tekst. Alleen nummers kunnen worden gecodeerd."
     },
     "bifid": {
-      "info": "De Bifid cijfer gebruikt een Polybiusvierkant. Op het resultaat wordt een transpositie uitgevoerd met de gegeven sleutel. Hierdoor treedt fractionering op. Het resultaat daarvan wordt weer vertaald naar tekst met hetzelfde Polybiusvierkant.",
+      "info": "De Bifid cijfer gebruikt een standaard Polybiusvierkant. Op het resultaat wordt een transpositie uitgevoerd met de gegeven sleutel. Hierdoor treedt fractionering op. Het resultaat daarvan wordt weer vertaald naar tekst met hetzelfde Polybiusvierkant.",
       "k1": "Transpositiesleutel"
     },
     "burrowswheeler": {
@@ -396,7 +413,7 @@
     "collon": {
       "info": "De Colloncijfer vertaalt letters naar bigrams met behulp van een Polybiusvierkant. Het bigram ontstaat door het combineren van de eerste/laatste letter in de rij/kolom. De periode wordt vervolgens gebruikt voor transpositie, waardoor fractionering optreedt.",
       "k1": "Volgorde van bigrams:",
-      "k2": "Sleutel voor het Polybiusvierkant",
+      "k2": "Polybiusvierkant",
       "k3": "Periode",
       "s1": {
         "rfcl": "Rij eerst, kolom laatst",
@@ -420,14 +437,14 @@
     },
     "digrafid": {
       "info": "De Digrafid cijfer gebruikt een tableau gebaseerd op twee alfabetten van 3 bij 9 en 9 bij 3 (27 tekens - ABCDEFGHIJKLMNOPQRSTUVWXYZ#).",
-      "k1": "Sleutel voor tableau 1",
-      "k2": "Sleutel voor tableau 2",
-      "k3": "Periode"
+      "k1": "Sleutel tableau 1",
+      "k2": "Sleutel tableau 2",
+      "k3": "Periode (verplicht)"
     },
     "foursquare": {
       "info": "De Foursquare cijfer is vervangt digrams (2 letters) op basis van twee Polybiusvierkanten.",
-        "k1": "Sleutel 1",
-        "k2": "Sleutel 2"
+        "k1": "Vierkant 1",
+        "k2": "Vierkant 2"
     },
     "gcid": {
       "info": "Geocache id, ookwel base 31, vertaalt het geocache id (een nummer) naar de geocache code, zoals GC001. Meerdere id's of codes kunnen worden ingevoerd.."
@@ -441,11 +458,11 @@
     },
     "gromark": {
       "info": "De Gromark cijfer gebruikt de sleutel om eerst het alfabet te herordenen en vervolgens dezelfde sleutel voor transpositie. De primer wordt gebruikt om de verschuiving van elke letter te bepalen.",
-      "k1": "Sleutel",
+      "k1": "Sleutel (verplicht)",
       "k2": "Primer (5 cijfers)"
     },
     "gronsfeld": {
-      "info": "De Gronsfeld cijfer is een Vigenere cijfer met een numerieke sleutel.",
+      "info": "De Gronsfeld cijfer is een Vigenere cijfer met een numerieke sleutel. De sleutel is verplicht.",
       "k1": "Sleutel (numeriek)"
     },
     "kennycode": {
@@ -457,7 +474,7 @@
       "k2": "Sleutel voor rij/kolom (min 10 letters)"
     },
     "morbit": {
-      "info": "Morbit vertaalt het bericht eerst naar Morse. De resulterende code wordt opgedeeld in koppels van 2 tekens, die met behulp van de sleutel (9 letters) worden omgezet in tekst.",
+      "info": "Morbit vertaalt het bericht eerst naar Morse. De resulterende code wordt opgedeeld in koppels van 2 tekens, die steeds met behulp van de sleutel (9 letters) worden omgezet in een cijfer.",
       "k1": "Sleutel (9 letters)"
     },
     "morse": {
@@ -473,13 +490,13 @@
     },
     "nihilist": {
       "info": "De Nihilist cijfer is een variant op de Polybius cipher. De eerste sleutel wordt gebruikt om het Polybiusvierkant te genereren. De tweede sleutel wordt ook gecodeerd en vervolgens bij elke letter opgeteld.",
-      "k1": "Sleutel voor vierkant",
+      "k1": "Polybius vierkant",
       "k2": "Sleutel om op te tellen"
     },
     "nihilisttransposition": {
       "info": "De Nihilist transpositiecijfer is een kolomtranspositie gevolgd door een rijtranspositie. Voor beide wordt dezelfde sleutel gebruikt. Het resultaat wordt vervolgens per kolom of per rij uitgeschreven. De lengte van het bericht moet een kwadraat van de sleutellengte zijn. (Deze cijfer heeft niks te maken met de Nihilist cijfer.)",
-      "k1": "Transpositiesleutel:",
-      "k2": "Per kolom / per rij:",
+      "k1": "Transpositiesleutel",
+      "k2": "Per kolom / per rij",
       "s1": {
         "row": "Rij",
         "col": "Kolom"
@@ -491,11 +508,11 @@
     },
     "phillips": {
       "info": "De Phillips cijfer is een variant op de Polybiuscijfer. De rijen en kolommen van het vierkant worden verschoven zodat er 8 verschillende vierkanten ontstaan. De 8 vierkanten worden na elkaar gebruikt.",
-      "k1": "Sleutel voor vierkant"
+      "k1": "Polybius vierkant"
     },
     "playfair": {
-      "info": "De Playfair cijfer codeert bigrams (2 letters) per keer met een Polybiusvierkant. Het is één van de klassieke cijfers en werd in 1854 uitgevonden door Sir Charles Wheatstone. De sleutel is optioneel om het Polybiusvierkant te genereren.",
-      "k1": "Sleutel"
+      "info": "De Playfair cijfer codeert bigrams (2 letters) per keer met een Polybiusvierkant. Het is één van de klassieke cijfers en werd in 1854 uitgevonden door Sir Charles Wheatstone.",
+      "k1": "Polybius vierkant"
     },
     "polybius": {
       "info": "De Polybiuscijfer gebruikt een vierkant (het Polybiusvierkant) van 5x5 (of 6x6). De labels van de rijen en kolommen zijn standaard 12345, maar dit kan worden aangepast. Het Polybiusiverkant wordt in veel andere cijfers gebruikt. Het vierkant is een klassieker die teruggaat naar de Oude Grieken.",
@@ -510,7 +527,7 @@
     },
     "porta": {
       "info": "De Porta cijfer gebruikt 13 verschillende alfabetten die een variant zijn op het standaard tableau van de Vigenerecijfer (die gebruikt 26 alfabetten). De sleutel bepaalt de volgorde waarin de alfabetten worden gekozen.",
-      "k1": "Sleutel"
+      "k1": "Sleutel (verplicht)"
     },
     "portax": {
       "info": "De Portax cijfer combineert verschillende technieken. Hij is vervangt digrams (2 letters), gebruikt meerdere alfabetten (het alfabet wordt steeds verschoven) en tenslotte ook transpositie (rij naar kolommen).",
@@ -572,10 +589,10 @@
       "k1": "Sleutel"
     },
     "trisquare": {
-      "info": "De Trisquare cijfer gebruikt dire Polybiusvierkanten. Groepen van twee letters (digrams) worden vertaald naar groepjes van 3 letters.",
-      "k1": "Enter key square 1:",
-      "k2": "Enter key square 2:",
-      "k3": "Enter key square 3:"
+      "info": "De Trisquare cijfer gebruikt drie Polybiusvierkanten. Groepen van twee letters (digrams) worden vertaald naar groepjes van 3 letters.",
+      "k1": "Vierkant 1",
+      "k2": "Vierkant 2",
+      "k3": "Vierkant 3"
     },
     "vatsyayana": {
       "info": "De Vatsyayana or Kamasutra cijfer is een simpele substitutiecijfer die paren van letters gebruikt (meestal 13), waarbij de letters steeds elkaars vervanging zijn.",
@@ -583,16 +600,36 @@
       "k2": "Tweede helft van de paren"
     },
     "vigenere": {
-      "info": "De Vigenère cijfer is een klassieke polyalphabetische cijfer. Er worden 26 verschillende alfabetten gegenereerd, waarbij elk alfabet steeds een positie wordt verschoven. Het zo ontstane tableau heet ook wel tableau recta. De sleutel bepaald in welke volgorde de verschillende alfabetten worden gebruikt.",
-      "k1": "Sleutel"
+      "info": "De Vigenère cijfer is een klassieke polyalfabetische cijfer. Er worden 26 verschillende alfabetten gegenereerd, waarbij elk alfabet steeds een positie wordt verschoven. Het zo ontstane tableau heet ook wel tableau recta. De sleutel bepaald in welke volgorde de verschillende alfabetten worden gebruikt.",
+      "k1": "Sleutel (verplicht)"
     },
     "zebra": {
       "info": "ZEBRA is de naam van een substitutietabel die gebruikt werd door het Volksleger en het Ministerie van Staatsveiligheid in de DDR. Het substitueert letters, inclusief Ä, Ü en Ö, enkele digrammen, enkele trigrammen, cijfers en enkele speciale tekens."
     },
     "zygazyfa": {
-      "info": "De Zygazyfa cijfer is bedacht door Ray Crowther die hem gebruikt in sommige van zijn geocaches. Het is een polyalphabetische cijfer, waarbij het volgende alfabet steeds wordt gegenereerd op basis van de te coderen letter.",
+      "info": "De Zygazyfa cijfer is bedacht door Ray Crowther die hem gebruikt in sommige van zijn geocaches. Het is een polyalfabetische cijfer, waarbij het volgende alfabet steeds wordt gegenereerd op basis van de te coderen letter.",
       "k1": "Sleutel"
     }
+  },
+
+  "cperrors" : {
+    "nothingtodo": "Geen bericht om te coderen of te decoderen.",
+    "isrequired" : " is verplicht.",
+    "mustbegreaterthen1" : " moet groter dan 1 zijn.",
+    "mustbegreaterthen0" : " moet groter dan 0 zijn.",
+    "mustbe1or2": " moet 1 of 2 zijn.",
+    "mustbe1char": " moet precies 1 teken zijn.",
+    "mustbeeof": " moet een teken zijn dat niet in het alfabet voorkomt.",
+    "mustbenumeric": " moet een getal zijn.",
+    "mustbehalfalf" : " moet de halve lengte van het alfabet zijn.",
+    "msg25key": "Bericht moet 25 keer de lengte van de sleutel lang zijn.",
+    "mustbe10ormore" : " moet 10 of meer tekens lang zijn.",
+    "mustbe9": " moet precies 9 tekens lang zijn.",
+    "msgmustbesquareofkey" : "Bericht moet het kwadraat van de lengte van de sleutel lang zijn.",
+    "keylongerthenmsg" : " moet net zo lang of langer zijn dan de lengte van het bericht.",
+    "keymustbesqrroot" : " sleutel moet de wortel van de lengte van het alfabet lang zijn.",
+    "keymustbealph" : " moet dezelfde lengte hebben als het alfabet.",
+    "keyfromalph" : " moet zijn samengesteld uit het alfabet."
   },
 
   "mathtools": {
@@ -799,7 +836,6 @@
   },
 
   "pixeldata": {
-    "sum": "Bereken het totaal van alle rood, groen en blauw waardes.",
     "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
   },
 
@@ -818,8 +854,8 @@
     "flipr": "Rijen van #pixels",
     "flipc": "Kolommen van #pixels",
     "transform": "Spiegelen",
-    "fliph": "Spiegel horizontal",
-    "flipv": "Spiegel vertical"
+    "fliph": "Spiegel horizontaal",
+    "flipv": "Spiegel verticaal"
   },
 
   "textextractor": {
@@ -1441,8 +1477,8 @@
   },
 
   "mathbase": {
-    "base1": "Base links (2 t/m 36)",
-    "base2": "Base rechts (2 t/m 36)"
+    "base1": "Base van (2 t/m 36)",
+    "base2": "Base naar (2 t/m 36)"
   },
 
   "mathdeci": {
@@ -1496,7 +1532,7 @@
     "the": "Het ",
     "nth": "e Fibonacci nummer is ",
     "not": " niet",
-    "fib": " een Fibonacci nummer"
+    "fib": " is een Fibonacci nummer op positie "
   },
 
   "mathgcd": {
@@ -1582,7 +1618,8 @@
     "niter": "Aantal herhalingen",
     "start": "Startwaarde",
     "res1": "Het getal op positie",
-    "res2": "De reeks is"
+    "res2": "De reeks is",
+    "maxconway" : "Het maximum voor Conway is 50"
   },
 
   "compbf": {
@@ -1595,6 +1632,7 @@
   },
 
   "compbcd": {
+    "seltype": "Selecteer methode",
     "bcdfrom": "BCD naar numbers",
     "bcdto": "Nummers naar BCD",
     "packed": "Packed BCD",
@@ -1648,5 +1686,73 @@
 
   "dialoghowto": {
     "info": "Deze pagina is helaas alleen beschikbaar in het Engels."
+  },
+
+  "numerology": {
+    "title" : "Numerologie",
+    "long" : "<p>Numerologie codeert volgens een bepaald systeem van versleutelen van het alfabet een woord of naam of datum, en herleidt dat tot een getal. Elke letter krijgt een waarde- De waardes zijn niet gerelateerd aan de positie in het alfabet (zoals met woordwaarde), maar met een symbolische waarde.</p><p>Het standaard Latijnse alfabet wordt meestal gebruikt. Gematria gebruikt het Hebreewse alfabet. Isopsephy het Griekse alfabet. </p>",
+    "selmethod" : "Selecteer methode",
+    "res1" : "De numerologische waarde is ",
+    "res2" : "Berekening :",
+    "err1" : "Eén of meerdere onbekende letters gevonden."
+  },
+
+  "datecalc" :{
+    "title" : "Datum rekenen",
+    "long" : "Bereken het aantal dagen tussen twee data. Tel een aantal dagen op of trek een aantal dagen af van een datum. Bereken de dag van de week of de dag in het jaar. Bereken het aantal dagen in het jaar en in de maand van een gegeven datum.",
+    "date1" : "Eerste date",
+    "date2" : "Tweede date",
+    "days" : "Dagen optellen of aftrekken",
+    "res1a" : "Het aantal dagen tussen de eerste en tweede datum is ",
+    "res1b" : " dagen.",
+    "res2a" : "Tel ",
+    "res2b" : " dagen op bij de eerste datum ",
+    "res3a" : "Trek ",
+    "res3b" : " dagen af van de eerste datum ",
+    "res4" : "De dag van de week is ",
+    "res5" : "Het aantal dagen in het jaar ",
+    "res6" : "Het aantal dagen in de maand ",
+    "res7" : "Dag in het jaar "
+  },
+
+  "randomizer" : {
+    "title" : "Random Generator",
+    "long" : "<p>De random generator genereert een willekeurige reeks cijfers of tekens. Dit kan handig zijn om een bericht tussen te verstoppen. Maar het kan ook handig zijn voor spelletjes, simulaties of voor statistiek. Binair genereert een reeks met enkel 0 of 1. Tekst genereert een reeks uit het gegeven alfabet. Bereik genereert getallen tussen het opgegeven minimum en maximum. Verzameling genereert een reeks aan de hand van de gedefinieerde verzameling (gescheiden door komma's). ASCII tenslotte genereert een reeks uit alle printbare tekens.</p>",
+    "sel" : "Selecteer methode",
+    "selbin": "Binair (0 en 1)",
+    "selrng": "Bereik",
+    "seltxt": "Tekst",
+    "selcol": "Verzameling",
+    "selascii": "Alle printbare tekens (ASCII)",
+    "numberof": "Aantal random",
+    "minmax": "Min en max voor bereik",
+    "chars": "Alfabet voor tekst",
+    "coll": "Verzameling (komma geschieden)",
+    "sep": "Tussenvoegsel",
+    "sepnone": "Geen",
+    "sepspace": "Spatie",
+    "sepcomma": "Komma",
+    "sepcolon": "Dubbele punt",
+    "sephyphen": "Streepje" 
+  },
+
+  "rotciphers" : {
+    "title": "Rotatie cijfers",
+    "long": "<p>Rotatie cijfer vervangen simpelweg elke letter met een andere een paar posities verderop in het alfabet. Als je aan het einde komt, begin je weer aan het begin, vandaar de naam rotatie cijfers. Standaard is de verschuiving de helft van de lengte van het alfabet. In dat geval zijn coderen en decoderen namelijk gelijk. ROT13 gebruikt het standaard alfabet (hoofdletters). ROT5 werkt met enkel getallen. ROT47 met alle printbare ascii tekens.</p><p>De tool genereert alle mogelijke verschuivingen, zodat het makkelijk is de code te kraken als de verschuiving onbekend is.</p>",
+    "rot5" : "Getallen (ROT5)",
+    "rot13": "Standaard (ROT13)",
+    "rot47": "Printare ASCII (ROT47)"
+  },
+  
+  "freqanal" : {
+    "title" : "Frequentie Analyse",
+    "long" : "<p>Frequentie analyse is een belangrijk hulpmiddel in het kraken van codes. Voor simpele codes is de de meest voorkomende code meestal de meest voorkomende letter. Maar ook voor complexere codes is dit een handige tool. Hoe langer de tekst hoe betrouwbaarder de analyse.</p><p>Lengte 1 geeft de verdeling van de letters in het alfabet. Als deze een beetje overeenkomt met een normale tekst dan is dit vermoedelijk een 1 op 1 omzetting. Gebruik <a href='/smartreplace'>Slimme Substitutie</a> om deze code te kraken.</p><p>Lengte 2, zogenaamde digrams of bigrams, is handig om codes te kraken die twee letters gebruiken om één teken te coderen, zoals de Polybius cijfer. Ook voor codes die twee letters, zoals Bazeries of Foursquare, per keer coderen is een analyse van bigrams handig. De gevonden verdeling komt dan overeen met de meest voorkomende verdeling van bigrams. Zo is EN in het Nederlands het meest voortkomende bigram.</p><p>Het maximale aantal getoonde missende n-grammen is 1000.</p>",
+    "size" : "Lengte n-gram",
+    "slide" : "Verschuif (ABCDE => AB, BC, CD, DE)",
+    "bound" : "Analyseer losse woorden",
+    "showmissing" : "Toon ontbrekende n-grams (max 1000)",
+    "numfound" : "Aantal gevonden n-grams: ",
+    "nummissing" : "Aantal ontbrekende n-grams: ",
+    "missing": "Ontbrekende n-grammen"
   }
 }

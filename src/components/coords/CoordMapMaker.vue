@@ -9,63 +9,56 @@
           class="infoblock"
           v-html="$t('coordinates.mapmaker.long')"
         />
-        <div class="form-row mb-2">
+        <div class="row mb-2">
           <label
-            class="form-label mr-2"
+            class="form-label sm-size mb-2"
             for="from"
           >{{ $t('labels.coordformat') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
-            class="mr-2"
+            class="md-size mb-2"
           />
-          <input
-            id="encode"
-            type="button"
-            name="encode"
-            :value="$t('cdmapmaker.makemap')"
-            class="btn btn-primary"
-            @click="makeMap"
-          >
         </div>
-        <div class="form-row mb-2">
-          <div class="custom-control custom-checkbox mr-2">
+        <v-show-on-map id="go" class="btn me-2" @Show="makeMap()" />
+        <div class="mb-2">
+          <div class="form-check custom-checkbox me-2">
             <input
               id="showmarkers"
               v-model="showmarkers"
               type="checkbox"
               name="showmarkers"
-              class="custom-control-input"
+              class="form-check-input"
             >
             <label
               for="showmarkers"
-              class="custom-control-label"
+              class="form-check-label"
             >{{ $t('cdmapmaker.showmark') }}</label>
           </div>
-          <div class="custom-control custom-checkbox  mr-2">
+          <div class="form-check  me-2">
             <input
               id="showlabels"
               v-model="showlabels"
               type="checkbox"
               name="showlabels"
-              class="custom-control-input"
+              class="form-check-input"
             >
             <label
               for="showlabels"
-              class="custom-control-label"
+              class="form-check-label"
             >{{ $t('cdmapmaker.showlabel') }}</label>
           </div>
-          <div class="custom-control custom-checkbox  mr-2">
+          <div class="form-check me-2">
             <input
               id="drawcircles"
               v-model="drawcircles"
               type="checkbox"
               name="drawcircles"
-              class="custom-control-input"
+              class="form-check-input"
             >
             <label
               for="drawcircles"
-              class="custom-control-label"
+              class="form-check-label"
             >{{ $t('cdmapmaker.drawcircle') }}</label>
           </div>
           <div>
@@ -92,8 +85,7 @@
             name="coordfrom"
             class="form-control mt-2"
             :placeholder="$t('cdmapmaker.phcoord')"
-            rows="10"
-            cols="20"
+            rows="5"
           />
         </div>
         <div class="col-6">
@@ -104,8 +96,7 @@
             name="labels"
             class="form-control mt-2"
             :placeholder="$t('cdmapmaker.phlabel')"
-            rows="10"
-            cols="20"
+            rows="5"
           />
         </div>
       </div>
@@ -125,6 +116,7 @@ import * as coords from '@/scripts/coords.js';
 import VMap from '@/components/inputs/VMap.vue'
 import VDatums from '@/components/inputs/VDatums.vue';
 import VDistance from '@/components/inputs/VDistance.vue';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
   name: 'CoordConvert',
@@ -133,6 +125,7 @@ export default {
     VDatums,
     VDistance,
     VMap,
+    VShowOnMap
   },
 
   data: function() {

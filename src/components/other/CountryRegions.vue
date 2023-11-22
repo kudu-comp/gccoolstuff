@@ -10,15 +10,15 @@
         class="infoblock"
         v-html="$t('othertools.countryregions.long')"
       />
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
           for="countrylist"
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('countryregions.list') }}</label>
         <select
           id="countrylist"
           v-model="country"
-          class="custom-select"
+          class="form-select md-size mb-2"
           @change="updateTable()"
         >
           <option

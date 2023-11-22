@@ -1,29 +1,26 @@
 <template>
   <div class="row">
     <div class="col-sm-12">
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="searchInput"
-          name="message"
-          class="form-control"
-          :placeholder="phsearch"
-          rows="2"
-        />
-      </div>
-      <div class="flex-row align-left">
+      <textarea
+        id="message"
+        ref="message"
+        v-model="searchInput"
+        class="form-control mb-2"
+        :placeholder="phsearch"
+        rows="2"
+      />
+      <div class="row px-3">
         <input
           id="searchweb"
           type="button"
-          name="searchweb"
           :value="$t('buttons.search')"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 me-2 sm-size"
           @click="search(sel)"
         >
         <select
+          id="searchindex"
           v-model="searchIndex"
-          class="custom-select mb-2 mr-2"
+          class="form-select me-2 mb-2 lg-size"
           style="width: 150px;"
         >
           <option
@@ -38,25 +35,22 @@
         <input
           id="reset"
           type="button"
-          name="reset"
           :value="$t('buttons.reset')"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 me-2 sm-size"
           @click="reset"
         >
         <input
-          id="showhide"
+          id="showtab"
           type="button"
-          name="showhide"
           :value="$t('buttons.showtab')"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 me-2 md-size"
           @click="showtable = !showtable"
         >
         <input
-          id="showhide"
+          id="showres"
           type="button"
-          name="showhide"
           :value="$t('buttons.showres')"
-          class="btn btn-primary mb-2"
+          class="btn mb-2 md-size"
           @click="showresults = !showresults"
         >
       </div>
@@ -487,19 +481,6 @@ export default defineComponent ({
 
 .desc {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAZUlEQVQ4y2NgGAWjYBSggaqGu5FA/BOIv2PBIPFEUgxjB+IdQPwfC94HxLykus4GiD+hGfQOiB3J8SojEE9EM2wuSJzcsFMG4ttQgx4DsRalkZENxL+AuJQaMcsGxBOAmGvopk8AVz1sLZgg0bsAAAAASUVORK5CYII=);
-}
-
-.v-table {
-
-}
-
-.v-table-header {
-  background-color: #2E1E03;
-  color: #C1B7A6;
-}
-
-.v-table-body {
-
 }
 
 </style>

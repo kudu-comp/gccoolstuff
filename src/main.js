@@ -5,10 +5,19 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import "@/scss/custom.scss"
+
+/* Bootstrap */
+// import "@/scss/custom.scss"
+// import bootstrap from "bootstrap"
+
 // Multilanguage support using vue-i18n
 import nl from './locales/nl.json'
 import en from './locales/en.json'
 
+// Navigation bar
+import VueNavigationBar from "vue-navigation-bar"
+import "./components/css/vue-navigation-bar.css";
 
 // globalInjection: true injects global properties for translation
 // Without this we would need to run useI18n in every component to make t() accessible
@@ -25,7 +34,7 @@ import en from './locales/en.json'
 const i18n = createI18n({
   legacy: false,
   globalInjection: true,
-  locale: 'nl',
+  locale: navigator.language.slice(0,2),
   fallbackLocale: 'en',
   silentTranslationWarn: true,
   silentFallbackWarn: true,
@@ -41,4 +50,5 @@ const app = createApp(App);
 
 app.use(store);
 app.use(i18n);
+app.component('vue-navigation-bar', VueNavigationBar);
 app.use(router).mount('#app');

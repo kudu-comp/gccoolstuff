@@ -35,13 +35,7 @@
           {{ $t('labels.point') }} 3
         </template>
       </v-coord>
-      <input
-        id="go"
-        type="button"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="getPoints()"
-      >
+      <v-show-on-map id="go" class="btn mr-2" @Show="getPoints()" />
       <div
         v-show="errormsg"
         class="errormsg"
@@ -63,6 +57,7 @@
 import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
   name: 'CoordProject',
@@ -70,6 +65,7 @@ export default {
   components: {
     VCoord,
     VMap,
+    VShowOnMap
   },
 
   data: function () {

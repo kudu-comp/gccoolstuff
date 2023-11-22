@@ -117,7 +117,7 @@ export default {
     })
 
     // Use easybutton to add get location button
-    this.L.easyButton('fa-map-marker-alt', () => {
+    this.L.easyButton('fas fa-location-dot', () => {
       coords.geoFindMe()
         .then ((position) => {
           coords.displayMarker(this.L, this.mymap, [position.coords.latitude, position.coords.longitude], "Your Location")

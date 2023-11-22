@@ -40,13 +40,7 @@
           {{ $t('labels.radius') }}
         </template>
       </v-distance>
-      <input
-        id="go"
-        type="button"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="getPoints()"
-      >
+      <v-show-on-map id="go" class="btn mb-2 mr-2" @show="getPoints()" />
       <div
         v-show="errormsg"
         class="errormsg"
@@ -69,6 +63,7 @@ import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import VDistance from '@/components/inputs/VDistance.vue'
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue'
 
 export default {
   name: 'CoordProject',
@@ -77,6 +72,7 @@ export default {
     VCoord,
     VMap,
     VDistance,
+    VShowOnMap
   },
 
   data: function () {

@@ -1,24 +1,24 @@
 <template>
-  <div class="form-inline">
+  <div class="row">
     <label
-      class="form-label"
+      class="form-label sm-size"
       for="var"
     >{{ $t('labels.variable') }}</label>
     <input
       type="text"
       size="1"
-      class="form-control ml-2"
+      class="form-control md-size "
       :value="variable"
       @input="updateVar($event.target.value)"
     >
     <label
-      class="form-label ml-2"
+      class="form-label sm-size "
       for="varoptions"
     >{{ $t('labels.option') }}</label>
     <input
       type="text"
       maxlength="20"
-      class="form-control ml-2"
+      class="form-control md-size "
       :value="varoptions"
       @input="updateVarOptions($event.target.value)"
     >

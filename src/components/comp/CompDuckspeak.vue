@@ -8,26 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.duckspeak.long')"
       />
-      <div class="form-row mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          name="code"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
-          for="selenc"
+          class="form-label mb-2 sm-size"
+          for="selds"
         >{{ $t('compds.format') }} </label>
         <select
+          id="selds"
           v-model="selDS"
-          class="custom-select mb-2 mr-2"
-          style="width: 150px;"
+          class="form-select mb-2 sm-size"
         >
           <option value="0">
             {{ $t('compds.ascii') }}
@@ -40,24 +29,22 @@
           </option>
         </select>
       </div>
-      <div class="form-inline">
-        <input
-          id="run"
-          type="button"
-          name="encode"
-          :value="$t('buttons.encode')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="encode"
-        >
-        <input
-          id="run"
-          type="button"
-          name="decode"
-          :value="$t('buttons.decode')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="decode"
-        >
+      <div class="mb-2">
+        <button id="enc" class="btn mb-2 me-2" @click="encode">
+          {{ $t('buttons.encode') }}
+        </button>
+        <button id="dec" class="btn mb-2" @click="decode">
+          {{ $t('buttons.decode') }}
+        </button>
       </div>
+      <textarea
+        id="code"
+        ref="code"
+        v-model="message"
+        class="form-control"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
         class="errormsg mt-2"

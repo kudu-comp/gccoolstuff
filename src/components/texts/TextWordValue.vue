@@ -8,7 +8,7 @@
         class="infoblock"
         v-html="$t('texttools.wordvalue.long')"
       />
-      <div class="form-inline mb-2">
+      <div class="row">
         <v-alphabets-ext
           id="listofalpha"
           ref="listofalpha"
@@ -17,61 +17,42 @@
         />
       </div>
       <div class="form-inline">
-        <div class="custom-control custom-checkbox">
+        <div class="form-check">
           <input
             id="reverse"
             v-model="reverse"
             type="checkbox"
             name="reverse"
-            class="custom-control-input mr-2 mb-2"
+            class="form-check-input"
             @change="wordValue"
           >
           <label
             for="reverse"
-            class="custom-control-label mb-2 mr-2"
+            class="form-check-label"
           >{{ $t('txtwordval.reverse') }}</label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div class="form-check">
           <input
             id="startatzero"
             v-model="startatzero"
             type="checkbox"
             name="startatzero"
-            class="custom-control-input mr-2 mb-2"
+            class="form-check-input"
             @change="wordValue"
           >
           <label
             for="startatzero"
-            class="custom-control-label mb-2"
+            class="form-check-label"
           >{{ $t('txtwordval.startzero') }}</label>
         </div>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-          @input="wordValue"
-        />
-      </div>
+      <v-calculate @calculate="wordValue" class="me-2"/>
       <input
-        id="analyze"
+        id="replace"
         type="button"
-        name="analyze"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="wordValue"
-      >
-      <input
-        id="remove"
-        type="button"
-        name="remove"
+        name="replace"
         :value="$t('txtwordval.replacediac')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="removeDiacr"
       >
       <input
@@ -79,9 +60,18 @@
         type="button"
         name="remove"
         :value="$t('txtwordval.showhide')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="showTable"
       >
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        @input="wordValue"
+      />
       <p
         v-show="errormsg"
         class="errormsg mb-2"
@@ -132,6 +122,7 @@
 import * as textHelper from '@/scripts/texthelper.js';
 import VAlphabetsExt from '@/components/inputs/VAlphabetsExt.vue'
 import VaItem from '@/components/inputs/VaItem.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
   name: 'TextAnalyze',
@@ -139,6 +130,7 @@ export default {
   components: {
     VAlphabetsExt,
     VaItem,
+    VCalculate
   },
 
   data: function () {
@@ -204,7 +196,7 @@ export default {
         let html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
         for (let i = 0; i < wordvalues.length; i++) {
           html += "<tr";
-          if (i==0) html += " style='color:red'";
+          if (i === 0) html += " style='color:#722727;'";
           html += "><th scope='row'>" + wordvalues[i].name + "</th><td class='text-center'>" + wordvalues[i].value + "</td><td class='text-center'>" + wordvalues[i].squareroot + "</td></tr>";
         }
         html += "</table>";

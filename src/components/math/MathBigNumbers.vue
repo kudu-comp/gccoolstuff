@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('mathtools.bignum.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
           for="selnum"
-          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mb-2 mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('bignum.selnum') }}</label>
         <select
           id="selnum"
           v-model="base"
-          class="custom-select mb-2"
+          class="form-select md-size mb-2"
         >
           <option value="10">
             {{ $t('bignum.decimal') }}
@@ -32,9 +32,9 @@
           </option>
         </select>
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2"
+          class="form-label sm-size mb-2"
           size="40"
           for="n1"
         >{{ $t('bignum.num1') }}</label>
@@ -42,22 +42,21 @@
           id="n1"
           ref="n1"
           v-model="n1"
-          type="number"
-          class="form-control mr-2 mb-2"
+          type="text"
+          class="form-control md-size mb-2"
         >
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-5 col-md-4 col-lg-3 col-xl-2 mr-2 mb-2"
+          class="form-label sm-size mb-2"
           size="40"
           for="n2"
         >{{ $t('bignum.num2') }}</label>
         <input
           id="n2"
-          ref="n2"
           v-model="n2"
-          type="number"
-          class="form-control mb-2"
+          type="text"
+          class="form-control md-size mb-2"
         >
       </div>
       <div>
@@ -66,65 +65,65 @@
           id="add"
           type="button"
           value="A + B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn sm-size mb-2 me-2"
           @click="calcBig('ADD')"
         >
         <input
           id="sub"
           type="button"
           value="A - B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn sm-size mb-2 me-2"
           @click="calcBig('SUB')"
         >
         <input
           id="mul"
           type="button"
           value="A * B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('MUL')"
         >
         <input
           id="div"
           type="button"
           value="A \ B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('DIV')"
         >
         <input
           id="mod"
           type="button"
           value="A % B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('MOD')"
         >
-        <!-- <input type="button" id="pow" value="A ** B" class="btn btn-primary mb-2" v-on:click="calcBig('POW')"> -->
+        <!-- <input type="button" id="pow" value="A ** B" class="btn mb-2" v-on:click="calcBig('POW')"> -->
         <h6>{{ $t('bignum.logical') }}</h6>
         <input
           id="and"
           type="button"
           value="A and B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('AND')"
         >
         <input
           id="or"
           type="button"
           value="A or B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('OR')"
         >
         <input
           id="xor"
           type="button"
           value="A xor B"
-          class="btn btn-primary mb-2 mr-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('XOR')"
         >
         <input
           id="not"
           type="button"
           value="not A"
-          class="btn btn-primary mb-2"
+          class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('NOT')"
         >
       </div>

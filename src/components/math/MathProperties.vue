@@ -8,10 +8,10 @@
         class="infoblock"
         v-html="$t('mathtools.numberprop.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-2 col-md-3 mb-2"
-          for="x"
+          class="form-label sm-size mb-2"
+          for="n"
         >{{ $t('mathprop.num') }}</label>
         <input
           id="n"
@@ -21,17 +21,10 @@
           name="n"
           min="1"
           max="1000000000"
-          class="form-control col-sm-10 col-md-6 mr-2 mb-2"
+          class="form-control md-size mb-2 me-2"
           @keyup.enter="getProperties"
         >
-        <input
-          id="props"
-          type="button"
-          name="props"
-          :value="$t('buttons.calc')"
-          class="col-md-2 btn btn-primary mb-2"
-          @click="getProperties"
-        >
+        <v-calculate class="sm-size" @calculate = "getProperties"></v-calculate>
       </div>
       <p
         v-show="errormsg"
@@ -248,12 +241,14 @@
 <script>
 
 import VaItem from '@/components/inputs/VaItem.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
   name: 'MathProperties',
 
   components: {
-    VaItem
+    VaItem,
+    VCalculate
   },
 
   data: function () {

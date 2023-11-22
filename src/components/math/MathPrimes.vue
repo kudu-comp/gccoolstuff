@@ -8,78 +8,54 @@
         class="infoblock"
         v-html="$t('mathtools.primes.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2"
+          class="form-label md-size mb-2"
           for="pos"
         >{{ $t('mathprime.check') }}</label>
         <input
           id="checkprime"
-          ref="checkprime"
           v-model="checkprime"
           type="number"
           min="1"
           max="9007199254740992"
-          class="form-control mb-2 mr-2"
+          class="form-control md-size mb-2"
         >
-        <input
-          id="check"
-          type="button"
-          name="check"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="checkPrime"
-        >
+        <v-calculate class="ms-2 sm-size" id="opt1" @calculate="checkPrime"></v-calculate>
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2"
+          class="form-label md-size mb-2"
           for="pos"
         >{{ $t('mathprime.pos') }}</label>
         <input
           id="pos"
-          ref="pos"
           v-model="pos"
           type="number"
           min="1"
           max="9007199254740992"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2 md-size"
         >
-        <input
-          id="getprime"
-          type="button"
-          name="getprime"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="getPrime"
-        >
+        <v-calculate class="ms-2 sm-size" id="opt2" @calculate="getPrime"></v-calculate>
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2"
+          class="form-label md-size mb-2"
           for="pos"
         >{{ $t('mathprime.primepos') }}</label>
         <input
           id="primepos"
-          ref="primepos"
           v-model="primepos"
           type="number"
           min="1"
           max="9007199254740992"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2 md-size"
         >
-        <input
-          id="getpos"
-          type="button"
-          name="getpos"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="getPos"
-        >
+        <v-calculate class="ms-2 sm-size" id="opt3" @calculate="getPos"></v-calculate>
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-8 col-md-4 col-lg-3 col-xl-2 mb-2"
+          class="form-label md-size mb-2"
           for="pos"
         >{{ $t('mathprime.primefact') }}</label>
         <input
@@ -89,15 +65,9 @@
           type="number"
           min="1"
           max="9007199254740992"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2 md-size"
         >
-        <input
-          id="primefact"
-          type="button"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="primeFactors"
-        >
+        <v-calculate class="ms-2 sm-size" id="opt4" @calculate="primeFactors"></v-calculate>
       </div>
       <p
         v-show="errormsg"
@@ -105,31 +75,22 @@
       >
         {{ errormsg }}
       </p>
-      <va-item
-        :showitem="true"
-        :hidebutton="true"
-      >
-        <template #header>
-          {{ $t('labels.result') }}
-        </template>
-        <template #content>
-          {{ result }}
-        </template>
-      </va-item>
+      <p class="resultbox" v-if="result">
+        {{ result }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-
-import VaItem from '@/components/inputs/VaItem.vue'
 import * as mathsequences from '@/scripts/mathsequences.js'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
   name: 'MathPrimes',
 
   components: {
-    VaItem,
+    VCalculate
   },
 
   data: function () {
@@ -143,10 +104,6 @@ export default {
       result: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/primes.php",
     }
-  },
-
-  mounted: function() {
-    this.$refs.pos.focus();
   },
 
   methods: {

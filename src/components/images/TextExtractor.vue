@@ -8,17 +8,16 @@
         class="infoblock"
         v-html="$t('imagetools.textextractor.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          name="file"
-          class="form-control-file mb-2"
-          @change="selectFile"
-        >
+      <input
+        id="file"
+        type="file"
+        ref="file"
+        class="form-control mb-2"
+        @change="selectFile"
+      >
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label md-size mb-2"
           for="length"
         >{{ $t('textextractor.length') }}</label>
         <input
@@ -26,10 +25,12 @@
           ref="length"
           v-model="length"
           type="number"
-          class="form-control mb-2 mr-2"
+          class="form-control md-size mb-2"
         >
+      </div>
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label md-size mb-2"
           for="max"
         >{{ $t('textextractor.max') }}</label>
         <input
@@ -37,29 +38,25 @@
           ref="max"
           v-model="max"
           type="number"
-          class="form-control mb-2 mr-2"
+          class="form-control md-size mb-2"
         >
+      </div>
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label md-size mb-2"
           for="start"
         >{{ $t('textextractor.start') }}</label>
         <input
-          id="max"
+          id="start"
           ref="start"
           v-model="start"
           type="number"
-          class="form-control mb-2"
+          class="form-control md-size mb-2"
         >
       </div>
-      <input
-        id="go"
-        type="button"
-        name="go"
-        :disabled="!loaded"
-        :value="$t('buttons.search')"
-        class="btn btn-primary mr-2 mb-2"
-        @click="scanFile()"
-      >
+      <button id="go" type="button" :disabled="!loaded" class="btn mr-2 mb-2" @click="scanFile()">
+        <i class="fas fa-search"></i> {{ $t('buttons.search') }}        
+      </button>
       <p
         v-show="errormsg"
         class="errormsg"

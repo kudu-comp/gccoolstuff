@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.compbrainfuck.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 md-size"
           for="bfvar"
         >{{ $t('compbf.vars') }}</label>
         <select
           id="bfvar"
           v-model="selBF"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
           style="width: 150px;"
         >
           <option
@@ -27,56 +27,48 @@
             {{ bfvar }}
           </option>
         </select>
-        <div class="custom-control custom-checkbox">
-          <input
-            id="shorthand"
-            v-model="shorthand"
-            type="checkbox"
-            name="shorthand"
-            class="custom-control-input mr-2 mb-2"
-          >
-          <label
-            for="shorthand"
-            class="custom-control-label mb-2"
-          >{{ $t('compbf.shorthand') }}</label>
-        </div>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          name="code"
-          class="form-control"
-          :placeholder="$t('compbf.code')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
-          class="form-label mr-2"
+          class="form-label mb-2 md-size"
           for="input"
         >{{ $t('compbf.input') }}</label>
         <input
           id="input"
-          ref="input"
           v-model="input"
           type="text"
-          name="input"
-          class="form-control"
-          size="40"
-          rows="10"
+          class="form-control mb-2 lg-size"
         >
       </div>
-      <div class="form-inline">
+      <div class="form-check">
         <input
-          id="run"
-          type="button"
-          name="run"
-          :value="$t('compbf.run')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="runBrainfuck"
+          id="shorthand"
+          v-model="shorthand"
+          type="checkbox"
+          class="form-check-input me-2 mb-2"
         >
+        <label
+          for="shorthand"
+          class="form-check-label mb-2"
+        >{{ $t('compbf.shorthand') }}</label>
+      </div>
+      <input
+        id="run"
+        type="button"
+        name="run"
+        :value="$t('compbf.run')"
+        class="btn mb-2 mr-2"
+        @click="runBrainfuck"
+      >
+      <div class="mb-2">
+        <textarea
+          id="code"
+          ref="code"
+          v-model="message"
+          class="form-control"
+          :placeholder="$t('compbf.code')"
+          rows="5"
+        />
       </div>
       <p
         v-show="errormsg"

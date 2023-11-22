@@ -9,16 +9,12 @@
         v-html="$t('texttools.texttoss.long')"
       />
       <div class="mb-2">
-        <label
-          class="form-label"
-          for="mode"
-        >{{ $t('txttoss.mode') }}</label>
+        <span class="form-label">{{ $t('txttoss.mode') }}</span>
         <div class="form-check">
           <input
             id="mode3"
             v-model="mode"
             type="radio"
-            name="mode"
             value="3"
             class="form-check-input"
           >
@@ -32,7 +28,6 @@
             id="mode2"
             v-model="mode"
             type="radio"
-            name="mode"
             value="2"
             class="form-check-input"
           >
@@ -46,7 +41,6 @@
             id="mode1"
             v-model="mode"
             type="radio"
-            name="mode"
             value="1"
             class="form-check-input"
           >
@@ -56,28 +50,22 @@
           >{{ $t('txttoss.mode1') }}</label>
         </div>
       </div>
-      <div>
-        <div class="form-row mb-2">
-          <textarea
-            id="message"
-            ref="message"
-            v-model="message"
-            name="message"
-            class="form-control"
-            :placeholder="$t('labels.message')"
-            rows="10"
-            @input="translateKeyboard"
-          />
-        </div>
-        <input
-          id="toss"
-          type="button"
-          name="toss"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="tossWords"
-        >
-      </div>
+      <input
+        id="toss"
+        type="button"
+        :value="$t('buttons.calc')"
+        class="btn mb-2 mr-2"
+        @click="tossWords"
+      >
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        @input="translateKeyboard"
+      />
       <p
         v-show="errormsg"
         class="errormsg mb-2"

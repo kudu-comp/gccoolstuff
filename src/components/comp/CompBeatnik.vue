@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.beatnik.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 sm-size"
           for="alphabet"
         >{{ $t('labels.alphabet') }}</label>
         <select
           id="alphabet"
           v-model="selectedalphabet"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 lg-size"
           style="width: 150px;"
         >
           <option
@@ -28,55 +28,42 @@
           </option>
         </select>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          name="code"
-          class="form-control"
-          :placeholder="$t('compbf.code')"
-          rows="10"
-        />
-      </div>
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
           for="input"
         >{{ $t('compbf.input') }}</label>
         <input
           id="input"
-          ref="input"
           v-model="input"
           type="text"
-          name="input"
-          class="form-control"
-          size="40"
-          rows="10"
+          class="form-control xl-size mb-2"
         >
       </div>
-      <div class="form-inline">
+      <div class="form-check">
         <input
-          id="run"
-          type="button"
-          name="run"
-          :value="$t('compbf.run')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="runBeatnik"
+          id="debug"
+          v-model="debug"
+          type="checkbox"
+          class="form-check-input mb-2"
         >
-        <div class="custom-control custom-checkbox">
-          <input
-            id="debug"
-            v-model="debug"
-            type="checkbox"
-            name="debug"
-            class="custom-control-input mr-2 mb-2"
-          >
-          <label
-            for="debug"
-            class="custom-control-label mb-2"
-          >{{ $t('compbf.debug') }}</label>
-        </div>
+        <label
+          for="debug"
+          class="form-check-label mb-2"
+        >{{ $t('compbf.debug') }}</label>
+      </div>
+      <button id="run" class="btn mb-2 mr-2" @click="runBeatnik">
+        {{ $t('compbf.run') }}
+      </button>
+      <div class="mb-2">
+        <textarea
+          id="code"
+          ref="code"
+          v-model="message"
+          class="form-control"
+          :placeholder="$t('compbf.code')"
+          rows="5"
+        />
       </div>
       <p
         v-show="errormsg"

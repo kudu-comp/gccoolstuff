@@ -8,51 +8,42 @@
         class="infoblock"
         v-html="$t('texttools.keyboards.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 sm-size"
           for="keyboards"
         >{{ $t('txtkeyb.inputkb') }}</label>
         <v-keyboards
           id="keyboards"
           v-model:keyboard="fromkeyboard"
           class="mb-2"
+          @change="translateKeyboard"
         />
       </div>
-      <div>
-        <div class="form-row mb-2">
-          <textarea
-            id="message"
-            ref="message"
-            v-model="message"
-            name="message"
-            class="form-control"
-            :placeholder="$t('labels.message')"
-            rows="10"
-            @input="translateKeyboard"
-          />
-        </div>
-        <div class="form-inline">
-          <input
-            id="convert"
-            type="button"
-            name="convert"
-            :value="$t('buttons.convert')"
-            class="btn btn-primary mb-2 mr-2"
-            @click="translateKeyboard"
-          >
-          <label
-            class="form-label mb-2 mr-2"
-            for="keyboards2"
-          >{{ $t('txtkeyb.outputkb') }}</label>
-          <v-keyboards
-            id="keyboards2"
-            v-model:keyboard="tokeyboard"
-            class="mb-2"
-            @change="translateKeyboard"
-          />
-        </div>
+      <div class="row">
+        <label
+          class="form-label mb-2 sm-size"
+          for="keyboards2"
+        >{{ $t('txtkeyb.outputkb') }}</label>
+        <v-keyboards
+          id="keyboards2"
+          v-model:keyboard="tokeyboard"
+          class="mb-2"
+          @change="translateKeyboard"
+        />
       </div>
+      <button id="convert" class="btn mb-2"  @click="translateKeyboard">
+        {{ $t('buttons.convert') }}
+      </button>
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        @input="translateKeyboard"
+      />
       <p
         v-show="errormsg"
         class="errormsg mt-2"

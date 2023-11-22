@@ -1,7 +1,7 @@
 <template>
-  <div class="form-inline mb-2">
+  <div class="row mb-2">
     <label
-      class="form-label col-sm-3 col-md-2 col-lg-1"
+      class="form-label sm-size"
       for="angle"
     >
       <slot name="label">{{ $t('labels.angle') }}</slot>
@@ -9,27 +9,26 @@
     <input
       id="angle"
       type="text"
-      class="form-control col-sm-5 col-md-4 col-lg-3 col-xl-2"
+      class="form-control md-size me-2"
       :value="angle"
       @input="updateAngle($event.target.value)"
     >
-    <div class="col-md-4">
-      <select
-        class="custom-select"
-        :value="unit"
-        @input="updateUnit($event.target.value)"
-      >
-        <option value="0.0174532925">
-          Degrees (&deg;)
-        </option>
-        <option value="1">
-          Radians (rad)
-        </option>
-        <option value="0.0157079633">
-          Gon (gon)
-        </option>
-      </select>
-    </div>
+    <select
+      id="angleunit"
+      class="form-select sm-size"
+      :value="unit"
+      @input="updateUnit($event.target.value)"
+    >
+      <option value="0.0174532925">
+        Degrees (&deg;)
+      </option>
+      <option value="1">
+        Radians (rad)
+      </option>
+      <option value="0.0157079633">
+        Gon (gon)
+      </option>
+    </select>
   </div>
 </template>
 

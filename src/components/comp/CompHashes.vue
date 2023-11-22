@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.hashes.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
-          for="selenc"
+          class="form-label mb-2 sm-size"
+          for="selhash"
         >{{ $t('comphash.hashes') }} </label>
         <select
           id="selhash"
           v-model="selhash"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 sm-size"
         >
           <option value="MD5">
             MD5
@@ -38,27 +38,15 @@
           </option>
         </select>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="5"
-        />
-      </div>
-      <div class="form-inline">
-        <input
-          id="calc"
-          type="button"
-          name="calc"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="hashMessage"
-        >
-      </div>
+      <v-calculate @calculate="hashMessage" />
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
         class="errormsg mb-2"
@@ -67,25 +55,23 @@
       </p>
       <div
         v-if="result"
-        class="card card-text p-2"
+        class="resultbox"
       >
         {{ result }}
       </div>
       <div
         v-if="result"
-        class="form-row mb-2"
+        class="row mb-2"
       >
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 md-size me-2"
           for="verify"
         >{{ $t('comphash.verify') }} </label>
         <input
           id="verify"
           v-model="verify"
           type="text"
-          name="verify"
-          class="form-control"
-          rows="5/"
+          class="form-control xl-size"
         >
       </div>
     </div>
@@ -95,10 +81,15 @@
 <script>
 
 import CryptoJS from 'crypto-js';
+import VCalculate from '../inputs/VCalculate.vue';
 
 export default {
 
   name: 'CompHashes',
+
+  components: {
+    VCalculate
+  },
 
   data: function () {
     return {

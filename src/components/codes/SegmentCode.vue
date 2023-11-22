@@ -9,15 +9,15 @@
         v-html="$t('codes.segment.long')"
       />
       <img src="~@\assets\images\segment2.png">
-      <div class="form-inline mt-2">
+      <div class="row mt-2">
         <label
-          class="form-label mb-2 mr-2"
-          for="ofs"
+          class="form-label md-size mb-2"
+          for="segsize"
         >{{ $t('segment.segsize') }}</label>
         <select
-          id="ofs"
+          id="segsize"
           v-model="seg" 
-          class="custom-select mb-2 mr-2" 
+          class="form-select md-size mb-2" 
           @change="styleObj.fontFamily = (seg == 0) ? 'Segment7' : 'Segment14'"
         >
           <option value="0">
@@ -31,15 +31,15 @@
           </option>
         </select>
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
-          for="ofs"
+          class="form-label md-size mb-2"
+          for="seginp"
         >{{ $t('segment.input') }}</label>
         <select
-          id="ofs"
+          id="seginp"
           v-model="inp"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option value="1">
             {{ $t('segment.letters') }}
@@ -49,51 +49,35 @@
           </option>
         </select>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
-      <input
-        id="enc"
-        type="button"
-        name="enc"
-        :value="$t('buttons.encode')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="encodeSeg"
-      >
-      <input
-        id="dec"
-        type="button"
-        name="dec"
-        :value="$t('buttons.decode')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="decodeSeg"
-      >
+      <button id="enc" class="btn mb-2 me-2" @click="encodeSeg">
+        {{ $t('buttons.encode') }}
+      </button>
+      <button id="dec" class="btn mb-2" @click="decodeSeg">
+        {{$t('buttons.decode')}}
+      </button>
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        name="message"
+        class="form-control"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
         class="errormsg mt-2"
       >
         {{ errormsg }}
       </p>
-      <div
-        id="result"
-        class="form-row"
-      >
+      <div class="row">
         <textarea
-          id="message2"
+          v-if="result"
+          id="res"
           v-model="result"
-          name="message2"
           spellcheck="false"
-          class="form-control"
+          class="resultbox"
           :style="styleObj"
-          rows="10"
         />
       </div>
     </div>

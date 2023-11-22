@@ -1,128 +1,62 @@
 <template>
-  <div
-    id="nav"
-    class="text-center"
-  >
-    <router-link to="/images/exifscanner">
-      {{ $t('imagetools.exifscanner.title') }}
-    </router-link> |
-    <router-link to="/images/colorpicker">
-      {{ $t('imagetools.colorpicker.title') }}
-    </router-link> |
-    <router-link to="/images/filltool">
-      {{ $t('imagetools.filltool.title') }}
-    </router-link> |
-    <router-link to="/images/pixeldata">
-      {{ $t('imagetools.pixeldata.title') }}
-    </router-link> |
-    <router-link to="/images/pixelbuild">
-      {{ $t('imagetools.pixelbuild.title') }}
-    </router-link> |
-    <router-link to="/images/imagetransform">
-      {{ $t('imagetools.imagetransform.title') }}
-    </router-link> |
-    <router-link to="/images/textextractor">
-      {{ $t('imagetools.textextractor.title') }}
-    </router-link>
-  </div>
-  <router-view :key="$route.path" />
-  <div v-if="['ImageTools'].includes($route.name)">
-    <div class="container">
-      <p
-        class="intro"
-        v-html="$t('imagetools.intro')"
-      />
-      <va-item
-        :showitem="show[0]"
-        @toggle="show[0] = !show[0]"
-      >
-        <template #header>
-          <router-link to="/images/colorpicker">
-            {{ $t('imagetools.colorpicker.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.colorpicker.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[1]"
-        @toggle="show[1] = !show[1]"
-      >
-        <template #header>
-          <router-link to="/images/exifscanner">
-            {{ $t('imagetools.exifscanner.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.exifscanner.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[2]"
-        @toggle="show[2] = !show[2]"
-      >
-        <template #header>
-          <router-link to="/images/filltool">
-            {{ $t('imagetools.filltool.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.filltool.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[3]"
-        @toggle="show[3] = !show[3]"
-      >
-        <template #header>
-          <router-link to="/images/pixeldata">
-            {{ $t('imagetools.pixeldata.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.pixeldata.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[4]"
-        @toggle="show[4] = !show[4]"
-      >
-        <template #header>
-          <router-link to="/images/pixelbuild">
-            {{ $t('imagetools.pixelbuild.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.pixelbuild.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[5]"
-        @toggle="show[5] = !show[5]"
-      >
-        <template #header>
-          <router-link to="/images/imagetransform">
-            {{ $t('imagetools.imagetransform.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.imagetransform.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[6]"
-        @toggle="show[6] = !show[6]"
-      >
-        <template #header>
-          <router-link to="/images/textextractor">
-            {{ $t('imagetools.textextractor.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('imagetools.textextractor.long')" />
-        </template>
-      </va-item>
+  <div class="d-flex flex-column mx-4">
+    <div class="row justify-content-around">
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <img class="card-img-top" src="@/assets/images/images.jpg" alt="Text" style="height: 200px">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.imagetools')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.intro')"></p>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.colorpicker.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.colorpicker.long')"></p>
+          <router-link to="/colorpicker"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.exifscanner.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.exifscanner.long')"></p>
+          <router-link to="/exifscanner"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.filltool.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.filltool.long')"></p>
+          <router-link to="/filltool"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.pixeldata.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.pixeldata.long')"></p>
+          <router-link to="/pixeldata"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.pixelbuild.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.pixelbuild.long')"></p>
+          <router-link to="/pixelbuild"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.imagetransform.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.imagetransform.long')"></p>
+          <router-link to="/imagetransform"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('imagetools.textextractor.title')}}</h5>
+          <p class="card-text" v-html="$t('imagetools.textextractor.long')"></p>
+          <router-link to="/textextractor"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>

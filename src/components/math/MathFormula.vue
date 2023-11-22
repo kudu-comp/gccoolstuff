@@ -8,32 +8,23 @@
         class="infoblock"
         v-html="$t('mathtools.formulasolver.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
-          for="x"
+          class="form-label sm-size mb-2"
+          for="formula"
         >{{ $t('mathcrypta.formula') }}</label>
         <input
           id="formula"
-          ref="formula"
           v-model="formula"
+          ref="formula"
           type="text"
           size="30"
-          name="formula"
-          class="form-control mb-2"
+          class="form-control lg-size mb-2"
         >
       </div>
-      <div class="form-inline">
-        <input
-          id="calc"
-          type="button"
-          name="calc"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="solveFormula"
-        >
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
           for="base"
         >{{ $t('mathcrypta.base') }}</label>
         <input
@@ -42,23 +33,23 @@
           type="number"
           min="2"
           max="16"
-          name="base"
-          class="form-control mb-2 mr-2"
+          class="form-control md-size mb-2"
         >
-        <div class="custom-control custom-checkbox">
+        <div class="form-check ms-3">
           <input
             id="unique"
             v-model="unique"
             type="checkbox"
             name="unique"
-            class="custom-control-input mb-2 mr-2"
+            class="form-check-input mb-2 mr-2"
           >
           <label
             for="unique"
-            class="custom-control-label mb-2"
+            class="form-check-label mb-2"
           >{{ $t('mathcrypta.unique') }}</label>
         </div>
       </div>
+      <v-calculate id="calc" @calculate="solveFormula"></v-calculate>
       <p
         v-show="errormsg"
         class="errormsg mb-2"
@@ -70,16 +61,16 @@
         class="mt-2"
       >
         {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
-        <div class="form-inline mt-2 mb-2">
+        <div class="row mt-2 mb-2">
           <label
             for="listofresults"
-            class="form-label mr-2"
+            class="form-label sm-size"
           >{{ $t('sudoku.sols') }}</label>
           <select
             id="listofresults"
             v-model="selectedsolution"
             name="listofresults"
-            class="form-control"
+            class="form-control lg-size"
             @change="printSolution"
           >
             <option
@@ -104,10 +95,15 @@
 <script>
 
 import { evalInfix } from '@/scripts/formulas.js'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
 
   name: 'MathFormula',
+
+  components : {
+    VCalculate
+  },
 
   data: function () {
     return {

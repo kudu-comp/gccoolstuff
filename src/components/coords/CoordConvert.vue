@@ -8,47 +8,47 @@
         class="infoblock"
         v-html="$t('coordinates.convert.long')"
       />
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-6">
-          <div class="form-row mb-2">
+          <div class="row">
             <label
-              class="form-label col-sm-4 col-md-2 col-lg-1"
+              class="form-label sm-size"
               for="from"
             >{{ $t('labels.from') }}</label>
             <v-datums
               id="from"
               v-model:datum="from"
-              class="col-sm-8 col-md-6 col-lg-4"
+              class="md-size"
             />
           </div>
         </div>
         <div class="col-6">
-          <div class="form-row mb-2">
+          <div class="row">
             <label
-              class="form-label col-sm-4 col-md-2 col-lg-1"
+              class="form-label sm-size"
               for="to"
             >{{ $t('labels.to') }}</label>
             <v-datums
               id="to"
               v-model:datum="to"
-              class="col-sm-8 col-md-6 col-lg-4"
               @change="convertCoordinates"
+              class="md-size"
             />
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-6">
+        <div class="col">
           <input
             id="encode"
             type="button"
             name="encode"
             :value="$t('buttons.convert')"
-            class="btn btn-primary mr-2"
+            class="btn"
             @click="convertCoordinates"
           >
         </div>
-        <div class="col-6">
+        <div class="col">
           <v-wgsformat
             id="wgsformat"
             v-model:format="wgsformat"
@@ -62,7 +62,6 @@
             id="coordfrom"
             ref="x"
             v-model="coordfrom"
-            name="coordfrom"
             class="form-control mt-2"
             :placeholder="$t('cdconvert.phfrom')"
             rows="5"
@@ -74,7 +73,6 @@
             id="result"
             ref="x"
             v-model="result"
-            name="result"
             class="form-control mt-2"
             :placeholder="$t('cdconvert.phto')"
             rows="5"
@@ -91,14 +89,13 @@
         >
           <label
             class="form-label"
-            for="key1"
+            for="proj4jsdef"
           >{{ $t('cdconvert.proj4jslabel') }}</label>
           <input
             id="proj4jsdef"
             ref="proj4jsdef"
             v-model="proj4jsdef"
             type="text"
-            name="proj4jsdef"
             size="80"
             class="form-control ml-2"
           >

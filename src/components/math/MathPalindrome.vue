@@ -8,27 +8,19 @@
         class="infoblock"
         v-html="$t('mathtools.palindrome.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
-          for="x"
-        >{{ $t('dialogseq.start') }}</label>
+          class="form-label sm-size mb-2"
+          for="start"
+        >{{ $t('mathseq.start') }}</label>
         <input
           id="start"
           ref="start"
           v-model="start"
           type="number"
-          name="start"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2 md-size me-2"
         >
-        <input
-          id="palindrome"
-          type="button"
-          name="palindrome"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="palindromeCounter"
-        >
+        <v-calculate class="sm-size" id="getdec" @calculate="palindromeCounter"></v-calculate>
       </div>
       <p
         v-show="errormsg"
@@ -36,31 +28,24 @@
       >
         {{ errormsg }}
       </p>
-      <va-item
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('mathpali.t1') }}
-        </template>
-        <template #content>
-          {{ $t('mathpali.res1') }} {{ n }} {{ $t('mathpali.res2') }}<br>
-          {{ $t('mathpali.res3') }} <br>
-          {{ seq }}
-        </template>
-      </va-item>
+      <p class="resultbox" v-if="seq">
+        {{ $t('mathpali.t1') }}
+        {{ $t('mathpali.res1') }} {{ n }} {{ $t('mathpali.res2') }}<br>
+        {{ $t('mathpali.res3') }} : &nbsp;
+        {{ seq }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
-import VaItem from '@/components/inputs/VaItem.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue' 
 
 export default {
   name: 'PalindromeCounter',
 
   components: {
-    VaItem,
+    VCalculate
   },
 
   data: function () {

@@ -8,16 +8,13 @@
         class="infoblock"
         v-html="$t('imagetools.colorpicker.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          name="file"
-          class="form-control-file mb-2"
-          @change="selectFile"
-        >
-      </div>
+      <input
+        id="file"
+        type="file"
+        ref="file"
+        class="form-control mb-2"
+        @change="selectFile"
+      >
       <p
         v-show="errormsg"
         class="errormsg"
@@ -31,20 +28,16 @@
         >
           <canvas
             id="canvas"
-            :width="width"
-            :height="height"
             @click="selColor"
           />
         </div>
         <div class="col-3">
           <table class="table table-sm table-borderless">
-            <thead>
-              <tr class="subhead">
-                <th colspan="2">
-                  {{ $t('colorpicker.selcolor') }}
-                </th>
-              </tr>
-            </thead>
+            <tr>
+              <td colspan="2" class="subhead" >
+                {{ $t('colorpicker.selcolor') }}
+              </td>
+            </tr>
             <tr>
               <td
                 id="selcolor"
@@ -153,34 +146,23 @@ export default {
       k: 0,
       c2: 0,
       m2: 0,
-      y2: 0,
-      width: 800,
-      height: 800
+      y2: 0
     }
   },
 
   mounted: function() {
 
     // Set focus on file input
-    // this.$refs.file.focus();
+    this.$refs.file.focus();
 
-    const canvas = document.getElementById('canvas');
-    this.ctx = canvas.getContext('2d');
-
-    // Resize canvas
-    this.resizeCanvas();
+    this.canvas = document.getElementById('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.canvas.width = this.canvas.getBoundingClientRect().width
+    this.canvas.height = this.canvas.width;
 
   },
 
   methods: {
-
-    resizeCanvas: function () {
-
-      // Resize canvas
-      let pv = document.getElementById("preview");
-      this.width = pv.offsetWidth - 10;
-      
-    },
 
     rgbToHsl: function (r, g, b) {
 
@@ -301,8 +283,13 @@ export default {
 
     selColor: function (event) {
 
-      let x = event.layerX;
-      let y = event.layerY;
+      // x and y are in CSS pixels, but the canvas still has the original drawing size
+      // (unless we would implement resize drawing)
+      // Read https://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
+
+      let x = Math.floor(event.offsetX * this.canvas.width / this.canvas.clientWidth);
+      let y = Math.floor(event.offsetY * this.canvas.height / this.canvas.clientHeight);
+
       let pixel = this.ctx.getImageData(x, y, 1, 1);
       let data = pixel.data;
       let destination = document.getElementById('selcolor');
@@ -344,7 +331,8 @@ export default {
       let hRatio = canvas.width  / img.width    ;
       let vRatio =  canvas.height / img.height  ;
       let ratio  = Math.min ( hRatio, vRatio );
-      let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+      // let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+      let centerShift_x = 0;
       // let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
       let centerShift_y = 0;
       this.ctx.clearRect(0,0,canvas.width, canvas.height);
@@ -397,4 +385,15 @@ export default {
 </script>
 
 <style scoped>
+
+
+.subhead {
+  font-weight: bold;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
 </style>

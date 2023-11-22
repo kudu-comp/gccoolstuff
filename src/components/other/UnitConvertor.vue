@@ -8,14 +8,14 @@
         class="infoblock"
         v-html="$t('othertools.unitconvertor.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
           for="cats"
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
         >{{ $t('unitconvertor.selcat') }}</label>
         <select
           v-model="cat"
-          class="custom-select mb-2"
+          class="form-select md-size mb-2"
           @change="changeCat"
         >
           <option
@@ -32,91 +32,79 @@
       </div>
       <div class="row">
         <div class="col-6">
-          <label
-            class="form-label mb-2 mr-2"
-            for="unitfrom"
-          >{{ $t('unitconvertor.unitfrom') }}</label>
-          <select
-            id="unitform"
-            v-model="idfrom"
-            class="custom-select"
-            @change="convertInput('right')"
-          >
-            <option
-              v-for="(u, index) in units[cat].units"
-              :key="index"
-              :value="index"
+          <div class="row">
+            <label
+              class="form-label mb-2 sm-size"
+              for="unitfrom"
+            >{{ $t('unitconvertor.unitfrom') }}</label>
+            <select
+              id="unitform"
+              v-model="idfrom"
+              class="form-select md-size mb-2"
+              @change="convertInput('right')"
             >
-              {{ u.name }} - {{ u.symbol }}
-            </option>
-          </select>
-          <label
-            class="form-label mb-2 mr-2"
-            for="valfrom"
-          >{{ $t('unitconvertor.value') }}</label>
-          <input
-            id="valfrom"
-            v-model="from"
-            type="number"
-            class="form-control mb-2"
-          >
-          <input
-            id="calc"
-            type="button"
-            :value="$t('buttons.calc')"
-            class="btn btn-primary mb-2 mr-2"
-            @click="convertInput('right')"
-          >
-          <input
-            id="calc"
-            type="button"
-            :value="$t('buttons.showtable')"
-            class="btn btn-primary mb-2"
-            @click="convertTable('right')"
-          >
+              <option
+                v-for="(u, index) in units[cat].units"
+                :key="index"
+                :value="index"
+              >
+                {{ u.name }} - {{ u.symbol }}
+              </option>
+            </select>
+          </div>
+          <div class="row">
+            <label
+              class="form-label mb-2 sm-size"
+              for="valfrom"
+            >{{ $t('unitconvertor.value') }}</label>
+            <input
+              id="valfrom"
+              v-model="from"
+              type="number"
+              class="form-control md-size mb-2"
+            >
+          </div>
+          <v-calculate id="calc" @calculate="convertInput('right')" />
+          <button class="btn mb-2" id="showtab" @click="convertTable('right')">
+            {{ $t('buttons.showtable') }}
+          </button>
         </div>
         <div class="col-6">
-          <label
-            class="form-label mb-2 mr-2"
-            for="unitfrom"
-          >{{ $t('unitconvertor.unitto') }}</label>
-          <select
-            v-model="idto"
-            class="custom-select"
-            @change="convertInput('left')"
-          >
-            <option
-              v-for="(u, index) in units[cat].units"
-              :key="index"
-              :value="index"
+          <div class="row">
+            <label
+              class="form-label mb-2 sm-size"
+              for="unitfrom"
+            >{{ $t('unitconvertor.unitto') }}</label>
+            <select
+              v-model="idto"
+              class="form-select mb-2 md-size"
+              @change="convertInput('left')"
             >
-              {{ u.name }} - {{ u.symbol }}
-            </option>
-          </select>
-          <label
-            class="form-label mb-2 mr-2"
-            for="valto"
-          >{{ $t('unitconvertor.value') }}</label>
-          <input
-            id="valto"
-            v-model="to"
-            type="number"
-            class="form-control mb-2"
-          >
-          <input
-            id="calc"
-            type="button"
-            :value="$t('buttons.calc')"
-            class="btn btn-primary mb-2 mr-2"
-            @click="convertInput('left')"
-          >
-          <input
-            id="calc"
-            type="button"
-            :value="$t('buttons.showtable')"
-            class="btn btn-primary mb-2"
-            @click="convertTable('left')"
-          >
+              <option
+                v-for="(u, index) in units[cat].units"
+                :key="index"
+                :value="index"
+              >
+                {{ u.name }} - {{ u.symbol }}
+              </option>
+            </select>
+          </div>
+          <div class="row">
+            <label
+              class="form-label mb-2 sm-size"
+              for="valto"
+            >{{ $t('unitconvertor.value') }}</label>
+            <input
+              id="valto"
+              v-model="to"
+              type="number"
+              class="form-control md-size mb-2"
+            >
+          </div>
+          <v-calculate id="calc" @calculate="convertInput('left')" />
+          <button class="btn mb-2" id="showtab" @click="convertTable('left')">
+            {{ $t('buttons.showtable') }}
+          </button>
         </div>
       </div>
       <p
@@ -137,6 +125,7 @@
 <script>
 
 import { definedUnits, convertUnit } from '@/scripts/unitconvertor.js'
+import VCalculate from '@/components/inputs/VCalculate.vue';
 
 export default {
 
@@ -158,6 +147,10 @@ export default {
 
   created: function() {
     this.units = definedUnits;
+  },
+
+  components: {
+    VCalculate
   },
 
   methods: {

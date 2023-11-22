@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('codes.decabit.long')"
       />
-      <div class="form-inline mt-2">
+      <div class="row mt-2">
         <label
           for="selenc"
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 sm-size"
         >{{ $t('decabit.selenc') }}</label>
         <select
           id="selenc"
           v-model="format"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option value="0">
             {{ $t('decabit.selnum') }}
@@ -29,33 +29,28 @@
           </option>
         </select>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
-      </div>
       <input
         id="enc"
         type="button"
-        name="enc"
         :value="$t('buttons.encode')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="encodeDeca"
       >
       <input
         id="dec"
         type="button"
-        name="dec"
         :value="$t('buttons.decode')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2"
         @click="decodeDeca"
       >
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        class="form-control"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
         class="errormsg mt-2"

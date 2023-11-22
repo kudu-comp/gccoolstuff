@@ -1,11 +1,7 @@
 <template>
-  <input
-    id="download"
-    type="button"
-    :value="$t('buttons.download')"
-    class="btn btn-primary mb-2 mr-2"
-    @click="downloadCanvas()"
-  >
+  <button id="download" class="btn mb-2 me-2" @click="downloadCanvas()">
+    <i class="fa-solid fa-download"></i> {{$t('buttons.download')}}
+  </button>
 </template>
 
 <script>

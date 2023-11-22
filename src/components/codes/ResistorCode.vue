@@ -10,62 +10,58 @@
         class="infoblock"
         v-html="$t('codes.resistorcode.long')"
       />
-      <div
-        class="row"
-        style="text-align:center"
-      >
-        <div class="col-sm-3 col-md-2">
+      <div class="row mb-2">
+        <div class="form-label sm-size">
           {{ $t('resistorcode.band') }} 1
-          <vd-color
-            v-model:color="band1"
-            @change="calcResistance"
-          />
         </div>
-        <div class="col-sm-3 col-md-2">
-          {{ $t('resistorcode.band') }} 2
-          <vd-color
-            v-model:color="band2"
-            @change="calcResistance"
-          />
-        </div>
-        <div class="col-sm-3 col-md-2">
-          {{ $t('resistorcode.band') }} 3
-          <vd-color
-            v-model:color="band3"
-            @change="calcResistance"
-          />
-        </div>
-        <div class="col-sm-3 col-md-2">
-          {{ $t('resistorcode.mult') }}
-          <vd-color
-            v-model:color="mult"
-            @change="calcResistance"
-          >
-            <template #addcolors>
-              <option
-                value="-1"
-                style="background-color: gold; color: black"
-              >
-                Gold
-              </option>
-              <option
-                value="-2"
-                style="background-color: silver; color: black"
-              >
-                Silver
-              </option>
-            </template>
-          </vd-color>
-        </div>
+        <vd-color
+          v-model:color="band1"
+          @update:color="calcResistance"
+        />
       </div>
-      <input
-        id="calc"
-        type="button"
-        name="calc"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="calcResistance"
-      >
+      <div class="row mb-2">
+        <div class="form-label sm-size">
+          {{ $t('resistorcode.band') }} 2
+        </div>
+        <vd-color
+          v-model:color="band2"
+          @update:color="calcResistance"
+        />
+      </div>
+      <div class="row mb-2">
+        <div class="form-label sm-size">
+          {{ $t('resistorcode.band') }} 3
+        </div>
+        <vd-color
+          v-model:color="band3"
+          @update:color="calcResistance"
+        />
+      </div>
+      <div class="row mb-2">
+        <div class="form-label sm-size">
+          {{ $t('resistorcode.mult') }} 3
+        </div>
+        <vd-color
+          v-model:color="mult"
+          @update:color="calcResistance"
+        >
+          <template #addcolors>
+            <option
+              value="-1"
+              style="background-color: gold; color: black"
+            >
+              Gold
+            </option>
+            <option
+              value="-2"
+              style="background-color: silver; color: black"
+            >
+              Silver
+            </option>
+          </template>
+        </vd-color>
+      </div>
+      <v-calculate @calculate="calcResistance" id="calc"></v-calculate>
       <p
         v-show="error"
         class="errormsg"
@@ -84,13 +80,15 @@
 <script>
 
 import VdColor from '@/components/inputs/VdColor.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
 
   name: 'ResistorCode',
 
   components: {
-    VdColor
+    VdColor,
+    VCalculate
   },
 
   // Data include variables to dynamically set appearnce and labels

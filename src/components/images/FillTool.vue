@@ -8,16 +8,12 @@
         class="infoblock"
         v-html="$t('imagetools.filltool.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          name="file"
-          class="form-control-file mb-2"
-          @change="selectFile"
-        >
-      </div>
+      <input
+        id="file"
+        type="file"
+        class="form-control mb-2"
+        @change="selectFile"
+      />
       <p
         v-show="errormsg"
         class="errormsg"
@@ -31,8 +27,6 @@
         >
           <canvas
             id="canvas"
-            :width="width"
-            :height="height"
             @click="fillColor"
           />
         </div>
@@ -42,7 +36,7 @@
             type="button"
             name="btnsearch"
             :value="$t('buttons.original')"
-            class="btn btn-primary mr-2 mb-2"
+            class="btn me-2 mb-2"
             @click="restore"
           >
           <v-download 
@@ -54,51 +48,24 @@
             </div>
             <div class="box-body">
               <p>{{ $t('filltool.fillinfo') }}</p>
-              <div class="form-inline">
+              <div class="row mb-2">
                 <label
-                  class="form-label mr-2"
+                  class="form-label sm-size"
                   for="pick"
                 >{{ $t('filltool.selfill') }}</label>
-                <select
-                  id="pick"
-                  v-model="selfill"
-                  class="custom-select mr-2 mb-2"
-                >
-                  <option value="0">
-                    {{ $t('colors.white') }}
-                  </option>
-                  <option value="1">
-                    {{ $t('colors.black') }}
-                  </option>
-                  <option value="2">
-                    {{ $t('colors.red') }}
-                  </option>
-                  <option value="3">
-                    {{ $t('colors.green') }}
-                  </option>
-                  <option value="4">
-                    {{ $t('colors.blue') }}
-                  </option>
-                  <option value="5">
-                    {{ $t('colors.yellow') }}
-                  </option>
-                  <option value="6">
-                    {{ $t('colors.cyan') }}
-                  </option>
-                  <option value="7">
-                    {{ $t('colors.magenta') }}
-                  </option>
-                </select>
+                <input id="pick" v-model="selfill" type="color" class="form-control sm-size" />
               </div>
-              <label
-                class="form-label mr-2 mb-2"
-                for="tol"
-              >{{ $t('filltool.tol') }}: {{ tol }}</label>
-              <vue-slider
-                v-model="tol"
-                v-bind="toloptions"
-                class="ml-2 mr-2"
-              />
+              <div>
+                <label 
+                  class="form-label mr-2"
+                  for="tol"
+                >{{ $t('filltool.tol') }}: {{ tol }}</label>
+                <vue-slider
+                  v-model="tol"
+                  v-bind="toloptions"
+                  class="ml-2 mr-2"
+                />
+              </div>
             </div>
           </div>
           <div class="box">
@@ -127,9 +94,8 @@
               <input
                 id="conbri"
                 type="button"
-                name="conbri"
                 :value="$t('buttons.apply')"
-                class="btn btn-primary mr-2 mb-2"
+                class="btn mr-2 mb-2"
                 @click="contrastBrightness"
               >
             </div>
@@ -139,52 +105,45 @@
               {{ $t('filltool.filter') }}
             </div>
             <div class="box-body">
-              <div class="form-inline">
-                <select
-                  id="filter"
-                  v-model="selfilt"
-                  class="custom-select mr-2 mb-2"
-                >
-                  <option value="0">
-                    {{ $t('filltool.gray1') }}
-                  </option>
-                  <option value="1">
-                    {{ $t('filltool.gray2') }}
-                  </option>
-                  <option value="2">
-                    {{ $t('filltool.invert') }}
-                  </option>
-                  <option value="3">
-                    {{ $t('filltool.sepia') }}
-                  </option>
-                  <option value="4">
-                    {{ $t('colors.red') }}
-                  </option>
-                  <option value="5">
-                    {{ $t('colors.green') }}
-                  </option>
-                  <option value="6">
-                    {{ $t('colors.blue') }}
-                  </option>
-                  <option value="7">
-                    {{ $t('colors.cyan') }}
-                  </option>
-                  <option value="8">
-                    {{ $t('colors.magenta') }}
-                  </option>
-                  <option value="9">
-                    {{ $t('colors.yellow') }}
-                  </option>
-                </select>
-                <input
-                  id="filter"
-                  type="button"
-                  name="filter"
-                  :value="$t('buttons.apply')"
-                  class="btn btn-primary mb-2"
-                  @click="filterColor"
-                >
-              </div>
+              <select id="filter" v-model="selfilt" class="form-select me-2 mb-2">
+                <option value="0">
+                  {{ $t('filltool.gray1') }}
+                </option>
+                <option value="1">
+                  {{ $t('filltool.gray2') }}
+                </option>
+                <option value="2">
+                  {{ $t('filltool.invert') }}
+                </option>
+                <option value="3">
+                  {{ $t('filltool.sepia') }}
+                </option>
+                <option value="4">
+                  {{ $t('colors.red') }}
+                </option>
+                <option value="5">
+                  {{ $t('colors.green') }}
+                </option>
+                <option value="6">
+                  {{ $t('colors.blue') }}
+                </option>
+                <option value="7">
+                  {{ $t('colors.cyan') }}
+                </option>
+                <option value="8">
+                  {{ $t('colors.magenta') }}
+                </option>
+                <option value="9">
+                  {{ $t('colors.yellow') }}
+                </option>
+              </select>
+              <input
+                id="colfil"
+                type="button"
+                :value="$t('buttons.apply')"
+                class="btn mb-2"
+                @click="filterColor"
+              >
             </div>
           </div>
           <div class="box">
@@ -192,43 +151,40 @@
               {{ $t('filltool.colordepth') }}
             </div>
             <div class="box-body">
-              <div class="form-inline">
-                <select
-                  id="filter"
-                  v-model="cdepth"
-                  class="custom-select mr-2 mb-2"
-                >
-                  <option value="0">
-                    1 bits - 2 {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="1">
-                    3 bits - 8 {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="2">
-                    6 bits - 64 {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="3">
-                    9 bits - 512 {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="4">
-                    12 bits - 4k {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="5">
-                    15 bits - 32k {{ $t('filltool.colors') }}
-                  </option>
-                  <option value="6">
-                    18 bits - 256k {{ $t('filltool.colors') }}
-                  </option>
-                </select>
-                <input
-                  id="conbri"
-                  type="button"
-                  name="conbri"
-                  :value="$t('buttons.apply')"
-                  class="btn btn-primary mb-2"
-                  @click="colorDepth"
-                >
-              </div>
+              <select
+                id="cdepth"
+                v-model="cdepth"
+                class="form-select mb-2"
+              >
+                <option value="0">
+                  1 bits - 2 {{ $t('filltool.colors') }}
+                </option>
+                <option value="1">
+                  3 bits - 8 {{ $t('filltool.colors') }}
+                </option>
+                <option value="2">
+                  6 bits - 64 {{ $t('filltool.colors') }}
+                </option>
+                <option value="3">
+                  9 bits - 512 {{ $t('filltool.colors') }}
+                </option>
+                <option value="4">
+                  12 bits - 4k {{ $t('filltool.colors') }}
+                </option>
+                <option value="5">
+                  15 bits - 32k {{ $t('filltool.colors') }}
+                </option>
+                <option value="6">
+                  18 bits - 256k {{ $t('filltool.colors') }}
+                </option>
+              </select>
+              <input
+                id="coldep"
+                type="button"
+                :value="$t('buttons.apply')"
+                class="btn mb-2"
+                @click="colorDepth"
+              >
             </div>
           </div>
         </div>
@@ -258,11 +214,9 @@ export default {
       ctx: null,
       canvas: null,
       img: null,
-      width: 800,
-      height: 800,
-      selfill: 1,
+      selfill: "#FF0000",
       selfilt: 0,
-      tol: 0,
+      tol: 5,
       toloptions: {
         min: 0,
         max: 255,
@@ -288,19 +242,12 @@ export default {
     this.ctx = this.canvas.getContext('2d');
 
     // Resize canvas
-    this.resizeCanvas();
+    this.canvas.width = this.canvas.getBoundingClientRect().width
+    this.canvas.height = this.canvas.width;
 
   },
 
   methods: {
-
-    resizeCanvas: function () {
-
-      // Resize canvas
-      let pv = document.getElementById("preview");
-      this.width = pv.offsetWidth - 10;
-      
-    },
 
     drawImageScaled: function (img) {
 
@@ -308,8 +255,10 @@ export default {
       let hRatio = canvas.width  / img.width    ;
       let vRatio =  canvas.height / img.height  ;
       let ratio  = Math.min ( hRatio, vRatio );
-      let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-      let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+      //let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
+      //let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
+      let centerShift_x = 0;
+      let centerShift_y = 0;
       this.ctx.clearRect(0,0,canvas.width, canvas.height);
       this.ctx.drawImage(img, 0, 0, img.width, img.height,
                          centerShift_x, centerShift_y, img.width*ratio, img.height*ratio); 
@@ -387,23 +336,15 @@ export default {
     // Fill color
     fillColor: function (event) {
 
-      const colors = [
-        [255, 255, 255],    // white
-        [0, 0, 0],          // black
-        [255, 0, 0],        // red
-        [0, 255, 0],        // green
-        [0, 0, 255],        // blue
-        [255,255,0],        // yellow
-        [0,255,255],        // cyan
-        [255,0,255],        // magenta
-      ];
-
       // Set fill color
-      let fill = colors[parseInt(this.selfill)];
+      let r = parseInt(this.selfill.slice(1,3),16);
+      let g = parseInt(this.selfill.slice(3,5),16);
+      let b = parseInt(this.selfill.slice(5,7),16);
 
       // Get the color of the selected pixel
-      let x = event.layerX;
-      let y = event.layerY;
+      let x = Math.floor(event.offsetX * this.canvas.width / this.canvas.clientWidth);
+      let y = Math.floor(event.offsetY * this.canvas.height / this.canvas.clientHeight);
+
       let pixel = this.ctx.getImageData(x, y, 1, 1);
       let repl  = pixel.data;
 
@@ -413,12 +354,12 @@ export default {
 
       // If color to be replaced matches fill with fill color
       for (let i = 0; i < data.length; i += 4) {
-        if (Math.abs(data[i] - repl[0]) <= this.tol && 
+        if (Math.abs(data[i]   - repl[0]) <= this.tol && 
             Math.abs(data[i+1] - repl[1]) <= this.tol && 
             Math.abs(data[i+2] - repl[2]) <= this.tol) {
-          data[i]     = fill[0]; // red
-          data[i + 1] = fill[1]; // green
-          data[i + 2] = fill[2]; // blue
+          data[i] = r;
+          data[i+1] = g;
+          data[i+2] = b;
         }
       }
 
@@ -523,4 +464,10 @@ export default {
 </script>
 
 <style scoped>
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
 </style>

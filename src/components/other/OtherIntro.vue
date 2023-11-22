@@ -1,166 +1,94 @@
 <template>
-  <div
-    id="nav"
-    class="text-center"
-  >
-    <router-link to="/other/sudokusolver">
-      {{ $t('othertools.sudokusolver.title') }}
-    </router-link> |
-    <router-link to="/other/mmsolver">
-      {{ $t('othertools.mmsolver.title') }}
-    </router-link> |
-    <router-link to="/other/periodictable">
-      {{ $t('othertools.periodictable.title') }}
-    </router-link> |
-    <router-link to="/other/countries">
-      {{ $t('othertools.countries.title') }}
-    </router-link> |
-    <router-link to="/other/unitconvertor">
-      {{ $t('othertools.unitconvertor.title') }}
-    </router-link> |
-    <router-link to="/other/usastates">
-      {{ $t('othertools.usastates.title') }}
-    </router-link> |
-    <router-link to="/other/countryregions">
-      {{ $t('othertools.countryregions.title') }}
-    </router-link> |
-    <router-link to="/other/dnacode">
-      {{ $t('othertools.dnacode.title') }}
-    </router-link>
-  </div>
-  <router-view :key="$route.path" />
-  <div v-if="['OtherIntro'].includes($route.name)">
-    <div class="container">
-      <p
-        class="intro"
-        v-html="$t('othertools.intro')"
-      />
-      <va-item
-        :showitem="show[0]"
-        @toggle="show[0]=!show[0]"
-      >
-        <template #header>
-          <router-link to="/other/sudokusolver">
-            {{ $t('othertools.sudokusolver.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.sudokusolver.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[1]"
-        @toggle="show[1]=!show[1]"
-      >
-        <template #header>
-          <router-link to="/other/mmsolver">
-            {{ $t('othertools.mmsolver.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.mmsolver.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[2]"
-        @toggle="show[2]=!show[2]"
-      >
-        <template #header>
-          <router-link to="/other/periodictable">
-            {{ $t('othertools.periodictable.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.periodictable.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[3]"
-        @toggle="show[3]=!show[3]"
-      >
-        <template #header>
-          <router-link to="/other/countries">
-            {{ $t('othertools.countries.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.countries.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[4]"
-        @toggle="show[4]=!show[4]"
-      >
-        <template #header>
-          <router-link to="/other/unitconvertor">
-            {{ $t('othertools.unitconvertor.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <sapn v-html="$t('othertools.unitconvertor.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[5]"
-        @toggle="show[5]=!show[5]"
-      >
-        <template #header>
-          <router-link to="/other/usastates">
-            {{ $t('othertools.usastates.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.usastates.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[6]"
-        @toggle="show[6]=!show[6]"
-      >
-        <template #header>
-          <router-link to="/other/countryregions">
-            {{ $t('othertools.countryregions.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.countryregions.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[7]"
-        @toggle="show[7]=!show[7]"
-      >
-        <template #header>
-          <router-link to="/other/dnacode">
-            {{ $t('othertools.dnacode.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('othertools.dnacode.long')" />
-        </template>
-      </va-item>
+  <div class="d-flex flex-column mx-4">
+    <div class="row justify-content-around">
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <img class="card-img-top" src="@/assets/images/whatsnew.jpg" alt="Text" style="height: 200px">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.other')}}</h5>
+          <p class="card-text" v-html="$t('othertools.intro')"></p>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.htmlscanner')}}</h5>
+          <p class="card-text" v-html="$t('htmlscanner.long')"></p>
+          <router-link to="/sudokusolver"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.sudokusolver.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.sudokusolver.long')"></p>
+          <router-link to="/sudokusolver"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.mmsolver.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.mmsolver.long')"></p>
+          <router-link to="/mmsolver"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.unitconvertor.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.unitconvertor.long')"></p>
+          <router-link to="/unitconvertor"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('datecalc.title')}}</h5>
+          <p class="card-text" v-html="$t('datecalc.long')"></p>
+          <router-link to="/datecalc"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('randomizer.title')}}</h5>
+          <p class="card-text" v-html="$t('randomizer.long')"></p>
+          <router-link to="/randomizer"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.periodictable.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.periodictable.long')"></p>
+          <router-link to="/periodictable"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.countries.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.countries.long')"></p>
+          <router-link to="/countries"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.usastates.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.usastates.long')"></p>
+          <router-link to="/usastates"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.countryregions.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.countryregions.long')"></p>
+          <router-link to="/countryregions"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('othertools.dnacode.title')}}</h5>
+          <p class="card-text" v-html="$t('othertools.dnacode.long')"></p>
+          <router-link to="/countryregions"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
-import VaItem from "@/components/inputs/VaItem.vue"
-
-export default {
-
-  name: 'OtherIntro',
-
-  components: {
-    VaItem,
-  },
-
-  data: function () {
-    return {
-      title: "OtherIntro",
-      show: Array(10).fill(true)
-    }
-  },
-
-}
 </script>

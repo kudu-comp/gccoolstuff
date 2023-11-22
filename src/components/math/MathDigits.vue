@@ -9,10 +9,9 @@
         v-html="$t('mathtools.decimals.long')"
       />
       <div>
-        <label
+        <span
           class="form-label"
-          for="number"
-        >{{ $t('mathdeci.sel') }}</label>
+        >{{ $t('mathdeci.sel') }}</span>
         <div class="form-check">
           <input
             id="number1"
@@ -182,45 +181,37 @@
           >{{ $t('mathdeci.champ') }}</label>
         </div>
       </div>
-      <div class="form-inline mt-4">
+      <div class="row mt-2">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label md-size mb-2"
           for="start"
         >{{ $t('mathdeci.from') }}</label>
         <input
           id="start"
-          ref="start"
           v-model="start"
+          ref="start"
           type="number"
-          name="start"
           min="0"
           max="1000000"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2 md-size"
         >
+      </div>
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2  md-size"
           for="end"
         >{{ $t('mathdeci.to') }}</label>
         <input
           id="end"
-          ref="end"
           v-model="end"
           type="number"
-          name="end"
           min="0"
           max="1000000"
-          class="form-control mb-2 mr-2"
+          class="form-control mb-2  md-size"
           @keyup.enter="getDigits"
         >
-        <input
-          id="getdec"
-          type="button"
-          name="getdec"
-          :value="$t('mathdeci.get')"
-          class="btn btn-primary mb-2"
-          @click="getDigits"
-        >
       </div>
+      <v-calculate id="getdec" @calculate="getDigits"></v-calculate>
       <p
         v-show="errormsg"
         class="errormsg"
@@ -238,8 +229,15 @@
 </template>
 
 <script>
+
+import VCalculate from '@/components/inputs/VCalculate.vue' 
+
 export default {
   name: 'MathDigits',
+
+  components: {
+    VCalculate
+  },
 
   data: function () {
     return {

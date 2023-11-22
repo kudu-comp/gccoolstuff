@@ -11,10 +11,8 @@
       <div class="form-inline">
         <input
           id="file"
-          ref="file"
           type="file"
-          name="file"
-          class="form-control-file mb-2"
+          class="form-control mb-2"
           @change="selectFile"
         >
       </div>
@@ -31,19 +29,13 @@
         >
           <canvas
             id="canvas"
-            :width="width"
-            :height="height"
             @click="fillColor"
           />
         </div>
         <div class="col-3">
-          <input
-            id="restore"
-            type="button"
-            :value="$t('buttons.original')"
-            class="btn btn-primary mr-2 mb-2"
-            @click="restore"
-          >
+          <button id="restore" class="btn me-2 mb-2" @click="restore">
+            {{ $t('buttons.original') }}
+          </button>
           <v-download 
             v-model:canvas ="canvas"
           />
@@ -68,7 +60,7 @@
                   type="button"
                   name="shiftrow"
                   :value="$t('buttons.apply')"
-                  class="btn btn-primary mr-2 mb-2"
+                  class="btn mr-2 mb-2"
                   @click="shiftRows"
                 >
               </div>
@@ -87,7 +79,7 @@
                   id="shiftcol"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn btn-primary mr-2 mb-2"
+                  class="btn mr-2 mb-2"
                   @click="shiftCols"
                 >
               </div>
@@ -114,7 +106,7 @@
                   id="fliprow"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn btn-primary mr-2 mb-2"
+                  class="btn mr-2 mb-2"
                   @click="flipRows"
                 >
               </div>
@@ -133,7 +125,7 @@
                   id="flipcol"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn btn-primary mr-2 mb-2"
+                  class="btn mr-2 mb-2"
                   @click="flipCols"
                 >
               </div>
@@ -148,14 +140,14 @@
                 id="fliph"
                 type="button"
                 :value="$t('imagetransform.fliph')"
-                class="btn btn-primary mr-2 mb-2"
+                class="btn me-2 mb-2 sm-size"
                 @click="flipH"
               >
               <input
                 id="flipv"
                 type="button"
                 :value="$t('imagetransform.flipv')"
-                class="btn btn-primary mr-2 mb-2"
+                class="btn mr-2 mb-2 sm-size"
                 @click="flipV"
               >
             </div>
@@ -188,8 +180,6 @@ export default {
       canvas: null,
       ctx: null,
       img: null,
-      width: 800,
-      height: 800,
       shiftr: 0,
       shiftc: 0,
       flipr : 1,
@@ -217,20 +207,12 @@ export default {
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
 
-    // Resize canvas
-    this.resizeCanvas();
+    this.canvas.width = this.canvas.getBoundingClientRect().width
+    this.canvas.height = this.canvas.width;
 
   },
 
   methods: {
-
-    resizeCanvas: function () {
-
-      let pv = document.getElementById("preview");
-      this.width = pv.offsetWidth - 10;
-      this.heigth = pv.offsetHeigth - 10;
-
-    },
 
     drawImageScaled: function (img) {
 
@@ -504,3 +486,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+</style>

@@ -32,14 +32,7 @@
         v-model:varoptions="var4options"
         class="mb-2"
       />
-      <input
-        id="project"
-        type="button"
-        name="project"
-        :value="$t('buttons.show')"
-        class="btn btn-primary mr-2"
-        @click="showCoordinates()"
-      >
+      <v-show-on-map id="project" class="btn mr-2" @Show="showCoordinates()" />
       <div
         v-show="errormsg"
         class="errormsg mt-2"
@@ -57,6 +50,7 @@ import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import VVariable from '@/components/inputs/VVariable.vue';
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
 
@@ -66,6 +60,7 @@ export default {
     VCoord,
     VVariable,
     VMap,
+    VShowOnMap
   },
 
   data: function () {

@@ -8,9 +8,9 @@
         class="infoblock"
         v-html="$t('mathtools.fibonacci.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-12 col-md-3 mb-2"
+          class="form-label md-size mb-2"
           for="pos"
         >{{ $t('mathfib.pos') }}</label>
         <input
@@ -21,7 +21,7 @@
           name="pos"
           min="1"
           max="500"
-          class="form-control col-sm-5 col-md-5 mr-md-2 mb-2"
+          class="form-control md-size mb-2 me-2"
           @keyup.enter="getFib"
         >
         <input
@@ -29,13 +29,13 @@
           type="button"
           name="getfib"
           :value="$t('buttons.get')"
-          class="btn btn-primary col-sm-7 col-md-2 mb-2"
+          class="btn md-size mb-2"
           @click="getFib"
         >
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-12 col-md-3 mb-2"
+          class="form-label md-size mb-2"
           for="check"
         >{{ $t('mathfib.check') }}</label>
         <input
@@ -44,7 +44,7 @@
           v-model="check"
           type="text"
           name="check"
-          class="form-control col-sm-5 col-md-5 mr-md-2 mb-2"
+          class="form-control md-size mb-2 me-2"
           @keyup.enter="checkFib"
         >
         <input
@@ -52,7 +52,7 @@
           type="button"
           name="checkfib"
           :value="$t('buttons.check')"
-          class="btn btn-primary col-sm-7 col-md-2 mb-2"
+          class="btn md-size mb-2"
           @click="checkFib"
         >
       </div>
@@ -373,8 +373,13 @@ export default {
 
       // Check if number is Fibonacci
       this.result = this.check;
-      if (this.fibnrs.indexOf(this.check) < 0) this.result += this.$t('mathfib.not');
-      this.result += this.$t('mathfib.fib');
+      let found = this.fibnrs.indexOf(this.check);
+      if (found) {
+        this.result += this.$t('mathfib.fib');
+        this.result += (found + 1).toString();
+      } else {
+        this.result += this.$t('mathfib.not');
+      }
     },
 
   },

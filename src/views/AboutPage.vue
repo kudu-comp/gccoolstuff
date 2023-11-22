@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="d-flex flex-column mx-4">
     <div class="mainpage">
       <div class="infoblock">
         {{ $t('dialogabout.info') }}
@@ -39,8 +39,8 @@
           Under construction
         </template>
         <template #content>
-          This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue.js, Vue-router, Vuex
-          and PHP. The front end is build as components and using Vue-cli. There is a great set of Javascript modules in use. Leaflet is used for maps, proj4 is
+          This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue3, Vue-router, Vuex
+          and PHP. The front end is build as components and using Vite. There is a great set of Javascript modules in use. Leaflet is used for maps, proj4 is
           used for coordinate conversions, crypto-js for digital encryptions. I use the vue-i18n plugin to support multiple languages.
           Some tools (ciphers, some of the math, sudoku solver) runs on the server, either to keep the size of the HTML small (e.g. it wouldn't be smart to
           load 1GB of digits) or because I had some PHP code that I wanted to reuse.

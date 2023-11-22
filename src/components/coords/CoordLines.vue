@@ -49,39 +49,21 @@
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('cdlines.calc1') }}</label>
-        <input
-          id="line1"
-          type="button"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="doLine1()"
-        >
+        <v-show-on-map id="line1" class="btn mb-2 mr-2" @show="doLine1()" />
       </div>
       <div>
         <label
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('cdlines.calc2') }}</label>
-        <input
-          id="line1"
-          type="button"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="doLine2()"
-        >
+        <v-show-on-map id="line2" class="btn mb-2 mr-2" @show="doLine2()" />
       </div>
       <div>
         <label
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('cdlines.calc3') }}</label>
-        <input
-          id="line1"
-          type="button"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="doLine3()"
-        >
+        <v-show-on-map id="line3" class="btn mb-2 mr-2" @show="doLine3()" />
       </div>
       <div
         v-if="result"
@@ -104,6 +86,7 @@
 import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
   name: 'CoordProject',
@@ -111,6 +94,7 @@ export default {
   components: {
     VCoord,
     VMap,
+    VShowOnMap
   },
 
   data: function () {

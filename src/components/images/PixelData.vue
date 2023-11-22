@@ -8,79 +8,63 @@
         class="infoblock"
         v-html="$t('imagetools.pixeldata.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          name="file"
-          class="form-control-file mb-2"
-          @change="selectFile"
-        >
-      </div>
+      <input
+        id="file"
+        type="file"
+        class="form-control mb-2"
+        @change="selectFile"
+      >
       <div class="row">
         <div class="col-6">
-          <div class="form-group">
-            <p>{{ $t('pixeldata.sum') }}</p>
+          <div class="row">
+            <label
+              class="form-label lg-size mb-2"
+              for="red"
+            >{{ $t('colors.red') }}</label>
             <input
-              id="sum"
-              type="button"
-              name="btnsearch"
-              :value="$t('buttons.sum')"
-              class="btn btn-primary mr-2 mb-2"
-              @click="pixelSum(img)"
+              id="red"
+              v-model="red"
+              type="number"
+              min="0"
+              max="255"
+              class="form-control sm-size mb-2"
             >
           </div>
-          <div class="form-group">
-            <p>{{ $t('pixeldata.count') }}</p>
-            <div class="form-inline">
-              <label
-                class="form-label col-2 mb-2"
-                for="red"
-              >{{ $t('colors.red') }}</label>
-              <input
-                id="red"
-                v-model="red"
-                type="number"
-                min="0"
-                max="255"
-                class="form-control mr-2 mb-2"
-              >
-            </div>
-            <div class="form-inline">
-              <label
-                class="form-label col-2 mb-2"
-                for="green"
-              >{{ $t('colors.green') }}</label>
-              <input
-                id="green"
-                v-model="green"
-                type="number"
-                min="0"
-                max="255"
-                class="form-control mr-2 mb-2"
-              >
-            </div>
-            <div class="form-inline">
-              <label
-                class="form-label col-2 mb-2"
-                for="blue"
-              >{{ $t('colors.blue') }}</label>
-              <input
-                id="blue"
-                v-model="blue"
-                type="number"
-                min="0"
-                max="255"
-                class="form-control mr-2 mb-2"
-              >
-            </div>
+          <div class="row">
+            <label
+              class="form-label lg-size mb-2"
+              for="green"
+            >{{ $t('colors.green') }}</label>
             <input
-              id="restore"
+              id="green"
+              v-model="green"
+              type="number"
+              min="0"
+              max="255"
+              class="form-control sm-size mb-2"
+            >
+          </div>
+          <div class="row">
+            <label
+              class="form-label lg-size mb-2"
+              for="blue"
+            >{{ $t('colors.blue') }}</label>
+            <input
+              id="blue"
+              v-model="blue"
+              type="number"
+              min="0"
+              max="255"
+              class="form-control sm-size mb-2"
+            >
+          </div>
+          <div class="row">
+            <p class="lg-size">{{ $t('pixeldata.count') }}</p>
+            <input
+              id="count"
               type="button"
-              name="btnsearch"
               :value="$t('buttons.count')"
-              class="btn btn-primary mr-2 mb-2"
+              class="btn sm-size mb-2"
               @click="pixelCount(img)"
             >
           </div>
@@ -224,11 +208,6 @@ export default {
       const data = imageData.data;
 
       let count = 0;
-      // Get the sum of RGB values
-      // console.log( this.red);
-      // console.log( this.green);
-      // console.log( this.blue);
-      // console.log( data.length);
 
       for (let i = 0; i < data.length; i += 4) {
         if ( (data[i] == this.red) && (data[i+1] == this.green) && (data[i+2] == this.blue) ) {
@@ -272,6 +251,7 @@ export default {
 
               this.drawImageScaled(this.img);
               this.printHeader();
+              this.pixelSum(this.img)
 
             } catch(err) {
 

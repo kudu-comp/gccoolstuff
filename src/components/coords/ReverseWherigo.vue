@@ -19,14 +19,7 @@
           rows="3"
         />
       </div>
-      <input
-        id="enc"
-        type="button"
-        name="enc"
-        :value="$t('buttons.convert')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="solveReverse"
-      >
+      <v-show-on-map id="go" class="btn mr-2" @Show="solveReverse()" />
       <p
         v-show="errormsg"
         class="errormsg mt-2"
@@ -47,13 +40,15 @@
 
 import VMap from '@/components/inputs/VMap.vue';
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
 
   name: 'ReverseWherigo',
 
   components: {
-    VMap
+    VMap,
+    VShowOnMap
   },
 
   data: function () {

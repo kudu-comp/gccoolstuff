@@ -1,236 +1,101 @@
 <template>
-  <div
-    id="nav"
-    class="text-center"
-  >
-    <router-link to="/math/baseconvertor">
-      {{ $t('mathtools.baseconvert.title') }}
-    </router-link> |
-    <router-link to="/math/countdigits">
-      {{ $t('mathtools.decimals.title') }}
-    </router-link> |
-    <router-link to="/math/primes">
-      {{ $t('mathtools.primes.title') }}
-    </router-link> |
-    <router-link to="/math/romans">
-      {{ $t('mathtools.romans.title') }}
-    </router-link> |
-    <router-link to="/math/fibonacci">
-      {{ $t('mathtools.fibonacci.title') }}
-    </router-link> |
-    <router-link to="/math/gcdandlcm">
-      {{ $t('mathtools.primegcdlcm.title') }}
-    </router-link> |
-    <router-link to="/math/formulasolv">
-      {{ $t('mathtools.formulasolver.title') }}
-    </router-link> |
-    <router-link to="/math/numberproperties">
-      {{ $t('mathtools.numberprop.title') }}
-    </router-link> |
-    <router-link to="/math/bignumbers">
-      {{ $t('mathtools.bignum.title') }}
-    </router-link> |
-    <router-link to="/math/nimbers">
-      {{ $t('mathtools.nimbers.title') }}
-    </router-link> |
-    <router-link to="/math/sequences">
-      {{ $t('mathtools.sequences.title') }}
-    </router-link> |
-    <router-link to="/math/palindromecounter">
-      {{ $t('mathtools.palindrome.title') }}
-    </router-link>
-  </div>
-  <router-view :key="$route.path" />
-  <div v-if="['Math'].includes($route.name)">
-    <div class="container">
-      <p
-        class="intro"
-        v-html="$t('mathtools.intro')"
-      />
-      <va-item
-        :showitem="show[0]"
-        @toggle="toggleItem(0)"
-      >
-        <template #header>
-          <router-link to="/math/baseconvertor">
-            {{ $t('mathtools.baseconvert.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.baseconvert.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[1]"
-        @toggle="toggleItem(1)"
-      >
-        <template #header>
-          <router-link to="/math/countdigits">
-            {{ $t('mathtools.decimals.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.decimals.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[2]"
-        @toggle="toggleItem(2)"
-      >
-        <template #header>
-          <router-link to="/math/primes">
-            {{ $t('mathtools.primes.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.primes.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[11]"
-        @toggle="toggleItem(11)"
-      >
-        <template #header>
-          <router-link to="/math/romans">
-            {{ $t('mathtools.romans.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.romans.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[3]"
-        @toggle="toggleItem(3)"
-      >
-        <template #header>
-          <router-link to="/math/fibonacci">
-            {{ $t('mathtools.fibonacci.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.fibonacci.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[4]"
-        @toggle="toggleItem(4)"
-      >
-        <template #header>
-          <router-link to="/math/gcdandlcm">
-            {{ $t('mathtools.primegcdlcm.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.primegcdlcm.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[5]"
-        @toggle="toggleItem(5)"
-      >
-        <template #header>
-          <router-link to="/math/formulasolv">
-            {{ $t('mathtools.formulasolver.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.formulasolver.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[6]"
-        @toggle="toggleItem(6)"
-      >
-        <template #header>
-          <router-link to="/math/numberproperties">
-            {{ $t('mathtools.numberprop.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.numberprop.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[7]"
-        @toggle="toggleItem(7)"
-      >
-        <template #header>
-          <router-link to="/math/bignumbers">
-            {{ $t('mathtools.bignum.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.bignum.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[8]"
-        @toggle="toggleItem(8)"
-      >
-        <template #header>
-          <router-link to="/math/nimbers">
-            {{ $t('mathtools.nimbers.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.nimbers.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[9]"
-        @toggle="toggleItem(9)"
-      >
-        <template #header>
-          <router-link to="/math/sequences">
-            {{ $t('mathtools.sequences.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.sequences.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[10]"
-        @toggle="toggleItem(10)"
-      >
-        <template #header>
-          <router-link to="/math/palindromecounter">
-            {{ $t('mathtools.palindrome.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('mathtools.palindrome.long')" />
-        </template>
-      </va-item>
+  <div class="d-flex flex-column mx-4">
+    <div class="row justify-content-around">
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <img class="card-img-top" src="@/assets/images/math.jpg" alt="Text" style="height: 200px">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.mathtools')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.intro')"></p>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.baseconvert.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.baseconvert.long')"></p>
+          <router-link to="/baseconvertor"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.decimals.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.decimals.long')"></p>
+          <router-link to="/countdigits"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.primes.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.primes.long')"></p>
+          <router-link to="/primes"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.romans.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.romans.long')"></p>
+          <router-link to="/romans"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.fibonacci.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.fibonacci.long')"></p>
+          <router-link to="/fibonacci"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.primegcdlcm.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.primegcdlcm.long')"></p>
+          <router-link to="/gcdandlcm"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.formulasolver.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.formulasolver.long')"></p>
+          <router-link to="/formulasolv"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.numberprop.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.numberprop.long')"></p>
+          <router-link to="/numberproperties"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.bignum.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.bignum.long')"></p>
+          <router-link to="/bignumbers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.nimbers.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.nimbers.long')"></p>
+          <router-link to="/nimbers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.sequences.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.sequences.long')"></p>
+          <router-link to="/sequences"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('mathtools.palindrome.title')}}</h5>
+          <p class="card-text" v-html="$t('mathtools.palindrome.long')"></p>
+          <router-link to="/palindromecounter"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
-import VaItem from "@/components/inputs/VaItem.vue"
-
-export default {
-  name: 'MathTools',
-
-  components: {
-    VaItem,
-  },
-
-  data: function () {
-    return {
-      title: "Mathtools",
-      show: [true, true, true, true, true, true, true, true, true, true, true, true]
-    }
-  },
-
-  methods: {
-
-    toggleItem: function(itemnr) {
-      this.show[itemnr] = !this.show[itemnr];
-    }
-
-  },
-}
 </script>

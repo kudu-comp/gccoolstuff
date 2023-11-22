@@ -1,0 +1,315 @@
+// Custom.scss
+
+// App settings
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 0px;
+}
+
+//
+// Load fonts
+//
+
+@font-face { font-family: QTHoboken;    src: url('@/assets/fonts/QTHoboken.otf'); }
+
+//
+// My colors
+//
+
+$mybgcolor : #eeeeee;
+$mybgcolorlight : #ffffff;
+$mycolor : #333333;
+$mycolorgrey : #aaaaaa;
+$mycolorwhite : #ffffff;
+$bluegreen : #09776E;
+$bluegreenshadow: rgba(10, 120, 111, 0.25);
+$redbrown : #722727;
+$yellowgreen: #95a832;
+
+//
+// HTML elements styling
+//
+
+a {
+  color: $bluegreen;
+}
+
+a:hover {
+  color: $bluegreen;
+}
+
+body {
+  background-color: $mybgcolor;
+  color: $mycolor;
+  font-size: 0.9rem;
+}
+
+h1 {
+  text-align: center;
+  font-family: "QTHoboken";
+  font-size: 5.0rem;
+  color: $yellowgreen;
+}
+
+hr {
+	color: $bluegreen;
+  height: 5px;
+}
+
+input[type="color"] {
+  padding: 0px;
+  border-style: none;
+  border-width: 0px;
+  border-radius: 15px;
+}
+
+th {
+  font-weight: bold;
+  background-color: #eeeeee;
+  color: #333333;
+}
+
+//
+// Custom classes used in all pages
+//
+
+.sectionhead {
+  font-family: "QTHoboken";
+  color: $bluegreen;
+  font-size: 2.4em;
+  max-height: 200px;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.mainpage {
+	min-height: 500px;
+}
+
+.infoblock {
+  border-color: $bluegreen;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.resultbox {
+  background-color: $mybgcolorlight;
+  color: $bluegreen;
+  border-color: $bluegreen;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+  overflow-wrap: break-word;
+}
+
+.errormsg {
+	color: #c9223e;
+}
+
+//
+// Bootstrap classes overrides
+//
+
+.btn {
+  color: $mycolorgrey;
+  background-color: $bluegreen;
+  border-style: none;
+}
+
+.btn:active {
+  color: $mycolorgrey;
+}
+
+.btn:hover {
+  background-color: $redbrown;
+  color: $mycolorwhite;
+}
+
+.btn:focus {
+  color: $mycolorgrey;
+  border-color: $bluegreen;
+  box-shadow: 0 0 0 0.2rem $bluegreenshadow;
+}
+
+.btn:disabled {
+  color: $mycolorgrey;
+  background-color: $bluegreen;
+  border-style: none;
+  opacity: 50%;
+}
+
+.card-title {
+  color: $yellowgreen;
+}
+
+.form-check:checked {
+  accent-color: $redbrown;
+}
+
+.form-control {
+  background-color: $mybgcolorlight;
+  color: #2c3e50;
+}
+
+.form-control:focus {
+  border-color: $bluegreen;
+  box-shadow: 0 0 0 0.2rem $bluegreenshadow;
+}
+
+.form-select:focus {
+  border-color: $bluegreen;
+  box-shadow: 0 0 0 0.2rem $bluegreenshadow;
+}
+
+.form-check:focus {
+  border-color: $bluegreen;
+  box-shadow: 0 0 0 0.2rem $bluegreenshadow;
+}
+
+.form-check-input:checked {
+  border:none;
+  background-color: $redbrown;
+}
+
+//
+// Default sizes for alignment in forms
+//
+
+.sm-size {
+  width: 8rem;
+}
+
+.md-size {
+  width: 15rem;
+}
+
+.lg-size {
+  width: 20rem;
+}
+
+.xl-size {
+  width: 25rem;
+}
+
+//
+// Styles used in v-table component
+//
+
+.v-table-header {
+  background-color: $redbrown;
+  color: $mybgcolorlight;
+}
+
+//
+// Styles of VA Item used in How to and other places
+//
+
+.va-item {
+  border-width: 2px;
+  border-style: solid;
+  border-color: $bluegreen;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.va-item-header {
+  color: $mybgcolor;
+  background-color: $bluegreen;
+  text-align: left;
+  font-size: 1.0em;
+  padding: 5px;
+}
+
+.va-item-content {
+  font-size: 0.95em;
+  padding: 5px;
+  overflow-y: hidden;
+}
+
+//
+// Styles used for box in FillTool
+//
+
+.box {
+  border-style: solid;
+  border-color: $bluegreen;
+  border-width: 2px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.box-header {
+  color: $mybgcolor;
+  background-color: $bluegreen;
+  text-align: center;
+  font-size: 1.0em;
+  padding: 5px;
+}
+
+.box-body {
+  font-size: 0.8em;
+  padding: 5px;
+}
+
+
+//
+
+// Styles for modal Polybius square
+//
+
+#thesquare {
+  padding: 4px 4px 4px 4px;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.5em;
+  border-style: solid;
+  border-color: $bluegreen;
+  border-width: thin;
+  border-radius: 5px;
+}
+
+.modal-mask {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  width: 600px;
+  max-width: 100%;
+  padding: 5px 5px 5px 5px;
+  background-color: $mybgcolor;
+  border-style: solid;
+  border-color: $redbrown;
+  border-width: 2px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px $redbrown;
+}
+
+.modal-container {
+  color: $mycolor;
+}
+
+.modal-header {
+  color: $mycolor;
+}
+
+.mapcontrol {
+  display: flex;
+  flex-direction: row-reverse
+}
+
+
+
+
+
+
+

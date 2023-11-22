@@ -8,10 +8,12 @@
         class="infoblock"
         v-html="$t('comptools.compbcd.long')"
       />
-      <div class="form-inline">
+      <div class="row">
+        <label for="meth" class="form-label sm-size">{{ $t('compbcd.seltype') }}</label>
         <select
+          id="meth"
           v-model="selBCD"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 md-size"
         >
           <option
             v-for="(code, index) in bcdformats.vars"
@@ -21,26 +23,16 @@
             {{ code.name }}
           </option>
         </select>
-        <div class="custom-control custom-checkbox">
-          <input
-            id="packed"
-            v-model="packed"
-            type="checkbox"
-            name="packed"
-            class="custom-control-input mr-2 mb-2"
-          >
-          <label
-            for="packed"
-            class="custom-control-label mb-2 mr-2"
-          >{{ $t('compbcd.packed') }}</label>
-        </div>
+      </div>
+      <div class="row">
         <label
           for="fill"
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
         >{{ $t('compbcd.fill') }}</label>
         <select
+          id="fill"
           v-model="fill"
-          class="custom-select mb-2"
+          class="form-select md-size mb-2"
           @checked="fill = ''"
         >
           <option value="" />
@@ -52,34 +44,43 @@
           </option>
         </select>
       </div>
-      <div class="form-row mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          name="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="10"
-        />
+      <div class="form-check">
+        <input
+          id="packed"
+          v-model="packed"
+          type="checkbox"
+          class="form-check-input me-2 mb-2"
+        >
+        <label
+          for="packed"
+          class="form-check-label mb-2 sm-size"
+        >{{ $t('compbcd.packed') }}</label>
       </div>
-      <div class="form-inline">
-        <input
-          id="bcdfrom"
-          type="button"
-          name="bcdfrom"
-          :value="$t('compbcd.bcdfrom')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="fromBCD"
-        >
-        <input
-          id="bcdto"
-          type="button"
-          name="bcdto"
-          :value="$t('compbcd.bcdto')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="toBCD"
-        >
+      <input
+        id="bcdfrom"
+        type="button"
+        :value="$t('compbcd.bcdfrom')"
+        class="btn mb-2 me-2"
+        @click="fromBCD"
+      >
+      <input
+        id="bcdto"
+        type="button"
+        :value="$t('compbcd.bcdto')"
+        class="btn mb-2"
+        @click="toBCD"
+      >
+      <textarea
+        id="message"
+        ref="message"
+        v-model="message"
+        name="message"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
+      <div>
+        
       </div>
       <p
         v-show="errormsg"

@@ -1,14 +1,14 @@
 <template>
   <div class="va-item">
     <div class="va-item-header">
-      <input
-        v-show="!hidebutton"
-        id="toggle"
-        type="button"
-        value="+|-"
-        class="btn btn-sm btn-primary mr-2"
-        @click="$emit('toggle')"
-      >
+      <button v-show="!hidebutton" id="toggle" class="btn mr-2"  @click="$emit('toggle')" >
+        <span v-if="showitem">
+          <i class="fa-solid fa-caret-down"></i>
+        </span>
+        <span v-if="!showitem">
+          <i class="fa-solid fa-caret-right"></i>
+        </span>
+      </button>
       <slot name="header">
         <h2>Item header</h2>
       </slot>
@@ -62,32 +62,7 @@ export default {
 
 }
 </script>
-
+ 
 <style scoped>
-
-.va-item {
-  border-style: solid;
-  border-color: #785E31;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-
-.va-item-header {
-  color: #E6D1AC;
-  background-color: #785E31;
-  text-align: left;
-  font-size: 1.2em;
-  padding: 5px;
-}
-
-.va-item-header a {
-  color: #E6D1AC;
-}
-
-.va-item-content {
-  font-size: 1.0em;
-  padding: 5px;
-  overflow-y: hidden;
-}
 
 </style>

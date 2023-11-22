@@ -8,17 +8,16 @@
         class="infoblock"
         v-html="$t('othertools.mmsolver.long')"
       />
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
           for="npin"
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('mmsolver.npin') }}</label>
         <select
           id="npin"
           ref="npin"
           v-model="npin"
-          name="npin"
-          class="form-control mr-2"
+          class="form-control sm-size mb-2"
         >
           <option value="3">
             3
@@ -33,15 +32,16 @@
             6
           </option>
         </select>
+      </div>
+      <div class="row">
         <label
           for="ncolor"
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('mmsolver.ncolor') }}</label>
         <select
           id="ncolor"
           v-model="ncolor"
-          name="ncolor"
-          class="form-control"
+          class="form-control sm-size mb-2"
         >
           <option value="4">
             4
@@ -62,19 +62,19 @@
             9
           </option>
         </select>
-        <div class="custom-control custom-checkbox">
-          <input
-            id="unique"
-            v-model="unique"
-            type="checkbox"
-            name="unique"
-            class="custom-control-input ml-2"
-          >
-          <label
-            for="unique"
-            class="custom-control-label ml-2"
-          >{{ $t('mmsolver.unique') }}</label>
-        </div>
+      </div>
+      <div class="form-check">
+        <input
+          id="unique"
+          v-model="unique"
+          type="checkbox"
+          name="unique"
+          class="form-check-input"
+        >
+        <label
+          for="unique"
+          class="form-check-label"
+        >{{ $t('mmsolver.unique') }}</label>
       </div>
       <div class="mb-2">
         <table class="table-sm table-borderless">
@@ -128,24 +128,12 @@
           </tr>
         </table>
       </div>
-      <div>
-        <input
-          id="solve"
-          type="button"
-          name="solve"
-          :value="$t('sudoku.solve')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="solveMM"
-        >
-        <input
-          id="reset"
-          type="button"
-          name="reset"
-          :value="$t('buttons.reset')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="resetMM"
-        >
-      </div>
+      <button id="solve" class="btn mb-2 me-2" @click="solveMM">
+        {{ $t('sudoku.solve') }}
+      </button>
+      <button id="reset" class="btn mb-2" @click="resetMM">
+        {{ $t('buttons.reset') }}
+      </button>
       <p
         v-show="errormsg"
         class="errormsg"
@@ -156,19 +144,15 @@
         v-show="solved"
         class="mt-2"
       >
-        {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
+        <span style="font-weight: bold;">
+          {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
+        </span>
         <div class="form-inline mt-2 mb-2">
-          <label
-            for="listofresults"
-            class="form-label mr-2"
-          >Solutions</label>
           <select
             id="listofresults"
             v-model="selectedsolution"
-            name="listofresults"
             size="10"
-            class="form-control"
-            @change="printSolution"
+            class="form-select"
           >
             <option
               v-for="result in results"
@@ -220,13 +204,6 @@ export default {
         this.pins[i] = "";
         this.pos[i] = 0;
         this.col[i] = 0;
-      }
-    },
-
-    // Print the selected solution from the dropdown
-    printSolution : function() {
-      for (let r=1; r <= this.npin; r++) {
-        // Print each pin
       }
     },
 

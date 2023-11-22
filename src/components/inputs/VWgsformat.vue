@@ -1,12 +1,12 @@
 <template>
-  <div class="form-inline">
+  <div class="row mb-2">
     <label
-      class="mr-2"
+      class="sm-size"
       for="wgsformat"
     >WGS84 format</label>
     <select
       id="wgsformat"
-      class="custom-select"
+      class="md-size form-select"
       :value="format"
       @input="updateFormat($event.target.value)"
     >

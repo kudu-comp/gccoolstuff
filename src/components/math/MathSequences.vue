@@ -9,10 +9,7 @@
         v-html="$t('mathtools.sequences.long')"
       />
       <div>
-        <label
-          class="form-label"
-          for="number"
-        >{{ $t('mathseq.sel') }}</label>
+        <span class="form-label">{{ $t('mathseq.sel') }}</span>
         <div class="form-check">
           <input
             id="number3"
@@ -112,43 +109,38 @@
           >{{ $t('mathseq.deficient') }}</label>
         </div>
       </div>
-      <div class="form-inline mt-2">
+      <div class="row mt-2">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label md-size mb-2"
           for="n"
         >{{ $t('mathseq.niter') }}</label>
         <input
           id="n"
-          ref="n"
           v-model="n"
           type="number"
           min="0"
           max="1000000"
-          class="form-control mr-2 mb-2"
+          class="form-control md-size mb-2"
         >
+      </div>
+      <div 
+        class="row"
+        v-show="number == 'hail' || number == 'cwy' || number == 'revcwy'"
+      >
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label md-size mb-2"
           for="start"
         >{{ $t('mathseq.start') }}</label>
         <input
-          v-show="number == 'hail' || number == 'cwy' || number == 'revcwy'"
           id="start"
           v-model="start"
           type="number"
           min="0"
           max="1000000"
-          class="form-control mr-2 mb-2"
-          @keyup.enter="sequence"
-        >
-        <input
-          id="product"
-          type="button"
-          name="product"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mb-2"
-          @click="sequence"
+          class="form-control md-size mb-2"
         >
       </div>
+      <v-calculate @calculate="sequence"/>
       <p
         v-show="errormsg"
         class="errormsg mb-2"
@@ -157,12 +149,10 @@
       </p>
       <div
         v-if="result"
-        class="resultbox"
+        class="resultbox monospace"
       >
-        <div class="monospace">
-          <p>{{ $t('mathseq.res1') }} {{ n }}: {{ result }}.</p>
-          <p>{{ $t('mathseq.res2') }} {{ seq }}</p>
-        </div>
+        <p>{{ $t('mathseq.res1') }} {{ n }}: {{ result }}.</p>
+        <p>{{ $t('mathseq.res2') }} {{ seq }}</p>
       </div>
     </div>
   </div>
@@ -171,9 +161,14 @@
 <script>
 
 import * as mathsequences from '@/scripts/mathsequences.js'
+import VCalculate from '../inputs/VCalculate.vue';
 
 export default {
   name: 'MathSequences',
+
+  components : {
+    VCalculate
+  },
 
   data: function () {
     return {
@@ -184,11 +179,6 @@ export default {
       seq: "",
       errormsg: "",
     }
-  },
-
-  mounted: function() {
-    // Set input focus
-    this.$refs.n.focus();
   },
 
   methods: {
@@ -214,9 +204,17 @@ export default {
             seq = mathsequences.deficient (this.n);
             break;
           case "cwy" :
+            if (this.n > 50) {
+              this.errormsg = this.$t('mathseq.maxconway');
+              return;
+            }
             seq = mathsequences.conway (this.start, this.n);
             break;
           case "revcwy" :
+            if (this.n > 50) {
+              this.errormsg = this.$t('mathseq.maxconway');
+              return;
+            }
             seq = mathsequences.revconway (this.start, this.n);
             break;
           case "niv" :

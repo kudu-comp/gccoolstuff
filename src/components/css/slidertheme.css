@@ -12,7 +12,7 @@
 
 /* process style */
 .vue-slider-process {
-  background-color: #785E31;
+  background-color: #111111;
   border-radius: 15px;
 }
 
@@ -58,10 +58,10 @@
   padding: 2px 5px;
   min-width: 20px;
   text-align: center;
-  color: #2E1E03;
+  color: #AAAAAA;
   border-radius: 5px;
-  border-color: #E2AE15;
-  background-color: #E2AE15;
+  border-color: #111111;
+  background-color: #111111;
   box-sizing: content-box;
 }
 .vue-slider-dot-tooltip-inner::after {

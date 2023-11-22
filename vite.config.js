@@ -7,7 +7,9 @@ const path = require("path");
 
 export default defineConfig({
 
-  plugins: [vue()],
+  plugins: [
+    vue()
+  ],
   
   resolve: {
     alias: {
@@ -21,10 +23,9 @@ export default defineConfig({
   },
 
   server: {
-    watch: {
-      usePolling: true,
-      origin: "~/src"
-    }
+    host: true,
+    port: 8080,
+    // https: true
   }
 
 })

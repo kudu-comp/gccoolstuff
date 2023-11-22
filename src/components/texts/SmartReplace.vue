@@ -8,9 +8,9 @@
         class="infoblock"
         v-html="$t('texttools.smartreplace.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          class="form-label sm-size"
           for="from"
         >{{ $t('txtsr.orig') }}</label>
         <input
@@ -20,13 +20,13 @@
           type="text"
           name="from"
           size="50"
-          class="form-control mb-2"
+          class="form-control lg-size mb-2"
           @keyup="replaceInput"
         >{{ error1 }}
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          class="form-label sm-size mb-2"
           for="to"
         >{{ $t('txtsr.repl') }}</label>
         <input
@@ -36,13 +36,13 @@
           type="text"
           name="to"
           size="50"
-          class="form-control mb-2"
+          class="form-control lg-size mb-2"
           @keyup="replaceInput"
         >{{ error2 }}
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          class="form-label sm-size mb-2"
           for="highlightflag"
         >{{ $t('txtsr.highlight') }}</label>
         <select
@@ -50,7 +50,7 @@
           ref="highlightflag"
           v-model="highlightflag"
           name="highlightflag"
-          class="form-control col-sm-4 col-md-3 col-lg-2 mb-2"
+          class="form-select lg-size mb-2"
           @change="replaceInput"
         >
           <option value="red">
@@ -69,8 +69,10 @@
             {{ $t('highlights.upper') }}
           </option>
         </select>
+      </div>
+      <div class="row">
         <label
-          class="form-label col-sm-4 col-md-3 col-lg-2 mb-2"
+          class="form-label sm-size mb-2"
           for="language"
         >{{ $t('language') }}</label>
         <select
@@ -78,7 +80,7 @@
           ref="language"
           v-model="language"
           name="language"
-          class="form-control col-sm-3 mb-2"
+          class="form-select lg-size mb-2"
           @change="setLanguage"
         >
           <option value="en">
@@ -102,22 +104,21 @@
         <input
           id="remdiacr"
           type="button"
-          :value="$t('dialogwv.replacediac')"
-          class="btn btn-primary mb-2"
+          :value="$t('txtwordval.replacediac')"
+          class="btn mb-2"
           @click="removeDiacr"
         >
-        <div class="custom-control custom-checkbox">
+        <div class="form-check">
           <input
             id="reverse"
             v-model="casesens"
             type="checkbox"
-            name="reverse"
-            class="custom-control-input mr-2 mb-2"
+            class="form-check-input me-2 mb-2"
             @change="wordValue"
           >
           <label
             for="reverse"
-            class="custom-control-label mb-2"
+            class="form-check-label mb-2"
           >{{ $t('txtsr.casesens') }}</label>
         </div>
       </div>
@@ -128,35 +129,31 @@
               id="message"
               ref="message"
               v-model="message"
-              name="message"
               class="form-control"
               :placeholder="$t('labels.message')"
-              rows="10"
-              cols="50"
+              rows="5"
               @keyup="replaceInput"
             />
           </div>
         </div>
         <p
-          class="col-6 result"
+          class="col-6 resultbox"
           v-html="result"
         />
         <div class="col-12">
           <div class="form-inline">
             <input
-              id="hint"
+              id="hint1"
               type="button"
-              name="hint"
               :value="$t('txtsr.get')"
-              class="btn btn-primary mr-2 mb-2"
+              class="btn me-2 mb-2"
               @click="printHints"
             >
             <input
-              id="hint"
+              id="hint2"
               type="button"
-              name="hint"
               :value="$t('txtsr.apply')"
-              class="btn btn-primary mb-2"
+              class="btn mb-2"
               @click="applyHints"
             >
           </div>
@@ -260,7 +257,6 @@ export default {
 
       // Reset counts
       let countletters = [];
-      let percentages = [];
       let idx;
       let length = 0;
 
@@ -292,11 +288,11 @@ export default {
 
       // Calculate percentages 
       for (let i=0; i < countletters.length; i++) {
-        percentages[i] = { char : countletters[i].char, count : countletters[i].count / length * 100 };
+        this.percentages[i] = { char : countletters[i].char, count : countletters[i].count / length * 100 };
       }
 
       // Sort array with percentages descending
-      percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
+      this.percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
 
       // Print hints
       let html = "<table class='table table-sm table-bordered text-center'><tr><td>Letter</td>";
@@ -304,9 +300,9 @@ export default {
       html += "</tr><tr><td>Frequency</td>";
       for (let i = 0; i < this.freqperc.length; i++) html+="<td>" + this.freqperc[i] + "</td>";
       html += "</tr><tr><td>Hint letters</td>";
-      for (let i = 0; i < percentages.length; i++) html+="<td>" + percentages[i].char + "</td>";
+      for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].char + "</td>";
       html += "</tr><tr><td>Hint freq</td>";
-      for (let i = 0; i < percentages.length; i++) html+="<td>" + percentages[i].count.toFixed(1) + "</td>";
+      for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].count.toFixed(1) + "</td>";
       html += "</tr></table>";
       this.hints = html;
 

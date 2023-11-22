@@ -1,6 +1,6 @@
 {
   "language": "Language",
-  "intro": "This is a collection of tools to solve geocaching mysteries. If you are new to geoaching go to <a href='https://www.geocaching.com/'>Geocaching.com</a>. If you are new to solving mystery caches read the <router-link to='howtostart'>How to's</router-link>.",
+  "intro": "This is a collection of tools to solve geocaching mysteries. If you are new to geoaching go to <a href='https://www.geocaching.com/'>Geocaching.com</a>. If you are new to solving mystery caches read the <router-link to='howto'>How to's</router-link>.",
 
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
@@ -13,7 +13,10 @@
     "unknowninput": "Unknown input ",
     "loadingimage": "Error loading image",
     "loadingfile": "Error loading file",
-    "notanumber": "Input is not a number"
+    "notanumber": "Input is not a number",
+    "notbinary" : "Not a binary number",
+    "notdecimal" : "Not a decimal number",
+    "nothexadecimal": "Not a hexadecimal number"
   },
 
   "labels": {
@@ -37,7 +40,14 @@
     "search": "Search for",
     "sum": "Sum",
     "count": "Count",
-    "number": "Number"
+    "perc" : "Percentage",
+    "number": "Number",
+    "welcome": "Welcome",
+    "whatsnew": "What's new",
+    "featured": "Featured",
+    "help" : "Help ",
+    "moreinfo" : "More info",
+    "letsgo" : "Let's go"
   },
 
   "buttons": {
@@ -98,10 +108,11 @@
     "ciphers": "Ciphers",
     "codes": "Codes",
     "imagetools": "Images",
-    "htmlscanner": "HTML Scanner",
+    "htmlscanner": "Scan HTML",
     "comptools": "Programming",
     "mathtools": "Math",
     "other": "More tools",
+    "help": "Help",
     "howto": "How to",
     "about": "About"
   },
@@ -161,11 +172,11 @@
   },
 
   "codes": {
-    "intro": "Codes are simple ways to translate text or numbers. They do not require a key to be solved. The only thing to do is recognize the right code. However recognizing the code might not be that easy. You can use the search tool or browse through the special fonts. Resistor, segment and decabit are codes used for special purposes.",
+    "intro": "Ciphers use keys or transposition to encrypt a message. There are 60 different ciphers available. Codes are simple ways to translate text or numbers. Codes not require a key to be solved, but it can be difficult to find the right code. You can use the search tool or use special fonts to find the code. Resistor, segment and decabit are codes used for special purposes.",
     "codebook": {
       "title": "Search codebook",
       "short": "Find codes using keywords and tags",
-      "long": "Find a code using keywords and tages. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
+      "long": "Find a code using keywords and tags. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
     }, 
     "fonts": {
       "title": "Special fonts",
@@ -268,7 +279,7 @@
   },
 
   "othertools" : {
-    "intro": "Another collection of tools for various topics. Solving Sudoku or Mastermind. A unit convertor for hundreds of units. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes.",
+    "intro": "A collection of tools for various topics. Solving Sudoku or Mastermind. A unit convertor for hundreds of units. A calculator for dates. A random generator. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes.",
     "sudokusolver": {
       "title": "Sudoku solver",
       "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
@@ -313,27 +324,32 @@
 
   "cp": {
     "short": " and 50 other ciphers",
-    "info": "Select one of the ciphers or codes below. The appropriate keys will be shown. Fill in the keys and press decode or encode. In most cases converting to uppercase works best. You can remove all the characters that are not in the alphabet. This is often necessary. The encoded message can be formatted in blocks with a separator (which is common). To decode you have to remove the formatting in most cases.",
+    "long": "Ciphers are used to encrypt messages by means of substitution and transposition or a combination of both. Simple ciphers use only one alphabet, such as Atbash or ROT13. More complex ciphers use more alphabets, for example Vigenere or Beaufort. Some ciphers encrypt one letter at a team, but there are many who encrypt bigrams of two letters. Examples are Polybius, Bazeries or Condi.Transposition ciphers simple reorder the message, such as the Railfence, Cadenus or Skip ciphers. The most complex ciphers use combinations of the above, such as the Bifid, Trifid and Digrafid cipher.",
+    "info": "Select one of the ciphers from the list. Enter you message and press encode or decode. If the cipher requires a key it will show. Use expertmode to change the default behavior.",
     "cipher": "Cipher",
+    "selcipher": "Select cipher",
+    "keepcase": "Keep lowercase characters",
+    "keepdiacrit": "Keep diacritics (do not change to normal letters)",
+    "keepunknown": "Keep letters that are not in the alphabet",
+    "replacechars": "Replace characters as specified below",
+    "formatoutput": "Format output in blocks with separator as specified below",
+    "expertmode": "Expert mode",
+    "hideexpertmode": "Standard mode",
     "gensq": "Generate square",
     "genalp": "Generate alphabet",
-    "phencmsg": "Encrypted message",
-    "toupper": "Uppercase",
-    "remnonalp": "Remove non alphabet",
-    "repl": "Replace",
     "errdec": "Message could not be decoded, please check.",
     "errenc": "Message could not be encoded, please check.",
     "sep": "Separator",
-    "remform": "Remove format",
     "bs": "Block size",
+    "repl": "Replacements",
     "adfgvx": {
       "info": "The ADFGX(V) cipher is Polybius cipher. A 5x5 or 6x6 square is used. The result is fractionated and the columns are transposed using the key.",
-      "k1": "Column transposition key:"
+      "k1": "Column transposition key"
     },
     "affine": {
       "info": "The Affine cipher is a substitution cipher. It uses the function ax + b to calculate the ciphered text. The value of A must be coprime with the length of the alphabet.",
-      "k1": "A (greater than 1):",
-      "k2": "B (greater than 0):"
+      "k1": "A (greater than 1)",
+      "k2": "B (greater than 0)"
     },
     "amsco": {
       "info": "AMSCO Encryption consists in writing a text in a grid according to a cutting sequence (2,1) then use a permutation key to switch columns.",
@@ -352,51 +368,51 @@
     "bacon": {
       "info": "Each character is replaced by 5 characters (normally A and B). There are two versions. Versions 1 uses the same combination for I and J, and U and V. Version 2 is different for each letter. You can also hide Bacon in any text using a different font for B or using lower- and uppercase for A and B.",
       "k1": "Version (1 or 2)",
-      "k2": "Value to use for A:",
-      "k3": "Value to use for B:"
+      "k2": "Value to use for A",
+      "k3": "Value to use for B"
     },
     "bazeries": {
       "info": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters. It uses two squares. The keys are optional to generate the squares. The numeric key is used for transpositioning and to generate the 2nd square if key 2 is empty.",
-      "k1": "Key for square 1:",
-      "k2": "Key for square 2:",
-      "k3": "Numeric key:"
+      "k1": "Square 1",
+      "k2": "Square 2",
+      "k3": "Numeric key"
     },
     "beaufort": {
       "info": "The Beaufort cipher, created by Sir Francis Beaufort, is a substitution cipher similar to the Vigenère cipher, with a slightly modified enciphering mechanism and tableau. Keyword is required.",
-      "k1": "Enter key:"
+      "k1": "Key (mandatory)"
     },
     "bibibinary": {
       "info": "Bibi-binary is a numeric encoding system. It converts the number to hexadecimal and translates into something that pronounces funny. Only numbers are allowed."
     },
     "bifid": {
-      "info": "The bifid cipher uses a Polybius square to fractionate each plaintext letter into a bigram, mixes the constituents of the bigrams, and then applies the Polybius square in reverse to turn these mixed bigrams into ciphertext letters.",
-      "k1": "Enter key:"
+      "info": "The bifid cipher uses a standard Polybius square to fractionate each plaintext letter into a bigram, mixes the constituents of the bigrams, and then applies the Polybius square in reverse to turn these mixed bigrams into ciphertext letters.",
+      "k1": "Enter key"
     },
     "burrowswheeler": {
       "info": "The Burrow Wheeler cipher is a transposition cipher. It uses a character to indicate end-of-file. This on is mandatory.",
-      "k1": "End of file character:"
+      "k1": "End of file character"
     },
     "cadenus": {
       "info": "The Cadenus cipher is a columnar transposition. The key both reorders columns and sets the starting point of each column. The message must be a 25 * keylength characters.",
-      "k1": "Columnar transposition key:"
+      "k1": "Columnar transposition key"
     },
     "caesar": {
       "info": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
-      "k1": "Shift:"
+      "k1": "Shift"
     },
     "rot13": {
       "info": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
-      "k1": "Shift:"
+      "k1": "Shift"
     },
     "chaocipher": {
       "info": "The chaocipher is polyalphabetic cipher with continuously changing alphabets. It was invented in 1918 by John F. Byrne.",
-      "k1": "Left starting alphabet:",
-      "k2": "Right starting alphabet:"
+      "k1": "Left starting alphabet",
+      "k2": "Right starting alphabet"
     },
     "collon": {
-      "info": "Collon uses a grid and convert letters into bigram. The bigram is taken from the first/last row/column in the grid. The period is then used for fractionation.",
-      "k1": "Select order of digrams:",
-      "k2": "Key to generate Polybius squares:",
+      "info": "Collon uses a grid (a Polybius square) to convert letters into bigram. The bigram is taken from the first/last row/column in the grid. The period is then used for fractionation.",
+      "k1": "Select order of digrams",
+      "k2": "Polybius square",
       "k3": "Period:",
       "s1": {
         "rfcl": "Row first, column last",
@@ -411,23 +427,23 @@
     },
     "columnartransposition": {
       "info": "Columnar transposition writes the message in columns, reorders it and writes the result column after column",
-      "k1": "Columnar transposition key:"
+      "k1": "Columnar transposition key"
     },
     "condi": {
       "info": "The condi cipher (consecutive digrams) uses digrams to calculate the offset for the next letter.",
-      "k1": "Key for the cipher alphabet:",
-      "k2": "Initial offset:"
+      "k1": "Key for the cipher alphabet",
+      "k2": "Initial offset"
     },
     "digrafid": {
       "info": "A fractionated cipher using a tableau in which two alphabets are organized in grids (of 3x9 and 9x3) with 27 characters (ABCDEFGHIJKLMNOPQRSTUVWXYZ#) are mixed. The plaintext is divided into digraphs, and the digraphs are written in groups, the number of digraphs in each group being the period of the cipher",
-      "k1": "Key for the first grid:",
-      "k2": "Key for the second grid:",
-      "k3": "Period:"
+      "k1": "Key first grid",
+      "k2": "Key second grid",
+      "k3": "Period (required)"
     },
     "foursquare": {
       "info": "The foursquare cipher is a polygraphic substitution cipher that replaces diagrams using two Polybius squares.",
-        "k1": "Key square 1:",
-        "k2": "Key square 2:"
+        "k1": "Square 1",
+        "k2": "Square 2"
     },
     "gcid": {
       "info": "Geocache id, a.k.a base 31, translates a geocache id (a number) to its geocache code like GC001. You can enter multiple geoaches or ids."
@@ -441,24 +457,24 @@
     },
     "gromark": {
       "info": "The gromark uses the key to reorder the alphabet and then uses the same key for columnar transposition of the cipher. The 5-digit primer is used to determine the shift of each letter.",
-      "k1": "Key:",
+      "k1": "Key (required)",
       "k2": "Primer (5 digits)"
     },
     "gronsfeld": {
-      "info": "The Gronsfeld cipher a Vigenere cipher using a numeric key.",
-      "k1": "Enter key (numeric):"
+      "info": "The Gronsfeld cipher a Vigenere cipher using a numeric key. The key is mandatory.",
+      "k1": "Enter key (numeric)"
     },
     "kennycode": {
       "info": "Kenny code is based on the mumbling of the Southpark character. Each letter is encoded with a combination of m, p and f (fff is not used)."
     },
     "monomedinome": {
-      "info": "The Monome-dinome cipher uses a 24 char alphabet. The first key is used to generate a 3x8 square. The second key is used to detemine the numbers for the rows and columns.",
-      "k1": "Key to reorder the alphabet:",
-      "k2": "Key for transposition (min 10 chars):"
+      "info": "The Monome-dinome cipher uses a 24 char alphabet. The first key is used to generate a 3x8 square. The second key is used to detemine the numbers for the rows and columns. Both keys are mandatory.",
+      "k1": "Key to reorder the alphabet",
+      "k2": "Key for transposition (min 10 chars)"
     },
     "morbit": {
       "info": "Morbit first translates the message into Morse. Then the morse code is split into couples of 2 characters, which are translated into numbers using a 9-digit key.",
-      "k1": "Enter key (9 letters):"
+      "k1": "Enter key (9 letters)"
     },
     "morse": {
       "info": "Morse code is well known. It uses short and long beeps (. and -) to transmit messages. This one also does morse for numbers and punctuation."
@@ -473,13 +489,13 @@
     },
     "nihilist": {
       "info": "The Nihilist cipher is a Polybius cipher. The first key is used to generate a 5x5 square. The second key is added to the generated numbers. The alphabet must be 25 characters and both keys are required.",
-      "k1": "Key to create Polybius square:",
-      "k2": "Key to be added:"
+      "k1": "Polybius square",
+      "k2": "Key to be added"
     },
     "nihilisttransposition": {
       "info": "The Nihilist transposition cipher is a columnar followed by a row based transposition, using the same key for both. The transposed grid can be read by rows or columns. The message size equals square of the key length.",
-      "k1": "Key for columnar transposition:",
-      "k2": "Read by rows or columns:",
+      "k1": "Key for columnar transposition",
+      "k2": "Read by rows or columns",
       "s1": {
         "row": "Rows",
         "col": "Columns"
@@ -487,49 +503,49 @@
     },
     "onetimepad": {
       "info": "The one time pad has a key with the same length as the message. It is the only truly unbreakable cipher (if you never reuse the pad).",
-      "k1": "Enter pad:"
+      "k1": "Enter pad"
     },
     "phillips": {
       "info": "The Phillips cipher is based on a Polybius square whose rows, columns or both are reordered to form 8 different squares. The plaintext is enciphered using each square in turn for groups of 5 letters.",
-      "k1": "Enter key:"
+      "k1": "Polybius square"
     },
     "playfair": {
-      "info": "The Playfair cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters. The key is optional and used to generate the square.",
-      "k1": "Enter key:"
+      "info": "The Playfair cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters.",
+      "k1": "Polybius square"
     },
     "polybius": {
       "info": "The Polybius cipher uses a 5x5 (or 6x6) square. The rows and columns are normally numbered 1 to 5 (or 1 to 6) but this can be changed. The alphabet must be 25 or 36 characters and both keys are required.",
-      "k1": "Rows:",
-      "k2": "Columns:"
+      "k1": "Rows",
+      "k2": "Columns"
     },
     "pollux": {
       "info": "The Pollux cipher translates a message into morse and then replaces the dot, hyphen and word breaks with a randomly selected character.",
-      "k1": "Characters for .:",
-      "k2": "Characters for -:",
-      "k3": "Characters for x:"
+      "k1": "Characters for .",
+      "k2": "Characters for -",
+      "k3": "Characters for x"
     },
     "porta": {
       "info": "The porta cipher is a polyalphabetic cipher which uses 13 alphabets.",
-      "k1": "Enter key:"
+      "k1": "Enter key (required)"
     },
     "portax": {
       "info": "Portax is a polygraphic (replaces digrams), polyalphabetic (it shifts the alphabet), transposition (rows to columns) cipher.",
-      "k1": "Enter key:"
+      "k1": "Enter key"
     },
     "ragbaby": {
       "info": "Using a selected keyword, construct a mixed alphabet. Keeping word divisions, the letters of the plaintext are numbered sequentially beginning with the first character of each word.  Ciphertext characters are obtained by taking the letter that is the indicated number of places to the right.",
-      "k1": "Enter key:"
+      "k1": "Enter key"
     },
     "railfence": {
       "info": "The railfence cipher is a transposition cipher using a zigzag pattern.",
       "k1": "Number of rails (greater than 1):",
-      "k2": "Initial offset:"
+      "k2": "Initial offset"
     },
     "redefence": {
       "info": "The redefence cipher is a transposition cipher. It is the generic form of the railfence cipher.",
       "k1": "Number of rails (greater than 1):",
-      "k2": "Initial offset:",
-      "k3": "Sequence of rails:"
+      "k2": "Initial offset",
+      "k3": "Sequence of rails"
     },
     "reverse": {
       "info": "Reverse the message"
@@ -539,24 +555,24 @@
     },
     "rot5": {
       "info": "ROT5 is a simple Caesar cipher that just uses digits. Default it has a shift of 5.",
-      "k1": "Shift:"
+      "k1": "Shift"
     },
     "rot47": {
       "info": "ROT47 is a Caesar cipher that uses an alphabet with lower- and uppercase, digits and some symbols (ASCII karakters 33 t/m 126). Default it has a shift of 47.",
-      "k1": "Shift:"
+      "k1": "Shift"
     },
     "scytale": {
       "info": "Scytale is a very basique transposition cipher used in ancient Greece and by spartans. It uses a cylinder and a band characterized by its number of turns around the cylinder.",
-      "k1": "Number of turns:"
+      "k1": "Number of turns"
     },
     "skip": {
       "info": "The skip cipher is a transposition cipher that consists of extracting the letters of a message every n characters (by jumping n characters). When the end of the message is reached, resume at the beginning (loop).",
-      "k1": "Skip value:",
-      "k2": "Start at:"
+      "k1": "Skip value",
+      "k2": "Start at"
     },
     "substitution": {
       "info": "The generic substitution uses a random reordered alphabet. If you don't know it you can better use the Smart Replace tool.",
-      "k1": "Substitutes:"
+      "k1": "Substitutes"
     },
     "syllabary": {
       "info": "The Syllabary cipher was introduced by G-MAN (Robert J Friedman) in the May-June 2012 issue of the Cryptogram magazine. It is based on a standard 10x10 Key-Square containing all 26 letters and all 10 digits, plus a number of 2-letter and 3-letter combinations. Words can usually be represented in more than one way by row and column coordinates. For example AMSTERDAM can be encrypted as A M ST ER DA M but also as A M S TER D A M. This algorithm always takes the longest matches first. Decryption works always as long as the code is valid. The rows and columns are default numbered 0123456789 but they can be numbered anyway you like.",
@@ -569,32 +585,52 @@
     },
     "trifid": {
       "info": "The trifid cipher uses a table to fractionate each plaintext letter into a trigram, mixes the constituents of the trigrams, and then applies the table in reverse to turn these mixed trigrams into ciphertext letters. The alphabet must be 27 long.",
-      "k1": "Enter key:"
+      "k1": "Enter key"
     },
     "trisquare": {
       "info": "The trisquare cipher uses three polybius squares and encodes digrams (2 letters) into trigrams (3 letters).",
-      "k1": "Enter key square 1:",
-      "k2": "Enter key square 2:",
-      "k3": "Enter key square 3:"
+      "k1": "Square 1",
+      "k2": "Square 2",
+      "k3": "Square 3"
     },
     "vatsyayana": {
       "info": "The Vatsyayana or Kamasutra cipher uses pairs of the letters who replace each other.",
-      "k1": "First half:",
-      "k2": "Second half:"
+      "k1": "First half",
+      "k2": "Second half"
     },
     "vigenere": {
       "info": "The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a (required) keyword. It employs a form of polyalphabetic substitution.",
-      "k1": "Enter key:"
+      "k1": "Enter key (required)"
     },
     "zebra": {
       "info": "ZEBRA is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters including German diacretics, some digrams, some trigrams, numbers and some special characters."
     },
     "zygazyfa": {
       "info": "The Zygazyfa cipher was created by Ray Crowther for fun. He uses it in some of his geocaches. It is a polyalphabetic cipher using a kind of autokey.",
-      "k1": "Enter key:"
+      "k1": "Enter key"
     }
   },
 
+  "cperrors" : {
+    "nothingtodo": "No message to encode or decode.",
+    "isrequired" : " is required.",
+    "mustbegreaterthen1" : " must be greater than 1.",
+    "mustbegreaterthen0" : " must be greater than 0.",
+    "mustbe1or2": " must be 1 or 2.",
+    "mustbe1char": " must be one character.",
+    "mustbeeof": " must be one character that is not in the alphabet.",
+    "mustbenumeric": " must be a number.",
+    "mustbehalfalf" : " must be half the length of the alphabet.",
+    "mustbe10ormore" : " must be 10 or more characters.",
+    "mustbe9": " must be 9 characters.",
+    "msg25key": "Message must be 25 times de key length long.",
+    "msgmustbesquareofkey" : " message size must be square of key length.",
+    "keylongerthenmsg" : " must be at least as long as the message.",
+    "keymustbesqrroot" : " must be square root of length of alphabet.",
+    "keymustbealph" : " must be the same length as the alphabet.",
+    "keyfromalph" : " must be composed of the alphabet."
+  },
+  
   "mathtools": {
     "intro": "Mathematical and arithmetic tools. Decimals of constants like pi. Calculator for very large binary, octal, decimal and hexadecimal numbers. Some well known series like Fibonacci and Hailstone. Primes, GCD and LCM and prime factors. A solver for cryptarithms.",    
     "baseconvert": {
@@ -800,7 +836,6 @@
   },
 
   "pixeldata": {
-    "sum": "To calculate the sum of the red, green and blue values press Totals",
     "count": "To count the number of pixels select values for red, green and blue and press Count"
   },
 
@@ -1439,8 +1474,8 @@
   },
 
   "mathbase": {
-    "base1": "Base left (2 to 36)",
-    "base2": "Base right (2 to 36)"
+    "base1": "Base from (2 to 36)",
+    "base2": "Base to (2 to 36)"
   },
 
   "mathdeci": {
@@ -1494,7 +1529,7 @@
     "the": "The ",
     "nth": "th Fibonacci number is ",
     "not": " not",
-    "fib": " a Fibonacci number"
+    "fib": " is a Fibonacci number at position "
   },
 
   "mathgcd": {
@@ -1580,7 +1615,8 @@
     "niter": "Number of iterations",
     "start": "Start with",
     "res1": "The number on position",
-    "res2": "The sequence is"
+    "res2": "The sequence is",
+    "maxconway" : "The maximum number for Conway is 50"
   },
 
   "compbf": {
@@ -1593,6 +1629,7 @@
   },
 
   "compbcd": {
+    "seltype": "Select method",
     "bcdfrom": "BCD to numbers",
     "bcdto": "Numbers to BCD",
     "packed": "Packed BCD",
@@ -1646,6 +1683,74 @@
 
   "dialoghowto": {
     "info": "This page is only available in English."
+  },
+
+  "numerology": {
+    "title" : "Numerology",
+    "long" : "<p>Numerology is the practice of assigning a numerical value to a name, word or phrase by reading it as a number. Each letter represents a value. Values are not related to the position in the alphabet (as when calculating Word Value), but to their supposed numerological meaning.</p><p>The modern Latin alphabet is mostly used. Gematria uses the Hebrew alphabet. Isopsephy the Greek alphabet. Agrippan the classic Latin alphabet. In these cases latin characters are 'replaced' by their alternatives.</p>",
+    "selmethod" : "Select method",
+    "res1" : "The numerological value is ",
+    "res2" : "Calculation :",
+    "err1" : "One or more unknown characters found."
+  },
+
+  "datecalc" :{
+    "title" : "Date calculator",
+    "long" : "Calculate the difference between two dates. Add or substract days from a given date. Give the number of days in the year, month, day of the week, day in the year of a given date.",
+    "date1" : "First date",
+    "date2" : "Second date",
+    "days" : "Add or substract days",
+    "res1a" : "The number of days between the first and second date is ",
+    "res1b" : " days.",
+    "res2a" : "Adding ",
+    "res2b" : " to the first date ",
+    "res3a" : "Substracting ",
+    "res3b" : " from the first date ",
+    "res4" : "The day of the week is ",
+    "res5" : "The number of days in the year ",
+    "res6" : "The number of days in the month ",
+    "res7" : "Day in the year "
+  },
+
+  "randomizer" : {
+    "title" : "Random Generator",
+    "long" : "<p>The random generator generates a random string of numbers or characters. This can be useful when you want to obfuscate a message by adding extra data. There are many other uses e.g. in games, running simulations or testing hypotheses.</p><p>Binary generates a string of 0 and 1. Numbers generate a string of numbers between the provided minium and maximum. Negative numbers can be used. Text generate a random string of characters form the given string. Collection takes values from a comma separated set. Printable characters generate a random string of ASCII printable characters, which include all letters, digits and common symnbols.</p>",
+    "sel" : "Select method",
+    "selbin": "Binary (0 and 1)",
+    "selrng": "Numbers in range",
+    "seltxt": "Text from string",
+    "selcol": "Collection",
+    "selascii": "All printable characters",
+    "numberof": "Number of randoms",
+    "minmax": "Min and max for range",
+    "chars": "Use this characters for string",
+    "coll": "Use this collection (comma separated)",
+    "sep": "Separate",
+    "sepnone": "None",
+    "sepspace": "Space",
+    "sepcomma": "Comma",
+    "sepcolon": "Colon",
+    "sephyphen": "Hyphen" 
+  },
+
+  "rotciphers" : {
+    "title": "Rotation ciphers",
+    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown.</p>",
+    "rot5" : "Numbers (ROT5)",
+    "rot13": "Latin (ROT13)",
+    "rot47": "Printable ASCII (ROT47)"
+  },
+
+  "freqanal" : {
+    "title" : "Frequency Analysis",
+    "long" : "<p>The frequency distribution of individual characters or n-grams is very useful when cracking ciphers. The larger the text the more reliable and useful statistics are.</p><p>If you use size 1 you get the frequency distribution of the alphabet. If it looks similar to normal text it is probably a 1 on 1 replacement. You can use <a href='/smartreplace'>Smart Replace</a> to crack the code.</p><p>Size 2 are so called digrams or bigrams. They can be used to crack ciphers that encode a single letter with two, such as Polybius. Digrams can also be useful for cracking ciphers that encode two characters each time, such as Bazeries or Trisquare. For ciphers that encode two characters at a time. The most common bigrams are probably also the bigrams most often found in normal text. So is TH the most common digram in English</p><p>The maximum number of missing n-grams shown is 1000.</p>",
+    "size" : "Size of n-gram",
+    "slide" : "Slide (ABCDE => AB, BC, CD, DE)",
+    "bound" : "Respect word boundaries",
+    "showmissing" : "Show missing n-grams (max 1000)",
+    "numfound" : "Number of n-grams found: ",
+    "nummissing" : "Number of n-grams missing: ",
+    "missing": "Missing n-grams"
   }
 
 }

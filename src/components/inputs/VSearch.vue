@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div class="form-inline">
+    <div class="row">
       <label
-        class="form-label mr-2 mb-2"
+        class="form-label sm-size mb-2"
         for="search"
       >{{ $t('labels.search') }}</label>
       <input
         type="text"
-        class="form-control mr-2 mb-2"
+        id="search"
+        class="form-control lg-size mb-2"
         :value="search"
         @input="updateSearch($event.target.value)"
       >
@@ -36,3 +37,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

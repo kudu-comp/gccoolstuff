@@ -97,7 +97,7 @@ export var codepages = [
   { name: "Bokscript",
     imagename: "bokscript.png",
     description: "Blokscript was invented in 2008 in Croatia by Vicko Bezić who was 12 years old at the time. It can be used to write English, particularly American and British English.",
-    tags: ["alphabet", "sqaures" ]
+    tags: ["alphabet", "squares" ]
   },
   { name: "Braille",
     imagename: "braille.png",

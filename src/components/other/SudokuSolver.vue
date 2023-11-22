@@ -8,16 +8,15 @@
         class="infoblock"
         v-html="$t('othertools.sudokusolver.long')"
       />
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
           for="sudokutype"
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('sudoku.type') }}</label>
         <select
           id="sudokutype"
           v-model="sudokutype"
-          name="sudokutype"
-          class="form-control mr-2"
+          class="form-control sm-size mb-2"
           @change="changeType"
         >
           <option value="Sudoku">
@@ -27,15 +26,16 @@
             Sudoku X
           </option>
         </select>
+      </div>
+      <div class="row">
         <label
           for="sudokutype"
-          class="form-label mr-2"
+          class="form-label sm-size mb-2"
         >{{ $t('sudoku.size') }}</label>
         <select
-          id="sudokutype"
+          id="sudokusize"
           v-model="size"
-          name="sudokutype"
-          class="form-control"
+          class="form-control sm-size mb-2"
           @change="changeSize"
         >
           <option value="2">
@@ -44,44 +44,29 @@
           <option value="3">
             3
           </option>
-          <option value="4">
+          <option value="4" disabled>
             4
           </option>
         </select>
       </div>
       <table id="sudokutable" />
-      <div class="mt-2 mb-2 mr-2">
-        {{ $t('sudoku.alt') }}
-      </div>
-      <div class="form-inline mb-2">
+      <div class="row">
+        <label for = "knownnumbers" class="form-label sm-size mb-2">
+          {{ $t('sudoku.alt') }}
+        </label>
         <input
           id="knownnumbers"
-          ref="knownnumbers"
           v-model="knownnumbers"
           type="text"
-          name="knownnumbers"
-          size="50"
-          class="form-control"
+          class="form-control xl-size mb-2"
         >
       </div>
-      <div>
-        <input
-          id="solve"
-          type="button"
-          name="solve"
-          :value="$t('sudoku.solve')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="solveSudoku"
-        >
-        <input
-          id="reset"
-          type="button"
-          name="reset"
-          :value="$t('buttons.reset')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="resetSudoku"
-        >
-      </div>
+      <button id="solve" class="btn mb-2 me-2" @click="solveSudoku">
+        {{ $t('sudoku.solve') }}
+      </button>
+      <button id="reset" class="btn mb-2" @click="resetSudoku">
+        {{ $t('buttons.reset') }}
+      </button>
       <p
         v-show="errormsg"
         class="errormsg"
@@ -92,17 +77,14 @@
         v-show="solved"
         class="mb-2"
       >
-        {{ $t('sudoku.thereare') }} {{ numberofsolutions }} {{ $t('sudoku.sols') }}
+        <span style="font-weight:bold;">
+          {{ $t('sudoku.thereare') }} {{ numberofsolutions }} {{ $t('sudoku.sols') }}
+        </span>
         <div class="form-inline mb-2">
-          <label
-            for="listofresults"
-            class="form-label mr-2"
-          >Solutions</label>
           <select
             id="listofresults"
             v-model="selectedsolution"
-            name="listofresults"
-            class="form-control"
+            class="form-select"
             @change="printSolution"
           >
             <option
@@ -140,7 +122,6 @@ export default {
 
   mounted: function() {
     this.generateTable();
-    this.$refs.knownnumbers.focus();
   },
 
   methods: {
@@ -159,9 +140,10 @@ export default {
           newInput.type="text";
           newInput.size="1";
           newInput.id = "box-" + r + "-" + c;
+          newInput.style="width: 3rem;"
           let classstr="form-control ";
-          if (c % this.size == 0) classstr += "mr-2 ";
-          if (r % this.size == 0) classstr += "mb-2";
+          if (c % this.size === 0) classstr += "me-2 ";
+          if (r % this.size === 0) classstr += "mb-2 ";
           newInput.setAttribute("class", classstr)
           newCell.appendChild(newInput);
         }

@@ -15,81 +15,78 @@
         <v-alphabets v-model:alphabet="selectedalphabet" />
       </div>
       <div class="form-inline">
-        <div class="custom-control custom-checkbox">
+        <div class="form-check custom-checkbox">
           <input
             id="reverse"
             v-model="reverse"
             type="checkbox"
             name="reverse"
-            class="custom-control-input mb-2 mr-2"
+            class="form-check-input mb-2"
           >
           <label
             for="reverse"
-            class="custom-control-label mb-2 mr-2"
+            class="form-check-label mb-2"
           >{{ $t('txtwordval.reverse') }}</label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div class="form-check custom-checkbox">
           <input
             id="startatzero"
             v-model="startatzero"
             type="checkbox"
             name="startatzero"
-            class="custom-control-input mb-2 mr-2"
+            class="form-check-input mb-2"
           >
           <label
             for="startatzero"
-            class="custom-control-label mb-2 mr-2"
+            class="form-check-label mb-2"
           >{{ $t('txtwordval.startzero') }}</label>
         </div>
-        <div class="custom-control custom-checkbox">
+        <div class="form-check custom-checkbox">
           <input
             id="leadzero"
             v-model="leadzero"
             type="checkbox"
             name="leadzero"
-            class="custom-control-input mb-2 mr-2"
+            class="form-check-input mb-2"
           >
           <label
             for="leadzero"
-            class="custom-control-label mb-2"
+            class="form-check-label mb-2"
           >{{ $t('txttonum.leadzero') }}</label>
         </div>
       </div>
       <div class="form-row mb-2">
+        <input
+          id="texttonumbers"
+          type="button"
+          :value="$t('txttonum.btnttn')"
+          class="btn mb-2 me-2"
+          @click="textToNumbers"
+        >
+        <input
+          id="numberstotext"
+          type="button"
+          :value="$t('txttonum.btnntt')"
+          class="btn mb-2 me-2"
+          @click="numbersToText"
+        >
+        <input
+          id="remove"
+          type="button"
+          :value="$t('txtwordval.replacediac')"
+          class="btn mb-2"
+          @click="removeDiacr"
+        >
         <textarea
           id="message"
           ref="message"
           v-model="message"
-          name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
-          rows="10"
+          rows="5"
         />
       </div>
-      <input
-        id="texttonumbers"
-        type="button"
-        name="texttonumbers"
-        :value="$t('txttonum.btnttn')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="textToNumbers"
-      >
-      <input
-        id="numberstotext"
-        type="button"
-        name="numberstotext"
-        :value="$t('txttonum.btnntt')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="numbersToText"
-      >
-      <input
-        id="remove"
-        type="button"
-        name="remove"
-        :value="$t('txtwordval.replacediac')"
-        class="btn btn-primary mb-2"
-        @click="removeDiacr"
-      >
+
       <div
         v-if="result"
         class="resultbox"
@@ -123,7 +120,7 @@ export default {
   },
 
   mounted: function() {
-    this.$refs.listofalpha.focus();
+    this.$refs.message.focus();
   },
 
   methods: {

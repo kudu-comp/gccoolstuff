@@ -11,17 +11,17 @@
       <v-coord
         v-model:coord="coordinate1"
         v-model:datum="selecteddatum1"
-        class="mr-2"
+        class="me-2"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
           for="language"
         >{{ $t('cdw3w.languages') }}</label>
         <select
           id="language"
           v-model="sellanguage"
-          class="custom-select mr-2 mb-2"
+          class="form-select md-size me-2 mb-2"
         >
           <option value="en">
             English
@@ -40,17 +40,17 @@
           </option>
         </select>
         <input
-          id="calc1"
-          type="button"
-          :value="$t('cdw3w.convertto')"
-          class="btn btn-primary mb-2"
-          @click="doConv()"
-        >
+            id="calc1"
+            type="button"
+            :value="$t('cdw3w.convertto')"
+            class="btn md-size mb-2"
+            @click="doConv()"
+          >
       </div>
-      <hr class="mt-0 mb-2">
-      <div class="form-inline">
+      <hr class="hr">
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size  mb-2"
           for="str"
         >{{ $t('cdw3w.w3wcode') }}</label>
         <input
@@ -58,25 +58,25 @@
           v-model="str"
           type="text"
           size="30"
-          class="form-control mr-2 mb-2"
+          class="form-control md-size mb-2"
         >
         <input
           id="calc2"
           type="button"
           :value="$t('cdw3w.convertfrom')"
-          class="btn btn-primary mr-2 mb-2"
+          class="btn sm-size ms-2 mb-2"
           @click="doConv2()"
         >
         <v-datums
           id="from"
           v-model:datum="selecteddatum2"
-          class="mb-2"
+          class="ms-2 mb-2"
         />
       </div>
-      <hr class="mt-0 mb-2">
-      <div class="form-inline">
+      <hr class="hr">
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
           for="str2"
         >{{ $t('cdw3w.w3wsugg') }}</label>
         <input
@@ -84,10 +84,19 @@
           v-model="str2"
           type="text"
           size="30"
-          class="form-control mr-2 mb-2"
+          class="form-control md-size me-2 mb-2"
         >
+        <input
+          id="calc2"
+          type="button"
+          :value="$t('cdw3w.suggest')"
+          class="btn md-size mb-2"
+          @click="suggestW3W()"
+        >
+      </div>
+      <div class="row">
         <label
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
           for="country"
         >{{ $t('cdw3w.countries') }}</label>
         <input
@@ -95,42 +104,37 @@
           v-model="country"
           type="text"
           size="30"
-          class="form-control mr-2 mb-2"
-        >
-        <input
-          id="calc2"
-          type="button"
-          :value="$t('cdw3w.suggest')"
-          class="btn btn-primary mb-2"
-          @click="suggestW3W()"
+          class="form-control md-size me-2 mb-2"
         >
       </div>
-      <v-coord
-        v-model:coord="coordfocus"
-        v-model:datum="datumfocus"
-        class="mr-2 mb-2"
-      >
-        <template #label>
-          {{ $t('cdw3w.focus') }}
-        </template>
-      </v-coord>
-      <v-coord
-        v-model:coord="coordclip"
-        v-model:datum="datumclip"
-        class="mr-2 mb-2"
-      >
-        <template #label>
-          {{ $t('cdw3w.clip') }}
-        </template>
-      </v-coord>
-      <v-distance
-        v-model:dist="clipradius"
-        v-model:unit="clipunit"
-      >
-        <template #label>
-          {{ $t('labels.radius') }}
-        </template>
-      </v-distance>
+      <div class="row">
+        <v-coord
+          v-model:coord="coordfocus"
+          v-model:datum="datumfocus"
+        >
+          <template #label>
+            {{ $t('cdw3w.focus') }}
+          </template>
+        </v-coord>
+      </div>
+      <div class="row">
+        <v-coord
+          v-model:coord="coordclip"
+          v-model:datum="datumclip"
+        >
+          <template #label>
+            {{ $t('cdw3w.clip') }}
+          </template>
+        </v-coord>
+        <v-distance
+          v-model:dist="clipradius"
+          v-model:unit="clipunit"
+        >
+          <template #label>
+            {{ $t('labels.radius') }}
+          </template>
+        </v-distance>
+      </div>      
       <div
         v-show="errormsg"
         class="errormsg"

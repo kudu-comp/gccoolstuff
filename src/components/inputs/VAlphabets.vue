@@ -1,11 +1,12 @@
 <template>
-  <div class="form-inline">
+  <div class="row">
     <label
       for="listofalpha"
-      class="form-label mr-2"
+      class="form-label sm-size mb-2"
     >{{ $t('labels.alphabet') }}</label>
     <select
-      class="custom-select"
+      id="listofalpha"
+      class="form-select xl-size mb-2"
       :value="alphabet"
       @input="updateAlphabet($event.target.value)"
     >

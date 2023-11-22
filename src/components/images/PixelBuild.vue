@@ -21,21 +21,14 @@
         >
           <canvas
             id="canvas"
-            :width="width"
-            :height="height"
           />
         </div>
         <div class="col-3">
-          <input
-            id="draw"
-            type="button"
-            name="draw"
-            :value="$t('buttons.show')"
-            class="btn btn-primary mr-2 mb-2"
-            @click="drawPixels"
-          >
+          <button id="draw" class="btn me-2 mb-2" @click="drawPixels">
+              {{ $t('buttons.show') }}
+          </button>
           <v-download 
-            v-model:canvas ="canvas"
+            v-model:canvas = "canvas"
           />
           <div class="box">
             <div class="box-header">
@@ -44,12 +37,10 @@
             <div class="box-body">
               <textarea
                 id="message"
-                ref="message"
                 v-model="message"
                 class="form-control"
                 :placeholder="$t('labels.message')"
-                rows="10"
-                cols="50"
+                rows="5"
               />
             </div>
           </div>
@@ -58,9 +49,9 @@
               {{ $t('pixelbuild.options') }}
             </div>
             <div class="box-body">
-              <div class="form-inline">
+              <div class="row mx-1">
                 <label
-                  class="form-label mb-2 mr-2"
+                  class="form-label mb-2 sm-size"
                   for="imgheight"
                 >{{ $t('exifscanner.height') }}</label>
                 <input
@@ -68,12 +59,12 @@
                   ref="imgheight"
                   v-model="imgHeight"
                   type="number"
-                  class="form-control mb-2"
+                  class="form-control mb-2 sm-size"
                 >
               </div>
-              <div class="form-inline">
+              <div class="row mx-1">
                 <label
-                  class="form-label mb-2 mr-2"
+                  class="form-label mb-2 sm-size"
                   for="imgwidth"
                 >{{ $t('exifscanner.width') }}</label>
                 <input
@@ -81,10 +72,10 @@
                   ref="imgwidth"
                   v-model="imgWidth"
                   type="number"
-                  class="form-control mb-2"
+                  class="form-control mb-2 sm-size"
                 >
               </div>
-              <div class="form-inline">                
+              <div class="row mx-1">                
                 <table class="table table-sm table-borderless">
                   <thead>
                     <tr>
@@ -98,24 +89,14 @@
                         id="v0"
                         v-model="vars[0]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c0"
+                      <input type="color"
+                        id="c1"
                         v-model="cols[0]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -124,24 +105,14 @@
                         id="v1"
                         v-model="vars[1]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c1"
+                      <input type="color"
+                        id="c2"
                         v-model="cols[1]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -150,24 +121,14 @@
                         id="v2"
                         v-model="vars[2]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c2"
+                      <input type="color"
+                        id="c3"
                         v-model="cols[2]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -176,24 +137,14 @@
                         id="v3"
                         v-model="vars[3]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c3"
+                      <input type="color"
+                        id="c4"
                         v-model="cols[3]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -202,24 +153,14 @@
                         id="v4"
                         v-model="vars[4]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c4"
+                      <input type="color"
+                        id="c5"
                         v-model="cols[4]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -228,24 +169,14 @@
                         id="v5"
                         v-model="vars[5]"
                         type="text"
-                        class="form-control"
-                        size="1"
-                      >
+                        class="form-control sm-size"
+                     >
                     </td>
                     <td>
-                      <select
-                        id="c5"
+                      <input type="color"
+                        id="c6"
                         v-model="cols[5]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -254,24 +185,14 @@
                         id="v6"
                         v-model="vars[6]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c6"
+                      <input type="color"
+                        id="c7"
                         v-model="cols[6]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -280,24 +201,14 @@
                         id="v7"
                         v-model="vars[7]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c7"
-                        v-model="cols[7]"
-                        class="custom-select"
+                      <input type="color"
+                        id="c2"
+                        v-model="cols[8]"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -306,24 +217,14 @@
                         id="v8"
                         v-model="vars[8]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c8"
+                      <input type="color"
+                        id="c9"
                         v-model="cols[8]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -332,24 +233,14 @@
                         id="v9"
                         v-model="vars[9]"
                         type="text"
-                        class="form-control"
-                        size="1"
+                        class="form-control sm-size"
                       >
                     </td>
                     <td>
-                      <select
-                        id="c9"
+                      <input type="color"
+                        id="c10"
                         v-model="cols[9]"
-                        class="custom-select"
                       >
-                        <option
-                          v-for="c in coloptions"
-                          :key="c.value"
-                          :value="c.value"
-                        >
-                          {{ c.label }}
-                        </option>
-                      </select>
                     </td>
                   </tr>
                 </table> 
@@ -386,33 +277,16 @@ export default {
       imgWidth: null,
       vars: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],      
       cols: ["#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#888888", "#444444"],
-      coloptions: [
-        { value: "#FFFFFF", label : this.$t('colors.white') },
-        { value: "#000000", label : this.$t('colors.black') },
-        { value: "#FF0000", label : this.$t('colors.red') },
-        { value: "#00FF00", label : this.$t('colors.green') },
-        { value: "#0000FF", label : this.$t('colors.blue') },
-        { value: "#FFFF00", label : this.$t('colors.yellow') },
-        { value: "#FF00FF", label : this.$t('colors.cyan') },
-        { value: "#00FFFF", label : this.$t('colors.magenta') },
-        { value: "#888888", label : this.$t('colors.grey') },
-        { value: "#444444", label : this.$t('colors.darkgrey') }
-      ],
       message: ""     
     }
   },
 
   mounted: function() {
 
-    // Set focus on file input
-    this.$refs.message.focus();
-
     this.canvas = document.getElementById('canvas');
     this.ctx = this.canvas.getContext('2d');
-
-    let pv = document.getElementById("preview");
-    this.width = pv.offsetWidth - 10;
-    this.height = this.width;
+    this.canvas.width = this.canvas.getBoundingClientRect().width
+    this.canvas.height = this.canvas.width;
 
   },
 
@@ -422,6 +296,9 @@ export default {
 
       let lines = this.message.split(/\n/g)
       
+      console.log(this.canvas.width);
+      console.log(this.canvas.height);
+
       // Number of rectangels to draw
       let h, w;
       if (this.imgHeight) {
@@ -455,3 +332,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+</style>

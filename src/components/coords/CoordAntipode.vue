@@ -12,13 +12,7 @@
         v-model:coord="coordinate"
         v-model:datum="selecteddatum"
       />
-      <input
-        id="project"
-        type="button"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2 mr-2"
-        @click="doCalc()"
-      >
+      <v-show-on-map id="go" class="btn mr-2" @Show="doCalc()" />
       <div
         v-show="errormsg"
         class="errormsg"
@@ -41,6 +35,7 @@
 import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 
 export default {
   name: 'CoordAntipode',
@@ -48,6 +43,7 @@ export default {
   components: {
     VCoord,
     VMap,
+    VShowOnMap
   },
 
   data: function () {
@@ -74,8 +70,12 @@ export default {
           .then (startcoord => {
 
             // Getting anitpode coordinate with some basic math
-            anticoord = { lat: -1 * startcoord.lat, lon: -1 * (180 - Math.abs(startcoord.lon)) }
-          
+            console.log(startcoord);
+            anticoord = { lon: startcoord.lon-180, lat: -1 * startcoord.lat }
+            if (anticoord.lon < -180) {
+              anticoord.lon += 360;
+            }
+            console.log(anticoord);
             // Display marker
             coords.displayMarker(this.$store.state.L, this.$store.state.mymap, anticoord, "Antipode");
 

@@ -11,7 +11,7 @@
       <v-coord
         v-model:coord="coordinate"
         v-model:datum="selecteddatum"
-        class="mr-2"
+        class="row mr-2"
       />
       <v-distance
         v-model:dist="dist"
@@ -21,13 +21,7 @@
         v-model:angle="angle"
         v-model:unit="angleunit"
       />
-      <input
-        id="project"
-        type="button"
-        :value="$t('buttons.calc')"
-        class="btn btn-primary mb-2"
-        @click="doCalc()"
-      >
+      <v-show-on-map id="project" class="btn mb-2" @show="doCalc()" />
       <div
         v-show="errormsg"
         class="errormsg"
@@ -50,7 +44,8 @@
 import VCoord from '@/components/inputs/VCoord.vue';
 import VAngle from '@/components/inputs/VAngle.vue';
 import VDistance from '@/components/inputs/VDistance.vue';
-import VMap from '@/components/inputs/VMap.vue'
+import VMap from '@/components/inputs/VMap.vue';
+import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {
@@ -61,6 +56,7 @@ export default {
     VDistance,
     VAngle,
     VMap,
+    VShowOnMap
   },
 
   data: function () {

@@ -8,7 +8,22 @@
         class="infoblock"
         v-html="$t('comptools.compdeadfish.long')"
       />
-      <div class="form-row">
+      <div class="form-check">
+        <input
+          id="debug"
+          v-model="debug"
+          type="checkbox"
+          class="form-check-input mr-2 mb-2"
+        >
+        <label
+          for="debug"
+          class="form-check-label mb-2"
+        >{{ $t('compbf.debug') }}</label>
+      </div>
+      <button id="run" class="btn mb-2 mr-2" @click="runCode()">
+        {{ $t('compbf.run') }}
+      </button>
+      <div class="mb-2">
         <textarea
           id="code"
           ref="code"
@@ -16,31 +31,8 @@
           name="code"
           class="form-control mb-2"
           :placeholder="$t('compbf.code')"
-          rows="10"
+          rows="5"
         />
-      </div>
-      <div class="form-inline">
-        <input
-          id="run"
-          type="button"
-          name="run"
-          :value="$t('compbf.run')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="runCode"
-        >
-        <div class="custom-control custom-checkbox">
-          <input
-            id="debug"
-            v-model="debug"
-            type="checkbox"
-            name="debug"
-            class="custom-control-input mr-2 mb-2"
-          >
-          <label
-            for="debug"
-            class="custom-control-label mb-2"
-          >{{ $t('compbf.debug') }}</label>
-        </div>
       </div>
       <p
         v-show="errormsg"

@@ -8,29 +8,21 @@
         class="infoblock"
         v-html="$t('mathtools.primegcdlcm.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label col-sm-5 col-md-2 mb-2"
+          class="form-label sm-size mb-2"
           for="input"
         >{{ $t('mathgcd.num') }}</label>
         <input
           id="input"
-          ref="input"
           v-model="input"
           type="text"
-          name="input"
+          ref="input"
           min="0"
-          class="form-control col-sm-7 col-md-6 mb-2 mr-2"
+          class="form-control md-size me-2 mb-2"
           @keyup.enter="getGCDandLCM"
         >
-        <input
-          id="gcdlcm"
-          type="button"
-          name="gcdlcm"
-          :value="$t('buttons.calc')"
-          class="col-md-2 btn btn-primary mb-2"
-          @click="getGCDandLCM"
-        >
+        <v-calculate id="getdec" class="sm-size mb-2" @calculate="getGCDandLCM"></v-calculate>
       </div>
       <p
         v-show="errormsg"
@@ -38,50 +30,36 @@
       >
         {{ errormsg }}
       </p>
-      <va-item
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('mathgcd.t1') }}
-        </template>
-        <template #content>
-          {{ $t('mathgcd.gcd') }} <strong>{{ gcd }}</strong>.<br>
-          {{ $t('mathgcd.lcm') }} <strong>{{ lcm }}</strong>.
-        </template>
-      </va-item>
-      <va-item
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('mathgcd.t2') }}
-        </template>
-        <template #content>
-          <table class="table table-sm table-borderless">
-            <tr
-              v-for="a in primes"
-              :key="a"
-              :value="a.n"
-            >
-              <td>{{ a.n }}</td><td>{{ a.primes }}</td>
-            </tr>
-          </table>
-        </template>
-      </va-item>
+      <p class="resultbox">
+        {{ $t('mathgcd.t1') }} <br>
+        {{ $t('mathgcd.gcd') }} <strong>{{ gcd }}</strong>.<br>
+        {{ $t('mathgcd.lcm') }} <strong>{{ lcm }}</strong>.
+      </p>
+      <p class="resultbox">
+        {{ $t('mathgcd.t2') }}
+        <table class="table table-sm table-borderless">
+          <tr
+            v-for="a in primes"
+            :key="a"
+            :value="a.n"
+          >
+            <td>{{ a.n }}</td><td>{{ a.primes }}</td>
+          </tr>
+        </table>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 import * as mathsequences from '@/scripts/mathsequences.js'
-import VaItem from '@/components/inputs/VaItem.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
   name: 'MathGCDandLCM',
 
   components: {
-    VaItem,
+    VCalculate
   },
 
   data: function () {

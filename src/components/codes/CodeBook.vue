@@ -8,7 +8,7 @@
         class="infoblock"
         v-html="$t('codes.codebook.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <v-search
           id="searchstr"
           ref="searchstr"
@@ -17,12 +17,12 @@
         />
         <label
           for="listoftags"
-          class="form-label mr-2 mb-2"
+          class="form-label sm-size mb-2"
         >{{ $t('cdbook.availtags') }}:</label>
         <select
           id="listoftags"
           v-model="selectedtag"
-          class="custom-select mr-2 mb-2"
+          class="form-select lg-size mb-2 me-2"
         >
           <option
             v-for="t in tags"
@@ -32,30 +32,15 @@
             {{ t }}
           </option>
         </select>
-        <input
-          id="btnsearch"
-          type="button"
-          name="btnsearch"
-          :value="$t('buttons.search')"
-          class="btn btn-primary mb-2 mr-2"
-          @click="goSearch"
-        >
-        <input
-          id="prev"
-          type="button"
-          name="prev"
-          value="&leftarrow;"
-          class="btn btn-primary mb-2 mr-2"
-          @click="getPrev"
-        >
-        <input
-          id="next"
-          type="button"
-          name="next"
-          value="&rightarrow;"
-          class="btn btn-primary mb-2 mr-2"
-          @click="getNext"
-        >
+        <button id="btnsearch" class="btn mb-2 me-2" style="width:3em;" @click="goSearch" >
+          <i class="fa-solid fa-search"></i>          
+        </button>
+        <button id="prev" class="btn mb-2 me-2" style="width:3em;" @click="getPrev" >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button id="next" class="btn mb-2" style="width:3em;" @click="getNext" >
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
         <span class="form-label mb-2">{{ foundpages.length }}&nbsp;{{ $t('cdbook.pagesfound') }}</span>
       </div>
       <p

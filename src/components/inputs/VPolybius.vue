@@ -2,7 +2,7 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container p-4">
           <div class="modal-header">
             <slot name="header">
               <h2>{{ $t('dialogpb.title') }}</h2>
@@ -12,15 +12,15 @@
           <div class="modal-body">
             <slot name="body">
               <div class="row mr-2">
-                <div class="form-inline mb-2">
+                <div class="row mb-2">
                   <label
-                    class="form-label"
+                    class="form-label sm-size"
                     for="startalphabet"
                   >{{ $t('dialogpb.start') }}</label>
                   <select
                     id="startalphabet"
                     v-model="startalphabet"
-                    class="custom-select"
+                    class="form-select lg-size"
                     @change="genCleanSquare"
                   >
                     <option value="ABCDEFGHIKLMNOPQRSTUVWXYZ">
@@ -35,28 +35,28 @@
                   </select>
                 </div>
                 <div class="col-8">
-                  <div class="form-inline mb-2">
+                  <div class="row mb-2">
                     <label
-                      class="form-label"
+                      class="form-label sm-size"
                       for="key1"
                     >{{ $t('dialogpb.key') }}</label>
                     <input
                       id="key"
                       v-model="key"
                       type="text"
-                      class="form-control ml-2"
+                      class="form-control md-size"
                       @input="genSquare"
                     >
                   </div>
-                  <div class="form-inline mb-2">
+                  <div class="row mb-2">
                     <label
-                      class="form-label"
+                      class="form-label sm-size"
                       for="direction"
                     >{{ $t('dialogpb.dir') }}</label>
                     <select
                       id="direction"
                       v-model="dir"
-                      class="custom-select ml-2"
+                      class="form-select md-size"
                       @change="genSquare"
                     >
                       <option value="HOR">
@@ -76,15 +76,15 @@
                       </option>
                     </select>
                   </div>
-                  <div class="form-inline mb-2">
+                  <div class="row mb-2">
                     <label
-                      class="form-label"
+                      class="form-label sm-size"
                       for="start"
                     >{{ $t('dialogpb.corner') }}</label>
                     <select
                       id="start"
                       v-model="start"
-                      class="custom-select ml-2"
+                      class="form-select md-size"
                       @change="genSquare"
                     >
                       <option value="TL">
@@ -102,17 +102,17 @@
                     </select>
                   </div>
                   <div class="form-inline mb-2">
-                    <div class="custom-control custom-checkbox">
+                    <div class="form-check">
                       <input
                         id="flip"
                         v-model="flip"
                         type="checkbox"
-                        class="custom-control-input ml-2"
+                        class="form-check-input ml-2"
                         @change="genSquare"
                       >
                       <label
                         for="flip"
-                        class="custom-control-label ml-2"
+                        class="form-check-label ml-2"
                       >{{ $t('dialogpb.flip') }}</label>
                     </div>
                   </div>
@@ -132,7 +132,7 @@
             </slot>
           </div>
 
-          <div class="modal-footer">
+          <div class="modal-footer mt-2">
             <p
               v-show="error"
               class="errormsg mr-2"
@@ -144,17 +144,17 @@
                 id="reset"
                 type="button"
                 :value="$t('buttons.reset')"
-                class="btn btn-secondary ml-2"
+                class="btn me-2"
                 @click="genReset"
               >
               <button
-                class="btn btn-secondary"
+                class="btn me-2"
                 @click="$emit('close')"
               >
                 {{ $t('buttons.cancel') }}
               </button>
               <button
-                class="btn btn-primary"
+                class="btn"
                 @click="closeModal()"
               >
                 {{ $t('buttons.save') }}
@@ -485,35 +485,5 @@ export default {
 </script>
 
 <style scoped>
-
-#thesquare {
-  padding: 4px 4px 4px 4px;
-  text-align: center;
-  font-family: monospace;
-  font-size: 1.5em;
-  border-style: solid;
-  border-color: #785E31;
-  border-width: thin;
-  border-radius: 5px;
-}
-
-.modal-mask {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9998;
-  width: 600px;
-  max-width: 100%;
-  background-color: #E6C128;
-}
-
-.modal-container {
-  color: #815E22;
-}
-
-.modal-header {
-  color: #2E1E03;
-}
 
 </style>

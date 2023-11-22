@@ -8,15 +8,15 @@
         class="infoblock"
         v-html="$t('comptools.checksum.long')"
       />
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label mb-2 sm-size"
           for="check"
         >{{ $t('compcsum.checkmethod') }}</label>
         <select
           id="check"
           v-model="checksel"
-          class="custom-select mb-2 mr-2"
+          class="form-select mb-2 lg-size"
           style="width: 150px;"
         >
           <option value="0">Modulo 10</option>
@@ -30,27 +30,19 @@
           <option value="8">Parity bit (only works on 0s and 1s)</option>
         </select>
       </div>
-      <div class="form-inline mb-2">
+      <div class="row">
         <label
-          class="form-label mr-2"
+          class="form-label mb-2 sm-size"
           for="input"
         >{{ $t('labels.number') }}</label>
         <input
           id="input"
           v-model="txt"
           type="text"
-          class="form-control mr-2"
-          size="40"
-          rows="10"
-        >
-        <input
-          id="run"
-          type="button"
-          :value="$t('buttons.calc')"
-          class="btn btn-primary mr-2"
-          @click="runChecksum"
+          class="form-control md-size mb-2"
         >
       </div>
+      <v-calculate id="run" @calculate="runChecksum" />
       <p
         v-show="errormsg"
         class="errormsg mt-2"
@@ -69,6 +61,8 @@
 
 <script>
 
+import VCalculate from '@/components/inputs/VCalculate.vue' 
+
 export default {
 
   name: 'CompChecksum',
@@ -82,8 +76,8 @@ export default {
     }
   },
 
-  mounted: function() {
-    // this.$refs.check.focus();
+  components: {
+    VCalculate
   },
 
   methods: {

@@ -8,7 +8,7 @@
         class="infoblock"
         v-html="$t('codes.fonts.long')"
       />
-      <div class="form-row mb-2">
+      <div class="row mb-2">
         <textarea
           id="message"
           ref="message"
@@ -16,18 +16,18 @@
           name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
-          rows="10"
+          rows="5"
         />
       </div>
-      <div class="form-inline">
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label sm-size mb-2 mr-2"
           for="ift"
         >{{ $t('cdfonts.selfont') }}</label>
         <select
           id="ift"
           v-model="styleObject.fontFamily"
-          class="custom-select mb-2 mr-2"
+          class="form-select md-size mb-2 me-2"
         >
           <option
             v-for="f in fontdef"
@@ -37,14 +37,16 @@
             {{ f.font }}
           </option>
         </select>
+      </div>
+      <div class="row">
         <label
-          class="form-label mb-2 mr-2"
+          class="form-label sm-size mb-2 me-2"
           for="ofs"
         >{{ $t('cdfonts.fontsize') }}</label>
         <select
           id="ofs"
           v-model="styleObject.fontSize"
-          class="custom-select mb-2 mr-2"
+          class="form-select md-size mb-2 me-2"
         >
           <option value="12px">
             12
@@ -60,38 +62,18 @@
           </option>
         </select>
         <label
-          class="form-label mb-2 mr-2"
-          for="ofs"
+          class="form-label sm-size mb-2 mr-2"
+          for="ofc"
         >{{ $t('cdfonts.selcolor') }}</label>
-        <select
-          id="ofs"
-          v-model="styleObject.color"
-          class="custom-select mb-2 mr-2"
-        >
-          <option value="black">
-            {{ $t('colors.black') }}
-          </option>
-          <option value="blue">
-            {{ $t('colors.blue') }}
-          </option>
-          <option value="red">
-            {{ $t('colors.red') }}
-          </option>
-          <option value="green">
-            {{ $t('colors.green') }}
-          </option>
-          <option value="brown">
-            {{ $t('colors.brown') }}
-          </option>
-        </select>
+        <input id="ofc" v-model="styleObject.color" type="color" class="mb-2 sm-size me-2"/>
         <label
-          class="form-label mb-2 mr-2"
-          for="ofs"
+          class="form-label sm-size mb-2 me-2"
+          for="olh"
         >{{ $t('cdfonts.lineheight') }}</label>
         <select
-          id="ofs"
+          id="olh"
           v-model="styleObject.lineHeight"
-          class="custom-select mb-2"
+          class="form-select md-size mb-2"
         >
           <option value="normal">
             {{ $t('cdfonts.standard') }}
@@ -116,15 +98,16 @@
       >
         {{ errormsg }}
       </p>
-      <div class="form-row">
+      <div class="row">
         <textarea
+          readonly
           id="message2"
           v-model="message"
           name="message2"
           spellcheck="false"
           class="form-control"
           :style="styleObject"
-          rows="10"
+          rows="5"
         />
       </div>
     </div>
@@ -138,14 +121,19 @@ export default {
 
   data: function () {
     return {
-      message: "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789\n!?.,:;@#$%^&*(){}[]-_=+<>/\\~\"`'|",
+      message: "ABCDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n0123456789",
       errormsg: "",
       selectedfont: 'Antiker',
       styleObject: {
         fontFamily: 'Antiker',
         fontSize: '24px',
         color: 'black',
-        lineHeight: 'normal'
+        lineHeight: 'normal',
+        backgroundColor: '#ffffff',
+        borderColor: '#09776E',
+        borderWidth: '2px',
+        borderStyle: 'solid',
+        borderRadius: '5px'
       },
       fontdef: [
         { id: 'Antiker', font: 'Ancient (Star Gate)' },

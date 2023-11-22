@@ -1,116 +1,73 @@
 <template>
-  <div
-    id="nav"
-    class="text-center"
-  >
-    <router-link to="/codes/codebook">
-      {{ $t('codes.codebook.title') }}
-    </router-link> |
-    <router-link to="/codes/fonts">
-      {{ $t('codes.fonts.title') }}
-    </router-link> |
-    <router-link to="/codes/segment">
-      {{ $t('codes.segment.title') }}
-    </router-link> |
-    <router-link to="/codes/resistorcode">
-      {{ $t('codes.resistorcode.title') }}
-    </router-link> |
-    <router-link to="/codes/decabit">
-      {{ $t('codes.decabit.title') }}
-    </router-link>
-  </div>
-  <router-view :key="$route.path" />
-  <div v-if="['Codes'].includes($route.name)">
-    <div class="container">
-      <p
-        class="intro"
-        v-html="$t('codes.intro')"
-      />
-      <va-item
-        :showitem="show[0]"
-        @toggle="show[0] = !show[0]"
-      >
-        <template #header>
-          <router-link to="/codes/codebook">
-            {{ $t('codes.codebook.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('codes.codebook.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[1]"
-        @toggle="show[1] = !show[1]"
-      >
-        <template #header>
-          <router-link to="/codes/fonts">
-            {{ $t('codes.fonts.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('codes.fonts.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[2]"
-        @toggle="show[2] = !show[2]"
-      >
-        <template #header>
-          <router-link to="/codes/segment">
-            {{ $t('codes.segment.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('codes.segment.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[3]"
-        @toggle="show[3] = !show[3]"
-      >
-        <template #header>
-          <router-link to="/codes/resistorcode">
-            {{ $t('codes.resistorcode.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('codes.resistorcode.long')" />
-        </template>
-      </va-item>
-      <va-item
-        :showitem="show[4]"
-        @toggle="show[4] = !show[4]"
-      >
-        <template #header>
-          <router-link to="/codes/decabit">
-            {{ $t('codes.decabit.title') }}
-          </router-link>
-        </template>
-        <template #content>
-          <span v-html="$t('codes.decabit.long')" />
-        </template>
-      </va-item>
+  <div class="d-flex flex-column mx-4">
+    <div class="row justify-content-around">
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <img class="card-img-top" src="@/assets/images/codes.jpg" alt="Text" style="height: 200px">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.codes')}}</h5>
+          <p class="card-text" v-html="$t('codes.intro')"></p>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.ciphers')}}</h5>
+          <p class="card-text" v-html="$t('cp.long')"></p>
+          <router-link to="/codebook"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('rotciphers.title')}}</h5>
+          <p class="card-text" v-html="$t('rotciphers.long')"></p>
+          <router-link to="/rotcipher"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('codes.codebook.title')}}</h5>
+          <p class="card-text" v-html="$t('codes.codebook.long')"></p>
+          <router-link to="/codebook"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('codes.fonts.title')}}</h5>
+          <p class="card-text" v-html="$t('codes.fonts.long')"></p>
+          <router-link to="/fonts"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('codes.segment.title')}}</h5>
+          <p class="card-text" v-html="$t('codes.segment.long')"></p>
+          <router-link to="/segment"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('codes.resistorcode.title')}}</h5>
+          <p class="card-text" v-html="$t('codes.resistorcode.long')"></p>
+          <router-link to="/resistorcode"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('codes.decabit.title')}}</h5>
+          <p class="card-text" v-html="$t('codes.decabit.long')"></p>
+          <router-link to="/decabit"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('freqanal.title')}}</h5>
+          <p class="card-text" v-html="$t('freqanal.long')"></p>
+          <router-link to="/freqanal"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
-import VaItem from "@/components/inputs/VaItem.vue"
-
-export default {
-  name: 'CodesIntro',
-
-  components: {
-    VaItem,
-  },
-
-  data: function () {
-    return {
-      show: [true, true, true, true, true, true, true, true, true, true]
-    }
-  }
-
-}
 </script>

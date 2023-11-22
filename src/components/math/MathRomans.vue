@@ -22,21 +22,19 @@
       <input
         id="romantodec"
         type="button"
-        name="romantodec"
         :value="$t('mathroman.btnrtd')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="romanToDec"
       >
       <input
         id="dectoroman"
         type="button"
-        name="dectoroman"
         :value="$t('mathroman.btndtr')"
-        class="btn btn-primary mb-2 mr-2"
+        class="btn mb-2"
         @click="decToRoman"
       >
       <p
-        v-show="errormsg"
+        v-if="errormsg"
         class="errormsg mb-2"
       >
         {{ errormsg }}

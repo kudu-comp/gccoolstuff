@@ -8,18 +8,12 @@
         class="infoblock"
         v-html="$t('imagetools.exifscanner.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          ref="file"
-          type="file"
-          name="file"
-          class="form-control-file mb-2"
-          @change="selectFile"
-        >
-        <!-- <label for="imgurl" class="form-label mr-2">Or enter URL</label>
-        <input type="text" ref="imgurl" name="imagurl" id="imgurl" v-model="fileurl" class="form-control" @change="selectURL"> -->
-      </div>
+      <input
+        id="file"
+        type="file"
+        class="form-control mb-2"
+        @change="selectFile"
+      >
       <p
         v-show="errormsg"
         class="errormsg"
@@ -162,11 +156,6 @@ export default {
       Shutter: "",
       GPSfromCamera: "",
     }
-  },
-
-  mounted: function() {
-    // Set focus on file input
-    this.$refs.file.focus();
   },
 
   methods: {
