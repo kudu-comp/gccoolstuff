@@ -24,11 +24,6 @@ export var codepages = [
     description: "Adunaroth conscript was created in 2004 by Arno Luyendijk as a derivation on the fictional history of the Numenoreans in The Silmarillion by J.R.R. Tolkien.",
     tags: ["alphabet", "book", "lines", "curves"]
   },
-  { name: "Aetherian",
-    imagename: "aetherian.png",
-    description: "Aetherian Language (Fantasy Alphabet) Aetherian is the original language spoken in Etheria, a TV series.",
-    tags: ["alphabet", "tv", "curves"]
-  },
   { name: "Alchemy Symbolen",
     imagename: "alchemicalsymbols.png",
     description: "Alchemical symbols, originally devised as part of alchemy, were used to denote some elements and some compounds until the 18th century. Although notation like this was mostly standardized, style and symbol varied between alchemists.",
@@ -59,11 +54,6 @@ export var codepages = [
     description: "The Antiker code comes from the Science Fiction Series Stargate and is sometimes called the Stargate code.",
     tags: ["alphabet", "language", "arabic"]
   },
-  { name: "Aramaic Alphabet (early version)",
-    imagename: "oldaramaic.png",
-    description: "Aramaic is a Semitic language which was the lingua franca of much of the Near East from about 7th century BC until the 7th century AD, when it was largely replaced by Arabic.",
-    tags: ["alphabet", "language", "arabic", "script"]
-  },
   { name: "Arcadian Alphabet",
     imagename: "arcadian.png",
     description: "The Arcadian alphabet was invented to write Arcadia, an invented language used in the computer game the 'Skies of Arcadia'. The alphabet is used to write inscriptions throughout the game.",
@@ -84,6 +74,11 @@ export var codepages = [
     description: "Ballett font with dancers in different pose.",
     tags: ["alphabet", "font", "men"]
   },
+  { name: "Bengali",
+    imagename: "bengali.png",
+    description: "Bengali is an eastern Indo-Aryan language with around 265 million speakers, mainly in Bangladesh and northern Indian.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Betamaze",
     imagename: "mazecode.png",
     description: "Betamaze is an alphabet invented by Terrana Cliff, who designed it to draw mazes.",
@@ -99,15 +94,25 @@ export var codepages = [
     description: "Blokscript was invented in 2008 in Croatia by Vicko Bezić who was 12 years old at the time. It can be used to write English, particularly American and British English.",
     tags: ["alphabet", "squares" ]
   },
+  { name: "Brahmi",
+    imagename: "brahmi.png",
+    description: "Brahmi is a writing system of ancient India that appeared as a fully developed script in the third century BCE. Its descendants, the Brahmic scripts, continue to be used today across Southern and Southeastern Asia. See also Brahmi numerals.",
+    tags: ["alphabet", "script", "language"]
+  },
+  { name: "Brahmi numerals",
+    imagename: "brahminum.png",
+    description: "Brahmi is a writing system of ancient India that appeared as a fully developed script in the third century BCE. Its descendants, the Brahmic scripts, continue to be used today across Southern and Southeastern Asia. See also Brahmi for the alphabet.",
+    tags: ["numbers", "script", "language"]
+  },
   { name: "Braille",
     imagename: "braille.png",
-    description: "The braille alphabet is writing system for visually impaired people. Braille is named after its creator, Louis Braille",
+    description: "The braille alphabet is writing system for visually impaired people. Braille is named after its creator, Louis Braille.",
     tags: ["alphabet", "braille", "dots"]
   },
-  { name: "Carian Alphabet",
-    imagename: "carian.png",
-    description: "The Carian language was an Anatolian language spoken in the southwest of Anatolian (modern Turkey) up to about the 1st Century AD.",
-    tags: ["alphabet", "language", "runes", "symbols"]
+  { name: "Burmese",
+    imagename: "burmese.png",
+    description: "Burmese is a Sino-Tibetan language spoken in Myanmar, where it is the official language and the native language of the Burmans.",
+    tags: ["alphabet", "numbers", "script", "language"]
   },
   { name: "Cempaka Alphabet",
     imagename: "cempaka.png",
@@ -124,10 +129,20 @@ export var codepages = [
     description: "Encryption with chinese code uses the positions of vowels and consonants in the alphabet. Each vowel adds a horizontal line. Each consonant adds a vertical line.",
     tags: ["alphabet", "lines"]
   },
+  { name: "Chinese, Japanese and Korean numbers",
+    imagename: "chinesenum.png",
+    description: "There are two systems. One for everyday use and one for use in a business context. The Hangzhou version is a shorthand version. The sets for Chinese Hànzì, the Japanese Kanji and the Korean Hanja are identical.",
+    tags: ["numbers", "language"]
+  },
   { name: "Cirth or Erebor runes",
     imagename: "runescirth.png",
     description: "Cirth was invented by J.R.R. Tolkien for use in his novels. It is modelled on the Anglo-Saxon Runic alphabet, and is used to write the language of the Dwarves (Khuzdul).",
     tags: ["alphabet", "book", "runes"]
+  },
+  { name: "Circular Glyphs numerals",
+    imagename: "circlecode.png",
+    description: "Easily recognized by the big plus and circles. Apparently based on Borg & Bynar from Star Trek.",
+    tags: ["alphabet", "numbers", "circles", "dots"]
   },
   { name: "Cistercian numerals",
     imagename: "cisterciannumerals.png",
@@ -154,6 +169,11 @@ export var codepages = [
     description: "Pixel bases symbols found on the keyboard of the famous Commodore 64 computer",
     tags: ["alphabet", "computer", "pixels", "squares"]
   },
+  { name: "Crosscode",
+    imagename: "crosscode.png",
+    description: "An alphabet created of crosses of unknown origin.",
+    tags: ["alphabet", "book", "symbols", "lines"]
+  },
   { name: "Daggers",
     imagename: "daggers.png",
     description: "The Daggers alphabet or Alphabet of Daggers, is cypher based on the Latin alphabet and used for magical purposes. It appears in Aleister Crowley's The Vision and the Voice.",
@@ -179,10 +199,15 @@ export var codepages = [
     description: "It's not a dice but a square with dots.",
     tags: ["alphabet", "squares", "dots"]
   },
+  { name: "Devanagari",
+    imagename: "devanagari.png",
+    description: "Devanagari, also called Nāgari, is a left-to-right abugida (a type of segmental writing system), based on the ancient Brahmi script, used in the northern Indian subcontinent. It is one of the official scripts of the Republic of India and Nepal. It contains characters for writing languages such as Hindi, Marathi, Bodo, Maithili, Sindhi, Nepali, and Sanskrit, among others.",
+    tags: ["alphabet", "numbers", "language", "script"]
+  },
   { name: "Dives Akuru",
     imagename: "divesakuru.png",
     description: "Dives Akuru is a script that was once used in the Maldive Islands. The earliest known inscription, found on Landhū Island, dates back to the 8th century AD.",
-    tags: ["alphabet", "language", "curves"]
+    tags: ["alphabet", "language", "script"]
   },
   { name: "DLI Lightscript",
     imagename: "dlilight.png",
@@ -203,6 +228,11 @@ export var codepages = [
     imagename: "dninumerals.png",
     description: "A base 25 numeric system. The D'Ni civilization appears in the Myst Series and novels",
     tags: ["numbers", "book", "tv", "squares", ]
+  },
+  { name: "Dorabella",
+    imagename: "dorabella.png",
+    description: "Darabella is bedacht door de componist Edward Elgar in een brief die hij schreef aan Dora Penny (1897). Dora, zo wil het verhaal, heeft de code nooit kunnen ontcijferen.",
+    tags: ["alphabet", "curves", "circles"]
   },
   { name: "Dotsies",
     imagename: "dotsies.png",
@@ -254,13 +284,18 @@ export var codepages = [
     description: "The Fakoo Writing is to serve as a link between 6-dot Braille and the black text.",
     tags: ["alphabet", "braille", "dots"]
   },
+  { name: "Farbcode",
+    imagename: "farbcode.png",
+    description: "Popular with geocachers, but of unknown origin.",
+    tags: ["alphabet", "color"]
+  },
   { name: "Fennim",
     imagename: "fennim.png",
     description: "The Fennim alphabet uses a small amount of symbols to make a large amount of sounds. It an write English, Spanish and Russian.",
     tags: ["alphabet", "curves"]
   },
   { name: "Fetish Font",
-    imagename: "fetishfont.png",
+    imagename: "fetish.png",
     description: "Font with shoes",
     tags: ["alphabet", "font", "things", "shoes"]
   },
@@ -364,6 +399,16 @@ export var codepages = [
     description: "Greek numerals, also known as Ionic, Ionian, Milesian, or Alexandrian numerals, are a system of writing numbers using the letters of the Greek alphabet.",
     tags: ["numbers", "language", "greek"]
   },
+  { name: "Gujarati",
+    imagename: "gujarati.png",
+    description: "The Gujarati script is an abugida for the Gujarati language, Kutchi language, and various other languages. It is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
+  { name: "Gurmukhi (Punjabi)",
+    imagename: "gujarati.png",
+    description: "Gurmukhī is an Indic script predominantly used in present-day Punjab, India. It is commonly regarded as a Sikh script, used by Punjabi Sikhs to write the Punjabi language, and is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Halo Covenant Alphabet",
     imagename: "halo.png",
     description: "The Halo Covenant alphabet is used in the Halo video games to write the languages of some of the characters",
@@ -439,10 +484,15 @@ export var codepages = [
     description: "The first letter of each drawing (in Dutch) is the code.",
     tags: ["alphabet", "things"]
   },
+  { name: "Kannada",
+    imagename: "kannada.png",
+    description: "The Kannada script is an abugida of the Brahmic family, used to write Kannada, one of the Dravidian languages of South India especially used in the state of Karnataka. It is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Kayah language",
-    imagename: "kayah.png",
+    imagename: "kayahli.png",
     description: "Kayah or Kayah Li is a member of Karen branch of the Sino-Tibetan language family. It is spoken by about 590,000 people in the Kayah and Karen states of Burma (Myanmar).",
-    tags: ["alphabet", "language", "script"]
+    tags: ["alphabet", "numbers", "language", "script"]
   },
   { name: "Keburi",
     imagename: "keburi.png",
@@ -459,6 +509,11 @@ export var codepages = [
     description: "The Klinzhai alphabet is another fictional script used in the Star Trek movies and television shows to write the Klingon language",
     tags: ["alphabet", "tv", "movie", "script"]
   },
+  { name: "Krempel",
+    imagename: "krempelcode.png",
+    description: "A script invited by Ralph Krempel, a German artist.",
+    tags: ["alphabet", "squares", "color" ]
+  },
   { name: "Kryptonian",
     imagename: "kryptonian.png",
     description: "In 2000 DC Comics introduced Kryptonian as a transliteration alphabet containing symbols for each of the letters of the English alphabet.",
@@ -468,6 +523,16 @@ export var codepages = [
     imagename: "malachim.png",
     description: "The Malachim alphabet was created by Heinrich Cornelius Agrippa during the 16th Century and is still used by Freemasons to a limited extent.",
     tags: ["alphabet", "lines", "dots"]
+  },
+  { name: "Magzetician",
+    imagename: "magzetician.png",
+    description: "Magzetician is a script of Magzenglish language. Whatever that may be.",
+    tags: ["alphabet", "numbers", "lines", "squares"]
+  },
+  { name: "Malayalam",
+    imagename: "malayalam.png",
+    description: "Malayalam script is a Brahmic script used commonly to write Malayalam, which is the principal language of Kerala, India. It is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "script", "languagae", "numbers"]
   },
   { name: "Maritime Signal Flags",
     imagename: "maritimeflags.gif",
@@ -482,6 +547,11 @@ export var codepages = [
   { name: "Matoran",
     imagename: "matoran.png",
     description: "The Matoran or Bionicle alphabet is used in the Lego series Bionicle.",
+    tags: ["alphabet", "tv", "circles"]
+  },
+  { name: "Eyes of Mara (Indiana Jones)",
+    imagename: "maraseye.png",
+    description: "Mara was a deity worshiped in the Lost Delta region of what is now modern India. The alphabet is based on the glyphs found at Disneyland's Indiana Jones ride.",
     tags: ["alphabet", "tv", "circles"]
   },
   { name: "Maya Numbers",
@@ -502,7 +572,7 @@ export var codepages = [
   { name: "Minimoys",
     imagename: "minimoys.png",
     description: "From the movie Arthur and the Minimoys (2006), a French movie.",
-    tags: ["alphabet", "movie", "circles" ]
+    tags: ["alphabet", "movie", "circles", "book" ]
   },
   { name: "Moon",
     imagename: "moon.png",
@@ -514,15 +584,20 @@ export var codepages = [
     description: "The N'Ko alphabet was invented by Soulemayne Kante of Kankan, Guinea, in 1949. It is mainly used by speakers of Maninka, Bambara, Dyula and their dialects in Guinea, Côte d'Ivoire and Mali.",
     tags: ["alphabet", "language", "symbols"]
   },
+  { name: "Odia",
+    imagename: "odia.png",
+    description: "The Odia script is a Brahmic script used to write primarily Odia language and others including Sanskrit and other regional languages. It is one of the official scripts of the Indian Republic. Oriya is the Unicode block containing characters for the Odia, Khondi and Santali languages of the state of Odisha in India.",
+    tags: ["alphabet", "language", "script"]
+  },
   { name: "Ogham",
     imagename: "ogham.png",
     description: "Ogham is an Early Medieval alphabet used primarily to write the early Irish language (4th to 6th centuries AD), and later the Old Irish language (scholastic ogham, 6th to 9th centuries).",
     tags: ["alphabet", "language", "lines"]
   },
-  { name: "Old Turkish or Orkhon alphabet",
-    imagename: "orkhon.png",
-    description: "The Orkhon alphabet, or the Old Turkic script, the Göktürk script, or the Orkhon-Yenisey script is the earliest known example of writing Turkish.",
-    tags: ["alphabet", "language", "runes", "symbols"]
+  { name: "Ol Chiki",
+    imagename: "olchiki.png",
+    description: "The Ol Chiki script, also known as Ol Chemet and sometimes as the Santali alphabet, was created by Pandit Raghunath Murmu. It is the official writing system for Santali, an Austroasiatic language recognized as an official regional language in India.",
+    tags: ["alphabet", "language", "numbers", "script"]
   },
   { name: "Pakmara",
     imagename: "pakmara.png",
@@ -542,6 +617,11 @@ export var codepages = [
   { name: "Pigpen, Freemason, Tic tac toe cipher",
     imagename: "pigpen.png",
     description: "The pigpen cipher (als known as the masonic cipher, Freemason's cipher, Napoleon cipher and tic-tac-toe cipher) is believed to be an ancient origin.",
+    tags: ["alphabet", "squares", "triangles"]
+  },
+  { name: "Pigpen other versions",
+    imagename: "pigpenalt.png",
+    description: "Variants on the pigpen cipher. Two or three characters in a box where the position or the number of dots determine the letter.",
     tags: ["alphabet", "squares", "triangles"]
   },
   { name: "Pixel code",
@@ -594,6 +674,11 @@ export var codepages = [
     description: "Colors used on resistor to indicate their Ohm value and tolerance.",
     tags: ["numbers", "color"]
   },
+  { name: "Hanifi Rohingya",
+    imagename: "rohingya.png",
+    description: "The Hanifi Rohingya script was created in the 1980s by Mohammad Hanif and his colleagues. It is an alternative way to write Rohingya, an eastern Indo-Aryan language spoken in northern Rakhine State in Myanmar and in the Chiittagong Division of Bangladesh.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Royal Navy Signal Flags",
     imagename: "royalnavyflags.gif",
     description: "Signal flags used in HM Royal Navy.",
@@ -634,20 +719,45 @@ export var codepages = [
     description: "The code appears in the story Chain of Death by Maxwell Grant in The Shadow Magazine, 1934",
     tags: ["alphabet", "book", "circles"]
   },
+  { name: "Sharada",
+    imagename: "sharada.png",
+    description: "The Sharada script is an abugida writing system of the Brahmic family of scripts. The script was widespread between the 8th and 12th centuries in the northwestern parts of Indian Subcontinent (in Kashmir and neighbouring areas), for writing Sanskrit and Kashmiri.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Sheikah",
     imagename: "sheikah.png",
     description: "The Sheikah alphabet is used in the computer games of Zelda to write Hylian (also see Hylian and ancient Hylian).",
     tags: ["alphabet", "games", "squares"]
+  },
+  { name: "Slash and Pipe",
+    imagename: "slashandpipe.png",
+    description: "A code popular with geocachers of unknown origin.",
+    tags: ["alphabet", "slash", "lines"]
   },
   { name: "Spintype",
     imagename: "spintype.png",
     description: "Spintype is a phonetic/sylabic writing system invented by Bryan Day which he uses in music composition and for his record label and projects.",
     tags: ["alphabet", "squares"]
   },
+  { name: "Sundanese",
+    imagename: "sundanese.png",
+    description: "Sundanese is a Malayo-Polynesian language spoken by about 39 million people mainly in western Java in Indonesia. Sundanese is normally written with the Latin alphabet, however the Sundanese script (Aksara Sunda) is still used to some extent.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
+  { name: "Tamil",
+    imagename: "tamil.png",
+    description: "The Tamil script is an abugida script that is used by Tamils and Tamil speakers in India, Sri Lanka, Malaysia, Singapore, Indonesia and elsewhere to write the Tamil language. It is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "numbers", "script", "language"]
+  },
   { name: "Tau language",
     imagename: "tau.png",
     description: "Tau is a language spoken in the tabletop game Warhammer 40,000.",
     tags: ["alphabet", "triangles", "diamonds"]
+  },
+  { name: "Telugu",
+    imagename: "telugu.png",
+    description: "Telugu script, an abugida from the Brahmic family of scripts, is used to write the Telugu language, a Dravidian language spoken in the Indian states of Andhra Pradesh and Telangana as well as several other neighbouring states. It is one of the official scripts of the Indian Republic.",
+    tags: ["alphabet", "numbers", "script", "language"]
   },
   { name: "Templar code",
     imagename: "templarcode.png",
@@ -663,6 +773,11 @@ export var codepages = [
     imagename: "theban.png",
     description: "The Theban alphabet is a writing system, in particular a substitution cipher of the Latin alphabet. It was first published in Johannes Trithemius's Polygraphia (1518).",
     tags: ["alphabet", "triangles", "slashes"]
+  },
+  { name: "Tomtom",
+    imagename: "tifinagh.png",
+    description: "The Tifinagh alphabet is thought to have derived from the old Berber script. Versions of Tifinagh are used to write Berber languages in Morocco, Algeria, Mali and Niger.",
+    tags: ["alphabet", "script", "language", "symbols"]
   },
   { name: "Tomtom",
     imagename: "tomtom.png",

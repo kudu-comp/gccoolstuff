@@ -1,6 +1,6 @@
 {
   "language": "Language",
-  "intro": "This is a collection of tools to solve geocaching mysteries. If you are new to geoaching go to <a href='https://www.geocaching.com/'>Geocaching.com</a>. If you are new to solving mystery caches read the <router-link to='howto'>How to's</router-link>.",
+  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/textwordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a> and <a href='/sudokusolver'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/html'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
@@ -42,7 +42,7 @@
     "count": "Count",
     "perc" : "Percentage",
     "number": "Number",
-    "welcome": "Welcome",
+    "welcome": "GC Tools",
     "whatsnew": "What's new",
     "featured": "Featured",
     "help" : "Help ",
@@ -174,9 +174,9 @@
   "codes": {
     "intro": "Ciphers use keys or transposition to encrypt a message. There are 60 different ciphers available. Codes are simple ways to translate text or numbers. Codes not require a key to be solved, but it can be difficult to find the right code. You can use the search tool or use special fonts to find the code. Resistor, segment and decabit are codes used for special purposes.",
     "codebook": {
-      "title": "Search codebook",
+      "title": "Codebook",
       "short": "Find codes using keywords and tags",
-      "long": "Find a code using keywords and tags. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
+      "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
     }, 
     "fonts": {
       "title": "Special fonts",
@@ -1714,7 +1714,7 @@
 
   "randomizer" : {
     "title" : "Random Generator",
-    "long" : "<p>The random generator generates a random string of numbers or characters. This can be useful when you want to obfuscate a message by adding extra data. There are many other uses e.g. in games, running simulations or testing hypotheses.</p><p>Binary generates a string of 0 and 1. Numbers generate a string of numbers between the provided minium and maximum. Negative numbers can be used. Text generate a random string of characters form the given string. Collection takes values from a comma separated set. Printable characters generate a random string of ASCII printable characters, which include all letters, digits and common symnbols.</p>",
+    "long" : "<p>The random generator generates a random string of numbers or characters. This can be useful when you want to obfuscate a message by adding extra data. There are many other uses e.g. in games, running simulations or testing hypotheses.</p><p>Binary generates a string of 0 and 1. Numbers generate a string of numbers between the provided minium and maximum. Negative numbers can be used. Text generate a random string of characters form the given string. Collection takes values from a comma separated set. Printable characters generate a random string of ASCII printable characters, which include all letters, digits and common symbols.</p>",
     "sel" : "Select method",
     "selbin": "Binary (0 and 1)",
     "selrng": "Numbers in range",
@@ -1735,7 +1735,7 @@
 
   "rotciphers" : {
     "title": "Rotation ciphers",
-    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown.</p>",
+    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>",
     "rot5" : "Numbers (ROT5)",
     "rot13": "Latin (ROT13)",
     "rot47": "Printable ASCII (ROT47)"

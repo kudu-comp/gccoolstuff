@@ -13,9 +13,9 @@
         <img class="card-img-top" src="../assets/images/whatsnew.jpg" alt="Welcome" style="height: 200px;">
         <div class="card-body">
           <h5 class="card-title">{{$t('labels.whatsnew')}}</h5>
-          <p class="card-text" v-show="$i18n.locale === 'nl'">GCtools.nl heeft een flinke opknapbeurt gehad en ziet er nu een stuk beter uit. Alles is nu eenvoudig te vinden via de navigatiebalk. Geheimschriften werken een stuk makkelijker. Er zijn nieuwe tools toegevoegd: <router-link to="/checksum">Controlegetallen berekenen</router-link> en <router-link to="/datecalc">Rekenen met datums</router-link>.
+          <p class="card-text" v-show="$i18n.locale === 'nl'">GCtools.nl heeft een flinke opknapbeurt gehad en ziet er nu een stuk beter uit. Alles is nu eenvoudig te vinden via de navigatiebalk. Geheimschriften werken een stuk makkelijker. Er zijn enkele nieuwe tools toegevoegd <router-link to="/freqanal">Frequentie analyse</router-link> en <router-link to="/datecalc">Rekenen met datums</router-link>.
           </p>
-          <p class="card-text" v-show="$i18n.locale !== 'nl'">GCtools.nl has been improved and now looks a lot better. All tools can easily be found in the navbar. Ciphers work a lot better with the use of an expert mode for those rare cases you need it. Some new tools have been added <router-link to="/checksum">Checkdigir</router-link> and <router-link to="/datecalc">Date calculator</router-link>.
+          <p class="card-text" v-show="$i18n.locale !== 'nl'">GCtools.nl has been improved and now looks a lot better. All tools can easily be found in the navbar. Ciphers work a lot better with the use of an expert mode for those rare cases you need it. Some new tools have been added <router-link to="/freqanal">Frequency analysis</router-link> and <router-link to="/datecalc">Date calculator</router-link>.
           </p>
         </div>
       </div>

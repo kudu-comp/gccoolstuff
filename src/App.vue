@@ -23,9 +23,9 @@ export default {
       navbarOptions: {
         elementId: "main-navbar",
         isUsingVueRouter: true,
-        mobileBreakpoint: 1000,
+        mobileBreakpoint: 1050,
         brandImagePath: "./",
-        brandImage,
+        brandImage: "gctlogo.png",
         brandImageAltText: "gctools.nl",
         collapseButtonOpenColor: "#2c3e50",
         collapseButtonCloseColor: "#2c3e50",

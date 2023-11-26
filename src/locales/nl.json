@@ -1,6 +1,6 @@
 {
   "language": "Taal",
-  "intro": "Dit is een collectie tools voor het oplossen van geocaching puzzels. Ga naar <a href='https://www.geocaching.com/'>Geocaching.com</a> voor meer informatie over geoaching. Meer informatie over geocaching puzzels is te vinden bij <a href='./howto'>Tips</a>.",
+  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/textwordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a> of <a href='/sudokusolver'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/html'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -43,7 +43,7 @@
     "count": "Aantal",
     "perc": "Percentage",
     "number": "Nummer",
-    "welcome": "Welkom",
+    "welcome": "GC Tools",
     "whatsnew": "Wat is er nieuw",
     "featured": "Uitgelicht",
     "help": "Help ",
@@ -175,9 +175,9 @@
   "codes": {
     "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden.",
     "codebook": {
-      "title": "Zoek codes",
+      "title": "Codebook",
       "short": "Vind de juiste code door te zoeken op tags en woorden",
-      "long": "Vind de juiste code door te zoeken op tags en woorden. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
+      "long": "Vind de juiste code door te zoeken op tags en woorden. Bijna 200 verschillende codes. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
     }, 
     "fonts": {
       "title": "Speciale fonts",
@@ -1738,10 +1738,10 @@
 
   "rotciphers" : {
     "title": "Rotatie cijfers",
-    "long": "<p>Rotatie cijfer vervangen simpelweg elke letter met een andere een paar posities verderop in het alfabet. Als je aan het einde komt, begin je weer aan het begin, vandaar de naam rotatie cijfers. Standaard is de verschuiving de helft van de lengte van het alfabet. In dat geval zijn coderen en decoderen namelijk gelijk. ROT13 gebruikt het standaard alfabet (hoofdletters). ROT5 werkt met enkel getallen. ROT47 met alle printbare ascii tekens.</p><p>De tool genereert alle mogelijke verschuivingen, zodat het makkelijk is de code te kraken als de verschuiving onbekend is.</p>",
+    "long": "<p>Rotatie cijfer vervangen simpelweg elke letter met een andere een paar posities verderop in het alfabet. Als je aan het einde komt, begin je weer aan het begin, vandaar de naam rotatie cijfers. Standaard is de verschuiving de helft van de lengte van het alfabet. In dat geval zijn coderen en decoderen namelijk gelijk. ROT13 gebruikt het standaard alfabet (hoofdletters). ROT5 werkt met enkel getallen. ROT47 met alle printbare ascii tekens.</p><p>De tool genereert alle mogelijke verschuivingen, zodat het makkelijk is de code te kraken als de verschuiving onbekend is. Overigens wordt ROT13 gebruikt door geocaching.com op de hints te coderen.</p>",
     "rot5" : "Getallen (ROT5)",
     "rot13": "Standaard (ROT13)",
-    "rot47": "Printare ASCII (ROT47)"
+    "rot47": "Printbare ASCII (ROT47)"
   },
   
   "freqanal" : {
