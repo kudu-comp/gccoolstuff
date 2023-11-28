@@ -10,6 +10,6 @@ You can see the website running on gctools.nl
 
 ## License
 
-(C) 2023 Kool Interim
+(C)2021 - 2023 Kool Interim
 License Creative Commmons <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0 DEED</a>
 
