@@ -11,8 +11,6 @@
 
 <script>
 
-import brandImage from "@/assets/gc2.png";
-
 export default {
   name: "App",
 
@@ -356,6 +354,11 @@ export default {
             text: this.$t("menu.other"),
             arrowColor: "#722727",
             subMenuOptions: [
+            {
+                type: "link",
+                text: this.$t("printlog.title"),
+                path: { name: "PrintLog"}
+              },                    
               {
                 type: "link",
                 text: this.$t("menu.htmlscanner"),
@@ -547,17 +550,18 @@ export default {
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[8].text = this.$t("comptools.duckspeak.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[9].text = this.$t("comptools.checksum.title");
       this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.other");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("menu.htmlscanner");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("othertools.sudokusolver.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("othertools.mmsolver.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("othertools.unitconvertor.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("datecalc.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("randomizer.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[6].text = this.$t("othertools.periodictable.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[7].text = this.$t("othertools.countries.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[8].text = this.$t("othertools.usastates.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[9].text = this.$t("othertools.countryregions.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[10].text = this.$t("othertools.dnacode.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("printlog.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("menu.htmlscanner");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("othertools.sudokusolver.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("othertools.mmsolver.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("othertools.unitconvertor.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("datecalc.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[6].text = this.$t("randomizer.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[7].text = this.$t("othertools.periodictable.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[8].text = this.$t("othertools.countries.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[9].text = this.$t("othertools.usastates.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[10].text = this.$t("othertools.countryregions.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[11].text = this.$t("othertools.dnacode.title");
       this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.help");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("menu.howto");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("labels.help") + this.$t("menu.coordinates");

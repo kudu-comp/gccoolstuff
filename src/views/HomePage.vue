@@ -13,22 +13,20 @@
         <img class="card-img-top" src="../assets/images/whatsnew.jpg" alt="Welcome" style="height: 200px;">
         <div class="card-body">
           <h5 class="card-title">{{$t('labels.whatsnew')}}</h5>
-          <p class="card-text" v-show="$i18n.locale === 'nl'">GCtools.nl heeft een flinke opknapbeurt gehad en ziet er nu een stuk beter uit. Alles is nu eenvoudig te vinden via de navigatiebalk. Geheimschriften werken een stuk makkelijker. Er zijn enkele nieuwe tools toegevoegd <router-link to="/freqanal">Frequentie analyse</router-link> en <router-link to="/datecalc">Rekenen met datums</router-link>.
+          <p class="card-text" v-show="$i18n.locale === 'nl'">GC Tools heeft een flinke opknapbeurt gehad en ziet er nu een stuk beter uit. Alles is nu eenvoudig te vinden via de navigatiebalk. Geheimschriften werken een stuk makkelijker. Er zijn enkele nieuwe tools toegevoegd <router-link to="/freqanal">Frequentie analyse</router-link> en <router-link to="/datecalc">Rekenen met datums</router-link>.
           </p>
-          <p class="card-text" v-show="$i18n.locale !== 'nl'">GCtools.nl has been improved and now looks a lot better. All tools can easily be found in the navbar. Ciphers work a lot better with the use of an expert mode for those rare cases you need it. Some new tools have been added <router-link to="/freqanal">Frequency analysis</router-link> and <router-link to="/datecalc">Date calculator</router-link>.
+          <p class="card-text" v-show="$i18n.locale !== 'nl'">GC Tools has been improved and now looks a lot better. All tools can easily be found in the navbar. Ciphers work a lot better with the use of an expert mode for those rare cases you need it. Some new tools have been added <router-link to="/freqanal">Frequency analysis</router-link> and <router-link to="/datecalc">Date calculator</router-link>.
           </p>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <img class="card-img-top" src="../assets/images/featured.jpg" alt="Welcome" style="height: 200px;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('labels.featured')}} - {{$t('comptools.checksum.title')}}</h5>
-          <p class="card-text" v-show="$i18n.locale === 'nl'">
-            Veel belangrijke nummers gebruiken een controlegetal om te voorkomen dat er fouten insluipen. De eerste twee cijfers van je IBAN rekening nummer, het laatste cijfer van je creditcard, ISBN nummers voor boeken of het Nederlandse BSN nummer. Met <router-link to="/checksum">Controlegetal</router-link> kan je al deze uitrekenen.
+          <h5 class="card-title">{{$t('labels.featured')}} - {{$t('printlog.title')}}</h5>
+          <p class="card-text">
+            {{$t('printlog.long')}}
           </p>
-          <p class="card-text" v-show="$i18n.locale !== 'nl'">
-            Many important numbers use so called checkdigits to avoid mistakes when being used. The International Bank Account Number (IBAN), credit card numbers, ISBN book numbers, article codes and so on. Use <router-link to="/checksum">Checkdigit</router-link> to calculate the various check digits.
-          </p>
+          <router-link to="/printlog"><span class="btn btn-primary">{{$t('labels.moreinfo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

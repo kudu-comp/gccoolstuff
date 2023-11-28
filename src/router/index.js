@@ -51,6 +51,7 @@ const routes = [
   { path: "/bintotext",       name: 'compbintotext',   component: () => import('@/components/comp/CompBinToText.vue') },
   { path: "/duckspeak",       name: 'duckspeak',       component: () => import('@/components/comp/CompDuckspeak.vue') },
   { path: "/checksum",        name: 'checksum',        component: () => import('@/components/comp/CompChecksum.vue') } ,
+  { path: '/printlog',        name: 'PrintLog',         component: () => import('@/components/other/PrintLog.vue')      },
   { path: '/sudokusolver',    name: 'SudokuSolver',     component: () => import('@/components/other/SudokuSolver.vue')      },
   { path: '/mmsolver',        name: 'MastermindSolver', component: () => import('@/components/other/MastermindSolver.vue') },
   { path: '/periodictable',   name: 'PeriodicTable',    component: () => import('@/components/other/PeriodicTable.vue')    },

@@ -1,6 +1,6 @@
 {
   "language": "Taal",
-  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/textwordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a> of <a href='/sudokusolver'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/html'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
+  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/textwordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a>, <a href='/printlog'>Logrollen printen<a> of <a href='/sudokusolver'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/html'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -43,6 +43,9 @@
     "count": "Aantal",
     "perc": "Percentage",
     "number": "Nummer",
+    "name": "Naam",
+    "date": "Datum",
+    "time" : "Tijd",
     "welcome": "GC Tools",
     "whatsnew": "Wat is er nieuw",
     "featured": "Uitgelicht",
@@ -1754,5 +1757,30 @@
     "numfound" : "Aantal gevonden n-grams: ",
     "nummissing" : "Aantal ontbrekende n-grams: ",
     "missing": "Ontbrekende n-grammen"
+  },
+
+  "printlog" : {
+    "title": "Logrollen maken",
+    "long" : "Een handige tool voor het maken van logrollen. Stel het aantal kolommen in, stel het aantal regels per log in, voeg afbeeldingen, voeg FTF toe, kies kleuren en sla op als PDF. Afdrukken op A4 - 2 kolommen van 9cm zijn geschikt voor petlings - 5 kolommen van 3.6cm zijn geschikt voor fotorolletjes - 9 kolommen van 2 cm passen overal in. Sla op als PDF of als PNG.",
+    "header": "Kopregel",
+    "ncol": "Aantal kolommen",
+    "lpl" : "Regels per log",
+    "txtcol" : "Tekstkleur",
+    "linecol" : "Lijnkleur",
+    "ftfcol" : "FTF kleur",
+    "extra" : "Extra opties",
+    "showimg" : "Afbeelding toevoegen",
+    "selimg" : "Kies afbeelding",
+    "nmdttm" : "Naam, datum, tijd",
+    "printftf" : "Print FTF, STF en TTF",
+    "savepdf" : "PDF opslaan",
+    "savepng" : "PNG opslaan",
+    "lh" : "Regelhoogte",
+    "lh1": "Erg krap",
+    "lh2": "Krap",
+    "lh3": "Normaal",
+    "lh4": "Ruim",
+    "lh5": "Erg ruim"
   }
+  
 }

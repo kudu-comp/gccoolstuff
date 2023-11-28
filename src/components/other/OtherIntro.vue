@@ -10,6 +10,13 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
+          <h5 class="card-title">{{$t('printlog.title')}}</h5>
+          <p class="card-text" v-html="$t('printlog.long')"></p>
+          <router-link to="/printlog"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
           <h5 class="card-title">{{$t('menu.htmlscanner')}}</h5>
           <p class="card-text" v-html="$t('htmlscanner.long')"></p>
           <router-link to="/sudokusolver"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>

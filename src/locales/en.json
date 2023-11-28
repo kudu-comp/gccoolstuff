@@ -1,6 +1,6 @@
 {
   "language": "Language",
-  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/textwordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a> and <a href='/sudokusolver'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/html'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
+  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/textwordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a>, <a href='/printlog'>Print logs<a> and <a href='/sudokusolver'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/html'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
@@ -42,6 +42,9 @@
     "count": "Count",
     "perc" : "Percentage",
     "number": "Number",
+    "name": "Name",
+    "date": "Date",
+    "time" : "Time",
     "welcome": "GC Tools",
     "whatsnew": "What's new",
     "featured": "Featured",
@@ -1751,6 +1754,31 @@
     "numfound" : "Number of n-grams found: ",
     "nummissing" : "Number of n-grams missing: ",
     "missing": "Missing n-grams"
+  },
+
+  "printlog" : {
+    "title": "Print logs",
+    "long" : "A handy tool to print logs. Set the number of columns, the lines per log, add images, choose colors and add FTF. When printing on A4 - 2 columns of 9cm will fit in petlings and 5 columns of 3.6cm will fit in photo canisters - 9 columns of 2cm will fit in almost anything. Save as PDF or PNG.",
+    "header": "Header",
+    "ncol": "No. of columns",
+    "lpl" : "Lines per log",
+    "txtcol" : "Text color",
+    "linecol" : "Line color",
+    "ftfcol" : "FTF color",
+    "extra" : "Extra options",
+    "showimg" : "Add image on top",
+    "selimg" : "Choose image",
+    "nmdttm" : "Name, date, time",
+    "printftf" : "Print FTF, STF and TTF",
+    "savepdf" : "Save PDF",
+    "savepng" : "Save PNG",
+    "lh" : "Line spacing",
+    "lh1": "Very tight",
+    "lh2": "Tight",
+    "lh3": "Normal",
+    "lh4": "Wide",
+    "lh5": "Very wide"
   }
+
 
 }
