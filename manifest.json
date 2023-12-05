@@ -1,5 +1,10 @@
 {
- "name": "App",
+ "name": "GC Tools",
+ "short_name": "GC Tools",
+ "description": "GC Tools has all the tools needed for geocaching.",
+ "theme_color": "#09776E",
+ "background_color": "#eeeeee",
+ "display": "standalone",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",

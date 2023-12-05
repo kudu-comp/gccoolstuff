@@ -59,6 +59,11 @@ export var codepages = [
     description: "The Arcadian alphabet was invented to write Arcadia, an invented language used in the computer game the 'Skies of Arcadia'. The alphabet is used to write inscriptions throughout the game.",
     tags: ["alphabet", "games", "script"]
   },
+  { name: "Armenian Alphabet",
+    imagename: "armenian.png",
+    description: "Armenian is an Indo-European language spoken mainly in Armenia. Armenian belongs to its own independent branch of the Indo-European language family. It is not closely related to any other languages.",
+    tags: ["alphabet", "language", "script"]
+  },
   { name: "Ath",
     imagename: "ath.png",
     description: "The Ath alphabet was created by Morioka Hiroyuki, a Japanese Sci-Fi writer, and first appeared in his novel The Crest of the Stars in 1996.",
@@ -733,6 +738,11 @@ export var codepages = [
     imagename: "slashandpipe.png",
     description: "A code popular with geocachers of unknown origin.",
     tags: ["alphabet", "slash", "lines"]
+  },
+  { name: "Space Invaders",
+    imagename: "spaceinv.png",
+    description: "An alphabet with space ships an other things from the game Space Invaders.",
+    tags: ["alphabet", "numbers", "game", "symbols"]
   },
   { name: "Spintype",
     imagename: "spintype.png",

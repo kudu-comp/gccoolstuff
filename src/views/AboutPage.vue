@@ -25,6 +25,17 @@
         :showitem="show"
       >
         <template #header>
+          Free to use
+        </template>
+        <template #content>
+          You are free to use GC Tools. There are no cookies, no commercial messages, no subscription fees.
+        </template>
+      </va-item>
+      <va-item
+        :hidebutton="hidebutton"
+        :showitem="show"
+      >
+        <template #header>
           Contact
         </template>
         <template #content>

@@ -16,8 +16,8 @@
     "notanumber": "Invoer is geen getal",
     "notbinary" : "Ongeldig binair getal",
     "notdecimal" : "Ongeldig decimaal getal",
-    "nothexadecimal": "Ongeldig hexadecimaal getal"
-
+    "nothexadecimal": "Ongeldig hexadecimaal getal",
+    "invalidchecksum": "Let op: Checksum klopt niet"
   },
 
   "labels": {

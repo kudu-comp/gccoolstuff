@@ -12,7 +12,8 @@
 <script>
 
 export default {
-  name: "App",
+
+  name: "GC Tools",
 
   // Make sure we return a function for data!
   data: function () {
@@ -24,7 +25,7 @@ export default {
         mobileBreakpoint: 1050,
         brandImagePath: "./",
         brandImage: "gctlogo.png",
-        brandImageAltText: "gctools.nl",
+        brandImageAltText: "GC Tools",
         collapseButtonOpenColor: "#2c3e50",
         collapseButtonCloseColor: "#2c3e50",
         showBrandImageInMobilePopup: true,

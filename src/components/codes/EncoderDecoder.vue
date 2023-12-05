@@ -902,8 +902,8 @@ export default {
       this.showgenkey3 = false;
       this.explanation = "";
       this.keepcase = false;
-      this.keepdiacrit = false;
       this.keepunknown = false;
+      this.keepdiacrit = false;
       this.replacechars = false;
       this.replacements = "";
 
@@ -926,6 +926,9 @@ export default {
           this.key1required = true;
           break;
         case 'Atbash':
+          this.keepcase = true;
+          this.keepunknown = true;
+          break;
         case 'Atomtom' :
           break;
         case 'Autokey' :
@@ -987,6 +990,8 @@ export default {
         case 'ROT13' :
           this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
           this.shownumkey1 = true;
+          this.keepcase = true;
+          this.keepunknown = true;
           this.key1 = 13;
           break;
         case 'Chaocipher' :
@@ -1200,11 +1205,15 @@ export default {
         case 'ROT5' :
           this.alphabet = "0123456789";
           this.shownumkey1 = true;
+          this.keepcase = true;
+          this.keepunknown = true;
           this.key1 = 5;
           break;
         case 'ROT47' :
           this.alphabet = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
           this.shownumkey1 = true;
+          this.keepcase = true;
+          this.keepunknown = true;
           this.key1 = 47;
           this.explanation = "";
           break;

@@ -67,6 +67,8 @@ export default {
 
   methods: {
 
+    // https://www.geoclub.de/forum/t/reverse-wherigo-algorithmus.82124/
+
     reverseWherigo2Coord : function (d1, d2, d3) {
 
       let latSign, lonSign, latValue, lonValue;
@@ -95,11 +97,27 @@ export default {
         lonValue = d2[4] + d3[5] + d1[4] + d1[1] + d2[3] + d2[5] + d3[1] + d2[1]
       }
       
-      // d2[2] and d3[2] are ignored they contain checksums
-      
+      // d2[2] and d3[2] contain checksums
+      let c1, c2;
+      if ((parseInt(d3[1]) + parseInt(d3[4])) % 2 == 0) {
+        c1 = 11 - ((2*d1[3] + 4*d1[2] + 7*d2[1] + 8*d1[0] + 5*d1[5] +	6*d1[1] + 9*d2[0] + 3*d1[4]) % 11);
+        c2 = 11 - ((6*d2[4] + 5*d3[3] + 9*d3[4] + 2*d3[0] + 7*d3[5] +	8*d2[3] + 3*d3[1] + 4*d2[5]) % 11);
+        c1 = (c1 === 10) ? 0 : (c1 === 11) ? 5 : c1;
+        c2 = (c2 === 10) ? 0 : (c2 === 11) ? 5 : c2;
+      } else {
+        c1 = 11 - ((2*d1[3] + 9*d2[0] + 5*d1[5] + 4*d1[2] + 8*d1[0] +	3*d1[4] + 6*d1[1] + 7*d2[1]) % 11);
+        c2 = 11 - ((2*d3[0] + 5*d3[3] + 9*d3[4] + 6*d2[4] + 7*d3[5] +	8*d2[3] + 4*d2[5] + 3*d3[1]) % 11);
+        c1 = (c1 === 10) ? 0 : (c1 === 11) ? 5 : c1;
+        c2 = (c2 === 10) ? 0 : (c2 === 11) ? 5 : c2;
+      }
+
+      if ( c1 !== parseInt(d2[2]) || c2 !== parseInt(d3[2])) {
+        throw(this.$t('errors.invalidchecksum'));
+      }
+
       return {
         lat: latSign * latValue / 100000,
-        lon: lonSign * lonValue / 100000
+        lon: lonSign * lonValue / 100000,
       }
 
     },
@@ -121,7 +139,6 @@ export default {
 
         // Solve
         let c = this.reverseWherigo2Coord (d[0], d[1], d[2]);
-        console.log(c);
 
         // Convert to different format
         this.result += coords.printCoordinateFromDMS (c, "N12.12345 E123.12345") + "<br>";

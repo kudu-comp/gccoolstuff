@@ -16,7 +16,8 @@
     "notanumber": "Input is not a number",
     "notbinary" : "Not a binary number",
     "notdecimal" : "Not a decimal number",
-    "nothexadecimal": "Not a hexadecimal number"
+    "nothexadecimal": "Not a hexadecimal number",
+    "invalidchecksum": "Warning: Invalid checksum"
   },
 
   "labels": {
