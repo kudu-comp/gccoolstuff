@@ -64,6 +64,7 @@ import VMap from '@/components/inputs/VMap.vue'
 import VDistance from '@/components/inputs/VDistance.vue'
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue'
+import L from "leaflet";
 
 export default {
   name: 'CoordProject',
@@ -123,17 +124,17 @@ export default {
             let r2 = this.radius2 * this.unit2;
 
             // Set markers
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, "Center 1");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, "Center 2");
+            coords.displayMarker(this.$store.state.mymap, coord1, "Center 1");
+            coords.displayMarker(this.$store.state.mymap, coord2, "Center 2");
 
             // Draw circles
-            this.$store.state.L.circle(coord1, {
+            L.circle(coord1, {
               color: "#E72E1C",
               fillColor: "#EC7F74",
               fillOpacity: 0.5,
               radius: r1
             }).addTo(this.$store.state.mymap);
-            this.$store.state.L.circle(coord2, {
+            L.circle(coord2, {
               color: "#E72E1C",
               fillColor: "#EC7F74",
               fillOpacity: 0.5,
@@ -191,8 +192,8 @@ export default {
                     this.result += "<br>" + this.$t('cdcircles.ia') + ": " + data.area.toFixed(0) + "m<sup>2</sup>";
 
                     // Display markers
-                    coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
-                    coords.displayMarker(this.$store.state.L, this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
+                    coords.displayMarker(this.$store.state.mymap, p1, this.$t('cdcircles.ip') + " 1");
+                    coords.displayMarker(this.$store.state.mymap, p2, this.$t('cdcircles.ip') + " 2");
 
                   })
                   .catch (e => {

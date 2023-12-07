@@ -58,6 +58,7 @@ import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import L from "leaflet";
 
 export default {
   name: 'CoordProject',
@@ -119,12 +120,12 @@ export default {
             gridcoord3 = data;
 
             // Set markers
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord3, this.$t('labels.point')+ " 3");
+            coords.displayMarker(this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
+            coords.displayMarker(this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
+            coords.displayMarker(this.$store.state.mymap, coord3, this.$t('labels.point')+ " 3");
 
             // Draw Triangle
-            this.$store.state.L.polyline([coord1, coord2, coord3, coord1], {color: 'red'}).addTo(this.$store.state.mymap);
+            L.polyline([coord1, coord2, coord3, coord1], {color: 'red'}).addTo(this.$store.state.mymap);
 
             let inputdata = {
               calc: 'triangle',
@@ -192,11 +193,11 @@ export default {
                       this.result += this.$t('cdtriangles.or') + coords.printCoordinateFromDMS(ninepointcenter, "N12 34.567 E1 23.456");
 
                       // Display markers
-                      coords.displayMarker(this.$store.state.L, this.$store.state.mymap, centroid, this.$t('cdtriangles.centroid'));
-                      coords.displayMarker(this.$store.state.L, this.$store.state.mymap, orthocenter, this.$t('cdtriangles.orthocenter'));
-                      coords.displayMarker(this.$store.state.L, this.$store.state.mymap, incenter, this.$t('cdtriangles.incenter'));
-                      coords.displayMarker(this.$store.state.L, this.$store.state.mymap, circumcenter, this.$t('cdtriangles.circumcenter'));
-                      coords.displayMarker(this.$store.state.L, this.$store.state.mymap, ninepointcenter, this.$t('cdtriangles.ninepoint'));
+                      coords.displayMarker(this.$store.state.mymap, centroid, this.$t('cdtriangles.centroid'));
+                      coords.displayMarker(this.$store.state.mymap, orthocenter, this.$t('cdtriangles.orthocenter'));
+                      coords.displayMarker(this.$store.state.mymap, incenter, this.$t('cdtriangles.incenter'));
+                      coords.displayMarker(this.$store.state.mymap, circumcenter, this.$t('cdtriangles.circumcenter'));
+                      coords.displayMarker(this.$store.state.mymap, ninepointcenter, this.$t('cdtriangles.ninepoint'));
 
                     })
 

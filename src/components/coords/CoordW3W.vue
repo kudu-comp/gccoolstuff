@@ -204,7 +204,7 @@ export default {
         .then (data => {
 
           // Set Marker
-          coords.displayMarker(this.$store.state.L, this.$store.state.mymap, data, this.$t('labels.point'));
+          coords.displayMarker(this.$store.state.mymap, data, this.$t('labels.point'));
 
           // Convert to W3W with the selected language
           return w3w.wgs84ToW3W(data, this.sellanguage)
@@ -235,7 +235,7 @@ export default {
         .then (data => {
 
           // Set Marker
-          coords.displayMarker(this.$store.state.L, this.$store.state.mymap, data, this.$t('labels.point'));
+          coords.displayMarker(this.$store.state.mymap, data, this.$t('labels.point'));
 
           // Convert to W3W with the selected language
           return coords.convertCoordFromWGS(data, this.selecteddatum2)
@@ -313,7 +313,7 @@ export default {
           for (let s of suggestions) {
             this.result += "<tr><td>" + coords.getTextFromCoord(data[i], "WGS84", 7, "N12 34.567 E1 23.456") +
                            "</td><td>" + s.words + "</td><td>" + s.country + "</td><td>" + s.nearestPlace + "</td></tr>";
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, data[i++], s.words);
+            coords.displayMarker(this.$store.state.mymap, data[i++], s.words);
           }
 
           this.result += "</table>";

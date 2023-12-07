@@ -146,7 +146,7 @@ export default {
         this.result += coords.printCoordinateFromDMS (c, "N12 34 56.789 E123 45 67.678");
 
         // Display marker
-        coords.displayMarker(this.$store.state.L, this.$store.state.mymap, c, this.$t('labels.point'));
+        coords.displayMarker(this.$store.state.mymap, c, this.$t('labels.point'));
 
       } catch (e) {
       

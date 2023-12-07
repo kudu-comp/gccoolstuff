@@ -77,7 +77,7 @@ export default {
             }
             console.log(anticoord);
             // Display marker
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, anticoord, "Antipode");
+            coords.displayMarker(this.$store.state.mymap, anticoord, "Antipode");
 
             // Convert antipode coordinate to input datum
             return coords.convertCoordFromWGS(anticoord, this.selecteddatum);

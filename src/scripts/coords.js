@@ -840,18 +840,19 @@ export async function convertCoordFromText (coord, fromdatum, todatum, proj4jsde
 /**
  * Set a marker on the map
  *
- * @param {object} L        the leaflet map object
  * @param {object} mymap    the map
  * @param {object} coord    latitude, longitude object (lat. lon) or arry with lat[0[, lon[1]
  * @param {string} text     text in the marker popup
 */
 
-export function displayMarker (L, mymap, coord, text) {
+import L from 'leaflet';
+
+export function displayMarker (mymap, coord, text) {
   // Center map view
   mymap.setView(coord, 13);
 
   // Set a marker
-  let markerhome = L.marker(coord).addTo(mymap);
+  let markerhome = new L.marker(coord).addTo(mymap);
   markerhome.bindPopup(text).openPopup();
 }
 

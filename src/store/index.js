@@ -7,7 +7,6 @@ export default createStore({
   },
   mutations: {
     initMap (state, payload) {
-      state.L = payload.L;
       state.mymap = payload.mymap;
     },
   },

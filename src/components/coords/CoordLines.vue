@@ -87,6 +87,7 @@ import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import L from "leaflet";
 
 export default {
   name: 'CoordProject',
@@ -174,12 +175,12 @@ export default {
             midpoint = data;
 
             // Set markers
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, midpoint, this.$t('cdlines.midpoint'));
+            coords.displayMarker(this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
+            coords.displayMarker(this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
+            coords.displayMarker(this.$store.state.mymap, midpoint, this.$t('cdlines.midpoint'));
 
             // Draw a line on the map
-            this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
+            L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
 
             // Convert midpoint to input datum
             return coords.convertCoordFromWGS(midpoint, this.selecteddatum1)
@@ -263,16 +264,16 @@ export default {
             intersectionpoint = data;
 
             // Set markers
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('cdlines.pointnearest'));
+            coords.displayMarker(this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
+            coords.displayMarker(this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
+            coords.displayMarker(this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
+            coords.displayMarker(this.$store.state.mymap, intersectionpoint, this.$t('cdlines.pointnearest'));
 
             // Draw a line on the map between Point 1 and 2
-            this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
+            L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
 
             // Draw a line on the map between Point 1 and 2
-            this.$store.state.L.polyline([coord3, intersectionpoint], {color: 'blue'}).addTo(this.$store.state.mymap);
+            L.polyline([coord3, intersectionpoint], {color: 'blue'}).addTo(this.$store.state.mymap);
 
             // Convert intersection point to input datum
             return coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1)
@@ -365,15 +366,15 @@ export default {
             intersectionpoint = data;
 
             // Set markers
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, coord4, this.$t('labels.point') + " 4");
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, intersectionpoint, this.$t('cdlines.intersection'));
+            coords.displayMarker(this.$store.state.mymap, coord1, this.$t('labels.point') + " 1");
+            coords.displayMarker(this.$store.state.mymap, coord2, this.$t('labels.point') + " 2");
+            coords.displayMarker(this.$store.state.mymap, coord3, this.$t('labels.point') + " 3");
+            coords.displayMarker(this.$store.state.mymap, coord4, this.$t('labels.point') + " 4");
+            coords.displayMarker(this.$store.state.mymap, intersectionpoint, this.$t('cdlines.intersection'));
 
             // Draw a line on the map between Point 1 and 2 / 3 and 4
-            this.$store.state.L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
-            this.$store.state.L.polyline([coord3, coord4], {color: 'blue'}).addTo(this.$store.state.mymap);
+            L.polyline([coord1, coord2], {color: 'red'}).addTo(this.$store.state.mymap);
+            L.polyline([coord3, coord4], {color: 'blue'}).addTo(this.$store.state.mymap);
 
             // Convert intersection point to input datum
             return coords.convertCoordFromWGS(intersectionpoint, this.selecteddatum1)

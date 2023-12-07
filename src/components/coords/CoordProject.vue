@@ -107,11 +107,11 @@ export default {
             projcoord = data;
 
             // Set marker for the starting point and the projected coordinate
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, startcoord, this.$t('cdproj.startpoint'));
-            coords.displayMarker(this.$store.state.L, this.$store.state.mymap, projcoord, this.$t('cdproj.projpoint'));
+            coords.displayMarker(this.$store.state.mymap, startcoord, this.$t('cdproj.startpoint'));
+            coords.displayMarker(this.$store.state.mymap, projcoord, this.$t('cdproj.projpoint'));
             
             // Draw a line on the map
-            this.$store.state.L.polyline([startcoord, projcoord], {color: 'red'}).addTo(this.$store.state.mymap);
+            L.polyline([startcoord, projcoord], {color: 'red'}).addTo(this.$store.state.mymap);
 
             // Get the projected coordinate in the same datum as the input
             return coords.convertCoordFromWGS(projcoord, this.selecteddatum);

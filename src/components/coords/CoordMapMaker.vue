@@ -117,6 +117,7 @@ import VMap from '@/components/inputs/VMap.vue'
 import VDatums from '@/components/inputs/VDatums.vue';
 import VDistance from '@/components/inputs/VDistance.vue';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import L from 'leaflet';
 
 export default {
   name: 'CoordConvert',
@@ -185,11 +186,11 @@ export default {
 
               // Add a marker to the map for each coordinate
               if (this.showmarkers) {
-                let marker = this.$store.state.L.marker(mapcoord).addTo(this.$store.state.mymap);
+                let marker = new L.marker(mapcoord).addTo(this.$store.state.mymap);
 
                 // Create a popup that doesn't close and bind it to the marker
                 if (this.showlabels) {
-                  let p = new this.$store.state.L.Popup({ autoClose: false, closeOnClick: false })
+                  let p = new L.Popup({ autoClose: false, closeOnClick: false })
                         .setContent(markertext[i])
                         .setLatLng(mapcoord);
                   marker.bindPopup(p).openPopup();
@@ -198,7 +199,7 @@ export default {
 
               // Draw circles if requested
               if (this.drawcircles) {
-                this.$store.state.L.circle(mapcoord, {
+                L.circle(mapcoord, {
                   color: "#E72E1C",
                   fillColor: "#EC7F74",
                   fillOpacity: 0.5,

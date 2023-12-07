@@ -51,6 +51,7 @@ import VMap from '@/components/inputs/VMap.vue'
 import VVariable from '@/components/inputs/VVariable.vue';
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import L from 'leaflet';
 
 export default {
 
@@ -85,7 +86,7 @@ export default {
     printMarker: function (newcoord, vars) {
       coords.convertCoordFromText(newcoord, this.selecteddatum, "WGS84")
         .then( coord => {
-          let marker = this.$store.state.L.marker(coord).addTo(this.$store.state.mymap);
+          let marker = new L.marker(coord).addTo(this.$store.state.mymap);
           marker.bindPopup(newcoord + " " + vars).openPopup();
         });
     },
