@@ -89,6 +89,10 @@
             </select>
           </div>
           <div class='row'>
+            <label for='hdrcol' class='form-label sm-size mb-2'>{{ $t('printlog.hdrcol')}}</label>
+            <input id='hdrcol' type='color' v-model='hdrcol' class='form-control mb-2 sm-size' @change='redraw()' />
+          </div>
+          <div class='row'>
             <label for='txtcol' class='form-label sm-size mb-2'>{{ $t('printlog.txtcol')}}</label>
             <input id='txtcol' type='color' v-model='txtcol' class='form-control mb-2 sm-size' @change='redraw()' />
           </div>
@@ -176,6 +180,7 @@ export default {
       errormsg: "",
       linesperlog: 3,
       lh: "27",
+      hdrcol: "#000000",
       txtcol: '#000000',
       linecol: '#000000',
       ftfcol: '#000000',
@@ -296,6 +301,7 @@ export default {
         currentY += margin;
         this.ctx.textAlign = 'center';
         this.ctx.font = "bold 15px Helvetica";
+        this.ctx.fillStyle = this.hdrcol;
         if (this.hdr1) {
           currentY += headerLh;
           this.ctx.fillText(this.hdr1, i*colWidth + colWidth/2, currentY, colWidth-margin);
@@ -310,6 +316,7 @@ export default {
         }
         this.ctx.textAlign = 'left';
         this.ctx.font = "15px Helvetica";
+        this.ctx.fillStyle = this.txtcol;
         currentY += margin;
 
         // Calculate number of logs in column

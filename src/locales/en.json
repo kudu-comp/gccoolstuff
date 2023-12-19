@@ -125,52 +125,42 @@
     "intro": "A collection of tools to convert and calculate coordinates. All tools support a wide range of coordinate systems and notations. You can make projections, calculate lines, triangles and circles. You can make maps or find incomplete coordinates. There is a special tool to help you find the right words for what3words coordinates. You can also solve Reverse Wherigo caches.",
     "convert": {
       "title": "Convert",
-      "short": "WGS84, UTM, MGRS, NAD, Dutch Grid, Maidenhead, Geohash, Mapcode, what3words and more",
-      "long" : "There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard. Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch RD Grid or the Belgian Lambert coordinates. Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates."
+      "long" : "There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard. Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates. Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means)."
     },
     "project": {
       "title": "Project",
-      "short": "Project a coordinate",
       "long": "A projection is a coordinate with a given distance and direction (angle) from the given coordinate. Many different coordinate systems are supported. Distances can be specified in meters, kilometer, feet, yards and miles. Angles can be specified in degrees, radians and gon."
     },
     "mapmaker": {
       "title": "Map maker",
-      "short": "Map coordinates with marker, label and circle",
       "long" : "Maps a list of coordinates with markers and labels on a map. Optionally draw a circle with a given radius around each coordinate. Ideal for showing possible geocache locations, for placing a geocache or finding a possible location of a mystery cache. Supports many different coordinate systems. Placing of markers and labels can be disabled."
     },
     "incomplete": {
       "title": "Incomplete coordinates",
-      "short": "Calculate and plot incomplete coordinates",
       "long" : "Plot and calculate possible coördinates where one to four numbers are unknown. For each of the unknowns the available options can be specified. A maximum of 500 locations can be shown. Clicking on the coordinate shows a popup with the used variables. The tool works with all available coordinate systems."
     },
     "lines": {
       "title": "Lines",
-      "short": "Midpoint, distance, direction, intersection of 1 or 2 lines",
       "long" : "Calculate the midpoint, direction and distance of a line. Calculate point nearest on a line relative to another point. Calculate the intersection of two lines. All points and lines are plotted on the map."
     },
     "triangles": {
       "title": "Triangles",
-      "short": "Area, circumference, centroid, orthocenter and other triangle points",
       "long" : "Calculate the area, circumference, centroid, orthocenter, incenter, circumcenter, ninepoints center of a triangle. All points and triangles are shown on the map."
     },
     "circles": {
       "title": "Circles",
-      "short": "Intersection points and area of two circles",
       "long" : "Calculate the intersection points and intersection area of two circles. All points and circles are plotted on the map."
     },
     "antipode": {
       "title": "Antipode",
-      "short": "The point opposite on the globe.",
       "long" : "The antipode is the point exactly on the opposite side of the earth. To calculate the latitude of an antipode, change the sign and direction of the latitude of the reference point. To calculate the longitude of an antipode, subtract the absolute value of the reference-point longitude from 180 degrees and change the sign and direction of the answer with reference to the reference point."
     },
     "w3w" : {
       "title": "What3words",
-      "short": "Convert to, convert from, auto suggest",
       "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p>"
     },
     "revwherigo" : {
       "title": "Reverse Wherigo",
-      "short": "Solve reverse wherigo",
       "long": "<p>Resolves reverse wherigo (Waltmeister cartridge only). Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p>"
     }
   },
@@ -179,27 +169,22 @@
     "intro": "Ciphers use keys or transposition to encrypt a message. There are 60 different ciphers available. Codes are simple ways to translate text or numbers. Codes not require a key to be solved, but it can be difficult to find the right code. You can use the search tool or use special fonts to find the code. Resistor, segment and decabit are codes used for special purposes.",
     "codebook": {
       "title": "Codebook",
-      "short": "Find codes using keywords and tags",
       "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
     }, 
     "fonts": {
       "title": "Special fonts",
-      "short": "More than 50 different codes are available as fonts.",
       "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>"  
     },
     "segment": {
       "title": "Segment display",
-      "short": "Segment display, 7, 14 and 16 segments.",
       "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on.</p><p>Choose the number of segments: 7, 14 or 16. Select the notation of segments either letters or binary. Click Encode to translate input to segment notation, click Decode to translate segment notation back to text.</p>"
     },
     "resistorcode": {
       "title": "Resistor colors",
-      "short": "Resistor calculator",
       "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"  
     },
     "decabit": {
       "title": "Decabit",
-      "short": "Decabit uses exactly ten + and - for encoding.",
       "long": "<p>Decabit is a protocol to transmit data across power lines using a series of electronic pulses. It transmits numbers between 0 up to and including 126. The numbers can be interpreted as numbers, as ASCII or anything else, for example positions in the alphabet.</p><p>This tool encodes and decodes decabit. Input/output can be numbers or text. Numbers should be between 0 - 126. Press encode to translate to decabit. Press decode to translate decabit back to text or numbers.</p>"
     } 
   },
@@ -208,37 +193,30 @@
     "intro": "Tools for text. Calculates word values. Converts ASCII or other codes. Analyze a text. Smart replace helps in solving ciphers. Convert text to numbers and back. Switch between keyboards such as Dvorak. A tool to hussle words.",
     "wordvalue": {
       "title": "Word value & square root",
-      "short": "Word value and square root, supports many alphabets, including Scrabble and Vanity code",
       "long" : "A tool to calculate the word value and square root of a text and each word individually. Supports many alphabets, including Greek and Cyrillic, Scrabble and Vanity code. Alphabets can be used in reverse order. Count starts default at one but can also start at zero. Replace diacritics if needed (but please be aware that sometimes diacritics are unique in the used alphabet)."
     },
     "charcodes": {
       "title": "Character codes",
-      "short": "UTF8, UTF16, ASCII, Alt codes, codepages, Baudot, Murray and more",
-      "long" : "<p>Computers internally use numbers and not letters. A number is translated into a character using a codepage. The most widely used these days is <b>UTF8</b>. <b>ASCII</b> is still frequently used. There are dozen of other codepages. For MS-DOS and Microsoft Windows there are many codepages with regional character sets. <b>Alt codes</b> refer to typing a number on the numeric keypad to display a special character from a Microsoft codepage. There is also an Atari version of Ascii and IBM's proprietary EBCDIC code.</p><p>In telegraphy codes were also used. These <b>Baudot and Murray codes</b> consisted of 5 bits (or holes in a paper tape). The tool can also translate these codes. The Cyrillic version called MTK2 is also supported.</p>"
+      "long" : "<p>Computers internally use numbers and not letters. A number is translated into a character using a codepage. The most widely used these days is <b>UTF8 or UTF16</b>. <b>ASCII</b> is still frequently used. There are dozen of other codepages. For MS-DOS and Microsoft Windows there are many codepages with regional character sets. <b>Alt codes</b> refer to typing a number on the numeric keypad to display a special character from a Microsoft codepage. There is also an Atari version of Ascii and IBM's proprietary EBCDIC code.</p><p>In telegraphy codes were also used. These <b>Baudot and Murray codes</b> consisted of 5 bits (or holes in a paper tape). The tool can also translate these codes. The Cyrillic version called MTK2 is also supported.</p>"
     },
     "smartreplace": {
       "title": "Smart replace",
-      "short": "Crack substitution ciphers, using frequency analysis",
       "long" : "A tool to solve any kind of substitution cipher. It uses frequency analysis to find the most likely matches for the selected language (English, Dutch, German, French and Spanish). Specify the original and replaced characters and the updated text will be shown with highlighted replacements. It can automatically replace the first 8 most likely candidates."
     },
     "analyze": {
       "title": "Analyze text",
-      "short": "Number of words, lines, whitespace and all characters in a text",
       "long" : "A tool to analyze a text. Counts the number of words, lines, whitespace , lowercase, uppercase, each letter, each digit and all symbols in a text. Also shows percentages."
     },
     "texttonumbers": {
       "title": "Text to numbers",
-      "short": "Text to numbers and vice versa",
       "long" : "A tool to translate text to numbers and vice versa using the position in the alphabet. Supports many alphabets. Optionally use a reverse alphabet and/or start at zero instead of one. A leading zero for numbers below 10 is optional, if it can be omitted safely."
     },
     "keyboards": {
       "title": "Keyboards",
-      "short": "Text as if it was typed with a different keyboard",
       "long" : "A tool to convert text as if it was typed with a different keyboard. Supports different keyboard layouts including Azerty, Cyrillic, Dvorak and Colemak."
     },
     "texttoss": {
       "title": "Toss",
-      "short": "Toss the letters of each word",
       "long": "Change the order of letters of each word in a text. The option that keeps both the first and last letter is also known as typoglycemia."
     }
   },
@@ -247,37 +225,30 @@
     "intro": "Some tools to quickly edit or scan images. Exif scanner shows the metadata of an image. The color picker will show all the details of a selected color. The color editor can do many things, such as filling an area, change contrast or brightness and apply filters. There is a tool to draw an image from number input. And a tool to do crazy things such as flipping half the rows or shifting parts of the image.",
     "exifscanner": {
       "title": "Exif Scanner",
-      "short": "Metadata (EXIF) of an image, like GPS, comments, description",
       "long": "Exif reader retrieve the metadata (EXIF and others) from an image. If a GPS location is included it is shown on the map. Also flips or rotates the image."
     },
     "colorpicker": {
       "title": "Color Picker",
-      "short": "RGB, hex, CMYK, HSL and HSV color values",
-      "long": "A tool that shows the RGB, hexadecimal RGB, CMY(K), HSL and HSV value. Click anywhere in the image to display the values."
+      "long": "A tool that shows the RGB, hexadecimal RGB, CMY(K), HSL and HSV color values. Click anywhere in the image to display the values."
     },
     "filltool": {
       "title": "Color editor",
-      "short": "Area fill, brightness and contrast, B&W, sepia, filters, color depth.",
       "long": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>"
     },
     "pixeldata": {
       "title": "Pixel data",
-      "short": "Total of R, G and B, count a specific RGB value",
       "long": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>"
     },
     "pixelbuild": {
       "title": "Pixeldraw",
-      "short": "Draw an image from numbers",
       "long": "<p>Tool to draw an image from a text with up to 10 different characters. Each character representing a different color. Example is a sequence of 0 and 1 representing a QR code. Another example would be a color drawing where the image appears if all colors are filled.</p><p>Height and width are optional. If height is empty, the number of lines in the input represents the height. If width is emptt, the length of the first line represents the width. You can select which character represents which color.</p>"
     },
     "imagetransform": {
       "title": "Transform",
-      "short": "Flip horizontal and vertical (whole picture or parts), shift rows or columns",
       "long": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image."
     },
     "textextractor": {
       "title": "Text extractor",
-      "short": "Find possible texts in any file",
       "long": "The tool tries to locate text by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely."
     }
   },
@@ -286,48 +257,39 @@
     "intro": "A collection of tools for various topics. Solving Sudoku or Mastermind. A unit convertor for hundreds of units. A calculator for dates. A random generator. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes.",
     "sudokusolver": {
       "title": "Sudoku solver",
-      "short": "Solver for Sudoku and Sudoku X, sizes 2 and 3",
       "long":  "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares or alternatively type the hints as row column number separed by comma, e.g. 125,243,254"
     },
     "mmsolver": {
       "title": "Mastermind solver",
-      "short": "Mastermind solver for 3 to 6 pins, 4 to 9 colors",
       "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors."
     },
     "periodictable": {
       "title": "Periodic table",
-      "short": "Chemical element numbers, symbols and names",
       "long": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>"
     },
     "countries": {
       "title": "Country codes",
-      "short": "Countries and named territories with flags",
       "long": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>"
     },
     "usastates": {
       "title": "US States",
-      "short": "States of the US including flags",
       "long": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>"  
     },
     "countryregions": {
       "title": "Regions of nl, be, de and fr",
-      "short": "Regions of the Netherlands, Belgium, Germany and France including flags",
       "long": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>"  
     },
     "unitconvertor": {
       "title": "Units",
-      "short": "Length, area, volume, temperature, power, angle and speed convertor",
-      "long": "Unit convertor converts a wide range of units. Units are organized in categories for units that measure the same event, e.g. length or temperature. It won't be possible to convert between categories. All the common units are supported, but also a lot of lesser known or now obsolete units."  
+      "long": "Unit convertor converts a wide range of units. Units are organized in categories for units that measure the same event, e.g. length or temperature. It won't be possible to convert between categories. Categories are length, area, volume, temperature, power, angle and speed. All the common units are supported, but also a lot of lesser known or now obsolete units."  
     },
     "dnacode": {
       "title": "DNA Code",
-      "short": "Three letter codes of DNA and RNA",
       "long": "<p>DNA or RNA codons are represented with 3 letters. Whenever you see a bunch of letters with lots of A, C, G, T or U you could be dealing with codons. Sometimes other letters are used as well to indicate combinations of codons. For example Y means T or C, so TAY means TAT or TAC. Type the codons in three letter chunks and press search.</p><p>Some background info. Codons are a combination of three nucleo acids. DNA are composed of A (Adenine), C (Cytosine)and G (Guanine) and T (Thymine). RNA shares three of the four nucleo acids but T is replaced with and U (Uracil). Most codons define an amino acid, which have a name, a three letter abbreviation and a single letter. Some codons are start and stop signals. Some codons are used for the same amino acid. A piece of RNA or DNA contains several codons, each representing an amino acid. The resulting chain of amino acids builds a proteine. For more information read <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>this</a>.</p>"
     }
   },
 
   "cp": {
-    "short": " and 50 other ciphers",
     "long": "Ciphers are used to encrypt messages by means of substitution and transposition or a combination of both. Simple ciphers use only one alphabet, such as Atbash or ROT13. More complex ciphers use more alphabets, for example Vigenere or Beaufort. Some ciphers encrypt one letter at a team, but there are many who encrypt bigrams of two letters. Examples are Polybius, Bazeries or Condi.Transposition ciphers simple reorder the message, such as the Railfence, Cadenus or Skip ciphers. The most complex ciphers use combinations of the above, such as the Bifid, Trifid and Digrafid cipher.",
     "info": "Select one of the ciphers from the list. Enter you message and press encode or decode. If the cipher requires a key it will show. Use expertmode to change the default behavior.",
     "cipher": "Cipher",
@@ -639,62 +601,50 @@
     "intro": "Mathematical and arithmetic tools. Decimals of constants like pi. Calculator for very large binary, octal, decimal and hexadecimal numbers. Some well known series like Fibonacci and Hailstone. Primes, GCD and LCM and prime factors. A solver for cryptarithms.",    
     "baseconvert": {
       "title": "Base converter",
-      "short": "Binary, decimal, hexadecimal or any base from 2 to 36.",
-      "long" : "A tool to convert numbers from one base to another. Supports any base from 2 (binary) to 36. Optionally change the characters to use. Multiple numbers can be entered separated by spaces."
+      "long" : "A tool to convert numbers from one base to another. Supports any base from 2 (binary) to 36. Optionally change the characters to use. Multiple numbers can be entered separated by spaces. Binary is base 2, octal is base 8, decimal is base 10 and hexadecimal is base 16."
     },
     "decimals": {
       "title": "Decimals",
-      "short": "Decimals of 𝜋, e, 𝜏, φ, γ, √2, √3, ζ(3)",
-      "long" : "<p>A tool to search decimals of 𝜋, e, 𝜏, φ, γ, √2 and √3. The count starts at the first decimal (so to say after the dot). The first 1,000,000 digits are available.</p><p>All of these numbers are irrational, which implies that any sequence of numbers appears somewhere between the decimals. The following constants are available. Pi or 𝜋. The natural number e. Tau or 2𝜋. The golden ratio  or φ or phi. The Euler-Mascheroni constant or γ. The square roots of 2 and 3 (√2 and √3). The constant of Apéry or ζ(3) or zeta(3). The Gauss's constant and Catalan's constant both also denoted as G. The lemniscate constant.</p>"
+      "long" : "<p>A tool to search decimals of 𝜋, e, 𝜏, φ, γ, √2, √3 and ζ(3). The count starts at the first decimal (so to say after the dot). The first 1,000,000 digits are available.</p><p>All of these numbers are irrational, which implies that any sequence of numbers appears somewhere between the decimals. The following constants are available. Pi or 𝜋. The natural number e. Tau or 2𝜋. The golden ratio  or φ or phi. The Euler-Mascheroni constant or γ. The square roots of 2 and 3 (√2 and √3). The constant of Apéry or ζ(3) or zeta(3). The Gauss's constant and Catalan's constant both also denoted as G. The lemniscate constant.</p>"
     },
     "primes": {
       "title": "Primes",
-      "short": "Primes",
       "long" : "This tool checks if a number is prime or not. The max number to be checked is 2^53. It shows the prime number at a given position or shows the position of a given prime. The first 865,000 primes are available. Get prime factors."
     },
     "romans": {
       "title": "Roman numbers",
-      "short": "Roman numbers",
       "long": "This tool converts roman numbers to decimal numbers and back. The maximum roman number is 3999. Roman numbers use the following characters MDCLXVI. It is possible to enter multiple numbers divided by spaces or something else."
     },
     "fibonacci": {
       "title": "Fibonacci",
-      "short": "First 500 Fibonacci numbers.",
       "long" : "The Fibonacci sequence starts with 1, 1. The next number is the addition of the previous two. So 1+1=2, 1+2=3, 2+3=5 and so on. The numbers get really large really quickly. The first 500 Fibonacci numbers are available."
     },
     "primegcdlcm": {
       "title": "GCD and LCM",
-      "short": "Greatest common divisor or least common muliple of one or more numbers. Also gives the prime factors",
       "long" : "This tool finds the Greatest Common Divisor (GCD) and least common multiple (LCM). It will also list the prime factors of each number. You can type multiple numbers. Please be aware that very large numbers can take some time to calculate."
     },
     "formulasolver": {
       "title": "Cryptarithm",
-      "short": "Cryptarithm or alphametics are formulas like SEND + MORE = MONEY",
       "long": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>"
     },
     "numberprop": {
       "title": "Number properties",
-      "short": "Properties of a number, e.g. prime, fibonacci, lucky, deficient, perfect, odd, even and more",
-      "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, odious, evil, lucky, perfect, deficient, pentagonal, squarefree and others."
+      "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, odious, evil, lucky, perfect, deficient, narcistic, powerful, aspiring, pentagonal, squarefree and others."
     },
     "bignum": {
       "title": "Big number calculator",
-      "short": "Calculator for very very large integers",
       "long": "<p>A calculator for very large numbers. Only integers are accepted. You can either enter decimal, binary, octal or hexadecimal numbers. All operators work als you would expect, except division. Division always truncates the result (instead of rounding to the nearest integer). All logical functions are bitwise logical operations.</p>"
     },
     "nimbers": {
       "title": "Nimbers",
-      "short": "Product and sum of two nimbers",
       "long" : "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT). Enter two numbers and the product and sum will be calculated."
     },
     "sequences": {
       "title": "Sequences",
-      "short": "Hailstone, Conway, Niven, Golomb and others.",
       "long" : "This tool generates the n-th term of some well known sequences, such as Hailstone, Conway, Golomb and Niven. These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. You can search OEIS on words, but also on the first few numbers of the sequence."
     },
     "palindrome": {
       "title": "Palindrome",
-      "short": "How many reverse additions does it take to become a palindrome",
       "long" : "A palindrome number is a number that is the same backwards. This tool calculates how many times does it takes for a number to become a palindrome by adding the reverse number. Most numbers get there rather quickly but some take longer (this algorithm stops after 100 tries)."      
     }
   },
@@ -703,52 +653,42 @@
     "intro": "A collection of tools used in programming and computers. There are severals way of coding numbers, characters and binary data. Encryptions and hashes are also supported. Several so called esoterioc programming languages (esolangs) can be executed as well.",
     "compbrainfuck": {
       "title": "Brainfuck",
-      "short": "Brainfuck, Ook! and Spoon programs",
       "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands + - > < . , [ and ]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>"
     },
     "compbcd": {
       "title": "BCD",
-      "short": "Binary Coded Decimals in different notations",
       "long":  "<p>BCD (Binary Coded Decimals) is a way to code numbers. By default it uses binary codes for each digit, so 4571 becomes 0100 0101 0111 0001. Binary codes can be packed into 8 digit groups. The example becomes 01000101 01110001. Or the 4 digits are filled to 8 digits like 11110100 11110101 11110111 11110001.</p><p>There are also other ways to code decimal numbers such as Aiken, Excess-3, Excess-6 or different Gray codes, which also use 4 bits per number but instead of binary some other table is used. More info can be found <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>here</a>.</p>"
     },
     "compdeadfish": {
       "title": "Deadfish",
-      "short": "Deadfish is a pretty useless programming language",
       "long":  "<p>Deadfish is a programming language with only 4 instructions. Increment with 1 (i), decrement with 1 (d), square (s) and output (o). The counter start at 0, if it reaches -1 or exactly 256 it resets to 0. Sometimes xdkc are used instead of idso. Both instruction sets are supported.</p>"
     },
     "encryption": {
       "title": "Encryption",
-      "short": "Okto3, AES, DES, Rabbit, HMAC and other digitial encryptions",
-      "long": "<p>All of these are basically very complex ciphers used by computers to transmit and store information safely. They are the successors of the handciphers of the 20th century. All of these codes require a key. There are also advanced options which control the alghorithm, but on most occassions you should keep the default settings.</p><p>DES used to be the standard in computer encryption but has found to be insecure. AES is most common these days. Rabbit and RC4 are also in use. Okto3 encrypts the input to a series of decimal numbers and is pretty useless for anything else but geocaches.</p>"
+      "long": "<p>All of these are basically very complex ciphers used by computers to transmit and store information safely. They are the successors of the handciphers of the 20th century. All of these codes require a key. There are also advanced options which control the alghorithm, but on most occassions you should keep the default settings.</p><p>DES used to be the standard in computer encryption but has found to be insecure. AES is most common these days. Rabbit, HMAC and RC4 are also in use. Okto3 encrypts the input to a series of decimal numbers and is pretty useless for anything else but geocaches.</p>"
     },
     "hashes": {
       "title": "Hashes",
-      "short": "MD5, SHA-1, SHA-2 (SHA256 and SHA512), SHA-3 and RIPEMD160 hashes",
-      "long": "<p>Hashes are like digital signatures. They only work one way. The message is hashed into a code (represented here as a hexadecimal string). The authenticity of a message can be confirmed by hashing the message again and compare it with the distributed hash. There are a couple of common hash algorithms. MD5 has been around for a while but is now considered insecure. SHA-1 is most common these days. SHA-3 is the most recent and most secure one.</p><p>Enter a message and press Calculate to get the hash. Optionally the hash is verified and the result is shown.</p>"
+      "long": "<p>Hashes are like digital signatures. They only work one way. The message is hashed into a code (represented here as a hexadecimal string). The authenticity of a message can be confirmed by hashing the message again and compare it with the distributed hash. There are a couple of common hash algorithms. MD5 has been around for a while but is now considered insecure. SHA-1 is most common these days. SHA-3 is the most recent and most secure one. Other formats are SHA-2 (SHA256 and SHA512) and RIPEMD160.</p><p>Enter a message and press Calculate to get the hash. Optionally the hash is verified and the result is shown.</p>"
     },
     "cow": {
       "title": "COW",
-      "short": "COW programming language",
       "long": "<p>The COW programming language is an esoteric programming language created by Sean Heber in 2003. It is a Brainfuck variant designed humorously with Bovinae in mind. COW has twelve instructions (four more than Brainfuck) and is Turing-complete. Most instructions are moos, only the capitalization varies: mOo, moO, mOO, Moo, and so on. MMM, OOO, oom and OOM are the exceptions. All other character combinations are ignored and treated as comments. The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
     },
     "beatnik": {
       "title": "Beatnik",
-      "short": "Beatnik programming language",
       "long": "Beatnik calculates the Scrabble value of each word. The value is then treated as a command. Words consist only of letters, so Boeing747Dreamliner gives two words (and two commands). Multiple Scrabble versions are available, but English is the most likely choice. More info can be found <a href='https://esolangs.org/wiki/Beatnik'>here.</a></p><p>The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
     },
     "compbintotext": {
       "title": "Binary to text",
-      "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91",
-      "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>"
+      "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days. The following formats are supported: Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>"
     },
     "duckspeak" : {
       "title": "Duckspeak",
-      "short": "A lot of nak",
       "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
     },
     "checksum" : {
       "title": "Checkdigit",
-      "short": "Calculate the check digit for IBAN, credit card, social security and other numbers",
       "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark. For IBAN the check digits are the 3rd and 4th positions, always replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>"
     }
 
@@ -871,7 +811,6 @@
   },
 
   "htmlscanner": {
-    "short": "Scan the page source for links, images and hidden information",
     "long": "Sometimes information is hidden inside the cache listing using HTML. For example using white or very small text, or marking letters as bold, italic or in some other way. Links can be hidden inside images or in other places. HTML Scanner scans the page source for links, images and hidden information. This tool only works with the official pages from geocaching.com. Copy & paste the page source below.",
     "ph": "Paste the page source here",
     "btnscan": "Scan",
@@ -1763,6 +1702,7 @@
     "header": "Header",
     "ncol": "No. of columns",
     "lpl" : "Lines per log",
+    "hdrcol": "Header color",
     "txtcol" : "Text color",
     "linecol" : "Line color",
     "ftfcol" : "FTF color",
@@ -1779,7 +1719,42 @@
     "lh3": "Normal",
     "lh4": "Wide",
     "lh5": "Very wide"
-  }
+  },
 
+  "gameoflife": {
+    "title": "Game of life",
+    "long": "<p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It starts with an initial generation of cells. Each next generation follows a few simple rules: A cell dies if it has less than 2 or more than three neighbours. A cell becomes alive if it has exactly three neighbours.</p><p>Select a pattern to fill the grid. At any time you can click a cell to make it alive or kill it. You can change the default rules if you want.</p>",
+    "newgrid": "Start new",
+    "step": "Step",
+    "gen": "Generation: ",
+    "cellsalive": "Cells alive: ",
+    "fillgrid": "Start pattern",
+    "chgrules": "Change rules",
+    "diebelow": "Die below",
+    "dieabove": "Die above",
+    "bornabove": "Born above",
+    "bornbelow": "Born below",
+    "empty": "Empty",
+    "random": "Random",
+    "rndsym": "Random symmetrical",
+    "rows": "# rows",
+    "cols": "# columns"
+  },
+
+  "booksearch" : {
+    "title" : "Book search",
+    "long" : "This tool will lookup a book using the ISBN number, author, title or a combination of those. It uses the free online OpenLibrary.org. If there are more matches all of them will be displayed.",
+    "sel" : "Show results",
+    "short": "Author(s), title, one ISBN",
+    "extra": "Author(s), title, all ISBN, year published, languages, publishers",
+    "bkfnd": "Books found: ",
+    "isbn": "ISBN(s): ",
+    "author": "Author(s): ",
+    "titles": "Title: ",
+    "firstpub": "First published: ",
+    "lang": "Language(s): ",
+    "pub": "Publisher(s): ",
+    "edcnt": "Edition count: "
+  }
 
 }

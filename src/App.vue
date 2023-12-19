@@ -145,7 +145,7 @@ export default {
               {
                 type: "link",
                 text: this.$t("menu.ciphers"),
-                path: { name: "Cipher"}
+                path: { name: "Cipher" }
               },                    
               {
                 type: "link",
@@ -415,6 +415,16 @@ export default {
                 text: this.$t("othertools.dnacode.title"),
                 path: { name: "DNACode" },
               },
+              {
+                type: "link",
+                text: this.$t("gameoflife.title"),
+                path: { name: "GameOfLife" },
+              },
+              {
+                type: "link",
+                text: this.$t("booksearch.title"),
+                path: { name: "BookSearch" },
+              },
             ],
           },
           {
@@ -471,6 +481,12 @@ export default {
           }              
         ],
         menuOptionsRight: [
+          {
+            type: 'button',
+            text: '',
+            path: { name: 'AllTools' },
+            iconRight: '<i class="fa-solid fa-search"></i>',
+          },
           {
             isLinkAction: true,
             type: "button",
@@ -563,6 +579,8 @@ export default {
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[9].text = this.$t("othertools.usastates.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[10].text = this.$t("othertools.countryregions.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[11].text = this.$t("othertools.dnacode.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[12].text = this.$t("gameoflife.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[13].text = this.$t("booksearch.title");
       this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.help");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("menu.howto");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("labels.help") + this.$t("menu.coordinates");

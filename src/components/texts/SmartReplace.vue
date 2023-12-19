@@ -199,7 +199,6 @@ export default {
 
   mounted: function() {
     this.$refs.message.focus();
-    for (let i=0; i<26; i++) this.percentages[i]= 0.00;
     this.setLanguage();
   },
 
@@ -287,13 +286,15 @@ export default {
       }
 
       // Calculate percentages 
+      this.percentages = new Array(countletters.length).fill(0.00);
+
       for (let i=0; i < countletters.length; i++) {
         this.percentages[i] = { char : countletters[i].char, count : countletters[i].count / length * 100 };
       }
 
       // Sort array with percentages descending
       this.percentages.sort((a, b) => { if (a.count > b.count) return -1; else if (a.count < b.count) return 1; else return 0; });
-
+      
       // Print hints
       let html = "<table class='table table-sm table-bordered text-center'><tr><td>Letter</td>";
       for (let i = 0; i < this.freq.length; i++) html+="<td>" + this.freq[i] + "</td>";
@@ -304,7 +305,7 @@ export default {
       html += "</tr><tr><td>Hint freq</td>";
       for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].count.toFixed(1) + "</td>";
       html += "</tr></table>";
-      this.hints = html;
+      this.hints += html;
 
     },
 
@@ -368,7 +369,7 @@ export default {
                 html += '<span style="color: ' + this.highlightflag + '">' + c + '</span>';
                 break;
               case 'bold' :
-                html += '<b>' + this.from[idx] + '</b>';
+                html += '<b>' + c + '</b>';
                 break;
               case 'uppercase' :
                 html += c.toUpperCase();

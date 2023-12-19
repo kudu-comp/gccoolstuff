@@ -856,7 +856,7 @@ export var codepages = [
   },
   { name: "Window cipher",
     imagename: "windowcipher.png",
-    description: "The cipher is found in 'Cryptographia' from Johannes Balthasar, written in 1685",
+    description: "Also known as Friderici windows. A steganography technique used by Johann B. Friderici in his book Cryptographia. There he presents an illustration of a ruined building made up of 22 four-paned windows.",
     tags: ["alphabet", "book", "squares"]
   },
   { name: "Yin Yang Alphalines",

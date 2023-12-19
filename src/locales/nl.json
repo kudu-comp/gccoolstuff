@@ -125,52 +125,42 @@
     "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en circles. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. What3words wordt uitgebreid ondersteund. Het is ook mogelijk Reverse Wherigo caches op te lossen.",
     "convert": {
       "title": "Converteren",
-      "short": "WGS84, RD, UTM, Maidenhead, Geohash, Mapcode, what3words, OGSM, MGRS, NAD en meer",
-      "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen."
+      "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen. Andere ondersteunde formaten zijn MGRS, OGSM en NAD. Je kan ook een willekeurige conversie invoeren middels de proj4 definitie van EPSG (als je weet hoe dat werkt)."
     },
     "project": {
       "title": "Projecteren",
-      "short": "Projecteer een coördinaat",
       "long": "Een projectie is een coördinaat dat zich op een gegeven afstand en hoek bevindt van een ander coördinaat. De afstand kan worden opgegeven in meter, kilometer, voet, yard en mijlen. De hoek kan worden opgegeven in graden, radialen en gon."
     },
     "mapmaker": {
       "title": "Kaart maken",
-      "short": "Plot coördinaten met marker, label en cirkel",
       "long" : "Plot een lijst van coördinaten met een marker en tekst op de kaart. Er kan eventueel een cirkel om de coördinaten worden getekend. Ideaal voor het vinden van mogelijk locaties voor een te plaatsen geocache of het vinden van een mystery cache. Het plaatsen van markers en tekst kan worden uitgezet."
     },
     "incomplete": {
       "title": "Incomplete coördinaten",
-      "short": "Plot coördinaten met onbekende cijfers.",
       "long" : "Plot en berekenen mogelijke coördinaten waarvoor één tot vier cijfers ontbreken. Voor elk van de ontbrekende cijfers kunnen de beschikbare opties worden ingesteld. Er kunnen maximaal 500 locaties worden getoond op kaart. De gebruikte waardes worden getoond in een popup alsop het coördinaat wordt geklikt. De tool werkt met alle beschikbare coördinaatsystemen."
     },
     "lines": {
       "title": "Lijnen",
-      "short": "Middelpunt, lengte, richting en snijpunt van 1 of 2 lijnen",
       "long" : "Bereken het middelpunt, lengte en richting van een lijn. Bereken het dichtsbijzijnde punt op een lijn gezien vanaf een ander punt. Bereken het snijpunt van twee lijnen. Berekende punten en lijnen worden getoond op kaart."
     },
     "triangles": {
       "title": "Driehoeken",
-      "short": "Oppervlakte, omtrek, zwaartepunt, hoogtepunt  en andere driehoekspunten",
       "long" : "Bereken het oppervlakte, omtrek, zwaartepunt, hoogtepunt, middelpunt ingeschreven cirkel, middelpunt omgeschreven circkel, negenpuntspunt van een driehoek. Berekende punten en driehoeken worden ook getoond op kaart."
     },
     "circles": {
       "title": "Cirkels",
-      "short": "Oppervlakte en snijpunten van twee cirkels",
       "long" : "Bereken de snijpunten van twee cirkels en de oppervlakte van het gezamenlijke deel. Berekende punten en cirkels worden ook getoond op kaart."
     },
     "antipode": {
       "title": "Antipode",
-      "short": "Het punt exact aan de andere kant van de aarde",
       "long" : "Bereken de antipode, het punt exact aan de andere kant van de aardbol."
     },
     "w3w" : {
       "title": "What3words",
-      "short": "Converteer naar en van, auto suggesties",
       "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>"
     },
     "revwherigo" : {
       "title": "Reverse Wherigo",
-      "short": "Reverse wherigo oplossen",
       "long": "<p>Oplossen van reverse wherigos (Waltmeister cartridge). Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
     }
   },
@@ -179,27 +169,22 @@
     "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden.",
     "codebook": {
       "title": "Codebook",
-      "short": "Vind de juiste code door te zoeken op tags en woorden",
       "long": "Vind de juiste code door te zoeken op tags en woorden. Bijna 200 verschillende codes. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar."
     }, 
     "fonts": {
       "title": "Speciale fonts",
-      "short": "Meer dan 50 fonts / codes zijn beschikbaar.",
       "long": "<p>Een code is soms niet veel meer dan het gebruik van een ander font, bijvoorbeeld Webdings. Ook zijn veel codes uit bijvoorbeeld games en televisieseries beschikbaar als font. Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>"  
     },
     "segment": {
       "title": "Segment display",
-      "short": "Segment display, 7, 14 en 16 segmenten.",
       "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is.</p><p>Kies het aantal segmenten: 7, 14 of 16. Kies de notatie van segmenten: letters of binair. Klik op Codeer om de invoer te vertalen naar segmenten, klik op Decodeer om segmentnotatie te vertalen naar tekst.</p>"
     },
     "resistorcode": {
       "title": "Weerstandscode",
-      "short": "Weerstand berekenen",
       "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>"
     },
     "decabit": {
       "title": "Decabit",
-      "short": "Decabit gebruikt steeds tien + en - voor coderen.",
       "long": "<p>Decabit is een protocol om data over het electriciteitsnet te transporteren door middel van een serie pulsen. Nummers tussen 0 en 126 worden door steeds 5 plus en 5 mintekens gecodeerd. De nummers kunnen geïnterpreteerd worden als nummers, als ASCII of iets anders, zoals de posities in het alfabet</p><p>Deze tool codeert en decodeert decabit. Invoer/uitvoer kan nummers of tekst zijn. Nummers moeten tussen de 0 en 126 zijn. Druk op Coderen om te vertalen naar decabit, druk op decoderen om decabit te vertalen naar tekst of nummers.</p>"
     } 
   },
@@ -208,37 +193,30 @@
     "intro": "Tools voor tekst. Het berekenen van woordwaardes. Het converteren van ASCII of andere codes. Een tool om tekst te analiseren. Slimme substitutie helpt met het kraken van geheimschriften. Converteren van tekst van en naar nummers. Het wisselen van toetsenborden zoals Dvorak. En een tool om woorden door elkaar te husselen.",
     "wordvalue": {
       "title": "Woordwaarde",
-      "short": "Woordwaarde, stapeltellen, standaard alfabet, Scrabble, Vanity code en diverse anderen.",
       "long" : "Een tool voor het berekenen van woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon. De telling kan ook in omgekeerde volgorde (bijv. Z=1 en A=26). De telling begint standaard met 1, maar kan ook met 0 beginnen (bijv. A=0 en Z=25). Vervang diakrieten indien gewenst, maar let erop dat in sommige alfabetten diakrieten een eigen letter vertegenwoordigen!"
     },
     "charcodes": {
       "title": "Karakter codes",
-      "short": "UTF8, UTF16, ASCII, Alt codes, codepages, Baudot, Murray en meer",
-      "long" : "<p>Computers werken intern met nummers en niet met letters. Een nummer wordt vertaald naar een karakter met gebruikmaking van een zogenaamde codepage. De meest gebruikte is tegenwoordig <b>UTF8</b>. <b>ASCII</b> is ook nog veel gebruikt. Er zijn nog veel meer varianten in gebruik. Voor MS-DOS en Microsoft Windows zijn er diverse codepages met regionale karakters. <b>Alt codes</b> refereren naar het intypen van een nummer op het numerieke keypad om een karakter to selecteren uit een Microsoft codepage. Er is ook een Atari version van Ascii en IBM's eigen EBCDIC code.</p><p>In telegrafie werden codes ook gebruikt. Deze <b>Baudot and Murray codes</b> bestaan uit 5 bits (of gaatjes in een papertape). De tool kan ook deze codes vertalen. De Cyrillische versie genaamd MTK2 wordt ook ondersteund.</p>"
+      "long" : "<p>Computers werken intern met nummers en niet met letters. Een nummer wordt vertaald naar een karakter met gebruikmaking van een zogenaamde codepage. De meest gebruikte is tegenwoordig <b>UTF8 en UTF16</b>. <b>ASCII</b> is ook nog veel gebruikt. Er zijn nog veel meer varianten in gebruik. Voor MS-DOS en Microsoft Windows zijn er diverse codepages met regionale karakters. <b>Alt codes</b> refereren naar het intypen van een nummer op het numerieke keypad om een karakter to selecteren uit een Microsoft codepage. Er is ook een Atari version van Ascii en IBM's eigen EBCDIC code.</p><p>In telegrafie werden codes ook gebruikt. Deze <b>Baudot and Murray codes</b> bestaan uit 5 bits (of gaatjes in een papertape). De tool kan ook deze codes vertalen. De Cyrillische versie genaamd MTK2 wordt ook ondersteund.</p>"
     },
     "smartreplace": {
       "title": "Slimme Substitutie",
-      "short": "Oplossen van substitutie geheimschriften",
       "long" : "Een tool om substitutie geheimschriften op te lossen met behulp van frequentieanalyse. Op basis van de frequenties in de gecodeerde tekst en die van de geselecteerde taal (Engels, Nederlands, Duits, Frans of Spaans) worden de beste matches voorgesteld. Specificeer de originele en de vervangende letters en de aangepaste tekst wordt getoond. De vervangen letters worden duidelijk gemarkeerrd. Eventueel kunnen de eerste 8 meest waarschijnlijke kandidaten automatisch worden vervangen."
     },
     "analyze": {
       "title": "Analiseer tekst",
-      "short": "Aantal zinnen, woorden, letters, cijfers, spaties en andere tekens",
       "long" : "Een tool om een tekst te analiseren. Telt het aantal zinnen, woorden, letters (hoofd- en kleine letters), cijfers, spaties en andere tekens. Geeft ook de percentages."
     },
     "texttonumbers": {
       "title": "Tekst naar nummers",
-      "short": "Tekst naar nummers en vice versa",
       "long" : "Een tool die tekst naar nummers vertaalt en vice versa op basis van de positie in het alfabet. Ondersteunt diverse alfabetten. Eventueel in omgekeerde volgorde en/of beginnend op nul. De voorloopnul bij getallen onder de 10 is optioneel, indien deze eenduidig kan worden weggelaten."
     },
     "keyboards": {
       "title": "Toetsenborden",
-      "short": "Vertaalt tekst alsof het op een ander toetsenbord was getikt.",
       "long" : "Een tool om tekst te vertalen alsof het op een ander toetsenbord was getikt. Ondersteund Azerty, Dvorak, Cyrillisch en Colemak."
     },
     "texttoss": {
       "title": "Hussel",
-      "short": "Alle woorden in een tekst husselen",
       "long": "Verander de volgorde van de letters van elk woord in een tekst. De optie met behoud van de eerste en laatste letter van elk woord heet ook wel typoglycemia."
     }
   },
@@ -247,37 +225,30 @@
     "intro": "Tools om afbeeldingen snel te bewerken of te scannen. De EXIF scanner toont de gegevens van een afbeelding. De kleurenkiezer geeft de details van een geseleteerde kleur. De editor kan snel een gebied vullen, helderheid of contrast aanpassen of een filter toepassen. Er is een tool om een afbeelding te genereren uit getallen. Transformeren doet rare dingen als een afbeelding gedeeltelijk spiegelen of verschuiven. Tekst zoeker vindt mogelijke teksten in willekeurige files, zoals afbeeldingen.",
     "exifscanner": {
       "title": "Exif Scanner",
-      "short": "Metadata van een foto, zoals beschrijving, commentaar en GPS data.",
       "long": "Exif Reader haalt de metadata (EXIF en andere informatie) van een foto op. Indien een GPS locatie aanwezig is wordt die getoond op de kaart."
     },
     "colorpicker": {
       "title": "Kleurenkiezer",
-      "short": "RGB, hex, CMYK, HSL en HSV waardes",
       "long": "Kleurenkiezer. Laad een afbeelding en selecteer een kleur. De tool toont de RGB, hex, CMY(K), HSL en HSV waardes van de geselecteerde kleur."
     },
     "filltool": {
       "title": "Kleuren aanpassen",
-      "short": "Gebied vullen, helderheid en contrast, B&W, sepia, filters, kleurdiepte.",
       "long": "<p>Vervang een kleur door een andere kleur. Probeer grote vlakken van eenzelfde kleur te vervangen door een andere kleur om onzichtbare verschillen in kleur tevoorschijn te halen. Converteer de afbeelding naar zwart wit, sepia of probeer een van de andere filters. Pas de helderheid of het contrast, of verminder de kleurdiepte. Spiegel de afbeelding.</p><p>Klik op een willekeurige plek in de afbeelding om die kleur te vullen. De vulkleur kan worden ingesteld. De tolerantie is standaard 0. Door de tolerantie aan te passen worden kleuren die lijken op de gekozen kleur ook vervangen. De maximum tolerantie is 255, in dat geval wordt de hele afbeelding gevuld. Gebruik de knop Origineel om de originele afbeelding weer te tonen.</p>"
     },
     "pixeldata": {
       "title": "Pixel data",
-      "short": "Totaal van R, G end B. Aantal pixels met een bepaalde kleur (RGB)",
       "long": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>"
     },
     "pixelbuild": {
       "title": "Pixelbeeld",
-      "short": "Teken aan de hand van een tekst",
       "long": "<p>Pixlebeed is een tool om een afbeelding op te bouwen aan de hand van een tekst met maximaal 10 verschillende karakters. Elk karakter staat voor één bepaalde kleur. Een voorbeeld is een bestand met 0 en 1 wat een QR code voorstelt. Een ander voorbeeld is kleurplaat.</p><p>Hoogte en breedte zijn optioneel. Als de hoogte leeg is wordt het aantal regels van de tekst gebruikt. Als de breedte leeg is wordt de lengte van de eerste regel gebruikt. Het is mogelijk om voor elk karakter de te gebruiken kleur in te stellen.</p>"
     },
     "imagetransform": {
       "title": "Transformeren",
-      "short": "Spiegelen (geheel of gedeeltelijk), verschuif rijen of kolommen",
       "long": "Spiegel horizontaal en/of verticaal (geheel of gedeeltelijk), verschuif rijen en/of kolommen een aantal pixels."
     },
     "textextractor": {
       "title": "Tekst in file",
-      "short": "Zoek mogelijke teksten in een file",
       "long": "De tool zoekt mogelijke teksten door te zoeken naar aaneengesloten afdrukbare karakters (ASCII 32 t/m 126). De minimale hoeveelheid aaneengesloten tekens kan worden ingesteld. Het maximale aantal zoekresultaten en de startpositie om te beginnen met zoeken zijn ook instelbaar. Door bijvoorbeeld eerst te zoeken op langere teksten kan vervolgens met de startpositie worden ingezoomd op een bepaald gebied met mogelijke kortere teksten. Grote files scannen kan enige tijd duren of deze kunnen in het geheel niet worden geladen."
     }
   },
@@ -286,48 +257,39 @@
     "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes",
     "sudokusolver": {
       "title": "Sudoku oplosser",
-      "short": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3",
       "long": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3. 4x4 uitgeschakeld vanwege belasting server. Vul het vierkant of voer de hints in als rij, kolom, cijfer gescheiden door komma's, bijv. 125,243,254"
     },
     "mmsolver": {
       "title": "Mastermind oplosser",
-      "short": "Mastermind solver voor 3 t/m 6 pins en 4 t/m 9 kleuren",
       "long": "<p>Mastermind is een logische puzzel. Het doel is een code (set kleuren) te achterhalen. Voor elke poging wordt het aantal correcte pins (kleur en positie) alsmede het aantal pins waarvan alleen de kleur juist is (maar de positie niet) gegeven. Door deze informatie logisch te gebruiken kan in een aantal pogingen de juiste combinatie worden gevonden. Het originele spel was 5 posities en 8 kleuren. De meeste populaire variant heeft 4 posities en 6 kleuren. De kleuren kunnen uniek zijn maar dat is meestal niet het geval. Deze tool gebruikt cijfers in plaats van kleuren. Voer het aantal pins, het aantal kleuren en de gedane pogingen in en de tool berekent de mogelijke combinaties.</p>"
     },
     "periodictable": {
       "title": "Periodiek systeem",
-      "short": "Nummers, symbolen en namen van chemische elementen",
       "long": "<p>Het periodiek systeem is een classificatie van chemische elementen. Chemische elementen hebben een nummer en een één- of tweeletterig symbool. Daarnaast worden de elementen ingedeeld in een bepaalde groep, een bepaalde periode en een bepaald blok. Elementen hebben daarnaast nog veel meer eigenschappen zoals massa, smeltpunt, aantal electronen, enzovoorts. Wanneer de hier getoonde eigenschappen geen resultaat opleveren, kan het lonen te kijken naar de overige eigenschappen.  Elementen 119 en hoger hebben nog geen officiële naam, maar alleen een systematische naam. De elementen 110, 111 en 112 stonden tot 2004 bekend als Uun, Uuu en Uub.</p><p>De tool zoekt op basis van nummer, naam of symbool. Foutieve invoer wordt genegeerd. Nummers en namen moeten gescheiden worden door spaties. Symbolen mogen aan elkaar geschreven worden en gebruiken de officiële notatie van een hoofdletter, eventueel gevolgd door een kleine letter, bijvoorbeeld HSAgCoCCr. Let op dat betekend bijvoorbeeld dat Co staat voor Cobalt, maar CO staat voor Koolstof en Zuurstof (Carbon en Oxygen). De tool gebruikt de Engelse namen voor de elementen.</p>"
     },
     "countries": {
       "title": "Landen van de wereld",
-      "short": "Landen, vlaggen, munteenheid, ISO codes, telefoon",
       "long": "<p>Tabel met alle landen en autonome gebieden in de wereld conform ISO3166. In totaal 249 landen met naam, munteenheid en vlag, ISO 2- en 3 letter codes en ISO land nummer, internationaal nummer voor telefonie en registratiecode voor voertuigen (kenteken). De namen zijn de gangbare namen en niet de officiële; toevoegingen als 'Republiek' ontbreken meestal. De munteenheden zijn de versimpele naam, landaanduidingen zoals 'Australische' ontbreken. De codes voor de munteenheden zijn de meest recente, maar let op dat deze codes soms kunnen wijzigen.</p><p>De codes en nummers, of de woordwaarde of stapeltelling hiervan, worden vaak gebruikt in geocaches.</p><p>Zoeken kan op meerdere codes, namen, nummers tegelijk. Voor de 2-letter, 3-letter codes is een spatie ertussen niet nodig.</p>"
     },
     "usastates": {
       "title": "Staten van de VS",
-      "short": "Lijst van staten van de VS inclusief vlag",
       "long": "<p> Lijst van staten van de VS inclusief vlag, hoofdstad, aantal zetels in het Huis van Afgevaardigden, ranking op oppervlakte en ranking op toetredingsdatum. De code is zowel de code gebruikt door de US Post als de code volgens <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. De naam van de staat is een link naar de Wikipedia.</p><p>Het is mogelijk meerdere codes, namen en nummers in te voeren gescheiden door spaties. Voor de USPS Code kan de spatie achterwege blijven.</p>"
     },
     "countryregions": {
       "title": "Provincies",
-      "short": "Provincies van Nederland, België, Duitsland en Frankrijk met vlag",
       "long": "<p>Provincies van Nederland, België, Duitsland en Frankrijk met ISO code, naam, hoofdstad en diverse andere gegevens, inclusief vlag. De code is de code volgens <a href='https://nl.wikipedia.org/wiki/ISO_3166-2:NL'>ISO3166-2:NL</a>. De naam van de provincie is een link naar de Wikipedia pagina in de taal van het betreffende land (Nederlands, Duits of Frans).</p>"
     },
     "unitconvertor": {
       "title": "Eenheden",
-      "short": "Converteert lengte, temperatuur en nog veel meer",
       "long": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund."  
     },
     "dnacode": {
       "title": "DNA Code",
-      "short": "Drie lettercodes van DNA of RNA",
       "long": "<p>DNA of RNA codons worden weergegeven door 3 letters. Als je een code ziet met veel A, C, G, T of U is dat waarschijnlijk DNA of RNA. Soms worden er ook andere letters gebruikt. Die zijn staan voor een combinatie. Bijvoorbeeld Y betekent T of C, dus TAY betekent TAT of TAC. Type de codons and druk op Zoek.</p><p>Achtergrondinformatie. Codons zijn een combinatie van steeds drie nucleobasen. DNA is samengesteld uit A (Adenine), C (Cytosine)and G (Guanine) en T (Thymine). RNA deelt drie van de vier, maar T is vervangen door U (Uracil). De meeste codons definieren een aminozuur. Aminozuren hebben een naam, een drie letter afkorting of een één-letterige code. Enkele codons werken als start en stop signaal. Een stuk RNA of DNA bevat een reeks codons, elke codon triggert een specifiek aminozuur. De opgebouwde keten vormt een eiwit. Voor meer informatie lees <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>hier</a>.</p>"
     }
   },
 
   "cp": {
-    "short": " en 50 andere geheimschriften.",
     "long": "Geheimschriften of beter gezegd Cijfers coderen berichten door substitutie en transpositie. Bij substitutie worden letters of combinaties van letters vervangen door iets anders. Bij transpositie wordt de volgorde van de letters aangepast. Cijfers die maar één alfabet gebruiken zijn eenvoudig te kraken, zoals ROT13 of Atbash. Cijfers die meerdere alfabetten gebruiken zijn bijvoorbeeld Vigenere en Beaufort. Sommige cijfers coderen één letter per keer, maar veel werken ook met bigrams van twee letters, zoals Polybius, Bazeries en Condi. Cijfers die transpositie toepassen om de volgorde van de letters te veranderen zijn er ook in allerlei variaties zoals Railfence, Cadenus or Skip. De meest complexe en dus moeilijk te kraken cijfers gebruiken een combinatie van al deze technieken. Bifid, Trifid en Digrafid zijn daarvan enkele voorbeelden.",
     "info": "Selecteer een geheimschrift uit de lijst. Vul het bericht in en codeer of decodeer. In de meeste gevallen volstaan de standaardinstelling. In expert mode kunnen die worden aangepast.",
     "cipher": "Geheimschrift",
@@ -639,62 +601,50 @@
     "intro": "Rekenkundige en wiskundige tools. Decimalen van wiskundige constantes zoals pi. Rekenen met gigantische binaire, octale, hexadecimale of decimale getallen. Priemgetallen, GGD en KGV, ontbinden in priemfactoren. Enkele bekende reeksen zoals Fibonacci of Hailstone. Het oplossen van cryptaritmes.",
     "baseconvert": {
       "title": "Base conversie",
-      "short": "Binair, decimaal, hexadecimaal en andere getalstelsels",
-      "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties."
+      "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16."
     },
     "decimals": {
       "title": "Decimalen",
-      "short": "Decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3, ζ(3)",
-      "long" : "<p>Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2 en √3 te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar.</p><p>Alle getallen zijn irrationeel. Dit impliceert dat elke opvolging van nummers vroeg of laat voorkomt tussen de decimalen. De volgende getallen zijn beschikbaar. Pi of 𝜋. Het natuurlijke getal e. Tau of 2𝜋. De gouden ratio of φ of phi. De Euler-Mascheroni constante of γ. De wortels van 2 en 3 (√2 en √3). De constante van Apéry of ζ(3) of zeta(3). De constanten van Gauss en Catalan, allebei soms ook aangeduid als G. De constante van Catalan.</p>"
+      "long" : "<p>Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3 en ζ(3) te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar.</p><p>Alle getallen zijn irrationeel. Dit impliceert dat elke opvolging van nummers vroeg of laat voorkomt tussen de decimalen. De volgende getallen zijn beschikbaar. Pi of 𝜋. Het natuurlijke getal e. Tau of 2𝜋. De gouden ratio of φ of phi. De Euler-Mascheroni constante of γ. De wortels van 2 en 3 (√2 en √3). De constante van Apéry of ζ(3) of zeta(3). De constanten van Gauss en Catalan, allebei soms ook aangeduid als G. De constante van Catalan.</p>"
     },
     "primes": {
       "title": "Priemgetallen",
-      "short": "Priemgetallen",
       "long" : "Een tool die controleert of een getal priem is of niet. Het maximum nummer is 2^53 wat kan worden gecontroleerd. De tool toont het priemgetal op de gegeven positie of geeft de positie van een gegeven priemgetal. De eerste 865.000 priemgetallen zijn beschikbaar."
     },
     "romans": {
       "title": "Romeinse getallen",
-      "short": "Romeinse getallen",
       "long": "Een tool die Romeinse getallen converteert naar normale getallen en andersom. Het maximale Romeins getal is 3999. Romeinse getallen bestaan uit de volgende letters MDCLXVI. Het is mogelijk meerdere getallen tegelijk in te voeren gescheiden door spaties of iets anders."
     },
   	"fibonacci": {
       "title": "Fibonacci",
-      "short": "De eerste 500 Fibonacci nummers",
       "long" : "De Fibonacci reeks begint met 1, 1. Het volgende nummer is steeds de som van de voorgaande twee. Dus 1+1=2, 1+2=3, 2+3=5 enzovoorts. De nummers worden zeer snel zeer groot. De eerste 500 Fibonacci nummers zijn beschikbaar."
     },
     "primegcdlcm": {
       "title": "GGD en KGV",
-      "short": "Grootste Gemene Deler, Kleinste Gemene Veelvoud en priemfactoren",
       "long" : "Deze tool berekent de Grootste Gemene Deler (GGD) en het Kleinste Gemene Veelvoud (KGV). Het geeft tevens de priemfactoren van elk getal. Let op want voor zeer grote getallen kan de berekening flink wat tijd kosten."
     },
     "formulasolver": {
       "title": "Cryptaritme",
-      "short": "Cryptaritmes zijn formules zoals THIS + IS + TOO = FUNNY",
       "long": "<p>Cryptaritmes, alphametics or letter rekenenen. Het oplossen van formules waar cijfers vervangen zijn door letters, zoals CHECK + THE = TIRES. Nummers zijn standaard uniek (d.w.z. voor elk nummers is er één letter). De berekeningen zijn decimaal. Dit kan eventueel worden aangepast, maar dat zal zelden nodig zijn.</p><p><b>Let op:</b> Het genereren en berekenen van alle mogelijke formules kan afhankelijk van de snelheid van de computer, redelijk wat tijd kosten. Heb geduld.</p>"
     },
     "numberprop": {
       "title": "Eigenschappen van nummers",
-      "short": "Prime, Fibonacci, evil, odious, perfect, aspiring en meer",
-      "long" : "Eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. Priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient en meer."
+      "long" : "Eigenschappen van een nummer. Het maximum nummer is 1,000,000,000. Priem, fibonacci, evil, odious, lucky, perfect, aspiring, deficient, squarefree, composiet en meer."
     },
     "bignum": {
       "title": "Giganummer calculator",
-      "short": "Calculator voor heel erg grote gehele getallen",
       "long": "<p>Een rekenmachine voor heel erg grote getallen. Werkt alleen met gehele getallen. Er kan gerekend worden met decimaal, binair, octaal of hexadecimaal getallen. Alle operaties werken zoals je mag verwachten, behalve delen. Bij delen wordt niet afgerond, maar de decimalen worden afgekapt. Alle logische operaties werken bit voor bit</p>"
     },
     "nimbers": {
       "title": "Nimbers",
-      "short": "Product en som twee nimbers",
       "long" : "Een tool om de som (+) en het product (*) van twee nimbers te berekenen. Nimbers zijn geen nummers, maar je kan ze wel optellen en vermenigvuldigen. Nimbers worden gebruikt in combinatorial game theory (CGT). Voer twee getallen in en het product en de som worden berekend."
     },
     "sequences": {
       "title": "Reeksen",
-      "short": "Conway, Hailstone, Golomb, Niven en andere reeksen",
       "long" : "Een tool om de n-de term te berekenen van enkele bekende reeksen zoals Conway, Hailstone, Golomb and Niven. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks."
     },
     "palindrome": {
       "title": "Palindroom",
-      "short": "Hoeveel omgekeerde optellingen maken een getal een palindroom",
       "long" : "Een palindroom getal is hetzelfde als het van rechts naar links wordt gelezen. De tool berekent hoeveel herhalingen nodig zijn om van een nummer een palindroom te maken, door er steeds het omgekeerde getal bij op te tellen. Voor de meeste getallen is dit opvallend weinig, maar sommige getallen duren aanzienlijk langer. Het algortime stopt na 100 herhalingen."
     }
   },
@@ -703,53 +653,43 @@
     "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Tenslotte kunnen enkele zogenaamde esoterische talen (esolangs) worden uitgevoerd.",
     "compbrainfuck": {
       "title": "Brainfuck",
-      "short": "Brainfuck, Ook! en Spoon programma's",
       "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's + - > < . , [ en ]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>"
     },
     "compbcd": {
       "title": "BCD",
-      "short": "Binary Coded Decimals: BCD, Gray, Aiken, Glixon en meer",
-      "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits. Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6 en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden."
+      "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits. Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6, Glixon en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden."
     },
     "compdeadfish": {
       "title": "Deadfish",
-      "short": "Deadfish is een programmeertaal met 4 instructies (idso)",
-      "long":  "<p>Deadfish is een programmeertaal met slechts 4 instructies. Optellen met 1 (i), aftrekken met 1 (d), kwadraat (s) en output (o). De teller begint op 0. Als de teller -1 of precies 256 is reset de teller naar 0. Soms worden xdkc gebruikt in plaats van idso. Beide varianten worden ondersteund.</p>"
+      "long":  "<p>Deadfish is een programmeertaal met slechts 4 instructies (idso). Optellen met 1 (i), aftrekken met 1 (d), kwadraat (s) en output (o). De teller begint op 0. Als de teller -1 of precies 256 is reset de teller naar 0. Soms worden xdkc gebruikt in plaats van idso. Beide varianten worden ondersteund.</p>"
     },
     "encryption": {
       "title": "Encryptie",
-      "short": "Okto3, AES, DES, Rabbit, HMAC en andere digitale encrypties",
-      "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>"
+      "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit, HMAC en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>"
     },
     "hashes": {
       "title": "Hashes",
-      "short": "MD5, SHA-1, SHA-2 (SHA256 en SHA512), SHA-3 en RIPEMD160 hashes",
-      "long": "<p>Hashes zijn een soort van digitale handtekening. Ze werken maar één kant op. De hash van het oorspronkelijke bericht wordt berekend en samen met het bericht verstuurd. De echtheid van het bericht kan vervolgens worden gecontroleerd door de hash opnieuw te berekenen en te vergelijken met de meegesturude hash. De hash wordt hier getoond als een hexadecimale string. MD5 is al lange tijd in gebruik, maar wordt nu als onveilig gezien. SHA-1 is nu de meest gebruikte hash. SHA-3 is de laatste en meest veilige versie.</p><p>Voer het bericht in en klik op Bereken om de hash te tonen. Indien er een hash ingevoerd is om te controleren dan wordt het resultaat van de controle ook getoond.</p>"
+      "long": "<p>Hashes zijn een soort van digitale handtekening. Ze werken maar één kant op. De hash van het oorspronkelijke bericht wordt berekend en samen met het bericht verstuurd. De echtheid van het bericht kan vervolgens worden gecontroleerd door de hash opnieuw te berekenen en te vergelijken met de meegesturude hash. De hash wordt hier getoond als een hexadecimale string. MD5 is al lange tijd in gebruik, maar wordt nu als onveilig gezien. SHA-1 is nu de meest gebruikte hash. SHA-3 is de laatste en meest veilige versie. Andere hashes zijn SHA-2 (SHA256 en SHA512) en RIPEMD160.</p><p>Voer het bericht in en klik op Bereken om de hash te tonen. Indien er een hash ingevoerd is om te controleren dan wordt het resultaat van de controle ook getoond.</p>"
     },
     "cow": {
       "title": "Cow",
-      "short": "COW programmmeertaal",
       "long": "<p>De COW programmeeertaal is bedacht door Sean Heber in 2003. Het is een humoristische Brainfuck variant speciaal bedoeld voor koeien. COW heeft twaalf instructies (vier meer dan Brainfuck) en is Turing-compleet. De meeste instructies zijn moos (in Engeland zeggen koeien moo), waarbij alleen de hoofdletters, kleine letters veranderen: mOo, moO, mOO, Moo, enzovoorts. De uitzonderingen zijn MMM, OOO, oom en OOM. Alle andere input is genegereerd als commentaar. De debug optie schrijft informatie tijdens de uitvoering van het programma naar de Developers console van de browser. Zo kan de code gecontroleerd worden.</p>"
     },
     "beatnik": {
       "title": "Beatnik",
-      "short": "Beatnik programmmeertaal",
       "long": "Beatnik berekent de Scrabble waarde van elk woord. De waarde is het commando dat wordt uitgevoerd. Woorden bestaan alleen uit letters, dus Boeing787Dreamliner geeft twee woorden (en dus twee commando's). Er zijn meerdere Scrabble versies beschikbaar, maar Engels is de meest waarschijnlijke keuze. Meer info is te vinden op <a href='https://esolangs.org/wiki/Beatnik'>Esolangs</a>.</p><p>De debug optie schrijft informatie tijdens de uitvoering van het programma naar de Developers console van de browser. Zo kan de code gecontroleerd worden.</p>"
     },
     "compbintotext": {
       "title": "Binary encoding",
-      "short": "Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16",
-      "long": "<p>Binaire naar text encodings converteren elk byte (8 bits) van de input naar iets leesbaars. Dit is zorgt ervoor dat binaire data via mail of andere protocollen getransporteerd kan worden. Dit is met name bruikbaar voor het verzenden van afbeeldingen, videos of willekeurig andere files die anders in transmissie corrupt raken. Base64 is op dit moment de meest gebruikte encoding.</p><p>Carriage returns en linefeeds worden standaard verwijderd uit de invoer, dit is gebruikelijk voor binary encoding. Spaties blijven bewaard (behalve voor tekst, binaire, decimale en hexadecimale invoer). Binaire, decimale and hexadecimale invoer is precies 1 nummer. Spaties kunnen worden gebruikt voor leesbaarheid maar worden verder genegeerd. Dus 123 123 is hetzelfde als 123123. En 3A B4 is het hexadecimale number 3AB4. </p>"
+      "long": "<p>Binaire naar text encodings converteren elk byte (8 bits) van de input naar iets leesbaars. Dit is zorgt ervoor dat binaire data via mail of andere protocollen getransporteerd kan worden. Dit is met name bruikbaar voor het verzenden van afbeeldingen, videos of willekeurig andere files die anders in transmissie corrupt raken. Base64 is op dit moment de meest gebruikte encoding. Deze tool ondersteunt base64, base32, Bitcoin, Ripple, ascii85, uuencode en base16.</p><p>Carriage returns en linefeeds worden standaard verwijderd uit de invoer, dit is gebruikelijk voor binary encoding. Spaties blijven bewaard (behalve voor tekst, binaire, decimale en hexadecimale invoer). Binaire, decimale and hexadecimale invoer is precies 1 nummer. Spaties kunnen worden gebruikt voor leesbaarheid maar worden verder genegeerd. Dus 123 123 is hetzelfde als 123123. En 3A B4 is het hexadecimale number 3AB4. </p>"
     },
     "duckspeak" : {
       "title": "Duckspeak",
-      "short": "Heel veel Nak, alsof je een eend hoort praten.",
       "long": "Duckspeak klinkt alsof een eend loopt te kwaken. De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde."
     },
     "checksum" : {
       "title": "Controlegetal",
-      "short": "Bereken het controlecijfer for IBAN, credit card, BSN en andere nummers",
-      "long": "<p>Controlecijfers worden gebruikt om te controleren of een nummer geldig is. Hierdoor kunnen bijvoorbeeld typefouten worden gedetecteerd. Er zijn diverse manieren om een controlecijfer te berekenen.</p><p>In de meeste gevallen is het controlecijfer het laatste cijfer. Je kan het weglaten of vervangen door een vraagteken. In IBAN nummers is het controlegetal de 3e en 4e positie. Vervang deze bij het invoeren atlijd door vraagtekens, bijv. NL??ABNA0373510122."
+      "long": "<p>Controlecijfers worden gebruikt om te controleren of een nummer geldig is. Hierdoor kunnen bijvoorbeeld typefouten worden gedetecteerd. Er zijn diverse manieren om een controlecijfer te berekenen. Controlegetallen worden gebruikt in credit card nummers, bankrekeningen, BSN (burgerservicenummer), artikel codes, ISBN nummers en nog veel meer.</p><p>In de meeste gevallen is het controlecijfer het laatste cijfer. Je kan het weglaten of vervangen door een vraagteken. In IBAN nummers is het controlegetal de 3e en 4e positie. Vervang deze bij het invoeren atlijd door vraagtekens, bijv. NL??ABNA0373510122."
     }
   },
 
@@ -870,7 +810,6 @@
   },
 
   "htmlscanner": {
-    "short": "Scan de paginabron op links, afbeeldingen en verborgen informatie",
     "long": "Soms wordt informatie verstop in de listing van de geocache met gebruik van HTML. Bijvoorbeeld door commentaar toe te voegen, witte tekst te gebruiken of heel erg kleine letters. Of er worden letters gemarkeerd door ze vet of schuin te maken of op een andere manier te onderscheiden. HTML Scanner scant de paginabron op links, afbeeldingen en andere verborgen informatie. De tool werkt alleen met de officiële listing van geocaching.com. Kopieer en plak de paginabron hieronder.",
     "ph": "Plak de paginabron hier",
     "btnscan": "Scan",
@@ -1765,6 +1704,7 @@
     "header": "Kopregel",
     "ncol": "Aantal kolommen",
     "lpl" : "Regels per log",
+    "hdrcol": "Kopregelkleur",
     "txtcol" : "Tekstkleur",
     "linecol" : "Lijnkleur",
     "ftfcol" : "FTF kleur",
@@ -1781,6 +1721,41 @@
     "lh3": "Normaal",
     "lh4": "Ruim",
     "lh5": "Erg ruim"
+  },
+
+  "gameoflife": {
+    "title": "Game of life",
+    "long": "<p>Game of Life is een cellulaire automaat ontworpen door de Britse wiskundige John Horton Conway in 1970. Het begint met een startgeneratie van cellen. Elke volgende generatie ontstaat door een paar simpele regels. Een cel met minder dan 2 of meer dan 3 buren sterft. Een cel met precies 3 buren komt tot leven. </p><p>Selecteer het startpatroon voor de eerste generatie. Het is altijd mogelijk om cellen tot leven te wekken of te elimineren door erop te klikken. Desgewenst kunnen de default regels nog worden aangepast.</p>",
+    "newgrid": "Start nieuw",
+    "step": "Volgende",
+    "gen": "Generatie: ",
+    "cellsalive": "Aantal levende cellen:",
+    "fillgrid": "Start patroon",
+    "chgrules": "Aangepaste regels",
+    "diebelow": "Sterft onder",
+    "dieabove": "Sterft boven",
+    "bornabove": "Leeft boven",
+    "bornbelow": "Leeft onder",
+    "empty": "Leeg",
+    "random": "Willekeurig",
+    "rndsym": "Willekeurig symetrisch",
+    "rows": "# rijen",
+    "cols": "# kolommen"
+  },
+
+  "booksearch" : {
+    "title" : "Zoek een boek",
+    "long" : "Zoek een boek op titel, auteur, ISBN nummer of een combinatie van deze. De online database van OpenLibrary.org wordt gebruikt. Als er meerdere matches zijn wordt alles getoond",
+    "sel" : "Resultaten",
+    "short": "Auteur, titel, één ISBN",
+    "extra": "Auteur(s), title, alle ISBN, jaar van publicatie, talen, uitgevers",
+    "bkfnd": "Aantal boeken gevonden: ",
+    "author": "Auteurs(s): ",
+    "titles": "Titel: ",
+    "firstpub": "Jaar van eerste uitgifte: ",
+    "lang": "Taal: ",
+    "pub": "Uitgever(s): ",
+    "edcnt": "Aantal edities: "
   }
   
 }

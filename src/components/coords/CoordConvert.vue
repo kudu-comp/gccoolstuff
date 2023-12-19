@@ -198,7 +198,7 @@ export default {
           .then ( mapcoords => {
 
             for (let m of mapcoords)
-              coords.displayMarker(this.$store.state.L, this.$store.state.mymap, m, this.$t('labels.point') + ++this.count);
+              coords.displayMarker(this.$store.state.mymap, m, this.$t('labels.point') + ++this.count);
 
           })
           .catch ( (e) => {

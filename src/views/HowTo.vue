@@ -327,7 +327,7 @@
             <li>
               <b>Binary</b>. If you see just 0 and 1 you're likely dealing with some kind of binary code. Try <router-link to="/baseconvertor">
                 Base converter
-              </router-link>. It might also be a slightly different binary code. Try <router-link to="/compbcd">
+              </router-link>. It might also be a slightly different binary code. Try <router-link to="/bcd">
                 Binary Coded Decimals
               </router-link>. Or try to convert to ASCII using <router-link to="/charcodes">
                 Character codes
@@ -336,14 +336,14 @@
             <li>
               <b>Decimal</b>. If you see the numbers 0 to 9 it's decimal. Try to convert to ASCII using <router-link to="/charcodes">
                 Character codes
-              </router-link>. Or try <router-link to="/compbintotext">
+              </router-link>. Or try <router-link to="/bintotext">
                 {{ $t('comptools.compbintotext.title') }}
               </router-link> with the input set to decimal.
             </li>
             <li>
               <b>Hexadecimal</b>. If you see 0 to 9 and A to Z it's hexadecimal. Try to convert to ASCII using <router-link to="/charcodes">
                 Character codes
-              </router-link>. Or try <router-link to="/compbintotext">
+              </router-link>. Or try <router-link to="/bintotext">
                 {{ $t('comptools.compbintotext.title') }}
               </router-link> with the input set to hexadecimal. Or it might be a hash. Try <router-link to="/hashes">
                 {{ $t('comptools.hashes.title') }}
@@ -374,7 +374,7 @@
             <li>
               <b>ROT5</b>. Actually a cipher with all the digits shifted 5 positions. Use <router-link
                 :to="{ name: 'Cipher',
-                       params: { cipher: 'ROT5' }}"
+                       params: { cp: 'ROT5' }}"
               >
                 ROT5
               </router-link> to solve or just calculate it yourself.
@@ -382,7 +382,7 @@
             <li>
               <b>Polybius</b>. A cipher that encodes digrams in to numbers between 11 and 55. use <router-link
                 :to="{ name: 'Cipher',
-                       params: { cipher: 'Polybius' }}"
+                       params: { cp: 'Polybius' }}"
               >
                 Polybius
               </router-link> to solve.
@@ -410,13 +410,13 @@
           <p>This can get quite complicated but there are a few easy ones you should try first</p>
           <ul>
             <li>
-              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT13'}}">
+              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Cipher', cp: { cipher: 'ROT13'}}">
                 ROT13
               </router-link>
               to solve the puzzle. This is also the one geocaching.com uses to show/hide the hints.
             </li>
             <li>
-              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', params: { cipher: 'Caesar'}}">
+              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', cp: { cipher: 'Caesar'}}">
                 Caesar
               </router-link>
               to solve the puzzle.
@@ -487,7 +487,7 @@
               </router-link> to see if there is a match.
             </li>
             <li>
-              <b>Encoded text</b> - the text is binary encoded using <router-link to="/compbintotext">
+              <b>Encoded text</b> - the text is binary encoded using <router-link to="/bintotext">
                 {{ $t('comptools.compbintotext.title') }}
               </router-link>
               In these cases the text is likely a combination of symbols, letters and digits.
@@ -507,7 +507,7 @@
               </router-link> support Cyrillic and Greek.
             </li>
             <li>
-              <b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/compbrainfuck">
+              <b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/brainfuck">
                 {{ $t('comptools.compbrainfuck.title') }}
               </router-link> to solve the code.
             </li>
@@ -519,7 +519,7 @@
             <li>
               <b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link
                 :to="{ name: 'Cipher',
-                       params: { cipher: 'Goldbug'}}"
+                       cp: { cipher: 'Goldbug'}}"
               >
                 here
               </router-link>.
@@ -681,7 +681,7 @@
             <li>
               <b>Monoalphabetic substitution</b> replaces the letters (or anything else) in the original message with one or more other letters (or
               anything else). Monoalphabetic means only one alphabet is used for all replacements. This make the cipher easy to crack using
-              frequency analysis. A well known example is <router-link :to="{ name: 'Cipher', params: { cipher: 'ROT13'}}">
+              frequency analysis. A well known example is <router-link :to="{ name: 'Cipher', cp: { cp: 'ROT13'}}">
                 ROT13
               </router-link>
             </li>
@@ -689,23 +689,23 @@
               <b>Polyalphabetic subsitution</b> uses different alphabets. This makes the cipher more difficult to break, as one letter has more
               than one on replacement. The more alphabets are being used, the more difficult it is to break the code. But if the number is too low
               and the text long enough, frequencey analysis can still reveal the message. A well known example is the
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'Vigenere'}}">
+              <router-link :to="{ name: 'Cipher', params: { cp: 'Vigenere'}}">
                 Vigenere
               </router-link> cipher.
             </li>
             <li>
               <b>Transposition</b> changes the order of the letters in the message. A good example is the
-              <router-link :to="{ name: 'Cipher', params: { cipher: 'Railfence'}}">
+              <router-link :to="{ name: 'Cipher', params : { cp: 'railfence'}}">
                 Railfence
               </router-link> cipher.
             </li>
           </ul>
           <p>
             Most substitutions replace one letter with one other, but some ciphers replace each letter with two (or sometimes more) letters. The
-            <router-link :to="{ name: 'Cipher', params: { cipher: 'Polybius'}}">
+            <router-link :to="{ name: 'Cipher', cp: { cp: 'Polybius'}}">
               Polybius
             </router-link> cipher replaces each letter with two numbers
-            using the so-called Polybius square. The funny <router-link :to="{ name: 'Cipher', params: { cipher: 'Kennycode'}}">
+            using the so-called Polybius square. The funny <router-link :to="{ name: 'Cipher', cp: { cp: 'Kennycode'}}">
               Kenny code
             </router-link>
             replaces each letter with three (m,p and f combinations).
@@ -717,7 +717,7 @@
           <p>
             A special technique is <b>fractionation</b>. The message first uses substitution where each letter is replaced by two or more.
             The result is transposed, so each substituted code is scattered (or fractionated) through the message. The result is then decoded
-            back to letters. A good example is the <router-link :to="{ name: 'Cipher', params: { cipher: 'Bifid'}}">
+            back to letters. A good example is the <router-link :to="{ name: 'Cipher', cp: { cp: 'Bifid'}}">
               Bifid
             </router-link>
             cipher, which uses a Polybius square and a columnar transposition.

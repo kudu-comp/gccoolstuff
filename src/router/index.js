@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/',   name: 'home',  component: () => import('@/views/HomePage.vue')  },
+  { path: "/alltools",        name: 'AllTools',         component: () => import('@/components/AllTools.vue') },
   { path: "/coordconvert",    name: 'CoordConvert',     component: () => import('@/components/coords/CoordConvert.vue') },
   { path: "/coordproj",       name: 'CoordProj',        component: () => import('@/components/coords/CoordProject.vue') },
   { path: "/coordlines",      name: 'CoordLines',       component: () => import('@/components/coords/CoordLines.vue') },
@@ -20,7 +21,7 @@ const routes = [
   { path: "/textkeyboards",   name: 'Keyboards',        component: () => import('@/components/texts/TextKeyboards.vue') },
   { path: "/texttoss",        name: 'TextToss',         component: () => import('@/components/texts/TextToss.vue') },
   { path: "/textnum",         name: 'Numerology',       component: () => import('@/components/texts/Numerology.vue') },
-  { path: '/cipher',          name: 'Cipher',           component: () => import('@/components/codes/EncoderDecoder.vue')  },
+  { path: '/cipher/:cphr?',   name: 'Cipher',           component: () => import('@/components/codes/EncoderDecoder.vue'),  },
   { path: '/rotcipher',       name: 'RotCipher',        component: () => import('@/components/codes/RotCiphers.vue')  },
   { path: "/codebook",        name: 'Codebook',         component: () => import('@/components/codes/CodeBook.vue') },   
   { path: "/fonts",           name: 'Fonts',            component: () => import('@/components/codes/FontSpecial.vue') },
@@ -63,6 +64,8 @@ const routes = [
   { path: '/dnacode',         name: 'DNACode',          component: () => import('@/components/other/DNACode.vue')        }, 
   { path: '/datecalc',        name: 'DateCalc',         component: () => import('@/components/other/DateCalc.vue')        }, 
   { path: '/randomizer',      name: 'Randomizer',       component: () => import('@/components/other/Randomizer.vue')        }, 
+  { path: '/gameoflife',      name: 'GameOfLife',       component: () => import('@/components/other/GameOfLife.vue')        }, 
+  { path: '/booksearch',      name: 'BookSearch',       component: () => import('@/components/other/BookSearch.vue')        }, 
   { path: '/exifscanner',     name: 'ExifScanner',      component: () => import('@/components/images/ExifScanner.vue')      },
   { path: '/colorpicker',     name: 'ColorPicker',      component: () => import('@/components/images/ColorPicker.vue')      },
   { path: '/filltool',        name: 'FillTool',         component: () => import('@/components/images/FillTool.vue')         },

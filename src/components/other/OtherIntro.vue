@@ -92,6 +92,20 @@
           <router-link to="/countryregions"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('gameoflife.title')}}</h5>
+          <p class="card-text" v-html="$t('gameoflife.long')"></p>
+          <router-link to="/gameoflife"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('booksearch.title')}}</h5>
+          <p class="card-text" v-html="$t('booksearch.long')"></p>
+          <router-link to="/booksearch"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
