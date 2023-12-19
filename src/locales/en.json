@@ -171,7 +171,7 @@
     "revwherigo" : {
       "title": "Reverse Wherigo",
       "short": "Solve reverse wherigo",
-      "long": "<p>Resolves reverse wherigo (Waltmeister cartridge only). The tool doesn't check the checksum! Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p>"
+      "long": "<p>Resolves reverse wherigo (Waltmeister cartridge only). Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p>"
     }
   },
 

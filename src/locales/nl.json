@@ -171,7 +171,7 @@
     "revwherigo" : {
       "title": "Reverse Wherigo",
       "short": "Reverse wherigo oplossen",
-      "long": "<p>Oplossen van reverse wherigos (Waltmeister cartridge). De tool controleert niet de checksum! Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
+      "long": "<p>Oplossen van reverse wherigos (Waltmeister cartridge). Geef de drie getallen van elk 6 cijfers gescheiden door spaties of iets anders. De tool berekent het coördinaat.</p>"
     }
   },
 
