@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('imagetools.imagetransform.title') }}
+      {{ $t('imagetransform.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('imagetools.imagetransform.long')"
+        v-html="$t('imagetransform.long')"
       />
       <div class="form-inline">
         <input

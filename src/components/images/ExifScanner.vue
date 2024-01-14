@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('imagetools.exifscanner.title') }}
+      {{ $t('exifscanner.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('imagetools.exifscanner.long')"
+        v-html="$t('exifscanner.long')"
       />
       <input
         id="file"
@@ -68,8 +68,8 @@
             </div>
             <div class="card-text p-1">
               <table class="table table-sm table-borderless">
-                <tr><td>{{ $t('exifscanner.title') }}</td><td>{{ Title }}</td></tr>
-                <tr><td>{{ $t('exifscanner.title') }} 2</td><td>{{ XPTitle }}</td></tr>
+                <tr><td>{{ $t('exifscanner.title2') }}</td><td>{{ Title }}</td></tr>
+                <tr><td>{{ $t('exifscanner.title2') }} 2</td><td>{{ XPTitle }}</td></tr>
                 <tr><td>{{ $t('exifscanner.desc') }}</td><td>{{ Description }}</td></tr>
                 <tr><td>{{ $t('exifscanner.desc') }} 2</td><td>{{ ImageDescription }}</td></tr>
                 <tr><td>{{ $t('exifscanner.subject') }}</td><td>{{ XPSubject }}</td></tr>

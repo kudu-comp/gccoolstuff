@@ -122,7 +122,7 @@ export default {
     L.control.scale().addTo(this.mymap);
 
     // Update global map vars for use in other places
-    this.$store.commit('initMap', {L: this.L, mymap: this.mymap} );
+    this.$store.commit('initMap', {mymap: this.mymap} );
 
     // Add fullscreen control (from leaflet-fullscreen, see index.html)
     // this.mymap.addControl(new L.Control.Fullscreen());

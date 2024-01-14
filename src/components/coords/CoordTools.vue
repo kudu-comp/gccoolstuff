@@ -10,71 +10,71 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.convert.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.convert.long')"></p>
+          <h5 class="card-title">{{$t('convert.title')}}</h5>
+          <p class="card-text" v-html="$t('convert.long')"></p>
           <router-link to="/coordconvert"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.project.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.project.long')"></p>
+          <h5 class="card-title">{{$t('project.title')}}</h5>
+          <p class="card-text" v-html="$t('project.long')"></p>
           <router-link to="/coordproj"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.mapmaker.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.mapmaker.long')"></p>
+          <h5 class="card-title">{{$t('mapmaker.title')}}</h5>
+          <p class="card-text" v-html="$t('mapmaker.long')"></p>
           <router-link to="/coordmapmaker"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.incomplete.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.incomplete.long')"></p>
+          <h5 class="card-title">{{$t('incomplete.title')}}</h5>
+          <p class="card-text" v-html="$t('incomplete.long')"></p>
           <router-link to="/coordincomplete"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.lines.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.lines.long')"></p>
+          <h5 class="card-title">{{$t('lines.title')}}</h5>
+          <p class="card-text" v-html="$t('lines.long')"></p>
           <router-link to="/coordlines"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.triangles.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.triangles.long')"></p>
+          <h5 class="card-title">{{$t('triangles.title')}}</h5>
+          <p class="card-text" v-html="$t('triangles.long')"></p>
           <router-link to="/coordtriangles"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.circles.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.circles.long')"></p>
+          <h5 class="card-title">{{$t('circles.title')}}</h5>
+          <p class="card-text" v-html="$t('circles.long')"></p>
           <router-link to="/coordcircles"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.antipode.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.antipode.long')"></p>
+          <h5 class="card-title">{{$t('antipode.title')}}</h5>
+          <p class="card-text" v-html="$t('antipode.long')"></p>
           <router-link to="/coordantipode"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.w3w.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.w3w.long')"></p>
+          <h5 class="card-title">{{$t('w3w.title')}}</h5>
+          <p class="card-text" v-html="$t('w3w.long')"></p>
           <router-link to="/coordw3w"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('coordinates.revwherigo.title')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.revwherigo.long')"></p>
+          <h5 class="card-title">{{$t('revwherigo.title')}}</h5>
+          <p class="card-text" v-html="$t('revwherigo.long')"></p>
           <router-link to="/reversewherigo"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>

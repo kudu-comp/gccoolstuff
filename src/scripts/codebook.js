@@ -51,7 +51,7 @@ export var codepages = [
   },
   { name: "Arabic Alphabet",
     imagename: "arabicalphabet.png",
-    description: "The Antiker code comes from the Science Fiction Series Stargate and is sometimes called the Stargate code.",
+    description: "Arabic alphabet.",
     tags: ["alphabet", "language", "arabic"]
   },
   { name: "Arcadian Alphabet",

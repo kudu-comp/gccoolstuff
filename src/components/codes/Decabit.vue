@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('codes.decabit.title') }}
+      {{ $t('decabit.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('codes.decabit.long')"
+        v-html="$t('decabit.long')"
       />
       <div class="row mt-2">
         <label

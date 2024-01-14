@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('imagetools.pixelbuild.title') }}
+      {{ $t('pixelbuild.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('imagetools.pixelbuild.long')"
+        v-html="$t('pixelbuild.long')"
       />
       <p
         v-show="errormsg"

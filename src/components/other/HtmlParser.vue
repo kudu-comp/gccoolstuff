@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('menu.htmlscanner') }}
+      {{ $t('htmlparser.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('htmlscanner.long')"
+        v-html="$t('htmlparser.long')"
       />
       <div class="form-row mb-2">
         <textarea
@@ -14,7 +14,7 @@
           ref="gchtml"
           v-model="gchtml"
           class="form-control"
-          :placeholder="$t('htmlscanner.ph')"
+          :placeholder="$t('htmlparser.ph')"
           rows="3"
         />
       </div>
@@ -22,7 +22,7 @@
         <input
           id="scan"
           type="button"
-          :value="$t('htmlscanner.btnscan')"
+          :value="$t('htmlparser.btnscan')"
           class="btn mr-2"
           @click="scanHTML"
         >{{ scanresult }}
@@ -39,7 +39,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.links') }}
+          {{ $t('htmlparser.links') }}
         </template>
         <template #content>
           <select
@@ -63,7 +63,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.images') }}
+          {{ $t('htmlparser.images') }}
         </template>
         <template #content>
           <select
@@ -87,7 +87,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.bgimages') }}
+          {{ $t('htmlparser.bgimages') }}
         </template>
         <template #content>
           <select
@@ -110,7 +110,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.comms') }}
+          {{ $t('htmlparser.comms') }}
         </template>
         <template #content>
           <div v-html="comments" />
@@ -122,7 +122,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.white') }}
+          {{ $t('htmlparser.white') }}
         </template>
         <template #content>
           <div v-html="whites" />
@@ -134,7 +134,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.size') }}
+          {{ $t('htmlparser.size') }}
         </template>
         <template #content>
           <div v-html="sizes" />
@@ -146,7 +146,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.strong') }}
+          {{ $t('htmlparser.strong') }}
         </template>
         <template #content>
           <div v-html="strongs" />
@@ -158,7 +158,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.bold') }}
+          {{ $t('htmlparser.bold') }}
         </template>
         <template #content>
           <div v-html="bolds" />
@@ -170,7 +170,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.ital') }}
+          {{ $t('htmlparser.ital') }}
         </template>
         <template #content>
           <div v-html="italics" />
@@ -182,7 +182,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.sup') }}
+          {{ $t('htmlparser.sup') }}
         </template>
         <template #content>
           <div v-html="sups" />
@@ -194,7 +194,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.sub') }}
+          {{ $t('htmlparser.sub') }}
         </template>
         <template #content>
           <div v-html="subs" />
@@ -206,7 +206,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.del') }}
+          {{ $t('htmlparser.del') }}
         </template>
         <template #content>
           <div v-html="dels" />
@@ -218,7 +218,7 @@
         :hidebutton="hidebutton"
       >
         <template #header>
-          {{ $t('htmlscanner.em') }}
+          {{ $t('htmlparser.em') }}
         </template>
         <template #content>
           <div v-html="ems" />
@@ -320,7 +320,7 @@ export default {
 
         // Check if cacheNode exists
         if (!this.cacheNode) {
-          this.errormsg = this.$t("htmlscanner.nocache");
+          this.errormsg = this.$t("htmlparser.nocache");
           return;
         }
 
@@ -407,11 +407,11 @@ export default {
         this.dels = this.listTags("em");
 
         // Display scan completed messages
-        this.scanresult = this.$t('htmlscanner.complete');
+        this.scanresult = this.$t('htmlparser.complete');
 
       } catch (e) {
 
-        this.errormsg = this.$t('htmlscanner.error');
+        this.errormsg = this.$t('htmlparser.error');
         console.log(e);
 
       }

@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('imagetools.textextractor.title') }}
+      {{ $t('textextractor.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('imagetools.textextractor.long')"
+        v-html="$t('textextractor.long')"
       />
       <input
         id="file"

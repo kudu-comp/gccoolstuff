@@ -2,13 +2,13 @@
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
       <div class="text-center">
-        {{ $t('othertools.dnacode.title') }}
+        {{ $t('dnacode.title') }}
       </div>
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('othertools.dnacode.long')"
+        v-html="$t('dnacode.long')"
       />
       <v-table
         :phsearch="phsearch"

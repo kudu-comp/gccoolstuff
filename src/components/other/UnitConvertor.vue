@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('othertools.unitconvertor.title') }}
+      {{ $t('unitconvertor.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('othertools.unitconvertor.long')"
+        v-html="$t('unitconvertor.long')"
       />
       <div class="row">
         <label

@@ -10,71 +10,71 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('texttools.charcodes.title')}}</h5>
-          <p class="card-text" v-html="$t('texttools.charcodes.long')"></p>
+          <h5 class="card-title">{{$t('charcodes.title')}}</h5>
+          <p class="card-text" v-html="$t('charcodes.long')"></p>
           <router-link to="/charcodes"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.compbintotext.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.compbintotext.long')"></p>
+          <h5 class="card-title">{{$t('bintotext.title')}}</h5>
+          <p class="card-text" v-html="$t('bintotext.long')"></p>
           <router-link to="/bintotext"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.compbcd.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.compbcd.long')"></p>
+          <h5 class="card-title">{{$t('bcd.title')}}</h5>
+          <p class="card-text" v-html="$t('bcd.long')"></p>
           <router-link to="/bcd"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.encryption.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.encryption.long')"></p>
+          <h5 class="card-title">{{$t('encryption.title')}}</h5>
+          <p class="card-text" v-html="$t('encryption.long')"></p>
           <router-link to="/encryption"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.hashes.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.hashes.long')"></p>
+          <h5 class="card-title">{{$t('hashes.title')}}</h5>
+          <p class="card-text" v-html="$t('hashes.long')"></p>
           <router-link to="/hashes"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.compbrainfuck.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.compbrainfuck.long')"></p>
+          <h5 class="card-title">{{$t('brainfuck.title')}}</h5>
+          <p class="card-text" v-html="$t('brainfuck.long')"></p>
           <router-link to="/brainfuck"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.cow.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.cow.long')"></p>
+          <h5 class="card-title">{{$t('cow.title')}}</h5>
+          <p class="card-text" v-html="$t('cow.long')"></p>
           <router-link to="/cow"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.beatnik.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.beatnik.long')"></p>
+          <h5 class="card-title">{{$t('beatnik.title')}}</h5>
+          <p class="card-text" v-html="$t('beatnik.long')"></p>
           <router-link to="/beatnik"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.compdeadfish.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.compdeadfish.long')"></p>
+          <h5 class="card-title">{{$t('deadfish.title')}}</h5>
+          <p class="card-text" v-html="$t('deadfish.long')"></p>
           <router-link to="/deadfish"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('comptools.duckspeak.title')}}</h5>
-          <p class="card-text" v-html="$t('comptools.duckspeak.long')"></p>
+          <h5 class="card-title">{{$t('duckspeak.title')}}</h5>
+          <p class="card-text" v-html="$t('duckspeak.long')"></p>
           <router-link to="/duckspeak"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>

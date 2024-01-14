@@ -1,15 +1,15 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('texttools.texttoss.title') }}
+      {{ $t('texttoss.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('texttools.texttoss.long')"
+        v-html="$t('texttoss.long')"
       />
       <div class="mb-2">
-        <span class="form-label">{{ $t('txttoss.mode') }}</span>
+        <span class="form-label">{{ $t('texttoss.mode') }}</span>
         <div class="form-check">
           <input
             id="mode3"
@@ -21,7 +21,7 @@
           <label
             class="form-check-label"
             for="mode3"
-          >{{ $t('txttoss.mode3') }}</label>
+          >{{ $t('texttoss.mode3') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -34,7 +34,7 @@
           <label
             class="form-check-label"
             for="mode2"
-          >{{ $t('txttoss.mode2') }}</label>
+          >{{ $t('texttoss.mode2') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -47,7 +47,7 @@
           <label
             class="form-check-label"
             for="mode1"
-          >{{ $t('txttoss.mode1') }}</label>
+          >{{ $t('texttoss.mode1') }}</label>
         </div>
       </div>
       <input

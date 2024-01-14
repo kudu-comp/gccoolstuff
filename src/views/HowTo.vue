@@ -274,7 +274,7 @@
           </p>
           <p>
             Alternatively the coordinate you are looking for might be in another format. In most of these cases you will need to use
-            <router-link to="/coordconvert">
+            <router-link to="/convert">
               Coordinate Convertor
             </router-link> to convert to WGS before you can pass it through a checker.
           </p>
@@ -366,7 +366,7 @@
             </li>
             <li>
               <b>Text to numbers</b>. The values of the letters are written one after the other. A leading zero might or might
-              not be included. E.g. 011812 read ARM. You can use <router-link to="/texttonumbers">
+              not be included. E.g. 011812 read ARM. You can use <router-link to="/texttonum">
                 Text to numbers
               </router-link>
               to crack the code.
@@ -374,7 +374,7 @@
             <li>
               <b>ROT5</b>. Actually a cipher with all the digits shifted 5 positions. Use <router-link
                 :to="{ name: 'Cipher',
-                       params: { cp: 'ROT5' }}"
+                       params: { cphr: 'rot5' }}"
               >
                 ROT5
               </router-link> to solve or just calculate it yourself.
@@ -382,7 +382,7 @@
             <li>
               <b>Polybius</b>. A cipher that encodes digrams in to numbers between 11 and 55. use <router-link
                 :to="{ name: 'Cipher',
-                       params: { cp: 'Polybius' }}"
+                       params: { cphr: 'polybius' }}"
               >
                 Polybius
               </router-link> to solve.
@@ -410,13 +410,13 @@
           <p>This can get quite complicated but there are a few easy ones you should try first</p>
           <ul>
             <li>
-              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Cipher', cp: { cipher: 'ROT13'}}">
+              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Cipher', params: { cphr: 'rot13'}}">
                 ROT13
               </router-link>
               to solve the puzzle. This is also the one geocaching.com uses to show/hide the hints.
             </li>
             <li>
-              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', cp: { cipher: 'Caesar'}}">
+              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', params: { cphr: 'caesar'}}">
                 Caesar
               </router-link>
               to solve the puzzle.
@@ -519,7 +519,7 @@
             <li>
               <b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link
                 :to="{ name: 'Cipher',
-                       cp: { cipher: 'Goldbug'}}"
+                       params: { cphr: 'goldbug'}}"
               >
                 here
               </router-link>.
@@ -681,7 +681,7 @@
             <li>
               <b>Monoalphabetic substitution</b> replaces the letters (or anything else) in the original message with one or more other letters (or
               anything else). Monoalphabetic means only one alphabet is used for all replacements. This make the cipher easy to crack using
-              frequency analysis. A well known example is <router-link :to="{ name: 'Cipher', cp: { cp: 'ROT13'}}">
+              frequency analysis. A well known example is <router-link :to="{ name: 'Cipher', params: { cphr: 'rot13'}}">
                 ROT13
               </router-link>
             </li>
@@ -689,23 +689,23 @@
               <b>Polyalphabetic subsitution</b> uses different alphabets. This makes the cipher more difficult to break, as one letter has more
               than one on replacement. The more alphabets are being used, the more difficult it is to break the code. But if the number is too low
               and the text long enough, frequencey analysis can still reveal the message. A well known example is the
-              <router-link :to="{ name: 'Cipher', params: { cp: 'Vigenere'}}">
+              <router-link :to="{ name: 'Cipher', params: { cphr: 'vigenere'}}">
                 Vigenere
               </router-link> cipher.
             </li>
             <li>
               <b>Transposition</b> changes the order of the letters in the message. A good example is the
-              <router-link :to="{ name: 'Cipher', params : { cp: 'railfence'}}">
+              <router-link :to="{ name: 'Cipher', params : { cphr: 'railfence'}}">
                 Railfence
               </router-link> cipher.
             </li>
           </ul>
           <p>
             Most substitutions replace one letter with one other, but some ciphers replace each letter with two (or sometimes more) letters. The
-            <router-link :to="{ name: 'Cipher', cp: { cp: 'Polybius'}}">
+            <router-link :to="{ name: 'Cipher', params: { cphr: 'polybius'}}">
               Polybius
             </router-link> cipher replaces each letter with two numbers
-            using the so-called Polybius square. The funny <router-link :to="{ name: 'Cipher', cp: { cp: 'Kennycode'}}">
+            using the so-called Polybius square. The funny <router-link :to="{ name: 'Cipher', params: { cphr: 'kennycode'}}">
               Kenny code
             </router-link>
             replaces each letter with three (m,p and f combinations).
@@ -717,7 +717,7 @@
           <p>
             A special technique is <b>fractionation</b>. The message first uses substitution where each letter is replaced by two or more.
             The result is transposed, so each substituted code is scattered (or fractionated) through the message. The result is then decoded
-            back to letters. A good example is the <router-link :to="{ name: 'Cipher', cp: { cp: 'Bifid'}}">
+            back to letters. A good example is the <router-link :to="{ name: 'Cipher', params: { cphr: 'bifid'}}">
               Bifid
             </router-link>
             cipher, which uses a Polybius square and a columnar transposition.

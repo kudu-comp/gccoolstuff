@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('codes.codebook.title') }}
+      {{ $t('codebook.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('codes.codebook.long')"
+        v-html="$t('codebook.long')"
       />
       <div class="row">
         <v-search
@@ -18,7 +18,7 @@
         <label
           for="listoftags"
           class="form-label sm-size mb-2"
-        >{{ $t('cdbook.availtags') }}:</label>
+        >{{ $t('codebook.availtags') }}:</label>
         <select
           id="listoftags"
           v-model="selectedtag"
@@ -41,7 +41,7 @@
         <button id="next" class="btn mb-2" style="width:3em;" @click="getNext" >
           <i class="fa-solid fa-arrow-right"></i>
         </button>
-        <span class="form-label mb-2">{{ foundpages.length }}&nbsp;{{ $t('cdbook.pagesfound') }}</span>
+        <span class="form-label mb-2">{{ foundpages.length }}&nbsp;{{ $t('codebook.pagesfound') }}</span>
       </div>
       <p
         v-show="errormsg"
@@ -88,6 +88,15 @@ export default {
   components: {
     VSearch,
     VaItem,
+  },
+
+  // Prop cphr is parameter passed by route (optional)
+  props: {
+    code: {
+      type: String,
+      required: false,
+      default: "atbash"
+    },
   },
 
   data: function () {
@@ -137,9 +146,10 @@ export default {
     this.currentpage = 0;
 
     // If code is passed as a param make that the current page
+    // Use imagename as it has no spaces
     if (this.$route.params.code) {
       for (let i=0; i < codepages.length; i++) {
-        if (codepages[i].name == this.$route.params.code) this.currentpage = i;
+        if (codepages[i].imagename.slice(0,-4) === this.$route.params.code) this.currentpage = i;
       }
     }
     this.selectCodepage();

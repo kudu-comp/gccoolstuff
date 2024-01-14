@@ -2,13 +2,13 @@
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
       <div class="text-center">
-        {{ $t('othertools.usastates.title') }}
+        {{ $t('usastates.title') }}
       </div>
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('othertools.usastates.long')"
+        v-html="$t('usastates.long')"
       />
       <v-table
         :phsearch="phsearch"

@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('imagetools.colorpicker.title') }}
+      {{ $t('colorpicker.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('imagetools.colorpicker.long')"
+        v-html="$t('colorpicker.long')"
       />
       <input
         id="file"

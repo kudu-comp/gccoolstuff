@@ -34,12 +34,12 @@ export const ciphers = [
   {
     name: "ADFGV(X)",
     ref: "adfgvx",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
-    repl: false,
-    replchar: "",
+    repl: true,
+    replchar: "J=I",
     keepunkn: false,
     keys: [
       {
@@ -164,7 +164,7 @@ export const ciphers = [
   },
   {
     name: "Base31",
-    ref: "base31",
+    ref: "gcid",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
     cleandec: false,
     keepcase: false,
@@ -207,7 +207,7 @@ export const ciphers = [
   },
   {
     name: "Beaufort",
-    ref: " beaufort",
+    ref: "beaufort",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
@@ -238,7 +238,7 @@ export const ciphers = [
   {
     name: "Bifid",
     ref: "bifid",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -267,6 +267,7 @@ export const ciphers = [
       {
         type: "txt",
         req: true,
+        dflt: "#"
       },
     ],
   },
@@ -372,11 +373,11 @@ export const ciphers = [
     ref: "columnartransposition",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
-    keepcase: true,
+    keepcase: false,
     keepdiac: false,
     repl: false,
     replchar: "",
-    keepunkn: true,
+    keepunkn: false,
     keys: [
       {
         type: "txt",
@@ -438,7 +439,7 @@ export const ciphers = [
   },
   {
     name: "Foursquare",
-    ref: "foursqaure",
+    ref: "foursquare",
     alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
@@ -462,6 +463,18 @@ export const ciphers = [
         req: true,
       },
     ],
+  },
+  {
+    name: "Geocache ID",
+    ref: "gcid",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    cleandec: false,
+    keepcase: false,
+    keepdiac: false,
+    repl: false,
+    replchar: "",
+    keepunkn: false,
+    keys: [],
   },
   {
     name: "Goldbug",
@@ -520,7 +533,7 @@ export const ciphers = [
   },
   {
     name: "Kamasutra",
-    ref: "kamasutra",
+    ref: "vatsyayana",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
@@ -559,7 +572,7 @@ export const ciphers = [
   {
     name: "Monome-dinome",
     ref: "monomedinome",
-    alphabet: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     codealph: "0123456789",
     keepcase: false,
@@ -613,7 +626,7 @@ export const ciphers = [
   {
     name: "Myszkowski",
     ref: "myszkowski",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -631,7 +644,7 @@ export const ciphers = [
   {
     name: "Nicodemus",
     ref: "nicodemus",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -649,7 +662,7 @@ export const ciphers = [
   {
     name: "Nihilist",
     ref: "nihilist",
-    alphabet: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: false,
     keepdiac: false,
@@ -659,7 +672,7 @@ export const ciphers = [
     keys: [
       {
         type: "txt",
-        dflt: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
         showgen: true,
         req: true,
         clean: true,
@@ -674,7 +687,7 @@ export const ciphers = [
   {
     name: "Nihilist Transposition",
     ref: "nihilisttransposition",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -699,7 +712,7 @@ export const ciphers = [
   {
     name: "One Time Pad",
     ref: "onetimepad",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -717,7 +730,7 @@ export const ciphers = [
   {
     name: "Phillips",
     ref: "phillips",
-    alphabet: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -727,7 +740,7 @@ export const ciphers = [
     keys: [
       {
         type: "txt",
-        dflt: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
         req: true,
         showgen: true,
         clean: true,
@@ -737,7 +750,7 @@ export const ciphers = [
   {
     name: "Playfair",
     ref: "playfair",
-    alphabet: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -747,7 +760,7 @@ export const ciphers = [
     keys: [
       {
         type: "txt",
-        dflt: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
         req: true,
         showgen: true,
         clean: true,
@@ -757,7 +770,7 @@ export const ciphers = [
   {
     name: "Pollux",
     ref: "pollux",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: false,
     keepdiac: false,
@@ -784,8 +797,8 @@ export const ciphers = [
   },
   {
     name: "Polybius",
-    ref: "Polybius",
-    alphabet: "ABCDEFGHIKLMNOPQRSTUWXYZ",
+    ref: "polybius",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: false,
     keepdiac: false,
@@ -808,7 +821,7 @@ export const ciphers = [
   {
     name: "Porta",
     ref: "porta",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -825,7 +838,7 @@ export const ciphers = [
   {
     name: "Portax",
     ref: "portax",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -843,7 +856,7 @@ export const ciphers = [
   {
     name: "Ragbaby",
     ref: "ragbaby",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     keepcase: false,
     keepdiac: false,
@@ -860,7 +873,7 @@ export const ciphers = [
   {
     name: "Railfence",
     ref: "railfence",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -883,7 +896,7 @@ export const ciphers = [
   {
     name: "Redefence",
     ref: "redefence",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -911,7 +924,7 @@ export const ciphers = [
   {
     name: "Reverse",
     ref: "reverse",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -923,7 +936,7 @@ export const ciphers = [
   {
     name: "Reverse words",
     ref: "reversewords",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: true,
@@ -953,7 +966,7 @@ export const ciphers = [
   {
     name: "ROT13",
     ref: "rot13",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: true,
     keepdiac: false,
@@ -989,8 +1002,8 @@ export const ciphers = [
   },
   {
     name: "Scytale",
-    ref: "scytable",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    ref: "scytale",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: false,
     keepdiac: false,
@@ -1008,13 +1021,13 @@ export const ciphers = [
   {
     name: "Skip",
     ref: "skip",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
-    keepcase: false,
-    keepdiac: false,
+    keepcase: true,
+    keepdiac: true,
     repl: false,
     replchar: "",
-    keepunkn: false,
+    keepunkn: true,
     keys: [
       {
         type: "num",
@@ -1031,7 +1044,7 @@ export const ciphers = [
   {
     name: "Substitution",
     ref: "substitution",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
     keepcase: false,
     keepdiac: false,
@@ -1042,14 +1055,14 @@ export const ciphers = [
       {
         type: "txt",
         req: true,
-        dflt: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+        dflt: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       },
     ],
   },
   {
     name: "Syllabary",
     ref: "syllabary",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ0123456789",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
     cleandec: true,
     codealph: "0123456789",
     keepcase: false,
@@ -1077,7 +1090,7 @@ export const ciphers = [
   {
     name: "Tapir",
     ref: "tapir",
-    alphabet: "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
     codealph: "0123456789",
     keepcase: false,
