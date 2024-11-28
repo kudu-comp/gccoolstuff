@@ -32,6 +32,9 @@ import * as geohash36 from '@/scripts/geohash36.js';
 import * as britishgrid from '@/scripts/britishgrid.js';
 import * as what3words from '@/scripts/what3words.js';
 import * as mapcode from '@/scripts/mapcode.js';
+import { NACtoWGS, WGStoNAC} from '@/scripts/nac.js';
+import { Geo3x3toWGS, WGStoGeo3x3} from '@/scripts/geo3x3.js';
+import { CsquareToWGS, WGSToCsquare} from '@/scripts/csquares.js';
 
 // var coordutils = {
 //   convertCoordFromLatLon: convertCoordFromLatLon,
@@ -512,6 +515,12 @@ export async function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
 
   switch (fromdatum) {
     // MGRS, QTH and Geohash don't use proj4 and return result immediately
+    case "NAC" :
+      return NACtoWGS(coord.s.trim());
+    case "Geo3x3" : 
+      return Geo3x3toWGS(coord.s.trim());
+    case "Csquare" :
+      return CsquareToWGS(coord.s.trim());
     case "MGRS" :
       // mgrs returns and array longitude first
       temp = mgrs.inverse(coord.s.trim());
@@ -597,6 +606,15 @@ export async function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
 
   // Get the newcoord in the right format
   switch (todatum) {
+
+    case "NAC" :
+      return {s : WGStoNAC(coord.lat, coord.lon)};
+
+    case "Geo3x3" :
+      return {s: WGStoGeo3x3(coord.lat, coord.lon)};
+
+    case "Csquare" :
+      return {s: WGSToCsquare(coord.lat, coord.lon)};
 
     case "MGRS" :
       // mgrs.forward takes longitude first and latitude second, returns a string
@@ -703,6 +721,9 @@ export function getCoordFromText (s, datum) {
       // Grid coordinates have longitude first and use integers
       temp = s.match(/[-0-9]+/g);
       return { lon: parseInt(temp[0]), lat: parseInt(temp[1]) };
+    case "NAC" :
+    case "Geo3x3" :
+    case "Csquare" :
     case "MGRS" :
     case "QTH" :
     case "Geohash" :
@@ -766,6 +787,9 @@ export function getTextFromCoord (coord, datum, round = 7, dmsformat = "") {
     case "EPSG:2154" :
       // Grid coordinates have Longitude (E/W, x) first and use integers
       return "" + coord.lon.toFixed(0) + " " + coord.lat.toFixed(0);
+    case "NAC":
+    case "Geo3x3" : 
+    case "Csquare" :
     case "MGRS" :
     case "QTH" :
     case "Geohash" :
@@ -869,6 +893,7 @@ export function geoFindMe () {
 
   if(!navigator.geolocation) {
     throw ('Geolocation is not supported by your browser');
+    console.log('Geolocation is not supported by your browser');
   } else {
 
     // Return the promise

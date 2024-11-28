@@ -5,6 +5,7 @@ export const fontdefs = [
   { id: 'Barbook', font: 'Barbook' },
   { id: 'Betamaze', font: 'Betamaze' },
   { id: 'Braille', font: 'Braille' },
+  { id: 'Builder', font: 'Builder' },
   { id: 'Centauri', font: 'Centauri (Babylon 5)' },
   { id: 'Code128', font: 'Code 128 (barcode)' },
   { id: 'Code39', font: 'Code 39 (barcode)' },

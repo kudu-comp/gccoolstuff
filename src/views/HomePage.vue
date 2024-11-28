@@ -7,17 +7,16 @@
         <div class="card-body">
           <h5 class="card-title">{{$t('labels.welcome')}}</h5>
           <p class="card-text" v-html="$t('intro')"></p>
-          <router-link to="/alltools"><span class="btn">{{$t('labels.alltools')}}</span></router-link>
+          <router-link to="/alltools"><span class="btn"><i class="fa-solid fa-search"></i> {{$t('labels.alltools')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <img class="card-img-top" src="../assets/images/featured.jpg" alt="Welcome" style="height: 200px;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('labels.featured')}} - {{$t('printlog.title')}}</h5>
-          <p class="card-text">
-            {{$t('printlog.long')}}
+          <h5 class="card-title">{{$t('labels.featured')}} - {{$t('tryanswers.title')}}</h5>
+          <p class="card-text" v-html="$t('tryanswers.long')">
           </p>
-          <router-link to="/printlog"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+          <router-link to="/tryanswers"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

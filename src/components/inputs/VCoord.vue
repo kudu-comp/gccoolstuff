@@ -79,6 +79,15 @@
       <option value="Geohash36">
         Geohash 36
       </option>
+      <option value="NAC">
+        Natural Area Code
+      </option>
+      <option value="Geo3x3">
+        Geo3x3
+      </option>
+      <option value="Csquare">
+        C-Squares
+      </option>
       <option disabled>
         --- Define your own ---
       </option>

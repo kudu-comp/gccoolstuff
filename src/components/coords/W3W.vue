@@ -8,7 +8,7 @@
         class="infoblock"
         v-html="$t('w3w.long')"
       />
-      <v-coord
+      <!-- <v-coord
         v-model:coord="coordinate1"
         v-model:datum="selecteddatum1"
         class="me-2"
@@ -47,7 +47,7 @@
             @click="doConv()"
           >
       </div>
-      <hr class="hr">
+      <hr class="hr"> -->
       <div class="row">
         <label
           class="form-label sm-size  mb-2"

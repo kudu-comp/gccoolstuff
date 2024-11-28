@@ -1,6 +1,6 @@
 {
   "language": "Taal",
-  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/wordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a>, <a href='/printlog'>Logrollen printen<a> of <a href='/sudokusolver'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/html'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
+  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/wordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotciphers'>ROT13<a>, <a href='/printlog'>Logrollen printen<a> of <a href='/sudokusolv'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/htmlparser'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -76,8 +76,10 @@
     "undo": "Ongedaan maken",
     "encode": "Codeer",
     "decode": "Decodeer",
-    "download": "Download"
-  },
+    "download": "Download",
+    "try" : "Probeer alles",
+    "prev" : "Vorige",
+    "next" : "Volgende"  },
 
   "colors": {
     "white": "Wit",
@@ -174,7 +176,8 @@
     "repl": "Vervangingen",
     "adfgvx": {
       "info": "De ADFGX(V) cijfer gebruikt een Polybiusvierkant (van 5 bij 5 of 6 bij 6). Daarna worden de kolommen verplaatst volgens de gegeven sleutel. Hierdoor wordt de code gefractioneerd.",
-      "k1": "Transpositiesleutel"
+      "k1": "Vierkant",
+      "k2": "Transpositiesleutel"
     },
     "affine": {
       "info": "De Affine cijfer is een substitutiecifjer. Het gebruikt de functie y=ax + b. De waarde van A moet een co-priem zijn met de lengte van het alfabet.",
@@ -202,7 +205,7 @@
       "k3": "Vervang B door"
     },
     "bazeries": {
-      "info": "De Bazeries cijfer codeert 2-letters per keer. Het gebruikte alfabet is 25 of 36 letters. Er worden twee vierkanten gebruikt. De sleutels voor het genereren van de vierkanten zijn optioneel. De numerieke sleutel wordt gebruikt voor transpositie van het gecodeerde bericht en eventueel om het tweede vierkant te genereren, indien de sleutel ontbreekt.",
+      "info": "De Bazeries cijfer codeert 2-letters per keer. Het gebruikte alfabet is 25 of 36 letters. Er worden twee vierkanten gebruikt. Het eerste vierkant is een verticaal geordend alfabet. Het tweede vierkant wordt gegenereerd met de numerieke sleutel. De numerieke sleutel wordt ook gebruikt voor transpositie van het gecodeerde bericht. Beide vierkanten kunnen worden aangepast. J wordt vervangen door I, maar in expert mode kan dit worden aangepast, bijvoorbeeld V wordt vervangen door I",
       "k1": "Vierkant 1",
       "k2": "Vierkant 2",
       "k3": "Transpositiesleutel (numeriek)"
@@ -313,6 +316,10 @@
       "info": "De Myszkowski cijfer is een kolom transpositie gebruikmakend van een sleutel met dubbele letters. Bij de transpositie worden gelijke letters van links naar rechts gelezen en vervolgens per kolom.",
       "k1": "Transpositiesleutel (met dubbele letters)"
     },
+    "nesw": {
+      "info": "De NESW of NEWS cipher gebruikt een vierkant. Om te coderen wordt een windrichting gekozen (N, E, S, W, NE, SE, SW oF NW) en de letter genomen die daar staat in het vierkant. Om te decoderen wordt de tegenovergestelde richting gekozen.",
+      "k1": "Vierkant"
+    },
     "nicodemus": {
       "info": "De Nicodemus cijfer voert eerst een transpositie uit met de sleutel. Op het resultaat wordt met dezelfde sleutel een Vigenere cijfer toegepast.",
       "k1": "Sleutel"
@@ -345,8 +352,9 @@
     },
     "polybius": {
       "info": "De Polybiuscijfer gebruikt een vierkant (het Polybiusvierkant) van 5x5 (of 6x6). De labels van de rijen en kolommen zijn standaard 12345, maar dit kan worden aangepast. Het Polybiusiverkant wordt in veel andere cijfers gebruikt. Het vierkant is een klassieker die teruggaat naar de Oude Grieken.",
-      "k1": "Rijen",
-      "k2": "Kolommen"
+      "k1": "Vierkant",
+      "k2": "Rijen",
+      "k3": "Kolommen"
     },
     "pollux": {
       "info": "De Pollux cijfer vertaalt het bericht eerst naar Morse. Vervolgens worden de -, . en x (pauze) omgezet naar letters. De letter wordt steeds random gekozen uit een verzameling. De sleutels mogen geen overeenkomende letters hebben.",
@@ -391,6 +399,9 @@
       "info": "ROT47 is een Caesar cijfer die de ASCII karakters 33 t/m 126 gebruikt (hoofdletters, kleine letters, cijfers en diverse leestekens en symbolen). De standaardverschuiving is 47.",
       "k1": "Verschuiving"
     },
+    "rot123": {
+      "info": "Bij ROT123 wordt de verschuiving steeds 1 positie verhoogd. Cijfers worden apart verschoven. Andere tekens worden niet gecodeerd."
+    },
     "scytale": {
       "info": "Scytale is een simpele transpositiecijfer die al gebruikt werd in het oude Griekenland. Het bericht wordt geschreven op een lint dat om een rol wordt gewikkeld. Vervolgens wordt het regel voor regel afgelezen.",
       "k1": "Aantal wikkelingen"
@@ -412,6 +423,11 @@
     },
     "tapir": {
       "info": "TAPIR is de naam van een substitutietabel die gebruikt werd door het Volksleger en het Ministerie van Staatsveiligheid in de DDR. Het substitueert letters, enkele digrammen, cijfers en enkele speciale tekens."
+    },
+    "trevanion": {
+      "info": "Trevanion neemt elke letter na een leesteken. Standaard is dit de eerste, maar elke aantal is mogelijk. Behalve leestekens kunnen ook andere tekens als signaal gebruikt worden, bijvoorbeeld cijfers. De code is genoemd naar John Trevanion, een Engelse gevangene die volgens het verhaal een brief ontving van een vriend met deze codering. Het verhaal is vermoedelijk verzonnen.",
+      "k1": "Leestekens",
+      "k2": "Offset"
     },
     "trifid": {
       "info": "De Trifid cijfer gebruikt 3 vierkanten van 3x3 op basis van een alfabet van 27 letters. De sleutel wordt gebruikt om de vierkanten te genereren. Elke letter wordt gecodeerd op basis van vierkant, rij, kolom (3 cijfers). Die worden per kolom achter elkaar gezet en daarna per rij opgeschreven. Hierdoor onstaat fractionering.",
@@ -458,7 +474,8 @@
     "keylongerthenmsg" : " moet net zo lang of langer zijn dan de lengte van het bericht.",
     "keymustbesqrroot" : " sleutel moet de wortel van de lengte van het alfabet lang zijn.",
     "keymustbealph" : " moet dezelfde lengte hebben als het alfabet.",
-    "keyfromalph" : " moet zijn samengesteld uit het alfabet."
+    "keyfromalph" : " moet zijn samengesteld uit het alfabet.",
+    "keymustbenumeric" : " moet numeriek zijn."
   },
 
   "codebook": {
@@ -1170,7 +1187,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p>",
+    "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
     "languages": "Beschikbare talen",
     "convertto": "Converteer naar w3w",
     "convertfrom": "Convert naar ...",
@@ -1183,6 +1200,30 @@
     "words": "Woorden",
     "country": "Land",
     "nearest": "Dichtsbijzijnde plaats"
+  },
+
+  "tryanswers" : {
+    "title" : "Probeer antwoorden",
+    "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
+    "formulas" : "Optioneel gebruik formules, 1e antwoord is A, 2e is B enzovoorts.",
+    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of miscshien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef antwoord per regel. Als er meerder opties zijn kan je die scheiden door een verticale streep. Als je formules wil gebruiken vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
+    "showdescr" : "Toon omschrijvingen",
+    "showtable" : "Toon tabel",
+    "trycnts" : "Probeer ook andere tellingen",
+    "tryfirst" : "Probeer ook de 1e letter",
+    "trylast" : "Probeer ook de laatste letter",
+    "trysv" : "Probeer ook het Scrabble en Vanity alfabet",
+    "trylang" : "Probeer ook andere talen",
+    "tryrev" : "Probeer ook het omgekeerde alfabet (A=26, Z=1)",
+    "tryzero" : "Probeer ook met starten op nul (A=0, Z=25)",
+    "value" : "Waarde",
+    "sq" : "Stapeltellen",
+    "full": "Volledig antwoord",
+    "first": "Eerste letter",
+    "last": "Laatste letter",
+    "rev": "Omgekeerd alfabet",
+    "zero": "Alfabet start op 0",
+    "finds": " antwoorden gevonden."
   },
 
   "wordvalue": {
@@ -1267,6 +1308,16 @@
     "mode1": "Hussel alle letters"
   },
 
+  "textchunks": {
+    "title": "Text blokken",
+    "long": "<p>Hakt een tekst in rijen of kolommen van gelijke lengte om verborgen patronen te onthullen. Geef een begin en eindgrootte op om meerdere mogelijkheden te onderzoeken. Ga op zoek naar herhalende letters, cijfers of symbolen in de ingedeelde tekst.</p><p>Bijvoorbeeld een schijnbaar random string van 0 en 1 kan na herindeling een patroon laten zien.</p>",
+    "dir": "Richting",
+    "start": "Blok grootte start",
+    "end": "Blok grootte end",
+    "ignore": "Negeer spaties",
+    "upper": "Alles hoofdletters"
+  },
+
   "baseconv": {
     "title": "Base conversie",
     "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16.",
@@ -1283,8 +1334,8 @@
     "tau": "𝜏, tau of 2*π, begint met 6.2831853071...",
     "phi": "φ of phi of de gulden ratio, begint met 1.61803398874989...",
     "euler": "γ of de Euler–Mascheroni constante, begint met 0.577215664901...",
-    "sq2": "√2, begint met 1.414213562373095...",
-    "sq3": "√3, begint met 1.7320508075...",
+    "sq2": "√2 of constante van Pythagoras, begint met 1.414213562373095...",
+    "sq3": "√3 of constante van Theodorus, begint met 1.7320508075...",
     "zeta3": "ζ(3) of zeta(3) of Constante van Apéry, begint met 1.202056903...",
     "gauss": "Constante van Gauss, begint met 0.8346268416...",
     "lemni": "Lemniscate constante, begint met 5.2441151085...",
@@ -1421,7 +1472,7 @@
 
   "sequences": {
     "title": "Reeksen",
-    "long" : "Een tool om de n-de term te berekenen van enkele bekende reeksen zoals Conway, Hailstone, Golomb and Niven. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks.",
+    "long" : "Een tool om de n-de term te berekenen van enkele bekende reeksen zoals Conway, Hailstone, Golomb and Niven. Dit zijn slechts enkele van de tienduizenden gedocumenteerde reeksen van gehele getallen. Voor ontbrekende reeksen, probeer de <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. OEIS kan zoeken op woorden, maar ook op de eerst termen van een reeks.",
     "sel": "Selecteer een reeks",
     "conway": "Conway reeks ook wel bekend als de hoor-en-spreek reeks",
     "revconway": "Reverse Conway reeks ook wel bekend als de hoor-en-spreek reeks",
@@ -1590,7 +1641,7 @@
   
   "freqanal" : {
     "title" : "Frequentie Analyse",
-    "long" : "<p>Frequentie analyse is een belangrijk hulpmiddel in het kraken van codes. Voor simpele codes is de de meest voorkomende code meestal de meest voorkomende letter. Maar ook voor complexere codes is dit een handige tool. Hoe langer de tekst hoe betrouwbaarder de analyse.</p><p>Lengte 1 geeft de verdeling van de letters in het alfabet. Als deze een beetje overeenkomt met een normale tekst dan is dit vermoedelijk een 1 op 1 omzetting. Gebruik <a href='/smartreplace'>Slimme Substitutie</a> om deze code te kraken.</p><p>Lengte 2, zogenaamde digrams of bigrams, is handig om codes te kraken die twee letters gebruiken om één teken te coderen, zoals de Polybius cijfer. Ook voor codes die twee letters, zoals Bazeries of Foursquare, per keer coderen is een analyse van bigrams handig. De gevonden verdeling komt dan overeen met de meest voorkomende verdeling van bigrams. Zo is EN in het Nederlands het meest voortkomende bigram.</p><p>Het maximale aantal getoonde missende n-grammen is 1000.</p>",
+    "long" : "<p>Frequentie analyse is een belangrijk hulpmiddel in het kraken van codes. Voor simpele codes is de de meest voorkomende code meestal de meest voorkomende letter. Maar ook voor complexere codes is dit een handige tool. Hoe langer de tekst hoe betrouwbaarder de analyse.</p><p>Lengte 1 geeft de verdeling van de letters in het alfabet. Als deze een beetje overeenkomt met een normale tekst dan is dit vermoedelijk een 1 op 1 omzetting. Gebruik <a href='/substcipher'>Slimme Substitutie</a> om deze code te kraken.</p><p>Lengte 2, zogenaamde digrams of bigrams, is handig om codes te kraken die twee letters gebruiken om één teken te coderen, zoals de Polybius cijfer. Ook voor codes die twee letters, zoals Bazeries of Foursquare, per keer coderen is een analyse van bigrams handig. De gevonden verdeling komt dan overeen met de meest voorkomende verdeling van bigrams. Zo is EN in het Nederlands het meest voortkomende bigram.</p><p>Het maximale aantal getoonde missende n-grammen is 1000.</p>",
     "size" : "Lengte n-gram",
     "slide" : "Verschuif (ABCDE => AB, BC, CD, DE)",
     "bound" : "Analyseer losse woorden",

@@ -153,6 +153,12 @@ export default {
       if (this.coordfrom == null) { this.errormsg = this.$t('errors.nocoords'); return; }
       if (this.coordfrom == "") { this.errormsg = this.$t('errors.nocoords'); return; }
 
+      // Convert coordinate to what3words no longer supported in free API plan
+      if (this.to === "W3W") {
+        this.result = "No longer supported\nfree of charge\nby what3words.com.";
+        return;
+      }
+
       // Get all the lines form input and convert them one by one
       let input = this.coordfrom.match(/[^\r\n]+/g);
 

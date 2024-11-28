@@ -10,6 +10,13 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
+          <h5 class="card-title">{{$t('tryanswers.title')}}</h5>
+          <p class="card-text" v-html="$t('tryanswers.long')"></p>
+          <router-link to="/tryanswers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
           <h5 class="card-title">{{$t('wordvalue.title')}}</h5>
           <p class="card-text" v-html="$t('wordvalue.long')"></p>
           <router-link to="/wordvalue"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
@@ -55,6 +62,13 @@
           <h5 class="card-title">{{$t('texttoss.title')}}</h5>
           <p class="card-text" v-html="$t('texttoss.long')"></p>
           <router-link to="/texttoss"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('textchunks.title')}}</h5>
+          <p class="card-text" v-html="$t('textchunks.long')"></p>
+          <router-link to="/textchunks"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
     </div>

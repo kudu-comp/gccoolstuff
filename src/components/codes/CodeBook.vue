@@ -32,14 +32,17 @@
             {{ t }}
           </option>
         </select>
-        <button id="btnsearch" class="btn mb-2 me-2" style="width:3em;" @click="goSearch" >
+        <button id="btnsearch" class="btn mb-2 me-2" :title="$t('buttons.search')" style="width:3em;" @click="goSearch" >
           <i class="fa-solid fa-search"></i>          
         </button>
-        <button id="prev" class="btn mb-2 me-2" style="width:3em;" @click="getPrev" >
+        <button id="prev" class="btn mb-2 me-2" :title="$t('buttons.prev')" style="width:3em;" @click="getPrev" >
           <i class="fa-solid fa-arrow-left"></i>
         </button>
-        <button id="next" class="btn mb-2" style="width:3em;" @click="getNext" >
+        <button id="next" class="btn mb-2 me-2" :title="$t('buttons.next')" style="width:3em;" @click="getNext" >
           <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button id="bnreset" class="btn mb-2 me-2" :title="$t('buttons.reset')" style="width:3em;" @click="resetSearch" >
+          <i class="fa-solid fa-refresh"></i>          
         </button>
         <span class="form-label mb-2">{{ foundpages.length }}&nbsp;{{ $t('codebook.pagesfound') }}</span>
       </div>
@@ -221,6 +224,12 @@ export default {
       this.currentpage = 0;
       this.selectCodepage();
     },
+
+    resetSearch: function () {
+      this.selectedtag = "";
+      this.searchstr = "";
+      this.goSearch();
+    }
   },
 }
 </script>

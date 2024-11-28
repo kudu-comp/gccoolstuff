@@ -21,7 +21,7 @@
  *   min                     Optional      minimum of range when type = num
  *   max                     Optional      maximum of range when type = num
  *   sels      Array         Optional      selections used, mandatory when type = sel
- *    ref    Text          Mandatory     ref for ref
+ *    ref      Text          Mandatory     ref for ref
  *    label    Text          Mandatory     text to be displayed
  *   req       Boolean       Optional      mandatory key, used in validating keys
  *   showgen   Boolean       Optional      show button to generate polybiussquare
@@ -42,6 +42,11 @@ export const ciphers = [
     replchar: "J=I",
     keepunkn: false,
     keys: [
+      {
+        type: "txt",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+        showgen: true
+      },
       {
         type: "txt",
         req: true,
@@ -108,7 +113,7 @@ export const ciphers = [
     ref: "atomtom",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: true,
-    codealph: "/ ",
+    codealph: "\\/ ",
     keepcase: false,
     keepdiac: false,
     repl: false,
@@ -187,14 +192,12 @@ export const ciphers = [
     keys: [
       {
         type: "txt",
-        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+        dflt: "AFLQVBGMRWCHNSXDIOTYEKPUZ",
         req: true,
         showgen: true,
       },
       {
         type: "txt",
-        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
-        req: true,
         showgen: true,
       },
       {
@@ -525,8 +528,8 @@ export const ciphers = [
     keepunkn: false,
     keys: [
       {
-        type: "num",
-        min: 1,
+        type: "txt",
+        dflt: "12345",
         req: true,
       },
     ],
@@ -628,17 +631,36 @@ export const ciphers = [
     ref: "myszkowski",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
-    keepcase: true,
-    keepdiac: true,
+    keepcase: false,
+    keepdiac: false,
     repl: false,
     replchar: "",
-    keepunkn: true,
+    keepunkn: false,
     keys: [
       {
         type: "txt",
         req: true,
         clean: true,
       },
+    ],
+  },
+  {
+    name: "NESW",
+    ref: "nesw",
+    alphabet: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+    cleandec: true,
+    keepcase: false,
+    keepdiac: false,
+    repl: true,
+    replchar: "J=I",
+    keepunkn: false,
+    keys: [
+      {
+        type: "txt",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+        clean: true,
+        showgen: true
+      }
     ],
   },
   {
@@ -808,6 +830,11 @@ export const ciphers = [
     keys: [
       {
         type: "txt",
+        dflt: "ABCDEFGHIKLMNOPQRSTUVWXYZ",
+        showgen: true
+      },
+      {
+        type: "txt",
         dflt: "12345",
         req: true,
       },
@@ -875,11 +902,11 @@ export const ciphers = [
     ref: "railfence",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
-    keepcase: true,
-    keepdiac: true,
+    keepcase: false,
+    keepdiac: false,
     repl: false,
     replchar: "",
-    keepunkn: true,
+    keepunkn: false,
     keys: [
       {
         type: "num",
@@ -898,11 +925,11 @@ export const ciphers = [
     ref: "redefence",
     alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     cleandec: false,
-    keepcase: true,
-    keepdiac: true,
+    keepcase: false,
+    keepdiac: false,
     repl: false,
     replchar: "",
-    keepunkn: true,
+    keepunkn: false,
     keys: [
       {
         type: "num",
@@ -999,6 +1026,18 @@ export const ciphers = [
         dflt: 47,
       },
     ],
+  },
+  {
+    name: "ROT123",
+    ref: "rot123",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    cleandec: false,
+    keepcase: false,
+    keepdiac: false,
+    repl: false,
+    replchar: "",
+    keepunkn: true,
+    keys: []
   },
   {
     name: "Scytale",
@@ -1099,6 +1138,30 @@ export const ciphers = [
     replchar: "",
     keepunkn: false,
     keys: [],
+  },
+  {
+    name: "Trevanion",
+    ref: "trevanion",
+    alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    cleandec: false,
+    keepcase: true,
+    keepdiac: true,
+    repl: false,
+    replchar: "",
+    keepunkn: true,
+    noencode: true,
+    keys: [
+      {
+        type: "txt",
+        req: true,
+        dflt: ".,;:?!"
+      },
+      {
+        type: "num",
+        dflt: 1,
+        min: 1
+      },
+    ],
   },
   {
     name: "Trisquare",

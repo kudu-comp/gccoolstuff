@@ -131,7 +131,7 @@
           <label
             for="keepcase"
             class="form-check-label mb-2"
-          >{{ $t('cp.keepcase') }}</label>
+          >{{ $t('ciphers.keepcase') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -402,7 +402,6 @@ export default {
       };
 
       console.log(data);
-
       try {
     
         // Call PHP script on server
@@ -413,7 +412,7 @@ export default {
           .then(response => response.json())
           .then(data => {
               this.result = data.message;
-              // console.log('Success', data)
+              console.log('Success decoding', data)
           })
           .catch((error) => {
               console.log('Error ', error);
@@ -460,7 +459,7 @@ export default {
       // Create data object
       let data = {
           alphabet: this.alphabet,
-          removeunknown: !this.keepuknown,
+          removeunknown: !this.keepunknown,
           replacements: this.replacements,
           cipher: this.cipher,
           enordecode: 'encode',
@@ -472,7 +471,6 @@ export default {
       };
 
       console.log(data);
-
       // Call PHP script on server
       try {
 
@@ -488,7 +486,7 @@ export default {
               } else {
                 this.result = data.transmessage
               }
-              //console.log('Success', data)
+              console.log('Success encoding', data)
           })
           .catch((error) => {
               console.log('Error ', error);
@@ -527,6 +525,8 @@ export default {
       }
       
       let re = new RegExp ("^[" + this.alphabet + "]*$", "gi");
+      let re2 = /^[0-9]+$/;
+          
       switch (this.cipher) {
         case 'affine' :
           if (keys[0] < 2) {
@@ -580,6 +580,12 @@ export default {
             this.errormsg = this.labels[2] + this.$t('cperrors.mustbegreaterthen0'); return false;
           }
           break;
+        case 'gronsfeld' :
+          if (!keys[0].match(re2) ) {
+            this.errormsg = this.labels[0] + this.$t('cperrors.keymustbenumeric'); return false;
+          }
+          break;
+          break;
         case 'vatsyayana' :
           let k0 = keys[0].length;
           if (k0 !== this.alphabet.length / 2) {
@@ -618,11 +624,11 @@ export default {
           break;
         }
         case 'polybius' : {
-          if (this.alphabet.length !== keys[0].length**2) {
-            this.errormsg = this.labels[0]+ this.$t('cperrors.keymustbesqrroot'); return false;
-          }
           if (this.alphabet.length !== keys[1].length**2) {
-            this.errormsg = this.labels[1] + this.$t('cperrors.keymustbesqrroot'); return false;
+            this.errormsg = this.labels[1]+ this.$t('cperrors.keymustbesqrroot'); return false;
+          }
+          if (this.alphabet.length !== keys[2].length**2) {
+            this.errormsg = this.labels[2] + this.$t('cperrors.keymustbesqrroot'); return false;
           }
           break;
         }

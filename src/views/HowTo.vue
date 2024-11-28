@@ -98,7 +98,7 @@
             <li>
               <b>Hidden information</b> - try select all (Ctrl-A) on the webpage and see what happens. There might be white text, that becomes
               visible. But there might also be information hidden inside the HTML (e.g. comments, 1x1 pixel links and more). Try
-              <router-link to="/html">
+              <router-link to="/htmlparser">
                 HTML scanner
               </router-link> and see if it can find this hidden information.
             </li>
@@ -162,7 +162,7 @@
             <li>Calculating the square root is done by adding to the numbers, till there is one left. So James Bond = 83 = 8+3 = 11 = 1+1 = 2.</li>
           </ul>
           There are lots of alternatives where the values of A-Z differ, e.g. the Scrabble values, A=0-Z=25 or Z=26-A=1. All of these are available
-          in the tool <router-link to="/textwordvalue">
+          in the tool <router-link to="/wordvalue">
             Word value &amp; square root
           </router-link>. Saving you all the hard work.
         </template>
@@ -184,7 +184,7 @@
             <li>The zeroes and ones are a clear indication of a possible binary code</li>
             <li>The are seven groups, which hints at a coordinate</li>
             <li>
-              Conversion to decimal with <router-link to="/baseconvertor">
+              Conversion to decimal with <router-link to="/baseconv">
                 Base converter
               </router-link> reveals 5219034
             </li>
@@ -199,7 +199,7 @@
             <li>The cache listing shows --+-+ ---+- ----+ -+--+ ----- ---++ --+--</li>
             <li>As there are only two symbols used, this might be a binary number.</li>
             <li>
-              Use <router-link to="/baseconvertor">
+              Use <router-link to="/baseconv">
                 Base converter
               </router-link> replacing -+ with 01 reveals 5219034.
             </li>
@@ -247,7 +247,7 @@
             <li>Make a snapshot of one or a few symbols and try Google image search</li>
             <li>
               If the text is long enough replace all the symbols with letters a to z and crack the code using substituion
-              using <router-link to="/smartreplace">
+              using <router-link to="/substcipher">
                 Smart replace
               </router-link>.
             </li>
@@ -308,7 +308,7 @@
           </ul>
           <p>
             One tool that is used quite often is the projection of coordinates. Given the starting point the new location is a certain
-            distance and angle away. Use <router-link to="/coordproj">
+            distance and angle away. Use <router-link to="/project">
               Project a coordinate
             </router-link>.
           </p>
@@ -325,7 +325,7 @@
           <p>There are quite a few possibilities to make sense out of a bunch of random numbers. Here are a few options</p>
           <ul>
             <li>
-              <b>Binary</b>. If you see just 0 and 1 you're likely dealing with some kind of binary code. Try <router-link to="/baseconvertor">
+              <b>Binary</b>. If you see just 0 and 1 you're likely dealing with some kind of binary code. Try <router-link to="/baseconv">
                 Base converter
               </router-link>. It might also be a slightly different binary code. Try <router-link to="/bcd">
                 Binary Coded Decimals
@@ -359,7 +359,7 @@
             </li>
             <li>
               <b>Base conversion</b>. The numbers are specified in a different base. The maximum digit might indicate the base
-              that was used. E.g. a maximum digit of 4, might be base 5 (or higher). Use <router-link to="/baseconvertor">
+              that was used. E.g. a maximum digit of 4, might be base 5 (or higher). Use <router-link to="/baseconv">
                 Base
                 converter
               </router-link> and try.
@@ -390,7 +390,7 @@
             <li><b>Vanity code</b>. The numbers represent letters on the keyboard of your phone, e.g. 2 is a, 22 is b, 333 is f.</li>
             <li>
               <b>Base conversion using letters</b>. The cache owner has translated the text using Base 26 with values A-Z to base 10
-              with digits 0-9. This is pretty rare, but you can easily convert it using <router-link to="/baseconvertor">
+              with digits 0-9. This is pretty rare, but you can easily convert it using <router-link to="/baseconv">
                 Base
                 converter
               </router-link>.
@@ -422,14 +422,14 @@
               to solve the puzzle.
             </li>
             <li>
-              <b>Analyze</b> the text using <router-link to="/textanalyzer">
+              <b>Analyze</b> the text using <router-link to="/analtxt">
                 Analyzer
               </router-link>. The coordinate might be
               hidden in the number of words, lines, certain letters.
             </li>
             <li>
               <b>Keyboards</b> - the text was typed as if it where another keyboard (like Dvorak or Colemak). You can use
-              <router-link to="/textkeyboards">
+              <router-link to="/keyboards">
                 Keyboards
               </router-link> to solve these puzzles.
             </li>
@@ -449,7 +449,7 @@
             </li>
             <li>
               <b>Substitution cipher</b> replaces each letter with one or more other
-              letters/digits/symbols. The best way to crack a substitution cipher is the <router-link to="/smartreplace">
+              letters/digits/symbols. The best way to crack a substitution cipher is the <router-link to="/substcipher">
                 Smart replace
               </router-link>
               tool. It will analyze frequencies in the encoded text and suggest possible replacements. It works really well for larger texts,
@@ -488,13 +488,13 @@
             </li>
             <li>
               <b>Encoded text</b> - the text is binary encoded using <router-link to="/bintotext">
-                {{ $t('comptools.compbintotext.title') }}
+                {{ $t('bintotext.title') }}
               </router-link>
               In these cases the text is likely a combination of symbols, letters and digits.
             </li>
             <li>
               <b>Computer codes</b> - symbols might convert to numbers, or might convert to letters when using a different codepage.
-              With <router-link to="/textcodes">
+              With <router-link to="/charcodes">
                 Character &amp; codes
               </router-link> you can quickly try all the options.
             </li>
@@ -502,18 +502,18 @@
               <b>Cyrillic or Greek letters</b> - are actually normal text. The tools <router-link to="/textcodes">
                 Character &amp; codes
               </router-link>
-              and <router-link to="/textkeyboards">
+              and <router-link to="/keyboards">
                 Keyboards
               </router-link> support Cyrillic and Greek.
             </li>
             <li>
               <b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/brainfuck">
-                {{ $t('comptools.compbrainfuck.title') }}
+                {{ $t('brainfuck.title') }}
               </router-link> to solve the code.
             </li>
             <li>
               <b>Decabit</b> - if you see a lot of + and - you might be looking at <router-link to="/decabit">
-                {{ $t('codes.decabit.title') }}
+                {{ $t('decabit.title') }}
               </router-link>
             </li>
             <li>
@@ -525,7 +525,7 @@
               </router-link>.
             </li>
             <li>
-              <b>Another cipher</b> - use <router-link to="/smartreplace">
+              <b>Another cipher</b> - use <router-link to="/substcipher">
                 Smart replace
               </router-link> to see if the frequencies
               are similar to those of natural language. If so, you can use the tool to find the right replacements.
@@ -534,7 +534,7 @@
               <b>Hashed text</b> - hashes are used for example to encrypt passwords. They are normally hexadecimal and would use the numbers 0 to 9 and A to F.
               The coded hash can not be converted back to the original text. The only way to solve it is trying all options and find the one that matches. 
               You can try your luck with <router-link to="/hashes">
-                {{ $t('comptools.hashes.title') }}
+                {{ $t('hashes.title') }}
               </router-link>
             </li>
             <li><b>Geohash</b> - read the topic on coordinates to recognize geohashes.</li>
@@ -553,7 +553,7 @@
           Some options to try:
           <ul>
             <li>
-              <b>Resistor code</b> - you can find it the <router-link to="/resistorcode">
+              <b>Resistor code</b> - you can find it the <router-link to="/resistor">
                 Resistor code
               </router-link> here.
             </li>
@@ -635,7 +635,7 @@
         <template #content>
           <p>
             After all the hard work you still might not have been able to get the entire coordinate. There might be one or two or more
-            digits missing. You can quickly plot the options using <router-link to="/coordincomplete">
+            digits missing. You can quickly plot the options using <router-link to="/incomplete">
               Incomplete coordinates
             </router-link>.
             Combine this with info about the cache (terrain rating, attributes, hint) and find the most likely options. Also keep in mind that
@@ -656,7 +656,7 @@
             coordinates (but mostly they are closer to the posted coordinates). And geocaches need to be 160m (or 0.1mi) away from each other.
             Especially in geocache dense areas this limits the number of options. So if you draw circles around each known geocache (including the mysteries
             you already solved) within roughly a 6km radius of the posted coordinates, the possible locations are revealed. Use
-            <router-link to="/coordmapmaker">
+            <router-link to="/mapmaker">
               Map maker
             </router-link>. Combine
             this with info about the cache (Terrain rating and attributes) to reduce possible options further. Finally the hint might contain
@@ -728,18 +728,6 @@
           </p>
         </template>
       </va-item>
-      <!-- <va-item v-bind:showitem='show[15]' v-on:toggle='toggleItem(15)'>
-        <template v-slot:header>Mathematical puzzles</template>
-        <template v-slot:content>
-          Work in progress.
-        </template>
-      </va-item>
-      <va-item v-bind:showitem='show[16]' v-on:toggle='toggleItem(16)'>
-        <template v-slot:header>Calculating with coordinates</template>
-        <template v-slot:content>
-          Work in progress.
-        </template>
-      </va-item> -->
     </div>
   </div>
 </template>

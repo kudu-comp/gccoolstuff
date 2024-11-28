@@ -18,7 +18,7 @@
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />
-        <button id="btnsearch" class="sm-size btn mb-2 me-2" @click="goSearch" >
+        <button id="btnsearch" class="sm-size btn mb-2 ms-2 me-2" @click="goSearch" >
           <i class="fa-solid fa-search"></i>          
         </button>
         <button id="btnsearch" class="sm-size btn mb-2 me-2" @click="showAll" >

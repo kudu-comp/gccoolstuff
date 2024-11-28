@@ -1,6 +1,6 @@
 {
   "language": "Language",
-  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/wordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotcipher'>ROT13<a>, <a href='/printlog'>Print logs<a> and <a href='/sudokusolver'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/html'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
+  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/wordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotciphers'>ROT13<a>, <a href='/printlog'>Print logs<a> and <a href='/sudokusolv'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/htmlparser'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
@@ -76,7 +76,10 @@
     "undo": "Undo",
     "encode": "Encode",
     "decode": "Decode",
-    "download": "Download"
+    "download": "Download",
+    "try" : "Try all",
+    "prev" : "Previous",
+    "next" : "Next"
   },
 
   "colors": {
@@ -172,7 +175,8 @@
     "repl": "Replacements",
     "adfgvx": {
       "info": "The ADFGX(V) cipher is Polybius cipher. A 5x5 or 6x6 square is used. The result is fractionated and the columns are transposed using the key.",
-      "k1": "Column transposition key"
+      "k1": "Square",
+      "k2": "Column transposition key"
     },
     "affine": {
       "info": "The Affine cipher is a substitution cipher. It uses the function ax + b to calculate the ciphered text. The value of A must be coprime with the length of the alphabet.",
@@ -200,7 +204,7 @@
       "k3": "Value to use for B"
     },
     "bazeries": {
-      "info": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters. It uses two squares. The keys are optional to generate the squares. The numeric key is used for transpositioning and to generate the 2nd square if key 2 is empty.",
+      "info": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. It uses two squares. The first square by default is a vertically arranged square. The second key square is optional. If none is given the numeric key is also used to generate the second sqaure. The numeric key is also used for transpositioning. J is replaced by I, but this can be changed in expert mode, e.g. V replaces U.",
       "k1": "Square 1",
       "k2": "Square 2",
       "k3": "Numeric key"
@@ -315,6 +319,10 @@
       "info": "The Nicodemus cipher first uses columnar transposition with the given key. The message is then encoded with Vigenere using the same key. The result is written column by column in blocks of 5 letters.",
       "k1": "Key for columnar transposition and Vigenere:"
     },
+    "nesw": {
+      "info": "The NESW or NEWS cipher takes a square a encodes a character by taking the N, E, S, W, NE, SE, SW or NW wind direction to encode a character. Decoding takes the opposite direction",
+      "k1": "Square"
+    },
     "nihilist": {
       "info": "The Nihilist cipher is a Polybius cipher. The first key is used to generate a 5x5 square. The second key is added to the generated numbers. The alphabet must be 25 characters and both keys are required.",
       "k1": "Polybius square",
@@ -343,8 +351,9 @@
     },
     "polybius": {
       "info": "The Polybius cipher uses a 5x5 (or 6x6) square. The rows and columns are normally numbered 1 to 5 (or 1 to 6) but this can be changed. The alphabet must be 25 or 36 characters and both keys are required.",
-      "k1": "Rows",
-      "k2": "Columns"
+      "k1": "Square",
+      "k2": "Rows",
+      "k3": "Columns"
     },
     "pollux": {
       "info": "The Pollux cipher translates a message into morse and then replaces the dot, hyphen and word breaks with a randomly selected character.",
@@ -389,6 +398,9 @@
       "info": "ROT47 is a Caesar cipher that uses an alphabet with lower- and uppercase, digits and some symbols (ASCII karakters 33 t/m 126). Default it has a shift of 47.",
       "k1": "Shift"
     },
+    "rot123": {
+      "info": "ROT123 increase the shift each time with 1. Numbers are shifted separately. Anything else is not encoded or decoded."
+    },
     "scytale": {
       "info": "Scytale is a very basique transposition cipher used in ancient Greece and by spartans. It uses a cylinder and a band characterized by its number of turns around the cylinder.",
       "k1": "Number of turns"
@@ -410,6 +422,11 @@
     },
     "tapir": {
       "info": "TAPIR is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters, some digrams, numbers and some special characters."
+    },
+    "trevanion": {
+      "info": "Trevanion takes each letter after a signal character, usually punctuation. The offset is default one, but can be any number of characters after the signal. Characters that are not in the alphabet are ignored and do not count. The cipher is named after John Trevanion, a prisoner who received an encrypted letter, but this story is probably a fake.",
+      "k1": "Punctation",
+      "k2": "Offset"
     },
     "trifid": {
       "info": "The trifid cipher uses a table to fractionate each plaintext letter into a trigram, mixes the constituents of the trigrams, and then applies the table in reverse to turn these mixed trigrams into ciphertext letters. The alphabet must be 27 long.",
@@ -456,7 +473,8 @@
     "keylongerthenmsg" : " must be at least as long as the message.",
     "keymustbesqrroot" : " must be square root of length of alphabet.",
     "keymustbealph" : " must be the same length as the alphabet.",
-    "keyfromalph" : " must be composed of the alphabet."
+    "keyfromalph" : " must be composed of the alphabet.",
+    "keymustbenumeric" : " must be numeric."
   },
   
   "codebook": {
@@ -1161,7 +1179,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p>",
+    "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
     "languages": "Available languages",
     "convertto": "Convert to w3w",
     "convertfrom": "Convert to ...",
@@ -1174,6 +1192,30 @@
     "words": "Words",
     "country": "Country",
     "nearest": "Nearest place"
+  },
+
+  "tryanswers" : {
+    "title" : "Try answers",
+    "answers" : "One answer per line. Separate multiple options with ",
+    "formulas" : "Optionally use formulas. A is the first answer, B the second and so on.",
+    "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should yoou use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by the pipe symbol. Just press try all and see if anything makes sense. You tick the boxed to try more options.</p>",
+    "showdescr" : "Show descriptions",
+    "showtable" : "Show table",
+    "trycnts" : "Try different counts",
+    "tryfirst" : "Try first letter",
+    "trylast" : "Try last letter",
+    "trysv" : "Try Scrabble and Vanity alfabet",
+    "trylang" : "Try other languages",
+    "tryrev" : "Try reversed alphabet (A=26, Z=1)",
+    "tryzero" : "Try alphabet starting at zero (A=0, Z=25)",
+    "value" : "Value",
+    "sq" : "Square root",
+    "full": "Full answer",
+    "first": "First letter",
+    "last": "Last letter",
+    "rev": "Reversed alphabet",
+    "zero": "Alphabet starting at 0",
+    "finds": " answers tried."
   },
 
   "wordvalue": {
@@ -1258,6 +1300,16 @@
     "mode1": "Keep none of the letters"
   },
 
+  "textchunks": {
+    "title": "Text chunks",
+    "long": "<p>Cuts text in equal length chunks to find patterns. Optionally ignoring all whitespace. Provide a range to try multiple chunk sizes. Look for repeating letters, numbers or symbols. </p><p>One possible use is chunking a seemingly binary code of 0s and 1s to reveal hidden patterns.</p>",
+    "dir": "Direction",
+    "start": "Chunk size start",
+    "end": "Chunk size end",
+    "ignore": "Ignore whitespace",
+    "upper": "All uppercase"
+  },
+
   "baseconv": {
     "title": "Base converter",
     "long" : "A tool to convert numbers from one base to another. Supports any base from 2 (binary) to 36. Optionally change the characters to use. Multiple numbers can be entered separated by spaces. Binary is base 2, octal is base 8, decimal is base 10 and hexadecimal is base 16.",
@@ -1274,8 +1326,8 @@
     "tau": "𝜏, tau or 2*π, starts with 6.2831853071...",
     "phi": "φ or phi or the golden ratio, starts with 1.61803398874989...",
     "euler": "γ or the Euler–Mascheroni constant, starts with 0.577215664901...",
-    "sq2": "√2, starts with 1.414213562373095...",
-    "sq3": "√3, starts with 1.7320508075...",
+    "sq2": "√2 or Pythagoras' constant, starts with 1.414213562373095...",
+    "sq3": "√3 or Theodorus' constant, starts with 1.7320508075...",
     "zeta3": "ζ(3) or zeta(3) or Apéry's constant, starts with 1.202056903...",
     "gauss": "Gauss's constant, starts with 0.8346268416...",
     "lemni": "Lemniscate constant, starts with 5.2441151085...",
@@ -1581,7 +1633,7 @@
 
   "freqanal" : {
     "title" : "Frequency Analysis",
-    "long" : "<p>The frequency distribution of individual characters or n-grams is very useful when cracking ciphers. The larger the text the more reliable and useful statistics are.</p><p>If you use size 1 you get the frequency distribution of the alphabet. If it looks similar to normal text it is probably a 1 on 1 replacement. You can use <a href='/smartreplace'>Smart Replace</a> to crack the code.</p><p>Size 2 are so called digrams or bigrams. They can be used to crack ciphers that encode a single letter with two, such as Polybius. Digrams can also be useful for cracking ciphers that encode two characters each time, such as Bazeries or Trisquare. For ciphers that encode two characters at a time. The most common bigrams are probably also the bigrams most often found in normal text. So is TH the most common digram in English</p><p>The maximum number of missing n-grams shown is 1000.</p>",
+    "long" : "<p>The frequency distribution of individual characters or n-grams is very useful when cracking ciphers. The larger the text the more reliable and useful statistics are.</p><p>If you use size 1 you get the frequency distribution of the alphabet. If it looks similar to normal text it is probably a 1 on 1 replacement. You can use <a href='/substcipher'>Smart Replace</a> to crack the code.</p><p>Size 2 are so called digrams or bigrams. They can be used to crack ciphers that encode a single letter with two, such as Polybius. Digrams can also be useful for cracking ciphers that encode two characters each time, such as Bazeries or Trisquare. For ciphers that encode two characters at a time. The most common bigrams are probably also the bigrams most often found in normal text. So is TH the most common digram in English</p><p>The maximum number of missing n-grams shown is 1000.</p>",
     "size" : "Size of n-gram",
     "slide" : "Slide (ABCDE => AB, BC, CD, DE)",
     "bound" : "Respect word boundaries",

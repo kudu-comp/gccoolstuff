@@ -171,6 +171,7 @@ export default {
 @font-face { font-family: Barbook;    src: url('@/assets/fonts/BarBook.woff'); }
 @font-face { font-family: Betamaze;   src: url('@/assets/fonts/BetaMaze-0-180.woff'); }
 @font-face { font-family: Braille;    src: url('@/assets/fonts/Braille.woff'); }
+@font-face { font-family: Builder;    src: url('@/assets/fonts/builder.ttf'); }
 @font-face { font-family: Centauri;   src: url('@/assets/fonts/Centauri.woff'); }
 @font-face { font-family: Code128;    src: url('@/assets/fonts/Code128.woff'); }
 @font-face { font-family: Code39;     src: url('@/assets/fonts/Code39Regular.woff'); }

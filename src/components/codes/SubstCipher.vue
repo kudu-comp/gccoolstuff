@@ -305,7 +305,7 @@ export default {
       html += "</tr><tr><td>Hint freq</td>";
       for (let i = 0; i < this.percentages.length; i++) html+="<td>" + this.percentages[i].count.toFixed(1) + "</td>";
       html += "</tr></table>";
-      this.hints += html;
+      this.hints = html;
 
     },
 

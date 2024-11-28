@@ -39,6 +39,11 @@ export var codepages = [
     description: "There really is no such thing as an alchemy alphabet. But there are several around on the internet. This is another one.",
     tags: ["alphabet", "alchemy", "script"]
   },
+  { name: "Alien Mushrooms",
+    imagename: "alienmush.png",
+    description: "An alphabet based on the shapes of actual mushrooms.",
+    tags: ["alphabet", "circles"]
+  },
   { name: "Ancient Code",
     imagename: "antikercode.png",
     description: "This codes originates in the Science Fiction Serie Stargate and is sometimes called Stargate code.",
@@ -74,10 +79,20 @@ export var codepages = [
     description: "Aurebesh was a writing system used in Star Wars to transcribe Galactic Basic.",
     tags: ["alphabet", "tv", "squares"]
   },
+  { name: "Backslash",
+    imagename: "backslash.png",
+    description: "A code that uses pipe symbol, slashes and backslashes. Looks a bit like A-tom-tom but this one also usses the pipe symbol |.",
+    tags: ["alphabet", "slashes"]
+  },
   { name: "Ballett",
     imagename: "ballett.png",
     description: "Ballett font with dancers in different pose.",
     tags: ["alphabet", "font", "men"]
+  },
+  { name: "Bearded Men",
+    imagename: "beards.png",
+    description: "An alphabet of bearded men. The beards take the shapes of capital letters with some fantasy.",
+    tags: ["alphabet", "men"]
   },
   { name: "Bengali",
     imagename: "bengali.png",
@@ -92,6 +107,11 @@ export var codepages = [
   { name: "Birds on a wire",
     imagename: "birdsonawire.png",
     description: "A popular code used in geocaches, but its origin is unknown.",
+    tags: ["alphabet", "animals"]
+  },
+  { name: "Birds Wingspan",
+    imagename: "wingspan.png",
+    description: "An alphabet that uses the silhouette of flying birds.",
     tags: ["alphabet", "animals"]
   },
   { name: "Bokscript",
@@ -113,6 +133,11 @@ export var codepages = [
     imagename: "braille.png",
     description: "The braille alphabet is writing system for visually impaired people. Braille is named after its creator, Louis Braille.",
     tags: ["alphabet", "braille", "dots"]
+  },
+  { name: "Builder Machine code",
+    imagename: "builder.png",
+    description: "Marvels Builder Machine code",
+    tags: ["alphabet", "circles", "dots"]
   },
   { name: "Burmese",
     imagename: "burmese.png",
@@ -159,6 +184,11 @@ export var codepages = [
     description: "A simple code based on an analogue clock.",
     tags: ["alphabet", "circles"]
   },
+  { name: "Clock Code",
+    imagename: "clockcode.jpg",
+    description: "Letters are represented by AM and PM times.",
+    tags: ["alphabet", "circles"]
+  },
   { name: "Color Tokkie",
     imagename: "colortokki.png",
     description: "The ColorHoney and ColorTokki alphabets were invented by Kim Godgul in 2009 as alternative ways of writing English. They use six colours (Red, Green, Blue, Cyan, Magenta, Yellow).",
@@ -168,6 +198,11 @@ export var codepages = [
     imagename: "colorhoney.png",
     description: "The ColorHoney and ColorTokki alphabets were invented by Kim Godgul in 2009 as alternative ways of writing English. They use six colours (Red, Green, Blue, Cyan, Magenta, Yellow).",
     tags: ["alphabet", "diamonds", "color"]
+  },
+  { name: "Colored Squares",
+    imagename: "coloredsquares.png",
+    description: "A code that uses colored squares. Each color is a power of two, when added it gives a number. White is 0, red is 1, blue is 2, yellow is 4, green is 8 and black is 16. But other color combinations could of course be used.",
+    tags: ["alphabet", "squares", "color"]
   },
   { name: "Commodore 64 keyboard",
     imagename: "commodore64keys.png",
@@ -246,7 +281,7 @@ export var codepages = [
   },
   { name: "Dovahzul",
     imagename: "dovahzul.png",
-    description: "Dovahzul, or the dragon language, is featured in The Elder Scrolls video game series.",
+    description: "Dovahzul, or Skyrim, or the dragon language, is featured in The Elder Scrolls video game series.",
     tags: ["alphabet", "games", "spikes"]
   },
   { name: "Dr. Who",
@@ -263,6 +298,11 @@ export var codepages = [
     imagename: "driehoekjes.png",
     description: "Triangles (in Dutch driehoekjes) is another creation of Drabkikker (also see Polkadot).",
     tags: ["alphabet", "triangles"]
+  },
+  { name: "Dwemer",
+    imagename: "dwemer.png",
+    description: "Dwemer is the script of the Deep Elves of Bethesda Softwork's Elder scrolls role playing games.",
+    tags: ["alphabet", "runes", "lines", "games"]
   },
   { name: "Efkolia",
     imagename: "efkolia.png",
@@ -309,6 +349,11 @@ export var codepages = [
     description: "The Fonic or fonime alphabet appears in the video game series Tales of the Abys and is used mainly for decorative purposes to write English.",
     tags: ["alphabet", "games", "script", "curves"]
   },
+  { name: "Forerunner Halo",
+    imagename: "forerunner.png",
+    description: "The Forerunner are a species from the Halo video game series.",
+    tags: ["alphabet", "numbers", "lines", "games"]
+  },
   { name: "Fremen",
     imagename: "fremen.png",
     description: "The Fremen alphabet was created by John Quijada in 1984 for The Dune Encyclopedia. It is a very simplified version of the Arabic script.",
@@ -333,6 +378,11 @@ export var codepages = [
     imagename: "futurama.png",
     description: "The Futurama Alien Alphabet appears in Matt Groening's animated series Futurama.",
     tags: ["alphabet", "tv", "symbols", "dots"]
+  },
+  { name: "Gaim",
+    imagename: "gaim.png",
+    description: "Based upon the language of the Gaim from the Babylon SF series.",
+    tags: ["alphabet", "series", "circles", "lines"]
   },
   { name: "Gargish Alphabet & Gargish Runes",
     imagename: "gargish.png",
@@ -424,6 +474,11 @@ export var codepages = [
     description: "Hebrew numbers",
     tags: ["numbers", "language", "hebrew"]
   },
+  { name: "Hexacode",
+    imagename: "hexacode.png",
+    description: "An alphabet that uses hexagons",
+    tags: ["alphabet", "numbers"]
+  },
   { name: "Hexahue",
     imagename: "hexahue.png",
     description: "A color based coding system using 3x2 codes of 6 different colors. Uses black and white for numbers. Hexahue was invented by Josh Cramer.",
@@ -499,6 +554,11 @@ export var codepages = [
     description: "Kayah or Kayah Li is a member of Karen branch of the Sino-Tibetan language family. It is spoken by about 590,000 people in the Kayah and Karen states of Burma (Myanmar).",
     tags: ["alphabet", "numbers", "language", "script"]
   },
+  { name: "Kilrathi",
+    imagename: "kilrathi.png",
+    description: "Wing Commander II: Vengeance of the Kilrathi is the first sequel in Chris Roberts' Wing Commander science fiction space combat simulator franchise of computer games. The Kilrathi are a race of warlike, feline extraterrestrials native to the planet Kilrah.",
+    tags: ["alphabet", "numbers", "symbols", "games"]
+  },
   { name: "Keburi",
     imagename: "keburi.png",
     description: "Keburi script was devised by Latvian biologist and amateur-linguist Jurģis Šuba. The word ķeburi in Latvian means scribbles or scrawls.",
@@ -524,15 +584,15 @@ export var codepages = [
     description: "In 2000 DC Comics introduced Kryptonian as a transliteration alphabet containing symbols for each of the letters of the English alphabet.",
     tags: ["alphabet", "book", "symbols"]
   },
-  { name: "Malachim Alphabet",
-    imagename: "malachim.png",
-    description: "The Malachim alphabet was created by Heinrich Cornelius Agrippa during the 16th Century and is still used by Freemasons to a limited extent.",
-    tags: ["alphabet", "lines", "dots"]
-  },
   { name: "Magzetician",
     imagename: "magzetician.png",
     description: "Magzetician is a script of Magzenglish language. Whatever that may be.",
     tags: ["alphabet", "numbers", "lines", "squares"]
+  },
+  { name: "Malachim Alphabet",
+    imagename: "malachim.png",
+    description: "The Malachim alphabet was created by Heinrich Cornelius Agrippa during the 16th Century and is still used by Freemasons to a limited extent.",
+    tags: ["alphabet", "lines", "dots"]
   },
   { name: "Malayalam",
     imagename: "malayalam.png",
@@ -559,10 +619,20 @@ export var codepages = [
     description: "Mara was a deity worshiped in the Lost Delta region of what is now modern India. The alphabet is based on the glyphs found at Disneyland's Indiana Jones ride.",
     tags: ["alphabet", "tv", "circles"]
   },
+  { name: "Maximal",
+    imagename: "maximal.png",
+    description: "Based upon the computer writing found on Maximal computers in the Beast Wars Television show.",
+    tags: ["numbers", "alphabet", "tv", "dots", "lines"]
+  },
   { name: "Maya Numbers",
     imagename: "mayanumbers.png",
     description: "Maya numbers (base 20), Middle America",
     tags: ["numbers", "language", "lines", "dots"]
+  },
+  { name: "Maykr",
+    imagename: "maykr.png",
+    description: "Based upon the runes and symbols used in DOOM Eternal.",
+    tags: ["alphabet", "numbers", "games", "lines", "circles"]
   },
   { name: "Mills",
     imagename: "mills.gif",
@@ -584,10 +654,20 @@ export var codepages = [
     description: "The Moon alphabet was invented by Dr. William Moon and is a writing system for visually impaired people.",
     tags: ["alphabet", "braille", "lines", "curves"]
   },
+  { name: "Morseircle",
+    imagename: "morseircle.png",
+    description: "Morse encoded as a circle.",
+    tags: ["alphabet", "dots", "circles"]
+  },
   { name: "N'Ko alphabet",
     imagename: "nko.png",
     description: "The N'Ko alphabet was invented by Soulemayne Kante of Kankan, Guinea, in 1949. It is mainly used by speakers of Maninka, Bambara, Dyula and their dialects in Guinea, Côte d'Ivoire and Mali.",
     tags: ["alphabet", "language", "symbols"]
+  },
+  { name: "Octo",
+    imagename: "octo.png",
+    description: "This alphabet uses octagonal shapes.",
+    tags: ["alphabet"]
   },
   { name: "Odia",
     imagename: "odia.png",
@@ -603,6 +683,11 @@ export var codepages = [
     imagename: "olchiki.png",
     description: "The Ol Chiki script, also known as Ol Chemet and sometimes as the Santali alphabet, was created by Pandit Raghunath Murmu. It is the official writing system for Santali, an Austroasiatic language recognized as an official regional language in India.",
     tags: ["alphabet", "language", "numbers", "script"]
+  },
+  { name: "Ophidian",
+    imagename: "ophidian.png",
+    description: "Based upon the serpentine writing and magic runes from the game Origin's System Ultima 7: The Black Isle.",
+    tags: ["alphabet", "numbers", "curves"]
   },
   { name: "Pakmara",
     imagename: "pakmara.png",
@@ -737,7 +822,7 @@ export var codepages = [
   { name: "Slash and Pipe",
     imagename: "slashandpipe.png",
     description: "A code popular with geocachers of unknown origin.",
-    tags: ["alphabet", "slash", "lines"]
+    tags: ["alphabet", "slashes", "lines"]
   },
   { name: "Space Invaders",
     imagename: "spaceinv.png",
@@ -784,7 +869,7 @@ export var codepages = [
     description: "The Theban alphabet is a writing system, in particular a substitution cipher of the Latin alphabet. It was first published in Johannes Trithemius's Polygraphia (1518).",
     tags: ["alphabet", "triangles", "slashes"]
   },
-  { name: "Tomtom",
+  { name: "Tifinagh",
     imagename: "tifinagh.png",
     description: "The Tifinagh alphabet is thought to have derived from the old Berber script. Versions of Tifinagh are used to write Berber languages in Morocco, Algeria, Mali and Niger.",
     tags: ["alphabet", "script", "language", "symbols"]

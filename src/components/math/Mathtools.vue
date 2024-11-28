@@ -19,7 +19,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$t('decimals.title')}}</h5>
           <p class="card-text" v-html="$t('decimals.long')"></p>
-          <router-link to="/countdigits"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+          <router-link to="/digits"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

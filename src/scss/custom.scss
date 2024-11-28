@@ -123,6 +123,39 @@ th {
 }
 
 //
+// Tab classes
+//
+
+.tab-content {
+  border-color: $bluegreen;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 0px 5px 5px 5px;
+  padding: 5px;
+  margin: 0px;
+  min-height: 100px;
+}
+
+.tab-button {
+  background-color: $bluegreen;
+  font-size: 1rem;
+  color: $mycolorgrey;
+  margin: 0px 15px 0px 0px;
+  border-style: none;
+  border-radius: 10px 10px 0px 0px;
+  padding: 5px 15px 2px 15px;
+}
+
+.tab-button.tab-active {
+  background-color: $bluegreen;
+  color: $mycolorwhite;
+}
+
+.tab-button:disabled {
+  opacity: 70%;
+}
+
+//
 // Bootstrap classes overrides
 //
 

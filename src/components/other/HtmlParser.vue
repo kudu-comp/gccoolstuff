@@ -342,7 +342,17 @@ export default {
         nodes = this.cacheNode.getElementsByTagName("img");
         for (let node of nodes) {
           // console.log(node);
-          this.images.push({ name: node.getAttribute("alt"), url: node.getAttribute("src") });
+          this.images.push({ name: node.getAttribute("alt") + " - " + node.getAttribute("title"), url: node.getAttribute("src") });
+        }
+
+        // Find background image of body
+        nodes = xmlTree.getElementsByTagName("body");
+        for (let node of nodes) {
+          // Parse url using regex
+          let url = node.getAttribute('background');
+          if (url) {
+            this.bgimages.push({ name : "Background image", url });
+          }
         }
 
         // Find bgimages in styles
@@ -374,8 +384,9 @@ export default {
         x = xmlTree.evaluate(
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='white'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#FFFFFF'] | " +
+          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#ffffff'] | " +
           "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='rgb(255, 255, 255)'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#FFFFFF') or contains(@style,'color:rgb(255, 255, 255)')]", xmlTree, null, XPathResult.ANY_TYPE, null);
+          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#ffffff') or contains(@style,'color:#FFFFFF') or contains(@style,'color:rgb(255, 255, 255)')]", xmlTree, null, XPathResult.ANY_TYPE, null);
         let white = x.iterateNext();
         while (white) {
           this.whites += white.textContent + "<br>";

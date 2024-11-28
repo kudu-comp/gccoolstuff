@@ -137,16 +137,15 @@ export default {
     L.easyButton('fas fa-location-dot', () => {
       coords.geoFindMe()
         .then ((position) => {
-          coords.displayMarker(this.L, this.mymap, [position.coords.latitude, position.coords.longitude], "Your Location")
           this.$emit('update:mylocation', position.coords.latitude.toFixed(5) + " " + position.coords.longitude.toFixed(5));
+          coords.displayMarker(this.mymap, [position.coords.latitude, position.coords.longitude], "Your Location")
         })
         .catch ((e) => {
+          console.log(e);
           this.error = true;
           this.errormsg = e;
         });
     }).addTo(this.mymap);
-
-    
 
   },
 

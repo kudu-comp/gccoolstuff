@@ -97,6 +97,11 @@ export default {
             subMenuOptions: [
               {
                 type: "link",
+                text: this.$t("tryanswers.title"),
+                path: { name: "TryAnswers" },
+              },
+              {
+                type: "link",
                 text: this.$t("wordvalue.title"),
                 path: { name: "WordValue" },
               },
@@ -129,6 +134,11 @@ export default {
                 type: "link",
                 text: this.$t("numerology.title"),
                 path: { name: "Numerology" },
+              },            
+              {
+                type: "link",
+                text: this.$t("textchunks.title"),
+                path: { name: "TextChunks" },
               },            
             ],
           },
@@ -362,7 +372,7 @@ export default {
               },                    
               {
                 type: "link",
-                text: this.$t("htmlscanner.title"),
+                text: this.$t("htmlparser.title"),
                 path: { name: "HtmlParser"}
               },                    
               {
@@ -517,13 +527,15 @@ export default {
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[8].text = this.$t("w3w.title");
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[9].text = this.$t("revwherigo.title");
       this.navbarOptions.menuOptionsLeft[1].text = this.$t("menu.texttools");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("wordvalue.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("charcodes.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[2].text = this.$t("analtxt.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("texttonum.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("keyboards.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("texttoss.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("numerology.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("tryanswers.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("wordvalue.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[2].text = this.$t("charcodes.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("analtxt.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("texttonum.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("keyboards.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("texttoss.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("numerology.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("textchunks.title");
       this.navbarOptions.menuOptionsLeft[2].text = this.$t("menu.codes");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");
@@ -568,7 +580,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[9].text = this.$t("checksum.title");
       this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.other");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("printlog.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("htmlscanner.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("htmlparser.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("sudokusolv.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("mmsolver.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("unitconvertor.title");
