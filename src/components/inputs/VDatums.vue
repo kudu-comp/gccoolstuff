@@ -73,6 +73,9 @@
     <option value="Csquare">
       C-squares
     </option>
+    <option value="Geohex">
+        Geohex
+      </option>
     <option disabled>
       --- Define your own ---
     </option>

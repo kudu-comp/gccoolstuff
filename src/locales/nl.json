@@ -1205,8 +1205,9 @@
   "tryanswers" : {
     "title" : "Probeer antwoorden",
     "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
-    "formulas" : "Optioneel gebruik formules, 1e antwoord is A, 2e is B enzovoorts.",
-    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of miscshien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef antwoord per regel. Als er meerder opties zijn kan je die scheiden door een verticale streep. Als je formules wil gebruiken vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
+    "formulas" : "Gebruik formules",
+    "phformulas" : "1e antwoord is A, 2e is B enzovoorts. Bijv A+B. Eén formule per regel.",
+    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of miscshien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef antwoord per regel. Als er meerder opties zijn kan je die scheiden door een {'|'}. Als je formules wil gebruiken vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
     "showdescr" : "Toon omschrijvingen",
     "showtable" : "Toon tabel",
     "trycnts" : "Probeer ook andere tellingen",
@@ -1223,7 +1224,12 @@
     "last": "Laatste letter",
     "rev": "Omgekeerd alfabet",
     "zero": "Alfabet start op 0",
-    "finds": " antwoorden gevonden."
+    "finds": " antwoorden gevonden.",
+    "length" : "Lengte",
+    "words": "Aantal woorden",
+    "chars": "Aantal tekens",
+    "letters": "Aantal letters",
+    "digits": "Aantal cijfers"
   },
 
   "wordvalue": {

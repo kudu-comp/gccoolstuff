@@ -88,6 +88,9 @@
       <option value="Csquare">
         C-Squares
       </option>
+      <option value="Geohex">
+        Geohex
+      </option>
       <option disabled>
         --- Define your own ---
       </option>

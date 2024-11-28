@@ -23,12 +23,12 @@
       </div>
       <!-- Formulas input-->
       <div class="mb-2">
-        <label for="formulas" class="form-label mb-2">Use these formulas</label>
+        <label for="formulas" class="form-label mb-2">{{$t('tryanswers.formulas')}}</label>
         <textarea
           id="formulas"
           class="form-control mb-2"
           v-model="formulas"
-          :placeholder="$t('tryanswers.formulas')"
+          :placeholder="$t('tryanswers.phformulas')"
           rows="5"
         />
       </div>
@@ -240,11 +240,11 @@ export default {
             for (let a of answers) {
               trieswv.push(f.f(ga.f(a)));
               triessq.push(textHelper.squareRoot(trieswv[trieswv.length - 1]));
-              usedansws += ga.f(a) + "|";
+              usedansws += ga.f(a) + " | ";
             }
-            usedansws = usedansws.slice(0, -1);
+            usedansws = usedansws.slice(0, -3);
             this.addTry(
-              ga.desc + "- " + this.$t('tryanswers.value') + " - " + f.desc + " - " + usedansws,
+              ga.desc + " - " + this.$t('tryanswers.value') + " - " + f.desc + " - " + usedansws,
               trieswv
             );
             this.addTry(
@@ -353,7 +353,7 @@ export default {
         // Reverse and start at zero
         if (this.rev && this.zero) {
           this.funcs.push({
-            desc: alph.name + " - " + this.$t('tryanswers.last') + " - " + this.$t('tryanswers.zero'),
+            desc: alph.name + " - " + this.$t('tryanswers.rev') + " - " + this.$t('tryanswers.zero'),
             f(a) {
               return textHelper.wordValue(a, true, true, alph.name);
             },
@@ -370,26 +370,26 @@ export default {
       });
       if (this.cnts) {
         this.funcs.push({
-          desc: "Count words",
+          desc: this.$t('tryanswers.words'),
           f(a) {
             return a.split(/\b\s+\b/g).length;
           },
         });
         this.funcs.push({
-          desc: "Count non white space",
+          desc: this.$t('tryanswers.chars'),
           f(a) {
             return a.replace(/\s/g, "").length;
           },
         });
         this.funcs.push({
-          desc: "Count characters A-Z",
+          desc: this.$t('tryanswers.letters'),
           f(a) {
             return textHelper.removeDiacritics(a).replace(/[^A-Za-z]/g, "")
               .length;
           },
         });
         this.funcs.push({
-          desc: "Count digits 0-9",
+          desc: this.$t('tryanswers.digits'),
           f(a) {
             return a.replace(/[^0-9]/g, "").length;
           },
@@ -405,8 +405,7 @@ export default {
         let h2 = h1[i].split(/\|/g);
         for (let j of h2) this.answs[i].push(j);
       }
-      console.log(this.answs);
-
+      
       // Print table headers
       if (this.table) {
         this.result += "<table class='table-tight'><thead><tr>";

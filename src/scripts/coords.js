@@ -35,6 +35,7 @@ import * as mapcode from '@/scripts/mapcode.js';
 import { NACtoWGS, WGStoNAC} from '@/scripts/nac.js';
 import { Geo3x3toWGS, WGStoGeo3x3} from '@/scripts/geo3x3.js';
 import { CsquareToWGS, WGSToCsquare} from '@/scripts/csquares.js';
+import { getZoneByLocation, getZoneByCode } from "@/scripts/geohex.js"; 
 
 // var coordutils = {
 //   convertCoordFromLatLon: convertCoordFromLatLon,
@@ -521,6 +522,9 @@ export async function convertCoordToWGS(coord, fromdatum, proj4jsdef = "") {
       return Geo3x3toWGS(coord.s.trim());
     case "Csquare" :
       return CsquareToWGS(coord.s.trim());
+    case "Geohex" :
+      let h = getZoneByCode(coord.s.trim());
+      return ( { lat : h.lat, lon : h.lon });
     case "MGRS" :
       // mgrs returns and array longitude first
       temp = mgrs.inverse(coord.s.trim());
@@ -615,6 +619,9 @@ export async function convertCoordFromWGS (coord, todatum, proj4jsdef = "") {
 
     case "Csquare" :
       return {s: WGSToCsquare(coord.lat, coord.lon)};
+
+    case "Geohex" :
+      return {s: getZoneByLocation(coord.lat, coord.lon, 12).code}
 
     case "MGRS" :
       // mgrs.forward takes longitude first and latitude second, returns a string
@@ -728,6 +735,7 @@ export function getCoordFromText (s, datum) {
     case "QTH" :
     case "Geohash" :
     case "Geohash36" :
+    case "Geohex" :
     case "OLC" :
       // These coordinates are using strings
       return { s: s.trim() };
@@ -794,6 +802,7 @@ export function getTextFromCoord (coord, datum, round = 7, dmsformat = "") {
     case "QTH" :
     case "Geohash" :
     case "Geohash36" :
+    case "Geohex" :
     case "OLC" :
     case "W3W" :
       // These coordinates are already using strings

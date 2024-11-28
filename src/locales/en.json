@@ -1197,8 +1197,9 @@
   "tryanswers" : {
     "title" : "Try answers",
     "answers" : "One answer per line. Separate multiple options with ",
-    "formulas" : "Optionally use formulas. A is the first answer, B the second and so on.",
-    "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should yoou use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by the pipe symbol. Just press try all and see if anything makes sense. You tick the boxed to try more options.</p>",
+    "formulas" : "Optionally use formulas",
+    "phformulas" : "A is the first answer, B the second and so on. For example A+B. One formula per line.",
+    "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should yoou use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by {'|'}. Just press try all and see if anything makes sense. You tick the boxed to try more options.</p>",
     "showdescr" : "Show descriptions",
     "showtable" : "Show table",
     "trycnts" : "Try different counts",
@@ -1215,7 +1216,12 @@
     "last": "Last letter",
     "rev": "Reversed alphabet",
     "zero": "Alphabet starting at 0",
-    "finds": " answers tried."
+    "finds": " answers tried.",
+    "length" : "Length",
+    "words": "Count words",
+    "chars": "Count chars",
+    "letters": "Count letters",
+    "digits": "Count digits"
   },
 
   "wordvalue": {
