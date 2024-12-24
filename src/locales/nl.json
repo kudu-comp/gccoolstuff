@@ -1318,7 +1318,7 @@
   },
 
   "textchunks": {
-    "title": "Text blokken",
+    "title": "Tekst blokken",
     "long": "<p>Hakt een tekst in rijen of kolommen van gelijke lengte om verborgen patronen te onthullen. Geef een begin en eindgrootte op om meerdere mogelijkheden te onderzoeken. Ga op zoek naar herhalende letters, cijfers of symbolen in de ingedeelde tekst.</p><p>Bijvoorbeeld een schijnbaar random string van 0 en 1 kan na herindeling een patroon laten zien.</p>",
     "dir": "Richting",
     "start": "Blok grootte start",

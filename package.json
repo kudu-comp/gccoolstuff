@@ -1,6 +1,7 @@
 {
   "name": "gccoolstuff",
   "version": "1.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "vite --host",
@@ -16,11 +17,11 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "^2.11.8",
-    "@what3words/api": "^3.3.6",
-    "axios": "^0.21.4",
+    "@what3words/api": "^5.4.0",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
-    "exifreader": "^3.16.0",
+    "exifreader": "^4.25.0",
     "jspdf": "^2.5.2",
     "latlon-geohash": "^2.0.0",
     "leaflet": "^1.9.4",
@@ -38,11 +39,11 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^2.1.2",
-    "@vitejs/plugin-vue": "^1.10.2",
+    "@vitejs/plugin-vue": "^5.2.1",
     "eslint": "^8.57.1",
     "eslint-plugin-vue": "^8.0.0",
     "sass": "^1.83.0",
-    "vite": "^2.9.18",
+    "vite": "^6.0.5",
     "vite-plugin-mkcert": "^1.17.6",
     "vue-eslint-parser": "^9.4.3"
   }

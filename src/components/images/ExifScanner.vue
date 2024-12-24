@@ -106,9 +106,10 @@
 
 <script>
 
-import ExifReader from 'exifreader'
-import VMap from '@/components/inputs/VMap.vue'
+import ExifReader from 'exifreader';
+import VMap from '@/components/inputs/VMap.vue';
 import * as coords from '@/scripts/coords.js';
+import L from "leaflet";
 
 export default {
   name: 'ExifScanner',
@@ -209,7 +210,7 @@ export default {
       // GPS data
       // Set a marker on the map for the GPS coordinates
       if (Object.prototype.hasOwnProperty.call(this.tags, "GPSLatitude") && Object.prototype.hasOwnProperty.call(this.tags, "GPSLongitude")) {
-        let marker = this.$store.state.L.marker([this.tags.GPSLatitude.description, this.tags.GPSLongitude.description]).addTo(this.$store.state.mymap);
+        let marker = L.marker([this.tags.GPSLatitude.description, this.tags.GPSLongitude.description]).addTo(this.$store.state.mymap);
         marker.bindPopup(this.$t('exifscanner.gps')).openPopup();
         this.GPSfromCamera = coords.printCoordinateFromDMS( { lon: this.tags.GPSLongitude.description, lat: this.tags.GPSLatitude.description }, "N52 11.111 E4 11.111");
       } else {

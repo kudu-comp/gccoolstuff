@@ -17,8 +17,7 @@
         <select
           id="segsize"
           v-model="seg" 
-          class="form-select md-size mb-2" 
-          @change="styleObj.fontFamily = (seg == 0) ? 'Segment7' : 'Segment14'"
+          class="form-select md-size mb-2"
         >
           <option value="0">
             7 Segment display
@@ -60,7 +59,7 @@
         ref="message"
         v-model="message"
         name="message"
-        class="form-control"
+        class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"
       />
@@ -70,16 +69,7 @@
       >
         {{ errormsg }}
       </p>
-      <div class="row">
-        <textarea
-          v-if="result"
-          id="res"
-          v-model="result"
-          spellcheck="false"
-          class="resultbox"
-          :style="styleObj"
-        />
-      </div>
+      <div v-if="result" class="resultbox" v-html="result" />
     </div>
   </div>
 </template>
@@ -96,9 +86,6 @@ export default {
       errormsg: "",
       seg: 0,
       inp: 1,
-      styleObj: {
-        fontFamily: 'Segment7'
-      },
       segdef: [
         {
           letters: ["A", "B", "C", "D", "E", "F", "G"],
@@ -295,8 +282,4 @@ export default {
 </script>
 
 <style scoped>
-
-@font-face { font-family: Segment7;    src: url('~@/assets/fonts/DSEG7Classic-Light.woff'); }
-@font-face { font-family: Segment14;   src: url('~@/assets/fonts/DSEG14Classic-Light.woff'); }
-
 </style>
