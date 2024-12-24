@@ -45,8 +45,8 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('resistorcode.title')}}</h5>
-          <p class="card-text" v-html="$t('resistorcode.long')"></p>
+          <h5 class="card-title">{{$t('resistor.title')}}</h5>
+          <p class="card-text" v-html="$t('resistor.long')"></p>
           <router-link to="/resistor"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>

@@ -1,17 +1,17 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('decimals.title') }}
+      {{ $t('digits.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('decimals.long')"
+        v-html="$t('digits.long')"
       />
       <div>
         <span
           class="form-label"
-        >{{ $t('decimals.sel') }}</span>
+        >{{ $t('digits.sel') }}</span>
         <div class="form-check">
           <input
             id="number1"
@@ -24,7 +24,7 @@
           <label
             class="form-check-label"
             for="number1"
-          >{{ $t('decimals.pi') }}</label>
+          >{{ $t('digits.pi') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -38,7 +38,7 @@
           <label
             class="form-check-label"
             for="number2"
-          >{{ $t('decimals.e') }}</label>
+          >{{ $t('digits.e') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -52,7 +52,7 @@
           <label
             class="form-check-label"
             for="number3"
-          >{{ $t('decimals.tau') }}</label>
+          >{{ $t('digits.tau') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -66,7 +66,7 @@
           <label
             class="form-check-label"
             for="number4"
-          >{{ $t('decimals.phi') }}</label>
+          >{{ $t('digits.phi') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -80,7 +80,7 @@
           <label
             class="form-check-label"
             for="number5"
-          >{{ $t('decimals.euler') }}</label>
+          >{{ $t('digits.euler') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -94,7 +94,7 @@
           <label
             class="form-check-label"
             for="number6"
-          >{{ $t('decimals.sq2') }}</label>
+          >{{ $t('digits.sq2') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -108,7 +108,7 @@
           <label
             class="form-check-label"
             for="number7"
-          >{{ $t('decimals.sq3') }}</label>
+          >{{ $t('digits.sq3') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -122,7 +122,7 @@
           <label
             class="form-check-label"
             for="number8"
-          >{{ $t('decimals.zeta3') }}</label>
+          >{{ $t('digits.zeta3') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -136,7 +136,7 @@
           <label
             class="form-check-label"
             for="number9"
-          >{{ $t('decimals.gauss') }}</label>
+          >{{ $t('digits.gauss') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -150,7 +150,7 @@
           <label
             class="form-check-label"
             for="number10"
-          >{{ $t('decimals.lemni') }}</label>
+          >{{ $t('digits.lemni') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -164,7 +164,7 @@
           <label
             class="form-check-label"
             for="number11"
-          >{{ $t('decimals.cat') }}</label>
+          >{{ $t('digits.cat') }}</label>
         </div>
         <div class="form-check">
           <input
@@ -178,14 +178,14 @@
           <label
             class="form-check-label"
             for="number12"
-          >{{ $t('decimals.champ') }}</label>
+          >{{ $t('digits.champ') }}</label>
         </div>
       </div>
       <div class="row mt-2">
         <label
           class="form-label md-size mb-2"
           for="start"
-        >{{ $t('decimals.from') }}</label>
+        >{{ $t('digits.from') }}</label>
         <input
           id="start"
           v-model="start"
@@ -200,7 +200,7 @@
         <label
           class="form-label mb-2  md-size"
           for="end"
-        >{{ $t('decimals.to') }}</label>
+        >{{ $t('digits.to') }}</label>
         <input
           id="end"
           v-model="end"
@@ -222,7 +222,7 @@
         v-if="result"
         class="resultbox"
       >
-        {{ $t('decimals.res1') }} {{ start }} {{ $t('decimals.res2') }} {{ end }} {{ $t('decimals.res3') }} {{ result }}.
+        {{ $t('digits.res1') }} {{ start }} {{ $t('digits.res2') }} {{ end }} {{ $t('digits.res3') }} {{ result }}.
       </div>
     </div>
   </div>

@@ -1,18 +1,18 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('primegcdlcm.title') }}
+      {{ $t('gcdandlcm.title') }}
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('primegcdlcm.long')"
+        v-html="$t('gcdandlcm.long')"
       />
       <div class="row">
         <label
           class="form-label sm-size mb-2"
           for="input"
-        >{{ $t('primegcdlcm.num') }}</label>
+        >{{ $t('gcdandlcm.num') }}</label>
         <input
           id="input"
           v-model="input"
@@ -31,12 +31,12 @@
         {{ errormsg }}
       </p>
       <p class="resultbox">
-        {{ $t('primegcdlcm.t1') }} <br>
-        {{ $t('primegcdlcm.gcd') }} <strong>{{ gcd }}</strong>.<br>
-        {{ $t('primegcdlcm.lcm') }} <strong>{{ lcm }}</strong>.
+        {{ $t('gcdandlcm.t1') }} <br>
+        {{ $t('gcdandlcm.gcd') }} <strong>{{ gcd }}</strong>.<br>
+        {{ $t('gcdandlcm.lcm') }} <strong>{{ lcm }}</strong>.
       </p>
       <p class="resultbox">
-        {{ $t('primegcdlcm.t2') }}
+        {{ $t('gcdandlcm.t2') }}
         <table class="table table-sm table-borderless">
           <tr
             v-for="a in primes"
@@ -131,7 +131,7 @@ export default {
       // Check for zeroes (GCD is undefined for zero)
       for (let i=0; i < a.length; i++) {
         if (parseInt(a[i]) == 0) {
-          this.errormsg = this.$t('primegcdlcm.inperror');
+          this.errormsg = this.$t('gcdandlcm.inperror');
           return;
         }
       }

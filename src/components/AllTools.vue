@@ -22,7 +22,7 @@
           <i class="fa-solid fa-search"></i>          
         </button>
         <button id="btnsearch" class="sm-size btn mb-2 me-2" @click="showAll" >
-          Show All          
+          {{$t('alltools.showall')}}          
         </button>
       </div>
       <!-- Error message -->
@@ -103,13 +103,15 @@ export default {
         {
           href: "/helptext",           name: this.$t('menu.texttools'), show : true, expand: false,
           l2: [
+            { href: "/tryanswers",     name: "", show : true       },
             { href: "/wordvalue",      name: "", show : true       },
             { href: "/charcodes",      name: "", show : true       },
             { href: "/analtxt",        name: "", show : true       },
             { href: "/texttonum",      name: "", show : true       },
             { href: "/keyboards",      name: "", show : true       },
             { href: "/texttoss",       name: "", show : true       },
-            { href: "/numerology",     name: "", show : true       }
+            { href: "/numerology",     name: "", show : true       },
+            { href: "/textchunks",     name: "", show : true       }
           ]
         },
         {
@@ -159,11 +161,12 @@ export default {
             {  href: "/romans",              name: "", show : true,        },
             {  href: "/fibonacci",           name: "", show : true,        },
             {  href: "/gcdandlcm",           name: "", show : true,        },
-            {  href: "/formulasolv",         name: "", show : true,        },
+            {  href: "/formulasolver",       name: "", show : true,        },
             {  href: "/numberprop",          name: "", show : true,        },
             {  href: "/bignumbers",          name: "", show : true,        },
             {  href: "/nimbers",             name: "", show : true,        },
             {  href: "/sequences",           name: "", show : true,        },
+            {  href: "/combinations",        name: "", show : true,        },
             {  href: "/palindrome",          name: "", show : true,        }
           ]
         },
@@ -268,7 +271,6 @@ export default {
 
       // Reset
       this.errormsg = "";
-      let info = "";
 
       let s = this.searchstr.toLowerCase();
       if (s === "") return;

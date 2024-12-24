@@ -2,17 +2,17 @@
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
       <div class="text-center">
-        {{ $t('resistorcode.title') }}
+        {{ $t('resistor.title') }}
       </div>
     </div>
     <div class="mainpage">
       <div
         class="infoblock"
-        v-html="$t('resistorcode.long')"
+        v-html="$t('resistor.long')"
       />
       <div class="row mb-2">
         <div class="form-label sm-size">
-          {{ $t('resistorcode.band') }} 1
+          {{ $t('resistor.band') }} 1
         </div>
         <vd-color
           v-model:color="band1"
@@ -21,7 +21,7 @@
       </div>
       <div class="row mb-2">
         <div class="form-label sm-size">
-          {{ $t('resistorcode.band') }} 2
+          {{ $t('resistor.band') }} 2
         </div>
         <vd-color
           v-model:color="band2"
@@ -30,7 +30,7 @@
       </div>
       <div class="row mb-2">
         <div class="form-label sm-size">
-          {{ $t('resistorcode.band') }} 3
+          {{ $t('resistor.band') }} 3
         </div>
         <vd-color
           v-model:color="band3"
@@ -39,7 +39,7 @@
       </div>
       <div class="row mb-2">
         <div class="form-label sm-size">
-          {{ $t('resistorcode.mult') }} 3
+          {{ $t('resistor.mult') }} 3
         </div>
         <vd-color
           v-model:color="mult"
@@ -84,7 +84,7 @@ import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
 
-  name: 'ResistorCode',
+  name: 'Resistor',
 
   components: {
     VdColor,
@@ -117,7 +117,7 @@ export default {
 
       // Reset flags
       this.error = false;
-      this.result = this.$t('resistorcode.res');
+      this.result = this.$t('resistorres');
 
       let value = (parseInt(this.band1) * 100 + parseInt(this.band2) * 10 + parseInt(this.band3)) * (10 ** this.mult);
 

@@ -17,8 +17,8 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('decimals.title')}}</h5>
-          <p class="card-text" v-html="$t('decimals.long')"></p>
+          <h5 class="card-title">{{$t('digits.title')}}</h5>
+          <p class="card-text" v-html="$t('digits.long')"></p>
           <router-link to="/digits"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
@@ -45,8 +45,8 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('primegcdlcm.title')}}</h5>
-          <p class="card-text" v-html="$t('primegcdlcm.long')"></p>
+          <h5 class="card-title">{{$t('gcdandlcm.title')}}</h5>
+          <p class="card-text" v-html="$t('gcdandlcm.long')"></p>
           <router-link to="/gcdandlcm"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
@@ -83,6 +83,20 @@
           <h5 class="card-title">{{$t('sequences.title')}}</h5>
           <p class="card-text" v-html="$t('sequences.long')"></p>
           <router-link to="/sequences"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('combinations.title')}}</h5>
+          <p class="card-text" v-html="$t('combinations.long')"></p>
+          <router-link to="/combinations"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('equations.title')}}</h5>
+          <p class="card-text" v-html="$t('equations.long')"></p>
+          <router-link to="/equations"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

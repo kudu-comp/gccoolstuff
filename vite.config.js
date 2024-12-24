@@ -26,6 +26,25 @@ export default defineConfig({
     host: true,
     port: 8080,
     // https: true
-  }
+  },
+
+  // Suppress warning voor depreciation of JS API of Sass
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler' // or "modern"
+      }
+    }
+  },
+  
+  // Needed because of mathjs
+  optimizeDeps: { 
+    esbuildOptions: {
+      supported: { 
+        bigint: true 
+      },
+    }
+
+  }, 
 
 })

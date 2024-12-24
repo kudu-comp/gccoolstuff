@@ -78,6 +78,20 @@
           <router-link to="/duckspeak"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('checksum.title')}}</h5>
+          <p class="card-text" v-html="$t('checksum.long')"></p>
+          <router-link to="/checksum"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('truthtable.title')}}</h5>
+          <p class="card-text" v-html="$t('truthtable.long')"></p>
+          <router-link to="/truthtable"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>

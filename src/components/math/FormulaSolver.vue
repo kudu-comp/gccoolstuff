@@ -94,7 +94,7 @@
 
 <script>
 
-import { evalInfix } from '@/scripts/formulas.js'
+import { evaluate } from 'mathjs';
 import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
@@ -165,7 +165,7 @@ export default {
       const lefthand = sides[0];
       const righthand = sides[1];
 
-      return evalInfix(lefthand) == evalInfix(righthand);
+      return evaluate(lefthand) == evaluate(righthand);
 
     },
 

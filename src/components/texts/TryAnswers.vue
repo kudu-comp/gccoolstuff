@@ -36,11 +36,22 @@
       <div class="form-check">
         <input
           type="checkbox"
-          class="form-check-input"
+          class="form-check-input mb-2"
+          id="onlysq"
+          v-model="onlysq"
+        />
+        <label for="onlysq" class="form-check-label mb-2"
+          >{{ $t('tryanswers.onlysq') }}</label
+        >
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input mb-2"
           id="table"
           v-model="table"
         />
-        <label for="table" class="form-check-label"
+        <label for="table" class="form-check-label mb-2"
           >{{ $t('tryanswers.showtable') }}</label
         >
       </div>
@@ -53,7 +64,18 @@
         />
         <label for="long" class="form-check-label mb-2">{{ $t('tryanswers.showdescr') }}</label>
       </div>
-      <hr style="margin-top: 0px;"/>
+      <hr style="margin-top: 0px; margin-bottom: 2px;"/>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input mb-2"
+          id="leng"
+          v-model="leng"
+        />
+        <label for="leng" class="form-check-label mb-2"
+          >{{ $t('tryanswers.tryleng') }}</label
+        >
+      </div>
       <div class="form-check">
         <input
           type="checkbox"
@@ -123,11 +145,11 @@
       <div class="form-check">
         <input
           type="checkbox"
-          class="form-check-input"
+          class="form-check-input mb-2"
           id="cnts"
           v-model="cnts"
         />
-        <label for="cnts" class="form-check-label"
+        <label for="cnts" class="form-check-label mb-2"
           >{{ $t('tryanswers.trycnts') }}</label
         >
       </div>
@@ -149,17 +171,17 @@
 
 <script>
 import * as textHelper from "@/scripts/texthelper.js";
-import { evalInfix } from '@/scripts/formulas.js';
+import { evaluate } from 'mathjs';
 
 export default {
 
-  name: "TryAnsers",
-
+  name: "TryAnswers",
   
   data() {
     return {
       txt: "",
       formulas: "",
+      onlysq: false,
       long: false,
       table: true,
       long: false,
@@ -169,6 +191,7 @@ export default {
       zero: false,
       scrabble: false,
       lang: false,
+      leng: false,
       cnts: false,
       result: "",
       errormsg: "",
@@ -189,17 +212,16 @@ export default {
       if (this.formulas) {
         let vars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (let f of this.frms) {
-          // Replace all variables
-          let cnt = 0;
-          let t = null;
-          for (let t of tries) {
-            let re = new RegExp(vars[cnt++], "gi");
-            f = f.replace(re, t);
+          // Build scope for mathjs evaluate
+          let scope = {};
+          let t;
+          for (let i=0; i<tries.length; i++) {
+            scope[vars[i]] = tries[i];
           }
           // Evaluate expression
           // If error just return the string
           try {
-            t = evalInfix(f);
+            t = evaluate(f, scope);
           } catch (e) {
             t = f;
           }
@@ -243,15 +265,18 @@ export default {
               usedansws += ga.f(a) + " | ";
             }
             usedansws = usedansws.slice(0, -3);
-            this.addTry(
-              ga.desc + " - " + this.$t('tryanswers.value') + " - " + f.desc + " - " + usedansws,
-              trieswv
-            );
+            if (!this.onlysq) {
+              this.addTry(
+                ga.desc + " - " + this.$t('tryanswers.value') + " - " + f.desc + " - " + usedansws,
+                trieswv
+              );
+              this.trycounter += 1;
+            }
             this.addTry(
               ga.desc + " - " + this.$t('tryanswers.sq') + " - " + f.desc + " - " + usedansws,
               triessq
             );
-            this.trycounter += 2;
+            this.trycounter += 1;
           }
         }
       } else {
@@ -361,13 +386,17 @@ export default {
         }
       }
 
-      // Define length and if flagged calculation functions for different counts
-      this.funcs.push({
-        desc: "Length",
-        f(a) {
-          return a ? a.length : 0;
-        },
-      });
+      // If flagged try length of the answer
+      if (this.leng) {
+        this.funcs.push({
+          desc: this.$t('tryanswers.length'),
+          f(a) {
+            return a ? a.length : 0;
+          },
+        });
+      }
+
+      // If flagged try different counts
       if (this.cnts) {
         this.funcs.push({
           desc: this.$t('tryanswers.words'),

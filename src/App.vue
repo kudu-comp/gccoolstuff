@@ -179,7 +179,7 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("resistorcode.title"),
+                text: this.$t("resistor.title"),
                 path: { name: "Resistor" },
               },
               {
@@ -248,7 +248,7 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("decimals.title"),
+                text: this.$t("digits.title"),
                 path: { name: "Digits" },
               },
               {
@@ -268,7 +268,7 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("primegcdlcm.title"),
+                text: this.$t("gcdandlcm.title"),
                 path: { name: "GCDAndLCM" },
               },
               {
@@ -295,6 +295,16 @@ export default {
                 type: "link",
                 text: this.$t("sequences.title"),
                 path: { name: "Sequences" },
+              },
+              {
+                type: "link",
+                text: this.$t("combinations.title"),
+                path: { name: "Combinations" },
+              },
+              {
+                type: "link",
+                text: this.$t("equations.title"),
+                path: { name: "Equations" },
               },
               {
                 type: "link",
@@ -357,6 +367,11 @@ export default {
                 type: "link",
                 text: this.$t("checksum.title"),
                 path: { name: "checksum" },
+              },
+              {
+                type: "link",
+                text: this.$t("truthtable.title"),
+                path: { name: "TruthTable" },
               }
             ],
           },
@@ -543,7 +558,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[3].text = this.$t("codebook.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[4].text = this.$t("fonts.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[5].text = this.$t("segment.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[6].text = this.$t("resistorcode.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[6].text = this.$t("resistor.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[7].text = this.$t("decabit.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[8].text = this.$t("freqanal.title");
       this.navbarOptions.menuOptionsLeft[3].text = this.$t("menu.imagetools");
@@ -556,17 +571,19 @@ export default {
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[6].text = this.$t("textextractor.title");
       this.navbarOptions.menuOptionsLeft[4].text = this.$t("menu.mathtools");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[0].text = this.$t("baseconv.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[1].text = this.$t("decimals.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[1].text = this.$t("digits.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[2].text = this.$t("primes.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[3].text = this.$t("romans.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[4].text = this.$t("fibonacci.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[5].text = this.$t("primegcdlcm.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[5].text = this.$t("gcdandlcm.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[6].text = this.$t("formulasolver.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[7].text = this.$t("numberprop.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[8].text = this.$t("bignumbers.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[9].text = this.$t("nimbers.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[10].text = this.$t("sequences.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[11].text = this.$t("palindrome.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[11].text = this.$t("combinations.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[12].text = this.$t("equations.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[13].text = this.$t("palindrome.title");
       this.navbarOptions.menuOptionsLeft[5].text = this.$t("menu.comptools");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[0].text = this.$t("bintotext.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[1].text = this.$t("bcd.title");
@@ -578,6 +595,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[7].text = this.$t("deadfish.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[8].text = this.$t("duckspeak.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[9].text = this.$t("checksum.title");
+      this.navbarOptions.menuOptionsLeft[5].subMenuOptions[10].text = this.$t("truthtable.title");
       this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.other");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("printlog.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("htmlparser.title");

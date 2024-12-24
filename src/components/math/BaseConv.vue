@@ -11,11 +11,11 @@
       <div class="row">
         <label
           class="form-label md-size mb-2"
-          for="base1"
-        >{{ $t('baseconv.base1') }}</label>
+          for="from"
+        >{{ $t('baseconv.from') }}</label>
         <input
-          id="base1"
-          v-model="base1"
+          id="from"
+          v-model="from"
           type="number"
           min="2"
           max="36"
@@ -23,8 +23,8 @@
         >
         <div class="lg-size">
           <input
-            id="basestr1"
-            v-model="basestr1"
+            id="fromstr"
+            v-model="fromstr"
             type="text"
             class="form-control mb-2"
           >
@@ -33,11 +33,11 @@
       <div class="row">
         <label
           class="form-label md-size mb-2"
-          for="base2"
-        >{{ $t('baseconv.base2') }}</label>
+          for="to"
+        >{{ $t('baseconv.to') }}</label>
         <input
-          id="base2"
-          v-model="base2"
+          id="to"
+          v-model="to"
           type="number"
           min="2"
           max="36"
@@ -45,8 +45,8 @@
         >
         <div class="lg-size">
           <input
-            id="basestr2"
-            v-model="basestr2"
+            id="tostr"
+            v-model="tostr"
             type="text"
             class="form-control mb-2"
           >
@@ -56,12 +56,12 @@
         {{ $t('buttons.convert') }}
       </button>
       <textarea
-        id="message"
-        ref="message"
-        v-model="message"
+        id="input"
+        ref="input"
+        v-model="input"
         class="form-control mb-2"
-        placeholder="Message"
-        rows="5"
+        placeholder="input"
+        rows="2"
       />
       <div class="resultbox" v-if="result">
         {{ result }}      
@@ -82,53 +82,80 @@ export default {
 
   data: function () {
     return {
-      title: "Base convertor",
-      message: "",
+      input: "",
       result: "",
-      basestr1: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      basestr2: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      base1: 2,
-      base2: 10,
-      phpurl: window.location.protocol + "//" + window.location.hostname + "/cipher-toolkit/encoderdecoder.php",
-      errormsg: ""
+      errormsg: "",
+      fromstr: "",
+      tostr: "",
+      defstr: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      from: 2,
+      to: 10,
     }
   },
 
   mounted: function() {
-    this.$refs.message.focus();
+    this.$refs.input.focus();
   },
 
   methods: {
 
     // Convert the base using the ciphertoolkit
     toConvert: function() {
+
+      // Reset
+      this.result = "";
       this.errormsg = "";
-      let data = {
-        alphabet: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        enordecode: "encode",
-        cipher: 'Baseconvertor',
-        key1: this.basestr1.slice(0, this.base1),
-        key2: this.basestr2.slice(0, this.base2),
-        message: this.message,
-        transmessage: this.result,
-      };
+      this.fromstr = this.fromstr.trim();
+      this.tostr = this.tostr.trim();
 
-      // Call the script on the server
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-          this.message = data.message;
-          this.result = data.transmessage;
-        })
-        .catch((error) => {
-          console.error('Error ', error);
-          this.errormsg = this.$t('errors.generic')
-        });
+      // Check input
+      if (
+        (this.fromstr !== "" && this.fromstr.length !== this.from) ||
+        (this.tostr !== "" && this.tostr.length !== this.to)
+      ) {
+        this.errormsg = this.$t("baseconv.symbolserr");
+        return;
+      }
+      if (!this.input) {
+        this.errormsg = this.$t("errors.noinput");
+        return;
+      }
+
+      // Parse numbers from input
+      let nums = this.input.matchAll(/(\S+)/gi);
+      let fromstr = this.fromstr.length > 0 ? this.fromstr : this.defstr;
+      let tostr = this.tostr.length > 0 ? this.tostr : this.defstr;
+
+      // Process all numbers
+      for (let n of nums) {
+        // Convert input string from custom symbols to 0-9A-Z
+        let h = "";
+        for (let c of n[0]) {
+          h += this.defstr[fromstr.toUpperCase().indexOf(c.toUpperCase())];
+        }
+
+        // Convert
+        h = parseInt(h, this.from).toString(this.to);
+        if (isNaN(h)) {
+          this.errormsg = this.$t("errors.unknowninput");
+          this.result += " error ";
+          continue;
+        }
+        let h2 = "";
+
+        // Convert output string from 0-9A-Z to custom symbols
+        for (let c of h) {
+          h2 += tostr[this.defstr.indexOf(c.toUpperCase())];
+        }
+
+        if (!h2) {
+          this.errormsg = this.$t("errors.unknowninput");
+        } else {
+          // Print output
+          this.result += h2 + " ";
+        }
+      } 
     },
-
   },
 }
 </script>

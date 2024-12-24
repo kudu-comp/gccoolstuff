@@ -152,7 +152,8 @@
   
   "alltools" : {
     "title" : "Zoek in alle tools",
-    "long" : "Doorzoek alle tools, geheimschriften, codes, fonts of toon alle tools."
+    "long" : "Doorzoek alle tools, geheimschriften, codes, fonts of toon alle tools.",
+    "showall": "Toon alle tools"
   },
 
   "ciphers": {
@@ -678,7 +679,7 @@
     "name": "Naam"
   },
 
-  "resistorcode": {
+  "resistor": {
     "title": "Weerstandscode",
     "long": "<p>Weerstanen gebruiken gekleurde banden om de waarde (in Ohm) te specificeren. Kleuren zijn makkelijker te lezen dan nummers. Er zijn versies met 3, 4, 5 en 6 banden. Voor de versies met 3 en 4 banden zijn de eerste twee banden de waarde en de 3e band is de vermenigvuldigingsfactor (het aantal nullen). Voor de versies met 5 of 6 banden zijn de eerste drie banden de waarde en is de 4e band de vermenigvuldigingsfactor (het aantal nullen). (De 5e band is de tolerantie en de 6e de thermische capaciteit). De kleurcodes zijn:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>De kleuren goud en silver zijn alleen geldig voor de vermenigvuldiging, goud is x 0.1 en zilver is x 0.01. De tool werkt voor de versies met 5 en 6 banden, selecteer de kleuren van de eerste 4 banden. De tool werkt eventueel ook voor de versie met 3 of 4 banden. Selecteer voor de 1e band zwart (0) en selecteer daarna band 2, band 3 en de vermenigvuldigsfactor.</p>",
     "band": "Band",
@@ -1207,16 +1208,18 @@
     "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
     "formulas" : "Gebruik formules",
     "phformulas" : "1e antwoord is A, 2e is B enzovoorts. Bijv A+B. Eén formule per regel.",
-    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of miscshien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef antwoord per regel. Als er meerder opties zijn kan je die scheiden door een {'|'}. Als je formules wil gebruiken vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
+    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of misschien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef één antwoord per regel. Als er meerder opties zijn kan je die scheiden door een {'|'}. Als je formules wil gebruiken, vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
     "showdescr" : "Toon omschrijvingen",
     "showtable" : "Toon tabel",
-    "trycnts" : "Probeer ook andere tellingen",
-    "tryfirst" : "Probeer ook de 1e letter",
-    "trylast" : "Probeer ook de laatste letter",
-    "trysv" : "Probeer ook het Scrabble en Vanity alfabet",
-    "trylang" : "Probeer ook andere talen",
-    "tryrev" : "Probeer ook het omgekeerde alfabet (A=26, Z=1)",
-    "tryzero" : "Probeer ook met starten op nul (A=0, Z=25)",
+    "onlysq": "Alleen stapeltellen (geen woordwaardes)",
+    "tryleng": "Probeer lengte van het antwoord",
+    "trycnts" : "Probeer diverse tellingen",
+    "tryfirst" : "Probeer de 1e letter",
+    "trylast" : "Probeer de laatste letter",
+    "trysv" : "Probeer het Scrabble en Vanity alfabet",
+    "trylang" : "Probeer andere talen",
+    "tryrev" : "Probeer het omgekeerde alfabet (A=26, Z=1)",
+    "tryzero" : "Probeer met starten op nul (A=0, Z=25)",
     "value" : "Waarde",
     "sq" : "Stapeltellen",
     "full": "Volledig antwoord",
@@ -1326,12 +1329,13 @@
 
   "baseconv": {
     "title": "Base conversie",
-    "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte karakters kunnen eventueel worden aangepast. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16.",
-    "base1": "Base van (2 t/m 36)",
-    "base2": "Base naar (2 t/m 36)"
+    "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte symbolen zijn standaard 0-9A-Z maar kunnen eventueel worden aangepast, bijv. + en - voor binair of A t/m J voor decimaal. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16.",
+    "from": "Van",
+    "to": "Naar",
+    "symbolserr": "Aantal symbolen moet overeenkomen met grondtal of leeg zijn."
   },
 
-  "decimals": {
+  "digits": {
     "title": "Decimalen",
     "long" : "<p>Een tool om de decimalen van 𝜋, e, 𝜏, φ, γ, √2, √3 en ζ(3) te zoeken. De eerste decimaal achter de punt is positie 1. De eerste 1,000,000 decimalen zijn beschikbaar.</p><p>Alle getallen zijn irrationeel. Dit impliceert dat elke opvolging van nummers vroeg of laat voorkomt tussen de decimalen. De volgende getallen zijn beschikbaar. Pi of 𝜋. Het natuurlijke getal e. Tau of 2𝜋. De gouden ratio of φ of phi. De Euler-Mascheroni constante of γ. De wortels van 2 en 3 (√2 en √3). De constante van Apéry of ζ(3) of zeta(3). De constanten van Gauss en Catalan, allebei soms ook aangeduid als G. De constante van Catalan.</p>",
     "sel": "Selecteer een nummer",
@@ -1393,7 +1397,7 @@
     "fib": " is een Fibonacci nummer op positie "
   },
 
-  "primegcdlcm": {
+  "gcdandlcm": {
     "title": "GGD en KGV",
     "long" : "Deze tool berekent de Grootste Gemene Deler (GGD) en het Kleinste Gemene Veelvoud (KGV). Het geeft tevens de priemfactoren van elk getal. Let op want voor zeer grote getallen kan de berekening flink wat tijd kosten.",
     "num": "Nummers",
@@ -1437,6 +1441,39 @@
     "hexadecimal": "Hexadecimaal",
     "arithmetic": "Rekenkundige bewerkingen",
     "logical": "Logische bewerkingen"
+  },
+
+  "combinations": {
+    "title": "Combinaties",
+    "long": "Bereken het aantal en genereer combinaties (de volgorde doet er niet toe) of permutaties (de volgorde doet er wel toe).",
+    "cnt": "Aantal te kiezen items",
+    "size": "Aantal items om uit te kiezen",
+    "rpt": "Vervanging toegestaan (hergebruik opties)",
+    "sel": "Combinaties of permutaties",
+    "set": "Selecteer items uit",
+    "set1": "Cijfers vanaf 1",
+    "set2": "Letters vanaf A",
+    "set3": "Lijst van items",
+    "list": "Lijst van items",
+    "cntcomb": "Aantal combinaties",
+    "cntperm": "Aantal permutaties",
+    "gencomb": "Genereer combinaties",
+    "genperm": "Genereer permutaties",
+    "notenoughitems": "Niet genoeg items in de lijst",
+    "toomany": "Teveel om te berekenen",
+    "numcomb": "Het aantal combinaties is ",
+    "numperm": "Het aantal permutaties is ",
+    "max": "Maximum aantal dat kan worden gegenereerd is "
+  },
+
+  "equations": {
+    "title": "Vergelijkingen",
+    "long": "Oplossen van een stelsel lineaire vergelijkingen. Input kan decimaal zijn of breuken, bijv. 1.5 of 3/2 of 1 1/2 zijn hetzelfde.",
+    "numvar": "Aantal variabelen",
+    "output": "Output formaat",
+    "fractions": "Breuken",
+    "decimals": "Decimalen",
+    "nosol": "Er zijn geen oplossingen."
   },
 
   "palindrome": {
@@ -1559,10 +1596,16 @@
     "checkpar2": "1 (even parity) of 0 (oneven parity)"
   },
 
-"encryption": {
-  "title": "Encryptie",
-  "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit, HMAC en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>",
-  "codes": "Kies een encryptie",
+  "truthtable": {
+    "title": "Waarheidstabel",
+    "long": "Deze tool maakt een zogenaamde waarheidstabel. Voor alle mogelijke variabelen (waar, niet waar) wordt het resultaat van de logische expressie (waar, niet waar) berekend.  Elke tekst anders dan and, or, xor of not wordt gezien als een variabele. In plaats van and, or, not kunnen ook symbolen uit programmeertalen (&&, {'||'} en !) de algabraische notatie (*, + en !) of de notatie volgens propositielogica (∧, ∨ en ¬) worden gebruikt. Alhoewel incorrect kunnen de notaties ook door elkaar worden gebruikt.",
+    "expr": "Boolean expressie"
+  },
+
+  "encryption": {
+    "title": "Encryptie",
+    "long": "<p>In feite zijn dit allemaal zeer complexe geheimschriften (cijfers) die door computers worden gebruikt om informatie veilig op te slaan en te verzenden. Het zijn de opvolgers van de handcijfers uit de 20e eeuw en daarvoor. Alle encyrpties hebben tenminste een sleutel nodig. Er zijn opties beschikbaar om de uitvoering van de algoritmes te beïnvloeden, maar het zal vrijwel altijd volstaan om de standaard instellingen te gebruiken.</p><p>DES was voor lange tijd de standaard, maar is door zijn korte sleutel inmiddels goed te kraken. AES is tegenwoordig het meest gebruikt. Rabbit, HMAC en RC4 worden ook gebruikt. Okto3 codeert de invoer naar een serie decimale getallen en is nutteloos, behalve misschien voor geocaches.</p>",
+    "codes": "Kies een encryptie",
     "key": "Sleutel",
     "coded": "Gecodeerd bericht",
     "advanced": "Geavanceerde opties",
