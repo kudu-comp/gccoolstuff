@@ -93,7 +93,6 @@ export default {
         .then(data => {
             this.prod = data.nimberproduct;
             this.sum = data.nimbersum;
-            // console.log('Success', data)
         })
         .catch((error) => {
             console.error('Error ', error);

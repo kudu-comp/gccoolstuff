@@ -67,7 +67,6 @@ export function evalPrefix (s, base = 10) {
 
   // Decompose expression using regex
   let elems = s.match(/[0-9a-f]+|[-+*/^()!]/g);
-  console.log(elems);
 
   // Scan prefix strang from end to begin
   for (let i = elems.length - 1; i >= 0; i--) {

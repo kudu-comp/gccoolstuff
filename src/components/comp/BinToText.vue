@@ -275,7 +275,6 @@ export default {
             buffer = bt.base91ToBuffer(this.message, this.selfromtable);
             break;
         }
-        console.log(buffer);
 
         switch (this.seltoenc) {
           case "bin" :

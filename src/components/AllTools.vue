@@ -167,6 +167,7 @@ export default {
             {  href: "/nimbers",             name: "", show : true,        },
             {  href: "/sequences",           name: "", show : true,        },
             {  href: "/combinations",        name: "", show : true,        },
+            {  href: "/equations",           name: "", show : true,        },
             {  href: "/palindrome",          name: "", show : true,        }
           ]
         },
@@ -182,7 +183,8 @@ export default {
             { href: "/beatnik",             name: "", show : true,        },
             { href: "/deadfish",            name: "", show : true,        },
             { href: "/duckspeak",           name: "", show : true,        },
-            { href: "/checksum",            name: "", show : true,        }
+            { href: "/checksum",            name: "", show : true,        },
+            { href: "/truthtable",          name: "", show : true,        }
           ]
         },
         {
@@ -281,8 +283,6 @@ export default {
         // info = this.$t(l1.href.slice(1)+".long");
         l1.show = false;
 
-        console.log(l1);
-
         if (l1.l2) {
 
           // Search level 2
@@ -301,7 +301,6 @@ export default {
                     break;
                   case "/codebook" :
                     l3.show = false;
-                    console.log(this.codes[l3.idx]);
                     if (this.codes[l3.idx].name.toLowerCase().indexOf(s) >= 0) l3.show = true;
                     if (this.codes[l3.idx].description.toLowerCase().indexOf(s) >= 0) l3.show = true;
                     for (let t of this.codes[l3.idx].tags) {

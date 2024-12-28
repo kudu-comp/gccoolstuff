@@ -27,7 +27,7 @@
         />
       </div>
       <!-- Insert table here -->
-      <table id="eqs" class="mb-2" />
+      <table id="eqs" />
       <!-- Select output format -->
       <label class="form-label">{{$t('equations.output')}}</label>
       <div>
@@ -116,22 +116,22 @@ export default {
           let newInput = document.createElement("input");
           newInput.type = "text";
           newInput.id = "eqs-" + r + "-" + c;
-          newInput.style = "width: 3rem;";
-          newInput.class = "form-control mb-2 me-2";
+          newInput.size = 1;
+          newInput.setAttribute("class", "form-control mb-2");
           newCell.appendChild(newInput);
-          newInput = document.createElement("td");
-          newInput.style = "width: 2rem;";
-          newInput.class = "ms-2 mb-2"
-          newInput.innerHTML =
+          let newLabel = document.createElement("td");
+          newLabel.style = "padding: 0px 10px 0px 10px;"
+          newLabel.innerHTML =
             this.varname[c - 1] + (c === this.size ? " = " : " + ");
-          newRow.appendChild(newInput);
+          //newLabel.setAttribute("class", "form-label mb-2 me-2");
+          newRow.appendChild(newLabel);
         }
         let newInput = document.createElement("input");
         newInput.type = "text";
         newInput.size = "1";
         newInput.id = "eqs-val-" + r;
-        newInput.class = "form-control mb-2";
         newRow.appendChild(newInput);
+        newInput.setAttribute("class", "form-control mb-2");
       }
     },
 

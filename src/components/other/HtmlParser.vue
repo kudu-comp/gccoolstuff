@@ -282,7 +282,6 @@ export default {
       let nodes = this.cacheNode.getElementsByTagName(tag);
       let tags ="";
       for (let node of nodes) {
-        // console.log(node);
         tags += node.textContent + " ";
       }
       return tags;
@@ -327,21 +326,18 @@ export default {
         // Find the links
         let nodes = this.cacheNode.getElementsByTagName("a");
         for (let node of nodes) {
-          // console.log(node);
           this.links.push({ name: node.textContent, url: node.getAttribute("href") });
         }
 
         // Find the links in maps
         nodes = this.cacheNode.getElementsByTagName("area");
         for (let node of nodes) {
-          // console.log(node);
           this.links.push({ name: "Link mapped in image", url: node.getAttribute("href") });
         }
 
         // Find the images
         nodes = this.cacheNode.getElementsByTagName("img");
         for (let node of nodes) {
-          // console.log(node);
           this.images.push({ name: node.getAttribute("alt") + " - " + node.getAttribute("title"), url: node.getAttribute("src") });
         }
 

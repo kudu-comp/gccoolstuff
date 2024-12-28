@@ -13,7 +13,6 @@
 
 export function WGSToCsquare(lat, lon, level = 13) {
   let hash = "";
-  console.log(lat, lon);
 
   // 1, 3, 5 or 7 indicates the global quadrant NE, SE, SW and NW
   if (lat >= 0 && lon >= 0) hash += "1";
@@ -40,7 +39,6 @@ export function WGSToCsquare(lat, lon, level = 13) {
 
 export function CsquareToWGS(code) {
 
-  console.log(code);
   if (code.length < 4) return;
 
   // First digits sets N E S W

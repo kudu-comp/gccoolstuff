@@ -212,7 +212,6 @@ export default {
       for (let i = 0; i < data.length; i += 4) {
         if ( (data[i] == this.red) && (data[i+1] == this.green) && (data[i+2] == this.blue) ) {
           count++;
-          // console.log(i);
         }
       }
 

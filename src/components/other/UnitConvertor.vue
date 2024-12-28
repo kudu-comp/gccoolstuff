@@ -161,7 +161,6 @@ export default {
       this.idfrom = 0;
       this.to = 1;
       this.from = 1;
-      console.log(this.cat);
     },
 
     // Translate the input

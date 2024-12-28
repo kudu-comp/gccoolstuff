@@ -70,12 +70,11 @@ export default {
           .then (startcoord => {
 
             // Getting anitpode coordinate with some basic math
-            console.log(startcoord);
             anticoord = { lon: startcoord.lon-180, lat: -1 * startcoord.lat }
             if (anticoord.lon < -180) {
               anticoord.lon += 360;
             }
-            console.log(anticoord);
+
             // Display marker
             coords.displayMarker(this.$store.state.mymap, anticoord, "Antipode");
 

@@ -401,7 +401,6 @@ export default {
         key3: keys[2]
       };
 
-      console.log(data);
       try {
     
         // Call PHP script on server
@@ -412,7 +411,6 @@ export default {
           .then(response => response.json())
           .then(data => {
               this.result = data.message;
-              console.log('Success decoding', data)
           })
           .catch((error) => {
               console.log('Error ', error);
@@ -470,7 +468,6 @@ export default {
           key3: keys[2]
       };
 
-      console.log(data);
       // Call PHP script on server
       try {
 
@@ -486,7 +483,6 @@ export default {
               } else {
                 this.result = data.transmessage
               }
-              console.log('Success encoding', data)
           })
           .catch((error) => {
               console.log('Error ', error);

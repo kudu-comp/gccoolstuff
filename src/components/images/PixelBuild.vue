@@ -296,9 +296,6 @@ export default {
 
       let lines = this.message.split(/\n/g)
       
-      console.log(this.canvas.width);
-      console.log(this.canvas.height);
-
       // Number of rectangels to draw
       let h, w;
       if (this.imgHeight) {

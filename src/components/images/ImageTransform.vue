@@ -227,17 +227,6 @@ export default {
       this.dw = Math.floor(img.width*ratio);
       this.dh = Math.floor(img.height*ratio);
 
-      // console.log('Canvas width  ' + canvas.width);
-      // console.log('Canvas height ' + canvas.height);
-      // console.log('Image width  ' + img.width);
-      // console.log('Image height ' + img.height);
-      // console.log('HRatio  ' + hRatio);
-      // console.log('VRatio  ' + vRatio);
-      // console.log('Dx ' + this.dx);
-      // console.log('Dy ' + this.dy);
-      // console.log('Dw ' + this.dw);
-      // console.log('Dh ' + this.dh);
-
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.ctx.drawImage(img, 0, 0, img.width, img.height,
                          this.dx, this.dy, this.dw, this.dh); 
@@ -252,7 +241,6 @@ export default {
     // Undo latest change
     undoEdit: function () {
       if (this.undo.length > 0) {
-        console.log("Undo " + this.undo.length + "/" + this.undo[0].length);
         let imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
 
         // Read only object need to use setter to copy the data back

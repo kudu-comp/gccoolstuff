@@ -96,8 +96,13 @@ export default {
       this.result = "";
       this.errormsg = "";
       this.vararr = [];
-      this.cleanexpr = this.expr;
+      this.cleanexpr = this.expr.trim();
 
+      // Check input
+      if (this.cleanexpr == "") {
+        this.errormsg = this.$t('errors.noinput');
+      }
+      
       // Replace logical operators with literal versions
       let repls = [
         // Programming
@@ -126,7 +131,6 @@ export default {
         if (t[0].toUpperCase() === "XOR") continue;
         this.vararr.push(t[0]);
       }
-      // console.log(this.vararr);
 
       let optarr = this.vararr.map((s) => false);
 

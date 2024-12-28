@@ -136,7 +136,6 @@ export default {
               this.result += this.$t('booksearch.edcnt') + data.docs[i].edition_count + "<BR>";
             }
           }
-          console.log(data);
         })
         .catch((error) => {
           console.error("Error ", error);

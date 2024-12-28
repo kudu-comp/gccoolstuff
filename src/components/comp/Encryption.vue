@@ -236,8 +236,6 @@ export default {
       
       // Split message
       let numbers = message.match(/[-0-9.,]+/g);
-      console.log(message);
-      console.log(numbers);
       
       // For each number
       for (let n of numbers) {
