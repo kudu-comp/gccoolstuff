@@ -74,7 +74,6 @@
         id="message"
         ref="message"
         v-model="message"
-        name="message"
         class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"

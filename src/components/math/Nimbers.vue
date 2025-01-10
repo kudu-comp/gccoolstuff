@@ -15,6 +15,7 @@
         >{{ $t('nimbers.num1') }}</label>
         <input
           id="x"
+          ref="x"
           v-model="x"
           type="number"
           class="form-control md-size mb-2"
@@ -74,6 +75,10 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.$refs.x.focus();
+  },
+  
   methods: {
 
     // Calculate the nimber product and sum

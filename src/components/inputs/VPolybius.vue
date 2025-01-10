@@ -11,7 +11,7 @@
 
           <div class="modal-body">
             <slot name="body">
-              <div class="row mr-2">
+              <div class="row me-2">
                 <div class="row mb-2">
                   <label
                     class="form-label sm-size"
@@ -107,12 +107,12 @@
                         id="flip"
                         v-model="flip"
                         type="checkbox"
-                        class="form-check-input ml-2"
+                        class="form-check-input ms-2"
                         @change="genSquare"
                       >
                       <label
                         for="flip"
-                        class="form-check-label ml-2"
+                        class="form-check-label ms-2"
                       >{{ $t('dialogpb.flip') }}</label>
                     </div>
                   </div>
@@ -135,7 +135,7 @@
           <div class="modal-footer mt-2">
             <p
               v-show="error"
-              class="errormsg mr-2"
+              class="errormsg me-2"
             >
               {{ errormsg }}
             </p>

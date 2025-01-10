@@ -16,7 +16,7 @@
         <div class="col-md-4">
           <div class="row">
             <label for="sel" class="form-label sm-size mb-2">{{ $t('gameoflife.fillgrid') }}</label>
-            <select v-model="sel" id="sel" class="form-control sm-size mb-2">
+            <select v-model="sel" id="sel" ref="sel" class="form-control sm-size mb-2">
               <option value="0">{{ $t('gameoflife.empty') }}</option>
               <option value="1">{{ $t('gameoflife.random') }}</option>
               <option value="2">{{ $t('gameoflife.rndsym') }}</option>
@@ -116,11 +116,7 @@ const szCell = 25;
 
 export default {
 
-  name: "ComponentName",
-
-  components: {
-        
-  },
+  name: "GameOfLife",
 
   data() {
     return {
@@ -142,6 +138,7 @@ export default {
   },
 
   mounted: function () {
+    this.$refs.sel.focus();
     this.cvs = document.getElementById("grid");
     this.fillGrid();
   },

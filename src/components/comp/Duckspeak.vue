@@ -86,6 +86,10 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.$refs.code.focus();
+  },
+
   methods: {
 
     // Translate the input

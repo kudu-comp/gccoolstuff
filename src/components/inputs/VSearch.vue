@@ -8,6 +8,7 @@
       <input
         type="text"
         id="search"
+        ref="search"
         class="form-control lg-size mb-2"
         :value="search"
         @input="updateSearch($event.target.value)"
@@ -29,6 +30,10 @@ export default {
   emits: [
     'update:search'
   ],
+  
+  mounted: function() {
+    this.$refs.search.focus();
+  },
 
   methods: {
     updateSearch: function (value) {

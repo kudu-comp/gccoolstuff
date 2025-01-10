@@ -63,7 +63,9 @@
           class="form-check-label mb-2"
         >{{ $t('textchunks.upper') }}</label>
       </div>
-      <button class="btn mb-2" id="btn1" @click="chunk()">{{$t('buttons.show')}}</button>
+      <button class="btn mb-2" id="btn1" @click="chunk()">
+        {{$t('buttons.show')}}
+      </button>
       <!-- Error message -->
       <p
         v-show="errormsg"
@@ -72,15 +74,14 @@
         {{ errormsg }}
       </p>
       <!-- Text area input -->
-      <div class="mb-2">
-        <textarea
-          id="txt"
-          v-model="txt"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="5"
-        />
-      </div>
+      <textarea
+        id="txt"
+        v-model="txt"
+        ref="txt"
+        class="form-control mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <!-- Result area or use v-html -->
       <div v-if="result" style="font-family: Courier" class="resultbox" v-html="result" />
     </div>
@@ -108,6 +109,10 @@ export default {
       ignore: false,
       upper: false
     };
+  },
+  
+  mounted: function() {
+    this.$refs.txt.focus();
   },
 
   methods: {

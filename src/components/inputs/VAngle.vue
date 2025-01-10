@@ -1,7 +1,7 @@
 <template>
-  <div class="row mb-2">
+  <div class="row">
     <label
-      class="form-label sm-size"
+      class="form-label sm-size mb-2"
       for="angle"
     >
       <slot name="label">{{ $t('labels.angle') }}</slot>
@@ -9,13 +9,13 @@
     <input
       id="angle"
       type="text"
-      class="form-control md-size me-2"
+      class="form-control md-size me-2 mb-2"
       :value="angle"
       @input="updateAngle($event.target.value)"
     >
     <select
       id="angleunit"
-      class="form-select sm-size"
+      class="form-select sm-size mb-2"
       :value="unit"
       @input="updateUnit($event.target.value)"
     >

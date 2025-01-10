@@ -16,6 +16,7 @@
         <textarea
           id="msg"
           v-model="txt"
+          ref="msg"
           class="form-control"
           :placeholder="$t('tryanswers.answers') + '|.'"
           rows="5"
@@ -199,6 +200,10 @@ export default {
     };
   },
 
+  mounted: function() {
+    this.$refs.msg.focus();
+  },
+  
   methods: {
 
     addTry: function (description, tries) {

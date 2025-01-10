@@ -13,26 +13,25 @@
           id="message"
           ref="input"
           v-model="input"
-          name="input"
           class="form-control"
           :placeholder="$t('labels.number')"
           rows="1"
         />
       </div>
-      <input
+      <button
         id="romantodec"
-        type="button"
-        :value="$t('romans.btnrtd')"
         class="btn mb-2 me-2"
         @click="romanToDec"
       >
-      <input
+        {{ $t('romans.btnrtd') }}
+      </button>
+      <button
         id="dectoroman"
-        type="button"
-        :value="$t('romans.btndtr')"
         class="btn mb-2"
         @click="decToRoman"
       >
+        {{ $t('romans.btndtr') }}
+      </button>
       <p
         v-if="errormsg"
         class="errormsg mb-2"
@@ -61,6 +60,10 @@ export default {
       ints: [1000, 500, 100, 50, 10, 5, 1],
       romans: ["M", "D", "C", "L", "X", "V", "I"]
     }
+  },  
+  
+  mounted: function() {
+    this.$refs.input.focus();
   },
 
   methods: {

@@ -8,6 +8,7 @@
     </label>
     <input
       id="coordinput"
+      ref="coordinput"
       type="text"
       class="form-control md-size mb-2 me-2"
       :value="coord"
@@ -67,9 +68,6 @@
       <option value="Geohash">
         Geohash
       </option>
-      <option value="W3W">
-        What3words
-      </option>
       <option value="MapcodeL">
         Mapcode local
       </option>
@@ -120,6 +118,10 @@ export default {
     'update:datum'
   ],
 
+  mounted: function() {
+    this.$refs.coordinput.focus();
+  },
+  
   methods: {
     updateCoord: function (value) {
       this.$emit ('update:coord', value);

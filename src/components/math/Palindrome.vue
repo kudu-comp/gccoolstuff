@@ -20,7 +20,7 @@
           type="number"
           class="form-control mb-2 md-size me-2"
         >
-        <v-calculate class="sm-size" id="getdec" @calculate="palindromeCounter"></v-calculate>
+        <v-calculate class="sm-size" @calculate="palindromeCounter"></v-calculate>
       </div>
       <p
         v-show="errormsg"

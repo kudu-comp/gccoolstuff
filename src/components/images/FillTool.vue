@@ -11,6 +11,7 @@
       <input
         id="file"
         type="file"
+        ref="file"
         class="form-control mb-2"
         @change="selectFile"
       />
@@ -34,8 +35,8 @@
           <input
             id="restore"
             type="button"
-            name="btnsearch"
             :value="$t('buttons.original')"
+            :title="$t('buttons.original')"
             class="btn me-2 mb-2"
             @click="restore"
           >
@@ -57,13 +58,13 @@
               </div>
               <div>
                 <label 
-                  class="form-label mr-2"
+                  class="form-label me-2"
                   for="tol"
                 >{{ $t('filltool.tol') }}: {{ tol }}</label>
                 <vue-slider
                   v-model="tol"
                   v-bind="toloptions"
-                  class="ml-2 mr-2"
+                  class="ms-2 me-2"
                 />
               </div>
             </div>
@@ -74,28 +75,28 @@
             </div>
             <div class="box-body">
               <label
-                class="form-label mr-2"
+                class="form-label me-2"
                 for="brigh"
               >{{ $t('filltool.brigh') }}: {{ brigh }}</label>
               <vue-slider
                 v-model="brigh"
                 v-bind="controptions"
-                class="ml-2 mr-2 mb-2"
+                class="ms-2 me-2 mb-2"
               />
               <label
-                class="form-label mr-2"
+                class="form-label me-2"
                 for="contr"
               >{{ $t('filltool.contr') }}: {{ contr }}</label>
               <vue-slider
                 v-model="contr"
                 v-bind="controptions"
-                class="ml-2 mr-2 mb-2"
+                class="ms-2 me-2 mb-2"
               />
               <input
                 id="conbri"
                 type="button"
                 :value="$t('buttons.apply')"
-                class="btn mr-2 mb-2"
+                class="btn me-2 mb-2"
                 @click="contrastBrightness"
               >
             </div>
@@ -244,6 +245,7 @@ export default {
     // Resize canvas
     this.canvas.width = this.canvas.getBoundingClientRect().width
     this.canvas.height = this.canvas.width;
+    this.$refs.file.focus();
 
   },
 

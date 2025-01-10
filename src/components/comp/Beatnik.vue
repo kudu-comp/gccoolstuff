@@ -52,7 +52,7 @@
           class="form-check-label mb-2"
         >{{ $t('brainfuck.debug') }}</label>
       </div>
-      <button id="run" class="btn mb-2 mr-2" @click="runBeatnik">
+      <button id="run" class="btn mb-2 me-2" @click="runBeatnik">
         {{ $t('brainfuck.run') }}
       </button>
       <div class="mb-2">

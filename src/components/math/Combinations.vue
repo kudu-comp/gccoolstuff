@@ -14,7 +14,7 @@
       <!-- Form fields -->
       <div class="row">
         <label for="cnt" class="form-label md-size mb-2">{{$t('combinations.cnt')}}</label>
-        <input type="number" min="0" v-model="cnt" id="cnt" class="form-control md-size mb-2"/>
+        <input type="number" min="0" v-model="cnt" id="cnt" ref="cnt" class="form-control md-size mb-2"/>
       </div>
       <div class="row">
         <label for="size" class="form-label md-size mb-2">{{$t('combinations.size')}}</label>
@@ -107,6 +107,10 @@ export default {
     };
   },
 
+  mounted: function() {
+    this.$refs.cnt.focus();
+  },
+  
   methods: {
 
     fact: function (n) {

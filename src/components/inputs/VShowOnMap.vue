@@ -1,5 +1,5 @@
 <template>
-  <button id="calc" class="btn mb-2 mr-2" @click="calculate()">
+  <button id="calc" class="btn mb-2 me-2" @click="calculate()" :title="$t('buttons.show')">
     <i class="fa-solid fa-map-location-dot"></i> {{$t('buttons.show')}}
   </button>
 </template>

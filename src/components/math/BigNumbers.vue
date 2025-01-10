@@ -61,71 +61,71 @@
       </div>
       <div>
         <h6>{{ $t('bignumbers.arithmetic') }}</h6>
-        <input
+        <button
           id="add"
-          type="button"
-          value="A + B"
           class="btn sm-size mb-2 me-2"
           @click="calcBig('ADD')"
         >
-        <input
+          A + B
+        </button>
+        <button
           id="sub"
-          type="button"
-          value="A - B"
           class="btn sm-size mb-2 me-2"
           @click="calcBig('SUB')"
         >
-        <input
+          A - B
+        </button>
+        <button
           id="mul"
-          type="button"
-          value="A * B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('MUL')"
         >
-        <input
+          A * B
+        </button>
+        <button
           id="div"
-          type="button"
-          value="A \ B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('DIV')"
         >
-        <input
+          A \ B
+        </button>
+        <button
           id="mod"
-          type="button"
-          value="A % B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('MOD')"
         >
+          A % B
+        </button>
         <!-- <input type="button" id="pow" value="A ** B" class="btn mb-2" v-on:click="calcBig('POW')"> -->
         <h6>{{ $t('bignumbers.logical') }}</h6>
-        <input
+        <button
           id="and"
-          type="button"
-          value="A and B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('AND')"
         >
-        <input
+          A and B
+        </button>
+        <button
           id="or"
-          type="button"
-          value="A or B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('OR')"
         >
-        <input
+          A or B
+        </button>
+        <button
           id="xor"
-          type="button"
-          value="A xor B"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('XOR')"
         >
-        <input
+          A xor B
+        </button>
+        <button
           id="not"
-          type="button"
-          value="not A"
           class="btn mb-2 sm-size mb-2 me-2"
           @click="calcBig('NOT')"
         >
+          not A
+        </button>
       </div>
       <p
         v-show="errormsg"

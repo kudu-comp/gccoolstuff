@@ -79,7 +79,10 @@
     "download": "Download",
     "try" : "Probeer alles",
     "prev" : "Vorige",
-    "next" : "Volgende"  },
+    "next" : "Volgende", 
+    "expall": "Alles uitvouwen",
+    "collall": "Alles inklappen"
+  },
 
   "colors": {
     "white": "Wit",
@@ -123,15 +126,15 @@
   },
 
   "coordinates": {
-    "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en circles. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. What3words wordt uitgebreid ondersteund. Het is ook mogelijk Reverse Wherigo caches op te lossen."
+    "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en circles. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. Het is ook mogelijk Reverse Wherigo caches op te lossen."
   },
 
   "codes": {
-    "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden."
+    "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Slimme substitutie helpt met het kraken van geheimschriften. Rotatie cijfers probeert alle mogelijk verschuivingen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden. Frequentieanalyse helpt met het vinden van veel voorkomende patronen."
   },
 
   "texttools": {
-    "intro": "Tools voor tekst. Het berekenen van woordwaardes. Het converteren van ASCII of andere codes. Een tool om tekst te analiseren. Slimme substitutie helpt met het kraken van geheimschriften. Converteren van tekst van en naar nummers. Het wisselen van toetsenborden zoals Dvorak. En een tool om woorden door elkaar te husselen."
+    "intro": "Tools voor tekst. Een tool om alle antwoorden te proberen en te vinden of er een coordinaat uitrolt. Het berekenen van woordwaarde of stapeltelling. Het converteren van ASCII of andere codes. Een tool om tekst te analiseren. Converteren van tekst van en naar nummers. Het wisselen van toetsenborden zoals Dvorak. En een tool om woorden door elkaar te husselen. Numerologie berekenen. Tekst horizontaal of verticaal indelen."
   },
 
   "imagetools": { 
@@ -139,15 +142,15 @@
   },
 
   "mathtools": {
-    "intro": "Rekenkundige en wiskundige tools. Decimalen van wiskundige constantes zoals pi. Rekenen met gigantische binaire, octale, hexadecimale of decimale getallen. Priemgetallen, GGD en KGV, ontbinden in priemfactoren. Enkele bekende reeksen zoals Fibonacci of Hailstone. Het oplossen van cryptaritmes."
+    "intro": "Rekenkundige en wiskundige tools. Decimalen van wiskundige constantes zoals pi. Rekenen met gigantische binaire, octale, hexadecimale of decimale getallen. Priemgetallen, GGD en KGV, ontbinden in priemfactoren. Enkele bekende reeksen zoals Fibonacci of Hailstone. Het oplossen van cryptaritmes. Het oplossen van een stelsel lineaire vergelijkingen."
   },
 
   "comptools" : {
-    "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Tenslotte kunnen enkele zogenaamde esoterische talen (esolangs) worden uitgevoerd."
+    "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Het is mogelijk diverse esoterische programmeertalen (esolangs) uit te voeren, bijv. Brainfuck en Cow. Het berekenen van de waarheidstabel bij een logische expressie."
   },
 
   "othertools" : {
-    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes"
+    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes."
   },
   
   "alltools" : {
@@ -1188,7 +1191,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
+    "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. <b>Sinds november 2024 is dit een betaalde dienst en wordt niet meer ondersteund door gctools.nl.</b></p><p>Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
     "languages": "Beschikbare talen",
     "convertto": "Converteer naar w3w",
     "convertfrom": "Convert naar ...",
@@ -1578,7 +1581,7 @@
 
   "duckspeak" : {
     "title": "Duckspeak",
-    "long": "Duckspeak klinkt alsof een eend loopt te kwaken. De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde.",
+    "long": "Duckspeak klinkt alsof een eend loopt te kwaken (Nak). De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde.",
     "invalidint": " is een ongeldig getal\n",
     "format": "Invoer/uitvoer formaat",
     "ascii": "Tekst (ASCII)",

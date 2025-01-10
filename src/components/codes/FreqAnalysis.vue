@@ -77,6 +77,7 @@
       <div class="mb-2">
         <textarea
           id="msg"
+          ref="msg"
           v-model="msg"
           class="form-control"
           :placeholder="$t('labels.message')"
@@ -114,6 +115,10 @@ export default {
     };
   },
 
+  mounted: function() {
+    this.$refs.msg.focus();
+  },
+  
   methods: {
 
     findMissing: function (freq, str, n, size) {

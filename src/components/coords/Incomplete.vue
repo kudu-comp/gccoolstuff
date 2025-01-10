@@ -32,7 +32,7 @@
         v-model:varoptions="var4options"
         class="mb-2"
       />
-      <v-show-on-map id="project" class="btn mr-2" @Show="showCoordinates()" />
+      <v-show-on-map id="project" class="btn me-2" @Show="showCoordinates()" />
       <div
         v-show="errormsg"
         class="errormsg mt-2"

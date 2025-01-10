@@ -40,8 +40,7 @@
             id="unique"
             v-model="unique"
             type="checkbox"
-            name="unique"
-            class="form-check-input mb-2 mr-2"
+            class="form-check-input mb-2 me-2"
           >
           <label
             for="unique"
@@ -69,7 +68,6 @@
           <select
             id="listofresults"
             v-model="selectedsolution"
-            name="listofresults"
             class="form-control lg-size"
             @change="printSolution"
           >

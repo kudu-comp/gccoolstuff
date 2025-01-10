@@ -49,21 +49,21 @@
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('lines.calc1') }}</label>
-        <v-show-on-map id="line1" class="btn mb-2 mr-2" @show="doLine1()" />
+        <v-show-on-map id="line1" class="btn mb-2 me-2" @show="doLine1()" />
       </div>
       <div>
         <label
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('lines.calc2') }}</label>
-        <v-show-on-map id="line2" class="btn mb-2 mr-2" @show="doLine2()" />
+        <v-show-on-map id="line2" class="btn mb-2 me-2" @show="doLine2()" />
       </div>
       <div>
         <label
           for="line1"
           class="col-10 col-md-8 col-lg-6"
         >{{ $t('lines.calc3') }}</label>
-        <v-show-on-map id="line3" class="btn mb-2 mr-2" @show="doLine3()" />
+        <v-show-on-map id="line3" class="btn mb-2 me-2" @show="doLine3()" />
       </div>
       <div
         v-if="result"

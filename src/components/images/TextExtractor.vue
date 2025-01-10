@@ -22,7 +22,6 @@
         >{{ $t('textextractor.length') }}</label>
         <input
           id="length"
-          ref="length"
           v-model="length"
           type="number"
           class="form-control md-size mb-2"
@@ -35,7 +34,6 @@
         >{{ $t('textextractor.max') }}</label>
         <input
           id="max"
-          ref="max"
           v-model="max"
           type="number"
           class="form-control md-size mb-2"
@@ -48,13 +46,12 @@
         >{{ $t('textextractor.start') }}</label>
         <input
           id="start"
-          ref="start"
           v-model="start"
           type="number"
           class="form-control md-size mb-2"
         >
       </div>
-      <button id="go" type="button" :disabled="!loaded" class="btn mr-2 mb-2" @click="scanFile()">
+      <button id="go" type="button" :disabled="!loaded" class="btn me-2 mb-2" @click="scanFile()">
         <i class="fas fa-search"></i> {{ $t('buttons.search') }}        
       </button>
       <p

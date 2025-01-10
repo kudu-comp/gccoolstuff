@@ -234,6 +234,7 @@
       <div class="mb-2">
         <textarea
           id="message"
+          ref="message"
           v-model="message"
           class="form-control"
           :placeholder="$t('labels.message')"
@@ -312,6 +313,7 @@ export default {
       this.selcp = 0;
     }
     this.selCipher();
+    this.$refs.message.focus();
   },
 
   methods: {

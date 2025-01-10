@@ -12,6 +12,7 @@
         <input
           id="file"
           type="file"
+          ref="file"
           class="form-control mb-2"
           @change="selectFile"
         >
@@ -33,7 +34,7 @@
           />
         </div>
         <div class="col-3">
-          <button id="restore" class="btn me-2 mb-2" @click="restore">
+          <button id="restore" class="btn me-2 mb-2" @click="restore" :title="$t('buttons.original')">
             {{ $t('buttons.original') }}
           </button>
           <v-download 
@@ -47,39 +48,38 @@
               <p>{{ $t('imagetransform.shiftinfo') }}</p>
               <div>
                 <label
-                  class="form-label mr-2"
+                  class="form-label me-2"
                   for="shiftr"
                 >{{ $t('imagetransform.shiftr') }}: {{ shiftr }}</label>
                 <vue-slider
                   id="shiftr"
                   v-model="shiftr"
                   v-bind="controptions2"
-                  class="ml-2 mr-2 mb-2"
+                  class="ms-2 me-2 mb-2"
                 />
                 <input
                   type="button"
-                  name="shiftrow"
                   :value="$t('buttons.apply')"
-                  class="btn mr-2 mb-2"
+                  class="btn me-2 mb-2"
                   @click="shiftRows"
                 >
               </div>
               <div>
                 <label
-                  class="form-label mr-2"
+                  class="form-label me-2"
                   for="shiftr"
                 >{{ $t('imagetransform.shiftc') }}: {{ shiftc }}</label>
                 <vue-slider
                   id="shiftc"
                   v-model="shiftc"
                   v-bind="controptions2"
-                  class="ml-2 mr-2 mb-2"
+                  class="ms-2 me-2 mb-2"
                 />
                 <input
                   id="shiftcol"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn mr-2 mb-2"
+                  class="btn me-2 mb-2"
                   @click="shiftCols"
                 >
               </div>
@@ -93,39 +93,39 @@
               <p>{{ $t('imagetransform.flipinfo') }}</p>
               <div>
                 <label
-                  class="form-label mr-2"
+                  class="form-label me-2"
                   for="flipr"
                 >{{ $t('imagetransform.flipr') }}: {{ flipr }}</label>
                 <vue-slider
                   id="flipr"
                   v-model="flipr"
                   v-bind="controptions"
-                  class="ml-2 mr-2 mb-2"
+                  class="ms-2 me-2 mb-2"
                 />
                 <input
                   id="fliprow"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn mr-2 mb-2"
+                  class="btn me-2 mb-2"
                   @click="flipRows"
                 >
               </div>
               <div>
                 <label
-                  class="form-label mr-2"
+                  class="form-label me-2"
                   for="halfflipc"
                 >{{ $t('imagetransform.flipc') }}: {{ flipc }}</label>
                 <vue-slider
                   id="flipc"
                   v-model="flipc"
                   v-bind="controptions"
-                  class="ml-2 mr-2 mb-2"
+                  class="ms-2 me-2 mb-2"
                 />
                 <input
                   id="flipcol"
                   type="button"
                   :value="$t('buttons.apply')"
-                  class="btn mr-2 mb-2"
+                  class="btn me-2 mb-2"
                   @click="flipCols"
                 >
               </div>
@@ -147,7 +147,7 @@
                 id="flipv"
                 type="button"
                 :value="$t('imagetransform.flipv')"
-                class="btn mr-2 mb-2 sm-size"
+                class="btn me-2 mb-2 sm-size"
                 @click="flipV"
               >
             </div>
@@ -209,6 +209,7 @@ export default {
 
     this.canvas.width = this.canvas.getBoundingClientRect().width
     this.canvas.height = this.canvas.width;
+    this.$refs.file.focus();
 
   },
 

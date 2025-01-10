@@ -16,6 +16,7 @@
         <select
           id="sudokutype"
           v-model="sudokutype"
+          ref="sudokutype"
           class="form-control sm-size mb-2"
           @change="changeType"
         >
@@ -122,6 +123,7 @@ export default {
 
   mounted: function() {
     this.generateTable();
+    this.$refs.sudokutype.focus();
   },
 
   methods: {

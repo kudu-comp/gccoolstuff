@@ -52,9 +52,6 @@
     <option value="Geohash">
       Geohash
     </option>
-    <option value="W3W">
-      What3words
-    </option>
     <option value="MapcodeL">
       Mapcode local
     </option>

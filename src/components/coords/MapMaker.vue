@@ -20,69 +20,62 @@
             class="md-size mb-2"
           />
         </div>
-        <v-show-on-map id="go" class="btn me-2" @Show="makeMap()" />
+        <v-show-on-map id="go" class="btn mb-2 me-2" @Show="makeMap()" />
+        <div class="form-check custom-checkbox mb-2 me-2">
+          <input
+            id="showmarkers"
+            v-model="showmarkers"
+            type="checkbox"
+            class="form-check-input"
+          >
+          <label
+            for="showmarkers"
+            class="form-check-label"
+          >{{ $t('mapmaker.showmark') }}</label>
+        </div>
+        <div class="form-check mb-2 me-2">
+          <input
+            id="showlabels"
+            v-model="showlabels"
+            type="checkbox"
+            class="form-check-input"
+          >
+          <label
+            for="showlabels"
+            class="form-check-label"
+          >{{ $t('mapmaker.showlabel') }}</label>
+        </div>
+        <div class="form-check mb-2 me-2">
+          <input
+            id="drawcircles"
+            v-model="drawcircles"
+            type="checkbox"
+            class="form-check-input"
+          >
+          <label
+            for="drawcircles"
+            class="form-check-label"
+          >{{ $t('mapmaker.drawcircle') }}</label>
+        </div>
         <div class="mb-2">
-          <div class="form-check custom-checkbox me-2">
-            <input
-              id="showmarkers"
-              v-model="showmarkers"
-              type="checkbox"
-              name="showmarkers"
-              class="form-check-input"
-            >
-            <label
-              for="showmarkers"
-              class="form-check-label"
-            >{{ $t('mapmaker.showmark') }}</label>
-          </div>
-          <div class="form-check  me-2">
-            <input
-              id="showlabels"
-              v-model="showlabels"
-              type="checkbox"
-              name="showlabels"
-              class="form-check-input"
-            >
-            <label
-              for="showlabels"
-              class="form-check-label"
-            >{{ $t('mapmaker.showlabel') }}</label>
-          </div>
-          <div class="form-check me-2">
-            <input
-              id="drawcircles"
-              v-model="drawcircles"
-              type="checkbox"
-              name="drawcircles"
-              class="form-check-input"
-            >
-            <label
-              for="drawcircles"
-              class="form-check-label"
-            >{{ $t('mapmaker.drawcircle') }}</label>
-          </div>
-          <div>
-            <v-distance
-              v-model:dist="dist"
-              v-model:unit="unit"
-            >
-              <template #label>
-                <label
-                  class="form-label"
-                  for="distance"
-                >{{ $t('labels.radius') }}</label>
-              </template>
-            </v-distance>
-          </div>
+          <v-distance
+            v-model:dist="dist"
+            v-model:unit="unit"
+          >
+            <template #label>
+              <label
+                class="form-label"
+                for="distance"
+              >{{ $t('labels.radius') }}</label>
+            </template>
+          </v-distance>
         </div>
       </div>
       <div class="row mb-2">
         <div class="col-6">
           <textarea
             id="coordfrom"
-            ref="x"
             v-model="coordfrom"
-            name="coordfrom"
             class="form-control mt-2"
             :placeholder="$t('mapmaker.phcoord')"
             rows="5"
@@ -91,9 +84,7 @@
         <div class="col-6">
           <textarea
             id="labels"
-            ref="x"
             v-model="labels"
-            name="labels"
             class="form-control mt-2"
             :placeholder="$t('mapmaker.phlabel')"
             rows="5"

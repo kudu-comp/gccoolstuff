@@ -1,7 +1,7 @@
 <template>
   <div class="va-item">
     <div class="va-item-header">
-      <button v-show="!hidebutton" id="toggle" class="btn mr-2"  @click="$emit('toggle')" >
+      <button v-show="!hidebutton" id="toggle" class="btn me-2"  @click="$emit('toggle')" >
         <span v-if="showitem">
           <i class="fa-solid fa-caret-down"></i>
         </span>

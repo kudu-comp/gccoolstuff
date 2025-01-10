@@ -13,15 +13,16 @@
       />
       <!-- Form fields -->
       <div class="row">
-        <label for="size" class="form-label lg-size mb-2"
+        <label for="size" class="form-label sm-size mb-2"
           >{{$t('equations.numvar')}}</label
         >
         <input
           id="size"
+          ref="size"
           type="number"
           max="26"
           v-model="size"
-          class="form-control sm-size"
+          class="form-control sm-size mb-2"
           min="1"
           @change="changeSize()"
         />
@@ -36,7 +37,6 @@
             id="format1"
             v-model="format"
             type="radio"
-            name="format"
             value="1"
             class="form-check-input mb-2"
           />
@@ -47,7 +47,6 @@
             id="format2"
             v-model="format"
             type="radio"
-            name="format"
             value="2"
             class="form-check-input mb-2"
           />
@@ -99,6 +98,7 @@ export default {
   // Generate the table when mounted
   mounted: function () {
     this.generateTable();
+    this.$refs.size.focus();
   },
 
   methods: {

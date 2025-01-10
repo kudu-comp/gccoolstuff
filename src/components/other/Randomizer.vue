@@ -12,7 +12,7 @@
         <label for="sel" class="form-label md-size mb2" style="width: 20rem">
           {{$t('randomizer.sel')}}
         </label>
-        <select v-model="sel" id="sel" class="form-control sm-size mb2" style="width: 25rem">
+        <select v-model="sel" id="sel" ref="sel" class="form-control sm-size mb2" style="width: 25rem">
           <option value="0">{{$t('randomizer.selbin')}}</option>
           <option value="1">{{$t('randomizer.selrng')}}</option>
           <option value="2">{{$t('randomizer.seltxt')}}</option>
@@ -119,7 +119,11 @@ export default {
       errormsg: "",
     };
   },
-
+  
+  mounted: function() {
+    this.$refs.sel.focus();
+  },
+  
   methods: {
 
     generate: function () {

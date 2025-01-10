@@ -9,24 +9,22 @@
       <div class="infoblock">
         {{ $t('dialoghowto.info') }}
       </div>
-      <div class="flex-row mb-2">
-        <input
-          id="collapseall"
-          type="button"
-          name="collapseall"
-          value="Collapse All"
-          class="btn me-2"
-          @click="collapseAll"
-        >
-        <input
-          id="expandall"
-          type="button"
-          name="expandall"
-          value="Expand All"
-          class="btn mr-2"
-          @click="expandAll"
-        >
-      </div>
+      <button
+        id="collapseall"
+        class="md-size btn mb-2 me-2"
+        :title="$t('buttons.collall')"
+        @click="collapseAll"
+      >
+        {{ $t('buttons.collall') }}
+      </button>
+      <button
+        id="expandall"
+        class="md-size btn mb-2 me-2"
+        :title="$t('buttons.expall')"
+        @click="expandAll"
+      >
+        {{ $t('buttons.expall') }}
+      </button>
       <va-item
         :showitem="show[0]"
         @toggle="toggleItem(0)"
@@ -373,7 +371,7 @@
             </li>
             <li>
               <b>ROT5</b>. Actually a cipher with all the digits shifted 5 positions. Use <router-link
-                :to="{ name: 'Cipher',
+                :to="{ name: 'Ciphers',
                        params: { cphr: 'rot5' }}"
               >
                 ROT5
@@ -381,7 +379,7 @@
             </li>
             <li>
               <b>Polybius</b>. A cipher that encodes digrams in to numbers between 11 and 55. use <router-link
-                :to="{ name: 'Cipher',
+                :to="{ name: 'Ciphers',
                        params: { cphr: 'polybius' }}"
               >
                 Polybius
@@ -410,13 +408,13 @@
           <p>This can get quite complicated but there are a few easy ones you should try first</p>
           <ul>
             <li>
-              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Cipher', params: { cphr: 'rot13'}}">
+              <b>ROT13</b> - the alphabet has shifted 13 postions. Use <router-link :to="{ name: 'Ciphers', params: { cphr: 'rot13'}}">
                 ROT13
               </router-link>
               to solve the puzzle. This is also the one geocaching.com uses to show/hide the hints.
             </li>
             <li>
-              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Cipher', params: { cphr: 'caesar'}}">
+              <b>Caesar</b> - the alphabet has shifted a few positions. Use <router-link :to="{ name: 'Ciphers', params: { cphr: 'caesar'}}">
                 Caesar
               </router-link>
               to solve the puzzle.
@@ -518,7 +516,7 @@
             </li>
             <li>
               <b>Goldbug cipher</b> - uses 52-†81346,709*‡.$();?¶]¢:[ and can be solved <router-link
-                :to="{ name: 'Cipher',
+                :to="{ name: 'Ciphers',
                        params: { cphr: 'goldbug'}}"
               >
                 here
@@ -681,7 +679,7 @@
             <li>
               <b>Monoalphabetic substitution</b> replaces the letters (or anything else) in the original message with one or more other letters (or
               anything else). Monoalphabetic means only one alphabet is used for all replacements. This make the cipher easy to crack using
-              frequency analysis. A well known example is <router-link :to="{ name: 'Cipher', params: { cphr: 'rot13'}}">
+              frequency analysis. A well known example is <router-link :to="{ name: 'Ciphers', params: { cphr: 'rot13'}}">
                 ROT13
               </router-link>
             </li>
@@ -689,23 +687,23 @@
               <b>Polyalphabetic subsitution</b> uses different alphabets. This makes the cipher more difficult to break, as one letter has more
               than one on replacement. The more alphabets are being used, the more difficult it is to break the code. But if the number is too low
               and the text long enough, frequencey analysis can still reveal the message. A well known example is the
-              <router-link :to="{ name: 'Cipher', params: { cphr: 'vigenere'}}">
+              <router-link :to="{ name: 'Ciphers', params: { cphr: 'vigenere'}}">
                 Vigenere
               </router-link> cipher.
             </li>
             <li>
               <b>Transposition</b> changes the order of the letters in the message. A good example is the
-              <router-link :to="{ name: 'Cipher', params : { cphr: 'railfence'}}">
+              <router-link :to="{ name: 'Ciphers', params : { cphr: 'railfence'}}">
                 Railfence
               </router-link> cipher.
             </li>
           </ul>
           <p>
             Most substitutions replace one letter with one other, but some ciphers replace each letter with two (or sometimes more) letters. The
-            <router-link :to="{ name: 'Cipher', params: { cphr: 'polybius'}}">
+            <router-link :to="{ name: 'Ciphers', params: { cphr: 'polybius'}}">
               Polybius
             </router-link> cipher replaces each letter with two numbers
-            using the so-called Polybius square. The funny <router-link :to="{ name: 'Cipher', params: { cphr: 'kennycode'}}">
+            using the so-called Polybius square. The funny <router-link :to="{ name: 'Ciphers', params: { cphr: 'kennycode'}}">
               Kenny code
             </router-link>
             replaces each letter with three (m,p and f combinations).
@@ -717,7 +715,7 @@
           <p>
             A special technique is <b>fractionation</b>. The message first uses substitution where each letter is replaced by two or more.
             The result is transposed, so each substituted code is scattered (or fractionated) through the message. The result is then decoded
-            back to letters. A good example is the <router-link :to="{ name: 'Cipher', params: { cphr: 'bifid'}}">
+            back to letters. A good example is the <router-link :to="{ name: 'Ciphers', params: { cphr: 'bifid'}}">
               Bifid
             </router-link>
             cipher, which uses a Polybius square and a columnar transposition.

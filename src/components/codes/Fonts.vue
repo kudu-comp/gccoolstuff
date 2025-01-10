@@ -13,7 +13,6 @@
           id="message"
           ref="message"
           v-model="message"
-          name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
           rows="5"
@@ -21,7 +20,7 @@
       </div>
       <div class="row">
         <label
-          class="form-label sm-size mb-2 mr-2"
+          class="form-label sm-size mb-2 me-2"
           for="ift"
         >{{ $t('fonts.selfont') }}</label>
         <select
@@ -62,7 +61,7 @@
           </option>
         </select>
         <label
-          class="form-label sm-size mb-2 mr-2"
+          class="form-label sm-size mb-2 me-2"
           for="ofc"
         >{{ $t('fonts.selcolor') }}</label>
         <input id="ofc" v-model="styleObject.color" type="color" class="mb-2 sm-size me-2"/>
@@ -103,7 +102,6 @@
           readonly
           id="message2"
           v-model="message"
-          name="message2"
           spellcheck="false"
           class="form-control"
           :style="styleObject"

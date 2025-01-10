@@ -8,61 +8,52 @@
         class="infoblock"
         v-html="$t('wordvalue.long')"
       />
-      <div class="row">
-        <v-alphabets-ext
-          id="listofalpha"
-          ref="listofalpha"
-          v-model:alphabet="selectedalphabet"
+      <v-alphabets-ext
+        id="listofalpha"
+        v-model:alphabet="selectedalphabet"
+        @change="wordValue"
+      />
+      <div class="form-check mb-2">
+        <input
+          id="reverse"
+          v-model="reverse"
+          type="checkbox"
+          class="form-check-input"
           @change="wordValue"
-        />
+        >
+        <label
+          for="reverse"
+          class="form-check-label"
+        >{{ $t('wordvalue.reverse') }}</label>
       </div>
-      <div class="form-inline">
-        <div class="form-check">
-          <input
-            id="reverse"
-            v-model="reverse"
-            type="checkbox"
-            name="reverse"
-            class="form-check-input"
-            @change="wordValue"
-          >
-          <label
-            for="reverse"
-            class="form-check-label"
-          >{{ $t('wordvalue.reverse') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="startatzero"
-            v-model="startatzero"
-            type="checkbox"
-            name="startatzero"
-            class="form-check-input"
-            @change="wordValue"
-          >
-          <label
-            for="startatzero"
-            class="form-check-label"
-          >{{ $t('wordvalue.startzero') }}</label>
-        </div>
+      <div class="form-check mb-2">
+        <input
+          id="startatzero"
+          v-model="startatzero"
+          type="checkbox"
+          class="form-check-input"
+          @change="wordValue"
+        >
+        <label
+          for="startatzero"
+          class="form-check-label"
+        >{{ $t('wordvalue.startzero') }}</label>
       </div>
-      <v-calculate @calculate="wordValue" class="me-2"/>
-      <input
+      <v-calculate @calculate="wordValue" class="mb-2 me-2"/>
+      <button
         id="replace"
-        type="button"
-        name="replace"
-        :value="$t('wordvalue.replacediac')"
         class="btn mb-2 me-2"
         @click="removeDiacr"
       >
-      <input
+        {{ $t('wordvalue.replacediac') }}
+      </button>
+      <button
         id="remove"
-        type="button"
-        name="remove"
-        :value="$t('wordvalue.showhide')"
         class="btn mb-2 me-2"
         @click="showTable"
       >
+        {{ $t('wordvalue.showhide') }}
+      </button>
       <textarea
         id="message"
         ref="message"
@@ -149,7 +140,7 @@ export default {
   },
 
   mounted: function() {
-    // this.$refs.listofalpha.focus();
+    this.$refs.message.focus();
   },
 
   methods: {
@@ -157,6 +148,7 @@ export default {
     // Remove diacritics
     removeDiacr: function() {
       this.message = textHelper.removeDiacritics(this.message);
+      this.wordValue();
     },
 
     // Load the tablie with row 0 the letters and row 1 the values

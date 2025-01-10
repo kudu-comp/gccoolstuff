@@ -38,6 +38,7 @@
               <textarea
                 id="message"
                 v-model="message"
+                ref="message"
                 class="form-control"
                 :placeholder="$t('labels.message')"
                 rows="5"
@@ -56,7 +57,6 @@
                 >{{ $t('exifscanner.height') }}</label>
                 <input
                   id="imgheight"
-                  ref="imgheight"
                   v-model="imgHeight"
                   type="number"
                   class="form-control mb-2 sm-size"
@@ -69,7 +69,6 @@
                 >{{ $t('exifscanner.width') }}</label>
                 <input
                   id="imgwidth"
-                  ref="imgwidth"
                   v-model="imgWidth"
                   type="number"
                   class="form-control mb-2 sm-size"
@@ -287,6 +286,7 @@ export default {
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = this.canvas.getBoundingClientRect().width
     this.canvas.height = this.canvas.width;
+    this.$refs.message.focus();
 
   },
 

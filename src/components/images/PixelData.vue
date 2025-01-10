@@ -11,6 +11,7 @@
       <input
         id="file"
         type="file"
+        ref="file"
         class="form-control mb-2"
         @change="selectFile"
       >
@@ -125,6 +126,7 @@ export default {
 
     // Resize canvas
     this.resizeCanvas();
+    this.$refs.file.focus();
 
   },
 

@@ -14,15 +14,30 @@
       <div class="row">
         <v-search
           id="searchstr"
-          ref="searchstr"
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />
-        <button id="btnsearch" class="sm-size btn mb-2 ms-2 me-2" @click="goSearch" >
+        <button id="btnsearch" class="sm-size btn mb-2 ms-2 me-2" @click="goSearch" :title="$t('buttons.search')">
           <i class="fa-solid fa-search"></i>          
         </button>
-        <button id="btnsearch" class="sm-size btn mb-2 me-2" @click="showAll" >
-          {{$t('alltools.showall')}}          
+        <button id="bnreset" class="sm-size btn mb-2 me-2" :title="$t('buttons.reset')" @click="showAll" >
+          <i class="fa-solid fa-refresh"></i>          
+        </button>
+        <button
+          id="collapseall"
+          class="md-size btn mb-2 me-2"
+          :title="$t('buttons.collall')"
+          @click="collapseAll"
+        >
+          {{ $t('buttons.collall') }}
+        </button>
+        <button
+          id="expandall"
+          class="md-size btn mb-2 me-2"
+          :title="$t('buttons.expall')"
+          @click="expandAll"
+        >
+          {{ $t('buttons.expall') }}
         </button>
       </div>
       <!-- Error message -->
@@ -250,6 +265,34 @@ export default {
 
   methods: {
 
+    expandAll: function() {
+      for (let l1 of this.alltools) {
+        l1.expand = true;
+        if (l1.l2) {
+          for (let l2 of l1.l2) {
+            l1.expand = true;
+            if (l2.l3) {
+              l2.expand = true;
+            }
+          }
+        }
+      }
+    },
+
+    collapseAll: function() {
+      for (let l1 of this.alltools) {
+        l1.expand = false;
+        if (l1.l2) {
+          for (let l2 of l1.l2) {
+            l1.expand = false;
+            if (l2.l3) {
+              l2.expand = false;
+            }
+          }
+        }
+      }
+    },
+
     showAll: function () {
       // Build tool list
       for (let l1 of this.alltools) {
@@ -267,6 +310,7 @@ export default {
           }
         }
       }
+      this.collapseAll();
     },
 
     goSearch: function () {

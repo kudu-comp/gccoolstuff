@@ -79,7 +79,9 @@
     "download": "Download",
     "try" : "Try all",
     "prev" : "Previous",
-    "next" : "Next"
+    "next" : "Next",
+    "expall": "Expand all",
+    "collall": "Collapse all"
   },
 
   "colors": {
@@ -127,18 +129,18 @@
     "intro": "A collection of tools to convert and calculate coordinates. All tools support a wide range of coordinate systems and notations. You can make projections, calculate lines, triangles and circles. You can make maps or find incomplete coordinates. There is a special tool to help you find the right words for what3words coordinates. You can also solve Reverse Wherigo caches."  },
 
   "codes": {
-    "intro": "Ciphers use keys or transposition to encrypt a message. There are 60 different ciphers available. Codes are simple ways to translate text or numbers. Codes not require a key to be solved, but it can be difficult to find the right code. You can use the search tool or use special fonts to find the code. Resistor, segment and decabit are codes used for special purposes."  },
+    "intro": "Ciphers use keys or transposition to encrypt a message. There are 60 different ciphers available. Codes are simple ways to translate text or numbers. Codes not require a key to be solved, but it can be difficult to find the right code. You can use the search tool or use special fonts to find the code. Rotation ciphers will try alle rotations. Smart replace helps in solving substitution ciphers. Resistor, segment and decabit are codes used for special purposes. Frequency analysis is helpful in finding patterns."  },
 
   "texttools": {
-    "intro": "Tools for text. Calculates word values. Converts ASCII or other codes. Analyze a text. Smart replace helps in solving ciphers. Convert text to numbers and back. Switch between keyboards such as Dvorak. A tool to hussle words."
+    "intro": "Tools for text. A tool to try all answers and see if a coordinate can be calculated. Calculate word value and square root. Converts ASCII or other codes. Analyze a text. Convert text to numbers and back. Switch between keyboards such as Dvorak. A tool to hussle words. Calculate the numerological value of a word. Reorganize text horizontally and vertically."
   },
 
   "mathtools": {
-    "intro": "Mathematical and arithmetic tools. Decimals of constants like pi. Calculator for very large binary, octal, decimal and hexadecimal numbers. Some well known series like Fibonacci and Hailstone. Primes, GCD and LCM and prime factors. A solver for cryptarithms."
+    "intro": "Mathematical and arithmetic tools. Decimals of constants like pi. Calculator for very large binary, octal, decimal and hexadecimal numbers. Some well known series like Fibonacci and Hailstone. Primes, GCD and LCM and prime factors. A solver for cryptarithms and a solver for linear equations."
   },
 
   "comptools" : {
-    "intro": "A collection of tools used in programming and computers. There are severals way of coding numbers, characters and binary data. Encryptions and hashes are also supported. Several so called esoterioc programming languages (esolangs) can be executed as well."
+    "intro": "A collection of tools used in programming and computers. There are severals way of coding numbers, characters and binary data. Encryptions and hashes are also supported. Several so called esoteric programming languages (esolangs), such as Brainfuck and Cow, can be executed as well. Show the truth table of a logical expression."
   },
 
   "imagetools": {
@@ -1180,7 +1182,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words translates a coordinate in 3 single words. It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
+    "long": "<p>What3words translates a coordinate in 3 single words.<b>As of November 2024 this is a paid service and no longer supported by gctools.nl</b></p><p>It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
     "languages": "Available languages",
     "convertto": "Convert to w3w",
     "convertfrom": "Convert to ...",

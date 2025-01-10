@@ -11,7 +11,6 @@
       <div class="row">
         <v-search
           id="searchstr"
-          ref="searchstr"
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />

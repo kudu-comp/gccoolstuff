@@ -1,5 +1,5 @@
 <template>
-  <button id="download" class="btn mb-2 me-2" @click="downloadCanvas()">
+  <button id="download" class="btn mb-2 me-2" :title="$t('buttons.download')" @click="downloadCanvas()">
     <i class="fa-solid fa-download"></i> {{$t('buttons.download')}}
   </button>
 </template>

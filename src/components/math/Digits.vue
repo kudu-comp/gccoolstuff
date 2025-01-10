@@ -17,7 +17,6 @@
             id="number1"
             v-model="number"
             type="radio"
-            name="number"
             value="pi"
             class="form-check-input"
           >
@@ -31,7 +30,6 @@
             id="number2"
             v-model="number"
             type="radio"
-            name="number"
             value="e"
             class="form-check-input"
           >
@@ -45,7 +43,6 @@
             id="number3"
             v-model="number"
             type="radio"
-            name="number"
             value="tau"
             class="form-check-input"
           >
@@ -59,7 +56,6 @@
             id="number4"
             v-model="number"
             type="radio"
-            name="number"
             value="phi"
             class="form-check-input"
           >
@@ -73,7 +69,6 @@
             id="number5"
             v-model="number"
             type="radio"
-            name="number"
             value="euler"
             class="form-check-input"
           >
@@ -87,7 +82,6 @@
             id="number6"
             v-model="number"
             type="radio"
-            name="number"
             value="sqrt2"
             class="form-check-input"
           >
@@ -101,7 +95,6 @@
             id="number7"
             v-model="number"
             type="radio"
-            name="number"
             value="sqrt3"
             class="form-check-input"
           >
@@ -115,7 +108,6 @@
             id="number8"
             v-model="number"
             type="radio"
-            name="number"
             value="zeta3"
             class="form-check-input"
           >
@@ -129,7 +121,6 @@
             id="number9"
             v-model="number"
             type="radio"
-            name="number"
             value="gauss"
             class="form-check-input"
           >
@@ -143,7 +134,6 @@
             id="number10"
             v-model="number"
             type="radio"
-            name="number"
             value="lemni"
             class="form-check-input"
           >
@@ -157,7 +147,6 @@
             id="number11"
             v-model="number"
             type="radio"
-            name="number"
             value="cat"
             class="form-check-input"
           >
@@ -171,7 +160,6 @@
             id="number12"
             v-model="number"
             type="radio"
-            name="number12"
             value="champ"
             class="form-check-input"
           >

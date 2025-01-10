@@ -40,7 +40,7 @@
           {{ $t('labels.radius') }}
         </template>
       </v-distance>
-      <v-show-on-map id="go" class="btn mb-2 mr-2" @show="getPoints()" />
+      <v-show-on-map id="go" class="btn mb-2 me-2" @show="getPoints()" />
       <div
         v-show="errormsg"
         class="errormsg"

@@ -1,5 +1,5 @@
 <template>
-  <!-- <label for="listofalpha" class="form-label mr-2">Keyboards</label> -->
+  <!-- <label for="listofalpha" class="form-label me-2">Keyboards</label> -->
   <select
     class="form-select lg-size"
     :value="keyboard"

@@ -15,6 +15,8 @@
         >{{ $t('unitconvertor.selcat') }}</label>
         <select
           v-model="cat"
+          id="cats"
+          ref="cats"
           class="form-select md-size mb-2"
           @change="changeCat"
         >
@@ -147,6 +149,10 @@ export default {
 
   created: function() {
     this.units = definedUnits;
+  },
+
+  mounted: function() {
+    this.$refs.cats.focus();
   },
 
   components: {

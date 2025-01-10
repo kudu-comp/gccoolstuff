@@ -18,7 +18,6 @@
           ref="pos"
           v-model="pos"
           type="number"
-          name="pos"
           min="1"
           max="500"
           class="form-control md-size mb-2 me-2"
@@ -27,9 +26,8 @@
         <input
           id="getfib"
           type="button"
-          name="getfib"
           :value="$t('buttons.get')"
-          class="btn md-size mb-2"
+          class="btn sm-size mb-2"
           @click="getFib"
         >
       </div>
@@ -40,19 +38,16 @@
         >{{ $t('fibonacci.check') }}</label>
         <input
           id="check"
-          ref="check"
           v-model="check"
           type="text"
-          name="check"
           class="form-control md-size mb-2 me-2"
           @keyup.enter="checkFib"
         >
         <input
           id="checkfib"
           type="button"
-          name="checkfib"
           :value="$t('buttons.check')"
-          class="btn md-size mb-2"
+          class="btn sm-size mb-2"
           @click="checkFib"
         >
       </div>

@@ -149,6 +149,7 @@
         <textarea
           id="message"
           v-model="message"
+          ref="message"
           class="form-control"
           :placeholder="$t('labels.message')"
           rows="5"
@@ -198,6 +199,7 @@ export default {
     this.selfromtable = "";
     this.totables = bt.base64encodings;
     this.seltotable = this.totables[0].value;
+    this.$refs.message.focus();
   },
 
   methods: {

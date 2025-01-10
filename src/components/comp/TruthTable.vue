@@ -17,6 +17,7 @@
         <label for="expr" class="form-label mb-2 md-size">{{$t('truthtable.expr')}}</label>
         <input
           id="expr"
+          ref="expr"
           class="form-control mb-2 lg-size"
           type="text"
           v-model="expr"
@@ -60,6 +61,10 @@ export default {
       chk1: false,
       msg: ""
     };
+  },
+
+  mounted: function() {
+    this.$refs.expr.focus();
   },
 
   methods: {

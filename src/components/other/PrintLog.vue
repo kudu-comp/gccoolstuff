@@ -19,6 +19,7 @@
             <label for="hdr1" class="form-label mb-2 sm-size">{{ $t('printlog.header')}} 1</label>
             <input
               id="hdr1"
+              ref="hdr1"
               class="form-control mb-2 md-size"
               type="text"
               length="20"
@@ -204,6 +205,7 @@ export default {
     this.canvas.height = this.height;
     // call redraw
     this.redraw();
+    this.$refs.hdr1.focus();
 
   },
 

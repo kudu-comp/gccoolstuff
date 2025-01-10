@@ -9,7 +9,6 @@
         v-html="$t('texttonum.long')"
       />
       <div
-        ref="listofalpha"
         class="form-inline mb-2"
       >
         <v-alphabets v-model:alphabet="selectedalphabet" />
@@ -20,7 +19,6 @@
             id="reverse"
             v-model="reverse"
             type="checkbox"
-            name="reverse"
             class="form-check-input mb-2"
           >
           <label
@@ -33,7 +31,6 @@
             id="startatzero"
             v-model="startatzero"
             type="checkbox"
-            name="startatzero"
             class="form-check-input mb-2"
           >
           <label
@@ -46,7 +43,6 @@
             id="leadzero"
             v-model="leadzero"
             type="checkbox"
-            name="leadzero"
             class="form-check-input mb-2"
           >
           <label
@@ -56,27 +52,27 @@
         </div>
       </div>
       <div class="form-row mb-2">
-        <input
+        <button
           id="texttonumbers"
-          type="button"
-          :value="$t('texttonum.btnttn')"
           class="btn mb-2 me-2"
           @click="textToNumbers"
         >
-        <input
+          {{ $t('texttonum.btnttn') }}
+        </button>
+        <button
           id="numberstotext"
-          type="button"
-          :value="$t('texttonum.btnntt')"
           class="btn mb-2 me-2"
           @click="numbersToText"
         >
-        <input
+          {{ $t('texttonum.btnntt') }}
+        </button>
+        <button
           id="remove"
-          type="button"
-          :value="$t('wordvalue.replacediac')"
           class="btn mb-2"
           @click="removeDiacr"
         >
+          {{ $t('wordvalue.replacediac') }}
+        </button>
         <textarea
           id="message"
           ref="message"

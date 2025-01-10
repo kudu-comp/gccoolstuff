@@ -25,14 +25,14 @@
           id="debug"
           v-model="debug"
           type="checkbox"
-          class="form-check-input mr-2 mb-2"
+          class="form-check-input me-2 mb-2"
         >
         <label
           for="debug"
           class="form-check-label mb-2"
         >{{ $t('brainfuck.debug') }}</label>
       </div>
-      <button id="run" class="btn mb-2 mr-2" @click="runCow">
+      <button id="run" class="btn mb-2 me-2" @click="runCow">
         {{ $t('brainfuck.run') }}
       </button>
       <div class="form-row mb-2">

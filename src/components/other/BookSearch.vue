@@ -21,15 +21,14 @@
         />
       </div>
       <div>
-        <span
-          class="form-label mb-2"
-        >{{ $t('booksearch.sel') }}</span>
+        <div class="form-label mb-2">
+          {{ $t('booksearch.sel') }}
+        </div>
         <div class="form-check">
           <input
             id="number1"
             v-model="sel"
             type="radio"
-            name="number"
             value="1"
             class="form-check-input mb-2"
           >
@@ -43,7 +42,6 @@
             id="number2"
             v-model="sel"
             type="radio"
-            name="number"
             value="2"
             class="form-check-input mb-2"
           >

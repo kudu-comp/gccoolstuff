@@ -289,7 +289,11 @@ export default defineComponent ({
 
     };
   },
-
+  
+  mounted: function() {
+    this.$refs.message.focus();
+  },
+  
   methods: {
 
     printResults: function () {

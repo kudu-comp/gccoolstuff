@@ -37,6 +37,7 @@
         >{{ $t('labels.number') }}</label>
         <input
           id="input"
+          ref="input"
           v-model="txt"
           type="text"
           class="form-control md-size mb-2"
@@ -78,6 +79,10 @@ export default {
 
   components: {
     VCalculate
+  },
+
+  mounted: function() {
+    this.$refs.input.focus();
   },
 
   methods: {

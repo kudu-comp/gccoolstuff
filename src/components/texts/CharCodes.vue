@@ -35,7 +35,6 @@
       <input
         id="convert"
         type="button"
-        name="convert"
         :value="$t('buttons.convert')"
         class="btn col mb-2 me-2"
         @click="translateInput"
@@ -45,7 +44,6 @@
           id="message"
           ref="message"
           v-model="message"
-          name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
           rows="5"

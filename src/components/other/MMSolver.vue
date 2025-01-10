@@ -68,7 +68,6 @@
           id="unique"
           v-model="unique"
           type="checkbox"
-          name="unique"
           class="form-check-input"
         >
         <label

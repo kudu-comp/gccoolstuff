@@ -15,10 +15,8 @@
         >{{ $t('substcipher.orig') }}</label>
         <input
           id="from"
-          ref="from"
           v-model="from"
           type="text"
-          name="from"
           size="50"
           class="form-control lg-size mb-2"
           @keyup="replaceInput"
@@ -31,10 +29,8 @@
         >{{ $t('substcipher.repl') }}</label>
         <input
           id="to"
-          ref="to"
           v-model="to"
           type="text"
-          name="to"
           size="50"
           class="form-control lg-size mb-2"
           @keyup="replaceInput"
@@ -47,9 +43,7 @@
         >{{ $t('substcipher.highlight') }}</label>
         <select
           id="highlightflag"
-          ref="highlightflag"
           v-model="highlightflag"
-          name="highlightflag"
           class="form-select lg-size mb-2"
           @change="replaceInput"
         >
@@ -77,9 +71,7 @@
         >{{ $t('language') }}</label>
         <select
           id="language"
-          ref="language"
           v-model="language"
-          name="language"
           class="form-select lg-size mb-2"
           @change="setLanguage"
         >

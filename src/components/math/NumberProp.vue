@@ -18,13 +18,12 @@
           ref="n"
           v-model="n"
           type="number"
-          name="n"
           min="1"
           max="1000000000"
           class="form-control md-size mb-2 me-2"
           @keyup.enter="getProperties"
         >
-        <v-calculate class="sm-size" @calculate = "getProperties"></v-calculate>
+        <v-calculate @calculate = "getProperties"></v-calculate>
       </div>
       <p
         v-show="errormsg"

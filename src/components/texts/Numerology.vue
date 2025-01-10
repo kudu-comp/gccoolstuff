@@ -24,6 +24,7 @@
       <v-calculate @calculate="calculateValue" class="mb-2"/>      
       <textarea
         id="message"
+        ref="message"
         v-model="txt"
         class="form-control mb-2"
         :placeholder="$t('labels.message')"
@@ -297,6 +298,11 @@ export default {
         ],
       ],
     };
+  },
+
+  
+  mounted: function() {
+    this.$refs.message.focus();
   },
 
   methods: {

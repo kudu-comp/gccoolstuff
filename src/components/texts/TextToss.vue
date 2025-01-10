@@ -50,13 +50,13 @@
           >{{ $t('texttoss.mode1') }}</label>
         </div>
       </div>
-      <input
+      <button
         id="toss"
-        type="button"
-        :value="$t('buttons.calc')"
-        class="btn mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="tossWords"
       >
+        {{ $t('buttons.show') }}
+      </button>
       <textarea
         id="message"
         ref="message"

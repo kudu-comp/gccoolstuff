@@ -13,13 +13,12 @@
           id="message"
           ref="message"
           v-model="message"
-          name="message"
           class="form-control"
           :placeholder="$t('labels.message')"
           rows="3"
         />
       </div>
-      <v-show-on-map id="go" class="btn mr-2" @Show="solveReverse()" />
+      <v-show-on-map id="go" class="btn me-2" @Show="solveReverse()" />
       <p
         v-show="errormsg"
         class="errormsg mt-2"

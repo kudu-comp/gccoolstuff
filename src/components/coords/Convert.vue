@@ -10,45 +10,40 @@
       />
       <div class="row mb-2">
         <div class="col-6">
-          <div class="row">
-            <label
-              class="form-label sm-size"
-              for="from"
-            >{{ $t('labels.from') }}</label>
-            <v-datums
-              id="from"
-              v-model:datum="from"
-              class="md-size"
-            />
-          </div>
+          <label
+            class="form-label sm-size"
+            for="from"
+          >{{ $t('labels.from') }}</label>
+          <v-datums
+            id="from"
+            v-model:datum="from"
+            class="md-size"
+          />
         </div>
         <div class="col-6">
-          <div class="row">
-            <label
-              class="form-label sm-size"
-              for="to"
-            >{{ $t('labels.to') }}</label>
-            <v-datums
-              id="to"
-              v-model:datum="to"
-              @change="convertCoordinates"
-              class="md-size"
-            />
-          </div>
+          <label
+            class="form-label sm-size"
+            for="to"
+          >{{ $t('labels.to') }}</label>
+          <v-datums
+            id="to"
+            v-model:datum="to"
+            @change="convertCoordinates"
+            class="md-size"
+          />
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <input
-            id="encode"
-            type="button"
-            name="encode"
-            :value="$t('buttons.convert')"
+      <div class="row mb-2">
+        <div class="col-6">
+          <button
+            id="convert"
             class="btn"
             @click="convertCoordinates"
           >
+            {{ $t('buttons.convert') }}
+          </button>
         </div>
-        <div class="col">
+        <div class="col-6">
           <v-wgsformat
             id="wgsformat"
             v-model:format="wgsformat"
@@ -60,7 +55,7 @@
         <div class="col-6">
           <textarea
             id="coordfrom"
-            ref="x"
+            ref="coordfrom"
             v-model="coordfrom"
             class="form-control mt-2"
             :placeholder="$t('convert.phfrom')"
@@ -71,7 +66,6 @@
         <div class="col-6">
           <textarea
             id="result"
-            ref="x"
             v-model="result"
             class="form-control mt-2"
             :placeholder="$t('convert.phto')"
@@ -93,11 +87,10 @@
           >{{ $t('convert.proj4jslabel') }}</label>
           <input
             id="proj4jsdef"
-            ref="proj4jsdef"
             v-model="proj4jsdef"
             type="text"
             size="80"
-            class="form-control ml-2"
+            class="form-control ms-2"
           >
         </div>
       </div>
@@ -138,6 +131,10 @@ export default {
       count : 0,
       wgsformat : "N52 12.345 E4 12.345"
     }
+  },
+
+  mounted: function() {
+    this.$refs.coordfrom.focus();
   },
 
   methods: {

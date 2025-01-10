@@ -25,7 +25,7 @@
         </select>
       </div>
       <button @click="generate()" class="btn mb-2">{{$t('buttons.decode')}}</button>
-      <textarea class="form-control mb-2" lines="5" v-model="txt"></textarea>
+      <textarea class="form-control mb-2" lines="5" v-model="txt" id="txt" ref="txt"></textarea>
       <p
         v-show="errormsg"
         class="errormsg"
@@ -63,6 +63,10 @@ export default {
     };
   },
 
+  mounted: function() {
+    this.$refs.txt.focus();
+  },
+  
   methods: {
 
     rotate: function (alf, txt, rot) {

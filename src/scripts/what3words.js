@@ -1,5 +1,6 @@
 /*
  * Convert what3words async
+ * As of november 2024 this is a paid service and no longer part of gctools.nl
  */
 
 const w3wapi = "ROTED0WV";

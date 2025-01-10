@@ -15,6 +15,7 @@
         >{{ $t('primes.check') }}</label>
         <input
           id="checkprime"
+          ref="checkprime"
           v-model="checkprime"
           type="number"
           min="1"
@@ -106,6 +107,10 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.$refs.checkprime.focus();
+  },
+  
   methods: {
 
     // Decompose in primefactors

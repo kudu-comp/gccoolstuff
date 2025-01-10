@@ -11,6 +11,7 @@
       <input
         id="file"
         type="file"
+        ref="file"
         class="form-control mb-2"
         @change="selectFile"
       >
@@ -159,6 +160,10 @@ export default {
     }
   },
 
+  mounted: function() {
+    this.$refs.file.focus();
+  },
+  
   methods: {
 
     // Decode a UCS2 string

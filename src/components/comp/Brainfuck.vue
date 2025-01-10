@@ -55,9 +55,8 @@
       <input
         id="run"
         type="button"
-        name="run"
         :value="$t('brainfuck.run')"
-        class="btn mb-2 mr-2"
+        class="btn mb-2 me-2"
         @click="runBrainfuck"
       >
       <div class="mb-2">

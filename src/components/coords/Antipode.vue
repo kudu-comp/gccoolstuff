@@ -12,7 +12,7 @@
         v-model:coord="coordinate"
         v-model:datum="selecteddatum"
       />
-      <v-show-on-map id="go" class="btn mr-2" @Show="doCalc()" />
+      <v-show-on-map id="go" class="btn me-2" @Show="doCalc()" />
       <div
         v-show="errormsg"
         class="errormsg"

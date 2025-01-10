@@ -23,7 +23,7 @@
           id="scan"
           type="button"
           :value="$t('htmlparser.btnscan')"
-          class="btn mr-2"
+          class="btn me-2"
           @click="scanHTML"
         >{{ scanresult }}
       </div>

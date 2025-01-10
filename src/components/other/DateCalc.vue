@@ -10,7 +10,7 @@
       />
       <div class="row" >
         <label for="date1" class="form-label sm-size mb-2">{{$t('datecalc.date1')}} </label>
-        <input type="date" v-model="date1" id="date1" class="form-control md-size mb-2"/>
+        <input type="date" v-model="date1" id="date1" ref="date1" class="form-control md-size mb-2"/>
       </div>
       <div class="row">
         <label for="extradays" class="form-label sm-size mb-2">{{$t('datecalc.days')}}</label>
@@ -61,6 +61,11 @@ export default {
     };
   },
 
+  
+  mounted: function() {
+    this.$refs.date1.focus();
+  },
+  
   methods: {
 
     calculateDates: function () {

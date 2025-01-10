@@ -35,7 +35,7 @@
           {{ $t('labels.point') }} 3
         </template>
       </v-coord>
-      <v-show-on-map id="go" class="btn mr-2" @Show="getPoints()" />
+      <v-show-on-map id="go" class="btn me-2" @Show="getPoints()" />
       <div
         v-show="errormsg"
         class="errormsg"

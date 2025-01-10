@@ -11,7 +11,7 @@
       <v-coord
         v-model:coord="coordinate"
         v-model:datum="selecteddatum"
-        class="row mr-2"
+        class="row me-2"
       />
       <v-distance
         v-model:dist="dist"
@@ -71,7 +71,7 @@ export default {
       errormsg: "",
     }
   },
-
+  
   methods: {
 
     doCalc: function () {

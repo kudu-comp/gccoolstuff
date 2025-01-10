@@ -9,13 +9,14 @@
         v-html="$t('sequences.long')"
       />
       <div>
-        <span class="form-label">{{ $t('sequences.sel') }}</span>
+        <div class="form-label mb-2">
+            {{ $t('sequences.sel') }}
+        </div>
         <div class="form-check">
           <input
             id="number3"
             v-model="number"
             type="radio"
-            name="number"
             value="hail"
             class="form-check-input"
           >
@@ -29,7 +30,6 @@
             id="number1"
             v-model="number"
             type="radio"
-            name="number"
             value="cwy"
             class="form-check-input"
           >
@@ -43,7 +43,6 @@
             id="number2"
             v-model="number"
             type="radio"
-            name="number"
             value="revcwy"
             class="form-check-input"
           >
@@ -57,7 +56,6 @@
             id="number7"
             v-model="number"
             type="radio"
-            name="number"
             value="gol"
             class="form-check-input"
           >
@@ -71,7 +69,6 @@
             id="number4"
             v-model="number"
             type="radio"
-            name="number"
             value="niv"
             class="form-check-input"
           >
@@ -85,7 +82,6 @@
             id="number5"
             v-model="number"
             type="radio"
-            name="number"
             value="abun"
             class="form-check-input"
           >
@@ -99,7 +95,6 @@
             id="number6"
             v-model="number"
             type="radio"
-            name="number"
             value="defi"
             class="form-check-input"
           >
@@ -116,6 +111,7 @@
         >{{ $t('sequences.niter') }}</label>
         <input
           id="n"
+          ref="n"
           v-model="n"
           type="number"
           min="0"
@@ -170,6 +166,10 @@ export default {
     VCalculate
   },
 
+  mounted: function() {
+    this.$refs.n.focus();
+  },
+  
   data: function () {
     return {
       number: 'hail',
