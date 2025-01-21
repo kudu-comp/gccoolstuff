@@ -1,6 +1,5 @@
 {
   "language": "Taal",
-  "intro": "GC Tools biedt alle tools die je nodig hebt als geocacher (bijna). Veel gebruikte tools zoals <a href='/wordvalue'>Woordwaarde<a>, <a href='/codebook'>Codebook<a>, <a href='/rotciphers'>ROT13<a>, <a href='/printlog'>Logrollen printen<a> of <a href='/sudokusolv'>Sudoku's oplossen<a>. Maar ook nieuwe tools zoals de <a href='/htmlparser'>HTML Scanner<a>. En nog heel veel andere tools. Tips voor het oplossen geocaching puzzels vind je bij <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
@@ -123,6 +122,14 @@
     "help": "Help",
     "howto": "Tips",
     "about": "Info"
+  },
+
+  "home" : {
+    "whatare" : "Waar ben je naar op zoek?",
+    "favs" : "Favorieten",
+    "intro": "GC Tools biedt alle tools die je nodig hebt voor het oplossen van je geocache puzzels. Gebruik de zoekfunctie om de juiste tool te vinden of gebruik het menu. GC Tools is 100% gratis, geen advertenties en geen cookies!",
+    "contact": "Contact",
+    "contacttxt": "Stuur ons je opmerkingen en suggesties. We horen het graag. Gebruik Geocaching.com, onze naam is Team Chaenaan of stuur een email naar info{'@'}gctools.nl"  
   },
 
   "coordinates": {
@@ -1211,7 +1218,8 @@
     "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
     "formulas" : "Gebruik formules",
     "phformulas" : "1e antwoord is A, 2e is B enzovoorts. Bijv A+B. Eén formule per regel.",
-    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of misschien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opies om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef één antwoord per regel. Als er meerder opties zijn kan je die scheiden door een {'|'}. Als je formules wil gebruiken, vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
+    "long" : "<p>Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Of misschien alleen de eerste letter, de laatste letter of toch de lengte van het antwoord. Eindeloos veel opties om te proberen. Dat kan makkelijker! Deze tool probeert alle opties en alle mogelijke berekeningen op de gegeven antwoorden.</p><p>Geef één antwoord per regel. Als er meerder opties zijn kan je die scheiden door een {'|'}. Als je formules wil gebruiken, vul dan één formule per regel in. Het eerste antwoord is A in de formule, het tweede B enzovoorts.</p>",
+    "short": "Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Eindeloos veel opties om te proberen. Dat kan makkelijker!",
     "showdescr" : "Toon omschrijvingen",
     "showtable" : "Toon tabel",
     "onlysq": "Alleen stapeltellen (geen woordwaardes)",
@@ -1536,7 +1544,7 @@
 
   "brainfuck": {
     "title": "Brainfuck",
-    "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's + - > < . , [ en ]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>",
+    "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's +-><.,[]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>",
     "vars" : "Selecteer programmeertaal",
     "shorthand" : "Verkorte notatie",
     "code": "Programmacode",

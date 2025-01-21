@@ -1,6 +1,5 @@
 {
   "language": "Language",
-  "intro": "GC Tools has all the tools needed for geocaching (almost). Well known tools such as <a href='/wordvalue'>Word value<a>, <a href='/codebook'>Codebook<a>, <a href='/rotciphers'>ROT13<a>, <a href='/printlog'>Print logs<a> and <a href='/sudokusolv'>Sudoku solver<a>. There are also some new handy tools such as the <a href='/htmlparser'>HTML Scanner<a>. And many more. Tips for solving geocaching mysteries you can find at <a href='./howto'>Tips</a>.",
 
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
@@ -123,6 +122,14 @@
     "help": "Help",
     "howto": "How to",
     "about": "About"
+  },
+
+  "home" : {
+    "whatare" : "What are you looking for?",
+    "favs" : "Favorites",
+    "intro": "GC Tools has all the tools needed to solve your geocache puzzles. Use search to find the tool you need or use the menu. GC Tools is 100% free, no ads, no cookies!",
+    "contact": "Contact",
+    "contacttxt": "We love to hear from you. Please let us know your suggestions. Send us a message through Geocaching.com to Team Chaenaan or send us an email to info{'@'}gctools.nl"
   },
 
   "coordinates": {
@@ -1203,6 +1210,7 @@
     "formulas" : "Optionally use formulas",
     "phformulas" : "A is the first answer, B the second and so on. For example A+B. One formula per line.",
     "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by {'|'}. Just press try all and see if anything makes sense. You tick the boxes to try more options.</p>",
+    "short": "Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.",
     "showdescr" : "Show descriptions",
     "showtable" : "Show table",
     "onlysq": "Only show square root (no word value)",
@@ -1527,7 +1535,7 @@
 
   "brainfuck": {
     "title": "Brainfuck",
-    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands + - > < . , [ and ]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>",
+    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands +-><.,[]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>",
     "vars" : "Select programming language",
     "shorthand" : "Shorthand notation",
     "code": "Program code",

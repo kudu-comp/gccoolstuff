@@ -527,6 +527,16 @@ export default {
     };
   },
 
+  mounted: function() {
+    if (navigator.language === "nl-NL") {
+      this.$i18n.locale = "nl";
+      this.translateMenu();
+    } else {
+      this.$i18n.locale = "en";
+      this.translateMenu();
+    }
+  },
+
   methods: {
 
     translateMenu: function () {

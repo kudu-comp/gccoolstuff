@@ -1,6 +1,8 @@
 {
  "name": "GC Tools",
  "short_name": "GC Tools",
+ "version": "1.0",
+ "manifest-version": 3,
  "description": "GC Tools has all the tools needed for geocaching.",
  "theme_color": "#09776E",
  "background_color": "#eeeeee",

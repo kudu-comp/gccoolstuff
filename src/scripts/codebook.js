@@ -24,6 +24,11 @@ export var codepages = [
     description: "Adunaroth conscript was created in 2004 by Arno Luyendijk as a derivation on the fictional history of the Numenoreans in The Silmarillion by J.R.R. Tolkien.",
     tags: ["alphabet", "book", "lines", "curves"]
   },
+  { name: "Aetherian",
+    imagename: "aetherian.png",
+    description: "Aetherian",
+    tags: ["alphabet", "numbers", "curves"]
+  },
   { name: "Alchemy Symbolen",
     imagename: "alchemicalsymbols.png",
     description: "Alchemical symbols, originally devised as part of alchemy, were used to denote some elements and some compounds until the 18th century. Although notation like this was mostly standardized, style and symbol varied between alchemists.",
@@ -189,6 +194,11 @@ export var codepages = [
     description: "Letters are represented by AM and PM times.",
     tags: ["alphabet", "circles"]
   },
+  { name: "Codigo",
+    imagename: "codigo.png",
+    description: "Letters are represented by combinaton of squares, dots, circles and triangles.",
+    tags: ["alphabet", "circles", "triangles"]
+  },
   { name: "Color Tokkie",
     imagename: "colortokki.png",
     description: "The ColorHoney and ColorTokki alphabets were invented by Kim Godgul in 2009 as alternative ways of writing English. They use six colours (Red, Green, Blue, Cyan, Magenta, Yellow).",
@@ -234,15 +244,20 @@ export var codepages = [
     description: "The Dancing Men script is a secret alphabet used by a gang of American criminals in the Sherlock Holmes short story The Adventure of the Dancing Men",
     tags: ["alphabet", "book", "men"]
   },
-  { name: "Dice Cipher",
-    imagename: "dicecipher.png",
-    description: "It's not a dice but a square with dots.",
-    tags: ["alphabet", "squares", "dots"]
+  { name: "Demon",
+    imagename: "demon.png",
+    description: "A code of unknown origin consisting of arcs and dots.",
+    tags: ["alphabet", "curves", "dots"]
   },
   { name: "Devanagari",
     imagename: "devanagari.png",
     description: "Devanagari, also called Nāgari, is a left-to-right abugida (a type of segmental writing system), based on the ancient Brahmi script, used in the northern Indian subcontinent. It is one of the official scripts of the Republic of India and Nepal. It contains characters for writing languages such as Hindi, Marathi, Bodo, Maithili, Sindhi, Nepali, and Sanskrit, among others.",
     tags: ["alphabet", "numbers", "language", "script"]
+  },
+  { name: "Dice Cipher",
+    imagename: "dicecipher.png",
+    description: "It's not a dice but a square with dots.",
+    tags: ["alphabet", "squares", "dots"]
   },
   { name: "Dives Akuru",
     imagename: "divesakuru.png",
@@ -548,6 +563,11 @@ export var codepages = [
     imagename: "kannada.png",
     description: "The Kannada script is an abugida of the Brahmic family, used to write Kannada, one of the Dravidian languages of South India especially used in the state of Karnataka. It is one of the official scripts of the Indian Republic.",
     tags: ["alphabet", "numbers", "script", "language"]
+  },
+  { name: "Kartrak",
+    imagename: "kartrak.png",
+    description: "Kartrak is a kind of bar code used to identify railcars. It was abandonned in 1977",
+    tags: ["numbers", "squares", "color"]
   },
   { name: "Kayah language",
     imagename: "kayahli.png",

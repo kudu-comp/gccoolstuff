@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   { path: '/',                    name: 'home',                  component: () => import('@/views/HomePage.vue')  },
-  { path: "/alltools",            name: 'AllTools',              component: () => import('@/components/AllTools.vue') },
+  { path: "/alltools/:s?",        name: 'AllTools',              component: () => import('@/components/AllTools.vue') }, //Param: s is immediate search for s
   { path: "/convert",             name: 'Convert',               component: () => import('@/components/coords/Convert.vue') },
   { path: "/project",             name: 'Project',               component: () => import('@/components/coords/Project.vue') },
   { path: "/lines",               name: 'Lines',                 component: () => import('@/components/coords/Lines.vue') },
@@ -22,11 +22,11 @@ const routes = [
   { path: "/texttoss",            name: 'TextToss',              component: () => import('@/components/texts/TextToss.vue') },
   { path: "/textchunks",          name: 'TextChunks',            component: () => import('@/components/texts/TextChunks.vue') },
   { path: "/numerology",          name: 'Numerology',            component: () => import('@/components/texts/Numerology.vue') },
-  { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },
+  { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },   //Param: cphr
   { path: '/rotciphers',          name: 'RotCiphers',            component: () => import('@/components/codes/RotCiphers.vue')  },
   { path: "/substcipher",         name: 'SubstCipher',           component: () => import('@/components/codes/SubstCipher.vue') },
-  { path: "/codebook/:code?",     name: 'Codebook',              component: () => import('@/components/codes/CodeBook.vue') },   
-  { path: "/fonts/:font?",        name: 'Fonts',                 component: () => import('@/components/codes/Fonts.vue') },
+  { path: "/codebook/:code?",     name: 'Codebook',              component: () => import('@/components/codes/CodeBook.vue') },    //Param: code
+  { path: "/fonts/:font?",        name: 'Fonts',                 component: () => import('@/components/codes/Fonts.vue') },       //Param: font
   { path: "/segment",             name: 'Segment',               component: () => import('@/components/codes/Segment.vue')},
   { path: "/resistor",            name: 'Resistor',              component: () => import('@/components/codes/Resistor.vue')},
   { path: "/decabit",             name: 'DecaBit',               component: () => import('@/components/codes/DecaBit.vue')},

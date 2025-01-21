@@ -92,6 +92,15 @@ export default {
     VSearch
   },
 
+  // Prop cphr is parameter passed by route (optional)
+  props: {
+    s: {
+      type: String,
+      required: false,
+      default: "atbash"
+    },
+  },
+  
   data() {
     return {
       errormsg: "",
@@ -231,36 +240,41 @@ export default {
     this.fonts = fontdefs;
     this.ciphers = ciphers;
     for (let i of this.alltools) {
-        i.show = true;
-        i.expand = false;
-        if (i.l2) {
-          for (let j of i.l2) {
-            j.name = this.$t(j.href.slice(1) + ".title");
-            j.show = true;
-            if (j.href === "/ciphers") {
-              // Add all ciphers, add idx to facilitate search
-              j.expand = false;
-              for (let [idx, c] of this.ciphers.entries()) {
-                j.l3.push( { name : c.name, href : j.href + "/" + c.ref, show : true, idx : idx })
-              }
+      i.show = true;
+      i.expand = false;
+      if (i.l2) {
+        for (let j of i.l2) {
+          j.name = this.$t(j.href.slice(1) + ".title");
+          j.show = true;
+          if (j.href === "/ciphers") {
+            // Add all ciphers, add idx to facilitate search
+            j.expand = false;
+            for (let [idx, c] of this.ciphers.entries()) {
+              j.l3.push( { name : c.name, href : j.href + "/" + c.ref, show : true, idx : idx })
             }
-            if (j.href === "/fonts") {
-              j.expand = false;
-              // Add all fonts
-              for (let [idx, c] of this.fonts.entries()) {
-                j.l3.push( { name : c.id, href : j.href + "/" + c.id, show : true, idx : idx }) 
-              }
+          }
+          if (j.href === "/fonts") {
+            j.expand = false;
+            // Add all fonts
+            for (let [idx, c] of this.fonts.entries()) {
+              j.l3.push( { name : c.id, href : j.href + "/" + c.id, show : true, idx : idx }) 
             }
-            if (j.href === "/codebook") {
-              j.expand = false;
-              // Add all codes
-              for (let [idx, c] of this.codes.entries()) {
-                j.l3.push( { name : c.name, href : j.href + "/" + c.imagename.slice(0,-4), show : true, idx : idx }) 
-              }
+          }
+          if (j.href === "/codebook") {
+            j.expand = false;
+            // Add all codes
+            for (let [idx, c] of this.codes.entries()) {
+              j.l3.push( { name : c.name, href : j.href + "/" + c.imagename.slice(0,-4), show : true, idx : idx }) 
             }
           }
         }
       }
+    }
+    console.log(this.$route);
+    if (this.$route.query.s) {
+      this.searchstr = this.$route.query.s;
+      this.goSearch();
+    }
   },
 
   methods: {
