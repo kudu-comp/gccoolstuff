@@ -112,6 +112,11 @@ export default {
               },
               {
                 type: "link",
+                text: this.$t("wordsearch.title"),
+                path: { name: "WordSearch" },
+              },
+              {
+                type: "link",
                 text: this.$t("analtxt.title"),
                 path: { name: "AnalTxt" },
               },
@@ -555,12 +560,13 @@ export default {
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("tryanswers.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("wordvalue.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[2].text = this.$t("charcodes.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("analtxt.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("texttonum.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("keyboards.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("texttoss.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("numerology.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("textchunks.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("wordsearch.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("analtxt.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("texttonum.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("keyboards.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("texttoss.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("numerology.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[9].text = this.$t("textchunks.title");
       this.navbarOptions.menuOptionsLeft[2].text = this.$t("menu.codes");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");

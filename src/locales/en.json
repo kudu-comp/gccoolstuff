@@ -1329,6 +1329,17 @@
     "upper": "All uppercase"
   },
 
+  "wordsearch": {
+    "title": "Word search",
+    "long": "Find words using a pattern, specify letters present at unknown positions and letters that are not in the word. A great tool to help solving the Wordle game or to help with crosswords.",
+    "length": "Word length",
+    "pattern": "Word pattern use ? for unknown letters",
+    "yellows": "Letters at unknown positions",
+    "greys": "Letters not in the word",
+    "wordsfound": " words found.",
+    "errpattern": "Word pattern too long or too short"
+  },
+
   "baseconv": {
     "title": "Base converter",
     "long" : "A simple tool to convert the radix (2 to 36). Default the string 0-9A-Z is used as symbols, But it can be anything, you can use + and - for binary for example or the letters A to J for decimal numbers. Multiple numbers can be entered, use spaces in between.",
