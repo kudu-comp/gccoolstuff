@@ -130,12 +130,14 @@ export default {
             { href: "/tryanswers",     name: "", show : true       },
             { href: "/wordvalue",      name: "", show : true       },
             { href: "/charcodes",      name: "", show : true       },
+            { href: "/wordsearch",     name: "", show : true       },
             { href: "/analtxt",        name: "", show : true       },
             { href: "/texttonum",      name: "", show : true       },
             { href: "/keyboards",      name: "", show : true       },
             { href: "/texttoss",       name: "", show : true       },
             { href: "/numerology",     name: "", show : true       },
-            { href: "/textchunks",     name: "", show : true       }
+            { href: "/textchunks",     name: "", show : true       },
+            { href: "/anagrams",       name: "", show : true       }
           ]
         },
         {

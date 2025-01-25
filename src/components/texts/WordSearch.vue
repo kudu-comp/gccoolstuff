@@ -107,7 +107,7 @@ export default {
           if (word.indexOf(this.yellows[i]) < 0) return;
         }
         // Check word
-        let h = this.dict.find(word.toLowerCase());
+        let h = this.dict.find(word);
         if (h) {
           this.result += word + "<br>";
           this.cnt++;
@@ -129,6 +129,9 @@ export default {
       this.result = "";
       this.errormsg = "";
       this.cnt = 0;
+      this.wordsearch = this.wordsearch.trim().toUpperCase();
+      this.yellows = this.yellows.trim().toUpperCase();
+      this.greys = this.greys.trim().toUpperCase();
 
       // Checks
       if (this.len !== this.wordsearch.length) {

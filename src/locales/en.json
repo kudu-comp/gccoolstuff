@@ -1340,6 +1340,15 @@
     "errpattern": "Word pattern too long or too short"
   },
 
+  "anagrams": {
+    "title": "Anagrams",
+    "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device.",
+    "maxw": "Max # words",
+    "minl": "Min word length",
+    "letters": "Letters that must be present",
+    "wordsfound": " anagrams found."	
+  },
+
   "baseconv": {
     "title": "Base converter",
     "long" : "A simple tool to convert the radix (2 to 36). Default the string 0-9A-Z is used as symbols, But it can be anything, you can use + and - for binary for example or the letters A to J for decimal numbers. Multiple numbers can be entered, use spaces in between.",

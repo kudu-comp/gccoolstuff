@@ -1349,6 +1349,15 @@
     "errpattern": "Teveel of te weinig letters in patroon."
   },
 
+  "anagrams": {
+    "title": "Anagrammen",
+    "long": "Vind de anagrammen van een woord. Geef het aantal woorden en de minimale woordlengte eventueel op. Hoe langer de invoer, hoe meer woorden en hoe korter de woordlengte hoe langer het duurt. De snelheid hangt af van de gebruikte browser en het device.",
+    "maxw": "Max # woorden",
+    "minl": "Min woord lengte",
+    "letters": "Te gebruiken letters",
+    "wordsfound": " anagrammen gevonden."	
+  },
+
   "baseconv": {
     "title": "Base conversie",
     "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte symbolen zijn standaard 0-9A-Z maar kunnen eventueel worden aangepast, bijv. + en - voor binair of A t/m J voor decimaal. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16.",

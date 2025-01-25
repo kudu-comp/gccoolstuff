@@ -12,7 +12,7 @@
         <div class="card-body">
           <h5 class="card-title">{{$t('ciphers.title')}}</h5>
           <p class="card-text" v-html="$t('ciphers.long')"></p>
-          <router-link to="/codebook"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+          <router-link to="/ciphers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
@@ -20,6 +20,13 @@
           <h5 class="card-title">{{$t('rotciphers.title')}}</h5>
           <p class="card-text" v-html="$t('rotciphers.long')"></p>
           <router-link to="/rotcipher"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('substcipher.title')}}</h5>
+          <p class="card-text" v-html="$t('substcipher.long')"></p>
+          <router-link to="/substcipher"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

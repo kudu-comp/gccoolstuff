@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <label for="sel" class="form-label md-size mb-2">Language</label>
+    <label for="sel" class="form-label md-size mb-2">{{$t('language')}}</label>
     <select
       id="sel"
       class="form-control md-size mb-2"

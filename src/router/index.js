@@ -23,6 +23,7 @@ const routes = [
   { path: "/textchunks",          name: 'TextChunks',            component: () => import('@/components/texts/TextChunks.vue') },
   { path: "/numerology",          name: 'Numerology',            component: () => import('@/components/texts/Numerology.vue') },
   { path: "/wordsearch",          name: 'WordSearch',            component: () => import('@/components/texts/WordSearch.vue') },
+  { path: "/anagrams",            name: 'Anagrams',              component: () => import('@/components/texts/Anagrams.vue') },
   { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },   //Param: cphr
   { path: '/rotciphers',          name: 'RotCiphers',            component: () => import('@/components/codes/RotCiphers.vue')  },
   { path: "/substcipher",         name: 'SubstCipher',           component: () => import('@/components/codes/SubstCipher.vue') },

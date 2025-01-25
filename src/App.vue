@@ -139,11 +139,16 @@ export default {
                 type: "link",
                 text: this.$t("numerology.title"),
                 path: { name: "Numerology" },
-              },            
+              },
               {
                 type: "link",
                 text: this.$t("textchunks.title"),
                 path: { name: "TextChunks" },
+              },            
+              {
+                type: "link",
+                text: this.$t("anagrams.title"),
+                path: { name: "Anagrams" },
               },            
             ],
           },
@@ -567,6 +572,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("texttoss.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("numerology.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[9].text = this.$t("textchunks.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[10].text = this.$t("anagrams.title");
       this.navbarOptions.menuOptionsLeft[2].text = this.$t("menu.codes");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");
