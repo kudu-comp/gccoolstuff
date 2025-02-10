@@ -17,10 +17,11 @@
             <input
               type="text"
               class="form-control"
-              aria-label="Example text with button addon"
+              aria-label="Search text with button"
               aria-describedby="btn1"
               v-model="searchstr"
-            />
+              @keyup.enter="goSearch()"
+              />
             <div class="input-group-append">
               <button
                 class="btn"

@@ -12,11 +12,8 @@
         v-html="$t('anagrams.long')"
       />
       <!-- Form fields -->
-      <div class="row">
-        <v-language v-model:dict="dict" />
-      </div>
-      <!-- Text input -->
-      <div class="row">
+      <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+      <div class="row mt-2">
         <label
           class="form-label mb-2 md-size"
           for="letters"
@@ -54,8 +51,21 @@
           min="1"	
         >
       </div>
+      <div class="row">
+        <label
+          class="form-label mb-2 md-size"
+          for="maxl"
+        >{{$t('anagrams.maxl')}}</label>
+        <input
+          id="maxl"
+          v-model="maxl"
+          type="number"
+          class="form-control md-size mb-2 me-2"
+          min="1"	
+        >
+      </div>
       <!-- Action buttons -->
-      <button class="btn mb-2" id="btn1" @click="anagrams()">{{$t('buttons.search')}}</button>
+      <button :disabled="dictloading" class="btn mb-2" id="btn1" @click="anagrams()">{{$t('buttons.search')}}</button>
       <!-- Error message -->
       <p
         v-show="errormsg"
@@ -88,8 +98,11 @@ export default {
       letters: "",
       maxw: 1,
       minl: 1,
+      maxl: 999,
       dict: {},
+      dictloading: true,
       finds: [],
+      maxcnt: 2500,
       base: ""
     };
   },
@@ -97,6 +110,13 @@ export default {
   methods: {
 
     nextTry: function (anagram, wordbreaks, start) {
+
+      // Check if we have too many finds
+      if (this.finds.length > this.maxcnt) {
+        this.errormsg = this.$t("anagrams.toomany");
+        return;
+      }
+
       // Build the string for the anagram
       let hword = "";
       for (let i = start; i < anagram.length; i++)
@@ -134,6 +154,9 @@ export default {
         this.finds.push(hword);
         return;
       }
+
+      // If max word length is exceeded, stop
+      if (hword.length >= this.maxl) return;
 
       // What we got is the start of a word or full word
       // If multiple words start with a new word
@@ -174,7 +197,10 @@ export default {
 
       // Start generating
       this.finds = [];
-      this.nextTry([], [0], 0);
+      for (let i = 0; i < this.base.length; i++) {
+        this.nextTry([i], [0], 0);
+      }
+      // this.nextTry([], [0], 0);
 
       // Due to duplicate letters we get duplicate finds, remove those
       let h2 = this.finds.filter(

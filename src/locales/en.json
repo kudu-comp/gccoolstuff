@@ -1331,13 +1331,25 @@
 
   "wordsearch": {
     "title": "Word search",
-    "long": "Find words using a pattern, specify letters present at unknown positions and letters that are not in the word. A great tool to help solving the Wordle game or to help with crosswords.",
+    "long": "<p>Search for words in one of the many dictionaries. Search using a pattern. The pattern uses a question mark for unknown letters. Optionally specify letters that must be present or not present. Or simply search for the longest word found, words starting with, words ending with or words containing a certain string. This is a nice tool for solving Wordle or cross word puzzles.</p><p>The search uses the letters in the alphabet. Letters that are not in the alphabet are replaced by something else or are removed. For example á is replaced by a, but in Czech as it is a genuine letter in that alphabet. Searching for the longest word can take some time if you provide too many letters.</p>",
     "length": "Word length",
     "pattern": "Word pattern use ? for unknown letters",
     "yellows": "Letters at unknown positions",
     "greys": "Letters not in the word",
     "wordsfound": " words found.",
-    "errpattern": "Word pattern too long or too short"
+    "errpattern": "Word pattern too long or too short",
+    "toomany": "Maximum number of words reached.",
+    "longest": "Longest word found: ",
+    "starting": "Words starting with ",
+    "ending": "Words ending with ",
+    "letters": "Letters for searches below",
+    "containing": "Words containing ",
+    "searchlongest": "Longest word",
+    "searchstart": "Starts with",
+    "searchend": "Ends with",
+    "searchcontains": "Contains",
+    "searchpattern": "Search pattern",
+    "lettersused": "Letters in alphabet"
   },
 
   "anagrams": {
@@ -1345,8 +1357,10 @@
     "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device.",
     "maxw": "Max # words",
     "minl": "Min word length",
+    "maxl": "Max word length",
     "letters": "Letters that must be present",
-    "wordsfound": " anagrams found."	
+    "wordsfound": " anagrams found.",
+    "toomany": "Maximum number of anagrams reached."
   },
 
   "baseconv": {
@@ -1496,6 +1510,26 @@
     "fractions": "Fractions",
     "decimals": "Decimals",
     "nosol": "There are no solutions"
+  },
+
+  "cryptosolver": {
+    "title": "Kryptosolver",
+    "long": "<p>The game Krypto (or Crypto) is a simple math game. Everybody receives 5 cards with numbers between 1 and 20. One card is put in the middle. The first one to make a calculation using all five cards that results in the card in the middle wins. Normally negative numbers and decimals are not allowed. Only +, - , * and / are allowed operators. This tool solves the game for you.</p><p>In this version you can provide as many numbers as you want. Don't use all the numbers, allow negative numbers and decimals, use modulus or power or don't use some of the standard operators. The tool can also be used to solve the numbers game from the UK TV Game Show Countdown.</p>",
+    "useall": "Use all numbers",
+    "nums": "Numbers to use",
+    "outcome": "Required outcome",
+    "allowneg": "Allow negative numbers",
+    "allowdec": "Allow decimals",
+    "allowadd": "Allow addition",
+    "allowsub": "Allow subtraction",
+    "allowmult": "Allow multiplication",
+    "allowdiv": "Allow division",
+    "allowmod": "Modulus, e.g. 11 % 3 = 2",
+    "allowpow": "Power, e.g. 2 ^ 3 = 8",
+    "nosolution": "No solution found",
+    "nooutcome": "No outcome provided",
+    "nonums": "Please input some numbers to use",
+    "found": "Solution found for "
   },
 
   "palindrome": {

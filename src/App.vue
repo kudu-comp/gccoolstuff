@@ -298,8 +298,8 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("nimbers.title"),
-                path: { name: "Nimbers" },
+                text: this.$t("cryptosolver.title"),
+                path: { name: "CryptoSolver" },
               },
               {
                 type: "link",
@@ -320,6 +320,11 @@ export default {
                 type: "link",
                 text: this.$t("palindrome.title"),
                 path: { name: "Palindrome" },
+              },
+              {
+                type: "link",
+                text: this.$t("nimbers.title"),
+                path: { name: "Nimbers" },
               },
             ],
           },
@@ -601,11 +606,12 @@ export default {
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[6].text = this.$t("formulasolver.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[7].text = this.$t("numberprop.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[8].text = this.$t("bignumbers.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[9].text = this.$t("nimbers.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[9].text = this.$t("cryptosolver.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[10].text = this.$t("sequences.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[11].text = this.$t("combinations.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[12].text = this.$t("equations.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[13].text = this.$t("palindrome.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[14].text = this.$t("nimbers.title");
       this.navbarOptions.menuOptionsLeft[5].text = this.$t("menu.comptools");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[0].text = this.$t("bintotext.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[1].text = this.$t("bcd.title");

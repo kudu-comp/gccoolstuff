@@ -3,74 +3,6 @@ let dict = {
 
   alphabet: "ABCDEFGJHIJKLMNOPQRSTUVWXYZ",
 
-  // Compare two words in the dictionary
-  compStr: function (s1, s2) {
-    if (s1 < s2) return -1;
-    else if (s1 > s2) return 1;
-    else return 0;
-  },
-
-  // Clean the string so it matches the dictionary rules
-  // E.g. lower case, no diacretics
-  cleanStr: function (s1) {
-    return s1.toUpperCase();
-  },
-
-  // Find the word if not matched exactly return the next word
-  findWord: function(s1) {
-    let start = 0;
-    let end = this.words.length - 1;
-
-    while (start <= end) {
-      let middle = Math.floor((start + end) / 2);
-      let h = this.compStr(this.words[middle], s1);
-      if (h === 0) {
-        // found the key
-        return {
-          fnd: true,
-          pos: middle,
-          word: this.words[middle],
-        };
-      } else if (h === -1) {
-        // continue searching to the right
-        start = middle + 1;
-      } else {
-        // search searching to the left
-        end = middle - 1;
-      }
-    }
-    // key wasn't found
-
-    return {
-      fnd: false,
-      pos: end,
-      word: this.words[end] < s1 ? this.words[end + 1] : this.words[end],
-    };
-  },
-
-  // Check if the word is in the dictionary (binary search)
-  find: function(s1) {
-    let start = 0;
-    let end = this.words.length - 1;
-
-    while (start <= end) {
-      let middle = Math.floor((start + end) / 2);
-      let h = this.compStr(this.words[middle], s1);
-      if (h === 0) {
-        // found the key
-        return true;
-      } else if (h === -1) {
-        // continue searching to the right
-        start = middle + 1;
-      } else {
-        // search searching to the left
-        end = middle - 1;
-      }
-    }
-    // key wasn't found
-    return false;
-  },
-
   // Dictionary must be sorted according to the rules used in compStr
   words: [
     "A",
@@ -6004,6 +5936,7 @@ let dict = {
     "CACHE",
     "CACHEPOT",
     "CACHET",
+    "CACHING",
     "CACKLE",
     "CACKLER",
     "CACOPHONOUS",
@@ -16444,6 +16377,7 @@ let dict = {
     "FSLIC",
     "FT",
     "FTC",
+    "FTF",
     "FTP",
     "FUCHS",
     "FUCHSIA",
@@ -17038,6 +16972,9 @@ let dict = {
     "GENUINENESS",
     "GENUS",
     "GEO",
+    "GEOCACHE",
+    "GEOCACHES",
+    "GEOCACHING",
     "GEOCENTRIC",
     "GEOCENTRICALLY",
     "GEOCHEMISTRY",
@@ -39845,6 +39782,7 @@ let dict = {
     "STEWARDESS",
     "STEWARDSHIP",
     "STEWART",
+    "STF",
     "STICK",
     "STICKER",
     "STICKILY",
@@ -43290,6 +43228,7 @@ let dict = {
     "TSP",
     "TSUNAMI",
     "TSWANA",
+    "TTF",
     "TTYS",
     "TU",
     "TUAMOTU",

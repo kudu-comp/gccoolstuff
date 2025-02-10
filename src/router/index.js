@@ -47,6 +47,7 @@ const routes = [
   { path: "/sequences",           name: 'Sequences',             component: () => import('@/components/math/Sequences.vue') },
   { path: "/combinations",        name: 'Combinations',          component: () => import('@/components/math/Combinations.vue') },
   { path: "/equations",           name: 'Equations',             component: () => import('@/components/math/Equations.vue') },
+  { path: "/cryptosolver",        name: 'CryptoSolver',          component: () => import('@/components/math/CryptoSolver.vue') },
   { path: "/bcd",                 name: 'bcd',                   component: () => import('@/components/comp/BCD.vue') },
   { path: "/encryption",          name: 'encryption',            component: () => import('@/components/comp/Encryption.vue') }, //Param: enc is name of the initial encryption
   { path: "/hashes",              name: 'hashes',                component: () => import('@/components/comp/Hashes.vue') },     //Param: hash is name of the initial encryption

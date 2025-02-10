@@ -73,9 +73,9 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('nimbers.title')}}</h5>
-          <p class="card-text" v-html="$t('nimbers.long')"></p>
-          <router-link to="/nimbers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('cryptosolver.title')}}</h5>
+          <p class="card-text" v-html="$t('cryptosolver.long')"></p>
+          <router-link to="/cryptosolver"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
@@ -104,6 +104,13 @@
           <h5 class="card-title">{{$t('palindrome.title')}}</h5>
           <p class="card-text" v-html="$t('palindrome.long')"></p>
           <router-link to="/palindrome"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('nimbers.title')}}</h5>
+          <p class="card-text" v-html="$t('nimbers.long')"></p>
+          <router-link to="/nimbers"><span class="btn btn-primary">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
     </div>

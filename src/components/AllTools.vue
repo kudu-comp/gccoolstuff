@@ -190,11 +190,12 @@ export default {
             {  href: "/formulasolver",       name: "", show : true,        },
             {  href: "/numberprop",          name: "", show : true,        },
             {  href: "/bignumbers",          name: "", show : true,        },
-            {  href: "/nimbers",             name: "", show : true,        },
+            {  href: "/cryptosolver",        name: "", show : true,        },
             {  href: "/sequences",           name: "", show : true,        },
             {  href: "/combinations",        name: "", show : true,        },
             {  href: "/equations",           name: "", show : true,        },
-            {  href: "/palindrome",          name: "", show : true,        }
+            {  href: "/palindrome",          name: "", show : true,        },
+            {  href: "/nimbers",             name: "", show : true,        }
           ]
         },
         {

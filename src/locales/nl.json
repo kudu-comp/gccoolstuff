@@ -1340,22 +1340,36 @@
 
   "wordsearch": {
     "title": "Woord zoeken",
-    "long": "Zoek woorden aan de hand van een patroon. Gebruik ? voor de onbekende letters. Specificeer de letters die voorkomen maar waarvan de positie niet bekend is. Specificeer letters die niet voorkomen in het woord. Een handige tool voor het oplossen van Wordle (of Lingo) en als hulp bij kruiswoordraadsels.",
+    "long": "<p>Doorzoek een van de vele woordenboeken. Zoek op een patroon. Gebruik ? voor de onbekende letters. Specificeer optioneel de letters die voorkomen of juist niet voorkomen. Of zoek naar het langste woord, woorden die beginnen met, eindigen met of bepaalde letters bevatten. Dit is een handige tool voor het oplossen van Wordle (Lingo) en als hulp bij kruiswoordraadsels.</p><p>Bij het zoeken worden de letters in het alfabet gebruikt. Letters die niet voorkomen worden vervangen of niet gebruikt. Bijvoorbeeld á wordt vervangen door a, maar niet in het Tsjechisch waar á een letter is in het alfabet. Zoeken naar het langste woord kan lang duren als er teveel letters worden gebruikt.</p>",
     "length": "Woord lengte",
     "pattern": "Patroon gebruik ? voor onbekende letters",
     "yellows": "Letters op onbekende positie",
     "greys": "Letters die niet voorkomen",
     "wordsfound": " woorden gevonden.",
-    "errpattern": "Teveel of te weinig letters in patroon."
-  },
+    "errpattern": "Teveel of te weinig letters in patroon.",
+    "toomany": "Maximum aantal woorden gevonden.",
+    "longest": "Langste woord gevonden: ",
+    "starting": "Woorden die beginnen met ",
+    "ending": "Woorden die eindigen met ",
+    "containing": "Woorden die bevatten ",
+    "letters": "Letters voor onderstaande zoekopdrachten",
+    "searchlongest": "Langste",
+    "searchstart": "Start met",
+    "searchend": "Eindigt op",
+    "searchcontains": "Bevat",
+    "searchpattern": "Zoek patroon",
+    "lettersused": "Letters in alfabet"
+},
 
   "anagrams": {
     "title": "Anagrammen",
     "long": "Vind de anagrammen van een woord. Geef het aantal woorden en de minimale woordlengte eventueel op. Hoe langer de invoer, hoe meer woorden en hoe korter de woordlengte hoe langer het duurt. De snelheid hangt af van de gebruikte browser en het device.",
     "maxw": "Max # woorden",
     "minl": "Min woord lengte",
+    "maxl": "Max woord lengte",
     "letters": "Te gebruiken letters",
-    "wordsfound": " anagrammen gevonden."	
+    "wordsfound": " anagrammen gevonden.",
+    "toomany": "Maximum aantal anagrammen gevonden."
   },
 
   "baseconv": {
@@ -1505,6 +1519,26 @@
     "fractions": "Breuken",
     "decimals": "Decimalen",
     "nosol": "Er zijn geen oplossingen."
+  },
+
+  "cryptosolver": {
+    "title": "Krypto oplosser",
+    "long": "<p>Het spelletje Krypto (of Crypto) is eenvoudig rekenspel. Iedereen krijgt 5 kaarten met nummers van 1 tot 20. Eén kaart wordt in het midden gelegd. De eerste die met alle 5 de kaarten een berekening maakt voor het getal in het midden wint. Negatieve getallen en breuken zijn normaal niet toegestaan. Enkel +, -, * en / zijn toegestane operaties. Deze tool lost het spel op.</p><p>In deze versie kunnen zoveel nummers worden gebruikt als gewenst. Er zijn opties om niet alle nummers te gebruiken, negatieve getallen of breuken toe te staan, modulo en machtsverheffen te gebruiken of bepaalde operaties uit te sluiten. De tool kan ook worden gebruikt om het cijfer spel op te lossen uit de TV show Cijfers en Letters. In Engeland heet deze game show Countdown.</p>",
+    "useall": "Gebruik alle getallen",
+    "nums": "Getallen om te gebruiken",
+    "outcome": "Gewenste uitkomst",
+    "allowneg": "Negatieve getallen zijn toegestaan",
+    "allowdec": "Breuken zijn toegestaan",
+    "allowadd": "Optellen",
+    "allowsub": "Aftrekken",
+    "allowmult": "Vermenigvuldigen",
+    "allowmod": "Module, bijv. 11 % 3 = 2",
+    "allowpow": "Machtsverheffen, bijv 2 ^ 3 = 8",
+    "allowdiv": "Delen",
+    "nosolution": "Geen oplossing gevonden.",
+    "nooutcome": "Geen gewenste uitkomst ingevoerd.",
+    "nonums": "Geen getallen ingevoerd.",
+    "found": "Oplossing gevonden voor "
   },
 
   "palindrome": {
