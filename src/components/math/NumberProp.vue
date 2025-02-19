@@ -23,7 +23,10 @@
           class="form-control md-size mb-2 me-2"
           @keyup.enter="getProperties"
         >
-        <v-calculate @calculate = "getProperties"></v-calculate>
+        <v-calculate class="sm-size" @calculate = "getProperties" :disabled="working"></v-calculate>
+        <div v-if="working" class="spinner-border ms-2" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
       </div>
       <p
         v-show="errormsg"
@@ -31,222 +34,35 @@
       >
         {{ errormsg }}
       </p>
-      <va-item
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('numberprop.t1') }}
-        </template>
-        <template #content>
-          <table>
-            <tr>
-              <td>
-                <div v-show="n % 2 == 0">
-                  &#x2713;
-                </div><div v-show="n % 2 != 0">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.even') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="n % 2 != 0">
-                  &#x2713;
-                </div><div v-show="n % 2 == 0">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.odd') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isprime">
-                  &#x2713;
-                </div><div v-show="!isprime">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.prime') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="!isprime">
-                  &#x2713;
-                </div><div v-show="isprime">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.comp') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isbiprime">
-                  &#x2713;
-                </div><div v-show="!isbiprime">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.bi') }}</td>
-            </tr>
-            <tr>
-              <td width="50px">
-                <div v-show="isfibonacci">
-                  &#x2713;
-                </div><div v-show="!isfibonacci">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.fib') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isniven">
-                  &#x2713;
-                </div><div v-show="!isniven">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.niven') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="issquarefree">
-                  &#x2713;
-                </div><div v-show="!issquarefree">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.sqfree') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isevil">
-                  &#x2713;
-                </div><div v-show="!isevil">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.evil') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="!isevil">
-                  &#x2713;
-                </div><div v-show="isevil">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.odious') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isperfect">
-                  &#x2713;
-                </div><div v-show="!isperfect">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.perfect') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isdeficient">
-                  &#x2713;
-                </div><div v-show="!isdeficient">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.defi') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isabundant">
-                  &#x2713;
-                </div><div v-show="!isabundant">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.abun') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isnarcissistic">
-                  &#x2713;
-                </div><div v-show="!isnarcissistic">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.narc') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="ispowerful">
-                  &#x2713;
-                </div><div v-show="!ispowerful">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.pow') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="ispentagonal">
-                  &#x2713;
-                </div><div v-show="!ispentagonal">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.penta') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="islucky">
-                  &#x2713;
-                </div><div v-show="!islucky">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.lucky') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="ishappy">
-                  &#x2713;
-                </div><div v-show="!ishappy">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.happy') }}</td>
-            </tr>
-            <tr>
-              <td>
-                <div v-show="isaspiring">
-                  &#x2713;
-                </div><div v-show="!isaspiring">
-                  &#x2717;
-                </div>
-              </td>
-              <td>{{ $t('numberprop.asp') }}</td>
-            </tr>
-          </table>
-        </template>
-      </va-item>
+      <h4>
+        {{ $t('numberprop.t1') }}
+      </h4>
+      <table>
+        <tr v-for="p in props" :key="p.ref">
+          <td v-if="p.ref">
+            <div v-show="p.value">
+              &#x2713;
+            </div><div v-show="!p.value">
+              &#x2717;
+            </div>
+          </td>
+          <td v-if="p.ref">{{ $t('numberprop.' + p.ref) }}</td>
+          <td v-if="p.txt" colspan="2"><h6>{{ $t('numberprop.' + p.txt) }}</h6></td>
+        </tr>          
+      </table>
     </div>
   </div>
 </template>
 
 <script>
 
-import VaItem from '@/components/inputs/VaItem.vue'
-import VCalculate from '@/components/inputs/VCalculate.vue'
+import VCalculate from '@/components/inputs/VCalculate.vue';
+import * as mathtools from '../../scripts/mathtools';
 
 export default {
   name: 'MathProperties',
 
   components: {
-    VaItem,
     VCalculate
   },
 
@@ -254,25 +70,55 @@ export default {
     return {
       n: 0,
       result: 0,
-      ispalindrome: false,
-      isfibonacci: false,
-      isprime: false,
-      isbiprime: false,
-      isniven: false,
-      issquarefree: false,
-      isevil: false,
-      isperfect: false,
-      isdeficient: false,
-      isabundant: false,
-      isnarcissistic: false,
-      ispowerful: false,
-      islucky: false,
-      ishappy: false,
-      isaspiring: false,
-      ispentagonal: false,
-      phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/numberproperties.php",
-      showitem: true,
-      hidebutton: true,
+      working: false,
+      props : [
+        { txt: "oddoreven"},
+        { ref: "even", func: function(n) { return n % 2 === 0; }, value: false},
+        { ref: "odd",  func: function(n) { return n % 2 === 1; }, value: false},
+        // Prime related properties
+        { txt: "primerel"},
+        { ref: "prime",func: function(n) { return mathtools.checkprime(n); }, value: false},
+        { ref: "comp",func: function(n) { return !mathtools.checkprime(n); }, value: false},
+        { ref: "bi",func: function(n) { return mathtools.isbiprime(n); }, value: false},
+        // Properties related to divisors
+        { txt: "divrel"},
+        { ref: "abun", func: function(n) { return mathtools.isabundant(n); }, value: false},
+        { ref: "perfect", func: function(n) { return mathtools.isperfect(n); }, value: false},
+        { ref: "defi",  func: function(n) { return mathtools.isdeficient(n); }, value: false},
+        { ref: "pow", func: function(n) { return mathtools.ispowerful(n); }, value: false},
+        { ref: "sqfree", func: function(n) { return mathtools.issquarefree(n); }, value: false},
+        // Properties related to 2D shapes or polygonal numbers
+        { txt: "polygonal"},
+        { ref: "tri", func: function(n) { return mathtools.istriangular(n); }, value: false},
+        { ref: "squa", func: function(n) { return mathtools.issquare(n); }, value: false},
+        { ref: "penta", func: function(n) { return mathtools.ispentagonal(n); }, value: false},
+        { ref: "hexa", func: function(n) { return mathtools.ishexagonal(n); }, value: false},
+        { ref: "hepta", func: function(n) { return mathtools.isheptagonal(n); }, value: false},
+        { ref: "octa", func: function(n) { return mathtools.isoctagonal(n); }, value: false},
+        { ref: "nona", func: function(n) { return mathtools.isnonagonal(n); }, value: false},
+        { ref: "deca", func: function(n) { return mathtools.isdecagonal(n); }, value: false},
+        { ref: "star", func: function(n) { return mathtools.isstar(n); }, value: false},
+        // Properties related to binary form
+        { txt: "binrel"},
+        { ref: "evil", func: function(n) { return mathtools.isevil(n); }, value: false},
+        { ref: "odious", func: function(n) { return mathtools.isodious(n); }, value: false},
+        // Properties related to 3D shapes or polyhedral nunbers
+        { txt: "polyhedral"},
+        { ref: "tethed", func: function(n) { return mathtools.istetrahedral(n); }, value: false},
+        { ref: "sqpyr", func: function(n) { return mathtools.issquarepyramidal(n); }, value: false},
+        { ref: "cube", func: function(n) { return mathtools.iscube(n); }, value: false},
+        // Various other properties 
+        { txt: "others"},
+        { ref: "fib", func: function(n) { return mathtools.isfibonacci(n); }, value: false},
+        { ref: "pal", func: function(n) { return mathtools.ispalindrome(n); }, value: false},
+        { ref: "narc", func: function(n) { return mathtools.isnarcistic(n); }, value: false},
+        { ref: "niven", func: function(n) { return mathtools.isniven(n); }, value: false},
+        { ref: "kap", func: function(n) { return mathtools.iskaprekar(n); }, value: false},
+        { ref: "lucky", func: function(n) { return mathtools.islucky(n); }, value: false},
+        { ref: "happ", func: function(n) { return mathtools.ishappy(n); }, value: false},
+        { ref: "asp", func: function(n) { return mathtools.isaspiring(n); }, value: false},
+      ],
+      errormsg: ""
     }
   },
 
@@ -286,6 +132,7 @@ export default {
 
       // Reset error
       this.errormsg = "";
+      this.working = true
 
       // Check if n is too big
       if (this.n > 1000000000) {
@@ -293,39 +140,15 @@ export default {
           return;
       }
 
-      // Call server script
-      let data = {
-        n: this.n,
-      };
+      // Update all properties
+      for (let p of this.props) {
+        if (p.ref) p.value = p.func(this.n);
+      }
+      this.working = false;
 
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-          this.ispalindrome = data.ispalindrome;
-          this.isfibonacci = data.isfibonacci;
-          this.isprime = data.isprime;
-          this.isbiprime = data. isbiprime;
-          this.isniven = data.isniven;
-          this.issquarefree = data.issquarefree;
-          this.isevil = data.isevil;
-          this.isperfect = data.isperfect;
-          this.isdeficient = data.isdeficient;
-          this.isabundant = data.isabundant;
-          this.isnarcissistic = data.isnarcissistic;
-          this.ispowerful = data.ispowerful;
-          this.islucky = data.islucky;
-          this.ishappy = data.ishappy;
-          this.isaspiring = data.isaspiring;
-          this.ispentagonal = data.ispentagonal;
-        })
-        .catch((error) => {
-          console.error('Error ', error);
-          this.errormsg = this.$t('errors.generic');
-        });
+      
     },
   },
 }
 </script>
+

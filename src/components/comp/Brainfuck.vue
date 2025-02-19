@@ -108,9 +108,9 @@ export default {
   mounted: function() {
     this.$refs.code.focus();
     this.bfvars = bf.vars;
-    if (this.$route.params.bfvar) {
+    if (this.$route.params.bf) {
       for (let i = 0; i < this.bfvars.length; i++)
-        if (this.bfvars[i] == this.$route.params.bfvar) this.selBF = i;
+        if (this.bfvars[i].toLowerCase() === this.$route.params.bf.toLowerCase()) this.selBF = i;
     }
   },
 
@@ -121,6 +121,7 @@ export default {
 
       // Reset error flag
       this.errormsg = "";
+      this.result = "";	
       let bfcode = "";
 
       try {

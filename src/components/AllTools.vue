@@ -83,6 +83,8 @@ import VSearch from '@/components/inputs/VSearch.vue'
 import { codepages } from '@/scripts/codebook.js'
 import { fontdefs } from '@/scripts/fontspecials.js'
 import { ciphers } from '@/scripts/ciphers.js'
+import * as bf  from '@/scripts/brainfuck.js'
+import { sequences } from '@/scripts/mathtools.js'
  
 export default {
 
@@ -108,6 +110,7 @@ export default {
       codes: null,
       fonts: null,
       ciphers: null,
+      bfvars: null,
       alltools: [
         {
           href: "/helpcoord",          name: this.$t('menu.coordinates'), show : true, expand: false,
@@ -135,7 +138,11 @@ export default {
             { href: "/texttonum",      name: "", show : true       },
             { href: "/keyboards",      name: "", show : true       },
             { href: "/texttoss",       name: "", show : true       },
-            { href: "/numerology",     name: "", show : true       },
+            { href: "/numerology",     name: "", show : true,       
+              l3 : [
+                // Add numerology variants here in mounted ()
+              ]
+            },
             { href: "/textchunks",     name: "", show : true       },
             { href: "/anagrams",       name: "", show : true       }
           ]
@@ -191,10 +198,13 @@ export default {
             {  href: "/numberprop",          name: "", show : true,        },
             {  href: "/bignumbers",          name: "", show : true,        },
             {  href: "/cryptosolver",        name: "", show : true,        },
-            {  href: "/sequences",           name: "", show : true,        },
+            {  href: "/sequences",           name: "", show : true,        
+              l3 : [
+                // Add sequences here in mounted ()
+              ]
+            },
             {  href: "/combinations",        name: "", show : true,        },
             {  href: "/equations",           name: "", show : true,        },
-            {  href: "/palindrome",          name: "", show : true,        },
             {  href: "/nimbers",             name: "", show : true,        }
           ]
         },
@@ -205,7 +215,11 @@ export default {
             { href: "/bcd",                 name: "", show : true,        },
             { href: "/encryption",          name: "", show : true,        },
             { href: "/hashes",              name: "", show : true,        },
-            { href: "/brainfuck",           name: "", show : true,        },
+            { href: "/brainfuck",           name: "", show : true,        
+              l3 : [
+                // Add brainfuck variants here in mounted ()
+              ]
+            },
             { href: "/cow",                 name: "", show : true,        },
             { href: "/beatnik",             name: "", show : true,        },
             { href: "/deadfish",            name: "", show : true,        },
@@ -242,6 +256,9 @@ export default {
     this.codes = codepages;
     this.fonts = fontdefs;
     this.ciphers = ciphers;
+    this.bfvars = bf.vars;
+    this.seqs = sequences;
+    console.log(this.seqs);
     for (let i of this.alltools) {
       i.show = true;
       i.expand = false;
@@ -270,10 +287,33 @@ export default {
               j.l3.push( { name : c.name, href : j.href + "/" + c.imagename.slice(0,-4), show : true, idx : idx }) 
             }
           }
+          if (j.href === "/brainfuck") {
+            j.expand = false;
+            // Add all brainfuck variants
+            for (let i = 0; i < this.bfvars.length; i++) {
+              j.l3.push( { name : this.bfvars[i], href : j.href + "/" + this.bfvars[i], show : true, idx : i }) 
+            }
+          }
+          if (j.href === "/numerology") {
+            j.expand = false;
+            // Add all numerology variants
+            j.l3.push( { name : "Agrippan", href : j.href + "/0", show : true, idx : 0 }) 
+            j.l3.push( { name : "Pythagorean", href : j.href + "/1", show : true, idx : 1 }) 
+            j.l3.push( { name : "Chaldean", href : j.href + "/2", show : true, idx : 2 }) 
+            j.l3.push( { name : "Gematria", href : j.href + "/3", show : true, idx : 3 }) 
+            j.l3.push( { name : "Isopsephy", href : j.href + "/5", show : true, idx : 4 }) 
+            j.l3.push( { name : "Qabbala", href : j.href + "/7", show : true, idx : 5 }) 
+          }
+          if (j.href === "/sequences") {
+            j.expand = false;
+             // Add all brainfuck variants
+             for (let i = 0; i < this.seqs.length; i++) {
+              j.l3.push( { name : this.seqs[i].name, href : j.href + "/" + this.seqs[i].ref, show : true, idx : i }) 
+            }
+          }
         }
       }
     }
-    console.log(this.$route);
     if (this.$route.query.s) {
       this.searchstr = this.$route.query.s;
       this.goSearch();
@@ -370,6 +410,17 @@ export default {
                     break;
                   case "/fonts" :
                     l3.show = (this.fonts[l3.idx].font.toLowerCase().indexOf(s) >= 0);
+                    break;
+                  case "/brainfuck" :
+                    l3.show = (this.bfvars[l3.idx].toLowerCase().indexOf(s) >= 0);
+                    break;
+                  case "/numerology" :
+                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
+                    break;
+                  case "/sequences" :
+                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
+                    let lookup = (l3.name === "Reverse Conway") ? "revconway" : l3.name.toLowerCase();	
+                    if (this.$t('sequences.' + lookup).toLowerCase().indexOf(s) >= 0) l3.show = true;
                     break;
                   default :
                     l3.show = false;

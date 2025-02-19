@@ -138,6 +138,7 @@ export default {
     // When size changes clear old table and generate new one
     changeSize: function () {
       // Check size
+      this.errormsg = "";
       if (this.size < 1 || this.size > 26) {
         this.errormsg = "Size must be between 1 and 26";
         return;

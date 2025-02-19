@@ -9,20 +9,26 @@ const BF_BLUB = 5;
 const BF_PEWLANG = 6;
 const BF_OOF = 7;
 const BF_TERNARY = 8;
+const BF_PIKALANG = 9;
+const BF_REVERSEFUCK = 10;
 
 export const vars = [
   "Brainfuck",
-  "Ook!Ook?",
+  "Ook!",
   "Spoon",
   "Alphuck",
   "Binaryfuck",
   "Blub",
   "Pewlang",
   "Oof",
-  "Ternary"
+  "Ternary",
+  "Pikalang",
+  "Reversefuck"
 ]
 
 export function preprocess (code, sel) {
+
+  console.log("Preprocess", code, sel);
   
   const bfsub = [
     [">", "<", "+", "-", ".", ",", "[", "]"],
@@ -33,7 +39,9 @@ export function preprocess (code, sel) {
     ["BLUB.BLUB?", "BLUB?BLUB.", "BLUB.BLUB.", "BLUB!BLUB!", "BLUB!BLUB.", "BLUB.BLUB!", "BLUB!BLUB?", "BLUB?BLUB!"],
     ["pew", "Pew", "pEw", "peW", "pEW", "PEw", "PeW", "PEW"],
     ["f", "of", "oof", "ooof", "oooof", "ooooof", "oooooof", "ooooooof"],
-    ["01", "00", "11", "10", "20", "21", "02", "12"]
+    ["01", "00", "11", "10", "20", "21", "02", "12"],
+    ["pipi", "pichu", "pi", "ka", "pikachu", "pikapi", "pika", "chu"],
+    ["<", ">", "-", "+", ",", ".", "]", "["]
   ];
 
   // Init
@@ -89,6 +97,18 @@ export function preprocess (code, sel) {
         if ("0123456789".indexOf(code[i]) >= 0) res += code[i];
       words = res.match(/[012]{2}|[3-9]+/g);
       break;
+    case BF_PIKALANG:
+      code = code.toLowerCase();
+      for (let i = 0; i < code.length; i++)
+        if ("0123456789pikachu \n\r\t".indexOf(code[i]) >= 0) res += code[i];
+      words = res.match(/[pikachu]{2,7}[\s]+|[0-9]+\s*|[pikachu]{2,7}$/g);
+      words = words.map( w => w.trim());
+      break;
+    case BF_REVERSEFUCK:
+      for (let i = 0; i < code.length; i++)
+        if ("0123456789><+-.,[]".indexOf(code[i]) >= 0) res += code[i];
+      words = res.match(/[0-9]+|[><+-.,\[\]]/g);
+      break;
     default:
       // Just remove comments and return clean code
       for (let i = 0; i < code.length; i++)
@@ -101,6 +121,7 @@ export function preprocess (code, sel) {
   res = "";
   
   for (let w of words) {
+    console.log(w);
     pos = bfsub[sel].indexOf(w);
     if (pos >= 0)
       res += bfsub[BF_ORIGINAL][pos];
@@ -119,7 +140,7 @@ export function extendshorthand (bfcode) {
 
   for (let i = 0; i < bfcode.length; i++) {
 
-    if ("+i-d>r<l.,".indexOf(bfcode[i]) >= 0) {
+    if ("+-><[].,dilr".indexOf(bfcode[i]) >= 0) {
       result += bfcode[i];
       lastop = bfcode[i];
     } else if ("0123456789".indexOf(bfcode[i]) >= 0) {

@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import * as mathsequences from '@/scripts/mathsequences.js'
+import * as mathtools from '@/scripts/mathtools.js'
 import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
@@ -126,7 +126,7 @@ export default {
 
       } else {
         
-        let a = mathsequences.primeFactorization (this.primefact);
+        let a = mathtools.primeFactorization (this.primefact);
         this.result = "";
         for (let p of a) this.result += p + " - ";
         this.result = this.result.slice(0, -3)
@@ -149,7 +149,7 @@ export default {
 
       } else {
         
-        if (mathsequences.checkprime(this.checkprime)) {
+        if (mathtools.checkprime(this.checkprime)) {
           this.result = this.checkprime + "  " +  this.$t('primes.isprime');
         } else {
           this.result = this.checkprime + "  " +  this.$t('primes.isnotprime');

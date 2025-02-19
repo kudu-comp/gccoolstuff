@@ -8,18 +8,109 @@
         class="infoblock"
         v-html="$t('numerology.long')"
       />
-      <div class="row">
-        <label for="sel" class="form-label sm-size mb-2">{{ $t('numerology.selmethod')}}</label>
-        <select id="sel" class="form-select lg-size mb-2" v-model="selmode" @change="calculateValue">
-          <option value="0">Agrippan (based on Classic latin alphabet)</option>
-          <option value="1">Pythagorean</option>
-          <option value="2">Chaldean</option>
-          <option value="3">Gematria (Latin input)</option>
-          <option value="4">Gematria (Hebrew input)</option>
-          <option value="5">Isopsephy (Latin input)</option>
-          <option value="6">Isopsephy (Greek input)</option>
-          <option value="7">English Qabbala</option>
-        </select>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="0"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Agrippan (based on Classic latin alphabet)</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="1"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Pythagorean</label>
+      </div>      
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="2"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Chaldean</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="3"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Gematria (Latin input)</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="4"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Gematria (Hebrew input)</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="5"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Isopsephy (Latin input)</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="6"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >Isopsephy (Greek input)</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="number1"
+          v-model="selmode"
+          type="radio"
+          value="7"
+          class="form-check-input" @change="calculateValue"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >English Qabbala</label>
       </div>
       <v-calculate @calculate="calculateValue" class="mb-2"/>      
       <textarea
@@ -30,6 +121,29 @@
         :placeholder="$t('labels.message')"
         rows="5"
       />
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}.
+      </p>
+      <h4>{{ $t('numerology.valtab') }}</h4>
+      <table class="table table-bordered text-center table-sm">
+        <tr>
+          <td class="sm-size"
+            v-for="a in alphabet"
+          >
+            {{ a }}
+          </td>
+        </tr>
+        <tr>
+          <td
+            v-for="s in values[selmode]"
+          >
+            {{ s }}
+          </td>
+        </tr>
+      </table>
       <div
         v-if="result"
         class="resultbox"
@@ -60,6 +174,7 @@ export default {
       result2: "",
       selmode: "0",
       errormsg: "",
+      alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       values: [
         // Agrippan https://en.wikipedia.org/wiki/Gematria
         [
@@ -303,6 +418,9 @@ export default {
   
   mounted: function() {
     this.$refs.message.focus();
+    if (this.$route.params.num) {
+      if (this.$route.params.num >= "0" && this.$route.params.num <= "7") this.selmode = this.$route.params.num;
+    }  
   },
 
   methods: {
@@ -326,6 +444,7 @@ export default {
         default:
           alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       }
+      this.alphabet = alphabet;
 
       for (let c of this.txt.trim()) {
         h = alphabet.indexOf(c.toUpperCase());

@@ -128,7 +128,7 @@
         </table>
       </div>
       <button id="solve" class="btn mb-2 me-2" @click="solveMM">
-        {{ $t('sudoku.solve') }}
+        {{ $t('sudokusolv.solve') }}
       </button>
       <button id="reset" class="btn mb-2" @click="resetMM">
         {{ $t('buttons.reset') }}
@@ -144,7 +144,7 @@
         class="mt-2"
       >
         <span style="font-weight: bold;">
-          {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
+          {{ $t('sudokusolv.thereare') }} {{ results.length }} {{ $t('sudokusolv.sols') }}
         </span>
         <div class="form-inline mt-2 mb-2">
           <select
@@ -185,8 +185,7 @@ export default {
       errormsg: "",
       results: [],
       selectedsolution: "",
-      solved: false,
-      phpurl: window.location.protocol + "//"  + window.location.hostname + "/sudokusolver/sudokusolver.php",
+      solved: false
     }
   },
 

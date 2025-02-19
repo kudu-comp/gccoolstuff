@@ -20,6 +20,7 @@
     "@what3words/api": "^5.4.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "bwip-js": "^4.5.1",
     "crypto-js": "^4.2.0",
     "exifreader": "^4.25.0",
     "jspdf": "^2.5.2",

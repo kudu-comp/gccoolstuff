@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import * as mathsequences from '@/scripts/mathsequences.js'
+import * as mathtools from '@/scripts/mathtools.js'
 import VCalculate from '@/components/inputs/VCalculate.vue'
 
 export default {
@@ -86,7 +86,7 @@ export default {
 
       // Take the GCD of two pairs
       for (let i = 1; i < n; i++)    {
-          result = mathsequences.gcd(arr[i], result);
+          result = mathtools.gcd(arr[i], result);
           if(result == 1)
           {
              return 1;
@@ -103,7 +103,7 @@ export default {
 
       // Take the GCD of two pairs
       for (let i = 1; i < n; i++)    {
-          result = mathsequences.lcm(arr[i], result);
+          result = mathtools.lcm(arr[i], result);
           if(result == 1)
           {
              return 1;
@@ -143,7 +143,7 @@ export default {
       // List prime factors
       this.primes = [];
       for (let i=0; i < a.length; i++) {
-        this.primes.push({ n: a[i], primes: mathsequences.primeFactorizationString(parseInt(a[i])) });
+        this.primes.push({ n: a[i], primes: mathtools.primeFactorizationString(parseInt(a[i])) });
       }
     },
 

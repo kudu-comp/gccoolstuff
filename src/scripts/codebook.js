@@ -62,7 +62,7 @@ export var codepages = [
   { name: "Arabic Alphabet",
     imagename: "arabicalphabet.png",
     description: "Arabic alphabet.",
-    tags: ["alphabet", "language", "arabic"]
+    tags: ["alphabet", "language", "curves", "dots"]
   },
   { name: "Arcadian Alphabet",
     imagename: "arcadian.png",
