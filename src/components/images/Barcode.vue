@@ -140,7 +140,7 @@ export default {
       try {
         bwipjs.toCanvas(canvas, options);
       } catch (e) {
-        this.errormsg = e;
+        this.errormsg = e.message.slice(e.message.indexOf(":")+1);
       }
 
     },

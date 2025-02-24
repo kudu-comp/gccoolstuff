@@ -281,9 +281,9 @@ export default {
       }
 
       const filters = [
-        [ [0.333, 0.333, 0.333], [0.333, 0.333, 0.333], [0.333, 0.333, 0.333] ], // grayscale average
+        [ [0.3333333, 0.3333333, 0.3333333], [0.3333333, 0.3333333, 0.3333333], [0.3333333, 0.3333333, 0.3333333] ], // grayscale average
         [ [0.299, 0.587, 0.114], [0.299, 0.587, 0.114], [0.299, 0.587, 0.114] ], // Gray scale luminance PAL
-        [ "invert" ],    // invert not defined
+        [ "invert" ],    // invert not defined here
         [ [0.393, 0.769, 0.189], [0.349, 0.686, 0.168], [0.272, 0.534, 0.131] ], // sepia
         [ [1,0,0], [0, 0, 0], [0, 0, 0] ],    // reds only
         [ [0,0,0], [0, 1, 0], [0, 0, 0] ],    // greens only
@@ -302,12 +302,15 @@ export default {
 
       // Apply filter to each pixel
       for (let i = 0; i < data.length; i += 4) {
-        data[i]     = Math.min (Math.round(data[i]   * filter[0][0] + data[i+1] * filter[0][1]  + data[i+2] * filter[0][2]), 255); // red
-        data[i + 1] = Math.min (Math.round(data[i]   * filter[1][0] + data[i+1] * filter[1][1]  + data[i+2] * filter[1][2]), 255); // green
-        data[i + 2] = Math.min (Math.round(data[i]   * filter[2][0] + data[i+1] * filter[2][1]  + data[i+2] * filter[2][2]), 255); // blue
+        let h1 = data[i];
+        let h2 = data[i+1]
+        data[i]     = Math.min (Math.floor(h1 * filter[0][0] + h2 * filter[0][1]  + data[i+2] * filter[0][2]), 255); // red
+        data[i + 1] = Math.min (Math.floor(h1 * filter[1][0] + h2 * filter[1][1]  + data[i+2] * filter[1][2]), 255); // green
+        data[i + 2] = Math.min (Math.floor(h1 * filter[2][0] + h2 * filter[2][1]  + data[i+2] * filter[2][2]), 255); // blue
       }
 
       // Draw the new image
+      this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.putImageData(imageData, 0, 0);
     },
 
@@ -331,6 +334,7 @@ export default {
       }
 
       // Draw the new image
+      this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.putImageData(imageData, 0, 0);
 
     },
@@ -366,6 +370,7 @@ export default {
       }
 
       // Draw the new image
+      this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.putImageData(imageData, 0, 0);
     },
 
@@ -384,6 +389,7 @@ export default {
       }
 
       // Draw the new image
+      this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.putImageData(imageData, 0, 0);
     },
 
@@ -419,6 +425,7 @@ export default {
       }
 
       // Draw the new image
+      this.ctx.clearRect(0,0,this.ctx.canvas.width, this.ctx.canvas.height);
       this.ctx.putImageData(imageData, 0, 0);
     },
 

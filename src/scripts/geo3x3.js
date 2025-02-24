@@ -4,7 +4,6 @@ export function Geo3x3toWGS (hash) {
   hash = hash.trim().match(/([WE]{1}[0-9]+)/gi);
   
   if (!hash || hash.length != 1) {
-    console.log("Invalid geo3x3 code")
     throw ("Invalid geo3x3 code");
   }
 

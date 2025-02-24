@@ -85,6 +85,7 @@ import { fontdefs } from '@/scripts/fontspecials.js'
 import { ciphers } from '@/scripts/ciphers.js'
 import * as bf  from '@/scripts/brainfuck.js'
 import { sequences } from '@/scripts/mathtools.js'
+import { numprops } from '@/scripts/mathtools.js'	
  
 export default {
 
@@ -99,7 +100,7 @@ export default {
     s: {
       type: String,
       required: false,
-      default: "atbash"
+      default: "code"
     },
   },
   
@@ -111,6 +112,8 @@ export default {
       fonts: null,
       ciphers: null,
       bfvars: null,
+      numprops: null,
+      seqs: null,
       alltools: [
         {
           href: "/helpcoord",          name: this.$t('menu.coordinates'), show : true, expand: false,
@@ -133,7 +136,6 @@ export default {
             { href: "/tryanswers",     name: "", show : true       },
             { href: "/wordvalue",      name: "", show : true       },
             { href: "/charcodes",      name: "", show : true       },
-            { href: "/wordsearch",     name: "", show : true       },
             { href: "/analtxt",        name: "", show : true       },
             { href: "/texttonum",      name: "", show : true       },
             { href: "/keyboards",      name: "", show : true       },
@@ -143,8 +145,7 @@ export default {
                 // Add numerology variants here in mounted ()
               ]
             },
-            { href: "/textchunks",     name: "", show : true       },
-            { href: "/anagrams",       name: "", show : true       }
+            { href: "/textchunks",     name: "", show : true       }
           ]
         },
         {
@@ -182,7 +183,8 @@ export default {
             { href: "/filltool",            name: "", show : true,        },
             { href: "/pixeldata",           name: "", show : true,        },
             { href: "/imagetransform",      name: "", show : true,        },
-            { href: "/textextractor",       name: "", show : true,        }
+            { href: "/textextractor",       name: "", show : true,        },
+            { href: "/barcode",             name: "", show : true,        }
           ]
         },
         {
@@ -195,7 +197,11 @@ export default {
             {  href: "/fibonacci",           name: "", show : true,        },
             {  href: "/gcdandlcm",           name: "", show : true,        },
             {  href: "/formulasolver",       name: "", show : true,        },
-            {  href: "/numberprop",          name: "", show : true,        },
+            {  href: "/numberprop",          name: "", show : true,        
+              l3: [
+                // Add number properties here in mounted ()
+              ]
+            },
             {  href: "/bignumbers",          name: "", show : true,        },
             {  href: "/cryptosolver",        name: "", show : true,        },
             {  href: "/sequences",           name: "", show : true,        
@@ -229,12 +235,21 @@ export default {
           ]
         },
         {
+          href: "/helpgames",          name: this.$t('menu.games'), show : true, expand: false,
+          l2: [
+            { href: "/sudokusolv",          name: "", show : true,        },
+            { href: "/mmsolver",            name: "", show : true,        },
+            { href: "/dictsearch",          name: "", show : true         },
+            { href: "/anagrams"  ,          name: "", show : true         },
+            { href: "/wordle",              name: "", show : true         },
+            { href: "/gameoflife",          name: "", show : true,        },
+          ]
+        },
+        {
           href: "/helpother",          name: this.$t('menu.other'), show : true, expand: false,
           l2: [
             { href: "/printlog",            name: "", show : true,        }, 
             { href: "/htmlparser",          name: "", show : true,        },
-            { href: "/sudokusolv",          name: "", show : true,        },
-            { href: "/mmsolver",            name: "", show : true,        },
             { href: "/unitconvertor",       name: "", show : true,        },
             { href: "/datecalc",            name: "", show : true,        },
             { href: "/randomizer",          name: "", show : true,        },
@@ -243,7 +258,6 @@ export default {
             { href: "/usastates",           name: "", show : true,        },
             { href: "/regions",             name: "", show : true,        },
             { href: "/dnacode",             name: "", show : true,        },
-            { href: "/gameoflife",          name: "", show : true,        },
             { href: "/booksearch",          name: "", show : true,        }
           ]
         }
@@ -258,7 +272,7 @@ export default {
     this.ciphers = ciphers;
     this.bfvars = bf.vars;
     this.seqs = sequences;
-    console.log(this.seqs);
+    this.numprops = numprops;
     for (let i of this.alltools) {
       i.show = true;
       i.expand = false;
@@ -309,6 +323,13 @@ export default {
              // Add all brainfuck variants
              for (let i = 0; i < this.seqs.length; i++) {
               j.l3.push( { name : this.seqs[i].name, href : j.href + "/" + this.seqs[i].ref, show : true, idx : i }) 
+            }
+          }
+          if (j.href === "/numberprop") {
+            j.expand = false;
+             // Add all number properties
+             for (let i = 0; i < this.numprops.length; i++) {
+              j.l3.push( { name : this.numprops[i].name, href : j.href,  ref : this.numprops[i].ref, show : true, idx : i }) 
             }
           }
         }
@@ -421,6 +442,10 @@ export default {
                     l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
                     let lookup = (l3.name === "Reverse Conway") ? "revconway" : l3.name.toLowerCase();	
                     if (this.$t('sequences.' + lookup).toLowerCase().indexOf(s) >= 0) l3.show = true;
+                    break;
+                  case "/numberprop" :
+                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
+                    if (this.$t('numberprop.' + l3.name).toLowerCase().indexOf(s) >= 0) l3.show = true;
                     break;
                   default :
                     l3.show = false;

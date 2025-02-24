@@ -32,7 +32,6 @@ export function NACtoWGS (code) {
   let coords = code.match(/([0123456789BCDFGHJKLMNPQRSTVWXZ]+)/gi);
 
   if (!coords || coords.length < 2 || coords.length > 3) {
-    console.log('Invalid NAC');
     throw ('Invalid NAC');
   }
 

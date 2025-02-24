@@ -106,7 +106,6 @@ export function convertKeyboard (s, fromkeyb, tokeyb) {
 
   // Handle wrong keyboard name
   if (from < 0 || to < 0) {
-    console.log("Unknown keyboard layout");
     throw ("Unknown keyboard detected");
   }
 

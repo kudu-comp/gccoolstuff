@@ -62,10 +62,10 @@
           class="form-control xl-size mb-2"
         >
       </div>
-      <button id="solve" class="btn mb-2 me-2" @click="solveSudoku">
-        {{ $t('sudokusolv.solve') }}
+      <button id="solve" class="btn sm-size mb-2 me-2" @click="solveSudoku">
+        <i class="fa-solid fa-puzzle-piece me-2"></i>{{ $t('buttons.solve') }}
       </button>
-      <button id="reset" class="btn mb-2" @click="resetSudoku">
+      <button id="reset" class="btn sm-size mb-2" @click="resetSudoku">
         {{ $t('buttons.reset') }}
       </button>
       <p

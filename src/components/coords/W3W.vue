@@ -63,6 +63,7 @@
         <input
           id="calc2"
           type="button"
+          disabled
           :value="$t('w3w.convertfrom')"
           class="btn sm-size ms-2 mb-2"
           @click="doConv2()"
@@ -89,6 +90,7 @@
         <input
           id="calc2"
           type="button"
+          disabled
           :value="$t('w3w.suggest')"
           class="btn md-size mb-2"
           @click="suggestW3W()"

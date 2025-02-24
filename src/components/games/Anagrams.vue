@@ -65,7 +65,7 @@
         >
       </div>
       <!-- Action buttons -->
-      <button :disabled="dictloading" class="btn mb-2" id="btn1" @click="anagrams()">{{$t('buttons.search')}}</button>
+      <button :disabled="dictloading" class="btn sm-size mb-2" id="btn1" @click="anagrams()"><i class="fa-solid fa-search me-2"></i>{{$t('buttons.search')}}</button>
       <!-- Error message -->
       <p
         v-show="errormsg"
@@ -85,7 +85,7 @@ import VLanguage from "@/components/inputs/VLanguage.vue";
 
 export default {
 
-  name: "wordsearch",
+  name: "Anagrams",
 
   components: {
     VLanguage  

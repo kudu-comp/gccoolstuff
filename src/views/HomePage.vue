@@ -126,11 +126,19 @@
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
+        <img class="card-img-top" src="../assets/images/games.jpg" alt="Games and puzzles" style="height: 200px">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('menu.games')}}</h5>
+          <p class="card-text" v-html="$t('games.intro')"></p>
+          <router-link to="/helpgames"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
         <img class="card-img-top" src="../assets/images/other.jpg" alt="Other tools" style="height: 200px">
         <div class="card-body">
           <h5 class="card-title">{{$t('menu.other')}}</h5>
           <p class="card-text" v-html="$t('othertools.intro')"></p>
-          <router-link to="/helpcomp"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+          <router-link to="/helpother"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
         </div>
       </div>
     </div>

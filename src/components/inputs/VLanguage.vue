@@ -15,7 +15,7 @@
     <span class="sr-only">Loading...</span>
   </div>
   <div v-if="!dictloading" class="row">
-    <label for="len" class="form-label md-size mb-2">{{$t('wordsearch.lettersused')}}</label>
+    <label for="len" class="form-label md-size mb-2">{{$t('wordle.lettersused')}}</label>
     <span class="md-size mb-2">{{dict.alphabet}}</span>
   </div>
 </template>

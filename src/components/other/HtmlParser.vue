@@ -366,8 +366,7 @@ export default {
         // let body = xmlTree.evaluate("//body", xmlTree, null, XPathResult.ANY_TYPE, null);
         // if (body.size != 1) throw ("There should be exactly 1 body tag not " + body.size);
         // let bgbody = body.getAttribute('background');
-        // console.log(bgbody);
-
+        
         // Find the comments using XPath
         x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
         let comment = x.iterateNext();

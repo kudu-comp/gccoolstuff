@@ -186,7 +186,6 @@ export default {
 
     nextTry: function (a, calc) {
       // Take two numbers apply the the basic operation, create a new array and try again
-      // console.log(a, calc);
       if (this.found) return;
       if (a.length === 1) {
         if (a[0] === this.outcome) {

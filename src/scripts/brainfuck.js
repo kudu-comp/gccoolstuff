@@ -27,8 +27,6 @@ export const vars = [
 ]
 
 export function preprocess (code, sel) {
-
-  console.log("Preprocess", code, sel);
   
   const bfsub = [
     [">", "<", "+", "-", ".", ",", "[", "]"],

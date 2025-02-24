@@ -58,6 +58,7 @@
     "convert": "Converteer",
     "calc": "Bereken",
     "search": "Zoek",
+    "solve": "Los op",
     "format": "Formatteer",
     "reset": "Reset",
     "cancel": "Annuleer",
@@ -119,6 +120,7 @@
     "imagetools": "Afbeeldingen",
     "mathtools": "Rekenen",
     "comptools": "Programmeren",
+    "games": "Puzzels & Games",
     "other": "Diversen",
     "help": "Help",
     "howto": "Tips",
@@ -134,7 +136,7 @@
   },
 
   "coordinates": {
-    "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en circles. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. Het is ook mogelijk Reverse Wherigo caches op te lossen."
+    "intro": "Een verzameling tools om coördinaten te converteren en te berekenen. Alle tools ondersteunen een groot aantal notaties en coördinaatsystemen. De tools berekenen projecties, lijnen, driehoeken en cirkels. Er is een tool om kaarten te maken of incomplete coördinaten te plotten. Het is ook mogelijk Reverse Wherigo caches op te lossen."
   },
 
   "codes": {
@@ -146,7 +148,7 @@
   },
 
   "imagetools": { 
-    "intro": "Tools om afbeeldingen snel te bewerken of te scannen. De EXIF scanner toont de gegevens van een afbeelding. De kleurenkiezer geeft de details van een geseleteerde kleur. De editor kan snel een gebied vullen, helderheid of contrast aanpassen of een filter toepassen. Er is een tool om een afbeelding te genereren uit getallen. Transformeren doet rare dingen als een afbeelding gedeeltelijk spiegelen of verschuiven. Tekst zoeker vindt mogelijke teksten in willekeurige files, zoals afbeeldingen."
+    "intro": "Tools om afbeeldingen snel te bewerken of te scannen. De EXIF scanner toont de gegevens van een afbeelding. De kleurenkiezer geeft de details van een geseleteerde kleur. De editor kan snel een gebied vullen, helderheid of contrast aanpassen of een filter toepassen. Er is een tool om een afbeelding te genereren uit getallen. Transformeren doet rare dingen als een afbeelding gedeeltelijk spiegelen of verschuiven. Tekst zoeker vindt mogelijke teksten in willekeurige files, zoals afbeeldingen. Genereer barcodes."
   },
 
   "mathtools": {
@@ -155,6 +157,10 @@
 
   "comptools" : {
     "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Het is mogelijk diverse esoterische programmeertalen (esolangs) uit te voeren, bijv. Brainfuck en Cow. Het berekenen van de waarheidstabel bij een logische expressie."
+  },
+
+  "games": {
+    "intro": "Een verzameling tools voor het oplossen van puzzels. Sudoku en Sudoku X oplossen. Mastermind kraken. De New York Times Wordle (of Lingo) oplossen. Doorzoek het puzzelwoordenboek om kruiswoordpuzzels sneller op te lossen. Ga op zoek naar anagrammen. Speel the game of life."
   },
 
   "othertools" : {
@@ -580,7 +586,7 @@
     "brigh": "Helderheid",
     "contr": "Contrast",
     "gray1": "Zwart/Wit (Gemiddelden)",
-    "gray2": "Zwart/Wit (Luminanctie)",
+    "gray2": "Zwart/Wit (Luminantie)",
     "invert": "Negatief",
     "sepia": "Sepia",
     "colordepth": "Kleurdiepte aanpassen",
@@ -626,6 +632,16 @@
     "fileerror": "Fout tijdens het laden van de file"
   },
 
+  "barcode": {
+    "title": "Barcodes",
+    "long": "Maak een barcode. Sommige codes accepteren alle tekens, zoals CODE128, QR, Datamatrix and Aztec. Andere codes accepteren alleen nummers of een beperkte set tekens.",
+    "bctype": "Barcode type",
+    "msg": "Bericht",
+    "clr": "Barcode kleur",
+    "bgclr": "Achtergrond color",
+    "showtxt": "Toon tekst (werkt niet voor all barcodes)"
+  },
+
   "htmlparser": {
     "title": "Scan HTML",
     "long": "Soms wordt informatie verstop in de listing van de geocache met gebruik van HTML. Bijvoorbeeld door commentaar toe te voegen, witte tekst te gebruiken of heel erg kleine letters. Of er worden letters gemarkeerd door ze vet of schuin te maken of op een andere manier te onderscheiden. HTML Scanner scant de paginabron op links, afbeeldingen en andere verborgen informatie. De tool werkt alleen met de officiële listing van geocaching.com. Kopieer en plak de paginabron hieronder.",
@@ -656,7 +672,6 @@
     "type": "Sudoku type",
     "size": "Afmeting",
     "alt": "Hints",
-    "solve": "Los op",
     "thereare": "Er zijn",
     "sols": "oplossingen"
   },
@@ -1199,7 +1214,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words vertaalt een coördinaat naar 3 woorden. <b>Sinds november 2024 is dit een betaalde dienst en wordt niet meer ondersteund door gctools.nl.</b></p><p>Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
+    "long": "<h4>Sinds november 2024 is dit een betaalde dienst en wordt niet meer ondersteund door gctools.nl.</h4><p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
     "languages": "Beschikbare talen",
     "convertto": "Converteer naar w3w",
     "convertfrom": "Convert naar ...",
@@ -1339,9 +1354,9 @@
     "upper": "Alles hoofdletters"
   },
 
-  "wordsearch": {
-    "title": "Woord zoeken",
-    "long": "<p>Doorzoek een van de vele woordenboeken. Zoek op een patroon. Gebruik ? voor de onbekende letters. Specificeer optioneel de letters die voorkomen of juist niet voorkomen. Of zoek naar het langste woord, woorden die beginnen met, eindigen met of bepaalde letters bevatten. Dit is een handige tool voor het oplossen van Wordle (Lingo) en als hulp bij kruiswoordraadsels.</p><p>Bij het zoeken worden de letters in het alfabet gebruikt. Letters die niet voorkomen worden vervangen of niet gebruikt. Bijvoorbeeld á wordt vervangen door a, maar niet in het Tsjechisch waar á een letter is in het alfabet. Zoeken naar het langste woord kan lang duren als er teveel letters worden gebruikt.</p>",
+  "wordle": {
+    "title": "Wordle oplosser",
+    "long": "<p>Dit is een handige tool voor het oplossen van Wordle (Lingo). Gebruik ? voor de onbekende letters. Specificeer optioneel de letters die voorkomen of die juist niet voorkomen.</p>",
     "length": "Woord lengte",
     "pattern": "Patroon gebruik ? voor onbekende letters",
     "yellows": "Letters op onbekende positie",
@@ -1349,18 +1364,27 @@
     "wordsfound": " woorden gevonden.",
     "errpattern": "Teveel of te weinig letters in patroon.",
     "toomany": "Maximum aantal woorden gevonden.",
-    "longest": "Langste woord gevonden: ",
-    "starting": "Woorden die beginnen met ",
-    "ending": "Woorden die eindigen met ",
-    "containing": "Woorden die bevatten ",
-    "letters": "Letters voor onderstaande zoekopdrachten",
-    "searchlongest": "Langste",
-    "searchstart": "Start met",
-    "searchend": "Eindigt op",
-    "searchcontains": "Bevat",
-    "searchpattern": "Zoek patroon",
     "lettersused": "Letters in alfabet"
-},
+  },
+
+  "dictsearch": {
+      "title": "Puzzelwoordenboek",
+      "long": "<p>Doorzoek een van de vele woordenboeken.</p>",
+      "searchstr": "Zoekterm",
+      "yellows": "Letters op onbekende positie",
+      "greys": "Letters die niet voorkomen",
+      "minlength": "Min lengte",
+      "maxlength": "Max lengte (0 = geen limiet)",
+      "searchfor": "Hoe wil je zoeken?",
+      "wordsfound": " woorden gevonden.",
+      "toomany": "Maximum aantal woorden gevonden.",
+      "longest": "Langste woord met alle gegeven letters",
+      "pattern": "Patroon gebruik ? voor onbekende letters",
+      "start": "Woorden die beginnen met de gegeven letters",
+      "end": "Woorden die eindigen met de gegeven letters",
+      "contains": "Woorden die de gegeven letters bevatten",
+      "regex": "Woorden die voldoen aan een reguliere expressie"
+  },
 
   "anagrams": {
     "title": "Anagrammen",

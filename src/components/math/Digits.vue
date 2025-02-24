@@ -268,7 +268,6 @@ export default {
         .then(response => response.json())
         .then(data => {
             this.result = data.result;
-            // console.log('Success', data)
         })
         .catch((error) => {
             console.error('Error ', error);

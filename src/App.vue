@@ -112,11 +112,6 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("wordsearch.title"),
-                path: { name: "WordSearch" },
-              },
-              {
-                type: "link",
                 text: this.$t("analtxt.title"),
                 path: { name: "AnalTxt" },
               },
@@ -144,11 +139,6 @@ export default {
                 type: "link",
                 text: this.$t("textchunks.title"),
                 path: { name: "TextChunks" },
-              },            
-              {
-                type: "link",
-                text: this.$t("anagrams.title"),
-                path: { name: "Anagrams" },
               },            
             ],
           },
@@ -243,6 +233,11 @@ export default {
                 type: "link",
                 text: this.$t("textextractor.title"),
                 path: { name: "TextExtractor" },
+              },
+              {
+                type: "link",
+                text: this.$t("barcode.title"),
+                path: { name: "Barcode" },
               }
             ],
           },
@@ -387,6 +382,43 @@ export default {
           },
           {
             type: "link",
+            text: this.$t("menu.games"),
+            arrowColor: "#722727",
+            subMenuOptions: [
+              {
+                type: "link",
+                text: this.$t("sudokusolv.title"),
+                path: { name: "SudokuSolv" },
+              },
+              {
+                type: "link",
+                text: this.$t("mmsolver.title"),
+                path: { name: "MMSolver" },
+              },
+              {
+                type: "link",
+                text: this.$t("dictsearch.title"),
+                path: { name: "DictSearch" },
+              },
+              {
+                type: "link",
+                text: this.$t("anagrams.title"),
+                path: { name: "Anagrams" },
+              },            
+              {
+                type: "link",
+                text: this.$t("wordle.title"),
+                path: { name: "Wordle" },
+              },
+              {
+                type: "link",
+                text: this.$t("gameoflife.title"),
+                path: { name: "GameOfLife" },
+              },
+            ] 
+          },
+          {
+            type: "link",
             text: this.$t("menu.other"),
             arrowColor: "#722727",
             subMenuOptions: [
@@ -399,17 +431,7 @@ export default {
                 type: "link",
                 text: this.$t("htmlparser.title"),
                 path: { name: "HtmlParser"}
-              },                    
-              {
-                type: "link",
-                text: this.$t("sudokusolv.title"),
-                path: { name: "SudokuSolv" },
-              },
-              {
-                type: "link",
-                text: this.$t("mmsolver.title"),
-                path: { name: "MMSolver" },
-              },
+              },                   
               {
                 type: "link",
                 text: this.$t("unitconvertor.title"),
@@ -449,11 +471,6 @@ export default {
                 type: "link",
                 text: this.$t("dnacode.title"),
                 path: { name: "DNACode" },
-              },
-              {
-                type: "link",
-                text: this.$t("gameoflife.title"),
-                path: { name: "GameOfLife" },
               },
               {
                 type: "link",
@@ -501,6 +518,11 @@ export default {
                 type: "link",
                 text: this.$t("labels.help") + this.$t("menu.comptools"),
                 path: { name: "HelpComp"}
+              },  
+              {
+                type: "link",
+                text: this.$t("labels.help") + this.$t("menu.games"),
+                path: { name: "GamesIntro"}
               },  
               {
                 type: "link",
@@ -565,14 +587,12 @@ export default {
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("tryanswers.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("wordvalue.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[2].text = this.$t("charcodes.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("wordsearch.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("analtxt.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("texttonum.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("keyboards.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("texttoss.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("numerology.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[9].text = this.$t("textchunks.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[10].text = this.$t("anagrams.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[3].text = this.$t("analtxt.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("texttonum.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("keyboards.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("texttoss.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("numerology.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("textchunks.title");
       this.navbarOptions.menuOptionsLeft[2].text = this.$t("menu.codes");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");
@@ -591,6 +611,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[4].text = this.$t("pixelbuild.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[5].text = this.$t("imagetransform.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[6].text = this.$t("textextractor.title");
+      this.navbarOptions.menuOptionsLeft[3].subMenuOptions[7].text = this.$t("barcode.title");
       this.navbarOptions.menuOptionsLeft[4].text = this.$t("menu.mathtools");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[0].text = this.$t("baseconv.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[1].text = this.$t("digits.title");
@@ -618,31 +639,36 @@ export default {
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[8].text = this.$t("duckspeak.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[9].text = this.$t("checksum.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[10].text = this.$t("truthtable.title");
-      this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.other");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("printlog.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("htmlparser.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("sudokusolv.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("mmsolver.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("unitconvertor.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("datecalc.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[6].text = this.$t("randomizer.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[7].text = this.$t("periodictable.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[8].text = this.$t("countries.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[9].text = this.$t("usastates.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[10].text = this.$t("regions.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[11].text = this.$t("dnacode.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[12].text = this.$t("gameoflife.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[13].text = this.$t("booksearch.title");
-      this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.help");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("menu.howto");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("labels.help") + this.$t("menu.coordinates");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[2].text = this.$t("labels.help") + this.$t("menu.texttools");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[3].text = this.$t("labels.help") + this.$t("menu.codes");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[4].text = this.$t("labels.help") + this.$t("menu.imagetools");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("labels.help") + this.$t("menu.mathtools");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[6].text = this.$t("labels.help") + this.$t("menu.comptools");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[7].text = this.$t("labels.help") + this.$t("menu.other");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[8].text = this.$t("menu.about");
+      this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.games");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("sudokusolv.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("mmsolver.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("dictsearch.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("anagrams.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("wordle.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("gameoflife.title");
+      this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.other");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("printlog.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("htmlparser.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[2].text = this.$t("unitconvertor.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("datecalc.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[4].text = this.$t("randomizer.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("periodictable.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[6].text = this.$t("countries.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[7].text = this.$t("usastates.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[8].text = this.$t("regions.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[9].text = this.$t("dnacode.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[10].text = this.$t("booksearch.title");
+      this.navbarOptions.menuOptionsLeft[8].text = this.$t("menu.help");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[0].text = this.$t("menu.howto");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[1].text = this.$t("labels.help") + this.$t("menu.coordinates");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[2].text = this.$t("labels.help") + this.$t("menu.texttools");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[3].text = this.$t("labels.help") + this.$t("menu.codes");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[4].text = this.$t("labels.help") + this.$t("menu.imagetools");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[5].text = this.$t("labels.help") + this.$t("menu.mathtools");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[6].text = this.$t("labels.help") + this.$t("menu.comptools");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[7].text = this.$t("labels.help") + this.$t("menu.games");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[8].text = this.$t("labels.help") + this.$t("menu.other");
+      this.navbarOptions.menuOptionsLeft[8].subMenuOptions[9].text = this.$t("menu.about");
     },
 
     vnbItemClicked: function (text) {

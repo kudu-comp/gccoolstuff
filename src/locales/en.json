@@ -57,6 +57,7 @@
   "buttons": {
     "convert": "Convert",
     "calc": "Calculate",
+    "solve": "Solve",
     "search": "Search",
     "format": "Format",
     "reset": "Reset",
@@ -119,6 +120,7 @@
     "imagetools": "Images",
     "comptools": "Programming",
     "mathtools": "Math",
+    "games": "Puzzles & Games",
     "other": "More tools",
     "help": "Help",
     "howto": "How to",
@@ -152,7 +154,11 @@
   },
 
   "imagetools": {
-    "intro": "Some tools to quickly edit or scan images. Exif scanner shows the metadata of an image. The color picker will show all the details of a selected color. The color editor can do many things, such as filling an area, change contrast or brightness and apply filters. There is a tool to draw an image from number input. And a tool to do crazy things such as flipping half the rows or shifting parts of the image."
+    "intro": "Some tools to quickly edit or scan images. Exif scanner shows the metadata of an image. The color picker will show all the details of a selected color. The color editor can do many things, such as filling an area, change contrast or brightness and apply filters. There is a tool to draw an image from number input. And a tool to do crazy things such as flipping half the rows or shifting parts of the image. Create barcodes."
+  },
+
+  "games": {
+    "intro": "A collection of tools to solve puzzles. Solve Sudoku and Sudoku X. Solve Mastermind. Solve the NYT wordle. Search the dictionary to solve crosswords or find anagrams. Play the game of life."
   },
 
   "othertools" : {
@@ -624,6 +630,16 @@
     "fileerror": "Error loading file."
   },
 
+  "barcode": {
+    "title": "Barcodes",
+    "long": "Create a barcode. Some codes accept all text and characters, such as CODE128, QR, Datamatrix and Aztec. Other codes only accept numbers or only a small set of characters.",
+    "bctype": "Barcode type",
+    "msg": "Message",
+    "clr": "Bar color",
+    "bgclr": "Background color",
+    "showtxt": "Show text (works only for some barcodes)"
+  },
+
   "htmlparser": {
     "title": "Scan HTML",
     "long": "Sometimes information is hidden inside the cache listing using HTML. For example using white or very small text, or marking letters as bold, italic or in some other way. Links can be hidden inside images or in other places. HTML Scanner scans the page source for links, images and hidden information. This tool only works with the official pages from geocaching.com. Copy & paste the page source below.",
@@ -654,7 +670,6 @@
     "type": "Sudoku type",
     "size": "Size",
     "alt": "Hints",
-    "solve": "Solve",
     "thereare": "There are",
     "sols": "solutions"
   },
@@ -1190,7 +1205,7 @@
 
   "w3w" : {
     "title": "What3words",
-    "long": "<p>What3words translates a coordinate in 3 single words.<b>As of November 2024 this is a paid service and no longer supported by gctools.nl</b></p><p>It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
+    "long": "<h4>As of November 2024 this is a paid service and no longer supported by gctools.nl</h4><p>What3words translates a coordinate in 3 single words.<b></b></p><p>It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
     "languages": "Available languages",
     "convertto": "Convert to w3w",
     "convertfrom": "Convert to ...",
@@ -1330,29 +1345,39 @@
     "upper": "All uppercase"
   },
 
-  "wordsearch": {
-    "title": "Word search",
-    "long": "<p>Search for words in one of the many dictionaries. Search using a pattern. The pattern uses a question mark for unknown letters. Optionally specify letters that must be present or not present. Or simply search for the longest word found, words starting with, words ending with or words containing a certain string. This is a nice tool for solving Wordle or cross word puzzles.</p><p>The search uses the letters in the alphabet. Letters that are not in the alphabet are replaced by something else or are removed. For example á is replaced by a, but in Czech as it is a genuine letter in that alphabet. Searching for the longest word can take some time if you provide too many letters.</p>",
-    "length": "Word length",
+  "wordle": {
+    "title": "Wordle solver",
+    "long": "<p>This is a tool for solving Wordle. Optionally specify letters that must be present or that are not present.</p>",
+    "length": "Wordle length",
     "pattern": "Word pattern use ? for unknown letters",
     "yellows": "Letters at unknown positions",
     "greys": "Letters not in the word",
     "wordsfound": " words found.",
     "errpattern": "Word pattern too long or too short",
     "toomany": "Maximum number of words reached.",
-    "longest": "Longest word found: ",
-    "starting": "Words starting with ",
-    "ending": "Words ending with ",
-    "letters": "Letters for searches below",
-    "containing": "Words containing ",
-    "searchlongest": "Longest word",
-    "searchstart": "Starts with",
-    "searchend": "Ends with",
-    "searchcontains": "Contains",
-    "searchpattern": "Search pattern",
     "lettersused": "Letters in alphabet"
   },
 
+  "dictsearch": {
+    "title": "Puzzle Dictionary",
+    "long": "<p>Search for words in one of the many dictionaries.</p>",
+    "searchstr": "Search for",
+    "yellows": "Letters at unknown positions",
+    "greys": "Letters not in the word",
+    "minlength": "Min length",
+    "maxlength": "Max length (0 = no limit)",
+    "searchfor": "What are you searching for?",
+    "wordsfound": " words found.",
+    "toomany": "Maximum number of words reached.",
+    "longest": "Longest word with these letters",
+    "pattern": "Word pattern use ? for unknown letters",
+    "start": "Words starting with these letters",
+    "end": "Words ending with these letters",
+    "contains": "Words containing these letters",
+    "regex": "Words that meet the a regular expression",
+    "lettersused": "Letters in alphabet"
+  },
+  
   "anagrams": {
     "title": "Anagrams",
     "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device.",

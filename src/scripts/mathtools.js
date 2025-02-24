@@ -18,6 +18,54 @@ export const sequences = [
   { name: "Palindrome", func: palindrome, ref: "palindrome"}
 ];
 
+export const numprops = [
+  { name: "Odd or even", ref: "oddoreven", group: true},
+  { name: "Even numbers", ref: "even", func: function(n) { return n % 2 === 0; }, value: false},
+  { name: "Odd numbers", ref: "odd",  func: function(n) { return n % 2 === 1; }, value: false},
+  // Prime related properties
+  { name: "Primes and so on", ref: "primerel", group: true},
+  { name: "Prime", ref: "prime",func: function(n) { return checkprime(n); }, value: false},
+  { name: "Composite numbers", ref: "comp",func: function(n) { return !checkprime(n); }, value: false},
+  { name: "Biprimes", ref: "bi",func: function(n) { return isbiprime(n); }, value: false},
+  // Properties related to divisors
+  { name: "Divisor related", ref: "divrel", group: true},
+  { name: "Abundant", ref: "abun", func: function(n) { return isabundant(n); }, value: false},
+  { name: "Perfect", ref: "perfect", func: function(n) { return isperfect(n); }, value: false},
+  { name: "Deficient", ref: "defi",  func: function(n) { return isdeficient(n); }, value: false},
+  { name: "Powerful", ref: "pow", func: function(n) { return ispowerful(n); }, value: false},
+  { name: "Squarefree", ref: "sqfree", func: function(n) { return issquarefree(n); }, value: false},
+  // Properties related to 2D shapes or polygonal numbers
+  { name: "Polygonal numbers", ref: "polygonal", group: true},
+  { name: "Triangular", ref: "tri", func: function(n) { return istriangular(n); }, value: false},
+  { name: "Square", ref: "squa", func: function(n) { return issquare(n); }, value: false},
+  { name: "Pentagonal", ref: "penta", func: function(n) { return ispentagonal(n); }, value: false},
+  { name: "Hexagonal", ref: "hexa", func: function(n) { return ishexagonal(n); }, value: false},
+  { name: "Heptagonal", ref: "hepta", func: function(n) { return isheptagonal(n); }, value: false},
+  { name: "Octagonal", ref: "octa", func: function(n) { return isoctagonal(n); }, value: false},
+  { name: "Nonagonal", ref: "nona", func: function(n) { return isnonagonal(n); }, value: false},
+  { name: "Decagonal", ref: "deca", func: function(n) { return isdecagonal(n); }, value: false},
+  { name: "Star", ref: "star", func: function(n) { return isstar(n); }, value: false},
+  // Properties related to binary form
+  { name: "Binary related", ref: "binrel", group: true},
+  { name: "Evil numbers", ref: "evil", func: function(n) { return isevil(n); }, value: false},
+  { name: "Odious numbers", ref: "odious", func: function(n) { return isodious(n); }, value: false},
+  // Properties related to 3D shapes or polyhedral nunbers
+  { name: "Polyhedral numbers", ref: "polyhedral", group: true},
+  { name: "Tetrahedral", ref: "tethed", func: function(n) { return istetrahedral(n); }, value: false},
+  { name: "Square pyramidal", ref: "sqpyr", func: function(n) { return issquarepyramidal(n); }, value: false},
+  { name: "Cubic", ref: "cube", func: function(n) { return iscube(n); }, value: false},
+  // Various other properties 
+  { name: "Other number properties", ref: "others", group: true},
+  { name: "Fibonacci", ref: "fib", func: function(n) { return isfibonacci(n); }, value: false},
+  { name: "Palindrome", ref: "pal", func: function(n) { return ispalindrome(n); }, value: false},
+  { name: "Narcistic", ref: "narc", func: function(n) { return isnarcistic(n); }, value: false},
+  { name: "Niven", ref: "niven", func: function(n) { return isniven(n); }, value: false},
+  { name: "Kaprekar", ref: "kap", func: function(n) { return iskaprekar(n); }, value: false},
+  { name: "Lucky", ref: "lucky", func: function(n) { return islucky(n); }, value: false},
+  { name: "Happy", ref: "happ", func: function(n) { return ishappy(n); }, value: false},
+  { name: "Aspiring", ref: "asp", func: function(n) { return isaspiring(n); }, value: false},
+]
+
 /*
  * Check if the number is prime
  *
@@ -210,7 +258,6 @@ export function hailstone (start, count, max, stopend) {
       cnt++;
       if (dp[i] >= max) break;
   }
-  console.log(dp[n], seq);
 	return { n: dp[cnt], cnt: cnt, seq : seq }
 
 }
@@ -303,10 +350,8 @@ export function abundant(n, max) {
   let seq = "12";
   let j = 13;
   let cnt = 0;
-  console.log(n, max);
   if (n === 0 && max > 0) n = Number.MAX_SAFE_INTEGER;
   if (n > 0 && max === 0) max = Number.MAX_SAFE_INTEGER;
-  console.log(n, max);
 
   for (let i = 1; i < n; i++) {
     while ( !isabundant(j) ) j++;

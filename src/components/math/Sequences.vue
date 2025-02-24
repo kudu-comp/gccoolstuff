@@ -149,7 +149,6 @@ export default {
   mounted: function() {
     this.$refs.niter.focus();
     this.seqs = mathtools.sequences;
-    console.log(this.seqs)
     if (this.$route.params.seq) {
       this.number = this.$route.params.seq;
     }  

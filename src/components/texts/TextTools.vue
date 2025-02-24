@@ -31,13 +31,6 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('wordsearch.title')}}</h5>
-          <p class="card-text" v-html="$t('wordsearch.long')"></p>
-          <router-link to="/wordsearch"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
           <h5 class="card-title">{{$t('analtxt.title')}}</h5>
           <p class="card-text" v-html="$t('analtxt.long')"></p>
           <router-link to="/analtxt"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
@@ -76,13 +69,6 @@
           <h5 class="card-title">{{$t('textchunks.title')}}</h5>
           <p class="card-text" v-html="$t('textchunks.long')"></p>
           <router-link to="/textchunks"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('anagrams.title')}}</h5>
-          <p class="card-text" v-html="$t('anagrams.long')"></p>
-          <router-link to="/anagrams"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
     </div>

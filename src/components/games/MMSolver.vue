@@ -127,10 +127,10 @@
           </tr>
         </table>
       </div>
-      <button id="solve" class="btn mb-2 me-2" @click="solveMM">
-        {{ $t('sudokusolv.solve') }}
+      <button id="solve" class="btn sm-size mb-2 me-2" @click="solveMM">
+        <i class="fa-solid fa-puzzle-piece me-2"></i>{{ $t('buttons.solve') }}
       </button>
-      <button id="reset" class="btn mb-2" @click="resetMM">
+      <button id="reset" class="btn sm-size mb-2" @click="resetMM">
         {{ $t('buttons.reset') }}
       </button>
       <p
@@ -271,8 +271,6 @@ export default {
 
       // Check the hints
       for (let i=0; i < this.maxhints; i++) {
-
-        // console.log(this.pins[i]);
 
         // On first empty hint stop and set number of hints
         if (this.pins[i].length === 0) {
