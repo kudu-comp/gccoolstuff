@@ -7,7 +7,7 @@
       <slot name="label">{{ $t('labels.distance') }}</slot>
     </label>
     <input
-      type="text"
+      type="number"
       class="form-control md-size mb-2 me-2"
       id="distance"
       :value="dist"

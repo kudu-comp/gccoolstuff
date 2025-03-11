@@ -96,6 +96,7 @@
         Proj4js definition
       </option>
     </select>
+    <slot name="popup"></slot>
   </div>
 </template>
 

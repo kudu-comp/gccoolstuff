@@ -15,6 +15,14 @@
         <template #label>
           {{ $t('labels.center') }} 1
         </template>
+        <template #popup>
+          <button 
+            class="btn sm-size mb-2 ms-2" 
+            @click="modal1 = true"
+          >
+            {{ $t('circles.from3p') }}
+          </button>
+        </template>     
       </v-coord>
       <v-distance
         v-model:dist="radius1"
@@ -31,6 +39,14 @@
         <template #label>
           {{ $t('labels.center') }} 2
         </template>
+        <template #popup>
+          <button 
+            class="btn sm-size mb-2 ms-2" 
+            @click="modal2 = true"
+          >
+            {{ $t('circles.from3p') }}
+          </button>
+        </template>    
       </v-coord>
       <v-distance
         v-model:dist="radius2"
@@ -40,6 +56,20 @@
           {{ $t('labels.radius') }}
         </template>
       </v-distance>
+      <v-circle3p
+        v-if="modal1"
+        v-model:center="coordinate1"
+        v-model:datum="selecteddatum1"
+        v-model:radius="radius1"
+        @close="modal1 = false"
+      />
+      <v-circle3p
+        v-if="modal2"
+        v-model:center="coordinate2"
+        v-model:datum="selecteddatum2"
+        v-model:radius="radius2"
+        @close="modal2 = false"
+      />
       <v-show-on-map id="go" class="btn mb-2 me-2" @show="getPoints()" />
       <div
         v-show="errormsg"
@@ -65,6 +95,7 @@ import VDistance from '@/components/inputs/VDistance.vue'
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue'
 import L from "leaflet";
+import VCircle3p from '@/components/inputs/VCircle3p.vue';
 
 export default {
   
@@ -74,7 +105,8 @@ export default {
     VCoord,
     VMap,
     VDistance,
-    VShowOnMap
+    VShowOnMap,
+    VCircle3p
   },
 
   data: function () {
@@ -85,8 +117,10 @@ export default {
       selecteddatum2: "WGS84",
       radius1: 0,
       unit1: 1,
+      modal1: false,
       radius2: 0,
       unit2: 1,
+      modal2: false,
       result: "",
       errormsg: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/coordcalc/coordcalc.php",

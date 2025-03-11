@@ -1123,6 +1123,10 @@
     "outdoors2": "Wandelroutes"
   },
 
+  "dialogc3p": {
+    "title": "Cirkel door 3 punten"
+  },
+
   "convert": {
     "title": "Converteren",
     "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen. Andere ondersteunde formaten zijn MGRS, OGSM en NAD. Je kan ook een willekeurige conversie invoeren middels de proj4 definitie van EPSG (als je weet hoe dat werkt).",
@@ -1202,7 +1206,8 @@
     "distance": "Afstand tussen snijpunten",
     "or": " of ",
     "surf": "Oppervlakte van cirkel ",
-    "circ": "Omtrek van cirkel  "
+    "circ": "Omtrek van cirkel  ",
+    "from3p": "Geef 3 punten"
   },
 
   "antipode": {
@@ -1365,6 +1370,16 @@
     "errpattern": "Teveel of te weinig letters in patroon.",
     "toomany": "Maximum aantal woorden gevonden.",
     "lettersused": "Letters in alfabet"
+  },
+
+  "wordsearch": {
+    "title": "Woordzoeker oplossen",
+    "long": "Een handige tool voor het oplossen van woordzoekers. Zoekt horizontaal, verticaal en diagonaal in beide richtingen. De overgebleven letters worden getoond. ",
+    "grid": "Het zoekvierkant",
+    "words": "Te vinden woorden",
+    "griderror": "Niet alle regels in het zoekvierkant hebben dezelfde lengte",
+    "remletters": "Overgebleven letters: ",
+    "notfound": " kan niet worden gevonden."
   },
 
   "dictsearch": {

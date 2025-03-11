@@ -242,6 +242,7 @@ export default {
             { href: "/dictsearch",          name: "", show : true         },
             { href: "/anagrams"  ,          name: "", show : true         },
             { href: "/wordle",              name: "", show : true         },
+            { href: "/wordsearch",          name: "", show : true,        },
             { href: "/gameoflife",          name: "", show : true,        },
           ]
         },

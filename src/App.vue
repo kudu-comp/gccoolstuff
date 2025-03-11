@@ -293,11 +293,6 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("cryptosolver.title"),
-                path: { name: "CryptoSolver" },
-              },
-              {
-                type: "link",
                 text: this.$t("sequences.title"),
                 path: { name: "Sequences" },
               },
@@ -404,11 +399,21 @@ export default {
                 type: "link",
                 text: this.$t("anagrams.title"),
                 path: { name: "Anagrams" },
-              },            
+              },
               {
                 type: "link",
                 text: this.$t("wordle.title"),
                 path: { name: "Wordle" },
+              },
+              {
+                type: "link",
+                text: this.$t("wordsearch.title"),
+                path: { name: "WordSearch" },
+              },
+              {
+                type: "link",
+                text: this.$t("cryptosolver.title"),
+                path: { name: "CryptoSolver" },
               },
               {
                 type: "link",
@@ -622,11 +627,10 @@ export default {
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[6].text = this.$t("formulasolver.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[7].text = this.$t("numberprop.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[8].text = this.$t("bignumbers.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[9].text = this.$t("cryptosolver.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[10].text = this.$t("sequences.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[11].text = this.$t("combinations.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[12].text = this.$t("equations.title");
-      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[13].text = this.$t("nimbers.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[9].text = this.$t("sequences.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[10].text = this.$t("combinations.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[11].text = this.$t("equations.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[12].text = this.$t("nimbers.title");
       this.navbarOptions.menuOptionsLeft[5].text = this.$t("menu.comptools");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[0].text = this.$t("bintotext.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[1].text = this.$t("bcd.title");
@@ -645,7 +649,9 @@ export default {
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[2].text = this.$t("dictsearch.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[3].text = this.$t("anagrams.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[4].text = this.$t("wordle.title");
-      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("gameoflife.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[5].text = this.$t("wordsearch.title");
+      this.navbarOptions.menuOptionsLeft[4].subMenuOptions[6].text = this.$t("cryptosolver.title");
+      this.navbarOptions.menuOptionsLeft[6].subMenuOptions[7].text = this.$t("gameoflife.title");
       this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.other");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("printlog.title");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("htmlparser.title");

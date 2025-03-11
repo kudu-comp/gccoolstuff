@@ -1120,6 +1120,10 @@
     "outdoors2": "Hiking routes"
   },
 
+  "dialogc3p": {
+    "title": "Circle through 3 points"
+  },
+
   "convert": {
     "title": "Convert",
     "long" : "There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard. Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates. Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).",
@@ -1193,7 +1197,8 @@
     "distance": "Distance between intersection points",
     "or": " or ",
     "surf": "Surface of circle ",
-    "circ": "Circumference of circle "
+    "circ": "Circumference of circle ",
+    "from3p": "Use 3 points"
   },
 
   "antipode": {
@@ -1356,6 +1361,16 @@
     "errpattern": "Word pattern too long or too short",
     "toomany": "Maximum number of words reached.",
     "lettersused": "Letters in alphabet"
+  },
+
+  "wordsearch": {
+    "title": "Word search solver",
+    "long": "A tool to solve word search puzzles. It reads horizontal, vertical and diagonal in both directions. The remaining letters are displayed.",
+    "grid": "The grid",
+    "words": "Words to find",
+    "griderror": "Not all lines in the grid are the same length",
+    "remletters": "Remaining letters: ",
+    "notfound": " cannot be found."
   },
 
   "dictsearch": {
