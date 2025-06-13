@@ -76,12 +76,12 @@ export default {
   name: "VCircle3p",
 
   props: {
-    center: {
-      type: String,
+    lat: {
+      type: Number,
       required: true
     },
-    datum: {
-      type: String,
+    lon: {
+      type: Number,
       required: true
     },
     radius: {
@@ -124,29 +124,18 @@ export default {
 
       let coord1, coord2, coord3, gridcoord1, gridcoord2, gridcoord3;
 
-      coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84")
-          .then (data => {
-            coord1 = data;
-            return coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-          })
-          .then (data => {
-            coord2 = data;
-            return coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
-          })
-          .then (data => {
-            coord3 = data;
-            return coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-          })
+      coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "RD")
           .then (data => {
             gridcoord1 = data;
-            return coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
+            return coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "RD");
           })
           .then (data => {
             gridcoord2 = data;
-            return coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
+            return coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "RD");
           })
           .then (data => {
             gridcoord3 = data;
+            // Calculate center
             let d= 2*(gridcoord1.lon*(gridcoord2.lat - gridcoord3.lat) + gridcoord2.lon*(gridcoord3.lat - gridcoord1.lat) + gridcoord3.lon*(gridcoord1.lat - gridcoord2.lat));
             let center = {
               lon: ((gridcoord1.lon**2 + gridcoord1.lat**2)*(gridcoord2.lat - gridcoord3.lat) +
@@ -157,9 +146,9 @@ export default {
                   (gridcoord3.lon**2 + gridcoord3.lat**2)*(gridcoord2.lon - gridcoord1.lon))/d
             };
             // Sent event to update the value of the associated input
-            this.$emit ('update:center', center.lon.toFixed(0) + " " + center.lat.toFixed(0));
-            this.$emit ('update:datum', "EPSG:28992");
-            this.$emit ('update:radius', Math.sqrt((center.lon - gridcoord1.lon)**2 + (center.lat - gridcoord1.lat)**2).toFixed(2));
+            this.$emit ('update:lon', center.lon );
+            this.$emit ('update:lat', center.lat );
+            this.$emit ('update:radius', Math.sqrt((center.lon - gridcoord1.lon)**2 + (center.lat - gridcoord1.lat)**2));
             // Close the modal window
             this.$emit ('close')
 
@@ -168,8 +157,6 @@ export default {
             this.error = true;
             this.errormsg = error;
           });
-
-          // Calculate center and radius
 
     },
 

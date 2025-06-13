@@ -12,7 +12,7 @@ let dict = {
   //
   // Alphabet determins sorting order of words
   //
-  alphabet: "ABCDEFGJHIJKLMNOPQRSTUVWXYZÑ",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZÑ",
 
   //
   // Cleans the string before comparing, e.g. convert to uppercase or remove diacretics

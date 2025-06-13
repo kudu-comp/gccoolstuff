@@ -93,7 +93,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c1"
+                        id="c0"
                         v-model="cols[0]"
                       >
                     </td>
@@ -109,7 +109,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c2"
+                        id="c1"
                         v-model="cols[1]"
                       >
                     </td>
@@ -125,7 +125,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c3"
+                        id="c2"
                         v-model="cols[2]"
                       >
                     </td>
@@ -141,7 +141,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c4"
+                        id="c3"
                         v-model="cols[3]"
                       >
                     </td>
@@ -157,7 +157,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c5"
+                        id="c4"
                         v-model="cols[4]"
                       >
                     </td>
@@ -173,7 +173,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c6"
+                        id="c5"
                         v-model="cols[5]"
                       >
                     </td>
@@ -189,7 +189,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c7"
+                        id="c6"
                         v-model="cols[6]"
                       >
                     </td>
@@ -205,8 +205,8 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c2"
-                        v-model="cols[8]"
+                        id="c7"
+                        v-model="cols[7]"
                       >
                     </td>
                   </tr>
@@ -221,7 +221,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c9"
+                        id="c8"
                         v-model="cols[8]"
                       >
                     </td>
@@ -237,7 +237,7 @@
                     </td>
                     <td>
                       <input type="color"
-                        id="c10"
+                        id="c9"
                         v-model="cols[9]"
                       >
                     </td>

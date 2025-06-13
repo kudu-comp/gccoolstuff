@@ -58,17 +58,17 @@
       </v-distance>
       <v-circle3p
         v-if="modal1"
-        v-model:center="coordinate1"
-        v-model:datum="selecteddatum1"
+        v-model:lat="lat1"
+        v-model:lon="lon1"
         v-model:radius="radius1"
-        @close="modal1 = false"
+        @close="createCenter(lat1,lon1,1); modal1 = false"
       />
       <v-circle3p
         v-if="modal2"
-        v-model:center="coordinate2"
-        v-model:datum="selecteddatum2"
+        v-model:lat="lat2"
+        v-model:lon="lon2"
         v-model:radius="radius2"
-        @close="modal2 = false"
+        @close="createCenter(lat2,lon2,2); modal2 = false"
       />
       <v-show-on-map id="go" class="btn mb-2 me-2" @show="getPoints()" />
       <div
@@ -124,10 +124,35 @@ export default {
       result: "",
       errormsg: "",
       phpurl: window.location.protocol + "//"  + window.location.hostname + "/coordcalc/coordcalc.php",
+      // Vars for popup circle3p
+      lat1 : 0,
+      lon1: 0,
+      lat2: 0,
+      lon2: 0
     }
   },
 
   methods: {
+
+    createCenter: function (lat, lon, h) {
+
+      console.log("createCenter", lat, lon, h);
+
+      // Create center coordinate from lat and lon provided in RD by circle3p component
+      let coord = { lat: lat, lon: lon };
+      // Convert coordinate to selected datum
+      let seldatum = (h === 2) ? this.selecteddatum2 : this.selecteddatum1;
+      console.log("seldatum", seldatum);
+      coords.convertCoordFromLatLon (coord, "RD", seldatum)
+        .then (data => {
+          coord = data;
+          if (h === 2) {
+            this.coordinate2 = coords.getTextFromCoord(coord, seldatum, 7);
+          } else {
+            this.coordinate1 = coords.getTextFromCoord(coord, seldatum, 7);
+          }
+        })
+    },
 
     getPoints: function () {
 
@@ -136,6 +161,26 @@ export default {
       this.result = "";
 
       let coord1, coord2, gridcoord1, gridcoord2;
+
+      // If there is no 2nd circle just show the first one
+      if (this.coordinate2 === "") {
+        let r = this.radius1 * this.unit1;
+        coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84")
+          .then (data => {
+            coord1 = data;
+            coords.displayMarker(this.$store.state.mymap, coord1, "Center 1");
+            L.circle(coord1, {
+                  color: "#E72E1C",
+                  fillColor: "#EC7F74",
+                  fillOpacity: 0.5,
+                  radius: r
+                }).addTo(this.$store.state.mymap);
+            this.result = this.$t('circles.surf') + "1: " + (r*Math.PI^2).toFixed(2) + " m<br>";
+            this.result += this.$t('circles.circ') + "1: " + (r*2*Math.PI).toFixed(2) + " m<sup>2</sup><br>";
+          })
+        this.errormsg = this.$t('circles.nocircle2');
+        return;
+      }
 
       try {
 

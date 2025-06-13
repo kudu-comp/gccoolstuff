@@ -250,6 +250,7 @@ export default {
           href: "/helpother",          name: this.$t('menu.other'), show : true, expand: false,
           l2: [
             { href: "/printlog",            name: "", show : true,        }, 
+            { href: "/genlog",              name: "", show : true,        }, 
             { href: "/htmlparser",          name: "", show : true,        },
             { href: "/unitconvertor",       name: "", show : true,        },
             { href: "/datecalc",            name: "", show : true,        },

@@ -13,7 +13,7 @@ let dict = {
   //
   // Alphabet determins sorting order of words
   //
-  alphabet: "ABCDEFGJHIJKLMNOPQRSTUVWXYZ",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
   //
   // All the words

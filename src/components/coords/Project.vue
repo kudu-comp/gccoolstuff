@@ -80,6 +80,9 @@ export default {
       this.errormsg = "";
       this.result = "";
 
+      // let gridsys = "EPSG:3857"; Google Mercator this doesn't work
+      let gridsys = "RD";
+
       let startcoord, gridcoord, projcoord;
 
       try {
@@ -90,7 +93,7 @@ export default {
 
             // Get the coordinate in grid
             startcoord = data;
-            return coords.convertCoordFromLatLon (startcoord, "WGS84", "RD");
+            return coords.convertCoordFromLatLon (startcoord, "WGS84", gridsys);
 
           })
           .then (data => {
@@ -100,7 +103,7 @@ export default {
             return coords.convertCoordToWGS(
                       { lat: gridcoord.lat + (this.dist * this.unit) * Math.cos(this.angle * this.angleunit),
                         lon: gridcoord.lon + (this.dist * this.unit) * Math.sin(this.angle * this.angleunit) },
-                        "RD");
+                        gridsys);
           })
           .then (data => {
             

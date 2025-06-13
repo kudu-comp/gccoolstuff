@@ -12,7 +12,7 @@ let dict = {
   //
   // Alphabet determines sorting order of words
   //
-  alphabet: "ABCDEFGJHIJKLMNOPQRSTUVWXYZ",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
   // Add clean ã and õ to basic cleaning
 

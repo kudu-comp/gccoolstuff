@@ -137,6 +137,19 @@
           for="sf"
         >{{$t('dictsearch.longest')}}</label>
       </div>
+      <div class="form-check">
+        <input
+          id="sf"
+          v-model="sf"
+          type="radio"
+          value="7"
+          class="form-check-input"
+        >
+        <label
+          class="form-check-label"
+          for="sf"
+        >{{$t('dictsearch.values')}}</label>
+      </div>
       <button :disabled="dictloading" class="btn smsize mb-2" id="btn1" @click="dictsearch()"><i class="fa-solid fa-search me-2"></i>{{$t('buttons.search')}}</button>
       <!-- Error message -->
       <p
@@ -154,6 +167,7 @@
 <script>
 
 import VLanguage from "@/components/inputs/VLanguage.vue";
+import { wordValueSimple } from "@/scripts/texthelper.js";
 
 export default {
 
@@ -219,6 +233,9 @@ export default {
           break;
         case 6:
           this.findLongest();
+          break;
+        case 7:
+          this.findWordValue();
           break;
       }
 
@@ -383,9 +400,35 @@ export default {
       let cnt = 0;
       let regex = new RegExp(this.searchstr);
 
+      if (!regex || this.searchstr.length === 0) {
+        this.errormsg = this.$t("errors.noinput");
+        return;
+      }
+
       // Scan the dictionary one by one
       for (let i = 0; i < this.dict.words.length; i++) {
         if (this.dict.words[i].match(regex) && this.dict.words[i].length <= this.maxl && this.dict.words[i].length >= this.minl) {
+          this.result += this.dict.words[i] + "<br>";
+          cnt++;
+        }
+      }
+
+      this.result = cnt + this.$t("dictsearch.wordsfound") + "<br><br>" + this.result;
+    },
+
+    findWordValue: function () {
+
+      let cnt = 0;
+      let wv = parseInt(this.searchstr);
+
+      if (!wv || wv === 0) {
+        this.errormsg = this.$t("errors.noinput");
+        return;
+      }
+
+      // Scan the dictionary one by one
+      for (let i = 0; i < this.dict.words.length; i++) {
+        if (wordValueSimple(this.dict.words[i], this.dict.alphabet) === wv){
           this.result += this.dict.words[i] + "<br>";
           cnt++;
         }

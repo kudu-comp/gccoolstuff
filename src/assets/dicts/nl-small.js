@@ -1,7 +1,7 @@
 let dict = {
   name: "Dutch small",
 
-  alphabet: "ABCDEFGJHIJKLMNOPQRSTUVWXYZ",
+  alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 
   // Dictionary must be sorted according to the rules used in compStr
   words: [

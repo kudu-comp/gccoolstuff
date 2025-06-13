@@ -162,7 +162,7 @@
   },
 
   "othertools" : {
-    "intro": "A collection of tools for various topics. Solving Sudoku or Mastermind. A unit convertor for hundreds of units. A calculator for dates. A random generator. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes."
+    "intro": "A collection of tools for various topics. Make and print logs. Scan the HTML source of a geocache. A unit convertor for hundreds of units. A calculator for dates. A random generator. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes. Search the OpenLibraby.org database for a book."
   },
 
   "alltools" : {
@@ -1198,7 +1198,8 @@
     "or": " or ",
     "surf": "Surface of circle ",
     "circ": "Circumference of circle ",
-    "from3p": "Use 3 points"
+    "from3p": "Use 3 points",
+    "nocircle2": "Only one circle given"
   },
 
   "antipode": {
@@ -1390,6 +1391,7 @@
     "end": "Words ending with these letters",
     "contains": "Words containing these letters",
     "regex": "Words that meet the a regular expression",
+    "values": "Words with a given word value",
     "lettersused": "Letters in alphabet"
   },
   
@@ -1797,10 +1799,13 @@
 
   "rotciphers" : {
     "title": "Rotation ciphers",
-    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>",
+    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters. You can rotate hexadecimal numbers or specify a customized alphabet to use.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>",
     "rot5" : "Numbers (ROT5)",
     "rot13": "Latin (ROT13)",
-    "rot47": "Printable ASCII (ROT47)"
+    "rot47": "Printable ASCII (ROT47)",
+    "hexa": "Hexadecimal (ROT8)",
+    "custom": "Specify your own rotation",
+    "other": "Specify the alphabet to use (use CAPS)"
   },
 
   "freqanal" : {
@@ -1838,6 +1843,17 @@
     "lh3": "Normal",
     "lh4": "Wide",
     "lh5": "Very wide"
+  },
+
+  "genlog" : {
+    "title": "Generate logs",
+    "long": "<p>Generate logs with counters and copy the log to the clipboard so you can paste it elsewhere. If you use the geocaching website to log this is an easy tool to use. Counters increase everytime you generate a log.</p><p>Use multiple templates for more variance in your logs. Use random to pick a random template.</p><p>If you want more options try GSAK or use an app like C:geo.</p>",
+    "n" : "Number of templates",
+    "tot": "Total finds (%tot%)",
+    "day": "Total finds for today (%day%)",
+    "ph": "Type a log. Use %tot% and %day% for counters",
+    "random": "Random log",
+    "template": "Generate log using template "
   },
 
   "gameoflife": {

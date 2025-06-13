@@ -404,6 +404,11 @@ export var codepages = [
     description: "The Gargish alphabet was is used to write Gargish or gargl, the language of the Gargoyle race in the Ultima Online computer game series.",
     tags: ["alphabet", "games", "curves", "runes"]
   },
+  { name: "Geocaching attributes",
+    imagename: "gcattr.png",
+    description: "Geocaching attributes specify properties of geocaches. The have a symbol and an internal value. Add 96 to get the negative attribute. So Recommended for kids = 6, Not recommended for kids = 102. Note that not all negative attributes are supported.",
+    tags: ["symbols", "games"]
+  },
   { name: "Gernreich Alphabet",
     imagename: "gernreich.png",
     description: "Gernreich is an alternative alphabet. The letters are like building blocks which are connected together to make words.",

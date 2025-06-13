@@ -427,16 +427,21 @@ export default {
             text: this.$t("menu.other"),
             arrowColor: "#722727",
             subMenuOptions: [
-            {
+              {
                 type: "link",
                 text: this.$t("printlog.title"),
                 path: { name: "PrintLog"}
-              },                    
+              },
+              {
+                type: "link",
+                text: this.$t("genlog.title"),
+                path: { name: "GenLog"}
+              },
               {
                 type: "link",
                 text: this.$t("htmlparser.title"),
                 path: { name: "HtmlParser"}
-              },                   
+              },
               {
                 type: "link",
                 text: this.$t("unitconvertor.title"),
@@ -654,16 +659,17 @@ export default {
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[7].text = this.$t("gameoflife.title");
       this.navbarOptions.menuOptionsLeft[7].text = this.$t("menu.other");
       this.navbarOptions.menuOptionsLeft[7].subMenuOptions[0].text = this.$t("printlog.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("htmlparser.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[2].text = this.$t("unitconvertor.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("datecalc.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[4].text = this.$t("randomizer.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("periodictable.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[6].text = this.$t("countries.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[7].text = this.$t("usastates.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[8].text = this.$t("regions.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[9].text = this.$t("dnacode.title");
-      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[10].text = this.$t("booksearch.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[1].text = this.$t("genlog.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[2].text = this.$t("htmlparser.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[3].text = this.$t("unitconvertor.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[4].text = this.$t("datecalc.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[5].text = this.$t("randomizer.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[6].text = this.$t("periodictable.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[7].text = this.$t("countries.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[8].text = this.$t("usastates.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[9].text = this.$t("regions.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[10].text = this.$t("dnacode.title");
+      this.navbarOptions.menuOptionsLeft[7].subMenuOptions[11].text = this.$t("booksearch.title");
       this.navbarOptions.menuOptionsLeft[8].text = this.$t("menu.help");
       this.navbarOptions.menuOptionsLeft[8].subMenuOptions[0].text = this.$t("menu.howto");
       this.navbarOptions.menuOptionsLeft[8].subMenuOptions[1].text = this.$t("labels.help") + this.$t("menu.coordinates");

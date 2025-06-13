@@ -64,6 +64,7 @@ const routes = [
   { path: "/cryptosolver",        name: 'CryptoSolver',          component: () => import('@/components/games/CryptoSolver.vue') },
   { path: '/gameoflife',          name: 'GameOfLife',            component: () => import('@/components/games/GameOfLife.vue')        }, 
   { path: '/printlog',            name: 'PrintLog',              component: () => import('@/components/other/PrintLog.vue')      },
+  { path: '/genlog',              name: 'GenLog',                component: () => import('@/components/other/GenLog.vue')      },
   { path: '/periodictable',       name: 'PeriodicTable',         component: () => import('@/components/other/PeriodicTable.vue')    },
   { path: '/countries',           name: 'Countries',             component: () => import('@/components/other/Countries.vue')    },
   { path: '/htmlparser',          name: 'HtmlParser',            component: () => import('@/components/other/HtmlParser.vue')  },

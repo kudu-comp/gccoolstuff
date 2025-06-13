@@ -11,7 +11,7 @@
         v-html="$t('rotciphers.long')"
       />
       <div class="row">
-        <label for="sel" class="form-label mb-2 sm-size"
+        <label for="sel" class="form-label mb-2 md-size"
           >Select alphabet</label
         >
         <select
@@ -22,7 +22,21 @@
           <option value="0">{{$t('rotciphers.rot13')}}</option>
           <option value="1">{{$t('rotciphers.rot5')}}</option>
           <option value="2">{{$t('rotciphers.rot47')}}</option>
+          <option value="3">{{$t('rotciphers.hexa')}}</option>
+          <option value="4">{{$t('rotciphers.custom')}}</option>
         </select>
+      </div>
+      <div class="row" v-show='selalph === "4"'>
+        <label
+          class="form-label mb-2 md-size"
+          for="other"
+        >{{$t('rotciphers.other')}}</label>
+        <input
+          id="other"
+          v-model="other"
+          type="text"
+          class="form-control md-size mb-2 me-2"
+        >
       </div>
       <button @click="generate()" class="btn mb-2">{{$t('buttons.decode')}}</button>
       <textarea class="form-control mb-2" lines="5" v-model="txt" id="txt" ref="txt"></textarea>
@@ -59,7 +73,9 @@ export default {
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "0123456789",
         "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+        "0123456789ABCDEF"
       ],
+      other: ""
     };
   },
 
@@ -88,9 +104,9 @@ export default {
       this.errormsg = "";
 
       // Assign alphabet
-      let alphabet = this.alf[parseInt(this.selalph)];
+      let alphabet = this.selalph !== "4" ? this.alf[parseInt(this.selalph)] : this.other.trim();
       let txt = this.txt;
-      if (this.selalph == "0") txt = txt.toUpperCase();
+      if (this.selalph !== "2") txt = txt.toUpperCase();
 
       this.result +=
         "<tr style='font-weight: bold'><td class='sm-size'>Default " +

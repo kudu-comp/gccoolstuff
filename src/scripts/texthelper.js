@@ -187,6 +187,24 @@ export function getTable (x, reverse = false, startatzero = false) {
   return t;
 }
 
+export function wordValueSimple(str, alphabet) {
+  // Empty, undefined return 0
+  if (!str) return 0;
+
+  // Initialize
+  let total = 0;
+  let idx = 0;
+  alphabet = alphabet.toUpperCase();
+  str = str.trim().toUpperCase();
+
+  // Get the index from the alphabet, value equals the index
+  for (let c of str) {
+    idx = alphabet.indexOf(c);
+    if (idx >= 0) total += idx + 1; // +1 because index starts at 0
+  }
+  return total;
+}
+
 export function wordValue (str, reverse = false, startatzero = false, x = "English") {
   
   // Empty, undefined return 0

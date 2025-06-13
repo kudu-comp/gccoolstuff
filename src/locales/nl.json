@@ -164,7 +164,7 @@
   },
 
   "othertools" : {
-    "intro": "Diverse tools voor van alles en nog wat. Oplossers voor Sudoku en Mastermind. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes."
+    "intro": "Diverse tools voor van alles en nog wat. Maak logrollen. Scan de HTML bron van een geocache pagina. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes. Zoek een boek in de OpenLibrary.org database."
   },
   
   "alltools" : {
@@ -1207,7 +1207,8 @@
     "or": " of ",
     "surf": "Oppervlakte van cirkel ",
     "circ": "Omtrek van cirkel  ",
-    "from3p": "Geef 3 punten"
+    "from3p": "Geef 3 punten",
+    "nocircle2": "Maar één cirkel ingevoerd"
   },
 
   "antipode": {
@@ -1398,7 +1399,8 @@
       "start": "Woorden die beginnen met de gegeven letters",
       "end": "Woorden die eindigen met de gegeven letters",
       "contains": "Woorden die de gegeven letters bevatten",
-      "regex": "Woorden die voldoen aan een reguliere expressie"
+      "regex": "Woorden die voldoen aan een reguliere expressie",
+      "values": "Woorden met een bepaalde waarde"
   },
 
   "anagrams": {
@@ -1808,7 +1810,10 @@
     "long": "<p>Rotatie cijfer vervangen simpelweg elke letter met een andere een paar posities verderop in het alfabet. Als je aan het einde komt, begin je weer aan het begin, vandaar de naam rotatie cijfers. Standaard is de verschuiving de helft van de lengte van het alfabet. In dat geval zijn coderen en decoderen namelijk gelijk. ROT13 gebruikt het standaard alfabet (hoofdletters). ROT5 werkt met enkel getallen. ROT47 met alle printbare ascii tekens.</p><p>De tool genereert alle mogelijke verschuivingen, zodat het makkelijk is de code te kraken als de verschuiving onbekend is. Overigens wordt ROT13 gebruikt door geocaching.com op de hints te coderen.</p>",
     "rot5" : "Getallen (ROT5)",
     "rot13": "Standaard (ROT13)",
-    "rot47": "Printbare ASCII (ROT47)"
+    "rot47": "Printbare ASCII (ROT47)",
+    "hexa": "Hexadecimaal (ROT8)",
+    "custom": "Aangepaste verschuiving",
+    "other": "Te gebruiken aangepaste alfabet (gebruik hoofdletters)"
   },
   
   "freqanal" : {
@@ -1846,6 +1851,17 @@
     "lh3": "Normaal",
     "lh4": "Ruim",
     "lh5": "Erg ruim"
+  },
+  
+  "genlog" : {
+    "title": "Maak logjes",
+    "long": "<p>Maak logjes met tellers en kopieer die naar het clipbord. Plak ze vervolgens waar je ze nodig hebt. Dit is een handige hulpmiddel als je de geoaching.com website gebruikt om te loggen. De tellers worden automatisch verhoogd.</p><p>Gebruik meerdere templates voor meer variatie in de logjes. Kies eventueel een willekeurige template.</p><p>Voor meer geavanceerde logjes gebruik een tool als GSAK of een app zoals C:geo.</p>",
+    "n" : "Aantal templates",
+    "tot": "Totaal gevonden (%tot%)",
+    "day": "Vandaag gevonden (%day%)",
+    "ph": "Type een log. Gebruik %tot% en %day% voor tellers",
+    "random": "Willekeurige log",
+    "template": "Genereer log met template "
   },
 
   "gameoflife": {
