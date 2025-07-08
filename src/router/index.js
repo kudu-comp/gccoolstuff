@@ -21,6 +21,7 @@ const routes = [
   { path: "/keyboards",           name: 'Keyboards',             component: () => import('@/components/texts/Keyboards.vue') },
   { path: "/texttoss",            name: 'TextToss',              component: () => import('@/components/texts/TextToss.vue') },
   { path: "/textchunks",          name: 'TextChunks',            component: () => import('@/components/texts/TextChunks.vue') },
+  { path: "/piglatin/:pig?",      name: 'PigLatin',              component: () => import('@/components/texts/PigLatin.vue') },    //Param: pig
   { path: "/numerology/:num?",    name: 'Numerology',            component: () => import('@/components/texts/Numerology.vue') },
   { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },   //Param: cphr
   { path: '/rotciphers',          name: 'RotCiphers',            component: () => import('@/components/codes/RotCiphers.vue')  },

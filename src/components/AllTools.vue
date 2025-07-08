@@ -86,6 +86,7 @@ import { ciphers } from '@/scripts/ciphers.js'
 import * as bf  from '@/scripts/brainfuck.js'
 import { sequences } from '@/scripts/mathtools.js'
 import { numprops } from '@/scripts/mathtools.js'	
+import { piglatin } from "@/scripts/piglatin.js"
  
 export default {
 
@@ -114,6 +115,7 @@ export default {
       bfvars: null,
       numprops: null,
       seqs: null,
+      pigs: null,
       alltools: [
         {
           href: "/helpcoord",          name: this.$t('menu.coordinates'), show : true, expand: false,
@@ -140,6 +142,11 @@ export default {
             { href: "/texttonum",      name: "", show : true       },
             { href: "/keyboards",      name: "", show : true       },
             { href: "/texttoss",       name: "", show : true       },
+            { href: "/piglatin",       name: "", show : true,       
+              l3 : [
+                // Add numerology variants here in mounted ()
+              ]
+            },
             { href: "/numerology",     name: "", show : true,       
               l3 : [
                 // Add numerology variants here in mounted ()
@@ -275,6 +282,7 @@ export default {
     this.bfvars = bf.vars;
     this.seqs = sequences;
     this.numprops = numprops;
+    this.pigs = piglatin;
     for (let i of this.alltools) {
       i.show = true;
       i.expand = false;
@@ -320,10 +328,17 @@ export default {
             j.l3.push( { name : "Isopsephy", href : j.href + "/5", show : true, idx : 4 }) 
             j.l3.push( { name : "Qabbala", href : j.href + "/7", show : true, idx : 5 }) 
           }
+          if (j.href === "/piglatin") {
+            j.expand = false;
+            // Add all piglatin variants
+            for (let i = 0; i < this.pigs.length; i++) {
+              j.l3.push( { name : this.pigs[i].name, href : j.href + "/" + i, show : true, idx : i }) 
+            }
+          }
           if (j.href === "/sequences") {
             j.expand = false;
-             // Add all brainfuck variants
-             for (let i = 0; i < this.seqs.length; i++) {
+            // Add all brainfuck variants
+            for (let i = 0; i < this.seqs.length; i++) {
               j.l3.push( { name : this.seqs[i].name, href : j.href + "/" + this.seqs[i].ref, show : true, idx : i }) 
             }
           }
@@ -436,6 +451,9 @@ export default {
                     break;
                   case "/brainfuck" :
                     l3.show = (this.bfvars[l3.idx].toLowerCase().indexOf(s) >= 0);
+                    break;
+                  case "/piglatin" :
+                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0) || (this.pigs[l3.idx].descr.toLowerCase().indexOf(s) >= 0);
                     break;
                   case "/numerology" :
                     l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);

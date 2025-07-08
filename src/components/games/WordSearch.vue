@@ -12,6 +12,20 @@
         v-html="$t('wordsearch.long')"
       />
       <!-- Form fields -->
+      <div class="row">
+        <label
+          class="form-label mb-2 md-size"
+          for="text1"
+        >{{$t('wordsearch.ignore')}}</label>
+        <input
+          id="ignore"
+          v-model="ignore"
+          type="text"
+          length="1"
+          class="form-control mb-2 me-2"
+          style="width: 35px"
+        >
+      </div>
       <label
           for="grid"
           class="form-label sm-size mb-2"
@@ -80,6 +94,7 @@ export default {
       checkarr: [],
       nrow: 0,
       ncol: 0,
+      ignore: "-",
       result: "",
       errormsg: "",
       boxsize: 30,
@@ -203,7 +218,7 @@ export default {
       ctx.font = "48px courier";
       for (let r = 0; r < this.nrow; r++)
         for (let c = 0; c < this.ncol; c++)
-          if (!this.checkarr[r][c]) {
+          if (!this.checkarr[r][c] && this.gridarr[r][c] !== this.ignore) {
             ctx.beginPath();
             ctx.arc(
               (c + 0.5) * this.boxsize,
@@ -282,7 +297,7 @@ export default {
       this.result = this.$t('wordsearch.remletters');
       for (let r = 0; r < this.nrow; r++)
         for (let c = 0; c < this.ncol; c++)
-          if (!this.checkarr[r][c]) this.result += this.gridarr[r][c];
+          if (!this.checkarr[r][c] && this.gridarr[r][c] !== this.ignore) this.result += this.gridarr[r][c];
     },
   },
 

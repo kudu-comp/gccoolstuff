@@ -1127,6 +1127,12 @@
     "title": "Cirkel door 3 punten"
   },
 
+  "linepointdir": {
+    "title": "Lijn vanaf punt met richting",
+    "start": "Startpunt",
+    "pdir": "Startpunt en richting"
+  },
+  
   "convert": {
     "title": "Converteren",
     "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen. Andere ondersteunde formaten zijn MGRS, OGSM en NAD. Je kan ook een willekeurige conversie invoeren middels de proj4 definitie van EPSG (als je weet hoe dat werkt).",
@@ -1378,6 +1384,7 @@
     "long": "Een handige tool voor het oplossen van woordzoekers. Zoekt horizontaal, verticaal en diagonaal in beide richtingen. De overgebleven letters worden getoond. ",
     "grid": "Het zoekvierkant",
     "words": "Te vinden woorden",
+    "ignore": "Karakter voor ongebruikte posities",
     "griderror": "Niet alle regels in het zoekvierkant hebben dezelfde lengte",
     "remletters": "Overgebleven letters: ",
     "notfound": " kan niet worden gevonden."
@@ -1764,6 +1771,12 @@
     "res2" : "Berekening :",
     "valtab": "Waardes van elke letter",
     "err1" : "Eén of meerdere onbekende letters gevonden."
+  },
+
+  "piglatin": {
+    "title" : "Varkenslatijn",
+    "long" : "<p>Varkenslatijn is een manier om in code te spreken, zodat anderen niet begrijpen wat er wordt gezegd. Varkenslatijn komt uit Engeland, maar er zijn vele varianten uit andere landen. Elk met zijn eigen regels.</p><p>Selecteer de juiste taal om klinkers en medeklinkers te kunnen onderscheiden. Het woordenboek wordt ook gebruikt in sommige argots om mogelijk woorden op te zoeken. Woorden die niet ontcijferd kunnen worden, worden met sterretjes gemarkeerd.</p>",
+    "sel" : "Wat voor soort varkenslatijn wil je spreken?"
   },
 
   "datecalc" :{

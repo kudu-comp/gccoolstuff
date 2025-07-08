@@ -136,8 +136,6 @@ export default {
 
     createCenter: function (lat, lon, h) {
 
-      console.log("createCenter", lat, lon, h);
-
       // Create center coordinate from lat and lon provided in RD by circle3p component
       let coord = { lat: lat, lon: lon };
       // Convert coordinate to selected datum

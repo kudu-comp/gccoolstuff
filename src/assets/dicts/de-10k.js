@@ -14,6 +14,7 @@ let dict = {
   // Alphabet determins sorting order of words
   //
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  vowels: "AEIOU",
 
   //
   // All the words

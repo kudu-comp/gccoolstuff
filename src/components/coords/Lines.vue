@@ -16,6 +16,14 @@
         <template #label>
           {{ $t('labels.point') }} 1
         </template>
+        <template #popup>
+          <button 
+            class="btn md-size mb-2 ms-2" 
+            @click="modal1 = true"
+          >
+            {{ $t('linepointdir.pdir') }}
+          </button>
+        </template>   
       </v-coord>
       <v-coord
         v-model:coord="coordinate2"
@@ -34,7 +42,14 @@
         <template #label>
           {{ $t('labels.point') }} 3
         </template>
-      </v-coord>
+        <template #popup>
+          <button 
+            class="btn md-size mb-2 ms-2" 
+            @click="modal2 = true"
+          >
+            {{ $t('linepointdir.pdir') }}
+          </button>
+        </template>        </v-coord>
       <v-coord
         v-model:coord="coordinate4"
         v-model:datum="selecteddatum4"
@@ -44,6 +59,22 @@
           {{ $t('labels.point') }} 4
         </template>
       </v-coord>
+      <v-line-point-dir
+        v-if="modal1"
+        v-model:lat1="lat1"
+        v-model:lon1="lon1"
+        v-model:lat2="lat2"
+        v-model:lon2="lon2"
+        @close="createLine(lat1,lon1,lat2,lon2,1); modal1 = false"
+      />
+      <v-line-point-dir
+        v-if="modal2"
+        v-model:lat1="lat1"
+        v-model:lon1="lon1"
+        v-model:lat2="lat2"
+        v-model:lon2="lon2"
+        @close="createLine(lat1,lon1,lat2,lon2,2); modal2 = false"
+      />
       <div>
         <label
           for="line1"
@@ -87,15 +118,18 @@ import VCoord from '@/components/inputs/VCoord.vue';
 import VMap from '@/components/inputs/VMap.vue'
 import * as coords from '@/scripts/coords.js';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import VLinePointDir from '@/components/inputs/VLinePointDir.vue';
 import L from "leaflet";
 
 export default {
-  name: 'CoordProject',
+
+  name: 'Lines',
 
   components: {
     VCoord,
     VMap,
-    VShowOnMap
+    VShowOnMap,
+    VLinePointDir
   },
 
   data: function () {
@@ -110,10 +144,47 @@ export default {
       selecteddatum4: "WGS84",
       result: "",
       errormsg: "",
+      modal1: false,
+      modal2: false,
+      lat1: 0,
+      lon1: 0,
+      lat2: 0,
+      lon2: 0
     }
   },
 
   methods: {
+
+    createLine: function (lat1, lon1, lat2, lon2, line) {
+
+      let coord1 = { lat: lat1, lon: lon1 };
+      let coord2 = { lat: lat2, lon: lon2 };
+      let coord = { lat: 0, lon: 0 };
+
+      // Convert coordinate to selected datum
+      let seldatum1 = (line === 2) ? this.selecteddatum3 : this.selecteddatum1;
+      let seldatum2 = (line === 2) ? this.selecteddatum4 : this.selecteddatum2;
+
+      coords.convertCoordFromLatLon (coord1, "RD", seldatum1)
+        .then (data => {
+          coord = data;
+          if (line === 1) {
+            this.coordinate1 = coords.getTextFromCoord(coord, seldatum1, 7);
+          } else {
+            this.coordinate3 = coords.getTextFromCoord(coord, seldatum1, 7);
+          }
+          return coords.convertCoordFromLatLon (coord2, "RD", seldatum2)
+        })
+        .then (data => {
+          coord = data;
+          if (line === 1) {
+            this.coordinate2 = coords.getTextFromCoord(coord, seldatum2, 7);
+          } else {
+            this.coordinate4 = coords.getTextFromCoord(coord, seldatum2, 7);
+          }
+        })
+
+    },  
 
     // Returns the length between two coordinates (in grid)
     getLength: function (c1, c2) {

@@ -2,6 +2,7 @@ let dict = {
   name: "French small",
 
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  vowels: "AEIOU",
 
   // Dictionary must be sorted according to the rules used in compStr
   words: [

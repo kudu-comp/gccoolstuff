@@ -132,6 +132,11 @@ export default {
               },
               {
                 type: "link",
+                text: this.$t("piglatin.title"),
+                path: { name: "PigLatin" },
+              },
+              {
+                type: "link",
                 text: this.$t("numerology.title"),
                 path: { name: "Numerology" },
               },
@@ -601,8 +606,9 @@ export default {
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[4].text = this.$t("texttonum.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[5].text = this.$t("keyboards.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[6].text = this.$t("texttoss.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("numerology.title");
-      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("textchunks.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[7].text = this.$t("piglatin.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[8].text = this.$t("numerology.title");
+      this.navbarOptions.menuOptionsLeft[1].subMenuOptions[9].text = this.$t("textchunks.title");
       this.navbarOptions.menuOptionsLeft[2].text = this.$t("menu.codes");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");

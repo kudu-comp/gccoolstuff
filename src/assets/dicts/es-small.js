@@ -13,7 +13,8 @@ let dict = {
   // Alphabet determins sorting order of words
   //
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZÑ",
-
+  vowels: "AEIOU",
+  
   // 
   // Clean the string so it matches the dictionary rules
   // Takes out all the diacretics and makes the string uppercase

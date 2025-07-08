@@ -2,6 +2,7 @@ let dict = {
   name: "Dutch small",
 
   alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  vowels: "AEIOU",
 
   // Dictionary must be sorted according to the rules used in compStr
   words: [
@@ -153494,6 +153495,7 @@ let dict = {
     "WOORDEINDE",
     "WOORDELIJK",
     "WOORDELOOS",
+    "WOORDEN",
     "WOORDENBOEK",
     "WOORDENBOEKENMAKER",
     "WOORDENBOEKMAKER",

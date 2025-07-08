@@ -59,6 +59,13 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
+          <h5 class="card-title">{{$t('piglatin.title')}}</h5>
+          <p class="card-text" v-html="$t('piglatin.long')"></p>
+          <router-link to="/piglatin"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
           <h5 class="card-title">{{$t('numerology.title')}}</h5>
           <p class="card-text" v-html="$t('numerology.long')"></p>
           <router-link to="/numerology"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>

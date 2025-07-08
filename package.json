@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
   },
   "dependencies": {
+    "@flatten-js/core": "^1.6.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-brands-svg-icons": "^6.7.1",
     "@fortawesome/free-regular-svg-icons": "^6.7.1",
@@ -23,7 +24,7 @@
     "bwip-js": "^4.5.1",
     "crypto-js": "^4.2.0",
     "exifreader": "^4.25.0",
-    "jspdf": "^2.5.2",
+    "jspdf": "^3.0.1",
     "latlon-geohash": "^2.0.0",
     "leaflet": "^1.9.4",
     "leaflet-easybutton": "^2.4.0",

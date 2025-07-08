@@ -1124,6 +1124,12 @@
     "title": "Circle through 3 points"
   },
 
+  "linepointdir": {
+    "title": "Line through point and direction",
+    "start": "Starting point",
+    "pdir": "Point and direction"
+  },
+
   "convert": {
     "title": "Convert",
     "long" : "There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard. Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates. Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).",
@@ -1369,6 +1375,7 @@
     "long": "A tool to solve word search puzzles. It reads horizontal, vertical and diagonal in both directions. The remaining letters are displayed.",
     "grid": "The grid",
     "words": "Words to find",
+    "ignore": "Character indicating unused positions",
     "griderror": "Not all lines in the grid are the same length",
     "remletters": "Remaining letters: ",
     "notfound": " cannot be found."
@@ -1756,6 +1763,12 @@
     "res2" : "Calculation :",
     "valtab": "Values of each letter",
     "err1" : "One or more unknown characters found."
+  },
+
+  "piglatin": {
+    "title" : "Pig Latin",
+    "long" : "<p>Pig Latin is a language game that alters the letters of words. It is used to speak in code, so that others cannot understand what is being said. There are many variations with different origins.</p><p>Select the right language to identify vowels and consonants, or to search for words when decoding. Words that cannot be found are marked between asterisks.</p>",
+    "sel" : "What kind of pig latin do you want to speak?"
   },
 
   "datecalc" :{
