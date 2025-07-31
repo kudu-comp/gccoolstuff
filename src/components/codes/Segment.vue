@@ -30,6 +30,18 @@
           </option>
         </select>
       </div>
+      <div class="form-check">
+        <input
+          id="space"
+          v-model="space"
+          type="checkbox"
+          class="form-check-input me-2 mb-2"
+        >
+        <label
+          for="chk1"
+          class="form-check-label mb-2"
+        >{{ $t('segment.space') }}</label>
+      </div>
       <div class="row">
         <label
           class="form-label md-size mb-2"
@@ -43,8 +55,17 @@
           <option value="1">
             {{ $t('segment.letters') }}
           </option>
-          <option value="2">
+          <option value="3">
             {{ $t('segment.binary') }}
+          </option>
+          <option value="2">
+            {{ $t('segment.numeric') }}
+          </option>
+          <option value="4">
+            {{ $t('segment.octal') }}
+          </option>
+          <option value="5">
+            {{ $t('segment.hexa') }}
           </option>
         </select>
       </div>
@@ -83,20 +104,24 @@ export default {
       message: "",
       result : "",
       errormsg: "",
+      space: true,
       seg: 0,
       inp: 1,
       segdef: [
         {
           letters: ["A", "B", "C", "D", "E", "F", "G"],
-          regex: "(A|B|C|D|E|F|G)"
+          regex: "(A|B|C|D|E|F|G)",
+          len: 7
         },
         {
           letters: ["A", "B", "C", "D", "E", "F", "G1", "G2", "H", "I", "J", "K", "L", "M"],
-          regex: "(A|B|C|D|E|F|G1|G2|H|I|J|K|L|M)"
+          regex: "(A|B|C|D|E|F|G1|G2|H|I|J|K|L|M)",
+          len: 14
         },
         {
           letters: ["A1", "A2", "B", "C", "D1", "D2", "E", "F", "G1", "G2", "H", "I", "J", "K", "L", "M"],
-          regex: "(A1|A2|B|C|D1|D2|E|F|G1|G2|H|I|J|K|L|M)"
+          regex: "(A1|A2|B|C|D1|D2|E|F|G1|G2|H|I|J|K|L|M)",
+          len: 16
         }
       ],
       mapseg: [
@@ -138,6 +163,9 @@ export default {
         ["ABDE",    "ADJM",         "A1A2D1D2JM",         "Z"],
         ["ABFG",    "ABFG1G2",      "A1A2BFG1G2",         "°"],
         ["BC", 		  "BCJ",				  "BCJ",                "1"],
+        ["ABCDG",   "ABCDG2",	  	  "A1A2BCD1D2G2",       "3"],
+        ["ABC", 	  "ABC",    			"A1A2BC",             "7"],
+        ["ABC", 	  "AJM",    			"A1A2JM",             "7"]
         ["ABC", 	  "AJL",    			"A1A2JL",             "7"]
       ]
     }
@@ -152,23 +180,59 @@ export default {
     bin2Letters: function (msg) {
     
       let input = "";
+      let tmp = "";
       let bins = null;
       
-      switch (this.seg) {
-        case 0 :
-          bins = msg.match(/[01]{7}/g); break;
-        case 1 :
-          bins = msg.match(/[01]{14}/g); break;
-        case 2 :
-          bins = msg.match(/[01]{16}/g); break;
+      // Parse input in single codes
+      switch (parseInt(this.inp)) {
+        case 2: // Numeric
+          bins = msg.match(/[0-9]+/g);
+          break;
+        case 3: // Binary
+          switch (this.seg) {
+            case 0 :
+              bins = msg.match(/[01]{7}/g); break;
+            case 1 :
+              bins = msg.match(/[01]{14}/g); break;
+            case 2 :
+              bins = msg.match(/[01]{16}/g); break;
+          }
+          break;
+        case 4: // Octal
+          bins = msg.match(/[0-7]+/g);
+          break;
+        case 5: // Hexa
+          bins = msg.match(/[0-9A-F]+/ig);
+          break;
       }
 
+      // For each code convert to letters one at a time
       for (let s of bins) {
-        for (let c = 0; c < s.length; c++) {
-          if (s[c] == 1)  input += this.segdef[this.seg].letters[c];
+
+        switch (parseInt(this.inp)) {
+          case 2: // Numeric
+            s = parseInt(s,10).toString(2).padStart(this.segdef[this.seg].len, '0');
+            break;
+          case 4: // Octal
+            s = parseInt(s,8).toString(2).padStart(this.segdef[this.seg].len, '0');
+            break;
+          case 5: // Hexa
+            s = parseInt(s,16).toString(2).padStart(this.segdef[this.seg].len, '0');
+            break;
         }
-        input += " ";
+      
+        let tmp = "";
+        for (let c = 0; c < s.length; c++) {
+          if (s[c] == 1)  tmp += this.segdef[this.seg].letters[c];
+        }
+        tmp += " ";
+        if (tmp === " " & this.space && this.inp !== 1) {
+          input += "SPACE ";
+        } else {
+          input += tmp;
+        }
       }
+
       return input.slice(0,-1);
       
     },
@@ -176,7 +240,9 @@ export default {
     letters2Bin: function (msg) {
 
       let input = "";
+      let tmp = "";
       let regex = new RegExp(this.segdef[this.seg].regex, "g");
+      let ltrs = [];
 
       // Split message into characters
       let bins = msg.split(/\s+/g);
@@ -184,15 +250,36 @@ export default {
       // For each character
       for (let b of bins) {
 
-        // Split each character into segments
-        let ltrs = b.match(regex);
+        // Handle space input
+        if (b === "SPACE") {
+          ltrs = "";
+        } else {
+          // Split each character into segments
+          ltrs = b.match(regex);
+        }
+
 
         // Scan all segments, if present add 1 else 0
+        tmp = "";
         for (let l of this.segdef[this.seg].letters) {
-          input += (ltrs.indexOf(l) >= 0) ? "1" : "0"
+          tmp += (ltrs.indexOf(l) >= 0) ? "1" : "0"
         }
-        input += " ";
+        switch (parseInt(this.inp)) {
+          case 2: // Numeric
+            input += parseInt(tmp, 2).toString(10) + " ";
+            break;
+          case 3: // Binary
+            input += tmp + " ";
+            break;
+          case 4: // Octal
+            input += parseInt(tmp, 2).toString(8) + " ";
+            break;
+          case 5: // Hexa
+            input += parseInt(tmp, 2).toString(16) + " ";
+            break;
+        }
       }
+
       return input.slice(0, -1);
     },
 
@@ -201,21 +288,25 @@ export default {
       // Reset
       this.errormsg = "";
       this.result = "";
+      let msg = this.inp == 1 ? this.message : this.bin2Letters(this.message);
       let regex = new RegExp(this.segdef[this.seg].regex, "g");
-
-      // Convert binary to letters
-      let msg = (this.inp == 2) ? this.bin2Letters(this.message) : this.message;
-
+  
       // Convert msg (segment letters e.g. BC) to text
       try {
 
-        let words = msg.toUpperCase().match(/[A-M12]+/g);
+        let words = msg.toUpperCase().match(/([A-M12]+)|(SPACE)/g);
+        console.log(msg, words);
         if (!words) {
           this.errormsg = this.$t('errors.cannotparse');
           return;
         }
         
         for (let w of words) {
+
+          if (w === "SPACE") {
+            this.result += " ";
+            continue;
+          }
           
           // Convert to uppercase and sort
           w = w.match(regex);
@@ -253,15 +344,20 @@ export default {
       
         for (let i = 0; i < this.message.length; i++) {
           
-          let s = this.mapseg.find( (s) => {
-            return s[3] == this.message[i].toUpperCase();
+          // Spaces only work with numeric inputs
+          if (this.message[i] == " ") {
+            if (this.space && this.inp > 1) tempstr += "SPACE ";
+            continue;
+          }
+
+          let s = this.mapseg.find( (a) => {
+            return a[3] == this.message[i].toUpperCase();
           })
-          if (s) tempstr += s[this.seg] + " ";
-          
+          if (s) tempstr += s[this.seg] + " ";       
         }
 
         tempstr = tempstr.slice(0,-1);
-        if (this.inp == 2) 
+        if (this.inp > 1) 
           this.result = this.letters2Bin(tempstr);
         else
           this.result = tempstr;

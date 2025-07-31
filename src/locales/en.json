@@ -513,11 +513,15 @@
 
   "segment": {
     "title": "Segment display",
-    "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on.</p><p>Choose the number of segments: 7, 14 or 16. Select the notation of segments either letters or binary. Click Encode to translate input to segment notation, click Decode to translate segment notation back to text.</p>",
+    "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on. The binary notation could also be converted to a number.</p><p>Choose the number of segments: 7, 14 or 16. Select the notation of segments either letters or binary. Click Encode to translate input to segment notation, click Decode to translate segment notation back to text.</p>",
     "segsize": "Number of segments",
     "input": "Segments as letters or as binary",
     "letters": "Letter notation",
-    "binary": "Binary notation"
+    "binary": "Binary notation",
+    "numeric": "Numeric notation (0-9)",
+    "octal": "Octal notation (0-7)",
+    "hexa": "Hexadecimal notation (0-9A-F)",
+    "space": "Space is all segments off"
   },
 
   "exifscanner": {

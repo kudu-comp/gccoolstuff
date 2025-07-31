@@ -515,11 +515,15 @@
   
   "segment": {
     "title": "Segment display",
-    "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is.</p><p>Kies het aantal segmenten: 7, 14 of 16. Kies de notatie van segmenten: letters of binair. Klik op Codeer om de invoer te vertalen naar segmenten, klik op Decodeer om segmentnotatie te vertalen naar tekst.</p>",
+    "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is (binaire notatie). De binaire notatie kan ook worden numeriek worden weergegeven.</p><p>Kies het aantal segmenten: 7, 14 of 16. Kies de notatie van segmenten: letters of binair. Klik op Codeer om de invoer te vertalen naar segmenten, klik op Decodeer om segmentnotatie te vertalen naar tekst.</p>",
     "segsize": "Aantal segmenten",
     "input": "Segmenten notatie letters of binair",
     "letters": "Letternotatie",
-    "binary": "Binaire notatie"
+    "binary": "Binaire notatie",
+    "numeric": "Numerieke notatie (0-9)",
+    "octal": "Octale notatie (0-7)",
+    "hexa": "Hexadecimale notatie (0-9A-F)",
+    "space": "Spatie is alle segmenten uit"
   },
 
   "exifscanner": {
@@ -1775,7 +1779,7 @@
 
   "piglatin": {
     "title" : "Varkenslatijn",
-    "long" : "<p>Varkenslatijn is een manier om in code te spreken, zodat anderen niet begrijpen wat er wordt gezegd. Varkenslatijn komt uit Engeland, maar er zijn vele varianten uit andere landen. Elk met zijn eigen regels.</p><p>Selecteer de juiste taal om klinkers en medeklinkers te kunnen onderscheiden. Het woordenboek wordt ook gebruikt in sommige argots om mogelijk woorden op te zoeken. Woorden die niet ontcijferd kunnen worden, worden met sterretjes gemarkeerd.</p>",
+    "long" : "<p>Varkenslatijn is een manier om in code te spreken, zodat anderen niet begrijpen wat er wordt gezegd. Varkenslatijn komt uit Engeland, maar er zijn vele varianten uit andere landen. Elk met zijn eigen regels.</p><p>Selecteer de juiste taal om klinkers en medeklinkers te kunnen onderscheiden. Het woordenboek wordt ook gebruikt in sommige varianten om mogelijk woorden op te zoeken. Woorden die niet ontcijferd kunnen worden, worden met sterretjes gemarkeerd.</p>",
     "sel" : "Wat voor soort varkenslatijn wil je spreken?"
   },
 
