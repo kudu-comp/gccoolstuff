@@ -69,10 +69,10 @@
           </option>
         </select>
       </div>
-      <button id="enc" class="btn mb-2 me-2" @click="encodeSeg">
+      <button id="enc" class="btn mb-2 me-2 sm-size" @click="encodeSeg">
         {{ $t('buttons.encode') }}
       </button>
-      <button id="dec" class="btn mb-2" @click="decodeSeg">
+      <button id="dec" class="sm-size btn mb-2 sm-size" @click="decodeSeg">
         {{$t('buttons.decode')}}
       </button>
       <textarea
@@ -165,7 +165,7 @@ export default {
         ["BC", 		  "BCJ",				  "BCJ",                "1"],
         ["ABCDG",   "ABCDG2",	  	  "A1A2BCD1D2G2",       "3"],
         ["ABC", 	  "ABC",    			"A1A2BC",             "7"],
-        ["ABC", 	  "AJM",    			"A1A2JM",             "7"]
+        ["ABC", 	  "AJM",    			"A1A2JM",             "7"],
         ["ABC", 	  "AJL",    			"A1A2JL",             "7"]
       ]
     }

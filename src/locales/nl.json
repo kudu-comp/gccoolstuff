@@ -515,7 +515,7 @@
   
   "segment": {
     "title": "Segment display",
-    "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is (binaire notatie). De binaire notatie kan ook worden numeriek worden weergegeven.</p><p>Kies het aantal segmenten: 7, 14 of 16. Kies de notatie van segmenten: letters of binair. Klik op Codeer om de invoer te vertalen naar segmenten, klik op Decodeer om segmentnotatie te vertalen naar tekst.</p>",
+    "long": "<p>Segment displays worden gebruikt in electronica. Nummers en letters worden getoond door 7, 14 of 16 segmenten aan of uit te schakelen. De segmenten worden aangeduid met letters, bijvoorbeeld A t/m G voor een 7-segment display. Ook kunnen 0 en 1 worden gebruikt om aan te geven welk segment uit en aan is (binaire notatie). De binaire notatie kan ook numeriek worden genoteerd.</p>",
     "segsize": "Aantal segmenten",
     "input": "Segmenten notatie letters of binair",
     "letters": "Letternotatie",
