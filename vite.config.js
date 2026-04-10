@@ -16,7 +16,7 @@ export default defineConfig({
     }
   },
 
-  preview: {
+ preview: {
     port: 8080,
     host: true
   },
@@ -24,6 +24,9 @@ export default defineConfig({
   server: {
     host: true,
     port: 8080,
+    // watch: {                                                                                                                                     
+    //     ignored: [ '**/node_modules/**', '**/assets/**' ],                                                                                             
+    // },      
     // https: true
   },
 

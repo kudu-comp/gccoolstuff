@@ -80,6 +80,11 @@ export default {
               },
               {
                 type: "link",
+                text: this.$t("plotcoord.title"),
+                path: { name: "PlotCoord" },
+              },
+              {
+                type: "link",
                 text: this.$t("w3w.title"),
                 path: { name: "W3W" },
               },
@@ -596,8 +601,9 @@ export default {
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[5].text = this.$t("triangles.title");
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[6].text = this.$t("circles.title");
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[7].text = this.$t("antipode.title");
-      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[8].text = this.$t("w3w.title");
-      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[9].text = this.$t("revwherigo.title");
+      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[8].text = this.$t("plotcoord.title");
+      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[9].text = this.$t("w3w.title");
+      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[10].text = this.$t("revwherigo.title");
       this.navbarOptions.menuOptionsLeft[1].text = this.$t("menu.texttools");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("tryanswers.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("wordvalue.title");

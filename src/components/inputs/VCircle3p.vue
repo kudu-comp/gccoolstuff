@@ -109,7 +109,6 @@ export default {
       selecteddatum2: "WGS84",
       coordinate3: "",
       selecteddatum3: "WGS84",
-      error: false,
       errormsg: ""
     };
   },
@@ -154,7 +153,6 @@ export default {
 
           })
           .catch (error => {
-            this.error = true;
             this.errormsg = error;
           });
 

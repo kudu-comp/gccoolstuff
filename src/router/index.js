@@ -13,6 +13,7 @@ const routes = [
   { path: "/mapmaker",            name: 'MapMaker',              component: () => import('@/components/coords/MapMaker.vue') },
   { path: "/w3w",                 name: 'W3W',                   component: () => import('@/components/coords/W3W.vue') },
   { path: "/revwherigo",          name: 'RevWherigo',            component: () => import('@/components/coords/RevWherigo.vue') },
+  { path: "/plotcoord",           name: 'PlotCoord',             component: () => import('@/components/coords/PlotCoord.vue') },
   { path: "/tryanswers",          name: 'TryAnswers',            component: () => import('@/components/texts/TryAnswers.vue') },
   { path: "/wordvalue",           name: 'WordValue',             component: () => import('@/components/texts/WordValue.vue') },
   { path: "/analtxt",             name: 'AnalTxt',               component: () => import('@/components/texts/AnalTxt.vue') },

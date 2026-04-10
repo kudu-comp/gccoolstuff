@@ -111,7 +111,6 @@ export default {
       angleunit: 0.0174532925, // Degrees
       dist: 0,
       unit: 1, // Meters
-      error: false,
       errormsg: ""
     };
   },
@@ -145,7 +144,6 @@ export default {
 
         })
         .catch (error => {
-          this.error = true;
           this.errormsg = error;
         });
 

@@ -137,7 +137,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.invalidinput');
         console.log(e);
 

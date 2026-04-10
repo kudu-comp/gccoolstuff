@@ -7,9 +7,6 @@ import store from './store'
 
 import "@/scss/custom.scss"
 
-/* Bootstrap */
-// import bootstrap from "bootstrap"
-
 // Multilanguage support using vue-i18n
 import nl from './locales/nl.json'
 import en from './locales/en.json'

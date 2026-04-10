@@ -75,7 +75,7 @@
       </div>
       <div class='row'>
         <label for='bgclr' class='form-label sm-size mb-2'>{{ $t('barcode.bgclr')}}</label>
-        <input id='bgclr' type='color' v-model='bgclr' class='form-control mb-2 sm-size' />
+        <input id='bgclr' type='color' v-model='bgclr' style="border-width: 0px;" class='form-control mb-2 sm-size' />
       </div>
       <!-- Action buttons -->
       <button class="btn md-size mb-2" id="btn1" @click="generate()">{{$t('buttons.generate')}}</button>

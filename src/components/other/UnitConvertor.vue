@@ -198,7 +198,6 @@ export default {
     convertTable : function (direction) {
 
       // Reset
-      this.error = false;
       this.result = "";
       let val = 0;
       let html = "";
@@ -232,7 +231,6 @@ export default {
 
       } catch (e) {
 
-        this.error = true;
         this.errormsg = this.$t('errors.generic');
         console.log(e);
 

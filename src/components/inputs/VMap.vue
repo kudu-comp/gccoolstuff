@@ -142,7 +142,6 @@ export default {
         })
         .catch ((e) => {
           console.log(e);
-          this.error = true;
           this.errormsg = e;
         });
     }).addTo(this.mymap);

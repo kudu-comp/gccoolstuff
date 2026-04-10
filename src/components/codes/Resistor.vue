@@ -63,7 +63,7 @@
       </div>
       <v-calculate @calculate="calcResistance" id="calc"></v-calculate>
       <p
-        v-show="error"
+        v-show="errormsg"
         class="errormsg"
       >
         {{ errormsg }}
@@ -96,7 +96,6 @@ export default {
     return {
       message: "",
       translatedmessage: "",
-      error: false,
       errormsg: "",
       result: "",
       band1: 0,
@@ -116,8 +115,8 @@ export default {
     calcResistance: function() {
 
       // Reset flags
-      this.error = false;
       this.result = this.$t('resistorres');
+      this.errormsg = "";
 
       let value = (parseInt(this.band1) * 100 + parseInt(this.band2) * 10 + parseInt(this.band3)) * (10 ** this.mult);
 

@@ -262,8 +262,7 @@ export default {
       }
       this.nrow = this.gridarr.length;
       this.ncol = this.gridarr[0].length;
-      console.log(this.nrow, this.ncol);
-
+      
       // Build a list of words
       let words = this.words
         .trim()
@@ -282,7 +281,7 @@ export default {
         for (let r = 0; r < this.nrow && !found; r++)
           for (let c = 0; c < this.ncol && !found; c++)
             if (this.gridarr[r][c] === words[w][0]) {
-              found = this.tryPos(r, c, words[w]);
+              found = this.tryPos(r, c, words[w].replace(/\s+/g, ''));
             }
 
         // If word hasn't been found raise an error

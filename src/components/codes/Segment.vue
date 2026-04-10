@@ -69,10 +69,10 @@
           </option>
         </select>
       </div>
-      <button id="enc" class="btn mb-2 me-2" @click="encodeSeg">
+      <button id="enc" class="btn mb-2 me-2 sm-size" @click="encodeSeg">
         {{ $t('buttons.encode') }}
       </button>
-      <button id="dec" class="btn mb-2" @click="decodeSeg">
+      <button id="dec" class="sm-size btn mb-2 sm-size" @click="decodeSeg">
         {{$t('buttons.decode')}}
       </button>
       <textarea
@@ -165,7 +165,7 @@ export default {
         ["BC", 		  "BCJ",				  "BCJ",                "1"],
         ["ABCDG",   "ABCDG2",	  	  "A1A2BCD1D2G2",       "3"],
         ["ABC", 	  "ABC",    			"A1A2BC",             "7"],
-        ["ABC", 	  "AJM",    			"A1A2JM",             "7"]
+        ["ABC", 	  "AJM",    			"A1A2JM",             "7"],
         ["ABC", 	  "AJL",    			"A1A2JL",             "7"]
       ]
     }
@@ -295,7 +295,6 @@ export default {
       try {
 
         let words = msg.toUpperCase().match(/([A-M12]+)|(SPACE)/g);
-        console.log(msg, words);
         if (!words) {
           this.errormsg = this.$t('errors.cannotparse');
           return;
@@ -310,7 +309,11 @@ export default {
           
           // Convert to uppercase and sort
           w = w.match(regex);
-          if (!w) throw ("Invalid input");
+          if (!w) {
+            this.errormsg += w + " ";
+            continue;
+          }
+
           w = w.sort().join("");
           
           let c = this.mapseg.find( (s) => { 
@@ -318,10 +321,14 @@ export default {
             });
             
           if (!c)
-            this.errormsg += this.$t('errors.unknowninput') + w + " ";
+            this.errormsg += w + " ";
           else
             this.result += c[3];
             
+        }
+
+        if (this.errormsg) {
+          this.errormsg = this.$t('errors.unknowninput') + ": " + this.errormsg;
         }
       
       } catch (e) {
@@ -330,6 +337,8 @@ export default {
         this.errormsg = e;
         
       }
+
+
 
     },
 

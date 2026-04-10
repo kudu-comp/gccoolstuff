@@ -1,13 +1,13 @@
 <template>
   <div class="d-flex flex-column mx-4">
     <div class="sectionhead">
-      {{ $t('mapmaker.title') }}
+      {{ $t('plotcoord.title') }}
     </div>
     <div class="mainpage">
       <div>
         <div
           class="infoblock"
-          v-html="$t('mapmaker.long')"
+          v-html="$t('plotcoord.long')"
         />
         <div class="row mb-2">
           <label
@@ -47,28 +47,27 @@
         </div>
         <div class="form-check mb-2 me-2">
           <input
-            id="drawcircles"
-            v-model="drawcircles"
+            id="drawlines"
+            v-model="drawlines"
             type="checkbox"
             class="form-check-input"
           >
           <label
-            for="drawcircles"
+            for="drawlines"
             class="form-check-label"
-          >{{ $t('mapmaker.drawcircle') }}</label>
+          >{{ $t('plotcoord.drawlines') }}</label>
         </div>
-        <div class="mb-2">
-          <v-distance
-            v-model:dist="dist"
-            v-model:unit="unit"
+        <div class="form-check mb-2 me-2">
+          <input
+            id="fillpoly"
+            v-model="fillpoly"
+            type="checkbox"
+            class="form-check-input"
           >
-            <template #label>
-              <label
-                class="form-label"
-                for="distance"
-              >{{ $t('labels.radius') }}</label>
-            </template>
-          </v-distance>
+          <label
+            for="fillpoly"
+            class="form-check-label"
+          >{{ $t('plotcoord.fillpoly') }}</label>
         </div>
       </div>
       <div class="row mb-2">
@@ -106,16 +105,14 @@
 import * as coords from '@/scripts/coords.js';
 import VMap from '@/components/inputs/VMap.vue'
 import VDatums from '@/components/inputs/VDatums.vue';
-import VDistance from '@/components/inputs/VDistance.vue';
 import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
 import L from 'leaflet';
 
 export default {
-  name: 'MapMaker',
+  name: 'plotcoord',
 
   components: {
     VDatums,
-    VDistance,
     VMap,
     VShowOnMap
   },
@@ -126,11 +123,12 @@ export default {
       from: "WGS84",
       coordfrom : "",
       labels: "",
-      drawcircles: false,
-      showlabels: true,
-      showmarkers: true,
-      unit: 1,
-      dist: 165,
+      drawlines: true,
+      fillpoly: false,
+      showlabels: false,
+      showmarkers: false,
+      drawlines: true,
+      fillpoly: false
     }
   },
 
@@ -142,6 +140,8 @@ export default {
       // Reset error flag
       this.errormsg = "" ;
       this.result = "";
+      let c = [];
+      let promises = [];
 
       // No input
       if (!this.coordfrom) {
@@ -164,52 +164,50 @@ export default {
         return;
       }
 
-      // Parse input line by line
+      // Convert all points to WGS84
       for (let i = 0; i < input.length; i++) {
-
-        try {
-
-          // Get the coordinates
-          coords.convertCoordFromText(input[i], this.from, 'WGS84')
-            .then ( mapcoord => {
-
-              // Add a marker to the map for each coordinate
-              if (this.showmarkers) {
-                let marker = new L.marker(mapcoord).addTo(this.$store.state.mymap);
-
-                // Create a popup that doesn't close and bind it to the marker
-                if (this.showlabels) {
-                  let p = new L.Popup({ autoClose: false, closeOnClick: false })
-                        .setContent(markertext[i])
-                        .setLatLng(mapcoord);
-                  marker.bindPopup(p).openPopup();
-                }
-              }
-
-              // Draw circles if requested
-              if (this.drawcircles) {
-                L.circle(mapcoord, {
-                  color: "#E72E1C",
-                  fillColor: "#EC7F74",
-                  fillOpacity: 0.5,
-                  radius: this.dist * this.unit
-                }).addTo(this.$store.state.mymap);
-                
-              }
-
-            })
-            .catch ( (e) => {
-              this.errormsg = this.$t('errors.incorrectcoords')
-              console.log(e);
-            });
-
-        } catch(e) {
-
-          this.errormsg = this.$t('errors.incorrectcoords')
-          console.log(e);
-          
-        }
+        console.log(input[i]);
+        promises.push(coords.convertCoordFromText(input[i], this.from, 'WGS84'));
       }
+
+      Promise.all(promises)
+        .then( points => {
+
+          for (let i = 0; i < points.length; i++) {
+
+            // Fill the array for polylines
+            c.push( { lon: points[i].lon, lat: points[i].lat } );
+      
+            // Add a marker to the map for each coordinate
+            if (this.showmarkers) {
+              let marker = new L.marker(points[i]).addTo(this.$store.state.mymap);
+
+              // Create a popup that doesn't close and bind it to the marker
+              if (this.showlabels) {
+                let p = new L.Popup({ autoClose: false, closeOnClick: false })
+                      .setContent(markertext[i])
+                      .setLatLng(points);
+                marker.bindPopup(p).openPopup();
+              }
+            }
+
+          }
+          // Draw polylines if requested
+          if (this.drawlines) {
+            c.push(c[0]);
+            if (this.fillpoly) {
+              L.polygon(c, {color: 'red', fillColor: 'red', fillOpacity: 0.5}).addTo(this.$store.state.mymap);   
+            } else {
+              L.polyline(c, {color: 'red'}).addTo(this.$store.state.mymap);
+            }
+      }
+
+        })
+        .catch((error) => {
+          console.error('Error ', error);
+          this.errormsg = this.$t('errors.incorrectcoords');
+        });
+
     },
   },
 }

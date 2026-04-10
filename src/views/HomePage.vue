@@ -58,7 +58,7 @@
                 <router-link to="/htmlparser">{{$t('htmlparser.title')}}</router-link>
               </li>
               <li>
-                <router-link to="/sudokusolv">{{$t('sudokusolv.title')}}</router-link>
+                <router-link to="/wordsearch">{{$t('wordsearch.title')}}</router-link>
               </li>
             </ul>
           </div>
