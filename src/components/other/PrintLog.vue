@@ -12,7 +12,6 @@
         v-html="$t('printlog.long')"
       />
       <!-- Form fields -->
-      <!-- Text input -->
       <div class="row">
         <div class='col-4'>
           <div class="row">
@@ -102,6 +101,10 @@
             <input id='linecol' type='color' v-model='linecol' class='form-control mb-2 sm-size' @change='redraw()' />
           </div>
           <div class='row'><h4>{{ $t('printlog.extra')}}</h4></div>
+          <div class='form-check'>
+            <input type='checkbox' id='nolines' class='form-check-input mb-2' v-model='nolines' @change='redraw()' />
+            <label for='nolines' class='form-check-label mb-2'>{{ $t('printlog.nolines')}}</label>
+          </div>
           <div class='form-check'>
             <input type='checkbox' id='showimg' class='form-check-input mb-2' v-model='showimg' @change='redraw()' />
             <label for='showimg' class='form-check-label mb-2'>{{ $t('printlog.showimg')}}</label>
@@ -276,17 +279,21 @@ export default {
       let headerLh = 18;
 
       // Draw the box
-      this.ctx.beginPath();
-      this.ctx.rect(1, 1, this.width-2, this.height-2);
-      this.ctx.stroke();
+      if (!this.nolines) {
+        this.ctx.beginPath();
+        this.ctx.rect(1, 1, this.width-2, this.height-2);
+        this.ctx.stroke();
+      }
 
       // Draw lines between columns
       let colWidth = Math.floor(this.width / this.ncol);
-      for (let i = 1; i < this.ncol; i++) {
-        this.ctx.beginPath();
-        this.ctx.moveTo(i*colWidth, 0);
-        this.ctx.lineTo(i*colWidth, this.height);
-        this.ctx.stroke();
+      if (!this.nolines) {
+        for (let i = 1; i < this.ncol; i++) {
+          this.ctx.beginPath();
+          this.ctx.moveTo(i*colWidth, 0);
+          this.ctx.lineTo(i*colWidth, this.height);
+          this.ctx.stroke();
+        } 
       }
 
       // Draw each column

@@ -142,6 +142,7 @@ export default {
       this.result = "";
       let c = [];
       let promises = [];
+      let markertext = [];
 
       // No input
       if (!this.coordfrom) {
@@ -151,12 +152,13 @@ export default {
 
       // If there are no labels default to coordinates
       if (!this.labels) {
-        this.labels = this.coordfrom;
+        markertext = this.coordfrom.match(/[^\r\n]+/g);
+      } else {
+        markertext = this.labels.match(/[^\r\n]+/g);
       }
 
       // Get all the lines form input and convert them one by one
       let input = this.coordfrom.match(/[^\r\n]+/g);
-      let markertext = this.labels.match(/[^\r\n]+/g);
 
       // Check if there are enough Labels
       if (input.length != markertext.length) {
@@ -166,7 +168,6 @@ export default {
 
       // Convert all points to WGS84
       for (let i = 0; i < input.length; i++) {
-        console.log(input[i]);
         promises.push(coords.convertCoordFromText(input[i], this.from, 'WGS84'));
       }
 

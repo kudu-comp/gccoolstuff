@@ -142,6 +142,7 @@ export default {
       // Reset error flag
       this.errormsg = "" ;
       this.result = "";
+      let markertext = [];
 
       // No input
       if (!this.coordfrom) {
@@ -150,13 +151,14 @@ export default {
       }
 
       // If there are no labels default to coordinates
-      if (!this.labels) {
-        this.labels = this.coordfrom;
+            if (!this.labels) {
+        markertext = this.coordfrom.match(/[^\r\n]+/g);
+      } else {
+        markertext = this.labels.match(/[^\r\n]+/g);
       }
 
       // Get all the lines form input and convert them one by one
       let input = this.coordfrom.match(/[^\r\n]+/g);
-      let markertext = this.labels.match(/[^\r\n]+/g);
 
       // Check if there are enough Labels
       if (input.length != markertext.length) {

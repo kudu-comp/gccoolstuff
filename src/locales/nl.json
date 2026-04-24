@@ -1172,10 +1172,10 @@
   },
 
   "plotcoord" : {
-    "title": "Coördinaten plotten",
-    "long" : "Maak een tekening of polygonen van de opgegeven",
+    "title": "Teken coördinaten",
+    "long" : "Maak een tekening of polygonen van de opgegeven coördinaten. Er kunnen lijnen worden getekend tussen de coördinaten en/of de polygonen kunnen worden gevuld. De tool werkt met alle beschikbare coördinaatsystemen.",
     "drawlines": "Teken lijnen",
-    "fillpoly": "Teken polygonen"
+    "fillpoly": "Vul het polygoon"
   },
 
   "dialogic": {
@@ -1867,6 +1867,7 @@
     "selimg" : "Kies afbeelding",
     "nmdttm" : "Naam, datum, tijd",
     "printftf" : "Print FTF, STF en TTF",
+    "nolines" : "Geen lijnen tussen de kolommen",
     "savepdf" : "PDF opslaan",
     "savepng" : "PNG opslaan",
     "lh" : "Regelhoogte",

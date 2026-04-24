@@ -1169,8 +1169,8 @@
   },
 
   "plotcoord" : {
-    "title": "Plot coordinates",
-    "long" : "Make a drawing  of a list of coordinates",
+    "title": "Draw coordinates",
+    "long" : "Make a drawing  of a list of coordinates. The coordinates are connected with lines and/or the polygons are filled. Supports many different coordinate systems. Placing of markers and labels can be disabled.",
     "drawlines": "Draw lines",
     "fillpoly": "Fill polygon"
   },
@@ -1860,6 +1860,7 @@
     "selimg" : "Choose image",
     "nmdttm" : "Name, date, time",
     "printftf" : "Print FTF, STF and TTF",
+    "nolines" : "No lines between columns",
     "savepdf" : "Save PDF",
     "savepng" : "Save PNG",
     "lh" : "Line spacing",

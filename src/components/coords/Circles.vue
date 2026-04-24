@@ -140,7 +140,6 @@ export default {
       let coord = { lat: lat, lon: lon };
       // Convert coordinate to selected datum
       let seldatum = (h === 2) ? this.selecteddatum2 : this.selecteddatum1;
-      console.log("seldatum", seldatum);
       coords.convertCoordFromLatLon (coord, "RD", seldatum)
         .then (data => {
           coord = data;
