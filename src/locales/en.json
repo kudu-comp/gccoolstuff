@@ -82,7 +82,8 @@
     "next" : "Next",
     "expall": "Expand all",
     "collall": "Collapse all",
-    "generate": "Generate"
+    "generate": "Generate",
+    "play": "Play"
   },
 
   "colors": {
@@ -502,7 +503,7 @@
   },
 
   "fonts": {
-    "title": "Special fonts",
+    "title": "Fonts",
     "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>",
     "selfont": "Select font",
     "fontsize": "Select fontsize",
@@ -522,6 +523,32 @@
     "octal": "Octal notation (0-7)",
     "hexa": "Hexadecimal notation (0-9A-F)",
     "space": "Space is all segments off"
+  },
+
+  "morsecode": {
+    "title": "Morse code",
+    "long": "<p>Morse code is a method of encoding text characters as standardized sequences of two different signal durations, called dots and dashes. Morse code can be transmitted in sound, light or as a visual signal. It is widely used in geocaching puzzles. This tool supports letters, digits and some punctuation.</p><p>The tool can read morse from audio files (e.g. WAV or OGG). It can also play messages in morse and save them as an audio file (WAV). It also supports converting text to morse code and vice versa.</p>",
+    "decodeaudio": "Read morse from an audiofile",
+    "decodectl": "The parameters below can be used to finetune the decoding of audio files. The default values work in many cases, but audio files can be hard to decode. The morse signal might be obscured by noise. The duration of the signals might vary. Use the threshold to filter the signal from noise. It works in small steps and is sensitive, so adjust carefully. The duration of a dash is normally around 3 times the duration of a dot, but it can be more or less. The duration of the pause between signals is normally around 3 times the duration of a dot, but it can also be more or less. The duration of the space between words is normally around 7 times the duration of a dot, but it can also be more or less. The default parameters are a bit lower to allow for variations.",
+    "thres": "Threshold for signal detection (default 0.15)",
+    "dottohyphen": "Duration of a dash in relation to a dot (default 2.6)",
+    "dottopause": "Duration of a pause between signals in relation to a dot (default 2.4)",
+    "dottospace": "Duration of a space in relation to a dot (default 5.0)",
+    "playmessage": "Play or save a message in morse code",
+    "encodectl": "The parameters below can be used to finetune the playing of morse code messages. Words per minute (WPM) is the standard way to indicate the speed of morse code. The default value is 20 WPM, which is a means the word PARIS can be sent 20 times per minute. If you want to play the message faster or slower, you can adjust the WPM value. The frequency is the pitch of the sound. The default value is 600 Hz, which is a common frequency for morse code. You can adjust it to make it easier to hear.",
+    "wpm": "Words per minute (default 20)",
+    "freq": "Frequency in Hz (default 600)",
+    "fileloaded1": "Info: File loaded successfully. Ready to decode. Samplerate: ",
+    "fileloaded2": " Hz, Duration: ",
+    "fileloaded3": " seconds.",
+    "noaudio": "Audio file appears to be empty. Please check the file and try again.",
+    "nomorse": "Could not find any Morse code signals. Try a file with a clearer 'beep' or adjust the threshold.",
+    "success": "Info: Successfully decoded morse code from audio.",
+    "notsupported": "Audio format not supported, no audio file or the file is corrupted.",
+    "failgen": "Failed to generate morse code audio: ",
+    "textmorse": "Text to morse code or morse code to text",
+    "textmorsectl": "Type morse code (using . and -) and press decode to get the text. Letters in morse code should be separated by a space. Words are normally separated by a slash (/),but this can be changed. Press encode to translate text to morse code.",
+    "spacesep": "Separator for words in morse code (default /)"
   },
 
   "exifscanner": {
@@ -722,6 +749,17 @@
     "selnum": "Numbers (0 - 126)",
     "selascii": "Text ASCII",
     "selalpha": "Text alphabet (A=1, Z=26)"
+  },
+
+  "vanitycode" : {
+    "title": "Vanity code",
+    "long": "<p>Vanity code is a method of encoding text into a sequence of numbers, using the same system as telephone keypads. Also known as the T9-alphabet or Nokia alphabet. Just type the text or codes and the result will be shown immediately.</p>",
+    "spaces": "Add spaces when encoding.",
+    "ignorespaces": "Ignore spaces when encoding.",
+    "addspaces": "Separate input with spaces",
+    "sel": "Select what to do",
+    "unknownchar": "Unknown characters: ",
+    "unknowncode": "Unknown codes: "
   },
 
   "countries": {
@@ -1735,6 +1773,17 @@
     "title": "Truth table",
     "long": "Generate the truth table from a boolean or logical expression. Any string that is not: and, or, xor or not is considered a variable. Instead of literals you can use programming logic (&&, {'||'} and !) or algabraic notation (*, + and !) or even proposition logic (∧, ∨ and ¬). Although it is incorrect you can mix the notations if you would like to try.",
     "expr": "Boolean expression"
+  },
+
+  "passwordgen" : {
+    "title": "Password generator",
+    "long": "<p>A password generator to generate random passwords. You can specify the length and the types of characters to include. The more types of characters you include, the stronger the password is. However, it also becomes harder to remember.</p>",
+    "length": "Length of password",
+    "uppcase": "Include uppercase letters (A-Z)",
+    "lowcase": "Include lowercase letters (a-z)",
+    "numbers": "Include numbers (0-9)",
+    "symbols": "Include symbols",
+    "result": "The generated password"
   },
 
   "encryption": {

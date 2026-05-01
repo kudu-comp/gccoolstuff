@@ -189,8 +189,18 @@ export default {
               },
               {
                 type: "link",
+                text: this.$t("morsecode.title"),
+                path: { name: "MorseCode" },
+              },
+              {
+                type: "link",
                 text: this.$t("resistor.title"),
                 path: { name: "Resistor" },
+              },
+              {
+                type: "link",
+                text: this.$t("vanitycode.title"),
+                path: { name: "VanityCode" },
               },
               {
                 type: "link",
@@ -382,6 +392,11 @@ export default {
                 type: "link",
                 text: this.$t("truthtable.title"),
                 path: { name: "TruthTable" },
+              },
+              {
+                type: "link",
+                text: this.$t("passwordgen.title"),
+                path: { name: "PasswordGen" },
               }
             ],
           },
@@ -622,9 +637,11 @@ export default {
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[3].text = this.$t("codebook.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[4].text = this.$t("fonts.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[5].text = this.$t("segment.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[6].text = this.$t("resistor.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[7].text = this.$t("decabit.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[8].text = this.$t("freqanal.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[6].text = this.$t("morsecode.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[7].text = this.$t("resistor.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[8].text = this.$t("vanitycode.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[9].text = this.$t("decabit.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[10].text = this.$t("freqanal.title");
       this.navbarOptions.menuOptionsLeft[3].text = this.$t("menu.imagetools");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[0].text = this.$t("exifscanner.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[1].text = this.$t("colorpicker.title");
@@ -660,6 +677,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[8].text = this.$t("duckspeak.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[9].text = this.$t("checksum.title");
       this.navbarOptions.menuOptionsLeft[5].subMenuOptions[10].text = this.$t("truthtable.title");
+      this.navbarOptions.menuOptionsLeft[5].subMenuOptions[11].text = this.$t("passwordgen.title");
       this.navbarOptions.menuOptionsLeft[6].text = this.$t("menu.games");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[0].text = this.$t("sudokusolv.title");
       this.navbarOptions.menuOptionsLeft[6].subMenuOptions[1].text = this.$t("mmsolver.title");

@@ -128,6 +128,7 @@ export default {
             { href: "/triangles",      name: "", show : true       },
             { href: "/circles",        name: "", show : true       },
             { href: "/antipode",       name: "", show : true       },
+            { href: "/plotcoord",      name: "", show : true       },
             { href: "/w3w",            name: "", show : true       },
             { href: "/revwherigo",     name: "", show : true       }
           ],
@@ -177,7 +178,9 @@ export default {
               ]
             },
             { href: "/segment",     name: "", show : true            },
+            { href: "/morsecode",   name: "", show : true            },
             { href: "/resistor",    name: "", show : true            },
+            { href: "/vanitycode",  name: "", show : true            },
             { href: "/decabit",     name: "", show : true            },
             { href: "/freqanal",    name: "", show : true            },
           ],
@@ -210,7 +213,6 @@ export default {
               ]
             },
             {  href: "/bignumbers",          name: "", show : true,        },
-            {  href: "/cryptosolver",        name: "", show : true,        },
             {  href: "/sequences",           name: "", show : true,        
               l3 : [
                 // Add sequences here in mounted ()
@@ -238,7 +240,8 @@ export default {
             { href: "/deadfish",            name: "", show : true,        },
             { href: "/duckspeak",           name: "", show : true,        },
             { href: "/checksum",            name: "", show : true,        },
-            { href: "/truthtable",          name: "", show : true,        }
+            { href: "/truthtable",          name: "", show : true,        },
+            { href: "/passwordgen",         name: "", show : true,        }
           ]
         },
         {
@@ -250,6 +253,7 @@ export default {
             { href: "/anagrams"  ,          name: "", show : true         },
             { href: "/wordle",              name: "", show : true         },
             { href: "/wordsearch",          name: "", show : true,        },
+            { href: "/cryptosolver",        name: "", show : true,        },
             { href: "/gameoflife",          name: "", show : true,        },
           ]
         },

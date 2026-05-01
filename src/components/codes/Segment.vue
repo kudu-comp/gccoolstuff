@@ -8,7 +8,7 @@
         class="infoblock"
         v-html="$t('segment.long')"
       />
-      <img src="~@\assets\images\segment2.png">
+      <img width="400px" max-width="100%"src="~@\assets\images\segment2.png">
       <div class="row mt-2">
         <label
           class="form-label md-size mb-2"

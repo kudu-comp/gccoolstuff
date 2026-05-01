@@ -59,6 +59,36 @@
           <option value="2">2</option>
         </select>
       </div>
+      <!-- Radios-->
+      <span
+        class="form-label mb-2"
+      >{{ $t('vanitycode.sel') }}</span>
+      <div class="form-check">
+        <input
+          id="radio1"
+          v-model="sel"
+          type="radio"
+          value="0"
+          class="form-check-input"
+        >
+        <label
+          class="form-check-label"
+          for="number1"
+        >{{ $t('buttons.encode') }}</label>
+      </div>
+      <div class="form-check">
+        <input
+          id="radio2"
+          v-model="sel"
+          type="radio"
+          value="1"
+          class="form-check-input"
+        >
+        <label
+          class="form-check-label"
+          for="number2"
+        >{{ $t('buttons.decode') }}</label>
+      </div>      
       <!-- Date input -->
       <div class="row" >
         <label for="date1" class="form-label sm-size mb-2">{{$t('compname.date1')}} </label>

@@ -504,7 +504,7 @@
   },
   
   "fonts": {
-    "title": "Speciale fonts",
+    "title": "Fonts",
     "long": "<p>Een code is soms niet veel meer dan het gebruik van een ander font, bijvoorbeeld Webdings. Ook zijn veel codes uit bijvoorbeeld games en televisieseries beschikbaar als font. Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>",
     "selfont": "Selecteer font",
     "fontsize": "Selecteer grootte",
@@ -524,6 +524,32 @@
     "octal": "Octale notatie (0-7)",
     "hexa": "Hexadecimale notatie (0-9A-F)",
     "space": "Spatie is alle segmenten uit"
+  },
+
+  "morsecode": {
+    "title": "Morse code",
+    "long": "<p>Morse code is een manier om berichten te versturen door middel van korte en lange signalen (puntjes en streepjes). Met deze tool kan een audio file worden gelezen en het bericht erin worden ontcijferd. De tool ondersteunt letters, cijfers en sommige symbolen. De tool kan ook audio files maken in morse en deze opslaan en afspelen. De tool ondersteunt ook het omzetten van tekst naar morse code en vice versa.</p>",
+    "decodeaudio": "Lees morse uit een audiofile",
+    "decodectl": "De parameters hieronder kunnen worden gebruikt om het ontcijferen van audio files te verfijnen. De standaard waarden werken in veel gevallen, maar audio files kunnen moeilijk te ontcijferen zijn. Het morse signaal kan worden verstoord door ruis. De duur van de signalen kan variëren. Gebruik de drempelwaarde om het signaal te filteren van ruis. Het werkt in kleine stappen en is gevoelig, dus pas het zorgvuldig aan. De duur van een streepje is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan meer of minder zijn. De duur van de pauze tussen signalen is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan ook meer of minder zijn. De duur van de ruimte tussen woorden is normaal gesproken ongeveer 7 keer de duur van een puntje, maar het kan ook meer of minder zijn. De standaard parameters zijn iets lager om variaties toe te staan.",
+    "thres": "Drempelwaarde (default 0.15)",
+    "dottohyphen": "Duur van een streepje in verhouding tot een puntje (default 2.6)",
+    "dottopause": "Duur van een pauze tussen signalen in verhouding tot een puntje (default 2.4)",
+    "dottospace": "Duur van spatie in verhouding tot een puntje (default 5.0)",
+    "playmessage": "Speel of bewaar een bericht in morse code",
+    "encodectl": "De parameters hieronder kunnen worden gebruikt om het afspelen van morse code berichten te verfijnen. Woorden per minuut (WPM) is de standaard manier om de snelheid van morse code aan te geven. De standaardwaarde is 20 WPM, wat betekent dat het woord PARIS 20 keer per minuut kan worden verzonden. Als je het bericht sneller of trager wilt afspelen, kun je de WPM-waarde aanpassen. De frequentie is de toonhoogte van het geluid. De standaardwaarde is 600 Hz, wat een veelvoorkomende frequentie is voor morse code. Je kunt deze aanpassen om het makkelijker te horen.",
+    "wpm": "Woorden per minuut (default 20)",
+    "freq": "Frequency in Hz (default 600)",
+    "fileloaded1": "Info: File succesvol geladen. Klaar om te decoderen. Samplerate: ",
+    "fileloaded2": " Hz, Tijd: ",
+    "fileloaded3": " secondes.",
+    "noaudio": "Audio file lijkt leeg. Controleer de file en probeer het nog eens.",
+    "nomorse": "Geen morse code signalen gevonden. Probeer een file met een duidelijkere 'beep' of pas de drempelwaarde aan.",
+    "success": "Info: Morse code succesvol ontcijferd.",
+    "notsupported": "Audio formaat niet ondersteund, geen audio file of de file is beschadigd.",
+    "failgen": "Mislukt om morse code audio te genereren: ",
+    "textmorse": "Tekst naar morse en morse naar tekst",
+    "textmorsectl": "Type morse code (door middel van . en -) en druk op Decodeer om de tekst te ontcifjeren. Letters in morse worden onderling gescheiden door een spatie. Woorden worden normaal gescheiden door een slash (/), maar dit kan worden aangepast. Klik op Codeer om tekst naar morse code te converteren.",
+    "spacesep": "Separator for words in morse code (default /)"
   },
 
   "exifscanner": {
@@ -724,6 +750,17 @@
     "selnum": "Nummers (0 - 126)",
     "selascii": "Tekst ASCII",
     "selalpha": "Tekst alfabet (A=1, Z=26)"
+  },
+
+  "vanitycode" : {
+    "title": "Vanity code",
+    "long": "<p>Vanity code is a methode om tekst om te zetten in een reeks nummers, gebaseerd op hetzelfde systeem als het toetsenbord van een telefoon. Ook bekend als het T9 alfabet of het Nokia alfabet. Type de tekst of de codes en het resultaat wordt direct getoond.</p>",
+    "spaces": "Voeg spaties toe bij het coderen.",
+    "ignorespaces": "Negeer spaties bij het (de)coderen.",
+    "addspaces": "Voeg spaties tussen in het bericht",
+    "sel": "Selecteer coderen of decoderen",
+    "unknownchar": "Onbekende karakters: ",
+    "unknowncode": "Onbekende codes: "
   },
 
   "countries": {
@@ -1742,6 +1779,17 @@
     "title": "Waarheidstabel",
     "long": "Deze tool maakt een zogenaamde waarheidstabel. Voor alle mogelijke variabelen (waar, niet waar) wordt het resultaat van de logische expressie (waar, niet waar) berekend.  Elke tekst anders dan and, or, xor of not wordt gezien als een variabele. In plaats van and, or, not kunnen ook symbolen uit programmeertalen (&&, {'||'} en !) de algabraische notatie (*, + en !) of de notatie volgens propositielogica (∧, ∨ en ¬) worden gebruikt. Alhoewel incorrect kunnen de notaties ook door elkaar worden gebruikt.",
     "expr": "Boolean expressie"
+  },
+
+  "passwordgen" : {
+    "title": "Wachtwoord generator",
+    "long": "<p>Een tool om willekeurige wachtwoorden te genereren. Je kunt het aantal karakters en de soorten karakters opgeven die moeten worden meegenomen. Hoe meer soorten karakters je opneemt, hoe sterker het wachtwoord is. Echter, hoe moeilijker het ook wordt om het te onthouden.</p>",
+    "length": "Lengte van wachtwoord",
+    "uppcase": "Hoofdletters (A-Z) meenemen",
+    "lowcase": "Kleine letters (a-z) meenemen",
+    "numbers": "Cijfers (0-9) meenemen",
+    "symbols": "Symbolen meenemen",
+    "result": "Het gegenereerde wachtwoord is"
   },
 
   "encryption": {
