@@ -92,6 +92,13 @@
           <router-link to="/truthtable"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('passwordgen.title')}}</h5>
+          <p class="card-text" v-html="$t('passwordgen.long')"></p>
+          <router-link to="/passwordgen"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>

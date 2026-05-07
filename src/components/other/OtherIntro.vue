@@ -17,6 +17,13 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
+          <h5 class="card-title">{{$t('genlog.title')}}</h5>
+          <p class="card-text" v-html="$t('genlog.long')"></p>
+          <router-link to="/genlog"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
           <h5 class="card-title">{{$t('htmlparser.title')}}</h5>
           <p class="card-text" v-html="$t('htmlparser.long')"></p>
           <router-link to="/htmlparser"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>

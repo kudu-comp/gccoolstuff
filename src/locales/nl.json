@@ -20,6 +20,7 @@
   },
 
   "labels": {
+    "selectfile": "Selecteer bestand",
     "from": "Van",
     "to": "Naar",
     "message": "Bericht",
@@ -63,6 +64,7 @@
     "reset": "Reset",
     "cancel": "Annuleer",
     "save": "Opslaan",
+    "delete": "Verwijder",
     "get": "Haal op",
     "check": "Controleer",
     "apply": "Toepassen",
@@ -140,7 +142,7 @@
   },
 
   "codes": {
-    "intro": "Geheimschriften (of cijfers) gebruiken sleutels of transpositie om een bericht te coderen. Er zijn 60 verschillende cijfers beschikbaar. Codes zijn een simpeler manier, er wordt geen sleutel bij gebruikt. Het vinden van de juiste code is niet altijd eenvoudig. De zoektool of de speciale fonts kunnen daarbij helpen. Slimme substitutie helpt met het kraken van geheimschriften. Rotatie cijfers probeert alle mogelijk verschuivingen. Weerstandscode, segmentcode en decabit zijn codes voor speciale doeleinden. Frequentieanalyse helpt met het vinden van veel voorkomende patronen."
+    "intro": "Een verzameling tools om allerlei codes te kraken. Geheimschriften (ook wel cijfers genoemd) versleutelen een bericht door letters te vervangen en te verplaatsen. Rotatie cijfers zijn simpele verschuivingen. Voor het kraken van geheimschriften kan slimme substitutie en frequentieanalyse worden gebruikt.<br><br>Codes zijn een stuk eenvoudiger. Een code vervangt een letter of cijfer door iets anders. In het codeboek kan je zoeken op kenmerken (tags) en in omschrijvingen. Segmentcode is een code voor ouderwetse displays. Morsecode werd vroeger gebruikt voor communicatie. De weerstandscode gebruikt kleuren. Vanitycode gebruikt cijfers als op het toetsenbord van je telefoon. In geocaching zijn veel codes simpelweg andere fonts. Decabit gebruikt = en -."
   },
 
   "texttools": {
@@ -156,7 +158,7 @@
   },
 
   "comptools" : {
-    "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Het is mogelijk diverse esoterische programmeertalen (esolangs) uit te voeren, bijv. Brainfuck en Cow. Het berekenen van de waarheidstabel bij een logische expressie."
+    "intro": "Een verzameling tools die gebruikt worden door computers en bij het programmeren daarvan. Diverse manieren om tekst, getallen of binaire data te coderen. Digital encrypties en hashes worden ondersteund. Het is mogelijk diverse esoterische programmeertalen (esolangs) uit te voeren, bijv. Brainfuck en Cow. Het berekenen van de waarheidstabel bij een logische expressie. Genereer wachtwoorden."
   },
 
   "games": {
@@ -164,7 +166,7 @@
   },
 
   "othertools" : {
-    "intro": "Diverse tools voor van alles en nog wat. Maak logrollen. Scan de HTML bron van een geocache pagina. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes. Zoek een boek in de OpenLibrary.org database."
+    "intro": "Van alles en nog wat. Maak logrollen. Genereer logjes. Scan de HTML bron van een geocache pagina. Conversie van honderden eenheden. Rekenen met datums. Random generator. Tabellen van het periodiek systeem, alle landen van de wereld, de staten van de VS, provincies van Europese landen en DNA codes. Zoek een boek in de OpenLibrary.org database."
   },
   
   "alltools" : {
@@ -530,11 +532,11 @@
     "title": "Morse code",
     "long": "<p>Morse code is een manier om berichten te versturen door middel van korte en lange signalen (puntjes en streepjes). Met deze tool kan een audio file worden gelezen en het bericht erin worden ontcijferd. De tool ondersteunt letters, cijfers en sommige symbolen. De tool kan ook audio files maken in morse en deze opslaan en afspelen. De tool ondersteunt ook het omzetten van tekst naar morse code en vice versa.</p>",
     "decodeaudio": "Lees morse uit een audiofile",
-    "decodectl": "De parameters hieronder kunnen worden gebruikt om het ontcijferen van audio files te verfijnen. De standaard waarden werken in veel gevallen, maar audio files kunnen moeilijk te ontcijferen zijn. Het morse signaal kan worden verstoord door ruis. De duur van de signalen kan variëren. Gebruik de drempelwaarde om het signaal te filteren van ruis. Het werkt in kleine stappen en is gevoelig, dus pas het zorgvuldig aan. De duur van een streepje is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan meer of minder zijn. De duur van de pauze tussen signalen is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan ook meer of minder zijn. De duur van de ruimte tussen woorden is normaal gesproken ongeveer 7 keer de duur van een puntje, maar het kan ook meer of minder zijn. De standaard parameters zijn iets lager om variaties toe te staan.",
+    "decodectl": "De parameters hieronder kunnen worden gebruikt om het ontcijferen van audio files te verfijnen. De standaard waarden werken in veel gevallen, maar audio files kunnen moeilijk te ontcijferen zijn. Het morse signaal kan worden verstoord door ruis. De duur van de signalen kan variëren. Gebruik de drempelwaarde om het signaal te filteren van ruis. Het werkt in kleine stappen en is gevoelig, dus pas het zorgvuldig aan. De duur van een streepje is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan meer of minder zijn. De pauze tussen twee letters is normaal gesproken ongeveer 3 keer de duur van een puntje. De duur van de ruimte tussen woorden is normaal gesproken ongeveer 7 keer de duur van een puntje. De standaard parameters zijn iets lager om variaties toe te staan.",
     "thres": "Drempelwaarde (default 0.15)",
     "dottohyphen": "Duur van een streepje in verhouding tot een puntje (default 2.6)",
-    "dottopause": "Duur van een pauze tussen signalen in verhouding tot een puntje (default 2.4)",
-    "dottospace": "Duur van spatie in verhouding tot een puntje (default 5.0)",
+    "dottopause": "Pauze tussen letters in verhouding tot een puntje (default 2.4)",
+    "dottospace": "Pauze tussen woorden in verhouding tot een puntje (default 5.0)",
     "playmessage": "Speel of bewaar een bericht in morse code",
     "encodectl": "De parameters hieronder kunnen worden gebruikt om het afspelen van morse code berichten te verfijnen. Woorden per minuut (WPM) is de standaard manier om de snelheid van morse code aan te geven. De standaardwaarde is 20 WPM, wat betekent dat het woord PARIS 20 keer per minuut kan worden verzonden. Als je het bericht sneller of trager wilt afspelen, kun je de WPM-waarde aanpassen. De frequentie is de toonhoogte van het geluid. De standaardwaarde is 600 Hz, wat een veelvoorkomende frequentie is voor morse code. Je kunt deze aanpassen om het makkelijker te horen.",
     "wpm": "Woorden per minuut (default 20)",
@@ -549,7 +551,22 @@
     "failgen": "Mislukt om morse code audio te genereren: ",
     "textmorse": "Tekst naar morse en morse naar tekst",
     "textmorsectl": "Type morse code (door middel van . en -) en druk op Decodeer om de tekst te ontcifjeren. Letters in morse worden onderling gescheiden door een spatie. Woorden worden normaal gescheiden door een slash (/), maar dit kan worden aangepast. Klik op Codeer om tekst naar morse code te converteren.",
-    "spacesep": "Separator for words in morse code (default /)"
+    "spacesep": "Scheidingsteken voor woorden (default /)"
+  },
+
+  "bitplane" : {
+    "title": "Bitplane Steganography",
+    "long": "<p>De Bitplane Steganography Tool is een gespecialiseerd forensisch hulpmiddel voor het verbergen en extraheren van gegevens binnen de pixelstructuren van digitale afbeeldingen. Het werkt door bitplanes te isoleren: de individuele binaire lagen van kleurkanalen zoals Rood, Groen, Blauw of Alfa. Door zich te richten op de Least Significant Bit (Bit 0) of LSB, kunnen gebruikers geheimen inbedden die visueel niet te onderscheiden zijn van natuurlijke beeldruis, omdat de resulterende kleurverschuivingen te subtiel zijn voor het menselijk oog.</p><p>De applicatie maakt diepgaande analyse mogelijk over meerdere kleurruimten, waaronder native RGBA en berekende HSV- of CMYK-vlakken. Om informatie te verbergen, converteert de tool tekst, bestanden of zwart-witafbeeldingen naar een binaire stroom en injecteert deze in de drager. Door het resultaat op te slaan als een verliesvrije PNG, garandeert de tool dat precisie op pixelniveau behouden blijft, wat veilige en verborgen communicatie mogelijk maakt.</p>"
+  },
+
+  "dataappended" : {
+    "title": "Append File Tool",
+    "long": "<p>De Append File Tool is een gespecialiseerd hulpmiddel voor digitale steganografie, ontworpen om geheime gegevens te verbergen in of te extraheren uit gangbare carrier-bestanden. Door officiële End-of-File (EOF)-handtekeningen te identificeren voor formaten zoals JPEG, PNG, PDF en multimedia-containers (MP3, WAV, MP4), bepaalt de tool de exacte grens waar een bestand officieel eindigt.</p><p>Gebruikers kunnen tekst- of binaire bestanden achter deze markering toevoegen, waardoor informatie effectief wordt verborgen voor standaard viewers en spelers; deze stoppen immers met het verwerken van gegevens zodra de EOF-marker is bereikt. De applicatie beschikt over een robuuste analyse-engine die verborgen payloads detecteert en previews biedt in hexadecimaal, binair of platte tekst. Het kan verschillende bestandsformaten herkennen vanuit de verborgen payload en previews bieden van afbeeldingen en geluidsbestanden. Bij het injecteren van nieuwe geheimen verwijdert de tool automatisch oude data om de integriteit van het bestand te waarborgen, wat het een krachtig instrument maakt voor zowel databeveiliging als forensisch onderzoek.</p>"
+  },
+
+  "pngchunk" : {
+    "title": "PNG Metadata Editor",
+    "long": "<p>De PNG Metadata Editor is ontworpen voor de grondige inspectie en aanpassing van PNG chunks. Gebruikers kunnen elk PNG-bestand laden om de interne structuur te visualiseren, waarbij de focus specifiek op metadata ligt terwijl ruwe beeldgegevens (IDAT) worden weggefilterd voor een overzichtelijke interface. De applicatie ondersteunt de drie belangrijkste PNG-tekstformaten: tEXt (platte Latin-1), zTXt (gecomprimeerd) en iTXt (internationaal UTF-8). Naast het bekijken stelt de tool gebruikers in staat om nieuwe metadata toe te voegen of bestanden op te schonen door bestaande vermeldingen te verwijderen. Belangrijke functies zijn onder meer verplichte trefwoordvalidatie (conform de specificatielimiet van 79 tekens), dynamische CRC32-checksumberekening voor binaire integriteit, en een optie om individuele metadata te exporteren als standalone .txt-bestanden. Het gewijzigde bestand kan worden opgeslagen. Ideaal voor gebruikers die verborgen beeldgegevens willen beheren.</p>"
   },
 
   "exifscanner": {
@@ -1290,7 +1307,7 @@
   },
 
   "tryanswers" : {
-    "title" : "Probeer antwoorden",
+    "title" : "Vraag en antwoord",
     "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
     "formulas" : "Gebruik formules",
     "phformulas" : "1e antwoord is A, 2e is B enzovoorts. Bijv A+B. Eén formule per regel.",
@@ -1784,7 +1801,7 @@
   "passwordgen" : {
     "title": "Wachtwoord generator",
     "long": "<p>Een tool om willekeurige wachtwoorden te genereren. Je kunt het aantal karakters en de soorten karakters opgeven die moeten worden meegenomen. Hoe meer soorten karakters je opneemt, hoe sterker het wachtwoord is. Echter, hoe moeilijker het ook wordt om het te onthouden.</p>",
-    "length": "Lengte van wachtwoord",
+    "len": "Lengte van wachtwoord",
     "uppcase": "Hoofdletters (A-Z) meenemen",
     "lowcase": "Kleine letters (a-z) meenemen",
     "numbers": "Cijfers (0-9) meenemen",

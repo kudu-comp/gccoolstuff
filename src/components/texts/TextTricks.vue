@@ -97,8 +97,8 @@
 
 <script>
 
-import Tabs from '@/components/inputs/Tabs.vue'
-import Tab from '@/components/inputs/Tab.vue'
+import Tabs from '@/components/generic/Tabs.vue'
+import Tab from '@/components/generic/Tab.vue'
 
 export default {
 

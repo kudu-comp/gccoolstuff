@@ -68,7 +68,7 @@
 
 <script>
 
-import VCoord from '@/components/inputs/VCoord.vue';
+import VCoord from '@/components/generic/VCoord.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {

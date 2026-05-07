@@ -66,9 +66,9 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('w3w.title')}}</h5>
-          <p class="card-text" v-html="$t('w3w.long')"></p>
-          <router-link to="/w3w"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('plotcoord.title')}}</h5>
+          <p class="card-text" v-html="$t('plotcoord.long')"></p>
+          <router-link to="/plotcoord"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">

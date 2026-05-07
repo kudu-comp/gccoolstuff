@@ -230,7 +230,7 @@
 
 <script>
 
-import VaItem from '@/components/inputs/VaItem.vue'
+import VaItem from '@/components/generic/VaItem.vue'
 
 export default {
   name: 'HtmlParser',

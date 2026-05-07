@@ -79,7 +79,7 @@
 
 <script>
 
-import VSearch from '@/components/inputs/VSearch.vue'
+import VSearch from '@/components/generic/VSearch.vue'
 import { codepages } from '@/scripts/codebook.js'
 import { fontdefs } from '@/scripts/fontspecials.js'
 import { ciphers } from '@/scripts/ciphers.js'

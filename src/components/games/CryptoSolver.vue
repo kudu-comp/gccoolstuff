@@ -23,6 +23,7 @@
           v-model="nums"
           type="text"
           class="form-control md-size mb-2 me-2"
+          autofocus
         >
       </div>
       <div class="row">
@@ -152,7 +153,7 @@
 </template>
 
 <script>
-import VCalculate from '@/components/inputs/VCalculate.vue' 
+import VCalculate from '@/components/generic/VCalculate.vue' 
 
 export default {
 

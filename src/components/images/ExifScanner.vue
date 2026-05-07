@@ -5,16 +5,20 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card"
         v-html="$t('exifscanner.long')"
       />
-      <input
-        id="file"
-        type="file"
-        ref="file"
-        class="form-control mb-2"
-        @change="selectFile"
-      >
+
+      <div class="card card-body mb-2">
+        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
+        <input
+          id="file"
+          type="file"
+          ref="file"
+          class="form-control"
+          @change="selectFile"
+        >
+      </div>
       <p
         v-show="errormsg"
         class="errormsg"
@@ -37,7 +41,7 @@
           <v-map />
         </div>
         <div class="col-4">
-          <div class="exifinfo card mb-2">
+          <div class="exifinfo card mb-2 py-2 px-2">
             <div class="card-header">
               {{ $t('exifscanner.info') }}
             </div>
@@ -108,7 +112,7 @@
 <script>
 
 import ExifReader from 'exifreader';
-import VMap from '@/components/inputs/VMap.vue';
+import VMap from '@/components/generic/VMap.vue';
 import * as coords from '@/scripts/coords.js';
 import L from "leaflet";
 

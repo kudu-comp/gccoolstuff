@@ -5,66 +5,71 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2"
         v-html="$t('textextractor.long')"
       />
-      <input
-        id="file"
-        type="file"
-        ref="file"
-        class="form-control mb-2"
-        @change="selectFile"
-      >
-      <div class="row">
-        <label
-          class="form-label md-size mb-2"
-          for="length"
-        >{{ $t('textextractor.length') }}</label>
-        <input
-          id="length"
-          v-model="length"
-          type="number"
-          class="form-control md-size mb-2"
-        >
+      <div class="card">
+        <div class="mb-2">
+          <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
+          <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
+        </div>
+        <div class="row">
+          <label
+            class="form-label md-size mb-2"
+            for="length"
+          >{{ $t('textextractor.length') }}</label>
+          <input
+            id="length"
+            v-model="length"
+            type="number"
+            class="form-control md-size mb-2"
+          >
+        </div>
+        <div class="row">
+          <label
+            class="form-label md-size mb-2"
+            for="max"
+          >{{ $t('textextractor.max') }}</label>
+          <input
+            id="max"
+            v-model="max"
+            type="number"
+            class="form-control md-size mb-2"
+          >
+        </div>
+        <div class="row">
+          <label
+            class="form-label md-size mb-2"
+            for="start"
+          >{{ $t('textextractor.start') }}</label>
+          <input
+            id="start"
+            v-model="start"
+            type="number"
+            class="form-control md-size mb-2"
+          >
+        </div>
+        <button id="go" type="button" :disabled="!loaded" class="btn md-size" @click="scanFile()">
+          <i class="fas fa-search"></i> {{ $t('buttons.search') }}        
+        </button>
       </div>
-      <div class="row">
-        <label
-          class="form-label md-size mb-2"
-          for="max"
-        >{{ $t('textextractor.max') }}</label>
-        <input
-          id="max"
-          v-model="max"
-          type="number"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label md-size mb-2"
-          for="start"
-        >{{ $t('textextractor.start') }}</label>
-        <input
-          id="start"
-          v-model="start"
-          type="number"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <button id="go" type="button" :disabled="!loaded" class="btn me-2 mb-2" @click="scanFile()">
-        <i class="fas fa-search"></i> {{ $t('buttons.search') }}        
-      </button>
       <p
         v-show="errormsg"
-        class="errormsg"
+        class="card errormsg"
       >
         {{ errormsg }}
       </p>
-      <div>
-        <div
-          class="card card-text p-2"
-          v-html="result"
-        />
+      <div class="card card-text p-4">
+        <div class="flex-row d-flex h4 mb-2">
+          <div class="sm-size">Match</div>
+          <div class="sm-size">Position</div>
+          <div class="sm-size">Text</div>
+        </div>
+        <div class="flex-row d-flex" v-for="r in results" :key="r.id">
+           <div class="sm-size">{{ r.id }}</div>
+           <div class="sm-size">{{ r.at }}</div>
+           <div>{{ r.text }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -85,6 +90,7 @@ export default {
       length: 8,
       max: 999,
       start: 0,
+      results: [],
       a : null
     }
   },
@@ -107,7 +113,7 @@ export default {
           
         // Scan for textstrings in printable range 32 - 126 with min length
         let s = "";
-        let cnt = 0;
+        let cnt = 0;let t
 
         for (let i = this.start; i <= this.a.length; i++) {
 
@@ -116,8 +122,8 @@ export default {
             s += String.fromCharCode(c);
           } else {
             if (s.length >= this.length) {
+              this.results.push({id: cnt.toFixed(0).padStart(3, "0"), at: (i-s.length).toString().padStart(6, "0"), text: s})
               cnt++;
-              this.result += "Match " + cnt.toFixed(0).padStart(3, "0") + " at " + (i-s.length).toString().padStart(6, "0") + ": " + s + "<br>"
             }
             if (cnt > this.max) {
               this.errormsg = this.$t('textextractor.maxexceeded')

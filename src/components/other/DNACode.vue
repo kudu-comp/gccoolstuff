@@ -23,7 +23,7 @@
 
 <script>
 
-import VTable from '@/components/inputs/VTable.vue'
+import VTable from '@/components/generic/VTable.vue'
 
 export default {
 

@@ -5,17 +5,14 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2 pb-0"
         v-html="$t('pixeldata.long')"
       />
-      <input
-        id="file"
-        type="file"
-        ref="file"
-        class="form-control mb-2"
-        @change="selectFile"
-      >
-      <div class="row">
+      <div class="card card-body mb-2">
+        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
+        <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
+      </div>
+      <div class="card flex-row">
         <div class="col-6">
           <div class="row">
             <label
@@ -270,4 +267,11 @@ export default {
 </script>
 
 <style scoped>
+
+canvas {
+  width: 100%;
+  height: auto;
+  padding-left: 15px;
+}
+
 </style>

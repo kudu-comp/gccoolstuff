@@ -95,7 +95,7 @@
 
 <script>
 import * as textHelper from '@/scripts/texthelper.js';
-import VAlphabets from '@/components/inputs/VAlphabets.vue'
+import VAlphabets from '@/components/generic/VAlphabets.vue'
 
 export default {
   name: 'TextToNum',

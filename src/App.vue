@@ -85,11 +85,6 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("w3w.title"),
-                path: { name: "W3W" },
-              },
-              {
-                type: "link",
                 text: this.$t("revwherigo.title"),
                 path: { name: "RevWherigo" },
               }
@@ -174,13 +169,13 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("codebook.title"),
-                path: { name: "Codebook" },
+                text: this.$t("freqanal.title"),
+                path: { name: "FreqAnal" },
               },
               {
                 type: "link",
-                text: this.$t("fonts.title"),
-                path: { name: "Fonts" },
+                text: this.$t("codebook.title"),
+                path: { name: "Codebook" },
               },
               {
                 type: "link",
@@ -204,13 +199,13 @@ export default {
               },
               {
                 type: "link",
-                text: this.$t("decabit.title"),
-                path: { name: "DecaBit" },
+                text: this.$t("fonts.title"),
+                path: { name: "Fonts" },
               },
               {
                 type: "link",
-                text: this.$t("freqanal.title"),
-                path: { name: "FreqAnal" },
+                text: this.$t("decabit.title"),
+                path: { name: "DecaBit" },
               },
             ],
           },
@@ -258,7 +253,22 @@ export default {
                 type: "link",
                 text: this.$t("barcode.title"),
                 path: { name: "Barcode" },
-              }
+              },
+              {
+                type: "link",
+                text: this.$t("bitplane.title"),
+                path: { name: "BitPlane" },
+              },
+              {
+                type: "link",
+                text: this.$t("dataappended.title"),
+                path: { name: "DataAppended" },
+              },
+              {
+                type: "link",
+                text: this.$t("pngchunk.title"),
+                path: { name: "PngChunk" },
+              },
             ],
           },
           {
@@ -617,8 +627,7 @@ export default {
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[6].text = this.$t("circles.title");
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[7].text = this.$t("antipode.title");
       this.navbarOptions.menuOptionsLeft[0].subMenuOptions[8].text = this.$t("plotcoord.title");
-      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[9].text = this.$t("w3w.title");
-      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[10].text = this.$t("revwherigo.title");
+      this.navbarOptions.menuOptionsLeft[0].subMenuOptions[9].text = this.$t("revwherigo.title");
       this.navbarOptions.menuOptionsLeft[1].text = this.$t("menu.texttools");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[0].text = this.$t("tryanswers.title");
       this.navbarOptions.menuOptionsLeft[1].subMenuOptions[1].text = this.$t("wordvalue.title");
@@ -634,14 +643,14 @@ export default {
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[0].text = this.$t("ciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[1].text = this.$t("rotciphers.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[2].text = this.$t("substcipher.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[3].text = this.$t("codebook.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[4].text = this.$t("fonts.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[3].text = this.$t("freqanal.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[4].text = this.$t("codebook.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[5].text = this.$t("segment.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[6].text = this.$t("morsecode.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[7].text = this.$t("resistor.title");
       this.navbarOptions.menuOptionsLeft[2].subMenuOptions[8].text = this.$t("vanitycode.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[9].text = this.$t("decabit.title");
-      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[10].text = this.$t("freqanal.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[9].text = this.$t("fonts.title");
+      this.navbarOptions.menuOptionsLeft[2].subMenuOptions[10].text = this.$t("decabit.title");
       this.navbarOptions.menuOptionsLeft[3].text = this.$t("menu.imagetools");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[0].text = this.$t("exifscanner.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[1].text = this.$t("colorpicker.title");
@@ -651,6 +660,9 @@ export default {
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[5].text = this.$t("imagetransform.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[6].text = this.$t("textextractor.title");
       this.navbarOptions.menuOptionsLeft[3].subMenuOptions[7].text = this.$t("barcode.title");
+      this.navbarOptions.menuOptionsLeft[3].subMenuOptions[8].text = this.$t("bitplane.title");
+      this.navbarOptions.menuOptionsLeft[3].subMenuOptions[9].text = this.$t("dataappended.title");
+      this.navbarOptions.menuOptionsLeft[3].subMenuOptions[10].text = this.$t("pngchunk.title");
       this.navbarOptions.menuOptionsLeft[4].text = this.$t("menu.mathtools");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[0].text = this.$t("baseconv.title");
       this.navbarOptions.menuOptionsLeft[4].subMenuOptions[1].text = this.$t("digits.title");

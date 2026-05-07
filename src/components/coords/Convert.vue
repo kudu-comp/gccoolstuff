@@ -5,82 +5,66 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2"
         v-html="$t('convert.long')"
       />
-      <div class="row mb-2">
-        <div class="col-6">
-          <label
-            class="form-label sm-size"
-            for="from"
-          >{{ $t('labels.from') }}</label>
-          <v-datums
-            id="from"
-            v-model:datum="from"
-            class="md-size"
-          />
+      <div class="card">
+        <div class="flex-row d-flex mb-2">
+          <div class="card col-6 me-2">
+            <label
+              class="form-label sm-size"
+              for="from"
+            >{{ $t('labels.from') }}</label>
+            <v-datums
+              id="from"
+              v-model:datum="from"
+              class="md-size mb-2"
+            />
+            <button
+              id="convert"
+              class="btn md-size"
+              @click="convertCoordinates"
+            >
+              {{ $t('buttons.convert') }}
+            </button>
+            <textarea
+              id="coordfrom"
+              ref="coordfrom"
+              v-model="coordfrom"
+              class="form-control mt-2"
+              :placeholder="$t('convert.phfrom')"
+              rows="5"
+              cols="20"
+            />
+          </div>
+          <div class="card col-6">
+            <label
+              class="form-label sm-size"
+              for="to"
+            >{{ $t('labels.to') }}</label>
+            <v-datums
+              id="to"
+              v-model:datum="to"
+              @change="convertCoordinates"
+              class="md-size mb-2"
+            />
+            <v-wgsformat
+              id="wgsformat"
+              v-model:format="wgsformat"
+              @change="convertCoordinates"
+            />
+            <textarea
+              id="result"
+              v-model="result"
+              class="form-control mt-2"
+              :placeholder="$t('convert.phto')"
+              rows="5"
+              cols="20"
+            />
+          </div>
         </div>
-        <div class="col-6">
-          <label
-            class="form-label sm-size"
-            for="to"
-          >{{ $t('labels.to') }}</label>
-          <v-datums
-            id="to"
-            v-model:datum="to"
-            @change="convertCoordinates"
-            class="md-size"
-          />
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-6">
-          <button
-            id="convert"
-            class="btn"
-            @click="convertCoordinates"
-          >
-            {{ $t('buttons.convert') }}
-          </button>
-        </div>
-        <div class="col-6">
-          <v-wgsformat
-            id="wgsformat"
-            v-model:format="wgsformat"
-            @change="convertCoordinates"
-          />
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-6">
-          <textarea
-            id="coordfrom"
-            ref="coordfrom"
-            v-model="coordfrom"
-            class="form-control mt-2"
-            :placeholder="$t('convert.phfrom')"
-            rows="5"
-            cols="20"
-          />
-        </div>
-        <div class="col-6">
-          <textarea
-            id="result"
-            v-model="result"
-            class="form-control mt-2"
-            :placeholder="$t('convert.phto')"
-            rows="5"
-            cols="20"
-          />
-        </div>
-        <div
-          v-show="to == 'Proj4js' || from == 'Proj4js'"
-          v-html="$t('convert.proj4jsmsg')"
-        />
-        <div
-          v-show="to == 'Proj4js' || from == 'Proj4js'"
-          class="form-inline mt-2"
-        >
+        <div class="card" v-if="to == 'Proj4js' || from == 'Proj4js'">
+          <div v-html="$t('convert.proj4jsmsg')" />
           <label
             class="form-label"
             for="proj4jsdef"
@@ -107,9 +91,9 @@
 
 <script>
 import * as coords from '@/scripts/coords.js';
-import VDatums from '@/components/inputs/VDatums.vue';
-import VWgsformat from '@/components/inputs/VWgsformat.vue'
-import VMap from '@/components/inputs/VMap.vue'
+import VDatums from '@/components/generic/VDatums.vue';
+import VWgsformat from '@/components/generic/VWgsformat.vue'
+import VMap from '@/components/generic/VMap.vue'
 
 export default {
   name: 'Convert',

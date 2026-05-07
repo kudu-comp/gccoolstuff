@@ -23,6 +23,7 @@
           v-model="letters"
           type="text"
           class="form-control md-size mb-2 me-2"
+          autofocus
         >
       </div>
       <div class="row">
@@ -81,7 +82,7 @@
 
 <script>
 
-import VLanguage from "@/components/inputs/VLanguage.vue";
+import VLanguage from "@/components/generic/VLanguage.vue";
 
 export default {
 

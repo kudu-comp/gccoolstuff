@@ -5,7 +5,7 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2 pb-0"
         v-html="$t('pixelbuild.long')"
       />
       <p
@@ -14,7 +14,7 @@
       >
         {{ errormsg }}
       </p>
-      <div class="row">
+      <div class="card flex-row">
         <div
           id="preview"
           class="col-9"
@@ -254,7 +254,7 @@
 
 <script>
 
-import VDownload from '@/components/inputs/VDownload.vue'
+import VDownload from '@/components/generic/VDownload.vue'
 
 export default {
 
@@ -334,7 +334,8 @@ export default {
 
 canvas {
   width: 100%;
-  height: 100%;
+  height: auto;
+  padding-right: 15px
 }
 
 </style>

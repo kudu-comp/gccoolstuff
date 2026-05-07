@@ -60,9 +60,9 @@
 
 <script>
 
-import VCoord from '@/components/inputs/VCoord.vue';
-import VAngle from '@/components/inputs/VAngle.vue';
-import VDistance from '@/components/inputs/VDistance.vue';
+import VCoord from '@/components/generic/VCoord.vue';
+import VAngle from '@/components/generic/VAngle.vue';
+import VDistance from '@/components/generic/VDistance.vue';
 
 import * as coords from '@/scripts/coords.js';
 

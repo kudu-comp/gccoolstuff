@@ -75,6 +75,7 @@
         <div class="col-6">
           <textarea
             id="coordfrom"
+            ref="coordfrom"
             v-model="coordfrom"
             class="form-control mt-2"
             :placeholder="$t('mapmaker.phcoord')"
@@ -104,10 +105,10 @@
 
 <script>
 import * as coords from '@/scripts/coords.js';
-import VMap from '@/components/inputs/VMap.vue'
-import VDatums from '@/components/inputs/VDatums.vue';
-import VDistance from '@/components/inputs/VDistance.vue';
-import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import VMap from '@/components/generic/VMap.vue'
+import VDatums from '@/components/generic/VDatums.vue';
+import VDistance from '@/components/generic/VDistance.vue';
+import VShowOnMap from '@/components/generic/VShowOnMap.vue';
 import L from 'leaflet';
 
 export default {
@@ -132,6 +133,10 @@ export default {
       unit: 1,
       dist: 165,
     }
+  },
+
+  mounted: function() {
+    this.$refs.coordfrom.focus();
   },
 
   methods: {

@@ -85,7 +85,7 @@
 
 <script>
 import * as mathtools from '@/scripts/mathtools.js'
-import VCalculate from '@/components/inputs/VCalculate.vue'
+import VCalculate from '@/components/generic/VCalculate.vue'
 
 export default {
   name: 'MathPrimes',

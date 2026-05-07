@@ -79,8 +79,8 @@
 
 <script>
 
-import VdColor from '@/components/inputs/VdColor.vue'
-import VCalculate from '@/components/inputs/VCalculate.vue'
+import VdColor from '@/components/generic/VdColor.vue'
+import VCalculate from '@/components/generic/VCalculate.vue'
 
 export default {
 

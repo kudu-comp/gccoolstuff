@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import VKeyboards from '@/components/inputs/VKeyboards.vue'
+import VKeyboards from '@/components/generic/VKeyboards.vue'
 import * as keyboards from '@/scripts/keyboards.js'
 
 export default {

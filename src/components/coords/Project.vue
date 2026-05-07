@@ -5,34 +5,36 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2"
         v-html="$t('project.long')"
       />
-      <v-coord
-        v-model:coord="coordinate"
-        v-model:datum="selecteddatum"
-        class="row me-2"
-      />
-      <v-distance
-        v-model:dist="dist"
-        v-model:unit="unit"
-      />
-      <v-angle
-        v-model:angle="angle"
-        v-model:unit="angleunit"
-      />
-      <v-show-on-map id="project" class="btn mb-2" @show="doCalc()" />
-      <div
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </div>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ $t('project.projcoord') }}{{ result }}
+      <div class="card">
+        <v-coord
+          v-model:coord="coordinate"
+          v-model:datum="selecteddatum"
+          class="row me-2"
+        />
+        <v-distance
+          v-model:dist="dist"
+          v-model:unit="unit"
+        />
+        <v-angle
+          v-model:angle="angle"
+          v-model:unit="angleunit"
+        />
+        <v-show-on-map id="project" class="btn md-size" @show="doCalc()" />
+        <div
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </div>
+        <div
+          v-if="result"
+          class="resultbox"
+        >
+          {{ $t('project.projcoord') }}{{ result }}
+        </div>
       </div>
       <v-map v-model:mylocation="coordinate" />
     </div>
@@ -41,11 +43,11 @@
 
 <script>
 
-import VCoord from '@/components/inputs/VCoord.vue';
-import VAngle from '@/components/inputs/VAngle.vue';
-import VDistance from '@/components/inputs/VDistance.vue';
-import VMap from '@/components/inputs/VMap.vue';
-import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import VCoord from '@/components/generic/VCoord.vue';
+import VAngle from '@/components/generic/VAngle.vue';
+import VDistance from '@/components/generic/VDistance.vue';
+import VMap from '@/components/generic/VMap.vue';
+import VShowOnMap from '@/components/generic/VShowOnMap.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {

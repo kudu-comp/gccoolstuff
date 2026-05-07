@@ -5,17 +5,12 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card"
         v-html="$t('imagetransform.long')"
       />
-      <div class="form-inline">
-        <input
-          id="file"
-          type="file"
-          ref="file"
-          class="form-control mb-2"
-          @change="selectFile"
-        >
+      <div class="card mb-2">
+        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
+        <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
       </div>
       <p
         v-show="errormsg"
@@ -23,7 +18,7 @@
       >
         {{ errormsg }}
       </p>
-      <div class="row">
+      <div class="card flex-row">
         <div
           id="preview"
           class="col-9"
@@ -161,7 +156,7 @@
 <script>
 
 import VueSlider from 'vue-slider-component'
-import VDownload from '@/components/inputs/VDownload.vue'
+import VDownload from '@/components/generic/VDownload.vue'
 import '@/components/css/slidertheme.css'
 
 export default {
@@ -480,7 +475,8 @@ export default {
 
 canvas {
   width: 100%;
-  height: 100%;
+  height: auto;
+  padding-right: 15px;
 }
 
 </style>

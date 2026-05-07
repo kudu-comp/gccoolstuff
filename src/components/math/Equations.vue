@@ -72,7 +72,7 @@
 
 <script>
 
-import VCalculate from '@/components/inputs/VCalculate.vue' 
+import VCalculate from '@/components/generic/VCalculate.vue' 
 import { fraction, lusolve, format, floor, subtract, isZero } from "mathjs";
 
 export default {

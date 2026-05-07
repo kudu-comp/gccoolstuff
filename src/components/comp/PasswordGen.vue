@@ -15,7 +15,7 @@
       <!-- Number input -->
       <div class="row">
         <label for="len" class="form-label sm-size mb-2">{{$t('passwordgen.len')}}</label>
-        <input type="number" min="4" v-model="len" id="num1" class="form-control md-size mb-2"/>
+        <input type="number" min="4" v-model="len" ref="len" id="len" class="form-control md-size mb-2"/>
       </div>
       <!-- Checkboxes -->
       <div class="form-check">
@@ -71,6 +71,10 @@ export default {
       numbers: true,
       symbols: true
     };
+  },
+
+  mounted: function() {
+    this.$refs.len.focus();
   },
 
   methods: {

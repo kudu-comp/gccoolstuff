@@ -155,10 +155,10 @@
 
 <script>
 
-import VCoord from '@/components/inputs/VCoord.vue';
-import VDatums from '@/components/inputs/VDatums.vue';
-import VMap from '@/components/inputs/VMap.vue';
-import VDistance from '@/components/inputs/VDistance.vue'
+import VCoord from '@/components/generic/VCoord.vue';
+import VDatums from '@/components/generic/VDatums.vue';
+import VMap from '@/components/generic/VMap.vue';
+import VDistance from '@/components/generic/VDistance.vue'
 import * as coords from '@/scripts/coords.js';
 import * as w3w from '@/scripts/what3words.js';
 

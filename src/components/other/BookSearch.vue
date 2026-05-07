@@ -67,7 +67,7 @@
 
 <script>
 
-import VSearch from '@/components/inputs/VSearch.vue'
+import VSearch from '@/components/generic/VSearch.vue'
 export default {
 
   name: "ComponentName",

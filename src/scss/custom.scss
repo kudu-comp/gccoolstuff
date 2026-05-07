@@ -111,7 +111,7 @@ th {
 }
 
 .mainpage {
-	min-height: 500px;
+	min-height: 100px;
 }
 
 .infoblock {
@@ -203,6 +203,15 @@ th {
   background-color: $bluegreen;
   border-style: none;
   opacity: 50%;
+}
+
+.card { 
+  background: white; 
+  border-radius: 12px; 
+  padding: 1.5rem; 
+  margin-bottom: 1.5rem; 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); 
+  border: 1px solid #dfe6e9; 
 }
 
 .card-title {

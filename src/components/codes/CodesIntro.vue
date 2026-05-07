@@ -31,16 +31,16 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('codebook.title')}}</h5>
-          <p class="card-text" v-html="$t('codebook.long')"></p>
-          <router-link to="/codebook"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('freqanal.title')}}</h5>
+          <p class="card-text" v-html="$t('freqanal.long')"></p>
+          <router-link to="/freqanal"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('fonts.title')}}</h5>
-          <p class="card-text" v-html="$t('fonts.long')"></p>
-          <router-link to="/fonts"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('codebook.title')}}</h5>
+          <p class="card-text" v-html="$t('codebook.long')"></p>
+          <router-link to="/codebook"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
@@ -52,6 +52,13 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
+          <h5 class="card-title">{{$t('morsecode.title')}}</h5>
+          <p class="card-text" v-html="$t('morsecode.long')"></p>
+          <router-link to="/morsecode"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
           <h5 class="card-title">{{$t('resistor.title')}}</h5>
           <p class="card-text" v-html="$t('resistor.long')"></p>
           <router-link to="/resistor"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
@@ -59,16 +66,23 @@
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('decabit.title')}}</h5>
-          <p class="card-text" v-html="$t('decabit.long')"></p>
-          <router-link to="/decabit"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('vanitycode.title')}}</h5>
+          <p class="card-text" v-html="$t('vanitycode.long')"></p>
+          <router-link to="/vanitycode"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
       <div class="card m-2 px-0" style="width: 25rem;">
         <div class="card-body">
-          <h5 class="card-title">{{$t('freqanal.title')}}</h5>
-          <p class="card-text" v-html="$t('freqanal.long')"></p>
-          <router-link to="/freqanal"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+          <h5 class="card-title">{{$t('fonts.title')}}</h5>
+          <p class="card-text" v-html="$t('fonts.long')"></p>
+          <router-link to="/fonts"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
+        </div>
+      </div>
+      <div class="card m-2 px-0" style="width: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{$t('decabit.title')}}</h5>
+          <p class="card-text" v-html="$t('decabit.long')"></p>
+          <router-link to="/decabit"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
         </div>
       </div>
     </div>

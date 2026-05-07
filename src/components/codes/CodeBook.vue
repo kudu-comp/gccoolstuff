@@ -80,9 +80,9 @@
 </template>
 
 <script>
-import VSearch from '@/components/inputs/VSearch.vue'
+import VSearch from '@/components/generic/VSearch.vue'
 import { codepages } from '@/scripts/codebook.js'
-import VaItem from '@/components/inputs/VaItem.vue'
+import VaItem from '@/components/generic/VaItem.vue'
 
 export default {
   name: 'CodeBook',

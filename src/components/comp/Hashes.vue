@@ -81,7 +81,7 @@
 <script>
 
 import CryptoJS from 'crypto-js';
-import VCalculate from '../inputs/VCalculate.vue';
+import VCalculate from '../generic/VCalculate.vue';
 
 export default {
 

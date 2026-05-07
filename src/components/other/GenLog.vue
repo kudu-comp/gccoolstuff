@@ -19,7 +19,7 @@
       </div>
       <div class="row">
         <label for="tot" class="form-label md-size mb-2">{{$t('genlog.tot')}}</label>
-        <input type="number" min="1" v-model="tot" id="tot" class="form-control md-size mb-2"/>
+        <input type="number" min="1" v-model="tot" id="tot" class="form-control md-size mb-2" autofocus/>
       </div>
       <div class="row">
         <label for="day" class="form-label md-size mb-2">{{$t('genlog.day')}}</label>

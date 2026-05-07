@@ -40,7 +40,7 @@
 
 <script>
 
-import VCalculate from '@/components/inputs/VCalculate.vue'
+import VCalculate from '@/components/generic/VCalculate.vue'
 import { evaluate } from "mathjs";
 
 export default {

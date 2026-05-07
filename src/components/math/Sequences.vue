@@ -137,7 +137,7 @@
 <script>
 
 import * as mathtools from '@/scripts/mathtools.js'
-import VCalculate from '../inputs/VCalculate.vue';
+import VCalculate from '../generic/VCalculate.vue';
 
 export default {
   name: 'mathtools',

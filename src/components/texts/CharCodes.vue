@@ -77,11 +77,11 @@
 </template>
 
 <script>
-import VCode from '@/components/inputs/VCode.vue'
+import VCode from '@/components/generic/VCode.vue'
 import * as baudotcode from '@/scripts/baudotcode.js'
 import * as codepages from '@/scripts/codepages.js'
 import { codePoints, fromCodePoint } from 'utf16-char-codes'
-import VaItem from '@/components/inputs/VaItem.vue'
+import VaItem from '@/components/generic/VaItem.vue'
 
 export default {
 

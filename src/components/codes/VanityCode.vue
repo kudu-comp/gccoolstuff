@@ -11,7 +11,7 @@
         class="infoblock"
         v-html="$t('vanitycode.long')"
       />
-      <img width="400px" max-width="100%" src="~@\assets\images\vanitycode.png">
+      <img width="200px" max-width="100%" src="~@\assets\images\vanitycode.png">
       <!-- Form fields -->
       <!-- Text input -->
       <div class="mt-2 mb-2">
@@ -19,9 +19,10 @@
           id="msg"
           v-model="msg"
           class="form-control"
-          :placeholder="$t('labels.msg')"
+          :placeholder="$t('labels.message')"
           rows="5"
           @input="updateResult"
+          autofocus
         />
       </div>
       <!-- Checkbox -->

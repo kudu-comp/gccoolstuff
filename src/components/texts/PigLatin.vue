@@ -54,7 +54,7 @@
 
 <script>
 
-import VLanguage from "@/components/inputs/VLanguage.vue";
+import VLanguage from "@/components/generic/VLanguage.vue";
 import { piglatin } from "@/scripts/piglatin.js";
 
 export default {

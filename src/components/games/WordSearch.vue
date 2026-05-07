@@ -38,6 +38,7 @@
           style="font-family:'Courier New', Courier, monospace"
           class="form-control"
           rows="5"
+          autofocus
         />
       </div>
       <label

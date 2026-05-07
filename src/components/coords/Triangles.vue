@@ -54,10 +54,10 @@
 
 <script>
 
-import VCoord from '@/components/inputs/VCoord.vue';
-import VMap from '@/components/inputs/VMap.vue'
+import VCoord from '@/components/generic/VCoord.vue';
+import VMap from '@/components/generic/VMap.vue'
 import * as coords from '@/scripts/coords.js';
-import VShowOnMap from '@/components/inputs/VShowOnMap.vue';
+import VShowOnMap from '@/components/generic/VShowOnMap.vue';
 import L from "leaflet";
 
 export default {

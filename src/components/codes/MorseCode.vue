@@ -27,6 +27,7 @@
             class="form-control"
             :placeholder="$t('labels.message')"
             rows="5"
+            autofocus
           />
         </div>
         <p

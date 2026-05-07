@@ -111,9 +111,9 @@
 
 <script>
 import * as textHelper from '@/scripts/texthelper.js';
-import VAlphabetsExt from '@/components/inputs/VAlphabetsExt.vue'
-import VaItem from '@/components/inputs/VaItem.vue'
-import VCalculate from '@/components/inputs/VCalculate.vue'
+import VAlphabetsExt from '@/components/generic/VAlphabetsExt.vue'
+import VaItem from '@/components/generic/VaItem.vue'
+import VCalculate from '@/components/generic/VCalculate.vue'
 
 export default {
   name: 'WordValue',

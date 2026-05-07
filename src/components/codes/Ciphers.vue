@@ -254,7 +254,7 @@
 <script>
 
 import * as textHelper from '@/scripts/texthelper.js';
-import VPolybius from '@/components/inputs/VPolybius.vue';
+import VPolybius from '@/components/generic/VPolybius.vue';
 import { ciphers } from "@/scripts/ciphers.js";
 
 
