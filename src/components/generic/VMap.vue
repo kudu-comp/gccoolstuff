@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, shallowRef } from 'vue';
+import { onMounted, onUnmounted, markRaw, shallowRef } from 'vue';
 import { useStore } from 'vuex';
 import L from "leaflet";
 import * as coords from '@/scripts/coords.js';
@@ -50,6 +50,13 @@ const locationIconSvg = `
   <line x1="12" y1="22" x2="12" y2="18"></line>
   <circle cx="12" cy="12" r="3"></circle>
 </svg>`;
+
+
+onUnmounted(() => {
+    if (mymap.value) {
+        mymap.value.remove();
+    }
+});
 
 onMounted(() => {
     // Access state from store
@@ -125,7 +132,7 @@ onMounted(() => {
       layers: [baseMaps.value["OpenStreetMap"]]
     });
 
-    mymap.value = mapInstance;
+    mymap.value = markRaw(mapInstance);
 
     // 3. Create Custom Location Control
     const LocationControl = L.Control.extend({
@@ -175,6 +182,7 @@ onMounted(() => {
     });
 
 });
+
 </script>
 
 <style scoped>
