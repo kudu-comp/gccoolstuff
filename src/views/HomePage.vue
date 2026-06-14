@@ -33,16 +33,19 @@
               <router-link to="/wordvalue">{{$t('wordvalue.title')}}</router-link>
             </li>
             <li>
-              <router-link to="/printlog">{{$t('printlog.title')}}</router-link>
-            </li>
-            <li>
-              <router-link to="/ciphers/rot13">ROT13</router-link>
+              <router-link to="/rotciphers">ROT13</router-link>
             </li>
             <li>
               <router-link to="/tryanswers">{{$t('tryanswers.title')}}</router-link>
             </li>
             <li>
               <router-link to="/convert">{{$t('convert.title')}} {{$t('menu.coordinates')}}</router-link>
+            </li>
+            <li>
+              <router-link to="/project">{{$t('project.title')}} {{$t('menu.coordinates')}}</router-link>
+            </li>
+            <li>
+              <router-link to="/printlog">{{$t('printlog.title')}}</router-link>
             </li>
             <li>
               <router-link to="/codebook">{{$t('codebook.title')}}</router-link>
