@@ -1,199 +1,178 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('texttonum.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('texttonum.long')"
-      />
-      <div
-        class="form-inline mb-2"
-      >
-        <v-alphabets v-model:alphabet="selectedalphabet" />
-      </div>
-      <div class="form-inline">
-        <div class="form-check custom-checkbox">
-          <input
-            id="reverse"
-            v-model="reverse"
-            type="checkbox"
-            class="form-check-input mb-2"
-          >
-          <label
-            for="reverse"
-            class="form-check-label mb-2"
-          >{{ $t('wordvalue.reverse') }}</label>
-        </div>
-        <div class="form-check custom-checkbox">
-          <input
-            id="startatzero"
-            v-model="startatzero"
-            type="checkbox"
-            class="form-check-input mb-2"
-          >
-          <label
-            for="startatzero"
-            class="form-check-label mb-2"
-          >{{ $t('wordvalue.startzero') }}</label>
-        </div>
-        <div class="form-check custom-checkbox">
-          <input
-            id="leadzero"
-            v-model="leadzero"
-            type="checkbox"
-            class="form-check-input mb-2"
-          >
-          <label
-            for="leadzero"
-            class="form-check-label mb-2"
-          >{{ $t('texttonum.leadzero') }}</label>
-        </div>
-      </div>
-      <div class="form-row mb-2">
-        <button
-          id="texttonumbers"
-          class="btn mb-2 me-2"
-          @click="textToNumbers"
-        >
-          {{ $t('texttonum.btnttn') }}
-        </button>
-        <button
-          id="numberstotext"
-          class="btn mb-2 me-2"
-          @click="numbersToText"
-        >
-          {{ $t('texttonum.btnntt') }}
-        </button>
-        <button
-          id="remove"
-          class="btn mb-2"
-          @click="removeDiacr"
-        >
-          {{ $t('wordvalue.replacediac') }}
-        </button>
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="5"
-        />
-      </div>
 
+<header class="page-header">
+    <h1>{{ $t('texttonum.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('texttonum.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-group-vertical">
+        <v-alphabets v-model:alphabet="selectedalphabet" />
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="reverse">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.reverse') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="startatzero">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.startzero') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="leadzero">
+          <span class="checkmark"></span>
+          {{ $t('texttonum.leadzero') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="replacediac">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.replacediac') }}
+        </label>
+        <div class="button-row">
+          <button
+            id="texttonumbers"
+            class="btn btn-primary"
+            @click="textToNumbers"
+          >
+            {{ $t('texttonum.btnttn') }}
+          </button>
+          <button
+            id="numberstotext"
+            class="btn btn-primary"
+            @click="numbersToText"
+          >
+            {{ $t('texttonum.btnntt') }}
+          </button>
+        </div>
+      </div>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
+      <textarea
+        id="message"
+        ref="messageInput"
+        v-model="message"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        @input="wordValue"
+      />
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}.
+      </p>          
+    </VCard>
+    <VCard :title="$t('labels.result')">
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
-      </div>
-    </div>
+      </div>      
+    </VCard>
   </div>
 </template>
 
-<script>
-import * as textHelper from '@/scripts/texthelper.js';
+<script setup>
+import { ref, onMounted } from 'vue'
+import * as textHelper from '@/scripts/texthelper.js'
 import VAlphabets from '@/components/generic/VAlphabets.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'TextToNum',
+defineOptions({
+  name: 'TextToNum'
+})
 
-  components: {
-    VAlphabets,
-  },
+// --- State ---
+const message = ref("")
+const selectedalphabet = ref("English")
+const reverse = ref(false)
+const startatzero = ref(false)
+const leadzero = ref(false)
+const result = ref("")
+const replacediac = ref(true)
 
-  data: function () {
-    return {
-      message: "",
-      selectedalphabet: "English",
-      reverse : false,
-      startatzero : false,
-      leadzero: false,
-      result : "",
+// --- Template Ref ---
+const messageInput = ref(null)
+
+onMounted(() => {
+  messageInput.value?.focus()
+})
+
+// --- Methods ---
+
+// Convert text to numbers
+const textToNumbers = () => {
+
+  result.value = ""
+  let hstr = replacediac.value ? textHelper.removeDiacritics(message.value) : message.value
+  
+  // Get alphabet reverse if necessary
+  let alpha = textHelper.getAlphabet(selectedalphabet.value)
+  if (reverse.value) alpha = [...alpha].reverse().join("");
+
+  let html = ""
+  for (let i = 0; i < hstr.length; i++) {
+
+    let idx = alpha.indexOf(hstr[i].toUpperCase());
+    let str = ""
+    
+    if (idx >= 0) {
+      // Logic for reverse and zero-based indexing
+      if (!startatzero.value) idx++;
+      if (leadzero.value) {
+        str = idx.toString().padStart(2, "0");
+      } else {
+        if (idx <= Math.floor(alpha.length / 10)) {
+          str = idx.toString().padStart(2, "0");
+        } else {
+          str = idx.toString();
+        }
+      }
+      html += str;
+    } else {
+      html += hstr[i]
     }
-  },
+  }
+  result.value = html
+}
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+// Convert numbers to text
+const numbersToText = () => {
 
-  methods: {
+  result.value = ""
+  let hstr = replacediac.value ? textHelper.removeDiacritics(message.value) : message.value
+  
+  let alpha = textHelper.getAlphabet(selectedalphabet.value)
+  if (reverse.value) alpha = [...alpha].reverse().join("");;
 
-    // Ruthless replace all diacritics
-    removeDiacr: function() {
-      this.message = textHelper.removeDiacritics(this.message);
-    },
+  let html = "";
+  
+  for (let i = 0; i < hstr.length; i++) {
+    
+    const char = hstr[i]
+    let str = "";
+    let idx = 0;
+  
+    if ("0123456789".indexOf(char) >= 0) {
 
-    // Convert text to numbers
-    textToNumbers : function () {
-
-      // Reset
-      this.errormsg = "";
-      this.result = "";
+      let d1 = parseInt(char);
       
-      // Get the selected alphabet using the name
-      let alpha = textHelper.getAlphabet(this.selectedalphabet);
-      let mod = Math.floor(alpha.length / 10);
-      if (this.startatzero) mod--;
-      let html = "";
-      let idx = 0;
-      for (let i=0; i < this.message.length; i++) {
-        idx = alpha.indexOf(this.message[i].toUpperCase());
-        if (idx >= 0) {
-          //if (!this.reverse && this.startatzedo) do nothing
-          if (!this.reverse && !this.startatzero) idx++;
-          if (this.reverse && this.startatzero) idx = alpha.length - idx - 1;
-          if (this.reverse && !this.startatzero) idx = alpha.length - idx;
-          if (!this.leadzero)
-            (idx <= mod) ? html+= "0" + idx.toFixed(0) : html+= idx.toFixed(0);
-          else
-            (idx <= 9) ? html+= "0" + idx.toFixed(0) : html+= idx.toFixed(0);
-        } else {
-          html += this.message[i];
-        }
+      if (d1 <= Math.floor(alpha.length/10)) {
+        d1 += hstr[++i];        
       }
-      this.result = html;
-    },
-
-    // Convert numbers to text
-    numbersToText : function() {
-
-      // Reset
-      this.errormsg = "";
-      this.result = "";
-
-      let alpha = textHelper.getAlphabet(this.selectedalphabet);
-      let mod = Math.floor(alpha.length / 10);
-      if (this.startatzero) mod--;
-      let html = "";
-      let d1 = 0;
-      let d2 = 0;
-      let pos = 0;
-      for (let i=0; i < this.message.length; i++) {
-        if ("0123456789".indexOf(this.message[i]) >= 0) {
-          d1 = parseInt(this.message[i]);
-          if (d1 <= mod) {
-            d2 = parseInt(this.message[++i]);
-            // If last number accept one digit always
-            pos = (d2) ? d1 * 10 + d2 : d1;
-          } else {
-            pos = d1;
-          }
-          //if (!this.reverse && this.startatzedo) do nothing
-          if (!this.reverse && !this.startatzero) pos--;
-          if (this.reverse && this.startatzero) pos = alpha.length - pos - 1;
-          if (this.reverse && !this.startatzero) pos = alpha.length - pos;
-          html += alpha[pos];
-        } else {
-          html += this.message[i];
-        }
-      }
-      this.result = html;
-    },
-
-  },
+      idx = parseInt(d1)
+      str += alpha[startatzero.value ? idx : idx - 1];
+      html += str
+    } else {
+      html += char
+    }
+  }
+  result.value = html
 }
 </script>
 

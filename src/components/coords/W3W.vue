@@ -1,11 +1,11 @@
 <template>
-  <div class="d-flex flex-column mx-4">
+  <div class="page-container mx-4">
     <div class="sectionhead">
       {{ $t('w3w.title') }}
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2 pb-2"
         v-html="$t('w3w.long')"
       />
       <!-- <v-coord
@@ -145,7 +145,7 @@
       </div>
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
         v-html="result"
       />
       <v-map v-model:mylocation="coordinate1" />

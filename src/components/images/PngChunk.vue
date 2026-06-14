@@ -1,104 +1,99 @@
 <template>
-  <div class="sectionhead">
-    {{ $t('pngchunk.title') }}
-  </div>
-  <div class="mainpage mx-4 d-flex flex-column">
-    <div
-      class="card card-body mb-2 pb-0"
-      v-html="$t('pngchunk.long')"
-    />
-    
-    <!-- Global Error Message -->
-    <div v-if="globalError" class="alert error">
-      {{ globalError }}
-      <button @click="globalError = ''" class="close-btn">&times;</button>
-    </div>
 
-    <!-- Upload Section -->
-    <div class="card card-body mb-2">
-      <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
-      <input class="form-control mb-2" type="file" accept="image/png" @change="handleFileUpload" />
-      <p v-if="originalFileName !== 'image'" class="card-text mt-2">
-        File: <strong>{{ originalFileName }}.png</strong>
-      </p>
-    </div>
-
-    <!-- Editor Section -->
-    <div v-if="rawBuffer" class="card card-body mb-2">
-      <div class="card-title h4">
-        Add New Metadata Chunk
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Keyword (Required, max 79 chars):</label>
-        <input v-model="newKeyword" 
-          class="form-control mb-2" 
-          placeholder="e.g. Author, Software"
-        />
-        <span v-if="keywordError" class="error-text">{{ keywordError }}</span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Text Content:</label>
-        <textarea class="form-control mb-2" v-model="newText" rows="3" placeholder="Enter metadata value here..."></textarea>
-      </div>
-
-      <div class="button-group">
-        <div class="add-buttons">
-          <button class="btn sm-size" @click="addChunk('tEXt')">Add tEXt</button>
-          <button class="btn sm-size" @click="addChunk('zTXt')">Add zTXt</button>
-          <button class="btn sm-size" @click="addChunk('iTXt')">Add iTXt</button>
+  <header class="page-header">
+    <h1>{{ $t('pngchunk.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('pngchunk.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input type="file" accept="image/*" @change="handleFileUpload" />
+          <p v-if="originalFileName !== 'image'" class="card-text mt-2">
+            File: <strong>{{ originalFileName }}.png</strong>
+          </p>
         </div>
-        
-        <!-- Download button moved here, disabled until modified -->
-        <button 
-          class="md-size btn" 
-          :disabled="!hasBeenModified" 
-          @click="downloadPng"
-          :title="!hasBeenModified ? 'Add a chunk first to enable download' : 'Download the modified PNG'"
+        <div v-if="globalError" class="alert error">
+          {{ globalError }}
+          <button @click="globalError = ''" class="close-btn">&times;</button>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-        <i class="fa-solid fa-download me-2"></i>
-          Modified PNG
-        </button>
+          {{ errormsg }}.
+        </p> 
+      </VCard>
+      <VCard title="Add New Metadata Chunk">
+        <!-- Editor Section -->
+        <div v-if="rawBuffer" class="card card-body mb-2">
+          <div class="form-horizontal">
+            <label >Keyword (Required, max 79 chars):</label>
+            <input v-model="newKeyword" type="text"
+              placeholder="e.g. Author, Software"
+            />
+            <span v-if="keywordError" class="error-text">{{ keywordError }}</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Text Content:</label>
+            <textarea class="form-control mb-2" v-model="newText" rows="3" placeholder="Enter metadata value here..."></textarea>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-primary" @click="addChunk('tEXt')">Add tEXt</button>
+            <button class="btn btn-primary" @click="addChunk('zTXt')">Add zTXt</button>
+            <button class="btn btn-primary" @click="addChunk('iTXt')">Add iTXt</button>
+            <button class="btn btn-primary" :disabled="!hasBeenModified" @click="downloadPng">
+              {{ $t('buttons.download') }}
+            </button>
+          </div>
       </div>
       <p v-if="!hasBeenModified" class="hint-text">Add at least one chunk to enable download.</p>
-    </div>
-
-    <!-- Chunks Display (Hiding IDAT) -->
-    <div v-if="filteredChunks.length" class="card card-body">
-      <div class="card-title h4">
-        Metadata & Header Chunks
-      </div>
-
-      <div v-for="(chunk, index) in filteredChunks" :key="index" class="chunk-card">
-        <div class="chunk-header">
-          <div class="chunk-id">
-            <span class="chunk-type">{{ chunk.type }}</span>
-            <span class="chunk-size">{{ chunk.length.toLocaleString() }} bytes</span>
+      </VCard>
+    </div>  
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <!-- Chunks Display (Hiding IDAT) -->
+        <div v-if="filteredChunks.length" class="card card-body">
+          <div class="card-title h4">
+            Metadata & Header Chunks
           </div>
-          <div class="header-actions">
-            <button v-if="chunk.metadata" class="btn me-2 md-size " @click="saveChunkAsTxt(chunk)"><i class="fa-solid fa-save me-2"></i>{{$t('buttons.save')}} .txt</button>
-            <button v-if="isMetadataType(chunk.type)" class="btn md-size" @click="removeChunk(chunk.originalIndex)"><i class="fa-solid fa-trash me-2"></i>{{$t('buttons.delete')}}</button>
+
+          <div v-for="(chunk, index) in filteredChunks" :key="index" class="chunk-card">
+            <div class="chunk-header">
+              <div class="chunk-id">
+                <span class="chunk-type">{{ chunk.type }}</span>
+                <span class="chunk-size">{{ chunk.length.toLocaleString() }} bytes</span>
+              </div>
+              <div class="button-row">
+                <button v-if="chunk.metadata" class="btn btn-secondary" @lick="saveChunkAsTxt(chunk)">{{$t('buttons.save')}} .txt</button>
+                <button v-if="isMetadataType(chunk.type)" class="btn btn-secondary" @click="removeChunk(chunk.originalIndex)">{{$t('buttons.delete')}}</button>
+              </div>
+            </div>
+            
+            <div v-if="chunk.metadata" class="chunk-content">
+              <div class="metadata-row">
+                <span class="label">Keyword</span>
+                <span class="keyword-value">{{ chunk.metadata.keyword }}</span>
+              </div>
+              <div class="metadata-row">
+                <span class="label">Value</span>
+                <pre class="text-value">{{ chunk.metadata.text }}</pre>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div v-if="chunk.metadata" class="chunk-content">
-          <div class="metadata-row">
-            <span class="label">Keyword</span>
-            <span class="keyword-value">{{ chunk.metadata.keyword }}</span>
-          </div>
-          <div class="metadata-row">
-            <span class="label">Value</span>
-            <pre class="text-value">{{ chunk.metadata.text }}</pre>
-          </div>
-        </div>
-      </div>
+    </VCard>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+import VCard from '@/Components/generic/VCard.vue';
 
 const PNG_SIG = new Uint8Array([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
 

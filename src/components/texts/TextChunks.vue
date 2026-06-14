@@ -1,171 +1,142 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('textchunks.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('textchunks.long')"
-      />
-      <!-- Form fields -->
-      <!-- Selection dropdown -->
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="dir"
-        >{{ $t('textchunks.dir') }}</label>    
-        <select
-          id="dir"
-          v-model="dir"
-          class="form-select mb-2 sm-size"
-        >
-          <option value="H">{{ $t('dialogpb.d.hor')}}</option>
-          <option value="V">{{ $t('dialogpb.d.ver')}}</option>
-        </select>
+
+  <header class="page-header">
+    <h1>{{ $t('textchunks.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('textchunks.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-group-vertical">
+        <div class="radio-group">
+          <label>{{$t('textchunks.dir')}}</label>
+          <div class="radio-options">
+            <label class="radio-item">
+              <input type="radio" value="H" v-model="dir">
+              <span class="radio-mark"></span> {{ $t('dialogpb.d.hor')}}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="V" v-model="dir">
+              <span class="radio-mark"></span> {{ $t('dialogpb.d.ver')}}
+            </label>
+          </div>
+        </div>
+        <div class="form-horizontal">
+          <label>{{$t('textchunks.size')}}</label>
+          <input type="number" min="0" v-model="size">
+        </div>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="ignore">
+          <span class="checkmark"></span>
+          {{ $t('textchunks.ignore') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="upper">
+          <span class="checkmark"></span>
+          {{ $t('textchunks.upper') }}
+        </label>
       </div>
-      <!-- Number input -->
-      <div class="row">
-        <label for="start" class="form-label md-size mb-2">{{$t('textchunks.start')}}</label>
-        <input type="number" min="0" v-model="start" id="start" class="form-control sm-size mb-2"/>
-      </div>
-      <!-- Number input -->
-      <div class="row">
-        <label for="end" class="form-label md-size mb-2">{{$t('textchunks.end')}}</label>
-        <input type="number" min="0" v-model="end" id="end" class="form-control sm-size mb-2"/>
-      </div>
-      <!-- Checkbox -->
-      <div class="form-check">
-        <input
-          id="ignore"
-          v-model="ignore"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="ignore"
-          class="form-check-label mb-2"
-        >{{ $t('textchunks.ignore') }}</label>
-      </div>
-      <!-- Checkbox -->
-      <div class="form-check">
-        <input
-          id="upper"
-          v-model="upper"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="upper"
-          class="form-check-label mb-2"
-        >{{ $t('textchunks.upper') }}</label>
-      </div>
-      <button class="btn mb-2" id="btn1" @click="chunk()">
-        {{$t('buttons.show')}}
-      </button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Text area input -->
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <textarea
-        id="txt"
+        ref="txtInput"
         v-model="txt"
-        ref="txt"
-        class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"
+        @input="wordValue"
       />
-      <!-- Result area or use v-html -->
-      <div v-if="result" style="font-family: Courier" class="resultbox" v-html="result" />
-    </div>
+      <p
+        v-show="errormsg"
+        class="errormsg mb-2"
+      >
+        {{ errormsg }}.
+      </p>          
+    </VCard>
+    <VCard :title="$t('labels.result')">
+      <div v-if="result" style="font-family: Courier" class="card resultbox" v-html="result" />     
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+defineOptions({
+  name: "ComponentName"
+})
 
-  name: "ComponentName",
+const { t } = useI18n()
 
-  components: {
-        
-  },
+// --- State ---
+const result = ref("")
+const errormsg = ref("")
+const txt = ref("")
+const size = ref(5)
+const dir = ref("H")
+const ignore = ref(false)
+const upper = ref(false)
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      txt: "",
-      start: 2,
-      end: 10,
-      dir: "H",
-      ignore: false,
-      upper: false
-    };
-  },
+// --- Template Ref ---
+const txtInput = ref(null)
+
+onMounted(() => {
+  // Focus the input on mount
+  txtInput.value?.focus()
+})
+
+watch([txt, size, dir, ignore, upper], () => {
+  chunk()
+})
+
+// --- Methods ---
+
+const chunk = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
+
+  // Check input
+  if (!txt.value) {
+    errormsg.value = t('errors.noinput')
+    return
+  }
+
+  // Process text based on settings
+  let cleantxt = txt.value
+  if (ignore.value) {
+    cleantxt = cleantxt.replace(/\s/g, "")
+  }
+  if (upper.value) {
+    cleantxt = cleantxt.toUpperCase()
+  }
+
+  let outputBuilder = ""
+
+  // Chunk txt
+  let h = cleantxt
   
-  mounted: function() {
-    this.$refs.txt.focus();
-  },
+  if (dir.value === "H") {
+    // Horizontal direction
+    while (h.length > 0) {
+      outputBuilder += h.slice(0, size.value) + "<BR>"
+      h = h.slice(size.value)
+    }
+  } else {
+    // Vertical direction
+    let a = new Array(size.value).fill("")
+    for (let j = 0; j < h.length; j++) {
+      a[j % size.value] += h[j]
+    }
+    for (let j = 0; j < size.value; j++) {
+      outputBuilder += a[j] + "<BR>"
+    }
+  }
 
-  methods: {
-
-    chunk: function () {
-
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-
-      // Check input
-      if (!this.txt) {
-        this.errormsg = this.$t('errors.noinput');
-        return;
-      }
-
-      // Replace whitespace with nothing if needed
-      let cleantxt = this.txt;
-      if (this.ignore) {
-        cleantxt = cleantxt.replace(/\s/g, "");
-      }
-      if (this.upper) {
-        cleantxt = cleantxt.toUpperCase();
-      }
-
-      // Chunk txt
-      for (let i = this.start; i <= this.end; i++) {
-        this.result += "<br><b>Chunk size " + i.toString() + "</b><br>";
-        let h = cleantxt;
-        if (this.dir == "H") {
-          // Horizontal direction
-          while (h.length > 0) {
-            this.result += h.slice(0, i) + "<BR>";
-            h = h.slice(i);
-          }
-        } else {
-          // Vertical direction
-          let a = new Array(i).fill("");
-          for (let j = 0; j < h.length; j++) {
-            a[j % i] += h[j];
-          }
-          for (let j = 0; j < i; j++) {
-            this.result += a[j] + "<BR>";
-          }
-        }
-      }
-
-    },
-
-  },
-};
-
+  result.value = outputBuilder
+}
 </script>
-
-<style scoped>
-</style>

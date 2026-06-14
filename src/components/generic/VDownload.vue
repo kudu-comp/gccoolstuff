@@ -1,35 +1,45 @@
 <template>
-  <button id="download" class="btn mb-2 me-2" :title="$t('buttons.download')" @click="downloadCanvas()">
-    <i class="fa-solid fa-download"></i> {{$t('buttons.download')}}
+  <button 
+    id="download" 
+    class="btn btn-primary" 
+    :title="$t('buttons.download')" 
+    @click="downloadCanvas"
+  >
+    {{ $t('buttons.download') }}
   </button>
 </template>
 
-<script>
-
-export default {
-
-  name: 'VDownload',
-
-  props: {
-    canvas: {
-      type: String,
-      required: true
-    }
-  },
-
-  methods: {
-  
-    downloadCanvas: function () {
-      
-      // Download canvas
-      const link = document.createElement('a');
-      link.download = 'download.png';
-      link.href = this.canvas.toDataURL();
-      link.click();
-      link.delete;
-      
-    },
-
+<script setup>
+// Props definition
+const props = defineProps({
+  canvas: {
+    type: Object, // Changed from String to Object to support the Canvas element
+    required: true
   }
-}
+});
+
+defineOptions({
+  name: 'VDownload'
+});
+
+const downloadCanvas = () => {
+  // Ensure the canvas exists before trying to export
+  if (!props.canvas || typeof props.canvas.toDataURL !== 'function') {
+    console.error("VDownload: Provided prop is not a valid canvas element.");
+    return;
+  }
+
+  // Create a temporary link element
+  const link = document.createElement('a');
+  link.download = 'download.png';
+  
+  // Convert canvas content to image data
+  link.href = props.canvas.toDataURL('image/png');
+  
+  // Trigger the download
+  link.click();
+  
+  // Clean up is automatic as 'link' goes out of scope, 
+  // no need for 'link.delete' (which was invalid syntax)
+};
 </script>

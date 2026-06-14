@@ -1,56 +1,73 @@
 <template>
-  <div class="row">
+  <div class="input-wrapper">
     <label
-      for="listofalpha"
-      class="form-label sm-size mb-2"
     >{{ $t('labels.alphabet') }}</label>
-    <select
-      class="form-select xl-size mb-2"
-      :value="alphabet"
-      @input="updateAlphabet($event.target.value)"
-    >
-      <option
-        v-for="a in alphabets"
-        :key="a"
-        :value="a.name"
-      >
-        {{ a.name }} - {{ a.alphabet }}
-      </option>
-    </select>
+    <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+      <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+        {{ selectedCategoryLabel }}
+        <span class="chevron">▾</span>
+      </div>
+      <transition name="fade-slide">
+        <div v-if="isDropdownOpen" class="custom-options-list">
+          <div 
+            v-for="a in alphabets" 
+            :key="a.name" 
+            class="custom-option" 
+            :class="{ 'selected': alphabet === a.name }" 
+            @click="selectAlphabet(a.name)"
+          >
+            {{ a.name }} - {{ a.alphabet }}
+            <span v-if="alphabet === a.name" class="check">✓</span>
+          </div>
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import * as textHelper from '@/scripts/texthelper.js';
 
-export default {
+const props = defineProps({
+  alphabet: {
+    type: String,
+    required: true
+  }
+});
 
-  props: {
-    alphabet: {
-      type: String,
-      required: true
-    }
-  },
+const emit = defineEmits(['update:alphabet']);
 
-  emits: [
-    'update:alphabet'
-  ],
+// --- State ---
+const alphabets = ref([]);
+const isDropdownOpen = ref(false);
 
-  data : function () {
-    return {
-      alphabets : null,
-    }
-  },
-
-  mounted: function() {
-    this.alphabets = textHelper.getExtAlphabets();
-  },
-
-  methods: {
-    updateAlphabet: function (value) {
-      this.$emit ('update:alphabet', value);
-    },
+// --- Computed ---
+const selectedCategoryLabel = computed(() => {
+  // Check if alphabets exists and has items
+  if (!alphabets.value || alphabets.value.length === 0) {
+    return 'Loading...';
   }
 
-}
+  // Find the selected item matching the prop
+  const found = alphabets.value.find(a => a.name === props.alphabet);
+
+  // Return the label if found, otherwise a default placeholder
+  return found ? found.name : 'Select a category';
+});
+
+// --- Methods ---
+const selectAlphabet = (name) => {
+  emit('update:alphabet', name);
+  isDropdownOpen.value = false; // Close the dropdown after selection
+};
+
+const toggleDropdown = () => {
+  isDropdownOpen.value = !isDropdownOpen.value;
+};
+
+// --- Lifecycle ---
+onMounted(() => {
+  alphabets.value = textHelper.getExtAlphabets();
+});
 </script>

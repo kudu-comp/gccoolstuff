@@ -1,232 +1,204 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('freqanal.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('freqanal.long')"
-      />
-      <!-- Form fields -->
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="text1"
-        >{{$t('labels.alphabet')}}</label>
-        <input
-          id="text1"
-          v-model="alphabet"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-        >
-      </div>
-      <div class="row">
-        <label for="size" class="form-label sm-size mb-2">{{$t('freqanal.size')}}</label>
-        <input type="number" min="1" max="6" v-model="size" id="size" class="form-control md-size mb-2"/>
-      </div>
-      <div class="form-check">
-        <input
-          id="slide"
-          v-model="slide"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="slide"
-          class="form-check-label mb-2"
-        >{{ $t('freqanal.slide') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="bound"
-          v-model="bound"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="bound"
-          class="form-check-label mb-2"
-        >{{ $t('freqanal.bound') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="showmissing"
-          v-model="showmissing"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="showmissing"
-          class="form-check-label mb-2"
-        >{{ $t('freqanal.showmissing') }}</label>
-      </div>
-      <!-- Action buttons -->
-      <v-calculate class="mb-2" id="calc" @calculate="genStats()"></v-calculate>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Text area input -->
-      <div class="mb-2">
+
+  <header class="page-header">
+    <h1>{{ $t('freqanal.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('freqanal.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <label>{{$t('labels.alphabet')}}</label>
+          <input
+            v-model="alphabet"
+            type="text"
+          >
+        </div>
+        <div class="form-horizontal">
+          <label>{{$t('freqanal.size')}}</label>
+          <input type="number" min="1" max="6" v-model="size" id="size"/>
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="slide">
+          <span class="checkmark"></span>
+          {{ $t('freqanal.slide') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="bound">
+          <span class="checkmark"></span>
+          {{ $t('freqanal.bound') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showmissing">
+          <span class="checkmark"></span>
+          {{ $t('freqanal.showmissing') }}
+        </label>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <!-- Text area input -->
         <textarea
-          id="msg"
-          ref="msg"
+          ref="msgInput"
           v-model="msg"
-          class="form-control"
+          class="mb-2"
           :placeholder="$t('labels.message')"
           rows="5"
         />
-      </div>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" v-html="result"></div>
+        <p
+          v-show="errormsg"
+          class="errormsg mb-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row">
+          <v-calculate class="mb-2" id="calc" @calculate="genStats()"></v-calculate>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <!-- Result area or use v-html -->
+        <div v-if="result" class="resultbox" v-html="result"></div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
+import VCalculate from '@/components/generic/VCalculate.vue'
 
-import VCalculate from '@/components/generic/VCalculate.vue';
+defineOptions({
+  name: "FreqAnalysis"
+})
 
-export default {
+const { t } = useI18n()
 
-  name: "FreqAnalysis",
+// --- State ---
+const result = ref("")
+const errormsg = ref("")
+const alphabet = ref("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+const size = ref(2)
+const slide = ref(true)
+const bound = ref(true)
+const showmissing = ref(false)
+const msg = ref("")
 
-  components: {
-    VCalculate
-  },
+// --- Template Ref ---
+const msgInput = ref(null)
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      alphabet: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      size: 2,
-      slide: true,
-      bound: true,
-      showmissing: false,
-      msg: ""
-    };
-  },
+// Internal logic counter
+let cntmissing = 0
 
-  mounted: function() {
-    this.$refs.msg.focus();
-  },
+onMounted(() => {
+  msgInput.value?.focus()
+})
+
+// --- Logic Helpers ---
+
+const findMissing = (freq, str, n, nSize) => {
+  if (cntmissing > 1000) return
+
+  if (n === nSize) {
+    const target = str.toUpperCase()
+    const idx = freq.findIndex((a) => a.ngram === target)
+    if (idx < 0) {
+      result.value += str + " "
+      cntmissing++
+    }
+  } else {
+    for (let i = 0; i < alphabet.value.length; i++) {
+      findMissing(freq, (str + alphabet.value[i]), n + 1, nSize)
+    }
+  }
+}
+
+const genNgrams = (nSize) => {
+  let freq = []
+  let totalNgrams = 0
+  let words = []
+
+  // Extract words or treat whole text as one block
+  if (bound.value) {
+    words = Array.from(msg.value.matchAll(/[A-Z]+/gi))
+  } else {
+    // Wrap in nested array to match matchAll structure [ [text] ]
+    words.push([msg.value.replace(/[^A-Z]+/gi, "")])
+  }
+
+  const shift = slide.value ? 1 : nSize
+
+  for (const w of words) {
+    const text = w[0]
+    for (let i = 0; i <= text.length - nSize; i += shift) {
+      const ngram = text.slice(i, i + nSize).toUpperCase()
+      if (ngram.length < nSize) continue
+
+      const existing = freq.find((a) => a.ngram === ngram)
+      if (existing) {
+        existing.cnt++
+      } else {
+        freq.push({ ngram: ngram, cnt: 1 })
+      }
+      totalNgrams++
+    }
+  }
+
+  // Sort: Count descending, then Alphabetical
+  freq.sort((a, b) => b.cnt - a.cnt || a.ngram.localeCompare(b.ngram))
+
+  // Build Output HTML
+  let html = `${t('freqanal.numfound')}${freq.length}<br>`
+  const totalPossible = Math.pow(alphabet.value.length, nSize)
+  html += `${t('freqanal.nummissing')}${totalPossible - freq.length}`
   
-  methods: {
+  html += `
+    <div class='table-responsive mt-2'>
+      <table class='p-table-small'>
+        <thead>
+          <tr>
+            <th>N-gram</th>
+            <th class="text-end">${t('labels.count')}</th>
+            <th class="text-end">${t('labels.perc')}</th>
+          </tr>
+        </thead>
+        <tbody>`
 
-    findMissing: function (freq, str, n, size) {
-      if (this.cntmissing > 1000) {
-        return;
-      }
-      if (n === size) {
-        // Test if missing
-        let idx = freq.findIndex(
-          (a) => a.ngram.localeCompare(str.toUpperCase()) == 0
-        );
-        if (idx < 0) {
-          this.result += str + " ";
-          this.cntmissing++;
-        }
-      } else {
-        for (let i = 0; i < this.alphabet.length; i++) {
-          this.findMissing(freq, (str + this.alphabet[i]), n + 1, size);
-        }
-      }
-    },
+  for (const e of freq) {
+    const percentage = ((e.cnt / totalNgrams) * 100).toFixed(2)
+    html += `
+      <tr>
+        <td>${e.ngram}</td>
+        <td class="text-end">${e.cnt}</td>
+        <td class="text-end">${percentage}%</td>
+      </tr>`
+  }
 
-    genNgrams: function (size) {
-      // freq array with objects ngram, cnt
-      let freq = [];
+  html += "</tbody></table></div>"
+  result.value = html
 
-      // Start bigrams at beginning of each word
-      let cntNgram = 0;
-      let words = [];
-      if (this.bound) {
-        words = this.msg.matchAll(/[A-Z]+/gi);
-      } else {
-        words.push(new Array(this.msg.replace(/[^A-Z]+/gi, "")));
-      }
-      let shift = this.slide ? 1 : size;
+  // Recursively find missing combinations if requested
+  if (showmissing.value) {
+    result.value += `<div class='mt-2'><b>${t('freqanal.missing')}</b><br>`
+    cntmissing = 0
+    findMissing(freq, "", 0, nSize)
+    result.value += "</div>"
+  }
+}
 
-      // Start counting
-      for (const w of words) {
-        for (let i = 0; i < w[0].length; i += shift) {
-          let ngram = w[0].slice(i, i + size);
-          if (ngram.length < size) continue;
-          let idx = freq.findIndex(
-            (a) => a.ngram.localeCompare(ngram.toUpperCase()) == 0
-          );
-          if (idx >= 0) {
-            freq[idx].cnt++;
-          } else {
-            freq.push({ ngram: ngram.toUpperCase(), cnt: 1 });
-          }
-          cntNgram++;
-        }
-      }
+// --- Main Action ---
+const genStats = () => {
+  errormsg.value = ""
+  result.value = ""
+  
+  if (!msg.value.trim()) {
+    errormsg.value = t('errors.noinput')
+    return
+  }
 
-      // Sort on frequence
-      freq.sort((a, b) => {
-        if (a.cnt > b.cnt) return -1;
-        else if (a.cnt < b.cnt) return 1;
-        else {
-          if (a.ngram > b.ngram) return 1;
-          else return -1;
-        }
-      });
-
-      // Print table stats and header
-      this.result =
-        this.$t('freqanal.numfound') + freq.length.toString() + "<br>";
-      this.result +=
-        this.$t('freqanal.nummissing') + (this.alphabet.length ** size - freq.length).toString();
-      this.result +=
-        "<br><br><table><thead><th>N-gram</th><th>" + this.$t('labels.count') + "</th><th>" + this.$t('labels.perc') + "</th></thead>";
-
-      // If show missing print something else and return
-      if (this.showmissing) {
-        this.result += "<b>"+ this.$t('freqanal.missing') + "</b><br>";
-        this.findMissing(freq, "", 0, this.size);
-        this.result += "<br><br>";
-      }
-
-      // Print table rows
-      for (let e of freq) {
-        this.result +=
-          "<tr><td class='sm-size'>" +
-          e.ngram +
-          "</td><td class='sm-size' style='text-align:right'>" +
-          e.cnt.toString() +
-          "</td><td class='sm-size' style='text-align:right'>" +
-          ((e.cnt / cntNgram) * 100).toFixed(2) +
-          "%</tr>";
-      }
-
-      // Print end of table
-      this.result += "</table>";
-    },
-
-    genStats: function () {
-      // Reset
-      this.errormsg = "";
-      this.result = "";
-      this.cntmissing = 0;
-
-      // Generate n grams
-      this.genNgrams(this.size);
-    },
-  },
-
-};
-
+  genNgrams(size.value)
+}
 </script>
-
-<style scoped>
-</style>

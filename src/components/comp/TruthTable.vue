@@ -1,161 +1,172 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('truthtable.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('truthtable.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('truthtable.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('truthtable.expr') }}</label>
+          <input type="text" v-model="expr">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate class="mb-2" id="calc" @calculate="calculate()"></v-calculate>
+        </div>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('truthtable.long')"
-      />
-      <!-- Form fields -->
-      <!-- Text input -->
-      <div class="row">
-        <label for="expr" class="form-label mb-2 md-size">{{$t('truthtable.expr')}}</label>
-        <input
-          id="expr"
-          ref="expr"
-          class="form-control mb-2 lg-size"
-          type="text"
-          v-model="expr"
-          placeholder="e.g.: a and b or c and not d"
-        />
-      </div>
-      <!-- Action buttons -->
-      <v-calculate class="mb-2" id="calc" @calculate="calculate()"></v-calculate>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div v-if="result" class="resultbox" v-html="result" />
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          v-html="result"
+          class="card resultbox"
+        >
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 
-import VCalculate from '@/components/generic/VCalculate.vue'
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { evaluate } from "mathjs";
+import VCalculate from '@/components/generic/VCalculate.vue';
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: "TruthTable"
+});
 
-  name: "TruthTable",
+const { t } = useI18n();
 
-  components: {
-    VCalculate
-  },
+// --- State ---
+const expr = ref("");
+const result = ref("");
+const errormsg = ref("");
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      text1: "",
-      num1: 0,
-      sel1: "0",
-      chk1: false,
-      msg: ""
-    };
-  },
+// These variables are used during the calculation process
+let vararr = [];
+let cleanexpr = "";
 
-  mounted: function() {
-    this.$refs.expr.focus();
-  },
+// --- Template Ref ---
+const exprInput = ref(null);
 
-  methods: {
+onMounted(() => {
+  exprInput.value?.focus();
+});
 
-    nextOption: function (scope, cnt) {
-      if (cnt == this.vararr.length) {
-        // We got enough variables now
-        let vars = {};
-        this.result += "<tr>";
+// --- Logic Helpers ---
 
-        // Build object with variables for mathjs.evaluate
-        // Print all values true or false
-        for (let i = 0; i < scope.length; i++) {
-          vars[this.vararr[i]] = scope[i];
-          this.result += "<td>" + scope[i] + "</td>";
-        }
+/**
+ * Recursive function to generate all T/F combinations
+ */
+const nextOption = (scope, cnt) => {
+  if (cnt === vararr.length) {
+    // Base Case: We have a full set of variable assignments
+    let vars = {};
+    let rowHtml = "<tr>";
 
-        // Evaluate expression with mathjs and print result
-        let result = evaluate(this.cleanexpr, vars);
-        this.result += "<td>" + result + "</td></tr>";
-      } else {
-        // Not enough variables yet
-        // Try next var being false
-        scope[cnt] = false;
-        this.nextOption(scope, cnt + 1);
-        // Try next var being true
-        scope[cnt] = true;
-        this.nextOption(scope, cnt + 1);
-      }
-    },
+    for (let i = 0; i < scope.length; i++) {
+      vars[vararr[i]] = scope[i];
+      rowHtml += `<td>${scope[i]}</td>`;
+    }
 
-    calculate: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      this.vararr = [];
-      this.cleanexpr = this.expr.trim();
-
-      // Check input
-      if (this.cleanexpr == "") {
-        this.errormsg = this.$t('errors.noinput');
-      }
-      
-      // Replace logical operators with literal versions
-      let repls = [
-        // Programming
-        [/&&/gi, " and "],
-        [/\|\|/gi, " or "],
-        [/~/gi, " not "],
-        // Boolean logic
-        [/∧/gi, " and "],
-        [/∨/gi, " or "],
-        [/¬/gi, " not "],
-        // Algabraic
-        [/\*/gi, " and "],
-        [/\+/gi, " or "],
-        [/!/gi, " not "],
-      ];
-      for (let r of repls) {
-        this.cleanexpr = this.cleanexpr.replace(r[0], r[1]);
-      }
-
-      // Build the vararr, anything that is not and, xor, or, not is a Variable
-      let tmp = this.cleanexpr.matchAll(/\b(\S+)\b/g);
-      for (let t of tmp) {
-        if (t[0].toUpperCase() === "AND") continue;
-        if (t[0].toUpperCase() === "OR") continue;
-        if (t[0].toUpperCase() === "NOT") continue;
-        if (t[0].toUpperCase() === "XOR") continue;
-        this.vararr.push(t[0]);
-      }
-
-      let optarr = this.vararr.map((s) => false);
-
-      // Print the table header
-      this.result = "<table class='table table-striped'><thead><tr>";
-      for (let i = 0; i < this.vararr.length; i++) {
-        this.result += "<th scope='col'>" + this.vararr[i] + "</th>";
-      }
-      this.result += "<th>" + this.expr + "</th></tr></thead>";
-
-      // Try all combinations
-      this.nextOption(optarr, 0);
-
-      // Close table
-      this.result += "</table>";
-    },
-
-  },
+    try {
+      // Evaluate the expression with mathjs using the current scope
+      const evalResult = evaluate(cleanexpr, vars);
+      rowHtml += `<td><strong>${evalResult}</strong></td></tr>`;
+      result.value += rowHtml;
+    } catch (e) {
+      rowHtml += `<td>Error</td></tr>`;
+      result.value += rowHtml;
+    }
+  } else {
+    // Recursive Case: Try both false and true for the current variable
+    scope[cnt] = false;
+    nextOption(scope, cnt + 1);
+    scope[cnt] = true;
+    nextOption(scope, cnt + 1);
+  }
 };
 
+/**
+ * Main calculation function
+ */
+const calculate = () => {
+  // Reset
+  result.value = "";
+  errormsg.value = "";
+  vararr = [];
+  cleanexpr = expr.value.trim();
+
+  if (cleanexpr === "") {
+    errormsg.value = t('errors.noinput');
+    return;
+  }
+
+  // 1. Replace logical operators with mathjs literal versions
+  const replacements = [
+    [/&&/gi, " and "],
+    [/\|\|/gi, " or "],
+    [/~/gi, " not "],
+    [/∧/gi, " and "],
+    [/∨/gi, " or "],
+    [/¬/gi, " not "],
+    [/\*/gi, " and "],
+    [/\+/gi, " or "],
+    [/!/gi, " not "],
+  ];
+
+  replacements.forEach(([regex, replacement]) => {
+    cleanexpr = cleanexpr.replace(regex, replacement);
+  });
+
+  // 2. Extract unique variables
+  const tokens = cleanexpr.matchAll(/\b(\w+)\b/g);
+  const uniqueVars = new Set();
+  const reserved = ["AND", "OR", "NOT", "XOR", "TRUE", "FALSE"];
+
+  for (const token of tokens) {
+    const word = token[0];
+    if (!reserved.includes(word.toUpperCase()) && isNaN(word)) {
+      uniqueVars.add(word);
+    }
+  }
+  vararr = Array.from(uniqueVars);
+
+  if (vararr.length > 10) {
+    errormsg.value = "Too many variables (max 10)";
+    return;
+  }
+
+  // 3. Build Table Header
+  let tableHtml = "<table class='p-table'><thead><tr>";
+  vararr.forEach(v => {
+    tableHtml += `<th scope='col'>${v}</th>`;
+  });
+  tableHtml += `<th scope='col'>${expr.value}</th></tr></thead><tbody>`;
+  
+  result.value = tableHtml;
+
+  // 4. Generate permutations recursively
+  const optarr = new Array(vararr.length).fill(false);
+  nextOption(optarr, 0);
+
+  // 5. Close Table
+  result.value += "</tbody></table>";
+};
 </script>
 
 <style scoped>

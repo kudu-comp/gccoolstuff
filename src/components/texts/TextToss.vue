@@ -1,156 +1,137 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('texttoss.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('texttoss.long')"
-      />
-      <div class="mb-2">
-        <span class="form-label">{{ $t('texttoss.mode') }}</span>
-        <div class="form-check">
-          <input
-            id="mode3"
-            v-model="mode"
-            type="radio"
-            value="3"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="mode3"
-          >{{ $t('texttoss.mode3') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="mode2"
-            v-model="mode"
-            type="radio"
-            value="2"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="mode2"
-          >{{ $t('texttoss.mode2') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="mode1"
-            v-model="mode"
-            type="radio"
-            value="1"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="mode1"
-          >{{ $t('texttoss.mode1') }}</label>
+
+  <header class="page-header">
+    <h1>{{ $t('texttoss.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('texttoss.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="radio-group">
+        <label>{{ $t('texttoss.mode') }}</label>
+        <div class="radio-options-vertical">
+          <label class="radio-item">
+            <input type="radio" value="3" v-model="mode">
+            <span class="radio-mark"></span> {{ $t('texttoss.mode3') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="2" v-model="mode">
+            <span class="radio-mark"></span> {{ $t('texttoss.mode2') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="1" v-model="mode">
+            <span class="radio-mark"></span> {{ $t('texttoss.mode1') }}
+          </label>
         </div>
       </div>
-      <button
-        id="toss"
-        class="btn mb-2 me-2"
-        @click="tossWords"
-      >
-        {{ $t('buttons.show') }}
-      </button>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <textarea
         id="message"
-        ref="message"
+        ref="messageInput"
         v-model="message"
-        class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"
-        @input="translateKeyboard"
       />
       <p
         v-show="errormsg"
         class="errormsg mb-2"
       >
-        {{ errormsg }}
-      </p>
+        {{ errormsg }}.
+      </p>          
+    </VCard>
+    <VCard :title="$t('labels.result')">
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
       </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'TextToss',
+defineOptions({ name: 'TextToss' })
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      mode : 3,
-      errormsg: ""
-    }
-  },
+const { t } = useI18n()
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+const message = ref("")
+const result = ref("")
+const mode = ref(3) // 3: Keep 1st & Last, 2: Keep 1st, 1: Keep none
+const errormsg = ref("")
+const messageInput = ref(null)
 
-  methods: {
+onMounted(() => messageInput.value?.focus())
 
-    // Translate form one keyboard to another
-    tossWords : function () {
+watch([message, mode], () => {
+  tossWords()
+})
 
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
+/**
+ * Helper to shuffle an array of characters (Fisher-Yates algorithm)
+ */
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]
+  }
+  return array.join('')
+}
 
-      // Modes
-      // Mode 3 - keep first and last position
-      // Mode 2 - keep first position
-      // Mode 1 - keep no position
+const tossWords = () => {
+  errormsg.value = ""
+  result.value = ""
 
-      try {
+  try {
+    // Regex: Group 1 is the word, Group 2 is the following punctuation/whitespace
+    const regex = /([^\s;:.,?!'`"]+)([\s;:.,?!'`"]*)/gm
+    let builder = ""
+    
+    const matches = message.value.matchAll(regex)
 
-        // Parse text into words, keep the stuff between words
-        const regex = /([^\s;:.,?!'`"]+)([\s;:.,?!'`"]*)/gm;
+    for (const m of matches) {
+      let word = m[1]
+      const punctuation = m[2]
       
-        // Process all words one by one using iterator
-        for (let m of this.message.matchAll(regex)) {
-        
-          let w = m[1];
-              
-          // Move letters to 2nd position randomly
-          for (let j = 0; j < w.length - this.mode; j++) {
-            
-            let idx = Math.floor(Math.random() * (w.length - this.mode));
-            if (this.mode == 1)
-              w = w[idx] + w.slice(0,idx) + w.slice(idx+1)
-            else {
-              idx+=2
-              w = w[0] + w[idx] + w.slice(1,idx) + w.slice(idx+1);
-            }
-          }
+      // Determine how many characters to keep fixed at the start and end
+      let fixedStart = 0
+      let fixedEnd = 0
 
-          this.result += w + m[2];
-        
-        }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
+      if (mode.value === 3) {
+        fixedStart = 1
+        fixedEnd = 1
+      } else if (mode.value === 2) {
+        fixedStart = 1
+        fixedEnd = 0
       }
-    },
 
-  },
+      // Only shuffle if the word is long enough to have "middle" letters
+      if (word.length > (fixedStart + fixedEnd)) {
+        const start = word.slice(0, fixedStart)
+        const end = fixedEnd > 0 ? word.slice(-fixedEnd) : ""
+        
+        // Extract the middle part, turn to array, shuffle, then join back
+        const middle = word.slice(fixedStart, word.length - fixedEnd)
+        const shuffledMiddle = shuffleArray(middle.split(''))
+        
+        word = start + shuffledMiddle + end
+      }
+
+      builder += word + punctuation
+    }
+
+    result.value = builder
+  } catch (e) {
+    errormsg.value = t('errors.generic')
+    console.error(e)
+  }
 }
 </script>
-
-<style scoped>
-</style>

@@ -1,198 +1,202 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('textextractor.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card mb-2"
-        v-html="$t('textextractor.long')"
-      />
-      <div class="card">
-        <div class="mb-2">
-          <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
-          <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
+
+
+  <header class="page-header">
+    <h1>{{ $t('textextractor.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('textextractor.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input
+            type="file"
+            ref="fileInputRef"
+            class="form-control"
+            @change="selectFile"
+          >
         </div>
-        <div class="row">
+        <p
+          v-show="errormsg"
+          class="card errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
           <label
-            class="form-label md-size mb-2"
-            for="length"
           >{{ $t('textextractor.length') }}</label>
           <input
-            id="length"
             v-model="length"
             type="number"
-            class="form-control md-size mb-2"
           >
         </div>
-        <div class="row">
+        <div class="form-horizontal">
           <label
-            class="form-label md-size mb-2"
-            for="max"
           >{{ $t('textextractor.max') }}</label>
           <input
-            id="max"
             v-model="max"
             type="number"
-            class="form-control md-size mb-2"
           >
         </div>
-        <div class="row">
+        <div class="form-horizontal">
           <label
-            class="form-label md-size mb-2"
-            for="start"
           >{{ $t('textextractor.start') }}</label>
           <input
-            id="start"
             v-model="start"
             type="number"
-            class="form-control md-size mb-2"
           >
         </div>
-        <button id="go" type="button" :disabled="!loaded" class="btn md-size" @click="scanFile()">
-          <i class="fas fa-search"></i> {{ $t('buttons.search') }}        
-        </button>
-      </div>
-      <p
-        v-show="errormsg"
-        class="card errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div class="card card-text p-4">
-        <div class="flex-row d-flex h4 mb-2">
-          <div class="sm-size">Match</div>
-          <div class="sm-size">Position</div>
-          <div class="sm-size">Text</div>
+        <div class="button-row">
+          <button :disabled="!loaded" class="btn btn-primary" @click="scanFile()">
+            {{ $t('buttons.search') }}        
+          </button>
         </div>
-        <div class="flex-row d-flex" v-for="r in results" :key="r.id">
-           <div class="sm-size">{{ r.id }}</div>
-           <div class="sm-size">{{ r.at }}</div>
-           <div>{{ r.text }}</div>
-        </div>
-      </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <table class="p-table">
+          <thead>
+            <tr>
+              <th>Match</th>
+              <th>Position</th>
+              <th>Text</th>
+            </tr>
+          </thead>
+          <tr class="flex-row d-flex" v-for="r in results" :key="r.id">
+            <td>{{ r.id }}</td>
+            <td>{{ r.at }}</td>
+            <td>{{ r.text }}</td>
+          </tr>
+        </table>      
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'TextExtractor',
+defineOptions({
+  name: 'TextExtractor'
+})
 
-  data: function() {
-    return {
-      fileurl: "",
-      imageData: "",
-      result: this.$t('labels.result'),
-      errormsg: "",
-      loaded: false,
-      length: 8,
-      max: 999,
-      start: 0,
-      results: [],
-      a : null
+const { t } = useI18n()
+
+// --- Template Refs ---
+const fileInput = ref(null)
+
+// --- State ---
+const result = ref(t('labels.result'))
+const errormsg = ref("")
+const loaded = ref(false)
+const length = ref(8)
+const max = ref(999)
+const start = ref(0)
+const results = ref([])
+const a = ref(null) // Uint8Array buffer
+
+onMounted(() => {
+  fileInput.value?.focus()
+})
+
+// --- Methods ---
+
+const scanFile = () => {
+  errormsg.value = ""
+  result.value = ""
+  results.value = [] // Reset results list
+
+  if (!a.value) {
+    errormsg.value = t('textextractor.fileerror')
+    return
+  }
+
+  try {
+    let s = ""
+    let cnt = 0
+    const buffer = a.value
+
+    for (let i = start.value; i < buffer.length; i++) {
+      let c = buffer[i]
+      
+      // Check if character is in printable ASCII range (32 - 126)
+      if (c >= 32 && c <= 126) {
+        s += String.fromCharCode(c)
+      } else {
+        // If non-printable, check if we just finished a string of minimum length
+        if (s.length >= length.value) {
+          results.value.push({
+            id: cnt.toString().padStart(3, "0"),
+            at: (i - s.length).toString().padStart(6, "0"),
+            text: s
+          })
+          cnt++
+        }
+
+        if (cnt > max.value) {
+          errormsg.value = t('textextractor.maxexceeded')
+          break
+        }
+        s = ""
+      }
     }
-  },
 
-  mounted: function() {
-    // Set focus on file input
-    this.$refs.file.focus();
-  },
+    // Check if the last part of the file was a valid string
+    if (s.length >= length.value && cnt <= max.value) {
+      results.value.push({
+        id: cnt.toString().padStart(3, "0"),
+        at: (buffer.length - s.length).toString().padStart(6, "0"),
+        text: s
+      })
+      cnt++
+    }
 
-  methods: {
-    
-    // Scan the file
-    scanFile: function () {
+    if (cnt === 0) {
+      result.value = t('errors.noresult')
+    }
 
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
+  } catch (err) {
+    console.error(err)
+    errormsg.value = t('textextractor.fileerror')
+  }
+}
 
+const selectFile = (event) => {
+  errormsg.value = ""
+  const input = event.target
+
+  if (input.files && input.files[0]) {
+    const reader = new FileReader()
+
+    reader.onerror = () => {
+      errormsg.value = t('errors.loadingfile')
+    }
+
+    reader.onloadend = (e) => {
       try {
-          
-        // Scan for textstrings in printable range 32 - 126 with min length
-        let s = "";
-        let cnt = 0;let t
-
-        for (let i = this.start; i <= this.a.length; i++) {
-
-          let c = this.a[i];
-          if (c >= 32 && c <= 126) {
-            s += String.fromCharCode(c);
-          } else {
-            if (s.length >= this.length) {
-              this.results.push({id: cnt.toFixed(0).padStart(3, "0"), at: (i-s.length).toString().padStart(6, "0"), text: s})
-              cnt++;
-            }
-            if (cnt > this.max) {
-              this.errormsg = this.$t('textextractor.maxexceeded')
-              break;
-            }
-            s = "";
-          }
-        }
-
-        // If the last part of the file was a string
-        if (s.length >= this.length) {
-          cnt++;
-          this.result += "Match " + cnt.toFixed(0).padStart(3, "0") + ": "+ s + "<br>"
-        }
-
-        if (cnt == 0) this.result = this.$t('errors.noresult')
-
-      } catch(err) {
-
-        console.log(err);
-        this.errormsg = this.$t('textextractor.fileerror')
-
+        // Convert the ArrayBuffer to Uint8Array for byte-by-byte scanning
+        a.value = new Uint8Array(e.target.result)
+        loaded.value = true
+        scanFile()
+      } catch (err) {
+        console.error(err)
+        errormsg.value = t('textextractor.error')
       }
+    }
 
-    },
-
-    // Triggered when the file is loaded
-    selectFile: function (event) {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Get the input file
-      let input = event.target;
-
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-
-        // create a new FileReader to read this image
-        let reader = new FileReader();
-
-        // Define a callback function to run, when image has errors loading
-        reader.onerror = () => {
-          this.errormsg = this.$t('errors.loadingfile')        
-        }
-
-        // Define a callback function to run, when FileReader finishes its job
-        reader.onloadend = (e) => {
-
-            try {
-          
-              // Put file contents in variable
-              this.a = new Uint8Array(e.target.result);
-              this.loaded = true;
-              
-            } catch(err) {
-
-              console.log(err);
-              this.errormsg = this.$t('textextractor.error')
-
-            }
-        }
-
-        // Start the reader job - read file as a array
-        reader.readAsArrayBuffer(input.files[0]);
-      }
-    },
-
+    reader.readAsArrayBuffer(input.files[0])
   }
 }
 </script>
-
+<style scoped>
+td {
+  word-wrap: break-word; 
+}</style>

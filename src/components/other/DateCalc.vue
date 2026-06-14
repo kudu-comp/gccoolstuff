@@ -1,122 +1,177 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('datecalc.title') }}
+  <header class="page-header">
+    <h1>{{ $t('datecalc.title') }}</h1>
+  </header>
+
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <!-- Intro Card -->
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('datecalc.long')" />
+      </VCard>
+
+      <!-- Input Card -->
+      <VCard :title="$t('labels.settings')">
+        <div class="form-group-vertical">
+          <div class="form-horizontal mb-3">
+            <label for="date1">{{ $t('datecalc.date1') }}</label>
+            <input 
+              ref="date1Input"
+              type="date" 
+              v-model="date1" 
+              class="form-control"
+            />
+          </div>
+          <div class="form-horizontal">
+            <label for="date2">{{ $t('datecalc.date2') }}</label>
+            <input 
+              type="date" 
+              v-model="date2" 
+              class="form-control"
+            />
+          </div>
+          <div class="form-horizontal mb-3">
+            <label for="extradays">{{ $t('datecalc.days') }}</label>
+            <input 
+              type="number" 
+              min="0" 
+              v-model.number="extradays" 
+              class="form-control"
+            />
+          </div>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('datecalc.long')"
-      />
-      <div class="row" >
-        <label for="date1" class="form-label sm-size mb-2">{{$t('datecalc.date1')}} </label>
-        <input type="date" v-model="date1" id="date1" ref="date1" class="form-control md-size mb-2"/>
-      </div>
-      <div class="row">
-        <label for="extradays" class="form-label sm-size mb-2">{{$t('datecalc.days')}}</label>
-        <input type="number" min="0" v-model="extradays" id="extradays" class="form-control md-size mb-2"/>
-      </div>
-      <div class="row" >
-        <label for="date2" class="form-label sm-size mb-2">{{$t('datecalc.date2')}} </label>
-        <input type="date" v-model="date2" id="date2" class="form-control md-size mb-2"/>
-      </div>
-      <v-calculate class="mb-2" id="calc" @calculate="calculateDates"></v-calculate>
-      <div v-if="result" class="resultbox" >
-        {{ result }} <br />
-        {{ result2 }} <br />
-        {{ result3 }} <br />
-        {{ result4 }} <br />
-        {{ result7 }} <br />
-        {{ result5 }} <br />
-        {{ result6 }}
-      </div>
+
+    <!-- Results Card -->
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="date1 && date2" class="resultbox">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item px-0">
+              <strong>{{ results.diff }}</strong>
+            </li>
+            <li class="list-group-item px-0">
+              {{ results.add }}
+            </li>
+            <li class="list-group-item px-0">
+              {{ results.sub }}
+            </li>
+            <li class="list-group-item px-0">
+              {{ results.dayOfYear }}
+            </li>
+            <li class="list-group-item px-0">
+              {{ results.dayOfWeek }}
+            </li>
+            <li class="list-group-item px-0">
+              {{ results.daysInYear }}
+            </li>
+            <li class="list-group-item px-0 pb-0">
+              {{ results.daysInMonth }}
+            </li>
+          </ul>
+        </div>
+        <div v-else class="text-center p-4 text-muted">
+          {{ $t('labels.no_result') }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import VCard from '@/components/generic/VCard.vue';
 
-import VCalculate from '@/components/generic/VCalculate.vue';
+defineOptions({ name: 'DateCalc' });
 
-export default {
+const { t, locale } = useI18n();
 
-  name: "DateCalc",
+// --- State ---
+// Initialize with today's date for a better UX
+const today = new Date().toISOString().substr(0, 10);
+const date1 = ref(today);
+const date2 = ref(today);
+const extradays = ref(0);
 
-  components: {
-    VCalculate    
-  },
+// Template Ref for autofocus
+const date1Input = ref(null);
 
-  data() {
-    return {
-      date1: "",
-      date2: "",
-      extradays: 0,
-      result: "",
-      result2: "",
-      result3: "",
-      result4: "",
-      result7: "",
-      result5: "",
-      result6: "",
-    };
-  },
+onMounted(() => {
+  date1Input.value?.focus();
+});
 
+// --- Logic (Computed Results) ---
+
+const results = computed(() => {
+
+  if (!date1.value || !date2.value) return {};
+
+  const d1 = new Date(date1.value);
+  const d2 = new Date(date2.value);
   
-  mounted: function() {
-    this.$refs.date1.focus();
-  },
-  
-  methods: {
+  // Basic date validation
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) return {};
 
-    calculateDates: function () {
+  const year = d1.getFullYear();
+  const msPerDay = 1000 * 3600 * 24;
 
-      let d1 = new Date(this.date1);
-      let d2 = new Date(this.date2);
-      let year = d1.getFullYear();
+  // 1. Difference between dates
+  const daysDiff = Math.round((d2 - d1) / msPerDay);
+  const diffStr = t('datecalc.res1a') + daysDiff + t('datecalc.res1b');
 
-      // Differences between two dates
-      this.result = this.$t('datecalc.res1a');
-      let days = Math.round((d2 - d1) / (1000 * 3600 * 24));
-      this.result += days + this.$t('datecalc.res1b');
+  // 2. Adding days
+  const dAdd = new Date(d1.getTime() + extradays.value * msPerDay);
+  const addStr = t('datecalc.res2a') + extradays.value + t('datecalc.res2b') + d1.toLocaleDateString() + ": " + dAdd.toLocaleDateString();
 
-      // Adding days to date 1
-      this.result2 = this.$t('datecalc.res2a') + this.extradays + this.$t('datecalc.res2b') + d1.toLocaleDateString() + ": ";
-      let d3 = new Date(d1.getTime() + this.extradays * (1000 * 3600 * 24));
-      this.result2 += d3.toLocaleDateString();
+  // 3. Subtracting days
+  const dSub = new Date(d1.getTime() - extradays.value * msPerDay);
+  const subStr = t('datecalc.res3a') + extradays.value + t('datecalc.res3b') + d1.toLocaleDateString() + ": " + dSub.toLocaleDateString();
 
-      // Subtracting days from date 1
-      this.result3 = this.$t('datecalc.res3a') + this.extradays + this.$t('datecalc.res3b') + d1.toLocaleDateString() + ": ";
-      let d4 = new Date(d1.getTime() - this.extradays * (1000 * 3600 * 24));
-      this.result3 += d4.toLocaleDateString();;
+  // 4. Day in year (Ordinal)
+  const startOfYear = new Date(d1.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((d1 - startOfYear) / msPerDay);
+  const dayOfYearStr = t('datecalc.res7') + year + " is " + dayOfYear;
 
-      // Day in year
-      let dayOfYear = Math.floor(
-        (d1 - new Date(d1.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24)
-      );
-      this.result7 = this.$t('datecalc.res7') + year.toString() + " is " + dayOfYear;
+  // 5. Day of the week (Localized)
+  const dayNames = locale.value === "nl" 
+    ? ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"]
+    : ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const dayOfWeekStr = t('datecalc.res4') + dayNames[d1.getDay()];
 
-      // Day of the week
-      let x;
-      if (this.$i18n.locale === "nl") {
-        x = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
-      } else {
-        x = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"];
-      }
-      this.result4 = this.$t('datecalc.res4') + x[d1.getDay()];
+  // 6. Leap Year / Days in year
+  const isLeap = (year % 400 === 0) || (year % 100 !== 0 && year % 4 === 0);
+  const daysInYearStr = t('datecalc.res5') + year + " is " + (isLeap ? "366" : "365");
 
-      // Number of days in year
-      let leap = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
-      this.result5 = this.$t('datecalc.res5') + year.toString() + " is " + (leap ? "366" : "365");
+  // 7. Days in month
+  const daysInMonthCount = new Date(year, d1.getMonth() + 1, 0).getDate();
+  const daysInMonthStr = t('datecalc.res6') + year + "-" + (d1.getMonth() + 1) + " is " + daysInMonthCount;
 
-      // Number of days in month and year of date1 day in the year
-      this.result6 = this.$t('datecalc.res6') + year.toString() + "-" + (d1.getMonth()+1).toString() + " is " + new Date(year, d1.getMonth() + 1, 0).getDate();
-
-    },
-
-  },
-};
-
+  return {
+    diff: diffStr,
+    add: addStr,
+    sub: subStr,
+    dayOfYear: dayOfYearStr,
+    dayOfWeek: dayOfWeekStr,
+    daysInYear: daysInYearStr,
+    daysInMonth: daysInMonthStr
+  };
+});
 </script>
 
 <style scoped>
+.result-content {
+  background: white;
+}
+
+.list-group-item {
+  border-color: rgba(0,0,0,0.05);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+input[type="date"] {
+  min-width: 150px;
+}
 </style>

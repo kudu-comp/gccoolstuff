@@ -1,280 +1,131 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('digits.title') }}
+
+   <header class="page-header">
+    <h1>{{ $t('digits.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('digits.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="radio-group">
+          <label>{{ $t('digits.sel') }}</label>
+          <div class="radio-options-vertical">
+            <label class="radio-item" v-for="dec in decOptions" :key="dec.id">
+              <input type="radio" :value="dec.id" v-model="number">
+              <span class="radio-mark"></span> {{ dec.label }}
+            </label>
+          </div>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('digits.long')"
-      />
-      <div>
-        <span
-          class="form-label"
-        >{{ $t('digits.sel') }}</span>
-        <div class="form-check">
-          <input
-            id="number1"
-            v-model="number"
-            type="radio"
-            value="pi"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number1"
-          >{{ $t('digits.pi') }}</label>
+    <div class="card-stack">
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('digits.from') }}</label>
+          <input type="number" v-model="start" ref="startInput" min="0" max="1000000">
         </div>
-        <div class="form-check">
-          <input
-            id="number2"
-            v-model="number"
-            type="radio"
-            value="e"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number2"
-          >{{ $t('digits.e') }}</label>
+        <div class="form-horizontal">
+          <label>{{ $t('digits.to') }}</label>
+          <input type="number" v-model="end" min="0" max="1000000">
         </div>
-        <div class="form-check">
-          <input
-            id="number3"
-            v-model="number"
-            type="radio"
-            value="tau"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number3"
-          >{{ $t('digits.tau') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number4"
-            v-model="number"
-            type="radio"
-            value="phi"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number4"
-          >{{ $t('digits.phi') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number5"
-            v-model="number"
-            type="radio"
-            value="euler"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number5"
-          >{{ $t('digits.euler') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number6"
-            v-model="number"
-            type="radio"
-            value="sqrt2"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number6"
-          >{{ $t('digits.sq2') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number7"
-            v-model="number"
-            type="radio"
-            value="sqrt3"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number7"
-          >{{ $t('digits.sq3') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number8"
-            v-model="number"
-            type="radio"
-            value="zeta3"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number8"
-          >{{ $t('digits.zeta3') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number9"
-            v-model="number"
-            type="radio"
-            value="gauss"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number9"
-          >{{ $t('digits.gauss') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number10"
-            v-model="number"
-            type="radio"
-            value="lemni"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number10"
-          >{{ $t('digits.lemni') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number11"
-            v-model="number"
-            type="radio"
-            value="cat"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number11"
-          >{{ $t('digits.cat') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number12"
-            v-model="number"
-            type="radio"
-            value="champ"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="number12"
-          >{{ $t('digits.champ') }}</label>
-        </div>
-      </div>
-      <div class="row mt-2">
-        <label
-          class="form-label md-size mb-2"
-          for="start"
-        >{{ $t('digits.from') }}</label>
-        <input
-          id="start"
-          v-model="start"
-          ref="start"
-          type="number"
-          min="0"
-          max="1000000"
-          class="form-control mb-2 md-size"
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2  md-size"
-          for="end"
-        >{{ $t('digits.to') }}</label>
-        <input
-          id="end"
-          v-model="end"
-          type="number"
-          min="0"
-          max="1000000"
-          class="form-control mb-2  md-size"
-          @keyup.enter="getDigits"
+          {{ errormsg }}.
+        </p>          
+        <div class="button-row mt-2">
+          <VCalculate @calculate="getDigits" />
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.result')">     
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-      </div>
-      <v-calculate id="getdec" @calculate="getDigits"></v-calculate>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ $t('digits.res1') }} {{ start }} {{ $t('digits.res2') }} {{ end }} {{ $t('digits.res3') }} {{ result }}.
-      </div>
+          {{ $t('digits.res1') }} {{ start }} {{ $t('digits.res2') }} {{ end }} {{ $t('digits.res3') }} {{ result }}.
+        </div>
+      </VCard>
     </div>
   </div>
+
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue' 
 import VCalculate from '@/components/generic/VCalculate.vue' 
 
-export default {
-  name: 'MathDigits',
+defineOptions({
+  name: 'MathDigits'
+})
 
-  components: {
-    VCalculate
-  },
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      number: "pi",
-      start: 1,
-      end: 1,
-      errormsg: "",
-      result: "",
-      phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/getdigits.php",
-      // squareroots: [2,3,5,6,7,8,10,11,12,13,14,15]
-      // <select class="custom-select" v-model="sqrt">
-      //   <option v-for="s in squareroots" :key="s" :value="s" width="50px">{{s}}</option>
-      // </select>
+// --- State ---
+const number = ref("pi")
+const start = ref(1)
+const end = ref(1)
+const errormsg = ref("")
+const result = ref("")
+// Note: 'n' was used in your original fetch payload but not defined in data. 
+// I've added a ref for it here to prevent errors.
+const n = ref(0) 
 
-    }
-  },
+const phpurl = `${window.location.protocol}//${window.location.hostname}/math/getdigits.php`
 
-  mounted: function() {
-    this.$refs.start.focus();
-  },
+// Options for the dropdown
+const decOptions = [
+  { id: 'pi', label: t('digits.pi') },
+  { id: 'e', label: t('digits.e') },
+  { id: 'tau', label: t('digits.tau') },  
+  { id: 'phi', label: t('digits.phi') },
+  { id: 'euler', label: t('digits.euler') },
+  { id: 'sqrt2', label: t('digits.sq2') },
+  { id: 'sqrt3', label: t('digits.sq3') },
+  { id: 'zeta3', label: t('digits.zeta3') },
+  { id: 'gauss', label: t('digits.gauss') },
+  { id: 'lemni', label: t('digits.lemni') },
+  { id: 'cat', label: t('digits.cat') },
+  { id: 'champ', label: t('digits.champ') },
+]
 
-  methods: {
+// --- Template Refs ---
+const startInput = ref(null)
 
-    // Get the digits
-    getDigits: function() {
-      this.errormsg = "";
-      
-      let data = {
-        number: this.number,
-        start: this.start,
-        end: this.end,
-        n: this.n,
-      };
+onMounted(() => {
+  startInput.value?.focus()
+})
 
-      // Call script on server
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.result = data.result;
-        })
-        .catch((error) => {
-            console.error('Error ', error);
-            this.errormsg = this.$t('errors.generic');
-        });
-    },
+// --- Methods ---
 
-  },
+const getDigits = async () => {
+  errormsg.value = ""
+  
+  const payload = {
+    number: number.value,
+    start: start.value,
+    end: end.value,
+    n: n.value,
+  }
+
+  try {
+    const response = await fetch(phpurl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    if (!response.ok) throw new Error('Network response was not ok')
+
+    const data = await response.json()
+    result.value = data.result
+  } catch (error) {
+    console.error('Error ', error)
+    errormsg.value = t('errors.generic')
+  }
 }
 </script>

@@ -1,431 +1,246 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('htmlparser.title') }}
+  <header class="page-header">
+    <h1>{{ $t('htmlparser.title') }}</h1>
+  </header>
+
+  <div class="card-grid mb-2">
+    <!-- Input Column -->
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('htmlparser.long')" />
+      </VCard>
+
+      <VCard :title="$t('labels.input')">
+        <div class="form-row mb-2">
+          <textarea
+            ref="gchtmlInput"
+            v-model="gchtml"
+            :placeholder="$t('htmlparser.ph')"
+            rows="5"
+          />
+        </div>
+        <p v-show="errormsg" class="errormsg mt-2">{{ errormsg }}</p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary" @click="scanHTML">
+            {{ $t('htmlparser.btnscan') }}
+          </button>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('htmlparser.long')"
-      />
-      <div class="form-row mb-2">
-        <textarea
-          id="gchtml"
-          ref="gchtml"
-          v-model="gchtml"
-          class="form-control"
-          :placeholder="$t('htmlparser.ph')"
-          rows="3"
-        />
-      </div>
-      <div class="form-inline mb-2">
-        <input
-          id="scan"
-          type="button"
-          :value="$t('htmlparser.btnscan')"
-          class="btn me-2"
-          @click="scanHTML"
-        >{{ scanresult }}
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <va-item
-        v-show="links.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.links') }}
-        </template>
-        <template #content>
-          <select
-            v-model="selectedlink"
-            class="form-select"
-            @change="openLink(selectedlink)"
-          >
-            <option
-              v-for="l in links"
-              :key="l"
-              :value="l.url"
-            >
-              {{ l.name }} - {{ l.url }}
-            </option>
-          </select>
-        </template>
-      </va-item>
-      <va-item
-        v-show="images.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.images') }}
-        </template>
-        <template #content>
-          <select
-            v-model="selectedimage"
-            class="form-select"
-            @change="openLink(selectedimage)"
-          >
-            <option
-              v-for="i in images"
-              :key="i"
-              :value="i.url"
-            >
-              {{ i.name }} - {{ i.url }}
-            </option>
-          </select>
-        </template>
-      </va-item>
-      <va-item
-        v-show="bgimages.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.bgimages') }}
-        </template>
-        <template #content>
-          <select
-            v-model="selectedbgimage"
-            class="form-select"
-            @change="openLink(selectedbgimage)"
-          >
-            <option
-              v-for="i in bgimages"
-              :key="i"
-              :value="i.url"
-            >
-              {{ i.name }} - {{ i.url }}
-            </option>
-          </select>
-        </template>
-      </va-item><va-item
-        v-show="comments.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.comms') }}
-        </template>
-        <template #content>
-          <div v-html="comments" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="whites.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.white') }}
-        </template>
-        <template #content>
-          <div v-html="whites" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="sizes.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.size') }}
-        </template>
-        <template #content>
-          <div v-html="sizes" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="strongs.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.strong') }}
-        </template>
-        <template #content>
-          <div v-html="strongs" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="bolds.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.bold') }}
-        </template>
-        <template #content>
-          <div v-html="bolds" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="italics.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.ital') }}
-        </template>
-        <template #content>
-          <div v-html="italics" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="sups.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.sup') }}
-        </template>
-        <template #content>
-          <div v-html="sups" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="subs.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.sub') }}
-        </template>
-        <template #content>
-          <div v-html="subs" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="dels.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.del') }}
-        </template>
-        <template #content>
-          <div v-html="dels" />
-        </template>
-      </va-item>
-      <va-item
-        v-show="ems.length>0"
-        :showitem="showitem"
-        :hidebutton="hidebutton"
-      >
-        <template #header>
-          {{ $t('htmlparser.em') }}
-        </template>
-        <template #content>
-          <div v-html="ems" />
-        </template>
-      </va-item>
+
+    <!-- Results Column -->
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <h4 class="mb-2 mt-2">{{ scanresult }}</h4>
+
+        <!-- Universal Result Loop -->
+        <div 
+          v-for="section in allSections" 
+          :key="section.id" 
+          v-show="section.items.length > 0"
+          class="result-section mb-4"
+        >
+          <h6 class="fw-bold border-bottom pb-1 text-uppercase" style="font-size: 0.85rem; color: var(--primary-color);">
+            {{ section.title }}
+          </h6>
+          <ul class="ms-3 mt-2">
+            <li v-for="(item, idx) in section.items" :key="idx" class="mb-1">
+              <!-- If it's a link-type section (Links or Images) -->
+              <span v-if="section.isLink">
+                <a :href="item.url" target="_blank" rel="noopener" class="result-link">
+                  {{ item.name }} 
+                  <span class="url-text">({{ item.url }})</span>
+                </a>
+              </span>
+              <!-- If it's just plain text (Comments, Formats, etc) -->
+              <span v-else>{{ item }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <p v-if="scanresult && allSections.every(s => s.items.length === 0)" class="text-muted">
+          No interesting elements found.
+        </p>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-import VaItem from '@/components/generic/VaItem.vue'
+defineOptions({ name: 'HtmlParser' })
+const { t } = useI18n()
 
-export default {
-  name: 'HtmlParser',
+// --- State ---
+const gchtml = ref("")
+const scanresult = ref("")
+const errormsg = ref("")
+const cacheNode = ref(null)
 
-  components: {
-    VaItem,
-  },
+// Data Containers
+const links = ref([])
+const images = ref([])
+const bgimages = ref([])
+const comments = ref([])
+const whites = ref([])
+const sizes = ref([])
+const strongs = ref([])
+const bolds = ref([])
+const italics = ref([])
+const sups = ref([])
+const subs = ref([])
+const dels = ref([])
+const ems = ref([])
 
-  data: function () {
-    return {
-      gchtml: "",
-      scanresult: "",
-      errormsg: "",
-      cacheNode: null,
-      images: [],
-      selectedimage: "",
-      bgimages: [],
-      selectedbgimage: "",
-      links: [],
-      selectedlink: "",
-      comments: "",
-      strongs: "",
-      whites: "",
-      sizes: "",
-      bolds: "",
-      italics: "",
-      sups: "",
-      subs: "",
-      dels: "",
-      ems: "",
-      showitem: true,
-      hidebutton: true
-    }
-  },
+const gchtmlInput = ref(null)
+onMounted(() => { gchtmlInput.value?.focus() })
 
-  mounted: function() {
-    this.$refs.gchtml.focus();
-  },
+// --- Unified Computed Property ---
+const allSections = computed(() => [
+  // Link types (expect items to be { name, url })
+  { id: 'links', title: t('htmlparser.links'), items: links.value, isLink: true },
+  { id: 'images', title: t('htmlparser.images'), items: images.value, isLink: true },
+  { id: 'bgimages', title: t('htmlparser.bgimages'), items: bgimages.value, isLink: true },
+  
+  // Text types (expect items to be strings)
+  { id: 'comms', title: t('htmlparser.comms'), items: comments.value },
+  { id: 'white', title: t('htmlparser.white'), items: whites.value },
+  { id: 'size', title: t('htmlparser.size'), items: sizes.value },
+  { id: 'strong', title: t('htmlparser.strong'), items: strongs.value },
+  { id: 'bold', title: t('htmlparser.bold'), items: bolds.value },
+  { id: 'ital', title: t('htmlparser.ital'), items: italics.value },
+  { id: 'sup', title: t('htmlparser.sup'), items: sups.value },
+  { id: 'sub', title: t('htmlparser.sub'), items: subs.value },
+  { id: 'del', title: t('htmlparser.del'), items: dels.value },
+  { id: 'em', title: t('htmlparser.em'), items: ems.value },
+])
 
-  methods: {
-
-    // Open a selected link from the dropdown with links
-    openLink: function (link) {
-      window.open(link);
-    },
-
-    // Get all the nodes with a certain tag return a string
-    listTags: function (tag) {
-      let nodes = this.cacheNode.getElementsByTagName(tag);
-      let tags ="";
-      for (let node of nodes) {
-        tags += node.textContent + " ";
-      }
-      return tags;
-    },
-
-    // Scan the HTML
-    scanHTML: function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
-      this.scanresult = "";
-
-      // Clear previous scan
-      this.images = [];
-      this.bgimages = [];
-      this.links = [];
-      this.comments = "";
-      this.strongs = "";
-      this.whites = "";
-      this.sizes = "";
-      this.bolds = "";
-      this.italics = "";
-      this.sups = "";
-      this.subs = "";
-      this.dels = "";
-
-      try {
-        // Scan the XML
-        let parser = new DOMParser();
-        let xmlTree = parser.parseFromString(this.gchtml,"text/html");
-
-        // First find the div with id cachedetails
-        this.cacheNode = xmlTree.getElementById("ctl00_ContentBody_LongDescription");
-
-        // Check if cacheNode exists
-        if (!this.cacheNode) {
-          this.errormsg = this.$t("htmlparser.nocache");
-          return;
-        }
-
-        // Find the links
-        let nodes = this.cacheNode.getElementsByTagName("a");
-        for (let node of nodes) {
-          this.links.push({ name: node.textContent, url: node.getAttribute("href") });
-        }
-
-        // Find the links in maps
-        nodes = this.cacheNode.getElementsByTagName("area");
-        for (let node of nodes) {
-          this.links.push({ name: "Link mapped in image", url: node.getAttribute("href") });
-        }
-
-        // Find the images
-        nodes = this.cacheNode.getElementsByTagName("img");
-        for (let node of nodes) {
-          this.images.push({ name: node.getAttribute("alt") + " - " + node.getAttribute("title"), url: node.getAttribute("src") });
-        }
-
-        // Find background image of body
-        nodes = xmlTree.getElementsByTagName("body");
-        for (let node of nodes) {
-          // Parse url using regex
-          let url = node.getAttribute('background');
-          if (url) {
-            this.bgimages.push({ name : "Background image", url });
-          }
-        }
-
-        // Find bgimages in styles
-        let x = xmlTree.evaluate(
-          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'background-image')]", xmlTree, null, XPathResult.ANY_TYPE, null);
-        let bgimage = x.iterateNext();
-        while (bgimage) {
-          // Parse url using regex
-          let url = bgimage.getAttribute('style').match(/background-image[:\s]*url\s*\(\s*['|"]*(\S*)['|"]\s*\)/);
-          this.bgimages.push({ name: bgimage.textContent, url: url[1] });
-          bgimage = x.iterateNext();
-        }
-
-        // Find background image in body tag
-        // let body = xmlTree.evaluate("//body", xmlTree, null, XPathResult.ANY_TYPE, null);
-        // if (body.size != 1) throw ("There should be exactly 1 body tag not " + body.size);
-        // let bgbody = body.getAttribute('background');
-        
-        // Find the comments using XPath
-        x = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null);
-        let comment = x.iterateNext();
-        while (comment) {
-          this.comments += comment.textContent + "<br>";
-          comment = x.iterateNext();
-        }
-
-        // Find white text using XPath matches style and font white and font FFFFFF
-        x = xmlTree.evaluate(
-          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='white'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#FFFFFF'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='#ffffff'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//font[@color='rgb(255, 255, 255)'] | " +
-          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#ffffff') or contains(@style,'color:#FFFFFF') or contains(@style,'color:rgb(255, 255, 255)')]", xmlTree, null, XPathResult.ANY_TYPE, null);
-        let white = x.iterateNext();
-        while (white) {
-          this.whites += white.textContent + "<br>";
-          white = x.iterateNext();
-        }
-
-        // Find different sized text using XPath 
-        x = xmlTree.evaluate(
-          "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'font-size')]", xmlTree, null, XPathResult.ANY_TYPE, null);
-        let size = x.iterateNext();
-        while (size) {
-          this.sizes += size.textContent + "<br>";
-          size = x.iterateNext();
-        }
-
-        // Find strong printed letters
-        this.strongs = this.listTags("strong");
-        // Find bold printed letters
-        this.bolds = this.listTags("b");
-        // Find italic letters
-        this.italics = this.listTags("i");
-        // Find superscript letters
-        this.sups = this.listTags("sup");
-        // Find subscript letters
-        this.subs = this.listTags("sub");
-        // Find deleted letters
-        this.dels = this.listTags("del");
-        // Find emphasized letters
-        this.dels = this.listTags("em");
-
-        // Display scan completed messages
-        this.scanresult = this.$t('htmlparser.complete');
-
-      } catch (e) {
-
-        this.errormsg = this.$t('htmlparser.error');
-        console.log(e);
-
-      }
-    },
-  },
+// --- Helper for formatting tags ---
+const listTags = (tag) => {
+  if (!cacheNode.value) return []
+  const nodes = cacheNode.value.getElementsByTagName(tag)
+  return Array.from(nodes)
+    .map(node => node.textContent.trim())
+    .filter(text => text !== "")
 }
 
+const scanHTML = () => {
+  // Reset all
+  errormsg.value = ""
+  scanresult.value = ""
+  links.value = []
+  images.value = []
+  bgimages.value = []
+  comments.value = []
+  whites.value = []
+  sizes.value = []
+  
+  try {
+    const parser = new DOMParser()
+    const xmlTree = parser.parseFromString(gchtml.value, "text/html")
+    const targetNode = xmlTree.getElementById("ctl00_ContentBody_LongDescription")
+    cacheNode.value = targetNode
+
+    if (!targetNode) {
+      errormsg.value = t("htmlparser.nocache")
+      return
+    }
+
+    // 1. Links
+    const aNodes = targetNode.getElementsByTagName("a")
+    for (const node of aNodes) {
+      links.value.push({ name: node.textContent.trim() || "Link", url: node.getAttribute("href") })
+    }
+    const areaNodes = targetNode.getElementsByTagName("area")
+    for (const node of areaNodes) {
+      links.value.push({ name: "Image Map Link", url: node.getAttribute("href") })
+    }
+
+    // 2. Images
+    const imgNodes = targetNode.getElementsByTagName("img")
+    for (const node of imgNodes) {
+      images.value.push({
+        name: (node.getAttribute("alt") || "No Alt Text"),
+        url: node.getAttribute("src")
+      })
+    }
+
+    // 3. Background images
+    const bodyNodes = xmlTree.getElementsByTagName("body")
+    for (const node of bodyNodes) {
+      const url = node.getAttribute('background')
+      if (url) bgimages.value.push({ name: "Body Background Attribute", url })
+    }
+
+    const bgXPath = xmlTree.evaluate(
+      "//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'background-image')]",
+      xmlTree, null, XPathResult.ANY_TYPE, null
+    )
+    let bgimageNode = bgXPath.iterateNext()
+    while (bgimageNode) {
+      const style = bgimageNode.getAttribute('style')
+      const urlMatch = style.match(/background-image[:\s]*url\s*\(\s*['|"]*(\S*)['|"]\s*\)/)
+      if (urlMatch) {
+        bgimages.value.push({ name: "CSS Style Background", url: urlMatch[1] })
+      }
+      bgimageNode = bgXPath.iterateNext()
+    }
+
+    // 4. Comments, White Text, Size Text (Strings)
+    const commentXPath = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//comment()", xmlTree, null, XPathResult.ANY_TYPE, null)
+    let cNode = commentXPath.iterateNext();
+    while (cNode) { if(cNode.textContent.trim()) comments.value.push(cNode.textContent.trim()); cNode = commentXPath.iterateNext(); }
+
+    const whiteXPath = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//font[@color='white'] | //span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'color:white') or contains(@style,'color:#ffffff')]", xmlTree, null, XPathResult.ANY_TYPE, null)
+    let wNode = whiteXPath.iterateNext();
+    while (wNode) { if(wNode.textContent.trim()) whites.value.push(wNode.textContent.trim()); wNode = whiteXPath.iterateNext(); }
+
+    const sizeXPath = xmlTree.evaluate("//span[@id='ctl00_ContentBody_LongDescription']//*[contains(@style,'font-size')]", xmlTree, null, XPathResult.ANY_TYPE, null)
+    let sNode = sizeXPath.iterateNext();
+    while (sNode) { if(sNode.textContent.trim()) sizes.value.push(sNode.textContent.trim()); sNode = sizeXPath.iterateNext(); }
+
+    // 5. Formatting tags
+    strongs.value = listTags("strong")
+    bolds.value = listTags("b")
+    italics.value = listTags("i")
+    sups.value = listTags("sup")
+    subs.value = listTags("sub")
+    dels.value = listTags("del")
+    ems.value = listTags("em")
+
+    scanresult.value = t('htmlparser.complete')
+  } catch (e) {
+    errormsg.value = t('htmlparser.error')
+    console.error(e)
+  }
+}
 </script>
 
 <style scoped>
+
+h6 {
+  margin-bottom: 0.2rem;
+}
+
+.result-section ul {
+  list-style-type: square;
+  word-break: break-all;
+  margin-top: 0.5rem;
+}
+.result-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+.result-link:hover {
+  text-decoration: underline;
+}
+.url-text {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-weight: normal;
+  margin-left: 4px;
+}
 </style>

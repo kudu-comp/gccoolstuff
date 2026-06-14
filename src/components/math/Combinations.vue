@@ -1,240 +1,252 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('combinations.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('combinations.long')"
-      />
-      <!-- Form fields -->
-      <div class="row">
-        <label for="cnt" class="form-label md-size mb-2">{{$t('combinations.cnt')}}</label>
-        <input type="number" min="0" v-model="cnt" id="cnt" ref="cnt" class="form-control md-size mb-2"/>
-      </div>
-      <div class="row">
-        <label for="size" class="form-label md-size mb-2">{{$t('combinations.size')}}</label>
-        <input type="number" min="0" v-model="size" id="size" class="form-control md-size mb-2"/>
-      </div>
-      <div class="form-check">
-        <input
-          id="rpt"
-          v-model="rpt"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="rpt"
-          class="form-check-label mb-2"
-        >{{ $t('combinations.rpt') }}</label>
-      </div>
-      <!-- Selection dropdown -->
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="sel"
-        >{{ $t('combinations.sel') }}</label>    
-        <select
-          id="sel"
+
+  <header class="page-header">
+    <h1>{{ $t('combinations.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('combinations.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('combinations.cnt') }}</label>
+          <input type="number" min="0" v-model="cnt" ref="cntInput">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('combinations.size') }}</label>
+          <input type="number" min="0" v-model="size">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="rpt">
+          <span class="checkmark"></span>
+          {{ $t('combinations.rpt') }}
+        </label>
+        <CustomDropdown 
+          :options="options" 
           v-model="sel"
-          class="form-select mb-2 md-size"
+          :title="$t('combinations.sel')"
           @change="doAction()"
-        >
-          <option value="0">{{ $t('combinations.cntcomb') }}</option>
-          <option value="1">{{ $t('combinations.cntperm') }}</option>
-          <option value="2">{{ $t('combinations.gencomb') }}</option>
-          <option value="3">{{ $t('combinations.genperm') }}</option>
-        </select>
-      </div>
-      <div class="row" v-show="sel === '2' || sel === '3'">
-        <label for="set" class="form-label md-size mb-2">{{ $t('combinations.set') }}</label>
-        <select 
-          id="set" 
-          v-model="set" 
-          class="form-control lg-size mb-2"
+        ></CustomDropdown>
+        <CustomDropdown 
+          v-if="sel === '2' || sel === '3'"
+          :options="sets" 
+          v-model="set"
+          :title="$t('combinations.set')"
           @change="doAction()"
+        ></CustomDropdown>
+        <div class="form-horizontal mt-2" v-if="set === '2' && (sel === '2' || sel === '3')">
+          <label >{{ $t('combinations.list') }}</label>
+          <input type="text" v-model="txt"/>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-          <option value="0">{{ $t('combinations.set1') }}</option>
-          <option value="1">{{ $t('combinations.set2') }}</option>
-          <option value="2">{{ $t('combinations.set3') }}</option>
-        </select>
-      </div>
-      <div class="row" v-if="set === '2' && (sel === '2' || sel === '3')">
-        <label for="txt" class="form-label lg-2 md-size">{{ $t('combinations.list') }}</label>
-        <input
-          id="txt"
-          class="form-control mb-2 lg-size"
-          type="text"
-          v-model="txt"
-        />
-      </div>
-      <!-- Action buttons -->
-      <button class="btn mb-2" id="btn1" @click="doAction()">{{$t('buttons.show')}}</button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" v-html="result" />
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button id="convert" class="btn btn-primary"  @click="doAction">
+            {{ $t('buttons.show') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">     
+        <div v-if="result" class="card resultbox" v-html="result" />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: "Combinations"
+})
 
-  name: "Combinations",
+const { t } = useI18n()
 
-  data() {
-    return {
-      sel: "0",
-      cnt: 2,
-      size: 4,
-      rpt: false,
-      set: "0",
-      txt: "Purple,Indigo,Blue,Green,Yellow,Orange,Red",
-      result: "",
-      errormsg: "",
-      list: [],
-    };
-  },
+// --- State ---
+const sel = ref("0")
+const cnt = ref(2)
+const size = ref(4)
+const rpt = ref(false)
+const set = ref("0")
+const txt = ref("Purple,Indigo,Blue,Green,Yellow,Orange,Red")
+const result = ref("")
+const errormsg = ref("")
+const list = ref([])
 
-  mounted: function() {
-    this.$refs.cnt.focus();
-  },
-  
-  methods: {
+// Dropdown Options
+const options = [
+  { value: "0", label: t('combinations.cntcomb') },
+  { value: "1", label: t('combinations.cntperm') },
+  { value: "2", label: t('combinations.gencomb') },
+  { value: "3", label: t('combinations.genperm') },
+]
 
-    fact: function (n) {
-      let cnt = 1;
-      for (let i = 2; i <= n; i++) cnt *= i;
-      return cnt;
-    },
+const sets = [
+  { value: "0", label: t('combinations.set1') },
+  { value: "1", label: t('combinations.set2') },
+  { value: "2", label: t('combinations.set3') },
+]
 
-    nextCombi: function (a, comb) {
-      if (a.length === this.cnt) {
-        // We've enough elements selected, so print
-        this.result += "<br>(";
-        for (let i = 0; i < a.length; i++) {
-          switch (this.set) {
-            case "0":
-              this.result += a[i];
-              break;
-            case "1":
-              this.result += "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[a[i] - 1];
-              break;
-            case "2":
-              this.result += this.list[a[i]-1];
-              break;
-            default:
-              this.result += "-";
-          }
-          this.result += ",";
-        }
-        this.result = this.result.slice(0, -1) + ")";
-      } else {
-        // More elements are needed, so loop over next choices
-        // For combinations start at latest number used, for permuations start at 1
-        let start = comb ? a[a.length - 1] : 1;
-        // For combinations withoutreplacements allow start at next
-        if (comb && !this.rpt) start++;
-        for (let i = start; i <= this.size; i++) {
-          // For permutations without replacements skip i if already used
-          if (!comb && !this.rpt && a.indexOf(i) >= 0) continue;
-          a.push(i);
-          this.nextCombi(a, comb);
-          a.pop();
-        }
-      }
-    },
+// --- Template Refs ---
+const cntInput = ref(null)
 
-    doAction: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      let cnt = 0;
-      let max = 10000;
-      if (this.set === "2") {
-        this.list = this.txt.split(",");
-        if (this.list.length < this.size) {
-          this.errormsg = this.$t("combinations.notenoughitems");
-          return;
-        }
-      }
+onMounted(() => {
+  cntInput.value?.focus()
+})
 
-      // Count and generate combinations or permutations
-      switch (this.sel) {
+// --- Math Helpers ---
+
+const fact = (n) => {
+  if (n < 0) return NaN
+  let val = 1
+  for (let i = 2; i <= n; i++) val *= i
+  return val
+}
+
+/**
+ * Recursive generation function
+ * @param {Array} a - current working set of elements
+ * @param {Boolean} isComb - true for combinations, false for permutations
+ */
+const nextCombi = (a, isComb) => {
+  if (a.length === cnt.value) {
+    // Base Case: Enough elements selected
+    result.value += "<br>("
+    for (let i = 0; i < a.length; i++) {
+      switch (set.value) {
         case "0":
-        case "2":
-          // Count combinations
-          if (this.rpt) {
-            cnt =
-              this.fact(this.size - 1 + this.cnt) /
-              (this.fact(this.cnt) * this.fact(this.size - 1));
-          } else {
-            if (this.size < this.cnt) {
-              cnt = 0;
-            } else {
-              cnt =
-                this.fact(this.size) /
-                (this.fact(this.cnt) * this.fact(this.size - this.cnt));
-            }
-          }
-          if (isNaN(cnt)) {
-            this.errormsg = this.$t("combinations.toomany");
-            return;
-          }
-          this.result = this.$t("combinations.numcomb") + cnt.toFixed(0) + "<br>";
-          if (this.sel === "0") return;
-          if (cnt > max) {
-            this.errormsg = this.$t("combinations.max") + max;
-            return;
-          }
-          for (let i = 1; i <= this.size; i++) {
-            this.nextCombi([i], true);
-          }
-          break;
+          result.value += a[i]
+          break
         case "1":
-        case "3":
-          // Count permutations
-          if (this.rpt) {
-            cnt = this.size ** this.cnt;
-          } else {
-            if (this.size < this.cnt) {
-              cnt = 0;
-            } else {
-              cnt = this.fact(this.size) / this.fact(this.size - this.cnt);
-            }
-          }
-          if (isNaN(cnt)) {
-            this.errormsg = this.$t("combinations.toomany");
-            return;
-          }
-          this.result = this.$t("combinations.numperm") + cnt.toFixed(0) + "<br>";
-          if (this.sel === "1") return;
-          if (cnt > max) {
-            this.errormsg = this.$t("combinations.max") + max;
-            return;
-          }
-          for (let i = 1; i <= this.size; i++) {
-            this.nextCombi([i], false);
-          }
-          break;
+          result.value += "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"[a[i] - 1]
+          break
+        case "2":
+          result.value += list.value[a[i] - 1]
+          break
         default:
+          result.value += "-"
       }
-    },
+      result.value += ","
+    }
+    result.value = result.value.slice(0, -1) + ")"
+  } else {
+    // Recursive Case
+    let start = isComb ? a[a.length - 1] : 1
+    
+    // For combinations without replacements, start at next index
+    if (isComb && !rpt.value) start++
 
-  },
-};
+    for (let i = start; i <= size.value; i++) {
+      // For permutations without replacements, skip if already used
+      if (!isComb && !rpt.value && a.indexOf(i) >= 0) continue
+      
+      a.push(i)
+      nextCombi(a, isComb)
+      a.pop()
+    }
+  }
+}
 
+// --- Main Action ---
+
+const doAction = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
+  let totalCount = 0
+  const maxLimit = 10000
+
+  // Prepare custom list if needed
+  if (set.value === "2") {
+    list.value = txt.value.split(",").map(s => s.trim())
+    if (list.value.length < size.value) {
+      errormsg.value = t("combinations.notenoughitems")
+      return
+    }
+  }
+
+  const k = cnt.value
+  const n = size.value
+
+  // Logic flow
+  switch (sel.value) {
+    case "0":
+    case "2":
+      // Combinations (nCr)
+      if (rpt.value) {
+        totalCount = fact(n - 1 + k) / (fact(k) * fact(n - 1))
+      } else {
+        if (n < k) {
+          totalCount = 0
+        } else {
+          totalCount = fact(n) / (fact(k) * fact(n - k))
+        }
+      }
+
+      if (isNaN(totalCount)) {
+        errormsg.value = t("combinations.toomany")
+        return
+      }
+
+      result.value = t("combinations.numcomb") + totalCount.toFixed(0) + "<br>"
+      
+      if (sel.value === "0") return // Count only
+      
+      if (totalCount > maxLimit) {
+        errormsg.value = t("combinations.max") + maxLimit
+        return
+      }
+
+      // Generate
+      for (let i = 1; i <= n; i++) {
+        nextCombi([i], true)
+      }
+      break
+
+    case "1":
+    case "3":
+      // Permutations (nPr)
+      if (rpt.value) {
+        totalCount = Math.pow(n, k)
+      } else {
+        if (n < k) {
+          totalCount = 0
+        } else {
+          totalCount = fact(n) / fact(n - k)
+        }
+      }
+
+      if (isNaN(totalCount)) {
+        errormsg.value = t("combinations.toomany")
+        return
+      }
+
+      result.value = t("combinations.numperm") + totalCount.toFixed(0) + "<br>"
+      
+      if (sel.value === "1") return // Count only
+      
+      if (totalCount > maxLimit) {
+        errormsg.value = t("combinations.max") + maxLimit
+        return
+      }
+
+      // Generate
+      for (let i = 1; i <= n; i++) {
+        nextCombi([i], false)
+      }
+      break
+  }
+}
 </script>
 
 <style scoped>

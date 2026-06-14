@@ -1,208 +1,188 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('convert.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card mb-2"
-        v-html="$t('convert.long')"
-      />
-      <div class="card">
-        <div class="flex-row d-flex mb-2">
-          <div class="card col-6 me-2">
-            <label
-              class="form-label sm-size"
-              for="from"
-            >{{ $t('labels.from') }}</label>
-            <v-datums
-              id="from"
-              v-model:datum="from"
-              class="md-size mb-2"
-            />
-            <button
-              id="convert"
-              class="btn md-size"
-              @click="convertCoordinates"
-            >
-              {{ $t('buttons.convert') }}
-            </button>
-            <textarea
-              id="coordfrom"
-              ref="coordfrom"
-              v-model="coordfrom"
-              class="form-control mt-2"
-              :placeholder="$t('convert.phfrom')"
-              rows="5"
-              cols="20"
-            />
-          </div>
-          <div class="card col-6">
-            <label
-              class="form-label sm-size"
-              for="to"
-            >{{ $t('labels.to') }}</label>
-            <v-datums
-              id="to"
-              v-model:datum="to"
-              @change="convertCoordinates"
-              class="md-size mb-2"
-            />
-            <v-wgsformat
-              id="wgsformat"
-              v-model:format="wgsformat"
-              @change="convertCoordinates"
-            />
-            <textarea
-              id="result"
-              v-model="result"
-              class="form-control mt-2"
-              :placeholder="$t('convert.phto')"
-              rows="5"
-              cols="20"
-            />
-          </div>
-        </div>
-        <div class="card" v-if="to == 'Proj4js' || from == 'Proj4js'">
-          <div v-html="$t('convert.proj4jsmsg')" />
+
+  <header class="page-header">
+    <h1>{{ $t('convert.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('convert.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
           <label
-            class="form-label"
-            for="proj4jsdef"
-          >{{ $t('convert.proj4jslabel') }}</label>
-          <input
-            id="proj4jsdef"
-            v-model="proj4jsdef"
-            type="text"
-            size="80"
-            class="form-control ms-2"
-          >
+          >{{ $t('labels.from') }}</label>
+          <v-datums
+            id="from"
+            v-model:datum="from"
+          />
         </div>
-      </div>
-      <div
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </div>
-      <v-map v-model:mylocation="coordfrom" />
+        <div class="form-horizontal">
+          <label
+          >{{ $t('labels.to') }}</label>
+          <v-datums
+            id="to"
+            v-model:datum="to"
+          />
+        </div>
+        <div class="form-horizontal">
+          <v-wgsformat
+            id="wgsformat"
+            v-model:format="wgsformat"
+          />
+          <div v-if="to == 'Proj4js' || from == 'Proj4js'">
+            <div v-html="$t('convert.proj4jsmsg')" />
+            <label
+              for="proj4jsdef"
+            >{{ $t('convert.proj4jslabel') }}</label>
+            <input
+              id="proj4jsdef"
+              v-model="proj4jsdef"
+              type="text"
+            >
+          </div>
+        </div>
+        <div class="button-row">
+          <button id="convert" class="btn btn-primary"  @click="convertCoordinates">
+            {{ $t('buttons.convert') }}
+          </button>
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <textarea
+          id="coordfrom"
+          ref="coordFromInput"
+          v-model="coordfrom"
+          :placeholder="$t('convert.phfrom')"
+          rows="5"
+          @input="wordValue"
+        />
+        <div
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}.
+      </div>          
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          v-html="result"
+          class="card resultbox"
+        >
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.map')">
+        <v-map v-model:mylocation="coordfrom" />     
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-import * as coords from '@/scripts/coords.js';
-import VDatums from '@/components/generic/VDatums.vue';
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+import * as coords from '@/scripts/coords.js'
+import VDatums from '@/components/generic/VDatums.vue'
+import VCard from '@/components/generic/VCard.vue'
 import VWgsformat from '@/components/generic/VWgsformat.vue'
 import VMap from '@/components/generic/VMap.vue'
 
-export default {
-  name: 'Convert',
+defineOptions({
+  name: 'Convert'
+})
 
-  components: {
-    VDatums,
-    VWgsformat,
-    VMap,
-  },
+// --- Setup Hooks ---
+const store = useStore()
+const { t } = useI18n()
 
-  data: function() {
-    return {
-      errormsg: "",
-      coordfrom : "",
-      to: "WGS84",
-      from: "WGS84",
-      result: "",
-      proj4jsdef: "",
-      count : 0,
-      wgsformat : "N52 12.345 E4 12.345"
-    }
-  },
+// --- Reactive State ---
+const errormsg = ref("")
+const coordfrom = ref("")
+const to = ref("WGS84")
+const from = ref("WGS84")
+const result = ref("")
+const proj4jsdef = ref("")
+const count = ref(0)
+const wgsformat = ref("N52 12.345 E4 12.345")
 
-  mounted: function() {
-    this.$refs.coordfrom.focus();
-  },
+// --- Template Ref ---
+const coordFromInput = ref(null)
 
-  methods: {
+watch([wgsformat, to], () => {
+  convertCoordinates()
+})
 
-    // Convert the coordinates
-    convertCoordinates: function() {
+onMounted(() => {
+  coordFromInput.value?.focus()
+})
 
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-    
-      // No input
-      if (this.coordfrom == null) { this.errormsg = this.$t('errors.nocoords'); return; }
-      if (this.coordfrom == "") { this.errormsg = this.$t('errors.nocoords'); return; }
+// --- Methods ---
 
-      // Convert coordinate to what3words no longer supported in free API plan
-      if (this.to === "W3W") {
-        this.result = "No longer supported\nfree of charge\nby what3words.com.";
-        return;
-      }
+const convertCoordinates = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
 
-      // Get all the lines form input and convert them one by one
-      let input = this.coordfrom.match(/[^\r\n]+/g);
+  // No input validation
+  if (!coordfrom.value || coordfrom.value.trim() === "") {
+    errormsg.value = t('errors.nocoords')
+    return
+  }
 
-      // Clear map of markers
-      // this.mymap.eachLayer((layer) => {
-      //     layer.remove();
-      // });
+  // Special case: W3W
+  if (to.value === "W3W") {
+    result.value = "No longer supported\nfree of charge\nby what3words.com."
+    return
+  }
 
-      // Parse input line by line
-      this.count = 0;
-      let promises = [];
+  // Parse lines from input
+  const inputLines = coordfrom.value.match(/[^\r\n]+/g) || []
+  count.value = 0
 
-      try {
+  try {
+    // 1. Logic for text output conversion
+    const conversionPromises = inputLines.map(line => 
+      coords.convertCoordFromText(line, from.value, to.value, proj4jsdef.value)
+    )
 
-        // Convert each coordinate
-        // Create a promise for each coordinaat
-        for (let i = 0; i < input.length; i++)
-          promises.push (coords.convertCoordFromText(input[i], this.from, this.to, this.proj4jsdef));
+    Promise.all(conversionPromises)
+      .then(convcoords => {
+        let outputBuilder = ""
+        for (const c of convcoords) {
+          outputBuilder += coords.getTextFromCoord(c, to.value, 7, wgsformat.value) + "<br>"
+        }
+        result.value = outputBuilder
+      })
+      .catch(e => {
+        errormsg.value = t('errors.incorrectcoords')
+        console.error("Conversion Error:", e)
+      })
 
-        // If all promises are resolved write output
-        Promise.all (promises)
-          .then( convcoords => {
+    // 2. Logic for map marker generation (Always to WGS84)
+    const mapPromises = inputLines.map(line => 
+      coords.convertCoordFromText(line, from.value, 'WGS84', proj4jsdef.value)
+    )
 
-            // Add the converted coordinate to output
-            for (let c of convcoords)
-              this.result += coords.getTextFromCoord(c, this.to, 7, this.wgsformat) + "\n";
+    Promise.all(mapPromises)
+      .then(mapcoords => {
+        const mymap = store.state.mymap
+        for (const m of mapcoords) {
+          count.value++
+          coords.displayMarker(mymap, m, t('labels.point') + " " + count.value)
+        }
+      })
+      .catch(e => {
+        errormsg.value = t('errors.incorrectcoords')
+        console.error("Map Marker Error:", e)
+      })
 
-          })
-          .catch ( (e) => {
-
-            this.errormsg = this.$t('errors.incorrectcoords');
-            console.log(e);
-
-          });
-
-        // Create promises to generate coordinates for markers
-        promises = [];
-        for (let i = 0; i < input.length; i++)
-          promises.push (coords.convertCoordFromText(input[i], this.from, 'WGS84', this.proj4jsdef));
-
-        // If all promises are resolved display markers
-        Promise.all(promises)
-          .then ( mapcoords => {
-
-            for (let m of mapcoords)
-              coords.displayMarker(this.$store.state.mymap, m, this.$t('labels.point') + ++this.count);
-
-          })
-          .catch ( (e) => {
-
-            this.errormsg = this.$t('errors.incorrectcoords');
-            console.log(e);
-
-          });
-
-      } catch(e) {
-
-        this.errormsg = this.$t('errors.incorrectcoords');
-        console.log(e);
-
-      }
-    },
-
-  },
+  } catch (e) {
+    errormsg.value = t('errors.incorrectcoords')
+    console.error("Unexpected Error:", e)
+  }
 }
 </script>

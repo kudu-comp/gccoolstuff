@@ -1,95 +1,44 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('fonts.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('fonts.long')"
-      />
+
+  <header class="page-header">
+    <h1>{{ $t('fonts.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('fonts.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-horizontal">
+        <CustomDropdown 
+          v-model="styleObject.fontFamily" 
+          :options="fontdef" 
+          :title="$t('fonts.selfont')"
+        />
+      </div>
+      <div class="form-horizontal">
+        <label>{{ $t('fonts.fontsize') }}</label>
+        <input type="text" v-model="styleObject.fontSize">
+      </div>
+      <div class="form-horizontal">
+        <label>{{ $t('fonts.selcolor') }}</label>
+        <input id="ofc" v-model="styleObject.color" type="color" class="mb-2 sm-size me-2"/>
+      </div>
+      <div class="form-horizontal">
+        <label>{{ $t('fonts.lineheight') }}</label>
+        <input type="number" v-model="styleObject.lineHeight">
+      </div>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <div class="row mb-2">
         <textarea
           id="message"
-          ref="message"
+          ref="messageRef"
           v-model="message"
-          class="form-control"
           :placeholder="$t('labels.message')"
           rows="5"
         />
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2 me-2"
-          for="ift"
-        >{{ $t('fonts.selfont') }}</label>
-        <select
-          id="ift"
-          v-model="styleObject.fontFamily"
-          class="form-select md-size mb-2 me-2"
-        >
-          <option
-            v-for="f in fontdef"
-            :key="f"
-            :value="f.id"
-          >
-            {{ f.font }}
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2 me-2"
-          for="ofs"
-        >{{ $t('fonts.fontsize') }}</label>
-        <select
-          id="ofs"
-          v-model="styleObject.fontSize"
-          class="form-select md-size mb-2 me-2"
-        >
-          <option value="12px">
-            12
-          </option>
-          <option value="24px">
-            24
-          </option>
-          <option value="48px">
-            48
-          </option>
-          <option value="72px">
-            72
-          </option>
-        </select>
-        <label
-          class="form-label sm-size mb-2 me-2"
-          for="ofc"
-        >{{ $t('fonts.selcolor') }}</label>
-        <input id="ofc" v-model="styleObject.color" type="color" class="mb-2 sm-size me-2"/>
-        <label
-          class="form-label sm-size mb-2 me-2"
-          for="olh"
-        >{{ $t('fonts.lineheight') }}</label>
-        <select
-          id="olh"
-          v-model="styleObject.lineHeight"
-          class="form-select md-size mb-2"
-        >
-          <option value="normal">
-            {{ $t('fonts.standard') }}
-          </option>
-          <option value="1">
-            1.0
-          </option>
-          <option value="1.2">
-            1.2
-          </option>
-          <option value="1.5">
-            1.5
-          </option>
-          <option value="2">
-            2.0
-          </option>
-        </select>
       </div>
       <p
         v-show="errormsg"
@@ -97,68 +46,78 @@
       >
         {{ errormsg }}
       </p>
-      <div class="row">
-        <textarea
-          readonly
-          id="message2"
-          v-model="message"
-          spellcheck="false"
-          class="form-control"
-          :style="styleObject"
-          rows="5"
-        />
-      </div>
-    </div>
+    </VCard>
+    <VCard :title="$t('labels.result')">
+      <textarea
+        readonly
+        v-model="message"
+        spellcheck="false"
+        :style="styleObject"
+        rows="5"
+      />
+    </VCard>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import { fontdefs } from '@/scripts/fontspecials.js'
+import VCard from '@/components/generic/VCard.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
-  name: 'FontSpecial',
+// Define Props
+const props = defineProps({
+  font: {
+    type: String,
+    required: false,
+    default: "atbash"
+  }
+})
 
-  // Prop cphr is parameter passed by route (optional)
-  props: {
-    font: {
-      type: String,
-      required: false,
-      default: "atbash"
-    },
-  },
+// Hooks
+const route = useRoute()
 
-  data: function () {
-    return {
-      message: "ABCDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n0123456789",
-      errormsg: "",
-      selectedfont: 'Antiker',
-      styleObject: {
-        fontFamily: 'Antiker',
-        fontSize: '24px',
-        color: 'black',
-        lineHeight: 'normal',
-        backgroundColor: '#ffffff',
-        borderColor: '#09776E',
-        borderWidth: '2px',
-        borderStyle: 'solid',
-        borderRadius: '5px'
-      },
-      fontdef: [{}]
-    }
-  },
+// --- State ---
+const message = ref("ABCDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n0123456789")
+const errormsg = ref("")
+const isDropdownOpen = ref(false)
+const fontdef = ref([])
 
-  mounted: function() {
-    this.fontdef = fontdefs;
-    this.$refs.message.focus();
-    if (this.$route.params.font) this.styleObject.fontFamily = this.$route.params.font
-  },
+// Style object for dynamic binding
+const styleObject = reactive({
+  fontFamily: 'Antiker',
+  fontSize: '24px',
+  color: 'black',
+  lineHeight: 1,
+  backgroundColor: '#ffffff',
+  borderColor: '#09776E',
+  borderWidth: '2px',
+  borderStyle: 'solid',
+  borderRadius: '5px'
+})
 
-  methods: {
+// Template Ref for focus
+const messageRef = ref(null)
 
-  },
+// --- Lifecycle ---
 
-}
+onMounted(() => {
+
+  fontdef.value = fontdefs.map ( f => ({ value: f.id, label: f.font}));
+  console.log(fontdef.value)
+  
+  // Focus the textarea
+  if (messageRef.value) {
+    messageRef.value.focus()
+  }
+
+  // Set initial font from route params if available
+  if (route.params.font) {
+    styleObject.fontFamily = route.params.font
+  }
+})
+
 </script>
 
 <style scoped>

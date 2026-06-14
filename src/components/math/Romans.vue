@@ -1,161 +1,169 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('romans.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('romans.long')"
-      />
-      <div class="form-row mb-2">
+
+  <header class="page-header">
+    <h1>{{ $t('romans.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('romans.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
         <textarea
-          id="message"
-          ref="input"
+          ref="inputRef"
           v-model="input"
-          class="form-control"
           :placeholder="$t('labels.number')"
           rows="1"
         />
-      </div>
-      <button
-        id="romantodec"
-        class="btn mb-2 me-2"
-        @click="romanToDec"
-      >
-        {{ $t('romans.btnrtd') }}
-      </button>
-      <button
-        id="dectoroman"
-        class="btn mb-2"
-        @click="decToRoman"
-      >
-        {{ $t('romans.btndtr') }}
-      </button>
-      <p
-        v-if="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}.
+        </p>
+        <div class="button-row mt-2">
+          <button id="convert" class="btn btn-primary"  @click="romanToDec">
+            {{ $t('romans.btnrtd') }}
+          </button>
+          <button id="convert" class="btn btn-primary"  @click="decToRoman">
+            {{ $t('romans.btndtr') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
+        >
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
+
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'MathRomans',
+defineOptions({
+  name: 'MathRomans'
+})
 
-  data: function () {
-    return {
-      input: "",
-      result: "",
-      ints: [1000, 500, 100, 50, 10, 5, 1],
-      romans: ["M", "D", "C", "L", "X", "V", "I"]
+const { t } = useI18n()
+
+// --- Constants ---
+const INTS = [1000, 500, 100, 50, 10, 5, 1]
+const ROMANS = ["M", "D", "C", "L", "X", "V", "I"]
+
+// --- State ---
+const input = ref("")
+const result = ref("")
+const errormsg = ref("")
+
+// --- Template Ref ---
+const inputRef = ref(null)
+
+onMounted(() => {
+  inputRef.value?.focus()
+})
+
+// --- Methods ---
+
+// Convert text to numbers
+const romanToDec = () => {
+  errormsg.value = ""
+  result.value = ""
+
+  // Find all strings that look like Roman numerals
+  const matches = input.value.match(/[MDCLXVI]+/ig)
+
+  if (!matches) {
+    errormsg.value = t('romans.notroman')
+    return
+  }
+
+  let finalResult = ""
+
+  for (const romanStr of matches) {
+    let decimalValue = 0
+    const upperStr = romanStr.toUpperCase()
+
+    for (let i = 0; i < upperStr.length; i++) {
+      const char = upperStr[i]
+      const currentIdx = ROMANS.indexOf(char)
+      const prevIdx = i > 0 ? ROMANS.indexOf(upperStr[i - 1]) : -1
+
+      // If a previous numeral is smaller than the current one (e.g., IV)
+      // Subtract twice the previous value (because it was added once in the previous loop)
+      if (prevIdx > currentIdx) {
+        decimalValue += INTS[currentIdx] - 2 * INTS[prevIdx]
+      } else {
+        decimalValue += INTS[currentIdx]
+      }
     }
-  },  
+    finalResult += decimalValue + " "
+  }
   
-  mounted: function() {
-    this.$refs.input.focus();
-  },
+  result.value = finalResult.trim()
+}
 
-  methods: {
+// Convert numbers to text
+const decToRoman = () => {
+  result.value = ""
+  errormsg.value = ""
 
-    // Convert text to numbers
-    romanToDec : function () {
+  const matches = input.value.match(/[0-9]+/g)
 
-      // Reset
-      this.errormsg = "";
-      this.result = "";
+  if (!matches) {
+    errormsg.value = t('romans.invalidint')
+    return
+  }
 
-      // Convert input to array of roman numbers
-      let a = this.input.match(/[MDCLXVI]+/ig);
+  let finalResult = ""
 
-      // Check for empty input
-      if (a === null) {
-        this.errormsg = this.$t('romans.notroman');
-        return;
-      }
+  for (const numStr of matches) {
+    let val = parseInt(numStr)
+
+    // Standard Roman numerals only support 1-3999
+    if (val > 3999 || val < 1) {
+      errormsg.value = t('romans.invalidint')
+      continue
+    }
+
+    let romanBuilder = ""
+
+    // Iterate through units: 1000, 100, 10, 1 (indices 0, 2, 4, 6)
+    for (let i = 0; i < INTS.length; i += 2) {
+      let digitCount = Math.trunc(val / INTS[i])
       
-      for (const elem of a) {
+      if (digitCount === 0) continue
 
-        // Process letters one by one look backwards if needed
-        let h = 0;
-        for (let i=0; i < elem.length; i++) {
-          let c = elem[i].toUpperCase();
-          let i1 = this.romans.indexOf(c);
-          let i2 = i>0 ? this.romans.indexOf(elem[i-1].toUpperCase()) : -1;
-          if (i2 > i1) {
-            h += this.ints[i1] - 2*this.ints[i2];
-          } else {
-            h += this.ints[i1];
-          }
+      if (digitCount === 9) {
+        // Special case for 9 (e.g., IX, CM)
+        romanBuilder += ROMANS[i] + ROMANS[i - 2]
+      } else if (digitCount === 4) {
+        // Special case for 4 (e.g., IV, CD)
+        romanBuilder += ROMANS[i] + ROMANS[i - 1]
+      } else {
+        // Standard addition (e.g., VII, LXXX)
+        if (digitCount >= 5) {
+          romanBuilder += ROMANS[i - 1]
+          digitCount -= 5
         }
-        this.result += h + " ";
-
-      }
-
-    },
-
-    // Convert numbers to text
-    decToRoman : function() {
-
-      /// Reset interpreter
-      this.result = "";
-      this.errormsg = "";
-
-      // Convert input to array of numbers
-      let a = this.input.match(/[0-9]+/g);
-
-      // Check for empty or invalid input
-      if (a === null) {
-        this.errormsg = this.$t('romans.invalidint');
-        return;
-      }
-      
-      for (const elem of a) {
-
-        // Parse integer and check range
-        let h2 = parseInt(elem);
-
-        if (h2 > 3999 || h2 < 1) {
-          this.errormsg = this.$t('romans.invalidint');
-          continue;          
+        for (let j = 0; j < digitCount; j++) {
+          romanBuilder += ROMANS[i]
         }
-
-        // Process 1000, 100, 10, 1 loop
-        for (let i=0; i < this.ints.length; i+=2) {
-          let h1 = Math.trunc(h2 / this.ints[i]);
-          if (h1 == 0) continue;
-          if (h1 == 9) {
-            this.result += this.romans[i] + this.romans[i-2];
-          } else if (h1 == 4) {
-            this.result += this.romans[i] + this.romans[i-1];
-          } else {
-            if (h1 >= 5) {
-              this.result += this.romans[i-1];
-              h1 -= 5
-            }
-            for (let j=0; j < h1; j++) this.result += this.romans[i];
-          }
-          h2 %= this.ints[i];
-        }
-        this.result += " ";
-
       }
-      
-    },
+      val %= INTS[i]
+    }
+    finalResult += romanBuilder + " "
+  }
 
-  },
+  result.value = finalResult.trim()
 }
 </script>
-
-<style scoped>
-</style>

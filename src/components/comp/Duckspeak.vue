@@ -1,217 +1,208 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('duckspeak.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('duckspeak.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="selds"
-        >{{ $t('duckspeak.format') }} </label>
-        <select
-          id="selds"
-          v-model="selDS"
-          class="form-select mb-2 sm-size"
+
+  <header class="page-header">
+    <h1>{{ $t('duckspeak.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('duckspeak.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <CustomDropdown
+            :title="$t('duckspeak.format')"
+            :options="[
+              { value: '0', label: $t('duckspeak.ascii') },
+              { value: '1', label: $t('duckspeak.hex') },
+              { value: '2', label: $t('duckspeak.dec') }
+            ]"
+            v-model="selDS"
+          />
+        </div>
+        <div class="form-horizontal">
+          <textarea
+            ref="codeInput"
+            v-model="message"
+            :placeholder="$t('brainfuck.code')"
+            rows="5"
+          />
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-          <option value="0">
-            {{ $t('duckspeak.ascii') }}
-          </option>
-          <option value="1">
-            {{ $t('duckspeak.hex') }}
-          </option>
-          <option value="2">
-            {{ $t('duckspeak.dec') }}
-          </option>
-        </select>
-      </div>
-      <div class="mb-2">
-        <button id="enc" class="btn mb-2 me-2" @click="encode">
-          {{ $t('buttons.encode') }}
-        </button>
-        <button id="dec" class="btn mb-2" @click="decode">
-          {{ $t('buttons.decode') }}
-        </button>
-      </div>
-      <textarea
-        id="code"
-        ref="code"
-        v-model="message"
-        class="form-control"
-        :placeholder="$t('labels.message')"
-        rows="5"
-      />
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="encode">
+            {{ $t('buttons.encode') }}
+          </button>
+          <button class="btn btn-primary"  @click="decode">
+            {{ $t('buttons.decode') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
+        >
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: 'Duckspeak'
+});
 
-  name: 'Duckspeak',
+const { t } = useI18n();
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      selDS : "0",
-      errormsg: "",
-      commands: [
-        "Nak", "Nanak",
-        "Nananak", "Nanananak",
-        "Nak?", "nak?",
-        "Naknak", "Naknaknak",
-        "Nak.", "Naknak.",
-        "Naknaknaknak", "nanak",
-        "naknak", "nak!",
-        "nak.", "naknaknak"
-      ],
+// --- Constants ---
+const COMMANDS = [
+  "Nak", "Nanak",
+  "Nananak", "Nanananak",
+  "Nak?", "nak?",
+  "Naknak", "Naknaknak",
+  "Nak.", "Naknak.",
+  "Naknaknaknak", "nanak",
+  "naknak", "nak!",
+  "nak.", "naknaknak"
+];
+
+// --- State ---
+const message = ref("");
+const result = ref("");
+const selDS = ref("0"); // 0: ASCII, 1: Hex, 2: Dec
+const errormsg = ref("");
+
+// --- Template Ref ---
+const codeInput = ref(null);
+
+onMounted(() => {
+  if (codeInput.value) {
+    codeInput.value.focus();
+  }
+});
+
+// --- Methods ---
+
+const encode = () => {
+  result.value = "";
+  errormsg.value = "";
+  let inputarr = null;
+
+  try {
+    // 1. Prepare input based on selection
+    if (selDS.value === "0") {
+      inputarr = message.value.split("");
+    } else if (selDS.value === "1") {
+      inputarr = message.value.match(/[0-9A-F]/ig);
+    } else if (selDS.value === "2") {
+      inputarr = message.value.match(/[0-9]+/g);
     }
-  },
 
-  mounted: function() {
-    this.$refs.code.focus();
-  },
+    if (!inputarr) {
+      errormsg.value = t('errors.noinput');
+      return;
+    }
 
-  methods: {
+    let encodedResult = "";
 
-    // Translate the input
-    encode : function () {
-
-      // Reset 
-      this.result = "";
-      this.errormsg = "";
-      let inputarr;
+    // 2. Conversion Loop
+    for (let i = 0; i < inputarr.length; i++) {
       let h = 0;
 
-      try {
-        
-        // read input
-        switch (this.selDS) {
-          case "0" : // ASCII
-            inputarr = this.message.split("");
-            break;
-          case "1" : // Hex
-            inputarr = this.message.match(/[0-9A-F]{1}/ig);
-            break;
-          case "2" : // Dec
-            inputarr = this.message.match(/[0-9]+/g);
-            break;
-        }
+      switch (selDS.value) {
+        case "0": // ASCII (Two nibbles)
+          h = inputarr[i].charCodeAt(0);
+          encodedResult += COMMANDS[Math.trunc(h / 16)] + " " + COMMANDS[h % 16];
+          break;
 
+        case "1": // Hex (Single nibble per char)
+          h = parseInt(inputarr[i].toUpperCase(), 16);
+          encodedResult += COMMANDS[h];
+          break;
 
-        if (!inputarr) {
-          this.errormsg = this.$t('errors.noinput');
-          return;
-        }
-        
-        // Start conversion
-        for (let i=0; i < inputarr.length; i++) {
-          
-          switch (this.selDS) {
-            case "0" : // ASCII
-              h = inputarr[i].charCodeAt(0);
-              this.result += this.commands[ Math.trunc(h/16) ] + " ";
-              this.result += this.commands[ h % 16 ];  
-              break;
-            case "1" : // Hex
-              h = parseInt(inputarr[i].toUpperCase(), 16);
-              this.result += this.commands[h];
-              break;
-            case "2" : // Dec
-              h = parseInt(inputarr[i]);
-              if (h < 0 || h > 255) {
-                this.errormsg += h + this.$t('duckspeak.invalidint');
-                continue;
-              }
-              this.result += this.commands[ Math.trunc(h/16) ] + " ";
-              this.result += this.commands[ h % 16 ];  
-              break;
+        case "2": // Dec (Two nibbles)
+          h = parseInt(inputarr[i]);
+          if (h < 0 || h > 255) {
+            errormsg.value += h + t('duckspeak.invalidint') + " ";
+            continue;
           }
-          this.result += " ";
-
-        }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
+          encodedResult += COMMANDS[Math.trunc(h / 16)] + " " + COMMANDS[h % 16];
+          break;
       }
-    },
+      encodedResult += " ";
+    }
+    
+    result.value = encodedResult.trim();
 
-    decode: function() {
+  } catch (e) {
+    errormsg.value = t('errors.generic');
+    console.error(e);
+  }
+};
 
-      // reset interpreter
-      this.result = "";
-      this.errormsg = "";
-      let h1 = "";
+const decode = () => {
+  result.value = "";
+  errormsg.value = "";
+  let hexBuffer = "";
 
-      try {
-
-        // Get command
-        let cmds = this.message.match(/[NAKnak.?]+/g);
-        if (!cmds) {
-          this.errormsg = this.$t('errors.noinput');
-          return;
-        }
-
-        for (let i = 0; i < cmds.length; i++) {
-
-          // Find cmd
-          let val = this.commands.indexOf(cmds[i]);
-
-          // If valid cmd
-          if (val >= 0) {
-            h1 += val.toString(16).toUpperCase();
-            if (h1.length == 2) {
-              switch (this.selDS) {
-                case "0" : // ASCII output
-                  this.result += String.fromCharCode(parseInt(h1, 16));
-                  break;
-                case "1" : // HEX output
-                  this.result += h1 + " ";
-                  break;
-                case "2" : // Decimal output
-                  this.result += parseInt(h1, 16) + " ";
-                  break;
-              }
-              h1 = "";
-            }
-
-          } else {
-            this.errormsg = cmds[i] + this.$t('duckspeak.invalidcmd');
-          }
-        }
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
-      }
-     
+  try {
+    // Extract words that look like Duckspeak commands
+    const cmds = message.value.match(/[NAKnak.?!]+/g);
+    
+    if (!cmds) {
+      errormsg.value = t('errors.noinput');
+      return;
     }
 
-  },
-}
-</script>
+    let decodedResult = "";
 
-<style scoped>
-</style>
+    for (let i = 0; i < cmds.length; i++) {
+      const val = COMMANDS.indexOf(cmds[i]);
+
+      if (val >= 0) {
+        // Build hex string from nibbles
+        hexBuffer += val.toString(16).toUpperCase();
+
+        // If we have two nibbles (one byte) or we are in Hex mode
+        // Note: Hex mode (selDS "1") interprets every single command as a hex char
+        if (selDS.value === "1") {
+          decodedResult += hexBuffer + " ";
+          hexBuffer = "";
+        } else if (hexBuffer.length === 2) {
+          const byteVal = parseInt(hexBuffer, 16);
+          
+          if (selDS.value === "0") {
+            decodedResult += String.fromCharCode(byteVal);
+          } else {
+            decodedResult += byteVal + " ";
+          }
+          hexBuffer = "";
+        }
+      } else {
+        errormsg.value = cmds[i] + t('duckspeak.invalidcmd');
+      }
+    }
+    
+    result.value = decodedResult;
+
+  } catch (e) {
+    errormsg.value = t('errors.generic');
+    console.error(e);
+  }
+};
+</script>

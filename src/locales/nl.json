@@ -20,6 +20,13 @@
   },
 
   "labels": {
+    "intro": "Introductie",
+    "selaction": "Wat wil je doen?",
+    "settings": "Instellingen",
+    "input": "Invoer",
+    "map": "Kaart",
+    "result": "Resultaat",
+    "addinfo": "Meer informatie",
     "selectfile": "Selecteer bestand",
     "from": "Van",
     "to": "Naar",
@@ -36,9 +43,9 @@
     "surface": "Oppervlakte",
     "center": "Middelpunt",
     "circumference": "Omtrek",
-    "result": "Resultaat",
     "alphabet": "Alfabet",
     "search": "Zoekterm",
+    "searchcol": "Zoek op kolom",
     "sum": "Som",
     "count": "Aantal",
     "perc": "Percentage",
@@ -502,16 +509,16 @@
     "title": "Codebook",
     "long": "Vind de juiste code door te zoeken op tags en woorden. Bijna 200 verschillende codes. Beschikbare tags referen naar de oorsprong van de code, de vorm of andere manieren om de code te identificeren. Tags en uitleg bij het codebook vooralsnog alleen in het Engels beschikbaar.",
     "availtags": "Beschikbare tags",
-    "pagesfound": "codes gevonden"
+    "pagesfound": "Codes gevonden - "
   },
   
   "fonts": {
     "title": "Fonts",
     "long": "<p>Een code is soms niet veel meer dan het gebruik van een ander font, bijvoorbeeld Webdings. Ook zijn veel codes uit bijvoorbeeld games en televisieseries beschikbaar als font. Type een tekst en zie het resultaat in het geselecteerde font. Maak een schermafbeelding voor je eigen puzzel of gebruik de tool om puzzels op te lossen.</p>",
     "selfont": "Selecteer font",
-    "fontsize": "Selecteer grootte",
+    "fontsize": "Selecteer grootte (bijv. 24px)",
     "selcolor": "Selecteer kleur",
-    "lineheight": "Regelafstand",
+    "lineheight": "Regelafstand (bijv. 1.5)",
     "standard": "Standaard"
   },
   
@@ -556,17 +563,17 @@
 
   "bitplane" : {
     "title": "Bitplane Steganography",
-    "long": "<p>De Bitplane Steganography Tool is een gespecialiseerd forensisch hulpmiddel voor het verbergen en extraheren van gegevens binnen de pixelstructuren van digitale afbeeldingen. Het werkt door bitplanes te isoleren: de individuele binaire lagen van kleurkanalen zoals Rood, Groen, Blauw of Alfa. Door zich te richten op de Least Significant Bit (Bit 0) of LSB, kunnen gebruikers geheimen inbedden die visueel niet te onderscheiden zijn van natuurlijke beeldruis, omdat de resulterende kleurverschuivingen te subtiel zijn voor het menselijk oog.</p><p>De applicatie maakt diepgaande analyse mogelijk over meerdere kleurruimten, waaronder native RGBA en berekende HSV- of CMYK-vlakken. Om informatie te verbergen, converteert de tool tekst, bestanden of zwart-witafbeeldingen naar een binaire stroom en injecteert deze in de drager. Door het resultaat op te slaan als een verliesvrije PNG, garandeert de tool dat precisie op pixelniveau behouden blijft, wat veilige en verborgen communicatie mogelijk maakt.</p>"
+    "long": "<p>De Bitplane Steganography Tool is een hulpmiddel voor het verbergen en extraheren van gegevens binnen de pixelstructuren van digitale afbeeldingen. Het werkt door bitplanes te isoleren: de individuele binaire lagen van kleurkanalen zoals Rood, Groen, Blauw of Alfa. Door zich te richten op de Least Significant Bit (Bit 0) of LSB, kunnen gebruikers geheimen inbedden die visueel niet te onderscheiden zijn van natuurlijke beeldruis, omdat de resulterende kleurverschuivingen te subtiel zijn voor het menselijk oog.</p><p>De applicatie maakt diepgaande analyse mogelijk over meerdere kleurruimten, waaronder native RGBA en berekende HSV- of CMYK-vlakken. Om informatie te verbergen, converteert de tool tekst, bestanden of zwart-witafbeeldingen naar een binaire stroom en injecteert deze in de drager. Door het resultaat op te slaan als een verliesvrije PNG, garandeert de tool dat precisie op pixelniveau behouden blijft, wat veilige en verborgen communicatie mogelijk maakt.</p>"
   },
 
   "dataappended" : {
     "title": "Append File Tool",
-    "long": "<p>De Append File Tool is een gespecialiseerd hulpmiddel voor digitale steganografie, ontworpen om geheime gegevens te verbergen in of te extraheren uit gangbare carrier-bestanden. Door officiële End-of-File (EOF)-handtekeningen te identificeren voor formaten zoals JPEG, PNG, PDF en multimedia-containers (MP3, WAV, MP4), bepaalt de tool de exacte grens waar een bestand officieel eindigt.</p><p>Gebruikers kunnen tekst- of binaire bestanden achter deze markering toevoegen, waardoor informatie effectief wordt verborgen voor standaard viewers en spelers; deze stoppen immers met het verwerken van gegevens zodra de EOF-marker is bereikt. De applicatie beschikt over een robuuste analyse-engine die verborgen payloads detecteert en previews biedt in hexadecimaal, binair of platte tekst. Het kan verschillende bestandsformaten herkennen vanuit de verborgen payload en previews bieden van afbeeldingen en geluidsbestanden. Bij het injecteren van nieuwe geheimen verwijdert de tool automatisch oude data om de integriteit van het bestand te waarborgen, wat het een krachtig instrument maakt voor zowel databeveiliging als forensisch onderzoek.</p>"
+    "long": "<p>De Append File Tool is een hulpmiddel voor digitale steganografie, ontworpen om geheime gegevens te verbergen in of te extraheren uit gangbare carrier-bestanden. Door officiële End-of-File (EOF)-handtekeningen te identificeren voor formaten zoals JPEG, PNG, PDF en multimedia-containers (MP3, WAV, MP4), bepaalt de tool de exacte grens waar een bestand officieel eindigt.</p><p>Gebruikers kunnen tekst- of binaire bestanden achter deze markering toevoegen, waardoor informatie effectief wordt verborgen voor standaard viewers en spelers; deze stoppen immers met het verwerken van gegevens zodra de EOF-marker is bereikt. De applicatie beschikt over een robuuste analyse-engine die verborgen payloads detecteert en previews biedt in hexadecimaal, binair of platte tekst. Het kan verschillende bestandsformaten herkennen vanuit de verborgen payload en previews bieden van afbeeldingen en geluidsbestanden. Bij het injecteren van nieuwe geheimen verwijdert de tool automatisch oude data om de integriteit van het bestand te waarborgen, wat het een krachtig instrument maakt voor zowel databeveiliging als forensisch onderzoek.</p>"
   },
 
   "pngchunk" : {
     "title": "PNG Metadata Editor",
-    "long": "<p>De PNG Metadata Editor is ontworpen voor de grondige inspectie en aanpassing van PNG chunks. Gebruikers kunnen elk PNG-bestand laden om de interne structuur te visualiseren, waarbij de focus specifiek op metadata ligt terwijl ruwe beeldgegevens (IDAT) worden weggefilterd voor een overzichtelijke interface. De applicatie ondersteunt de drie belangrijkste PNG-tekstformaten: tEXt (platte Latin-1), zTXt (gecomprimeerd) en iTXt (internationaal UTF-8). Naast het bekijken stelt de tool gebruikers in staat om nieuwe metadata toe te voegen of bestanden op te schonen door bestaande vermeldingen te verwijderen. Belangrijke functies zijn onder meer verplichte trefwoordvalidatie (conform de specificatielimiet van 79 tekens), dynamische CRC32-checksumberekening voor binaire integriteit, en een optie om individuele metadata te exporteren als standalone .txt-bestanden. Het gewijzigde bestand kan worden opgeslagen. Ideaal voor gebruikers die verborgen beeldgegevens willen beheren.</p>"
+    "long": "<p>De PNG Metadata Editor is ontworpen voor de inspectie en aanpassing van PNG chunks. Gebruikers kunnen elk PNG-bestand laden om de interne structuur te visualiseren, waarbij de focus specifiek op metadata ligt terwijl ruwe beeldgegevens (IDAT) worden weggefilterd voor een overzichtelijke interface. De meeste viewers laten de teksten in een PNG bestand niet zien. Dit is een eenvoudige manier om tekst te verstoppen in een afbeelding.</p><p>De applicatie ondersteunt de drie belangrijkste PNG-tekstformaten: tEXt (platte Latin-1), zTXt (gecomprimeerd) en iTXt (internationaal UTF-8). Naast het bekijken stelt de tool gebruikers in staat om nieuwe metadata toe te voegen of bestanden op te schonen door bestaande vermeldingen te verwijderen. Belangrijke functies zijn onder meer verplichte trefwoordvalidatie (conform de specificatielimiet van 79 tekens), dynamische CRC32-checksumberekening voor binaire integriteit, en een optie om individuele metadata te exporteren als standalone .txt-bestanden. Het gewijzigde bestand kan worden opgeslagen. Ideaal voor gebruikers die verborgen beeldgegevens willen beheren.</p>"
   },
 
   "exifscanner": {
@@ -641,14 +648,22 @@
   },
 
   "pixeldata": {
-    "title": "Pixel data",
-    "long": "<p>Tool om het totaal van rood, groen en blauw waardes te berekenen. Tool om het aantal pixels met een bepaalde kleur (RGB waarde) te tellen. De hoogte, breedte en het totaal aantal pixels worden ook getoond.</p><p>De tool werkt perfect met PNG, maar lijkt met JPG een afwijking te hebben.</p>",
-    "count": "Selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen."
+    "title": "Pixel analyse",
+    "long": "<p>Met Pixel Analyse kan een analyse gemaakt woorden van een afbeelding op pixleniveau. Na het laden van de afbeelding wordt de metadata te berekend, waaronder exacte afmetingen, het totale aantal pixels en de waargenomen gemiddelde helderheid.</p><p>De tool voert een analyse uit door de  intensiteit van de rode, groene en blauwe kanalen te berekenen, terwijl tegelijkertijd 'dead-zones' worden geïdentificeerd; pixels waar kleurgegevens volledig ontbreken. Door ergens in de preview te klikken worden alle pixels geteld die exact dezelfde waarde hebben. De scan is houdt rekening met het zogenaamde alpha channel, waardoor de tellingen niet vertekend.</p><p>Het histogram biedt een frequentieverdelingskaart voor zowel individuele kleurkanalen als de algehele helderheid.</p>",
+    "count": "Klik in de preview of selecteer rood, groen en blauw om het aantal pixels met deze kleur te tellen.",
+    "targetcolor": "Tel een specifieke kleur",
+    "metadata": "Afbeelding metadata",
+    "histogram": "Histogram",
+    "channel": "RGB Intensiteit",
+    "channelexpl": "Som van alle R, G en  B waardes in de afbeelding",
+    "deadzones": "Dead zones",
+    "deadzonesexpl": "Pixels waar R, G of B gelijk is aan 0",
+    "avgcol": "Gemiddelde kleur"
   },
 
   "pixelbuild": {
     "title": "Pixelbeeld",
-    "long": "<p>Pixlebeed is een tool om een afbeelding op te bouwen aan de hand van een tekst met maximaal 10 verschillende karakters. Elk karakter staat voor één bepaalde kleur. Een voorbeeld is een bestand met 0 en 1 wat een QR code voorstelt. Een ander voorbeeld is kleurplaat.</p><p>Hoogte en breedte zijn optioneel. Als de hoogte leeg is wordt het aantal regels van de tekst gebruikt. Als de breedte leeg is wordt de lengte van de eerste regel gebruikt. Het is mogelijk om voor elk karakter de te gebruiken kleur in te stellen.</p>",
+    "long": "<p>Pixelbeed is een tool om een afbeelding op te bouwen aan de hand van een tekst met maximaal 10 verschillende karakters. Elk karakter staat voor één bepaalde kleur. Een voorbeeld is een bestand met 0 en 1 wat een QR code voorstelt. Een ander voorbeeld is kleurplaat.</p><p>Hoogte en breedte zijn optioneel. Als de hoogte leeg is wordt het aantal regels van de tekst gebruikt. Als de breedte leeg is wordt de lengte van de eerste regel gebruikt. Het is mogelijk om voor elk karakter de te gebruiken kleur in te stellen.</p>",
     "input": "Tekstinvoer",
     "options": "Instellingen"
   },
@@ -671,7 +686,7 @@
 
   "textextractor": {
     "title": "Tekst in file",
-    "long": "De tool zoekt mogelijke teksten door te zoeken naar aaneengesloten afdrukbare karakters (ASCII 32 t/m 126). De minimale hoeveelheid aaneengesloten tekens kan worden ingesteld. Het maximale aantal zoekresultaten en de startpositie om te beginnen met zoeken zijn ook instelbaar. Door bijvoorbeeld eerst te zoeken op langere teksten kan vervolgens met de startpositie worden ingezoomd op een bepaald gebied met mogelijke kortere teksten. Grote files scannen kan enige tijd duren of deze kunnen in het geheel niet worden geladen.",
+    "long": "<p>Het verstoppen van teksten in bijvoorbeeld afbeeldingen of geluidsfragementen is een eenvoudige manier om een boodschap te verbergen. Deze zijn vaak niet hoorbaar of zichtbaar. Deze vorm van steganografie werkt vooral goed op ongecomprimeerde data zoals bitmaps of WAV-files.</p><p>De tool kan deze teksten eenvoudig boven water krijgen. Dit kan door te zoeken naar aaneengesloten afdrukbare karakters (ASCII 32 t/m 126). De minimale hoeveelheid aaneengesloten tekens kan worden ingesteld. Het maximale aantal zoekresultaten en de startpositie om te beginnen met zoeken zijn ook instelbaar. Door bijvoorbeeld eerst te zoeken op langere teksten kan vervolgens met de startpositie worden ingezoomd op een bepaald gebied met mogelijke kortere teksten. Grote files scannen kan enige tijd duren of deze kunnen in het geheel niet worden geladen.</p>",
     "length": "Minimale lengte",
     "max": "Maximaal aantal resultaten",
     "start": "Start op positie",
@@ -1089,6 +1104,10 @@
     "long": "Deze tool converteert een groot aantal eenheden. Eenheden zijn onderverdeeld in categoriën, zoals lengte of temperatuur. De standaard tegenwoordig gebruikt het metrieke stelsel (zoals meter, kilogram). In Engels sprekende landen wordt het imperial systeem nog veel gebruikt (zoals inch, acre or ounce). Voor introductie van deze standaarden waren er veel andere systemen in gebruik die verschilden van regio tot regio. Alle standaard eenheden evenals sommige van deze historische eenheden worden ondersteund.",
     "value": "Waarde",
     "selcat": "Selecteer een categorie",
+    "amount": "Hoeveelheid",
+    "symbol": "Symbool",
+    "unit": "Eenheid",
+
     "unitfrom": "Van eenheid",
     "unitto": "Naar eenheid",
     "cat" : {
@@ -1193,7 +1212,7 @@
   
   "convert": {
     "title": "Converteren",
-    "long" : "Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen. De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert. Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen. Andere ondersteunde formaten zijn MGRS, OGSM en NAD. Je kan ook een willekeurige conversie invoeren middels de proj4 definitie van EPSG (als je weet hoe dat werkt).",
+    "long" : "<p>Er zijn veel verschillende coördinaten in gebruik. De meest gangbare is WGS84, die standaard vrijwel overal gebruikt wordt, zoals bij geoaching.com en in navigatiesystemen.</p><p>De Universale Transversale Mercator (UTM) is eveneens vrij gebruikelijk. Dan zijn er nog grid gebaseerde systemen, die x en y coördinaten gebruiken, zoals het Nederlandse Rijksdriehoekstelsel (RD), de Britse OGSM of de Belgisch Lambert.</p><p>Maidenhead, geohash en Google's Open Location Code zijn normale coördinaten die gecodeerd worden als een hash. Mapcode en what3words zijn commerciële oplossingen om coördinaten te vereenvoudigen. Andere ondersteunde formaten zijn MGRS, OGSM en NAD. Je kan ook een willekeurige conversie invoeren middels de proj4 definitie van EPSG (als je weet hoe dat werkt).</p>",
     "proj4jsmsg": "Je kan elk coördinaat systeem converteren door hieronder de proj4js definitie in te voeren. De definitie kan gevonden worden op <a href='http://epsg.io'>EPSG.io</a>. Neem de Proj4js.def (onderaan op de pagina) en kopieer de string die begint met + (zonder de aanhalingstekens).",
     "proj4jslabel": "Proj4js definitie",
     "phfrom": "Coördinaten om te converteren",
@@ -1217,7 +1236,7 @@
     "title": "Kaart maken",
     "long" : "Plot een lijst van coördinaten met een marker en tekst op de kaart. Er kan eventueel een cirkel om de coördinaten worden getekend. Ideaal voor het vinden van mogelijk locaties voor een te plaatsen geocache of het vinden van een mystery cache. Het plaatsen van markers en tekst kan worden uitgezet.",
     "phcoord": "Coördinaten hier invoeren",
-    "phlabel": "Labels hier invoeren",
+    "phlabel": "Labels hier invoeren (optioneel)",
     "showmark": "Toon markers",
     "showlabel": "Toon marker labels",
     "drawcircle": "Teken cirkels",
@@ -1230,6 +1249,12 @@
     "long" : "Maak een tekening of polygonen van de opgegeven coördinaten. Er kunnen lijnen worden getekend tussen de coördinaten en/of de polygonen kunnen worden gevuld. De tool werkt met alle beschikbare coördinaatsystemen.",
     "drawlines": "Teken lijnen",
     "fillpoly": "Vul het polygoon"
+  },
+
+  "triangulation": {
+    "title": "Driehoeksmeting",
+    "long" : "Driehoeksmeting is een oude methode voor het inmeten van gebieden op kaarten. Het werd gebruikt om grid-gebaseerde coördinaten te berekenen die nog steeds bestaan. Zoals de Nederlandse Rijksdriehoeksmeting (RD) of het Belgische Lambert-systeem. Er zijn twee hoofdmethoden: Voorwaartse Insnijding en Achterwaardse Insnijding. Voorwaartse Insnijding bepaalt de exacte locatie van een punt op basis van richtingen die worden gemeld vanaf twee bekende punten. Achterwaardse Insnijding — een klassieke techniek voor traditionele kaart-en-kompasnavigatie — berekent een onbekende gebruikerspositie door het analyseren van richtingen naar drie verschillende bekende punten (landmarks) met behulp van de Tienstra-formule.",
+    "result": "Het getrianguleerde coördinaat is "
   },
 
   "dialogic": {
@@ -1289,23 +1314,6 @@
     "or": " of "
   },
 
-  "w3w" : {
-    "title": "What3words",
-    "long": "<h4>Sinds november 2024 is dit een betaalde dienst en wordt niet meer ondersteund door gctools.nl.</h4><p>What3words vertaalt een coördinaat naar 3 woorden. Meerdere talen worden ondersteund. Er is ook een optie om suggesties te tonen op basis van incomplete of fout gespelde woorden. Bij het converteren naar een what3words coördinaat kan de taal worden geselecteerd. Bij het converteren van een what3words coördinaat is de taal niet relevant.</p><p>De automatische suggesties zijn iets lastiger. De resultaten kunnen worden beperkt tot een land. Gebruik hiervoor de twee-letter ISO code zoals NL of DE. De resultaten kunnen ook worden beperkt tot een cirkel rondom een gegeven coördinaat. Tenslotte kan ook een focus coördinaat worden opgegeven. Er worden maximaal 3 suggesties getoond, maar soms zijn er geen resultaten. Probeer diverse spellingen voor het beste resultaat.</p><p>Vanaf november 2024 is het niet langer mogelijk een coördinaat te converteren naar what3words. De gratis service is niet meer beschikbaar gesteld door what3words.com.</p>",
-    "languages": "Beschikbare talen",
-    "convertto": "Converteer naar w3w",
-    "convertfrom": "Convert naar ...",
-    "suggest": "Toon suggesties",
-    "w3wcode": "What3words coordinaat",
-    "w3wsugg": "What3words suggestie",
-    "countries": "Beperk to land",
-    "focus": "Focus op coördinaat",
-    "clip": "Beperk tot cirkel",
-    "words": "Woorden",
-    "country": "Land",
-    "nearest": "Dichtsbijzijnde plaats"
-  },
-
   "tryanswers" : {
     "title" : "Vraag en antwoord",
     "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
@@ -1361,6 +1369,7 @@
 
   "substcipher": {
     "title": "Slimme Substitutie",
+    "hint": "Hints",
     "long" : "Een tool om substitutie geheimschriften op te lossen met behulp van frequentieanalyse. Op basis van de frequenties in de gecodeerde tekst en die van de geselecteerde taal (Engels, Nederlands, Duits, Frans of Spaans) worden de beste matches voorgesteld. Specificeer de originele en de vervangende letters en de aangepaste tekst wordt getoond. De vervangen letters worden duidelijk gemarkeerrd. Eventueel kunnen de eerste 8 meest waarschijnlijke kandidaten automatisch worden vervangen.",
     "errorlength": "Origineel en substituten moeten dezelfde lengte hebben",
     "errordouble": "Dubbele letters gevonden.",
@@ -1423,10 +1432,9 @@
 
   "textchunks": {
     "title": "Tekst blokken",
-    "long": "<p>Hakt een tekst in rijen of kolommen van gelijke lengte om verborgen patronen te onthullen. Geef een begin en eindgrootte op om meerdere mogelijkheden te onderzoeken. Ga op zoek naar herhalende letters, cijfers of symbolen in de ingedeelde tekst.</p><p>Bijvoorbeeld een schijnbaar random string van 0 en 1 kan na herindeling een patroon laten zien.</p>",
+    "long": "<p>Hakt een tekst in rijen of kolommen van gelijke lengte om verborgen patronen te onthullen. Spaties kunnen eventueel worden genegeerd. Verlaag of verhoog de blok grootte en het resultaat verschijnt meteen. Ga op zoek naar herhalende letters, cijfers of symbolen in de ingedeelde tekst.</p><p>Bijvoorbeeld: een schijnbaar random string van 0 en 1 kan na herindeling een patroon laten zien. Maar er kan van alles verboregn zijn.</p>",
     "dir": "Richting",
-    "start": "Blok grootte start",
-    "end": "Blok grootte end",
+    "size": "Blok grootte",
     "ignore": "Negeer spaties",
     "upper": "Alles hoofdletters"
   },
@@ -1712,7 +1720,7 @@
     "niven": "Niven of Harshad, nummers deelbaar door de som van de cijfers",
     "abundant": "Abundant, nummers waarvoor de som van de delers groter is dan 2x het nummer",
     "deficient": "Deficient, nummers waarvoor de soms van de delers kleiner is dan 2x het nummer",
-    "golomb": "Golomb, de n-de term is gelijk aan het aantal keren dat n voorkomt in de reels",
+    "golomb": "Golomb, de n-de term is gelijk aan het aantal keren dat n voorkomt in de reeks",
     "kaprekar": "Kaprekar, sorteer het getal, draai het om en trek beiden van elkaar af tot beiden hetzelfde zijn",
     "palindrome": "Palindroom, tel een getal op bij zijn omgekeerde totdat een palindroom is gevonden. Een Lychrel nummer wordt nooit een palindroom.",
     "start": "Startwaarde",
@@ -1755,7 +1763,7 @@
 
   "bcd": {
     "title": "BCD",
-    "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits. Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6, Glixon en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden.",
+    "long":  "<p>BCD (Binary Coded Decimals) is een manier om getallen te coderen. Standaard worden alle cijfers binair weergegeven, dus 4571 wordt 0100  0101 0111 0001. Deze worden soms gecombineerd in groepen van 8 digits (packed BCD). Het voorbeeld wordt dan 01000101 01110001. Of soms aangevuld tot 8 digits, 11110100 11110101 11110111 11110001.</p><p>Er zijn ook andere manier om te coderen zoals Aiken, Excess-3, Excess-6, Glixon en diverse Gray codes. Elke cijfer wordt nog steeds met 4 bites gecodeerd, maar in in plaats van binair wordt een andere codering gebruikt. Meer info is <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>hier</a> te vinden.",
     "seltype": "Selecteer methode",
     "bcdfrom": "BCD naar numbers",
     "bcdto": "Nummers naar BCD",
@@ -1806,7 +1814,8 @@
     "lowcase": "Kleine letters (a-z) meenemen",
     "numbers": "Cijfers (0-9) meenemen",
     "symbols": "Symbolen meenemen",
-    "result": "Het gegenereerde wachtwoord is"
+    "result": "Het gegenereerde wachtwoord is",
+    "errnosel": "Selecteer ten minste één verzameling karakters om te gebruiken."
   },
 
   "encryption": {
@@ -1844,7 +1853,7 @@
     "long" : "<p>Numerologie codeert volgens een bepaald systeem van versleutelen van het alfabet een woord of naam of datum, en herleidt dat tot een getal. Elke letter krijgt een waarde- De waardes zijn niet gerelateerd aan de positie in het alfabet (zoals met woordwaarde), maar met een symbolische waarde.</p><p>Het standaard Latijnse alfabet wordt meestal gebruikt. Gematria gebruikt het Hebreewse alfabet. Isopsephy het Griekse alfabet. </p>",
     "selmethod" : "Selecteer methode",
     "res1" : "De numerologische waarde is ",
-    "res2" : "Berekening :",
+    "res2" : "Berekening ",
     "valtab": "Waardes van elke letter",
     "err1" : "Eén of meerdere onbekende letters gevonden."
   },
@@ -1897,6 +1906,7 @@
   "rotciphers" : {
     "title": "Rotatie cijfers",
     "long": "<p>Rotatie cijfer vervangen simpelweg elke letter met een andere een paar posities verderop in het alfabet. Als je aan het einde komt, begin je weer aan het begin, vandaar de naam rotatie cijfers. Standaard is de verschuiving de helft van de lengte van het alfabet. In dat geval zijn coderen en decoderen namelijk gelijk. ROT13 gebruikt het standaard alfabet (hoofdletters). ROT5 werkt met enkel getallen. ROT47 met alle printbare ascii tekens.</p><p>De tool genereert alle mogelijke verschuivingen, zodat het makkelijk is de code te kraken als de verschuiving onbekend is. Overigens wordt ROT13 gebruikt door geocaching.com op de hints te coderen.</p>",
+    "selmethod": "Selecteer rotatie",
     "rot5" : "Getallen (ROT5)",
     "rot13": "Standaard (ROT13)",
     "rot47": "Printbare ASCII (ROT47)",
@@ -1950,7 +1960,7 @@
     "tot": "Totaal gevonden (%tot%)",
     "day": "Vandaag gevonden (%day%)",
     "ph": "Type een log. Gebruik %tot% en %day% voor tellers",
-    "random": "Willekeurige log",
+    "random": "Willekeurige template",
     "template": "Genereer log met template "
   },
 
@@ -1960,7 +1970,7 @@
     "newgrid": "Start nieuw",
     "step": "Volgende",
     "gen": "Generatie: ",
-    "cellsalive": "Aantal levende cellen:",
+    "cellsalive": "Aantal levende cellen: ",
     "fillgrid": "Start patroon",
     "chgrules": "Aangepaste regels",
     "diebelow": "Sterft onder",

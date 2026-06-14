@@ -1,241 +1,214 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('beatnik.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('beatnik.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('beatnik.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <CustomDropdown
+            :options="alphabets"
+            v-model="selectedalphabet"
+            :title="$t('labels.alphabet')"
+          />
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('brainfuck.input') }}</label>
+          <input type="text" v-model="input">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="debug">
+          <span class="checkmark"></span>
+          {{ $t('brainfuck.debug') }}
+        </label>
+        <div class="form-horizontal">
+          <textarea
+            ref="codeInput"
+            v-model="message"
+            :placeholder="$t('brainfuck.code')"
+            rows="5"
+          />
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="runBeatnik">
+            {{ $t('brainfuck.run') }}
+          </button>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('beatnik.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="alphabet"
-        >{{ $t('labels.alphabet') }}</label>
-        <select
-          id="alphabet"
-          v-model="selectedalphabet"
-          class="form-select mb-2 lg-size"
-          style="width: 150px;"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-          <option
-            v-for="a in alphabets"
-            :key="a"
-            :value="a.name"
-          >
-            {{ a.name }} - {{ a.alphabet }}
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="input"
-        >{{ $t('brainfuck.input') }}</label>
-        <input
-          id="input"
-          v-model="input"
-          type="text"
-          class="form-control xl-size mb-2"
-        >
-      </div>
-      <div class="form-check">
-        <input
-          id="debug"
-          v-model="debug"
-          type="checkbox"
-          class="form-check-input mb-2"
-        >
-        <label
-          for="debug"
-          class="form-check-label mb-2"
-        >{{ $t('brainfuck.debug') }}</label>
-      </div>
-      <button id="run" class="btn mb-2 me-2" @click="runBeatnik">
-        {{ $t('brainfuck.run') }}
-      </button>
-      <div class="mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          class="form-control"
-          :placeholder="$t('brainfuck.code')"
-          rows="5"
-        />
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import * as textHelper from '@/scripts/texthelper.js';
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: 'Beatnik'
+});
 
-  name: 'Beatnik',
+const { t } = useI18n();
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      input: "",
-      debug: false,
-      errormsg: "",
-      selectedalphabet: "Scrabble English",
-      alphabets: []
+// --- State ---
+const message = ref("");
+const result = ref("");
+const input = ref("");
+const debug = ref(false);
+const errormsg = ref("");
+const selectedalphabet = ref("Scrabble English");
+const alphabets = ref([]);
+
+// --- Template Ref ---
+const codeRef = ref(null);
+
+// --- Lifecycle ---
+onMounted(() => {
+  if (codeRef.value) {
+    codeRef.value.focus();
+  }
+  // Load alphabet options from helper
+  alphabets.value = textHelper.extalphabets.slice(1).map(a => ({ label: a.name + " - " + a.alphabet, value: a.name }));
+});
+
+// --- Interpreter Logic ---
+const runBeatnik = () => {
+  // Reset outputs
+  result.value = "";
+  errormsg.value = "";
+  
+  let stack = [];
+  let a1, a2, n;
+
+  try {
+    // 1. Tokenize input message into words
+    const cmds = message.value.match(/[A-Z]+/ig);
+    if (!cmds) {
+      console.warn("Beatnik: No commands found in message.");
+      return;
     }
-  },
 
-  mounted: function() {
-    this.$refs.code.focus();
-    this.alphabets = textHelper.extalphabets.slice(1);
-  },
+    // 2. Tokenize program input (characters)
+    const inputs = input.value.match(/[^\s]{1}/ig) || [];
+    let nextinput = 0;
 
-  methods: {
+    // 3. Execution Loop
+    for (let i = 0; i < cmds.length; i++) {
+      // Calculate Scrabble score of the current word
+      const cmd = textHelper.wordValue(cmds[i], false, false, selectedalphabet.value);
 
-    // Translate the input
-    runBeatnik : function () {
-
-      // reset interpreter
-      this.result = "";
-			let stack = [];
-      let a1,a2, n;
-      
-      try {
-
-        // Get commands (needs a better regex for words)
-        let cmds = this.message.match(/[A-Z]+/ig);
-        if (!cmds) {
-          console.log("No input");
-          return;
-        }
-        
-        // Read inputs (anything but white space goes)
-        let inputs = this.input.match(/[^\s]{1}/ig);
-        let nextinput = 0;
-        console.log(cmds);
-        
-        for (let i = 0; i < cmds.length; i++) {
-        
-          let cmd = textHelper.wordValue(cmds[i], false, false, this.selectedalphabet);
-          
-          if (this.debug) {
-            console.log(`Command: ${cmds[i]} Value: ${cmd} Pointer: ${i}`);
-          }
-
-          switch (cmd) {        
-            case 5 :
-              // Push next word on stack
-              stack.push(textHelper.wordValue(cmds[++i], false, false, this.selectedalphabet));
-              break;
-            case 6 :
-              // Pop stack and discard
-              stack.pop();
-              break;
-            case 7 :
-              // Pop two numbers and add them, push result
-              stack.push(stack.pop() + stack.pop());
-              break;
-            case 8 :
-              // Input a character and push its value
-              if (nextinput >= inputs.length) throw("Not enough inputs");
-              stack.push(inputs[nextinput++].charCodeAt(0));
-              break;
-            case 9 :
-              // Pop number and output its character
-              this.result += String.fromCharCode(stack.pop());
-              break;
-            case 10 :
-              // Pop two numbers, subtract the first from the second push the result
-              stack.push(-stack.pop() + stack.pop());
-              break;
-            case 11 :
-              // Pop two numbers, swap them, and push them back.
-              a1 = stack.pop();
-              a2 = stack.pop();
-              stack.push(a1);
-              stack.push(a2);
-              break;
-            case 12 :
-              //Pop a number and push it twice
-              a1 = stack.pop();
-              stack.push(a1);
-              stack.push(a1);
-              break;
-            case 13 :
-              // Pop a number and skip ahead n (actually n+1) words if the number is zero.
-              a1 = stack.pop();
-              if (a1 == 0) {
-                n = textHelper.wordValue(cmds[++i], false, false, this.selectedalphabet);
-                i += n;
-              }
-              break;
-            case 14 :
-              // Skip ahead n (actually n+1) words if the number isn't zero.
-              a1 = stack.pop();
-              if (a1 != 0) {
-                n = textHelper.wordValue(cmds[++i], false, false, this.selectedalphabet);
-                i += n;
-              }
-              break;
-            case 15 :
-              // Skip back n words if the number is zero.
-              a1 = stack.pop();
-              if (a1 == 0) {
-                n = textHelper.wordValue(cmds[i+1], false, false, this.selectedalphabet);
-                i = i - n;
-              }
-              break;
-            case 16 :
-              // Skip back n words if the number isn't zero.
-              a1 = stack.pop();
-              if (a1 != 0) {
-                n = textHelper.wordValue(cmds[i+1], false, false, this.selectedalphabet);
-                i = i - n;
-              }
-              break;
-            case 17 :
-              // Stop the program
-              i = cmds.length;
-              break;
-            default :
-              // Ignore as comment
-              console.log("Comment: " + cmds[i]);        
-          }
-          
-          if (this.debug) {
-            console.log(`Stack after command: ${stack} - Pointer ${i}\n`);        
-          }
-
-        }
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
+      if (debug.value) {
+        console.log(`Command: ${cmds[i]} Value: ${cmd} Pointer: ${i}`);
       }
 
-    },
+      switch (cmd) {
+        case 5:
+          // Push next word's value on stack
+          stack.push(textHelper.wordValue(cmds[++i], false, false, selectedalphabet.value));
+          break;
+        case 6:
+          // Pop stack and discard
+          stack.pop();
+          break;
+        case 7:
+          // Pop two numbers and add them, push result
+          stack.push(stack.pop() + stack.pop());
+          break;
+        case 8:
+          // Input a character and push its value
+          if (nextinput >= inputs.length) throw new Error("Not enough inputs");
+          stack.push(inputs[nextinput++].charCodeAt(0));
+          break;
+        case 9:
+          // Pop number and output its character
+          result.value += String.fromCharCode(stack.pop());
+          break;
+        case 10:
+          // Pop two numbers, subtract first from second, push result
+          stack.push(-stack.pop() + stack.pop());
+          break;
+        case 11:
+          // Pop two numbers, swap them
+          a1 = stack.pop();
+          a2 = stack.pop();
+          stack.push(a1);
+          stack.push(a2);
+          break;
+        case 12:
+          // Duplicate top of stack
+          a1 = stack.pop();
+          stack.push(a1);
+          stack.push(a1);
+          break;
+        case 13:
+          // Pop and skip ahead n words if zero
+          a1 = stack.pop();
+          if (a1 === 0) {
+            n = textHelper.wordValue(cmds[++i], false, false, selectedalphabet.value);
+            i += n;
+          }
+          break;
+        case 14:
+          // Pop and skip ahead n words if not zero
+          a1 = stack.pop();
+          if (a1 !== 0) {
+            n = textHelper.wordValue(cmds[++i], false, false, selectedalphabet.value);
+            i += n;
+          }
+          break;
+        case 15:
+          // Skip back n words if zero
+          a1 = stack.pop();
+          if (a1 === 0) {
+            n = textHelper.wordValue(cmds[i + 1], false, false, selectedalphabet.value);
+            i = i - n;
+          }
+          break;
+        case 16:
+          // Skip back n words if not zero
+          a1 = stack.pop();
+          if (a1 !== 0) {
+            n = textHelper.wordValue(cmds[i + 1], false, false, selectedalphabet.value);
+            i = i - n;
+          }
+          break;
+        case 17:
+          // Halt
+          i = cmds.length;
+          break;
+        default:
+          if (debug.value) console.log("Comment: " + cmds[i]);
+      }
 
-  },
-
-}
+      if (debug.value) {
+        console.log(`Stack: [${stack}] | Pointer: ${i}`);
+      }
+    }
+  } catch (e) {
+    errormsg.value = t('errors.generic');
+    console.error("Beatnik Error:", e);
+  }
+};
 </script>
-
-<style scoped>
-</style>

@@ -1,63 +1,40 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('mapmaker.title') }}
-    </div>
-    <div class="mainpage">
-      <div>
-        <div
-          class="infoblock"
-          v-html="$t('mapmaker.long')"
-        />
-        <div class="row mb-2">
+
+<header class="page-header">
+    <h1>{{ $t('mapmaker.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('mapmaker.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
           <label
-            class="form-label sm-size mb-2"
-            for="from"
-          >{{ $t('labels.coordformat') }}</label>
+          >{{ $t('labels.from') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
-            class="md-size mb-2"
           />
         </div>
-        <v-show-on-map id="go" class="btn mb-2 me-2" @Show="makeMap()" />
-        <div class="form-check custom-checkbox mb-2 me-2">
-          <input
-            id="showmarkers"
-            v-model="showmarkers"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="showmarkers"
-            class="form-check-label"
-          >{{ $t('mapmaker.showmark') }}</label>
+        <div class="form-group-vertical mb-2">
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="showmarkers">
+            <span class="checkmark"></span>
+            {{ $t('mapmaker.showmark') }}
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="showlabels">
+            <span class="checkmark"></span>
+            {{ $t('mapmaker.showlabel') }}
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="drawcircles">
+            <span class="checkmark"></span>
+            {{ $t('mapmaker.drawcircle') }}
+          </label>
         </div>
-        <div class="form-check mb-2 me-2">
-          <input
-            id="showlabels"
-            v-model="showlabels"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="showlabels"
-            class="form-check-label"
-          >{{ $t('mapmaker.showlabel') }}</label>
-        </div>
-        <div class="form-check mb-2 me-2">
-          <input
-            id="drawcircles"
-            v-model="drawcircles"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="drawcircles"
-            class="form-check-label"
-          >{{ $t('mapmaker.drawcircle') }}</label>
-        </div>
-        <div class="mb-2">
+        <div class="form-horizontal" v-if="drawcircles">
           <v-distance
             v-model:dist="dist"
             v-model:unit="unit"
@@ -69,43 +46,47 @@
               >{{ $t('labels.radius') }}</label>
             </template>
           </v-distance>
+        </div>  
+        <div class="button-row">
+          <v-show-on-map id="go" class="btn btn-primary" @Show="makeMap()" />
         </div>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <textarea
+          id="coordfrom"
+          ref="coordfrom"
+          v-model="coordfrom"
+          class="form-control mt-2"
+          :placeholder="$t('mapmaker.phcoord')"
+          rows="5"
+        />
+        <textarea
+          id="labels"
+          v-model="labels"
+          class="form-control mt-2 mb-2"
+          :placeholder="$t('mapmaker.phlabel')"
+          rows="5"
+        />
+        <div
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
       </div>
-      <div class="row mb-2">
-        <div class="col-6">
-          <textarea
-            id="coordfrom"
-            ref="coordfrom"
-            v-model="coordfrom"
-            class="form-control mt-2"
-            :placeholder="$t('mapmaker.phcoord')"
-            rows="5"
-          />
-        </div>
-        <div class="col-6">
-          <textarea
-            id="labels"
-            v-model="labels"
-            class="form-control mt-2"
-            :placeholder="$t('mapmaker.phlabel')"
-            rows="5"
-          />
-        </div>
-      </div>
-      <div
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </div>
-      <v-map v-model:mylocation="coordfrom" />
+      </VCard>
     </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.map')">
+        <v-map v-model:mylocation="coordfrom" />
+      </VCard>
+      </div>
   </div>
 </template>
 
 <script>
 import * as coords from '@/scripts/coords.js';
 import VMap from '@/components/generic/VMap.vue'
+import VCard from '@/components/generic/VCard.vue'
 import VDatums from '@/components/generic/VDatums.vue';
 import VDistance from '@/components/generic/VDistance.vue';
 import VShowOnMap from '@/components/generic/VShowOnMap.vue';
@@ -118,6 +99,7 @@ export default {
     VDatums,
     VDistance,
     VMap,
+    VCard,
     VShowOnMap
   },
 

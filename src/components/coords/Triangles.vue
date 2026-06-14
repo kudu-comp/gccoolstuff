@@ -1,229 +1,178 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('triangles.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('triangles.long')"
-      />
-      <v-coord
-        v-model:coord="coordinate1"
-        v-model:datum="selecteddatum1"
-        class="mb-2"
-      >
-        <template #label>
-          {{ $t('labels.point') }} 1
-        </template>
-      </v-coord>
-      <v-coord
-        v-model:coord="coordinate2"
-        v-model:datum="selecteddatum2"
-        class="mb-2"
-      >
-        <template #label>
-          {{ $t('labels.point') }} 2
-        </template>
-      </v-coord>
-      <v-coord
-        v-model:coord="coordinate3"
-        v-model:datum="selecteddatum3"
-        class="mb-2"
-      >
-        <template #label>
-          {{ $t('labels.point') }} 3
-        </template>
-      </v-coord>
-      <v-show-on-map id="go" class="btn me-2" @Show="getPoints()" />
-      <div
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
+
+<header class="page-header">
+    <h1>{{ $t('triangles.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('triangles.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <v-coord
+            v-model:coord="coordinate1"
+            v-model:datum="selecteddatum1"
+          >
+            <template #label>
+              {{ $t('labels.point') }} 1
+            </template>
+          </v-coord>
+        </div>
+        <div class="form-horizontal">
+          <v-coord
+            v-model:coord="coordinate2"
+            v-model:datum="selecteddatum2"
+          >
+            <template #label>
+              {{ $t('labels.point') }} 2
+            </template>
+          </v-coord>
+        </div>
+        <div class="form-horizontal">
+          <v-coord
+            v-model:coord="coordinate3"
+            v-model:datum="selecteddatum3"
+          >
+            <template #label>
+              {{ $t('labels.point') }} 3
+            </template>
+          </v-coord>
+        </div>
+        <div class="button-row">
+          <v-show-on-map id="go" class="btn bn-primary" @Show="getPoints()" />
+        </div>  
+        <div
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
+          v-html="result"
+        />
+      </VCard>
       </div>
-      <div
-        v-if="result"
-        class="resultbox"
-        v-html="result"
-      />
-      <v-map v-model:mylocation="coordinate1" />
+    <div class="card-stack">
+      <VCard :title="$t('labels.map')">
+        <v-map v-model:mylocation="coordinate1" />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+import L from "leaflet"
 
-import VCoord from '@/components/generic/VCoord.vue';
+// Logic Imports
+import * as coords from '@/scripts/coords.js'
+import { calculateTriangleProperties } from '@/scripts/triangle.js'
+
+// UI Component Imports (The missing part!)
+import VCoord from '@/components/generic/VCoord.vue'
+import VCard from '@/components/generic/VCard.vue'
 import VMap from '@/components/generic/VMap.vue'
-import * as coords from '@/scripts/coords.js';
-import VShowOnMap from '@/components/generic/VShowOnMap.vue';
-import L from "leaflet";
+import VShowOnMap from '@/components/generic/VShowOnMap.vue'
 
-export default {
-  name: 'Triangles',
+defineOptions({
+  name: 'Triangles'
+})
 
-  components: {
-    VCoord,
-    VMap,
-    VShowOnMap
-  },
+const store = useStore()
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      coordinate1: "",
-      coordinate2: "",
-      coordinate3: "",
-      selecteddatum1: "WGS84",
-      selecteddatum2: "WGS84",
-      selecteddatum3: "WGS84",
-      result: "",
-      errormsg: "",
-      phpurl: window.location.protocol + "//"  + window.location.hostname + "/coordcalc/coordcalc.php",
-    }
-  },
+// --- State ---
+const coordinate1 = ref("")
+const coordinate2 = ref("")
+const coordinate3 = ref("")
+const selecteddatum1 = ref("WGS84")
+const selecteddatum2 = ref("WGS84")
+const selecteddatum3 = ref("WGS84")
+const result = ref("")
+const errormsg = ref("")
 
-  methods: {
+// --- Methods ---
 
-    getPoints: function () {
+const getPoints = async () => {
+  // Reset outputs
+  errormsg.value = ""
+  result.value = ""
 
-      // Reset error
-      this.errormsg = "";
-      this.result = "";
-      let coord1, coord2, coord3, gridcoord1, gridcoord2, gridcoord3;
+  try {
+    const mymap = store.state.mymap
+    if (!mymap) throw new Error("Map not initialized")
 
-      try {
+    // 1. Convert input strings to WGS84 Lat/Lon
+    const coord1 = await coords.convertCoordFromText(coordinate1.value, selecteddatum1.value, "WGS84")
+    const coord2 = await coords.convertCoordFromText(coordinate2.value, selecteddatum2.value, "WGS84")
+    const coord3 = await coords.convertCoordFromText(coordinate3.value, selecteddatum3.value, "WGS84")
 
-        // Translate the inputed coordinates to WGS84 for display on map
-        coords.convertCoordFromText(this.coordinate1, this.selecteddatum1, "WGS84")
-          .then (data => {
-            coord1 = data;
-            return coords.convertCoordFromText(this.coordinate2, this.selecteddatum2, "WGS84");
-          })
-          .then (data => {
-            coord2 = data;
-            return coords.convertCoordFromText(this.coordinate3, this.selecteddatum3, "WGS84");
-          })
-          .then (data => {
-            coord3 = data;
-            return coords.convertCoordFromLatLon (coord1, "WGS84", "RD");
-          })
-          .then (data => {
-            gridcoord1 = data;
-            return coords.convertCoordFromLatLon (coord2, "WGS84", "RD");
-          })
-          .then (data => {
-            gridcoord2 = data;
-            return coords.convertCoordFromLatLon (coord3, "WGS84", "RD");
-          })
-          .then (data => {
-            gridcoord3 = data;
+    // 2. Convert WGS84 to RD Grid (needed for accurate meters/surface math)
+    const grid1 = await coords.convertCoordFromLatLon(coord1, "WGS84", "RD")
+    const grid2 = await coords.convertCoordFromLatLon(coord2, "WGS84", "RD")
+    const grid3 = await coords.convertCoordFromLatLon(coord3, "WGS84", "RD")
 
-            // Set markers
-            coords.displayMarker(this.$store.state.mymap, coord1, this.$t('labels.point')+ " 1");
-            coords.displayMarker(this.$store.state.mymap, coord2, this.$t('labels.point')+ " 2");
-            coords.displayMarker(this.$store.state.mymap, coord3, this.$t('labels.point')+ " 3");
+    // 3. Draw on Map
+    coords.displayMarker(mymap, coord1, `${t('labels.point')} 1`)
+    coords.displayMarker(mymap, coord2, `${t('labels.point')} 2`)
+    coords.displayMarker(mymap, coord3, `${t('labels.point')} 3`)
+    L.polyline([coord1, coord2, coord3, coord1], { color: 'red' }).addTo(mymap)
 
-            // Draw Triangle
-            L.polyline([coord1, coord2, coord3, coord1], {color: 'red'}).addTo(this.$store.state.mymap);
+    // 4. Calculate Properties using triangle.js
+    const data = calculateTriangleProperties(
+      { x: grid1.lon, y: grid1.lat },
+      { x: grid2.lon, y: grid2.lat },
+      { x: grid3.lon, y: grid3.lat }
+    )
 
-            let inputdata = {
-              calc: 'triangle',
-              p1: {x : gridcoord1.lon, y: gridcoord1.lat },
-              p2: {x : gridcoord2.lon, y: gridcoord2.lat },
-              p3: {x : gridcoord3.lon, y: gridcoord3.lat },
-            };
+    // 5. Basic Results
+    let output = `${t('labels.surface')}: ${data.surface.toFixed(0)}m`
+    output += `<br>${t('labels.circumference')}: ${data.circumference.toFixed(0)}m<sup>2</sup>`
 
-            // Call PHP script on server
-            fetch(this.phpurl, {
-                method: 'POST',
-                body: JSON.stringify(inputdata)
-              })
-              .then(response => response.json())
-              .then(data => {
+    // 6. Center Points: Convert RD back to WGS84
+    const centerKeys = ['centroid', 'orthocenter', 'incenter', 'circumcenter', 'ninepointcenter']
+    const centerWgsPromises = centerKeys.map(key => 
+      coords.convertCoordToWGS({ lat: data[key].y, lon: data[key].x }, "RD")
+    )
+    const [centroid, orthocenter, incenter, circumcenter, ninepointcenter] = await Promise.all(centerWgsPromises)
 
-                  // Print and plot the results
-                  this.result = this.$t('labels.surface') + ": " + data.surface.toFixed(0) + "m";
-                  this.result += "<br>" + this.$t('labels.circumference') + ": "  + data.circumference.toFixed(0) + "m<sup>2</sup>";
+    // 7. Center Points: Convert WGS84 back to Input Datum for the text list
+    const datumPromises = [centroid, orthocenter, incenter, circumcenter, ninepointcenter].map(p => 
+      coords.convertCoordFromWGS(p, selecteddatum1.value)
+    )
+    const datumPoints = await Promise.all(datumPromises)
 
-                  // Convert all triangle points to WGS84
-                  let promises = [
-                    coords.convertCoordToWGS( {lat: data.centroid.y, lon: data.centroid.x}, "RD"),
-                    coords.convertCoordToWGS( {lat: data.orthocenter.y, lon: data.orthocenter.x}, "RD"),
-                    coords.convertCoordToWGS( {lat: data.incenter.y, lon: data.incenter.x}, "RD"),
-                    coords.convertCoordToWGS( {lat: data.circumcenter.y, lon: data.circumcenter.x}, "RD"),
-                    coords.convertCoordToWGS( {lat: data.ninepointcenter.y, lon: data.ninepointcenter.x}, "RD")
-                  ];
+    // 8. Generate Output Text and Markers
+    const centers = [
+      { key: 'centroid', wgs: centroid },
+      { key: 'orthocenter', wgs: orthocenter },
+      { key: 'incenter', wgs: incenter },
+      { key: 'circumcenter', wgs: circumcenter },
+      { key: 'ninepoint', wgs: ninepointcenter }
+    ]
 
-                  let centroid, orthocenter, incenter, circumcenter, ninepointcenter;
+    centers.forEach((center, idx) => {
+      const datumP = datumPoints[idx]
+      output += `<br>${t(`triangles.${center.key}`)}: ` 
+      output += coords.getTextFromCoord(datumP, selecteddatum1.value, 7, coordinate1.value)
+      output += t('triangles.or') + coords.printCoordinateFromDMS(center.wgs, "N12 34.567 E1 23.456")
+      
+      // Plot centers on map
+      coords.displayMarker(mymap, center.wgs, t(`triangles.${center.key}`))
+    })
 
-                  Promise.all(promises)
-                    .then( points => {
+    result.value = output
 
-                      centroid = points[0];
-                      orthocenter = points[1];
-                      incenter = points[2];
-                      circumcenter = points[3];
-                      ninepointcenter = points[4];
-                      
-                      // Convert all triangle points to selected datum
-                      let promises2 = [
-                        coords.convertCoordFromWGS(centroid, this.selecteddatum1),
-                        coords.convertCoordFromWGS(orthocenter, this.selecteddatum1),
-                        coords.convertCoordFromWGS(incenter, this.selecteddatum1),
-                        coords.convertCoordFromWGS(circumcenter, this.selecteddatum1),
-                        coords.convertCoordFromWGS(ninepointcenter, this.selecteddatum1)
-                      ]
-
-                      return Promise.all(promises2)
-
-                    })
-                    .then ( points => {
-
-                      // Print results
-                      this.result += "<br>" + this.$t('triangles.centroid') + ": " + coords.getTextFromCoord(points[0], this.selecteddatum1, 7, this.coordinate1);
-                      this.result += this.$t('triangles.or') + coords.printCoordinateFromDMS(centroid, "N12 34.567 E1 23.456");
-                      this.result += "<br>"+ this.$t('triangles.orthocenter') + ": " + coords.getTextFromCoord(points[1], this.selecteddatum1, 7, this.coordinate1);
-                      this.result += this.$t('triangles.or') + coords.printCoordinateFromDMS(orthocenter, "N12 34.567 E1 23.456");
-                      this.result += "<br>"+ this.$t('triangles.incenter') + ": " + coords.getTextFromCoord(points[2], this.selecteddatum1, 7, this.coordinate1);
-                      this.result += this.$t('triangles.or') + coords.printCoordinateFromDMS(incenter, "N12 34.567 E1 23.456");
-                      this.result += "<br>"+ this.$t('triangles.circumcenter') + ": " + coords.getTextFromCoord(points[3], this.selecteddatum1, 7, this.coordinate1);
-                      this.result += this.$t('triangles.or') + coords.printCoordinateFromDMS(circumcenter, "N12 34.567 E1 23.456");
-                      this.result += "<br>"+ this.$t('triangles.ninepoint') + ": " + coords.getTextFromCoord(points[4], this.selecteddatum1, 7, this.coordinate1);
-                      this.result += this.$t('triangles.or') + coords.printCoordinateFromDMS(ninepointcenter, "N12 34.567 E1 23.456");
-
-                      // Display markers
-                      coords.displayMarker(this.$store.state.mymap, centroid, this.$t('triangles.centroid'));
-                      coords.displayMarker(this.$store.state.mymap, orthocenter, this.$t('triangles.orthocenter'));
-                      coords.displayMarker(this.$store.state.mymap, incenter, this.$t('triangles.incenter'));
-                      coords.displayMarker(this.$store.state.mymap, circumcenter, this.$t('triangles.circumcenter'));
-                      coords.displayMarker(this.$store.state.mymap, ninepointcenter, this.$t('triangles.ninepoint'));
-
-                    })
-
-              })
-              .catch((error) => {
-
-                  console.error('Error ', error);
-                  this.errormsg = this.$t('errors.incorrectcoords');
-
-              });
-
-          })
-          .catch ( (e) => {
-            console.log(e);
-            this.errormsg = this.$t('errors.incorrectcoords');
-          });
-        
-        } catch (e) {
-
-          console.log(e);
-          this.errormsg = this.$t('errors.incorrectcoords');
-          
-        }
-
-    },
-
+  } catch (e) {
+    console.error('Calculation Error:', e)
+    errormsg.value = t('errors.incorrectcoords')
   }
 }
 </script>

@@ -1,28 +1,18 @@
 <template>
-  <button id="calc" class="btn mb-2 me-2" :title="$t('buttons.calc')" @click="calculate()">
-    <i class="fa-solid fa-calculator"></i> {{$t('buttons.calc')}}
+  <button class="btn btn-primary" :title="$t('buttons.calc')" @click="calculate()">
+    {{$t('buttons.calc')}}
   </button>
 </template>
 
-<script>
+<script setup>
+defineOptions({
+  name: 'VCalculate'
+})
 
-export default {
+const emit = defineEmits(['calculate'])
 
-  name: 'VCalculate',
-
-  emits: [
-    'calculate'
-  ],
-
-  methods: {
-  
-    calculate: function () {
-      
-      // Sent event
-      this.$emit('calculate');
-      
-    },
-
-  }
+const calculate = () => {
+  // Emit the event to the parent
+  emit('calculate')
 }
 </script>

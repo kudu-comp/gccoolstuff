@@ -1,111 +1,104 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('keyboards.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('keyboards.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="keyboards"
-        >{{ $t('keyboards.inputkb') }}</label>
+
+<header class="page-header">
+    <h1>{{ $t('keyboards.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('keyboards.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-horizontal">
+        <label>{{ $t('keyboards.inputkb') }}</label>
         <v-keyboards
-          id="keyboards"
           v-model:keyboard="fromkeyboard"
-          class="mb-2"
-          @change="translateKeyboard"
+          @click="translateKeyboard"
         />
       </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="keyboards2"
-        >{{ $t('keyboards.outputkb') }}</label>
+      <div class="form-horizontal">
+        <label>{{ $t('keyboards.outputkb') }}</label>
         <v-keyboards
-          id="keyboards2"
           v-model:keyboard="tokeyboard"
-          class="mb-2"
-          @change="translateKeyboard"
+          @click="translateKeyboard"
         />
       </div>
-      <button id="convert" class="btn mb-2"  @click="translateKeyboard">
-        {{ $t('buttons.convert') }}
-      </button>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <textarea
         id="message"
-        ref="message"
+        ref="messageInput"
         v-model="message"
-        class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"
         @input="translateKeyboard"
       />
       <p
         v-show="errormsg"
-        class="errormsg mt-2"
+        class="errormsg mb-2"
       >
-        {{ errormsg }}
-      </p>
+        {{ errormsg }}.
+      </p>          
+    </VCard>
+    <VCard :title="$t('labels.result')">
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
       </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import VKeyboards from '@/components/generic/VKeyboards.vue'
 import * as keyboards from '@/scripts/keyboards.js'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'Keyboards',
+// Component Name (useful for devtools)
+defineOptions({
+  name: 'Keyboards'
+})
 
-  components: {
-    VKeyboards,
-  },
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      fromkeyboard : "QWERTY",
-      tokeyboard: "DVORAK2",
-      errormsg: "",
-    }
-  },
+// --- State ---
+const message = ref("")
+const result = ref("")
+const fromkeyboard = ref("QWERTY")
+const tokeyboard = ref("DVORAK2")
+const errormsg = ref("")
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+// --- Template Ref ---
+const messageInput = ref(null)
 
-  methods: {
+onMounted(() => {
+  // Automatically focus the input on mount
+  messageInput.value?.focus()
+})
 
-    // Translate form one keyboard to another
-    translateKeyboard : function () {
+// --- Methods ---
 
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
+const translateKeyboard = () => {
+  // Reset error flag and result
+  errormsg.value = ""
+  result.value = ""
 
-      try {
-        // Convert the input
-        this.result = keyboards.convertKeyboard (this.message, this.fromkeyboard, this.tokeyboard);
-      } catch (e) {
-        this.errormsg = this.$t('keyboards.error');
-        console.log(e);
-      }
-    },
-
-  },
+  try {
+    // Convert the input using the external script
+    // Remember to use .value when accessing ref variables
+    result.value = keyboards.convertKeyboard(
+      message.value, 
+      fromkeyboard.value, 
+      tokeyboard.value
+    )
+  } catch (e) {
+    errormsg.value = t('keyboards.error')
+    console.error(e)
+  }
 }
 </script>
-
-<style scoped>
-</style>

@@ -1,164 +1,130 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('hashes.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('hashes.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="selhash"
-        >{{ $t('hashes.hashes') }} </label>
-        <select
-          id="selhash"
-          v-model="selhash"
-          class="form-select mb-2 sm-size"
+
+  <header class="page-header">
+    <h1>{{ $t('hashes.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('hashes.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <CustomDropdown
+            :title="$t('hashes.hashes')"
+            :options="hashes"
+            v-model="selhash"
+          />
+        </div>
+        <div class="form-horizontal">
+          <textarea
+            ref="messageRef"
+            v-model="message"
+            :placeholder="$t('labels.message')"
+            rows="5"
+            @input="doSomething"
+          />
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('hashes.verify') }}</label>
+          <input type="text" v-model="verify">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-          <option value="MD5">
-            MD5
-          </option>
-          <option value="SHA1">
-            SHA-1
-          </option>
-          <option value="SHA256">
-            SHA-2 (SHA256)
-          </option>
-          <option value="SHA512">
-            SHA-2 (SHA512)
-          </option>
-          <option value="SHA3">
-            SHA-3
-          </option>
-          <option value="RIPEMD160">
-            RIPEMD160
-          </option>
-        </select>
-      </div>
-      <v-calculate @calculate="hashMessage" />
-      <textarea
-        id="message"
-        ref="message"
-        v-model="message"
-        class="form-control mb-2"
-        :placeholder="$t('labels.message')"
-        rows="5"
-      />
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
-      <div
-        v-if="result"
-        class="row mb-2"
-      >
-        <label
-          class="form-label mb-2 md-size me-2"
-          for="verify"
-        >{{ $t('hashes.verify') }} </label>
-        <input
-          id="verify"
-          v-model="verify"
-          type="text"
-          class="form-control xl-size"
-        >
-      </div>
+          {{ errormsg }}.
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div class="resultbox" v-if="result">
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import CryptoJS from 'crypto-js';
-import VCalculate from '../generic/VCalculate.vue';
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import VCalculate from '@/components/generic/VCalculate.vue';
 
-export default {
+defineOptions({
+  name: 'Hashes'
+});
 
-  name: 'Hashes',
+const route = useRoute();
+const { t } = useI18n();
 
-  components: {
-    VCalculate
-  },
+// --- State ---
+const message = ref("");
+const verify = ref("");
+const selhash = ref("SHA1");
+const messageRef = ref(null);
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      verify: "",
-      errormsg: "",
-      selhash : "SHA1"
-    }
-  },
+const hashes = [
+  { value: "MD5", label: "MD5" },
+  { value: "SHA1", label: "SHA-1" },
+  { value: "SHA256", label: "SHA-2 (SHA256)" },
+  { value: "SHA512", label: "SHA-2 (SHA512)" },
+  { value: "SHA3", label: "SHA-3" },
+  { value: "RIPEMD160", label: "RIPEMD160" }
+];
 
-  mounted: function() {
-    this.$refs.message.focus();
-    if (this.$route.params.hash) this.selhash = this.$route.params.hash;
-  },
-
-  methods: {
-
-    // Encrypt the message
-    hashMessage : function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
-      
-      try {
-
-        switch (this.selhash) {
-
-          case "MD5" :
-            this.result = CryptoJS.MD5 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          case "SHA1" :
-            this.result = CryptoJS.SHA1 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          case "SHA256" :
-            this.result = CryptoJS.SHA256 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          case "SHA512" :
-            this.result = CryptoJS.SHA512 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          case "SHA3" :
-            this.result = CryptoJS.SHA3 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          case "RIPEMD160" :
-            this.result = CryptoJS.RIPEMD160 (this.message).toString(CryptoJS.enc.Hex);
-            break;
-          default :
-            // Unknown, raise error
-        }
-
-        if (this.verify) {
-
-          if (this.verify == this.result)
-            this.errormsg = this.$t('hashes.errorok')
-          else
-            this.errormsg = this.$t('hashes.errornok')
-        }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.genericerror');
-        console.log(e);
-
-      }
-    }
-
-  }
+// --- Lifecycle ---
+onMounted(() => {
+  messageRef.value?.focus();
   
-}
+  // Set hash type from route params if provided
+  if (route.params.hash) {
+    selhash.value = route.params.hash;
+  }
+});
+
+// --- Computed Result ---
+const result = computed(() => {
+  if (!message.value) return "";
+
+  try {
+    const msg = message.value;
+    switch (selhash.value) {
+      case "MD5":
+        return CryptoJS.MD5(msg).toString(CryptoJS.enc.Hex);
+      case "SHA1":
+        return CryptoJS.SHA1(msg).toString(CryptoJS.enc.Hex);
+      case "SHA256":
+        return CryptoJS.SHA256(msg).toString(CryptoJS.enc.Hex);
+      case "SHA512":
+        return CryptoJS.SHA512(msg).toString(CryptoJS.enc.Hex);
+      case "SHA3":
+        return CryptoJS.SHA3(msg).toString(CryptoJS.enc.Hex);
+      case "RIPEMD160":
+        return CryptoJS.RIPEMD160(msg).toString(CryptoJS.enc.Hex);
+      default:
+        return "";
+    }
+  } catch (e) {
+    console.error(e);
+    return "";
+  }
+});
+
+// --- Computed Error/Verification Message ---
+const errormsg = computed(() => {
+  // If there's nothing to verify against, return empty
+  if (!verify.value || !result.value) return "";
+
+  // Check if the calculated hash matches the verification string
+  if (verify.value.toLowerCase() === result.value.toLowerCase()) {
+    return t('hashes.errorok');
+  } else {
+    return t('hashes.errornok');
+  }
+});
 </script>
 

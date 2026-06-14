@@ -1,482 +1,434 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('imagetransform.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card"
-        v-html="$t('imagetransform.long')"
-      />
-      <div class="card mb-2">
-        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
-        <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div class="card flex-row">
-        <div
-          id="preview"
-          class="col-9"
-        >
-          <canvas
-            id="canvas"
-            @click="fillColor"
-          />
+
+  <header class="page-header">
+    <h1>{{ $t('imagetransform.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('imagetransform.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input
+            type="file"
+            ref="fileInputRef"
+            class="form-control"
+            @change="selectFile"
+          >
         </div>
-        <div class="col-3">
-          <button id="restore" class="btn me-2 mb-2" @click="restore" :title="$t('buttons.original')">
-            {{ $t('buttons.original') }}
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <h4>{{ $t('imagetransform.shift') }}</h4>
+        <p>{{ $t('imagetransform.shiftinfo') }}</p>
+        <div class="form-horizontal">
+          <label>{{ $t('imagetransform.shiftr') }}</label>
+          <input v-model="shiftr" type="number"/>
+          <div class="button-row">
+            <button 
+              class="btn btn-primary"  
+              @click="shiftRows"
+            > 
+              {{ $t('buttons.apply') }}
+            </button>
+          </div>
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('imagetransform.shiftc') }}</label>
+          <input v-model="shiftc" type="number"/>
+          <div class="button-row">
+            <button 
+              class="btn btn-primary"  
+              @click="shiftCols"
+            > 
+              {{ $t('buttons.apply') }}
+            </button>
+          </div>
+        </div>
+        <hr>
+        <h4>{{ $t('imagetransform.fliphalf') }}</h4>
+        <p>{{ $t('imagetransform.flipinfo') }}</p>
+        <div class="form-horizontal">
+          <label>{{ $t('imagetransform.flipr') }}</label>
+          <input v-model="flipr" type="number"/>
+          <div class="button-row">
+            <button 
+              class="btn btn-primary"  
+              @click="flipRows"
+            > 
+              {{ $t('buttons.apply') }}
+            </button>
+          </div>
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('imagetransform.flipc') }}</label>
+          <input v-model="flipc" type="number"/>
+          <div class="button-row">
+            <button 
+              class="btn btn-primary"  
+              @click="flipCols"
+            > 
+              {{ $t('buttons.apply') }}
+            </button>
+          </div>
+        </div>
+        <hr>
+        <h4>{{ $t('imagetransform.transform') }}</h4>
+        <div class="button-row">
+          <button 
+            class="btn btn-primary"  
+            @click="flipH"
+          > 
+            {{ $t('imagetransform.fliph') }}
+          </button>
+          <button 
+            class="btn btn-primary"  
+            @click="flipV"
+          > 
+            {{ $t('imagetransform.flipv') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard title="Preview">
+        <div class="button-row mb-2">
+          <button class="btn btn-primary" @click="undoEdit"> 
+            {{  $t('buttons.undo') }} 
+          </button>
+          <button class="btn btn-primary" @click="restore"> 
+            {{  $t('buttons.original') }} 
           </button>
           <v-download 
-            v-model:canvas ="canvas"
+            v-model:canvas ="canvasRef"
           />
-          <div class="box">
-            <div class="box-header">
-              {{ $t('imagetransform.shift') }}
-            </div>
-            <div class="box-body">
-              <p>{{ $t('imagetransform.shiftinfo') }}</p>
-              <div>
-                <label
-                  class="form-label me-2"
-                  for="shiftr"
-                >{{ $t('imagetransform.shiftr') }}: {{ shiftr }}</label>
-                <vue-slider
-                  id="shiftr"
-                  v-model="shiftr"
-                  v-bind="controptions2"
-                  class="ms-2 me-2 mb-2"
-                />
-                <input
-                  type="button"
-                  :value="$t('buttons.apply')"
-                  class="btn me-2 mb-2"
-                  @click="shiftRows"
-                >
-              </div>
-              <div>
-                <label
-                  class="form-label me-2"
-                  for="shiftr"
-                >{{ $t('imagetransform.shiftc') }}: {{ shiftc }}</label>
-                <vue-slider
-                  id="shiftc"
-                  v-model="shiftc"
-                  v-bind="controptions2"
-                  class="ms-2 me-2 mb-2"
-                />
-                <input
-                  id="shiftcol"
-                  type="button"
-                  :value="$t('buttons.apply')"
-                  class="btn me-2 mb-2"
-                  @click="shiftCols"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="box-header">
-              {{ $t('imagetransform.fliphalf') }}
-            </div>
-            <div class="box-body">
-              <p>{{ $t('imagetransform.flipinfo') }}</p>
-              <div>
-                <label
-                  class="form-label me-2"
-                  for="flipr"
-                >{{ $t('imagetransform.flipr') }}: {{ flipr }}</label>
-                <vue-slider
-                  id="flipr"
-                  v-model="flipr"
-                  v-bind="controptions"
-                  class="ms-2 me-2 mb-2"
-                />
-                <input
-                  id="fliprow"
-                  type="button"
-                  :value="$t('buttons.apply')"
-                  class="btn me-2 mb-2"
-                  @click="flipRows"
-                >
-              </div>
-              <div>
-                <label
-                  class="form-label me-2"
-                  for="halfflipc"
-                >{{ $t('imagetransform.flipc') }}: {{ flipc }}</label>
-                <vue-slider
-                  id="flipc"
-                  v-model="flipc"
-                  v-bind="controptions"
-                  class="ms-2 me-2 mb-2"
-                />
-                <input
-                  id="flipcol"
-                  type="button"
-                  :value="$t('buttons.apply')"
-                  class="btn me-2 mb-2"
-                  @click="flipCols"
-                >
-              </div>
-            </div>
-          </div>
-          <div class="box">
-            <div class="box-header">
-              {{ $t('imagetransform.transform') }}
-            </div>
-            <div class="box-body">
-              <input
-                id="fliph"
-                type="button"
-                :value="$t('imagetransform.fliph')"
-                class="btn me-2 mb-2 sm-size"
-                @click="flipH"
-              >
-              <input
-                id="flipv"
-                type="button"
-                :value="$t('imagetransform.flipv')"
-                class="btn me-2 mb-2 sm-size"
-                @click="flipV"
-              >
-            </div>
-          </div>
         </div>
-      </div>
+        <canvas
+          ref="canvasRef"
+        />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
-import VueSlider from 'vue-slider-component'
+<script setup>
+import { ref, shallowRef, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import VDownload from '@/components/generic/VDownload.vue'
+import VCard from '@/components/generic/VCard.vue'
 import '@/components/css/slidertheme.css'
 
-export default {
+defineOptions({
+  name: 'ImageTransform'
+})
 
-  name: 'ImageTransform',
+const { t } = useI18n()
 
-  components: {
-    VueSlider,
-    VDownload
-  },
+// --- Template Refs ---
+const canvasRef = ref(null)
+const fileInputRef = ref(null)
 
-  data: function() {
-    return {
-      fileurl: "",
-      errormsg: "",
-      canvas: null,
-      ctx: null,
-      img: null,
-      shiftr: 0,
-      shiftc: 0,
-      flipr : 1,
-      flipc : 1,
-      controptions: {
-        min: 0,
-        max: 100,
-        height: 8
-      },
-      controptions2: {
-        min: -100,
-        max: 100,
-        height: 8
-      },
-      // Position of image on canvas
-      dx : 0,
-      dy : 0,
-      // Stack of images
-      undo: []
+// --- Reactive State ---
+const errormsg = ref("")
+const shiftr = ref(0)
+const shiftc = ref(0)
+const flipr = ref(1)
+const flipc = ref(1)
+const undo = ref([])
+
+// Image placement/dimensions
+const dx = ref(0)
+const dy = ref(0)
+const dw = ref(0)
+const dh = ref(0)
+
+// Config objects
+const controptions = { min: 0, max: 100, height: 8 }
+const controptions2 = { min: -100, max: 100, height: 8 }
+
+// Non-reactive / Shallow objects
+const canvas = shallowRef(null)
+const ctx = shallowRef(null)
+const img = shallowRef(null)
+
+onMounted(() => {
+  if (canvasRef.value) {
+    canvas.value = canvasRef.value
+    ctx.value = canvas.value.getContext('2d')
+    
+    // Set initial canvas size based on container
+    const rect = canvas.value.getBoundingClientRect()
+    canvas.value.width = rect.width
+    canvas.value.height = rect.width
+  }
+  
+  // Set focus on file input
+  fileInputRef.value?.focus()
+})
+
+// --- Methods ---
+
+const drawImageScaled = (image) => {
+  const cvs = canvas.value
+  const context = ctx.value
+  if (!cvs || !context) return
+
+  const hRatio = cvs.width / image.width
+  const vRatio = cvs.height / image.height
+  const ratio = Math.min(hRatio, vRatio)
+
+  // Calculate placement
+  dx.value = Math.floor((cvs.width - image.width * ratio) / 2)
+  dy.value = 0
+  dw.value = Math.floor(image.width * ratio)
+  dh.value = Math.floor(image.height * ratio)
+
+  context.clearRect(0, 0, cvs.width, cvs.height)
+  context.drawImage(
+    image, 0, 0, image.width, image.height,
+    dx.value, dy.value, dw.value, dh.value
+  )
+}
+
+const restore = () => {
+  if (img.value) drawImageScaled(img.value)
+  undo.value = []
+}
+
+const undoEdit = () => {
+  if (undo.value.length > 0 && ctx.value) {
+    const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+    // Pop the last snapshot and set it
+    imageData.data.set(undo.value.pop())
+    ctx.value.putImageData(imageData, dx.value, dy.value)
+  }
+}
+
+const shiftRows = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  
+  const oldData = Array.from(data)
+  undo.value.push(new Uint8ClampedArray(oldData)) // Save state for undo
+
+  let shift = shiftr.value
+  for (let r = 0; r < height; r++) {
+    for (let c = 0; c < width; c++) {
+      const idx1 = (r * width + c) * 4
+      const c2 = (c + shift + width) % width
+      const idx2 = (r * width + c2) * 4
+      
+      data[idx2] = oldData[idx1]
+      data[idx2 + 1] = oldData[idx1 + 1]
+      data[idx2 + 2] = oldData[idx1 + 2]
+      data[idx2 + 3] = oldData[idx1 + 3]
     }
-  },
+    shift = (shift + shiftr.value + width) % width
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-  mounted: function() {
+const shiftCols = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  
+  const oldData = Array.from(data)
+  undo.value.push(new Uint8ClampedArray(oldData))
 
-    this.canvas = document.getElementById('canvas');
-    this.ctx = this.canvas.getContext('2d');
+  let shift = shiftc.value
+  for (let c = 0; c < width; c++) {
+    for (let r = 0; r < height; r++) {
+      const idx1 = (r * width + c) * 4
+      const r2 = (r + shift + height) % height
+      const idx2 = (r2 * width + c) * 4
+      
+      data[idx2] = oldData[idx1]
+      data[idx2 + 1] = oldData[idx1 + 1]
+      data[idx2 + 2] = oldData[idx1 + 2]
+      data[idx2 + 3] = oldData[idx1 + 3]
+    }
+    shift = (shift + shiftc.value + height) % height
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-    this.canvas.width = this.canvas.getBoundingClientRect().width
-    this.canvas.height = this.canvas.width;
-    this.$refs.file.focus();
+const flipRows = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  undo.value.push(new Uint8ClampedArray(data))
 
-  },
+  let isFlipping = true
+  for (let r = 0; r < height; r++) {
+    if ((r - 1) % flipr.value === 0) isFlipping = !isFlipping
+    if (!isFlipping) continue
 
-  methods: {
-
-    drawImageScaled: function (img) {
-
-      let hRatio = this.canvas.width  / img.width    ;
-      let vRatio = this.canvas.height / img.height  ;
-      let ratio  = Math.min ( hRatio, vRatio );
-
-      // Upperleft corner coordinates
-      this.dx = Math.floor(( this.canvas.width - img.width*ratio ) / 2);
-      // this.dy = Math.floor(( canvas.height - img.height*ratio ) / 2);
-      this.dy = 0;
-      this.dw = Math.floor(img.width*ratio);
-      this.dh = Math.floor(img.height*ratio);
-
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.ctx.drawImage(img, 0, 0, img.width, img.height,
-                         this.dx, this.dy, this.dw, this.dh); 
-
-    },
-
-    // Restore original loaded image
-    restore: function () {
-      this.drawImageScaled(this.img);
-    },
-
-    // Undo latest change
-    undoEdit: function () {
-      if (this.undo.length > 0) {
-        let imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-
-        // Read only object need to use setter to copy the data back
-        imageData.data.set (Array.from(this.undo.pop()));
-
-        // Redraw the new image
-        this.ctx.putImageData(imageData, this.dx, this.dy);
+    for (let c = 0; c < width / 2; c++) {
+      const idx1 = (r * width + c) * 4
+      const idx2 = ((r + 1) * width - c - 1) * 4
+      for (let i = 0; i < 4; i++) {
+        const temp = data[idx1 + i]
+        data[idx1 + i] = data[idx2 + i]
+        data[idx2 + i] = temp
       }
-    },
+    }
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-    // Shifting rows, x pixels to the right (cumulative)
-    shiftRows: function () {
+const flipCols = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  undo.value.push(new Uint8ClampedArray(data))
 
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
+  let isFlipping = true
+  for (let c = 0; c < width; c++) {
+    if ((c - 1) % flipc.value === 0) isFlipping = !isFlipping
+    if (!isFlipping) continue
 
-      // Make a copy of the image
-      const olddata = Array.from(data);
-      this.undo.push(Array.from(data));
-
-      let idx1, idx2, c2;
-      let shift = this.shiftr;
-
-      for (let r = 0; r < height; r++) {
-
-        for (let c = 0; c < width; c++) {
-          idx1 = (r * width + c) * 4;
-          c2   = (c + shift) % width;
-          idx2 = (r * width + c2) * 4
-          data[idx2]   = olddata[idx1];
-          data[idx2+1] = olddata[idx1+1];
-          data[idx2+2] = olddata[idx1+2];
-        }
-
-        // Calculate shift for next row
-        shift = (shift + this.shiftr + width) % width
+    for (let r = 0; r < height / 2; r++) {
+      const idx1 = (r * width + c) * 4
+      const idx2 = ((height - r - 1) * width + c) * 4
+      for (let i = 0; i < 4; i++) {
+        const temp = data[idx1 + i]
+        data[idx1 + i] = data[idx2 + i]
+        data[idx2 + i] = temp
       }
+    }
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
+const flipH = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  undo.value.push(new Uint8ClampedArray(data))
 
-    },
-
-    // Shifting columns, x pixels to downwards (cumulative)
-    shiftCols: function () {
-
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
-
-      // Make a copy of the image
-      const olddata = Array.from(data)
-
-      let idx1, idx2, r2;
-      let shift = this.shiftc;
-
-      for (let c = 0; c < width; c++) {
-
-        for (let r = 0; r < height; r++) {
-          idx1 = (r * width + c) * 4;
-          r2   = (r + shift) % height;
-          idx2 = (r2 * width + c) * 4
-          data[idx2]   = olddata[idx1];
-          data[idx2+1] = olddata[idx1+1];
-          data[idx2+2] = olddata[idx1+2];
-        }
-
-        // Calculate shift for next row
-        shift = (shift + this.shiftc + height) % height
+  for (let r = 0; r < height; r++) {
+    for (let c = 0; c < width / 2; c++) {
+      const idx1 = (r * width + c) * 4
+      const idx2 = ((r + 1) * width - c - 1) * 4
+      for (let i = 0; i < 4; i++) {
+        const temp = data[idx1 + i]
+        data[idx1 + i] = data[idx2 + i]
+        data[idx2 + i] = temp
       }
+    }
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
+const flipV = () => {
+  const imageData = ctx.value.getImageData(dx.value, dy.value, dw.value, dh.value)
+  const { width, height, data } = imageData
+  undo.value.push(new Uint8ClampedArray(data))
 
-    },
-
-    // Flip half of the rows horizontally, flipping flipr rows at a time
-    flipRows: function () {
-
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
-
-      let idx1, idx2, h;
-      let flip = true;
-
-      for (let r = 0; r < height; r++) {
-        if ((r-1) % this.flipr == 0) flip = !flip;
-        if (!flip) continue;
-        for (let c = 0; c < (width / 2); c++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((r + 1) * width - c - 1) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
-        }
+  for (let c = 0; c < width; c++) {
+    for (let r = 0; r < height / 2; r++) {
+      const idx1 = (r * width + c) * 4
+      const idx2 = ((height - r - 1) * width + c) * 4
+      for (let i = 0; i < 4; i++) {
+        const temp = data[idx1 + i]
+        data[idx1 + i] = data[idx2 + i]
+        data[idx2 + i] = temp
       }
+    }
+  }
+  ctx.value.putImageData(imageData, dx.value, dy.value)
+}
 
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
+const selectFile = (event) => {
+  errormsg.value = ""
+  const input = event.target
 
-    },
+  if (input.files && input.files[0]) {
+    // Revoke old URL if exists
+    if (img.value && img.value.src) URL.revokeObjectURL(img.value.src)
 
-    // Flip half of the columns vertically, flipping flipc columns at a time
-    flipCols: function () {
+    const newImg = new Image()
+    newImg.crossOrigin = 'anonymous'
+    newImg.src = URL.createObjectURL(input.files[0])
 
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
+    newImg.onerror = (e) => {
+      errormsg.value = t('errors.loadingimage')
+      console.log(e);
+    }
 
-      // Invert the image
-      let idx1, idx2, h = 0;
-      let flip = true;
-
-      for (let c = 0; c < width; c++) {
-        if ((c-1) % this.flipc == 0) flip = !flip;
-        if (!flip) continue;
-        for (let r = 0; r < (height / 2); r++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((height - r - 1) * width + c) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
-        }
+    newImg.onload = () => {
+      try {
+        img.value = newImg
+        drawImageScaled(newImg)
+        undo.value = []
+      } catch (err) {
+        console.error(err)
+        errormsg.value = t('colorpicker.error')
       }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
-    },
-
-
-    flipH: function () {
-
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
-
-      // Invert the image
-      let idx1, idx2, h = 0;
-
-      for (let r = 0; r < height; r++) {
-        for (let c = 0; c < (width / 2); c++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((r + 1) * width - c - 1) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
-        }
-      }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
-    },
-
-    flipV: function () {
-
-      // Make a copy of the imagedata
-      const imageData = this.ctx.getImageData(this.dx, this.dy, this.dw, this.dh);
-      const width = imageData.width;
-      const height = imageData.height;
-      const data = imageData.data;
-
-      // Invert the image
-      let idx1, idx2, h = 0;
-
-      for (let c = 0; c < width; c++) {
-        for (let r = 0; r < (height / 2); r++) {
-          idx1 = (r * width + c) * 4;
-          idx2 = ((height - r - 1) * width + c) * 4
-          h = data[idx1];    data[idx1]   = data[idx2];    data[idx2]   = h;
-          h = data[idx1+1];  data[idx1+1] = data[idx2+1];  data[idx2+1] = h;
-          h = data[idx1+2];  data[idx1+2] = data[idx2+2];  data[idx2+2] = h;
-        }
-      }
-
-      // Draw the new image
-      this.ctx.putImageData(imageData, this.dx, this.dy);
-    },
-
-    // Triggered when the file is loaded
-    selectFile: function (event) {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Get the input file
-      let input = event.target;
-
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-
-        // create a new image
-        this.img = new Image();
-        this.img.crossOrigin = 'anonymous';
-        this.img.src = URL.createObjectURL(input.files[0]);
-
-        // Define a callback function to run, when image has errors loading
-        this.img.onerror = () => {
-          this.errormsg = this.$t('errors.loadingimage')        
-        }
-
-        // Define a callback function to run, when image has loaded finishes its job
-        this.img.onload = () => {
-
-            try {
-
-              this.drawImageScaled(this.img);
-
-            } catch(err) {
-
-              console.log(err);
-              this.errormsg = this.$t('colorpicker.error')
-            
-            }
-        }
-
-      }
-    },
-
+    }
   }
 }
 </script>
 
 <style scoped>
 
+.card-grid {
+   grid-template-columns: 1fr;
+}
+
 canvas {
   width: 100%;
   height: auto;
-  padding-right: 15px;
+  border-radius: 10px;
+}
+
+h4 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 750px) {
+  .card-grid {
+    grid-template-columns: 33% 1fr;
+  }
+}
+
+@media (max-width: 1250px) {
+  .form-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px; /* Tighten the space between label and input */
+  }
+
+  .form-horizontal label {
+    /* KEY FIX: Reset flex so 150px height doesn't apply */
+    flex: none !important; 
+    width: 100% !important;
+    height: auto !important;
+    margin-bottom: 2px;
+    /* Optional: reduce font size slightly for mobile if needed */
+    font-size: 0.85rem; 
+  }
+
+  .form-horizontal .range-input {
+    height: 6px;
+    min-height: 6px;
+  }
+
+  .form-horizontal input, 
+  .form-horizontal select, 
+  .form-horizontal textarea 
+  .form-horizontal .custom-select-container {
+    /* KEY FIX: Ensure it doesn't try to grow vertically */
+    flex: none !important; 
+    width: 100% !important;
+    height: 45px; /* Set a standard touch-friendly height */
+    min-height: 45px;
+  }
 }
 
 </style>

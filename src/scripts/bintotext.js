@@ -212,11 +212,10 @@ export function bufferToText (b) {
  */
 
 export const base58encodings = [
-  { name: "Bitcoin", value: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" },
-  { name: "Ripple",  value: "rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz" },
-  { name: "Flickr",  value: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ" },
-  { name: "IPFS",    value: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" },
-  { name: "GMP",     value: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv" }
+  { label: "Bitcoin / IPFS", value: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" },
+  { label: "Ripple",  value: "rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz" },
+  { label: "Flickr",  value: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ" },
+  { label: "GMP",     value: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv" }
 ]
 
 /*
@@ -301,9 +300,9 @@ export function bufferToBase58(b, enc = base58encodings[0].value) {
  */
 
 export const  ascii85encodings = [
-  { name: "Adobe Ascii85", value: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstu" },
-  { name: "Original btoa", value: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrst" },
-  { name: "Z85",           value: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#" }
+  { label: "Adobe Ascii85", value: "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstu" },
+  { label: "Original btoa", value: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrst" },
+  { label: "Z85",           value: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.-:+=^!/*?&<>()[]{}@%$#" }
 ]
 
 /*
@@ -406,8 +405,8 @@ export function bufferToAscii85 (b, enc = ascii85encodings[0].value) {
  */
 
 export const base64encodings = [
-  { name: "Standard base64",   value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" },
-  { name: "UUencode",   value: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" }
+  { label: "Standard base64",   value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" },
+  { label: "UUencode",   value: " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_" }
 ]
 
 /*
@@ -513,10 +512,10 @@ export function bufferToBase64 (bf, enc = base64encodings[0].value) {
  */
 
 export const base32encodings = [
-  { name: "RFC4648",      value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567" },
-  { name: "Extended Hex", value: "0123456789ABCDEFGHIJKLMNOPQRSTUV" },
-  { name: "z-base-32",    value: "ybndrfg8ejkmcpqxot1uwisza345h789" },
-  { name: "Geohash",      value: "0123456789bcdefghjkmnpqrstuvwxyz" },
+  { label: "RFC4648",      value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567" },
+  { label: "Extended Hex", value: "0123456789ABCDEFGHIJKLMNOPQRSTUV" },
+  { label: "z-base-32",    value: "ybndrfg8ejkmcpqxot1uwisza345h789" },
+  { label: "Geohash",      value: "0123456789bcdefghjkmnpqrstuvwxyz" },
 ]
 
 /*
@@ -645,7 +644,7 @@ export function bufferToBase32 (bf, enc = base32encodings[0].value) {
  */
 
 export const  base91encodings = [
-  { name: "Base91", value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./:;<=>?@[]^_`{|}~\"" }
+  { label: "Base91", value: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./:;<=>?@[]^_`{|}~\"" }
 ]
 
 /*

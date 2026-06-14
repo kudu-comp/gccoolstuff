@@ -1,220 +1,186 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('plotcoord.title') }}
-    </div>
-    <div class="mainpage">
-      <div>
-        <div
-          class="infoblock"
-          v-html="$t('plotcoord.long')"
-        />
-        <div class="row mb-2">
+
+  <header class="page-header">
+    <h1>{{ $t('plotcoord.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('plotcoord.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
           <label
-            class="form-label sm-size mb-2"
-            for="from"
-          >{{ $t('labels.coordformat') }}</label>
+          >{{ $t('labels.from') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
-            class="md-size mb-2"
           />
         </div>
-        <v-show-on-map id="go" class="btn mb-2 me-2" @Show="makeMap()" />
-        <div class="form-check custom-checkbox mb-2 me-2">
-          <input
-            id="showmarkers"
-            v-model="showmarkers"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="showmarkers"
-            class="form-check-label"
-          >{{ $t('mapmaker.showmark') }}</label>
+        <div class="form-group-vertical">
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="showmarkers">
+            <span class="checkmark"></span>
+            {{ $t('mapmaker.showmark') }}
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="showlabels">
+            <span class="checkmark"></span>
+            {{ $t('mapmaker.showlabel') }}
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="drawlines">
+            <span class="checkmark"></span>
+            {{ $t('plotcoord.drawlines') }}
+          </label>
+          <label class="checkbox-container">
+            <input type="checkbox" v-model="fillpoly">
+            <span class="checkmark"></span>
+            {{ $t('plotcoord.fillpoly') }}
+          </label>
         </div>
-        <div class="form-check mb-2 me-2">
-          <input
-            id="showlabels"
-            v-model="showlabels"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="showlabels"
-            class="form-check-label"
-          >{{ $t('mapmaker.showlabel') }}</label>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="makeMap">
+            {{ $t('buttons.show') }}
+          </button>
         </div>
-        <div class="form-check mb-2 me-2">
-          <input
-            id="drawlines"
-            v-model="drawlines"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="drawlines"
-            class="form-check-label"
-          >{{ $t('plotcoord.drawlines') }}</label>
-        </div>
-        <div class="form-check mb-2 me-2">
-          <input
-            id="fillpoly"
-            v-model="fillpoly"
-            type="checkbox"
-            class="form-check-input"
-          >
-          <label
-            for="fillpoly"
-            class="form-check-label"
-          >{{ $t('plotcoord.fillpoly') }}</label>
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-6">
-          <textarea
-            id="coordfrom"
-            ref="coordfrom"
-            v-model="coordfrom"
-            class="form-control mt-2"
-            :placeholder="$t('mapmaker.phcoord')"
-            rows="5"
-          />
-        </div>
-        <div class="col-6">
-          <textarea
-            id="labels"
-            v-model="labels"
-            class="form-control mt-2"
-            :placeholder="$t('mapmaker.phlabel')"
-            rows="5"
-          />
-        </div>
-      </div>
-      <div
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </div>
-      <v-map v-model:mylocation="coordfrom" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <textarea
+          ref="coordFromInput"
+          v-model="coordfrom"
+          class="mb-2"
+          :placeholder="$t('mapmaker.phcoord')"
+          rows="5"
+        />
+        <textarea
+          v-model="labels"
+          :placeholder="$t('mapmaker.phlabel')"
+          rows="5"
+          class="mb-2"
+        />
+        <p
+          v-show="errormsg"
+          class="errormsg mb-2"
+        >
+          {{ errormsg }}.
+        </p>          
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.map')">
+        <v-map v-model:mylocation="coordfrom" />     
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-import * as coords from '@/scripts/coords.js';
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useI18n } from 'vue-i18n'
+import L from 'leaflet'
+import * as coords from '@/scripts/coords.js'
 import VMap from '@/components/generic/VMap.vue'
-import VDatums from '@/components/generic/VDatums.vue';
-import VShowOnMap from '@/components/generic/VShowOnMap.vue';
-import L from 'leaflet';
+import VCard from '@/components/generic/VCard.vue'
+import VDatums from '@/components/generic/VDatums.vue'
+import VShowOnMap from '@/components/generic/VShowOnMap.vue'
 
-export default {
-  name: 'plotcoord',
+defineOptions({
+  name: 'PlotCoord'
+})
 
-  components: {
-    VDatums,
-    VMap,
-    VShowOnMap
-  },
+const store = useStore()
+const { t } = useI18n()
 
-  data: function() {
-    return {
-      errormsg: "",
-      from: "WGS84",
-      coordfrom : "",
-      labels: "",
-      drawlines: true,
-      fillpoly: false,
-      showlabels: false,
-      showmarkers: false,
-      drawlines: true,
-      fillpoly: false
-    }
-  },
+// --- State ---
+const errormsg = ref("")
+const from = ref("WGS84")
+const coordfrom = ref("")
+const labels = ref("")
+const drawlines = ref(true)
+const fillpoly = ref(false)
+const showlabels = ref(false)
+const showmarkers = ref(false)
 
-  mounted: function() {
-    this.$refs.coordfrom.focus();
-  },
+// --- Template Ref ---
+const coordFromInput = ref(null)
 
-  methods: {
+onMounted(() => {
+  coordFromInput.value?.focus()
+})
 
-    // Convert the coordinates
-    makeMap: function() {
+// --- Methods ---
 
-      // Reset error flag
-      this.errormsg = "" ;
-      this.result = "";
-      let c = [];
-      let promises = [];
-      let markertext = [];
+const makeMap = () => {
+  // Reset error flag
+  errormsg.value = ""
+  let pointsForLine = []
+  let promises = []
+  let markerTexts = []
 
-      // No input
-      if (!this.coordfrom) {
-        this.errormsg = this.$t('errors.nocoords');
-        return;
-      }
+  // No input validation
+  if (!coordfrom.value) {
+    errormsg.value = t('errors.nocoords')
+    return
+  }
 
-      // If there are no labels default to coordinates
-      if (!this.labels) {
-        markertext = this.coordfrom.match(/[^\r\n]+/g);
-      } else {
-        markertext = this.labels.match(/[^\r\n]+/g);
-      }
+  // Handle Labels logic
+  const inputLines = coordfrom.value.match(/[^\r\n]+/g) || []
+  if (!labels.value) {
+    markerTexts = inputLines
+  } else {
+    markerTexts = labels.value.match(/[^\r\n]+/g) || []
+  }
 
-      // Get all the lines form input and convert them one by one
-      let input = this.coordfrom.match(/[^\r\n]+/g);
+  // Check if there are enough labels for the points
+  if (inputLines.length !== markerTexts.length) {
+    errormsg.value = t('mapmaker.error1')
+    return
+  }
 
-      // Check if there are enough Labels
-      if (input.length != markertext.length) {
-        this.errormsg = this.$t('mapmaker.error1');
-        return;
-      }
+  // Convert all points to WGS84 for Leaflet
+  for (let i = 0; i < inputLines.length; i++) {
+    promises.push(coords.convertCoordFromText(inputLines[i], from.value, 'WGS84'))
+  }
 
-      // Convert all points to WGS84
-      for (let i = 0; i < input.length; i++) {
-        promises.push(coords.convertCoordFromText(input[i], this.from, 'WGS84'));
-      }
+  Promise.all(promises)
+    .then((points) => {
+      const mymap = store.state.mymap
 
-      Promise.all(promises)
-        .then( points => {
+      for (let i = 0; i < points.length; i++) {
+        // Fill the array for polylines/polygons
+        pointsForLine.push({ lon: points[i].lon, lat: points[i].lat })
 
-          for (let i = 0; i < points.length; i++) {
+        // Add a marker to the map for each coordinate if requested
+        if (showmarkers.value) {
+          const marker = L.marker(points[i]).addTo(mymap)
 
-            // Fill the array for polylines
-            c.push( { lon: points[i].lon, lat: points[i].lat } );
-      
-            // Add a marker to the map for each coordinate
-            if (this.showmarkers) {
-              let marker = new L.marker(points[i]).addTo(this.$store.state.mymap);
-
-              // Create a popup that doesn't close and bind it to the marker
-              if (this.showlabels) {
-                let p = new L.Popup({ autoClose: false, closeOnClick: false })
-                      .setContent(markertext[i])
-                      .setLatLng(points);
-                marker.bindPopup(p).openPopup();
-              }
-            }
-
+          // Create a popup that doesn't close and bind it to the marker
+          if (showlabels.value) {
+            const p = L.popup({ autoClose: false, closeOnClick: false })
+              .setContent(markerTexts[i])
+              .setLatLng(points[i])
+            marker.bindPopup(p).openPopup()
           }
-          // Draw polylines if requested
-          if (this.drawlines) {
-            c.push(c[0]);
-            if (this.fillpoly) {
-              L.polygon(c, {color: 'red', fillColor: 'red', fillOpacity: 0.5}).addTo(this.$store.state.mymap);   
-            } else {
-              L.polyline(c, {color: 'red'}).addTo(this.$store.state.mymap);
-            }
+        }
       }
 
-        })
-        .catch((error) => {
-          console.error('Error ', error);
-          this.errormsg = this.$t('errors.incorrectcoords');
-        });
+      // Draw polylines/polygons if requested
+      if (drawlines.value && pointsForLine.length > 0) {
+        // Add first point to end to close the loop
+        const loop = [...pointsForLine, pointsForLine[0]]
 
-    },
-  },
+        if (fillpoly.value) {
+          L.polygon(loop, { color: 'red', fillColor: 'red', fillOpacity: 0.5 }).addTo(mymap)
+        } else {
+          L.polyline(loop, { color: 'red' }).addTo(mymap)
+        }
+      }
+    })
+    .catch((error) => {
+      console.error('Error ', error)
+      errormsg.value = t('errors.incorrectcoords')
+    })
 }
 </script>

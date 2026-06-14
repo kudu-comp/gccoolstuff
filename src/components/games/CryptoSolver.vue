@@ -1,341 +1,264 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('cryptosolver.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('cryptosolver.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('cryptosolver.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('cryptosolver.nums') }}</label>
+          <input type="text" v-model="nums" ref="numsRef">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('cryptosolver.outcome') }}</label>
+          <input type="number" v-model="outcome">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="useall">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.useall') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowneg">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowneg') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowdec">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowdec') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowadd">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowadd') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowsub">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowsub') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowmult">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowmult') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowdiv">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowdiv') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowmod">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowmod') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="allowpow">
+          <span class="checkmark"></span>
+          {{ $t('cryptosolver.allowpow') }}
+        </label>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate @calculate="findCalculation()"></v-calculate>
+        </div>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('cryptosolver.long')"
-      />
-      <!-- Form fields -->
-      <!-- Text input -->
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="nums"
-        >{{$t('cryptosolver.nums')}}</label>
-        <input
-          id="nums"
-          v-model="nums"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-          autofocus
-        >
-      </div>
-      <div class="row">
-        <label for="outcome" class="form-label md-size mb-2">{{$t('cryptosolver.outcome')}}</label>
-        <input type="number" min="0" v-model="outcome" id="outcome" class="form-control md-size mb-2"/>
-      </div>
-      <div class="form-check">
-        <input
-          id="useall"
-          v-model="useall"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="useall"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.useall') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowneg"
-          v-model="allowneg"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowneg"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowneg') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowdec"
-          v-model="allowdec"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowdec"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowdec') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowadd"
-          v-model="allowadd"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowadd"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowadd') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowsub"
-          v-model="allowsub"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowsub"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowsub') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowmult"
-          v-model="allowmult"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowmult"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowmult') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowdiv"
-          v-model="allowdiv"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowdiv"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowdiv') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowmod"
-          v-model="allowmod"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowmod"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowmod') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="allowpow"
-          v-model="allowpow"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="allowpow"
-          class="form-check-label mb-2"
-        >{{ $t('cryptosolver.allowpow') }}</label>
-      </div>
-      <v-calculate class="mb-2" id="calc" @calculate="findCalculation()"></v-calculate>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" v-html="result"></div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="result" class="card resultbox" v-html="result"></div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-import VCalculate from '@/components/generic/VCalculate.vue' 
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCalculate from '@/components/generic/VCalculate.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+defineOptions({
+  name: "CryptoSolver"
+})
 
-  name: "CryptoSolver",
+const { t } = useI18n()
 
-  components: {
-    VCalculate
-  },
+// --- State ---
+const useall = ref(true)
+const outcome = ref(null)
+const nums = ref("")
+const result = ref("")
+const errormsg = ref("")
+const found = ref(false)
 
-  data() {
-    return {
-      useall: true,
-      outcome: null,
-      nums: "",
-      result: "",
-      calc: "",
-      errormsg: "",
-      found: false,
-      allowneg: false,
-      allowdec: false,
-      allowadd: true,
-      allowsub: true,
-      allowmult: true,
-      allowdiv: true,
-      allowmod: false,
-      allowpow: false
-    };
-  },
+const allowneg = ref(false)
+const allowdec = ref(false)
+const allowadd = ref(true)
+const allowsub = ref(true)
+const allowmult = ref(true)
+const allowdiv = ref(true)
+const allowmod = ref(false)
+const allowpow = ref(false)
+const numsRef=ref(null)
 
-  methods: {
+onMounted(() => {
+  numsRef.value?.focus()
+})
+// --- Internal Recursive Logic ---
 
-    nextTry: function (a, calc) {
-      // Take two numbers apply the the basic operation, create a new array and try again
-      if (this.found) return;
-      if (a.length === 1) {
-        if (a[0] === this.outcome) {
-          // We got a match
-          this.result = this.$t('cryptosolver.found') + this.outcome + "<br>" + calc;
-          this.found = true;
+const nextTry = (a, calc) => {
+  // If we found a solution in another branch, stop everything
+  if (found.value) return
+
+  // Base Case: Only one number left in the array
+  if (a.length === 1) {
+    if (a[0] === outcome.value) {
+      result.value = `${t('cryptosolver.found')} ${outcome.value}<br>${calc}`
+      found.value = true
+    }
+    return
+  }
+
+  for (let i = 0; i < a.length; i++) {
+    // If "Must use all numbers" is OFF, check if any intermediate number matches the target
+    if (!useall.value && a[i] === outcome.value) {
+      result.value = `Found ${outcome.value}<br>${calc}`
+      found.value = true
+      return
+    }
+
+    for (let j = i + 1; j < a.length; j++) {
+      // Build a new array 'h' containing all numbers except the two being operated on
+      let h = []
+      for (let k = 0; k < a.length; k++) {
+        if (k !== i && k !== j) h.push(a[k])
+      }
+
+      const n1 = a[i]
+      const n2 = a[j]
+
+      // --- Try Allowed Operations ---
+
+      // Addition
+      if (allowadd.value) {
+        h.push(n1 + n2)
+        nextTry(h, calc + `${n1} + ${n2} = ${n1 + n2}<br>`)
+        h.pop()
+      }
+
+      // Multiplication
+      if (allowmult.value) {
+        h.push(n1 * n2)
+        nextTry(h, calc + `${n1} × ${n2} = ${n1 * n2}<br>`)
+        h.pop()
+      }
+
+      // Subtraction (n1 - n2 and n2 - n1)
+      if (allowsub.value) {
+        // n1 - n2
+        if (allowneg.value || n1 > n2) {
+          h.push(n1 - n2)
+          nextTry(h, calc + `${n1} - ${n2} = ${n1 - n2}<br>`)
+          h.pop()
+        }
+        // n2 - n1
+        if (!found.value && (allowneg.value || n2 > n1)) {
+          h.push(n2 - n1)
+          nextTry(h, calc + `${n2} - ${n1} = ${n2 - n1}<br>`)
+          h.pop()
         }
       }
-      for (let i = 0; i < a.length; i++) {
-        // If we don't need to use all numbers see if we got one
-        if (!this.useall && a[i] === this.outcome) {
-          this.result = "Found " + this.outcome + "<br>" + calc;
-          this.found = true;
-          return;
+
+      // Division
+      if (allowdiv.value) {
+        // n1 / n2
+        if (n2 !== 0 && (allowdec.value || n1 % n2 === 0)) {
+          h.push(n1 / n2)
+          nextTry(h, calc + `${n1} ÷ ${n2} = ${n1 / n2}<br>`)
+          h.pop()
         }
-        // Try add, multiply, substract (no negative numbers) and divide (no decimals)
-        for (let j = i + 1; j < a.length; j++) {
-          let h = [];
-          // Build the array with unused numbers
-          for (let k = 0; k < a.length; k++) {
-            if (k !== i && k !== j) h.push(a[k]);
-          }
-          // Try addition
-          if (this.allowadd) {
-            h.push(a[i] + a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " + " + a[j] + " = " + (a[i] + a[j]) + "<br>"
-            );
-            h.pop();
-          }
-          // Try multiple
-          if (this.allowmult) {
-            h.push(a[i] * a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " x " + a[j] + " = " + a[i] * a[j] + "<br>"
-            );
-            h.pop();
-          }
-          // Try substract i - j
-          if (this.allowsub && (this.allowneg || a[i] > a[j])) {
-            h.push(a[i] - a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " - " + a[j] + " = " + (a[i] - a[j]) + "<br>"
-            );
-            h.pop();
-          }
-          // Try substract j - i
-          if (this.allowsub && (this.allowneg || a[j] > a[i])) {
-            h.push(a[j] - a[i]);
-            this.nextTry(
-              h,
-              calc + a[j] + " - " + a[i] + " = " + (a[j] - a[i]) + "<br>"
-            );
-            h.pop();
-          }
-          // Try division i / j
-          if (this.allowdiv && (this.allowdec || a[i] % a[j] === 0)) {
-            h.push(a[i] / a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " : " + a[j] + " = " + a[i] / a[j] + "<br>"
-            );
-            h.pop();
-          }
-          // Try division j / i
-          if (this.allowdiv && (this.allowdec || a[j] % a[i] === 0)) {
-            h.push(a[j] / a[i]);
-            this.nextTry(
-              h,
-              calc + a[j] + " : " + a[i] + " = " + a[j] / a[i] + "<br>"
-            );
-            h.pop();
-          }
-          // Try mod i % j
-          if (this.allowmod) {
-            h.push(a[i] % a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " % " + a[j] + " = " + a[i] % a[j] + "<br>"
-            );
-            h.pop();
-          }
-          // Try mod j % i
-          if (this.allowmod) {
-            h.push(a[j] % a[i]);
-            this.nextTry(
-              h,
-              calc + a[j] + " % " + a[i] + " = " + a[j] % a[i] + "<br>"
-            );
-            h.pop();
-          }
-          // Try power i ** j
-          if (this.allowpow) {
-            h.push(a[i] ** a[j]);
-            this.nextTry(
-              h,
-              calc + a[i] + " ^ " + a[j] + " = " + a[i] ** a[j] + "<br>"
-            );
-            h.pop();
-          }
-          // Try power j ** i
-          if (this.allowpow) {
-            h.push(a[j] ** a[i]);
-            this.nextTry(
-              h,
-              calc + a[i] + " ^ " + a[i] + " = " + a[j] ** a[i] + "<br>"
-            );
-            h.pop();
-          }
+        // n2 / n1
+        if (!found.value && n1 !== 0 && (allowdec.value || n2 % n1 === 0)) {
+          h.push(n2 / n1)
+          nextTry(h, calc + `${n2} ÷ ${n1} = ${n2 / n1}<br>`)
+          h.pop()
         }
       }
-    },
 
-    findCalculation: function () {
-
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      this.found = false;
-      if (!this.outcome) {
-        this.errormsg = this.$t('cryptosolver.nooutcome');
-        return;
+      // Modulo
+      if (allowmod.value) {
+        if (n2 !== 0) {
+          h.push(n1 % n2)
+          nextTry(h, calc + `${n1} % ${n2} = ${n1 % n2}<br>`)
+          h.pop()
+        }
+        if (!found.value && n1 !== 0) {
+          h.push(n2 % n1)
+          nextTry(h, calc + `${n2} % ${n1} = ${n2 % n1}<br>`)
+          h.pop()
+        }
       }
 
-      // Parse numbers form the input and convert to integers
-      let h = this.nums.match(/([!0-9]+)/g);
-      if (!h) {
-        this.errormsg = this.$t('cryptosolver.nonums');
-        return;
+      // Power
+      if (allowpow.value) {
+        const p1 = Math.pow(n1, n2)
+        if (isFinite(p1)) {
+          h.push(p1)
+          nextTry(h, calc + `${n1} ^ ${n2} = ${p1}<br>`)
+          h.pop()
+        }
+        const p2 = Math.pow(n2, n1)
+        if (!found.value && isFinite(p2)) {
+          h.push(p2)
+          nextTry(h, calc + `${n2} ^ ${n1} = ${p2}<br>`)
+          h.pop()
+        }
       }
-      let numbers = h.map((e) => parseInt(e));
-      if (!numbers || numbers.length === 0) {
-        this.errormsg = this.$t('cryptosolver.nonums');
-        return;
-      }
+    }
+  }
+}
 
-      this.nextTry(numbers, "");
-      if (!this.found) {
-        this.result = this.$t('cryptosolver.nosolution');
-      }
-    },
+// --- Main Action ---
 
-  },
-};
+const findCalculation = () => {
+  result.value = ""
+  errormsg.value = ""
+  found.value = false
 
+  if (outcome.value === null || outcome.value === undefined) {
+    errormsg.value = t('cryptosolver.nooutcome')
+    return
+  }
+
+  // Parse numbers from the input string
+  const matches = nums.value.match(/([0-9]+)/g)
+  if (!matches) {
+    errormsg.value = t('cryptosolver.nonums')
+    return
+  }
+
+  const numberList = matches.map(e => parseInt(e, 10))
+  if (numberList.length === 0) {
+    errormsg.value = t('cryptosolver.nonums')
+    return
+  }
+
+  // Start the recursive search
+  nextTry(numberList, "")
+
+  if (!found.value) {
+    result.value = t('cryptosolver.nosolution')
+  }
+}
 </script>
 
-<style scoped>
-</style>

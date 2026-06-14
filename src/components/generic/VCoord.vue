@@ -1,135 +1,107 @@
 <template>
-  <div class="row">
-    <label
-      class="form-label sm-size mb-2"
-      for="coordinput"
-    >
-      <slot name="label">{{ $t('labels.coordinate') }}</slot>
-    </label>
-    <input
-      id="coordinput"
-      ref="coordinput"
-      type="text"
-      class="form-control md-size mb-2 me-2"
-      :value="coord"
-      @input="updateCoord($event.target.value)"
-    >
-    <select
-      id="coorddatum"
-      class="form-select md-size mb-2"
-      :value="datum"
-      @input="updateDatum($event.target.value)"
-    >
-      <option value="WGS84">
-        WGS84
-      </option>
-      <option value="EPSG:4269">
-        NAD / North American Datum
-      </option>
-      <option value="UTM">
-        UTM
-      </option>
-      <option value="MGRS">
-        MGRS / US Military Grid
-      </option>
-      <option disabled>
-        --- National grids ---
-      </option>
-      <option value="EPSG:27700">
-        OSGB 1936 / British National Grid
-      </option>
-      <option value="OSGB">
-        OSGB 1936 with zones
-      </option>
-      <option value="EPSG:5680">
-        Gauss-Kruger (DHDN)
-      </option>
-      <option value="EPSG:28992">
-        Dutch grid / RD
-      </option>
-      <option value="EPSG:2154">
-        RGF93 / Lambert-93 France
-      </option>
-      <option value="EPSG:3812">
-        Belgian Lambert 2008
-      </option>
-      <option value="EPSG:3857">
-        Pseudo Mercator for online maps
-      </option>
-      <option disabled>
-        --- Hashes and other stuff ---
-      </option>
-      <option value="QTH">
-        Maidenhead / QTH locator
-      </option>
-      <option value="OLC">
-        Open location code
-      </option>
-      <option value="Geohash">
-        Geohash
-      </option>
-      <option value="MapcodeL">
-        Mapcode local
-      </option>
-      <option value="MapcodeI">
-        Mapcode international
-      </option>
-      <option value="Geohash36">
-        Geohash 36
-      </option>
-      <option value="NAC">
-        Natural Area Code
-      </option>
-      <option value="Geo3x3">
-        Geo3x3
-      </option>
-      <option value="Csquare">
-        C-Squares
-      </option>
-      <option value="Geohex">
-        Geohex
-      </option>
-      <option disabled>
-        --- Define your own ---
-      </option>
-      <option value="Proj4js">
-        Proj4js definition
-      </option>
-    </select>
-    <slot name="popup"></slot>
+  <label
+    ><slot name="label">{{ $t('labels.coordinate') }}</slot>
+  </label>
+  <input
+    id="coordinput"
+    type="text"
+    class="fixed-input"
+    :value="coord"
+    @input="$emit('update:coord', $event.target.value)"
+  >
+  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+    <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+      {{ selectDatum }}
+      <span class="chevron">▾</span>
+    </div>
+    <transition name="fade-slide">
+      <div v-if="isDropdownOpen" class="custom-options-list">
+        <div 
+          v-for="option in datumOptions"
+          class="custom-option" 
+          :class="{ 'selected': datum === option.value }" 
+          :disabled="option.disabled"
+          @click="$emit('update:datum', option.value)"
+        >
+          {{ option.label }}
+          <span v-if="datum ===  option.value" class="check">✓</span>
+        </div>
+      </div>
+    </transition>
   </div>
+  <slot name="popup"></slot>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from 'vue'
 
-export default {
-  props: {
-    coord: {
-      type: String,
-      required: true
-    },
-    datum: {
-      type: String,
-      required: true
-    }
+const props = defineProps({
+  coord: {
+    type: String,
+    required: true
   },
-
-  emits: [
-    'update:coord',
-    'update:datum'
-  ],
-
-  mounted: function() {
-    this.$refs.coordinput.focus();
-  },
-  
-  methods: {
-    updateCoord: function (value) {
-      this.$emit ('update:coord', value);
-    },
-    updateDatum: function (value) {
-      this.$emit ('update:datum', value);
-    }
+  datum: {
+    type: String,
+    required: true
   }
-}
+})
+
+defineEmits(['update:coord', 'update:datum'])
+
+// Reference for auto-focusing the input
+const isDropdownOpen = ref(false);
+
+const selectDatum = computed(() =>  {
+
+  // Check if categories exists and has items
+    if (!datumOptions || datumOptions.length === 0) {
+      return 'Loading...'; 
+    }
+    
+    // Find the selected item
+    const found = datumOptions.find(a => a.value === props.datum);
+    isDropdownOpen.value = false;
+    
+    // Return the label if found, otherwise a default placeholder
+    return found ? found.label : 'Select a datum';
+  });
+
+// Options array for the select dropdown
+const datumOptions = [
+  { label: 'WGS84', value: 'WGS84' },
+  { label: 'NAD / North American Datum', value: 'EPSG:4269' },
+  { label: 'UTM', value: 'UTM' },
+  { label: 'MGRS / US Military Grid', value: 'MGRS' },
+  
+  { label: '--- National grids ---', disabled: true },
+  { label: 'OSGB 1936 / British National Grid', value: 'EPSG:27700' },
+  { label: 'OSGB 1936 with zones', value: 'OSGB' },
+  { label: 'Gauss-Kruger (DHDN)', value: 'EPSG:5680' },
+  { label: 'Dutch grid / RD', value: 'EPSG:28992' },
+  { label: 'RGF93 / Lambert-93 France', value: 'EPSG:2154' },
+  { label: 'Belgian Lambert 2008', value: 'EPSG:3812' },
+  { label: 'Pseudo Mercator for online maps', value: 'EPSG:3857' },
+  
+  { label: '--- Hashes and other stuff ---', disabled: true },
+  { label: 'Maidenhead / QTH locator', value: 'QTH' },
+  { label: 'Open location code', value: 'OLC' },
+  { label: 'Geohash', value: 'Geohash' },
+  { label: 'Mapcode local', value: 'MapcodeL' },
+  { label: 'Mapcode international', value: 'MapcodeI' },
+  { label: 'Geohash 36', value: 'Geohash36' },
+  { label: 'Natural Area Code', value: 'NAC' },
+  { label: 'Geo3x3', value: 'Geo3x3' },
+  { label: 'C-Squares', value: 'Csquare' },
+  { label: 'Geohex', value: 'Geohex' },
+  
+  { label: '--- Define your own ---', disabled: true },
+  { label: 'Proj4js definition', value: 'Proj4js' }
+]
 </script>
+
+<style scoped>
+
+.form-horizontal label{
+  flex: 0 0 100px;
+}
+</style>

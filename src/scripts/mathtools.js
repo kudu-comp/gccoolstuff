@@ -98,6 +98,8 @@ export function checkprime (n) {
  */
 export function primeFactorization (n) {
   
+    if (n === 0) return [0];
+
     let a = [];
 
     // Get all the 2 factors

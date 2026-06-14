@@ -1,150 +1,161 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('booksearch.title') }}
+  <header class="page-header">
+    <h1>{{ $t('booksearch.title') }}</h1>
+  </header>
+
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <!-- Intro Card -->
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('booksearch.long')" />
+      </VCard>
+
+      <!-- Settings/Search Card -->
+      <VCard :title="$t('labels.settings')">
+        <div class="form-group-vertical">
+          <v-search
+            v-model:search="txt"
+            @keyup.enter="goSearch"
+          />
+          <div class="radio-group">
+            <label>{{ $t('booksearch.sel') }}</label>
+            <div class="radio-options-vertical">
+              <label class="radio-item">
+                <input type="radio" value="1" v-model="sel">
+                <span class="radio-mark"></span> {{ $t('booksearch.short') }}
+              </label>
+              <label class="radio-item">
+                <input type="radio" value="2" v-model="sel">
+                <span class="radio-mark"></span> {{ $t('booksearch.extra') }}
+              </label>
+            </div>
+          </div>
+          <p v-show="errormsg" class="errormsg">
+            {{ errormsg }}
+          </p>
+          <div class="button-row mt-2">
+            <button 
+              class="btn btn-primary" 
+              :disabled="loading" 
+              @click="goSearch"
+            >
+              {{ $t('buttons.search') }}
+            </button>
+          </div>
+        </div>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('booksearch.long')"
-      />
-      <!-- Form fields -->
-      <div class="row">
-        <v-search
-          id="searchstr"
-          ref="searchstr"
-          v-model:search="txt"
-          @keyup.enter="goSearch"
-        />
-      </div>
-      <div>
-        <div class="form-label mb-2">
-          {{ $t('booksearch.sel') }}
-        </div>
-        <div class="form-check">
-          <input
-            id="number1"
-            v-model="sel"
-            type="radio"
-            value="1"
-            class="form-check-input mb-2"
-          >
-          <label
-            class="form-check-label mb-2"
-            for="number1"
-          >{{ $t('booksearch.short') }}</label>
-        </div>
-        <div class="form-check">
-          <input
-            id="number2"
-            v-model="sel"
-            type="radio"
-            value="2"
-            class="form-check-input mb-2"
-          >
-          <label
-            class="form-check-label mb-2"
-            for="number2"
-          >{{ $t('booksearch.extra') }}</label>
-        </div>
-      </div>
-      <button id="btnsearch" class="btn mb-2 md-size" @click="goSearch" >
-        <i class="fa-solid fa-search"></i> {{ $t('buttons.search') }}          
-      </button>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div v-if="result" class="resultbox" v-html="result"></div>
+
+    <!-- Results Card -->
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="result" class="resultbox" v-html="result" />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import VSearch from '@/components/generic/VSearch.vue';
+import VCard from '@/components/generic/VCard.vue';
 
-import VSearch from '@/components/generic/VSearch.vue'
-export default {
+defineOptions({ name: 'BookSearch' });
 
-  name: "ComponentName",
+const { t } = useI18n();
 
-  components: {
-    VSearch
-  },
+// --- State ---
+const txt = ref("");
+const sel = ref("1"); // "1" for short, "2" for extra
+const result = ref("");
+const errormsg = ref("");
+const loading = ref(false);
 
-  data() {
-    return {
-      txt: "",
-      sel: "1",
-      url: "https://openlibrary.org/search.json?q=",
-      result: "",
-      errormsg: ""
-    };
-  },
+const API_URL = "https://openlibrary.org/search.json?q=";
 
-  methods: {
+const goSearch = async () => {
+  const query = txt.value.trim();
+  
+  // Reset
+  result.value = "";
+  errormsg.value = "";
 
-    goSearch: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
+  // Validation
+  if (query.length < 5) {
+    errormsg.value = t("Search needs to be at least 5 characters.");
+    return;
+  }
 
-      // Catch stupid searches
-      if (this.txt.trim().length < 5) {
-        this.errormsg = "Search needs to be at least 5 characters.";
-        return;
+  loading.value = true;
+
+  try {
+    const response = await fetch(API_URL + encodeURIComponent(query));
+    if (!response.ok) throw new Error("Network response was not ok");
+    
+    const data = await response.json();
+    
+    if (data.numFound === 0) {
+      result.value = t('errors.noresult');
+      loading.value = false;
+      return;
+    }
+
+    let html = `<b>${t('booksearch.bkfnd')} ${data.numFound}</b><br>`;
+    
+    // Iterate through docs (limit to length returned in response)
+    const docs = data.docs;
+    for (let i = 0; i < docs.length; i++) {
+      const book = docs[i];
+
+      if (book.title) {
+        html += `<br><strong>${t('booksearch.titles')}</strong> ${book.title}<br>`;
       }
 
-      //
-      fetch(this.url + this.txt)
-        .then((response) => response.json())
-        .then((data) => {
-          this.result = "<b>" + this.$t('booksearch.bkfnd') + data.numFound + "</b><BR>";
-          for (let i = 0; i < data.numFound; i++) {
-            if (data.docs[i].title) {
-              this.result += "<BR>" + this.$t('booksearch.titles') + data.docs[i].title + "<BR>";
-            }
-            if (data.docs[i].author_name) {
-              for (let j = 0; j < data.docs[i].author_name.length; j++)
-                this.result += this.$t('booksearch.author') + data.docs[i].author_name[j] + "<BR>";
-            }
-            if (data.docs[i].isbn) {
-              for (let j = 0; j < data.docs[i].isbn.length; j++){
-                this.result += this.$t('booksearch.isbn') + data.docs[i].isbn[j] + "<BR>";
-                if (this.sel === "1") break;                
-              }
-            }
-            if (this.sel === "1") continue;
-            if (data.docs[i].first_publish_year) {
-              this.result += this.$t('booksearch.firstpub') + data.docs[i].first_publish_year + "<BR>";
-            }
-            if (data.docs[i].language) {
-              for (let j = 0; j < data.docs[i].language.length; j++)
-                this.result += this.$t('booksearch.lang') + data.docs[i].language[j] + "<BR>";
-            }
-            if (data.docs[i].publisher) {
-              for (let j = 0; j < data.docs[i].publisher.length; j++)
-                this.result += this.$t('booksearch.pub') + data.docs[i].publisher[j] + "<BR>";
-            }
-            if (data.docs[i].edition_count) {
-              this.result += this.$t('booksearch.edcnt') + data.docs[i].edition_count + "<BR>";
-            }
-          }
-        })
-        .catch((error) => {
-          console.error("Error ", error);
-          this.errormsg = this.$t('errors.generic');
+      if (book.author_name) {
+        book.author_name.forEach(author => {
+          html += `<strong>${t('booksearch.author')}</strong> ${author}<br>`;
         });
-    },
+      }
 
-  },
+      if (book.isbn) {
+        // In mode "1" (short), we only show the first ISBN
+        const isbnsToShow = sel.value === "1" ? [book.isbn[0]] : book.isbn;
+        isbnsToShow.forEach(isbn => {
+          html += `<strong>${t('booksearch.isbn')}</strong> ${isbn}<br>`;
+        });
+      }
+
+      // If Short mode, skip the rest of the details for this book
+      if (sel.value === "1") {
+        continue;
+      }
+
+      // Extra Details (Mode 2)
+      if (book.first_publish_year) {
+        html += `<strong>${t('booksearch.firstpub')}</strong> ${book.first_publish_year}<br>`;
+      }
+
+      if (book.language) {
+        html += `<strong>${t('booksearch.lang')}</strong> ${book.language.join(", ")}<br>`;
+      }
+
+      if (book.publisher) {
+        // Limiting publisher count to avoid huge blocks
+        const publishers = book.publisher.slice(0, 5).join(", ");
+        html += `<strong>${t('booksearch.pub')}</strong> ${publishers}<br>`;
+      }
+
+      if (book.edition_count) {
+        html += `<strong>${t('booksearch.edcnt')}</strong> ${book.edition_count}<br>`;
+      }
+    }
+    result.value = html;
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    errormsg.value = t('errors.generic');
+  } finally {
+    loading.value = false;
+  }
 };
-
 </script>
-
-<style scoped>
-</style>

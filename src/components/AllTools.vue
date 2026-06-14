@@ -1,528 +1,395 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('alltools.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('alltools.long')"
-      />
-      <div class="row">
+
+  <header class="page-header">
+    <h1>{{ $t('alltools.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('alltools.long')" />
+      </VCard>
+      <VCard :title="$t('labels.search')">
         <v-search
           id="searchstr"
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />
-        <button id="btnsearch" class="sm-size btn mb-2 ms-2 me-2" @click="goSearch" :title="$t('buttons.search')">
-          <i class="fa-solid fa-search"></i>          
-        </button>
-        <button id="bnreset" class="sm-size btn mb-2 me-2" :title="$t('buttons.reset')" @click="showAll" >
-          <i class="fa-solid fa-refresh"></i>          
-        </button>
-        <button
-          id="collapseall"
-          class="md-size btn mb-2 me-2"
-          :title="$t('buttons.collall')"
-          @click="collapseAll"
-        >
-          {{ $t('buttons.collall') }}
-        </button>
-        <button
-          id="expandall"
-          class="md-size btn mb-2 me-2"
-          :title="$t('buttons.expall')"
-          @click="expandAll"
-        >
-          {{ $t('buttons.expall') }}
-        </button>
-      </div>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Show tools -->
-      <div class="level1" v-for="l1 in alltools">
-        <span v-show="l1.l2 && l1.show" @click="l1.expand=!l1.expand">
-          <span v-if="l1.expand">
-            <i class="levelbtn fa-solid fa-caret-down"></i>
-          </span>
-          <span v-if="!l1.expand">
-            <i class="levelbtn fa-solid fa-caret-right"></i>
-          </span>
-        </span>
-        <a v-show="l1.show" :href="l1.href">{{ l1.name }}</a>
-        <div class="level2" v-show="l1.l2 && l1.expand && l1.show" v-for="l2 in l1.l2">
-          <span v-show="l2.l3 && l2.show" @click="l2.expand=!l2.expand">
-            <span v-if="l2.expand">
-              <i class="levelbtn fa-solid fa-caret-down"></i>
-            </span>
-            <span v-if="!l2.expand">
-              <i class="levelbtn fa-solid fa-caret-right"></i>
-            </span>
-          </span>
-          <a v-show="l2.show" :href="l2.href">{{ l2.name }}</a>
-          <div class="level3" v-show="l2.l3 && l2.expand && l2.show" v-for="l3 in l2.l3">
-            <a v-show="l3.show" :href="l3.href">{{ l3.name }}</a>
-          </div>
+        <div class="button-row">
+          <button class="btn btn-primary" @click="goSearch" :title="$t('buttons.search')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <button class="btn btn-primary" :title="$t('buttons.reset')" @click="reset" >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+            </svg>
+          </button>
+          <button class="btn btn-primary" :title="$t('buttons.collall')" @click="collapseList">
+            {{ $t('buttons.collall') }}
+          </button>
+          <button class="btn btn-primary" :title="$t('buttons.expall')" @click="expandList">
+            {{ $t('buttons.expall') }}
+          </button>
         </div>
-      </div>
+        <!-- Error message -->
+        <p
+          v-if="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <!-- isVisible tools -->
+         <TreeList 
+          ref="listComponent" 
+          :items="alltools" 
+        />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import VSearch from '@/components/generic/VSearch.vue'
+import VCard from '@/components/generic/VCard.vue'
+import TreeList from '@/components/generic/TreeList.vue';
+
+// Script imports
 import { codepages } from '@/scripts/codebook.js'
 import { fontdefs } from '@/scripts/fontspecials.js'
-import { ciphers } from '@/scripts/ciphers.js'
-import * as bf  from '@/scripts/brainfuck.js'
-import { sequences } from '@/scripts/mathtools.js'
-import { numprops } from '@/scripts/mathtools.js'	
+import { ciphers as cipherData } from '@/scripts/ciphers.js'
+import * as bf from '@/scripts/brainfuck.js'
+import { sequences, numprops as numPropsData } from '@/scripts/mathtools.js'
 import { piglatin } from "@/scripts/piglatin.js"
- 
-export default {
 
-  name: "AllTools",
+defineOptions({
+  name: "AllTools"
+})
 
-  components: {
-    VSearch
+const props = defineProps({
+  s: {
+    type: String,
+    required: false,
+    default: "code"
+  }
+})
+
+const { t } = useI18n()
+const route = useRoute()
+const listComponent = ref(null);
+
+// --- State ---
+const errormsg = ref("")
+const searchstr = ref("")
+const codes = ref(null)
+const fonts = ref(null)
+const ciphers = ref(null)
+const bfvars = ref(null)
+const numprops = ref(null)
+const seqs = ref(null)
+const pigs = ref(null)
+
+const alltools = ref([
+  {
+    link: "/helpcoord", name: t('menu.coordinates'), isVisible: true, expand: false,
+    children : [
+      { link: "/convert", name: "", isVisible: true },
+      { link: "/project", name: "", isVisible: true },
+      { link: "/mapmaker", name: "", isVisible: true },
+      { link: "/incomplete", name: "", isVisible: true },
+      { link: "/lines", name: "", isVisible: true },
+      { link: "/triangles", name: "", isVisible: true },
+      { link: "/circles", name: "", isVisible: true },
+      { link: "/antipode", name: "", isVisible: true },
+      { link: "/plotcoord", name: "", isVisible: true },
+      { link: "/revwherigo", name: "", isVisible: true }
+    ],
   },
-
-  // Prop cphr is parameter passed by route (optional)
-  props: {
-    s: {
-      type: String,
-      required: false,
-      default: "code"
-    },
+  {
+    link: "/helptext", name: t('menu.texttools'), isVisible: true, expand: false,
+    children: [
+      { link: "/tryanswers", name: "", isVisible: true },
+      { link: "/wordvalue", name: "", isVisible: true },
+      { link: "/charcodes", name: "", isVisible: true },
+      { link: "/analtxt", name: "", isVisible: true },
+      { link: "/texttonum", name: "", isVisible: true },
+      { link: "/keyboards", name: "", isVisible: true },
+      { link: "/texttoss", name: "", isVisible: true },
+      { link: "/piglatin", name: "", isVisible: true, children: [] },
+      { link: "/numerology", name: "", isVisible: true, children: [] },
+      { link: "/textchunks", name: "", isVisible: true }
+    ]
   },
-  
-  data() {
-    return {
-      errormsg: "",
-      searchstr: "",
-      codes: null,
-      fonts: null,
-      ciphers: null,
-      bfvars: null,
-      numprops: null,
-      seqs: null,
-      pigs: null,
-      alltools: [
-        {
-          href: "/helpcoord",          name: this.$t('menu.coordinates'), show : true, expand: false,
-          l2: [
-            { href: "/convert",        name: "", show : true       },
-            { href: "/project",        name: "", show : true       },
-            { href: "/mapmaker",       name: "", show : true       },
-            { href: "/incomplete",     name: "", show : true       },
-            { href: "/lines",          name: "", show : true       },
-            { href: "/triangles",      name: "", show : true       },
-            { href: "/circles",        name: "", show : true       },
-            { href: "/antipode",       name: "", show : true       },
-            { href: "/plotcoord",      name: "", show : true       },
-            { href: "/w3w",            name: "", show : true       },
-            { href: "/revwherigo",     name: "", show : true       }
-          ],
-        },
-        {
-          href: "/helptext",           name: this.$t('menu.texttools'), show : true, expand: false,
-          l2: [
-            { href: "/tryanswers",     name: "", show : true       },
-            { href: "/wordvalue",      name: "", show : true       },
-            { href: "/charcodes",      name: "", show : true       },
-            { href: "/analtxt",        name: "", show : true       },
-            { href: "/texttonum",      name: "", show : true       },
-            { href: "/keyboards",      name: "", show : true       },
-            { href: "/texttoss",       name: "", show : true       },
-            { href: "/piglatin",       name: "", show : true,       
-              l3 : [
-                // Add numerology variants here in mounted ()
-              ]
-            },
-            { href: "/numerology",     name: "", show : true,       
-              l3 : [
-                // Add numerology variants here in mounted ()
-              ]
-            },
-            { href: "/textchunks",     name: "", show : true       }
-          ]
-        },
-        {
-          href: "/helpcodes",          name: this.$t('menu.codes'), show : true, expand: false,
-          l2: [
-            { 
-              href: "/ciphers",         name: "", show : true, expand: false,
-              l3 : [
-                // Add ciphers here in mounted ()
-              ]
-            },
-            { href: "/rotciphers",     name: "", show : true            },
-            { href: "/substcipher",    name: "", show : true            },
-            { href: "/codebook",       name: "", show : true, expand: false,          
-              l3 : [
-                // Add codes here in mounted ()
-              ]
-            },
-            { href: "/fonts",          name: "", show : true, expand: false,          
-              l3 : [
-                // Add fonts here in mounted ()
-              ]
-            },
-            { href: "/segment",     name: "", show : true            },
-            { href: "/morsecode",   name: "", show : true            },
-            { href: "/resistor",    name: "", show : true            },
-            { href: "/vanitycode",  name: "", show : true            },
-            { href: "/decabit",     name: "", show : true            },
-            { href: "/freqanal",    name: "", show : true            },
-          ],
-        },
-        {
-          href: "/helpimage",          name: this.$t('menu.imagetools'), show : true, expand: false,
-          l2: [
-            { href: "/exifscanner",         name: "", show : true,        },
-            { href: "/colorpicker",         name: "", show : true,        },
-            { href: "/filltool",            name: "", show : true,        },
-            { href: "/pixeldata",           name: "", show : true,        },
-            { href: "/imagetransform",      name: "", show : true,        },
-            { href: "/textextractor",       name: "", show : true,        },
-            { href: "/barcode",             name: "", show : true,        }
-          ]
-        },
-        {
-          href: "/helpmath",          name: this.$t('menu.mathtools'), show : true, expand: false,
-          l2: [
-            {  href: "/baseconv",            name: "", show : true,        },
-            {  href: "/digits",              name: "", show : true,        },
-            {  href: "/primes",              name: "", show : true,        },
-            {  href: "/romans",              name: "", show : true,        },
-            {  href: "/fibonacci",           name: "", show : true,        },
-            {  href: "/gcdandlcm",           name: "", show : true,        },
-            {  href: "/formulasolver",       name: "", show : true,        },
-            {  href: "/numberprop",          name: "", show : true,        
-              l3: [
-                // Add number properties here in mounted ()
-              ]
-            },
-            {  href: "/bignumbers",          name: "", show : true,        },
-            {  href: "/sequences",           name: "", show : true,        
-              l3 : [
-                // Add sequences here in mounted ()
-              ]
-            },
-            {  href: "/combinations",        name: "", show : true,        },
-            {  href: "/equations",           name: "", show : true,        },
-            {  href: "/nimbers",             name: "", show : true,        }
-          ]
-        },
-        {
-          href: "/helpcomp",          name: this.$t('menu.comptools'), show : true, expand: false,
-          l2: [
-            { href: "/bintotext",           name: "", show : true,        },
-            { href: "/bcd",                 name: "", show : true,        },
-            { href: "/encryption",          name: "", show : true,        },
-            { href: "/hashes",              name: "", show : true,        },
-            { href: "/brainfuck",           name: "", show : true,        
-              l3 : [
-                // Add brainfuck variants here in mounted ()
-              ]
-            },
-            { href: "/cow",                 name: "", show : true,        },
-            { href: "/beatnik",             name: "", show : true,        },
-            { href: "/deadfish",            name: "", show : true,        },
-            { href: "/duckspeak",           name: "", show : true,        },
-            { href: "/checksum",            name: "", show : true,        },
-            { href: "/truthtable",          name: "", show : true,        },
-            { href: "/passwordgen",         name: "", show : true,        }
-          ]
-        },
-        {
-          href: "/helpgames",          name: this.$t('menu.games'), show : true, expand: false,
-          l2: [
-            { href: "/sudokusolv",          name: "", show : true,        },
-            { href: "/mmsolver",            name: "", show : true,        },
-            { href: "/dictsearch",          name: "", show : true         },
-            { href: "/anagrams"  ,          name: "", show : true         },
-            { href: "/wordle",              name: "", show : true         },
-            { href: "/wordsearch",          name: "", show : true,        },
-            { href: "/cryptosolver",        name: "", show : true,        },
-            { href: "/gameoflife",          name: "", show : true,        },
-          ]
-        },
-        {
-          href: "/helpother",          name: this.$t('menu.other'), show : true, expand: false,
-          l2: [
-            { href: "/printlog",            name: "", show : true,        }, 
-            { href: "/genlog",              name: "", show : true,        }, 
-            { href: "/htmlparser",          name: "", show : true,        },
-            { href: "/unitconvertor",       name: "", show : true,        },
-            { href: "/datecalc",            name: "", show : true,        },
-            { href: "/randomizer",          name: "", show : true,        },
-            { href: "/periodictable",       name: "", show : true,        },
-            { href: "/countries",           name: "", show : true,        },
-            { href: "/usastates",           name: "", show : true,        },
-            { href: "/regions",             name: "", show : true,        },
-            { href: "/dnacode",             name: "", show : true,        },
-            { href: "/booksearch",          name: "", show : true,        }
-          ]
-        }
-      ],
-    };
+  {
+    link: "/helpcodes", name: t('menu.codes'), isVisible: true, expand: false,
+    children: [
+      { link: "/ciphers", name: "", isVisible: true, expand: false, children: [] },
+      { link: "/rotciphers", name: "", isVisible: true },
+      { link: "/substcipher", name: "", isVisible: true },
+      { link: "/codebook", name: "", isVisible: true, expand: false, children: [] },
+      { link: "/fonts", name: "", isVisible: true, expand: false, children: [] },
+      { link: "/segment", name: "", isVisible: true },
+      { link: "/morsecode", name: "", isVisible: true },
+      { link: "/resistor", name: "", isVisible: true },
+      { link: "/vanitycode", name: "", isVisible: true },
+      { link: "/decabit", name: "", isVisible: true },
+      { link: "/freqanal", name: "", isVisible: true },
+    ],
   },
-
-  mounted: function() {
-    
-    this.codes = codepages;
-    this.fonts = fontdefs;
-    this.ciphers = ciphers;
-    this.bfvars = bf.vars;
-    this.seqs = sequences;
-    this.numprops = numprops;
-    this.pigs = piglatin;
-    for (let i of this.alltools) {
-      i.show = true;
-      i.expand = false;
-      if (i.l2) {
-        for (let j of i.l2) {
-          j.name = this.$t(j.href.slice(1) + ".title");
-          j.show = true;
-          if (j.href === "/ciphers") {
-            // Add all ciphers, add idx to facilitate search
-            j.expand = false;
-            for (let [idx, c] of this.ciphers.entries()) {
-              j.l3.push( { name : c.name, href : j.href + "/" + c.ref, show : true, idx : idx })
-            }
-          }
-          if (j.href === "/fonts") {
-            j.expand = false;
-            // Add all fonts
-            for (let [idx, c] of this.fonts.entries()) {
-              j.l3.push( { name : c.id, href : j.href + "/" + c.id, show : true, idx : idx }) 
-            }
-          }
-          if (j.href === "/codebook") {
-            j.expand = false;
-            // Add all codes
-            for (let [idx, c] of this.codes.entries()) {
-              j.l3.push( { name : c.name, href : j.href + "/" + c.imagename.slice(0,-4), show : true, idx : idx }) 
-            }
-          }
-          if (j.href === "/brainfuck") {
-            j.expand = false;
-            // Add all brainfuck variants
-            for (let i = 0; i < this.bfvars.length; i++) {
-              j.l3.push( { name : this.bfvars[i], href : j.href + "/" + this.bfvars[i], show : true, idx : i }) 
-            }
-          }
-          if (j.href === "/numerology") {
-            j.expand = false;
-            // Add all numerology variants
-            j.l3.push( { name : "Agrippan", href : j.href + "/0", show : true, idx : 0 }) 
-            j.l3.push( { name : "Pythagorean", href : j.href + "/1", show : true, idx : 1 }) 
-            j.l3.push( { name : "Chaldean", href : j.href + "/2", show : true, idx : 2 }) 
-            j.l3.push( { name : "Gematria", href : j.href + "/3", show : true, idx : 3 }) 
-            j.l3.push( { name : "Isopsephy", href : j.href + "/5", show : true, idx : 4 }) 
-            j.l3.push( { name : "Qabbala", href : j.href + "/7", show : true, idx : 5 }) 
-          }
-          if (j.href === "/piglatin") {
-            j.expand = false;
-            // Add all piglatin variants
-            for (let i = 0; i < this.pigs.length; i++) {
-              j.l3.push( { name : this.pigs[i].name, href : j.href + "/" + i, show : true, idx : i }) 
-            }
-          }
-          if (j.href === "/sequences") {
-            j.expand = false;
-            // Add all brainfuck variants
-            for (let i = 0; i < this.seqs.length; i++) {
-              j.l3.push( { name : this.seqs[i].name, href : j.href + "/" + this.seqs[i].ref, show : true, idx : i }) 
-            }
-          }
-          if (j.href === "/numberprop") {
-            j.expand = false;
-             // Add all number properties
-             for (let i = 0; i < this.numprops.length; i++) {
-              j.l3.push( { name : this.numprops[i].name, href : j.href,  ref : this.numprops[i].ref, show : true, idx : i }) 
-            }
-          }
-        }
-      }
-    }
-    if (this.$route.query.s) {
-      this.searchstr = this.$route.query.s;
-      this.goSearch();
-    }
+  {
+    link: "/helpimage", name: t('menu.imagetools'), isVisible: true, expand: false,
+    children: [
+      { link: "/exifscanner", name: "", isVisible: true },
+      { link: "/colorpicker", name: "", isVisible: true },
+      { link: "/filltool", name: "", isVisible: true },
+      { link: "/pixeldata", name: "", isVisible: true },
+      { link: "/imagetransform", name: "", isVisible: true },
+      { link: "/textextractor", name: "", isVisible: true },
+      { link: "/barcode", name: "", isVisible: true }
+    ]
   },
-
-  methods: {
-
-    expandAll: function() {
-      for (let l1 of this.alltools) {
-        l1.expand = true;
-        if (l1.l2) {
-          for (let l2 of l1.l2) {
-            l1.expand = true;
-            if (l2.l3) {
-              l2.expand = true;
-            }
-          }
-        }
-      }
-    },
-
-    collapseAll: function() {
-      for (let l1 of this.alltools) {
-        l1.expand = false;
-        if (l1.l2) {
-          for (let l2 of l1.l2) {
-            l1.expand = false;
-            if (l2.l3) {
-              l2.expand = false;
-            }
-          }
-        }
-      }
-    },
-
-    showAll: function () {
-      // Build tool list
-      for (let l1 of this.alltools) {
-        l1.show = true;
-        if (l1.l2) {
-          for (let l2 of l1.l2) {
-            l2.show = true;
-            l1.expand = false;
-            if (l2.l3) {
-              l2.expand = false;
-              for (let l3 of l2.l3) {
-                l3.show = true;
-              }
-            }
-          }
-        }
-      }
-      this.collapseAll();
-    },
-
-    goSearch: function () {
-
-      // Reset
-      this.errormsg = "";
-
-      let s = this.searchstr.toLowerCase();
-      if (s === "") return;
-
-      // Scan info of tools
-      for (let l1 of this.alltools) {
-
-        // info = this.$t(l1.href.slice(1)+".long");
-        l1.show = false;
-
-        if (l1.l2) {
-
-          // Search level 2
-          for (let l2 of l1.l2) {
-
-            l2.show = false;
-            
-            if (l2.l3) {
-              // Search level 3
-              for (let l3 of l2.l3) {
-                switch (l2.href) {
-                  case "/ciphers" :
-                    l3.show = false;
-                    if (this.$t('ciphers.' + this.ciphers[l3.idx].ref + '.info').toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    if (this.ciphers[l3.idx].name.toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    break;
-                  case "/codebook" :
-                    l3.show = false;
-                    if (this.codes[l3.idx].name.toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    if (this.codes[l3.idx].description.toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    for (let t of this.codes[l3.idx].tags) {
-                      if (t.toLowerCase() === s) l3.show = true;
-                    }
-                    break;
-                  case "/fonts" :
-                    l3.show = (this.fonts[l3.idx].font.toLowerCase().indexOf(s) >= 0);
-                    break;
-                  case "/brainfuck" :
-                    l3.show = (this.bfvars[l3.idx].toLowerCase().indexOf(s) >= 0);
-                    break;
-                  case "/piglatin" :
-                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0) || (this.pigs[l3.idx].descr.toLowerCase().indexOf(s) >= 0);
-                    break;
-                  case "/numerology" :
-                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
-                    break;
-                  case "/sequences" :
-                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
-                    let lookup = (l3.name === "Reverse Conway") ? "revconway" : l3.name.toLowerCase();	
-                    if (this.$t('sequences.' + lookup).toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    break;
-                  case "/numberprop" :
-                    l3.show = (l3.name.toLowerCase().indexOf(s) >= 0);
-                    if (this.$t('numberprop.' + l3.name).toLowerCase().indexOf(s) >= 0) l3.show = true;
-                    break;
-                  default :
-                    l3.show = false;
-                }
-                if (l3.show) {
-                  l2.show = true;
-                  l2.expand = true;
-                  l1.show = true;
-                  l1.expand = true;
-                }
-              }
-            } else {
-
-              if (this.$t(l2.href.slice(1)+".long").toLowerCase().indexOf(s) >= 0) l2.show = true;
-              if (this.$t(l2.href.slice(1)+".title").toLowerCase().indexOf(s) >= 0) l2.show = true;
-              if (l2.show) {
-                l1.show = true;
-                l1.expand = true;
-              }
-            }
-          } 
-        }
-
-      }
-    },
+  {
+    link: "/helpmath", name: t('menu.mathtools'), isVisible: true, expand: false,
+    children: [
+      { link: "/baseconv", name: "", isVisible: true },
+      { link: "/digits", name: "", isVisible: true },
+      { link: "/primes", name: "", isVisible: true },
+      { link: "/romans", name: "", isVisible: true },
+      { link: "/fibonacci", name: "", isVisible: true },
+      { link: "/gcdandlcm", name: "", isVisible: true },
+      { link: "/formulasolver", name: "", isVisible: true },
+      { link: "/numberprop", name: "", isVisible: true, children: [] },
+      { link: "/bignumbers", name: "", isVisible: true },
+      { link: "/sequences", name: "", isVisible: true, children: [] },
+      { link: "/combinations", name: "", isVisible: true },
+      { link: "/equations", name: "", isVisible: true },
+      { link: "/nimbers", name: "", isVisible: true }
+    ]
   },
+  {
+    link: "/helpcomp", name: t('menu.comptools'), isVisible: true, expand: false,
+    children: [
+      { link: "/bintotext", name: "", isVisible: true },
+      { link: "/bcd", name: "", isVisible: true },
+      { link: "/encryption", name: "", isVisible: true },
+      { link: "/hashes", name: "", isVisible: true },
+      { link: "/brainfuck", name: "", isVisible: true, children: [] },
+      { link: "/cow", name: "", isVisible: true },
+      { link: "/beatnik", name: "", isVisible: true },
+      { link: "/deadfish", name: "", isVisible: true },
+      { link: "/duckspeak", name: "", isVisible: true },
+      { link: "/checksum", name: "", isVisible: true },
+      { link: "/truthtable", name: "", isVisible: true },
+      { link: "/passwordgen", name: "", isVisible: true }
+    ]
+  },
+  {
+    link: "/helpgames", name: t('menu.games'), isVisible: true, expand: false,
+    children: [
+      { link: "/sudokusolv", name: "", isVisible: true },
+      { link: "/mmsolver", name: "", isVisible: true },
+      { link: "/dictsearch", name: "", isVisible: true },
+      { link: "/anagrams", name: "", isVisible: true },
+      { link: "/wordle", name: "", isVisible: true },
+      { link: "/wordsearch", name: "", isVisible: true },
+      { link: "/cryptosolver", name: "", isVisible: true },
+      { link: "/gameoflife", name: "", isVisible: true },
+    ]
+  },
+  {
+    link: "/helpother", name: t('menu.other'), isVisible: true, expand: false,
+    children: [
+      { link: "/printlog", name: "", isVisible: true },
+      { link: "/genlog", name: "", isVisible: true },
+      { link: "/htmlparser", name: "", isVisible: true },
+      { link: "/unitconvertor", name: "", isVisible: true },
+      { link: "/datecalc", name: "", isVisible: true },
+      { link: "/randomizer", name: "", isVisible: true },
+      { link: "/periodictable", name: "", isVisible: true },
+      { link: "/countries", name: "", isVisible: true },
+      { link: "/usastates", name: "", isVisible: true },
+      { link: "/regions", name: "", isVisible: true },
+      { link: "/dnacode", name: "", isVisible: true },
+      { link: "/booksearch", name: "", isVisible: true }
+    ]
+  }
+])
+
+// --- Methods ---
+const collapseList = () => {
+  if (listComponent.value) {
+    listComponent.value.collapseAll();
+  }
 };
 
+const expandList = () => {
+  if (listComponent.value) {
+    listComponent.value.expandAll();
+  }
+};
+
+const reset = () => {
+  if (listComponent.value) {
+    listComponent.value.resetVisibility();
+  }
+};
+
+const goSearch = () => {
+  errormsg.value = "";
+  const s = searchstr.value.toLowerCase()
+  if (s === "") {
+    isVisibleAll()
+    return
+  }
+
+  alltools.value.forEach(l1 => {
+    l1.isVisible = false
+    if (l1.children) {
+      l1.children.forEach(l2 => {
+        l2.isVisible = false
+        if (l2.children) {
+          l2.children.forEach(l3 => {
+            l3.isVisible = false
+            switch (l2.link) {
+              case "/ciphers":
+                if (t(`ciphers.${ciphers.value[l3.idx].ref}.info`).toLowerCase().includes(s)) l3.isVisible = true
+                if (ciphers.value[l3.idx].name.toLowerCase().includes(s)) l3.isVisible = true
+                break
+              case "/codebook":
+                if (codes.value[l3.idx].name.toLowerCase().includes(s)) l3.isVisible = true
+                if (codes.value[l3.idx].description.toLowerCase().includes(s)) l3.isVisible = true
+                if (codes.value[l3.idx].tags.some(tag => tag.toLowerCase() === s)) l3.isVisible = true
+                break
+              case "/fonts":
+                l3.isVisible = fonts.value[l3.idx].font.toLowerCase().includes(s)
+                break
+              case "/brainfuck":
+                l3.isVisible = bfvars.value[l3.idx].toLowerCase().includes(s)
+                break
+              case "/piglatin":
+                l3.isVisible = l3.name.toLowerCase().includes(s) || pigs.value[l3.idx].descr.toLowerCase().includes(s)
+                break
+              case "/numerology":
+                l3.isVisible = l3.name.toLowerCase().includes(s)
+                break
+              case "/sequences":
+                l3.isVisible = l3.name.toLowerCase().includes(s)
+                const lookup = (l3.name === "Reverse Conway") ? "revconway" : l3.name.toLowerCase()
+                if (t(`sequences.${lookup}`).toLowerCase().includes(s)) l3.isVisible = true
+                break
+              case "/numberprop":
+                l3.isVisible = l3.name.toLowerCase().includes(s)
+                if (t(`numberprop.${l3.name}`).toLowerCase().includes(s)) l3.isVisible = true
+                break
+              default:
+                l3.isVisible = false
+            }
+            if (l3.isVisible) {
+              l2.isVisible = true; l2.isExpanded = true
+              l1.isVisible = true; l1.isExpanded = true
+            }
+          })
+        } else {
+          const longInfo = t(`${l2.link.slice(1)}.long`).toLowerCase()
+          const titleInfo = t(`${l2.link.slice(1)}.title`).toLowerCase()
+          if (longInfo.includes(s) || titleInfo.includes(s)) {
+            l2.isVisible = true
+            l1.isVisible = true
+            l1.isExpanded = true
+          }
+        }
+      })
+    }
+  })
+}
+
+// --- Initialization ---
+
+onMounted(() => {
+  codes.value = codepages
+  fonts.value = fontdefs
+  ciphers.value = cipherData
+  bfvars.value = bf.vars
+  seqs.value = sequences
+  numprops.value = numPropsData
+  pigs.value = piglatin
+
+  alltools.value.forEach(i => {
+    i.isVisible = true
+    i.isExpanded = false
+    if (i.children) {
+      i.children.forEach(j => {
+        j.name = t(`${j.link.slice(1)}.title`)
+        j.isVisible = true
+        
+        // Populate L3 dynamic contents
+        if (j.link === "/ciphers") {
+          j.isExpanded = false
+          ciphers.value.forEach((c, idx) => {
+            j.children.push({ name: c.name, link: `${j.link}/${c.ref}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/fonts") {
+          j.isExpanded = false
+          fonts.value.forEach((c, idx) => {
+            j.children.push({ name: c.id, link: `${j.link}/${c.id}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/codebook") {
+          j.isExpanded = false
+          codes.value.forEach((c, idx) => {
+            j.children.push({ name: c.name, link: `${j.link}/${c.imagename.slice(0, -4)}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/brainfuck") {
+          j.isExpanded = false
+          bfvars.value.forEach((name, idx) => {
+            j.children.push({ name, link: `${j.link}/${name}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/numerology") {
+          j.isExpanded = false
+          const variants = ["Agrippan", "Pythagorean", "Chaldean", "Gematria", "Isopsephy", "Qabbala"]
+          const ids = [0, 1, 2, 3, 5, 7]
+          variants.forEach((name, idx) => {
+            j.children.push({ name, link: `${j.link}/${ids[idx]}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/piglatin") {
+          j.isExpanded = false
+          pigs.value.forEach((p, idx) => {
+            j.children.push({ name: p.name, link: `${j.link}/${idx}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/sequences") {
+          j.expand = false
+          seqs.value.forEach((s, idx) => {
+            j.children.push({ name: s.name, link: `${j.link}/${s.ref}`, isVisible: true, idx })
+          })
+        }
+        if (j.link === "/numberprop") {
+          j.expand = false
+          numprops.value.forEach((n, idx) => {
+            j.children.push({ name: n.name, link: j.link, ref: n.ref, isVisible: true, idx })
+          })
+        }
+      })
+    }
+  })
+
+  if (route.query.s) {
+    searchstr.value = route.query.s
+    goSearch()
+  }
+})
 </script>
-
-<style scoped>
-
-.level1 {
-  margin-left: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.level2 {
-  margin-left: 40px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
-.level3 {
-  margin-left: 60px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.levelbtn {
-  width: 20px;
-  text-align: left;
-}
-
-</style>

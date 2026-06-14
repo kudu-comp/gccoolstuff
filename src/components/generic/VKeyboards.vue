@@ -1,51 +1,68 @@
-<template>
-  <!-- <label for="listofalpha" class="form-label me-2">Keyboards</label> -->
-  <select
-    class="form-select lg-size"
-    :value="keyboard"
-    @input="updateKeyboard($event.target.value)"
-  >
-    <option
-      v-for="k in keyboards"
-      :key="k"
-      :value="k.name"
-    >
-      {{ k.description }}
-    </option>
-  </select>
+<template> 
+  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+    <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+      {{ selectedCategoryLabel }}
+      <span class="chevron">▾</span>
+    </div>
+    <transition name="fade-slide">
+      <div v-if="isDropdownOpen" class="custom-options-list">
+        <div 
+          v-for="k in keyboards" 
+          :key="k.name" 
+          class="custom-option" 
+          :class="{ 'selected': keyboard === k.name }" 
+          @click="updateKeyboard(k.name)"
+        >
+          {{ k.description }}
+          <span v-if="keyboard === k.name" class="check">✓</span>
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
-<script>
-import * as keyBoards from '@/scripts/keyboards.js';
+<script setup>
 
-export default {
+import { ref, computed, onMounted } from 'vue';
+import * as keyBoardsScript from '@/scripts/keyboards.js';
 
-  props: {
-    keyboard: {
-      type: String,
-      required: true
-    }
-  },
-  
-  emits: [
-    'update:keyboard'
-  ],
-
-  data : function () {
-    return {
-      keyboards : null,
-    }
-  },
-
-  mounted: function() {
-    this.keyboards = keyBoards.keyboards;
-  },
-
-  methods: {
-    updateKeyboard: function (value) {
-      this.$emit ('update:keyboard', value);
-    },
+// --- Props & Emits ---
+const props = defineProps({
+  keyboard: {
+    type: String,
+    required: true
   }
-  
-}
+});
+
+const emit = defineEmits(['update:keyboard']);
+
+// --- State ---
+const keyboards = ref([]);
+const isDropdownOpen = ref(false);
+
+// --- Computed ---
+const selectedCategoryLabel = computed(() => {
+  // Check if categories exists and has items
+  if (!keyboards.value || keyboards.value.length === 0) {
+    return 'Loading...';
+  }
+
+  // Find the selected item matching the prop
+  const found = keyboards.value.find(a => a.name === props.keyboard);
+
+  // Return the label if found, otherwise a default placeholder
+  return found ? found.description : 'Select a keyboard';
+});
+
+// --- Methods ---
+const updateKeyboard = (value) => {
+  emit('update:keyboard', value);
+  isDropdownOpen.value = false; // Close the menu after selection
+};
+
+// --- Lifecycle ---
+onMounted(() => {
+  keyboards.value = keyBoardsScript.keyboards;
+});
+
 </script>

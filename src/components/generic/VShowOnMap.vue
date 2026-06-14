@@ -1,28 +1,11 @@
 <template>
-  <button id="calc" class="btn mb-2 me-2" @click="calculate()" :title="$t('buttons.show')">
-    <i class="fa-solid fa-map-location-dot"></i> {{$t('buttons.show')}}
+  <button id="calc" class="btn btn-primary" @click="$emit('show')" :title="$t('buttons.show')">
+    {{$t('buttons.show')}}
   </button>
 </template>
 
-<script>
+<script setup>
 
-export default {
+defineEmits(['show'])
 
-  name: 'VShowOnMap',
-
-  emits: [
-    'show'
-  ],
-
-  methods: {
-  
-    calculate: function () {
-      
-      // Sent event
-      this.$emit('show');
-      
-    },
-
-  }
-}
 </script>

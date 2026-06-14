@@ -1,37 +1,38 @@
 <template>
-  <div class="card card-bodypt-0">
-    <div class="" style="display: flex; justify-content: space-between; align-items: center;">
-      <div class="h4 card-title">Detected filetype: {{ detected.ext.toUpperCase()  }}</div>
-      <div class="badge" :class="detected.ext">{{ detected.ext.toUpperCase() }}</div>
+  <div class="mb-2" style="display: flex; justify-content: space-between; align-items: center;">
+    <div class="h4">Detected filetype: {{ detected.ext.toUpperCase()  }}</div>
+    <div class="badge" :class="detected.ext">{{ detected.ext.toUpperCase() }}</div>
+  </div>
+
+  <div class="card-title mb-2">Choose how to view and save your secret:</div>
+  <div class="radio-group">
+    <div class="radio-options">
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="auto" /><span class="radio-mark"></span> Detected</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="binary" /><span class="radio-mark"></span> Binary</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="hex" /><span class="radio-mark"></span> Hex</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="txt" /><span class="radio-mark"></span> TXT</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="bin" /><span class="radio-mark"></span> BIN</label>
+    </div>
+  </div>
+  <div class="preview-display">
+    <!-- Image Preview -->
+    <div v-if="previewMode === 'auto' && isImage" class="image-preview">
+      <img :src="imageUrl" alt="Secret preview" />
+    </div>
+    
+    <!-- NEW: Audio Preview -->
+    <div v-else-if="previewMode === 'auto' && isAudio" class="audio-preview">
+      <audio controls :src="audioUrl"></audio>
     </div>
 
-    <div class="card-title mb-2">Choose how to view and save your secret:</div>
-    <div class="form-check-inline">
-      <label class="form-check-label me-2 sm-size"><input class="form-check-input me-2" type="radio" v-model="previewMode" value="auto" /> Detected</label>
-      <label class="form-check-label me-2 sm-size"><input class="form-check-input me-2" type="radio" v-model="previewMode" value="binary" />Binary</label>
-      <label class="form-check-label me-2 sm-size"><input class="form-check-input me-2" type="radio" v-model="previewMode" value="hex" /> Hex</label>
-      <label class="form-check-label me-2 sm-size"><input class="form-check-input me-2" type="radio" v-model="previewMode" value="txt" /> TXT</label>
-      <label class="form-check-label me-2 sm-size"><input class="form-check-input me-2" type="radio" v-model="previewMode" value="bin" /> BIN</label>
-    </div>
+    <!-- Text/Code Preview -->
+    <pre v-else class="code-preview">{{ formattedContent }}</pre>
+  </div>
 
-    <div class="preview-display">
-      <!-- Image Preview -->
-      <div v-if="previewMode === 'auto' && isImage" class="image-preview">
-        <img :src="imageUrl" alt="Secret preview" />
-      </div>
-      
-      <!-- NEW: Audio Preview -->
-      <div v-else-if="previewMode === 'auto' && isAudio" class="audio-preview">
-        <audio controls :src="audioUrl"></audio>
-      </div>
-
-      <!-- Text/Code Preview -->
-      <pre v-else class="code-preview">{{ formattedContent }}</pre>
-    </div>
-
-    <button @click="save" class="btn md-size mt-2">
+  <div class="button-row">
+    <button @click="save" class="btn btn-primary mt-2">
       Save Secret as .{{ saveExt }}
-    </button>
+      </button>
   </div>
 </template>
 
@@ -117,7 +118,6 @@ onUnmounted(() => imageUrl.value && URL.revokeObjectURL(imageUrl.value));
 </script>
 
 <style scoped>
-.card { border-radius: 10px; padding: 1.5rem; margin-bottom: 1.2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border: 1px solid #dfe6e9; }
 .preview-display { background: #2d3436; border-radius: 8px; max-height: 350px; overflow-y: auto; margin-top: 10px; }
 .code-preview { padding: 15px; font-family: 'Courier New', monospace; font-size: 13px; color: #dfe6e9; margin: 0; white-space: pre-wrap; word-break: normal; line-height: 1.8; }
 .audio-preview audio { width: 100%; filter: invert(1) hue-rotate(180deg); }

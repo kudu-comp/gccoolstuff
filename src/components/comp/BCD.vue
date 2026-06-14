@@ -1,171 +1,150 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('bcd.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('bcd.long')"
-      />
-      <div class="row">
-        <label for="meth" class="form-label sm-size">{{ $t('bcd.seltype') }}</label>
-        <select
-          id="meth"
+
+  <header class="page-header">
+    <h1>{{ $t('bcd.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('bcd.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <CustomDropdown
+          :options="bcdformats"
           v-model="selBCD"
-          class="form-select mb-2 md-size"
-        >
-          <option
-            v-for="(code, index) in bcdformats.vars"
-            :key="index"
-            :value="index"
-          >
-            {{ code.name }}
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          for="fill"
-          class="form-label sm-size mb-2"
-        >{{ $t('bcd.fill') }}</label>
-        <select
-          id="fill"
+          :title="$t('bcd.seltype')"
+        />
+        <CustomDropdown v-if="!packed"
+          :options="[
+            { label: 'No fill', value: '' },
+            { label: '0000', value: '0000' },
+            { label: '1111', value: '1111' }
+          ]"
           v-model="fill"
-          class="form-select md-size mb-2"
-          @checked="fill = ''"
+          :title="$t('bcd.fill')"
+        />
+        <label class="checkbox-container mt-2 mb-2">
+          <input type="checkbox" v-model="packed">
+          <span class="checkmark"></span>
+          {{ $t('bcd.packed') }}
+        </label> 
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.input')">
+        <div class="radio-group mb-2">
+          <div class="radio-options">
+            <label class="radio-item">
+              <input type="radio" value="from" v-model="mode">
+              <span class="radio-mark"></span> {{ $t('bcd.bcdfrom') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="to" v-model="mode">
+              <span class="radio-mark"></span> {{ $t('bcd.bcdto') }}
+            </label>
+          </div>
+        </div>        
+        <textarea
+          ref="messageInput"
+          v-model="message"
+          :placeholder="$t('labels.message')"
+          rows="5"
+          @input="doSomething"
+        />
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-          <option value="" />
-          <option value="0000">
-            0000
-          </option>
-          <option value="1111">
-            1111
-          </option>
-        </select>
-      </div>
-      <div class="form-check">
-        <input
-          id="packed"
-          v-model="packed"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
+          {{ errormsg }}.
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-        <label
-          for="packed"
-          class="form-check-label mb-2 sm-size"
-        >{{ $t('bcd.packed') }}</label>
-      </div>
-      <input
-        id="bcdfrom"
-        type="button"
-        :value="$t('bcd.bcdfrom')"
-        class="btn mb-2 me-2"
-        @click="fromBCD"
-      >
-      <input
-        id="bcdto"
-        type="button"
-        :value="$t('bcd.bcdto')"
-        class="btn mb-2"
-        @click="toBCD"
-      >
-      <textarea
-        id="message"
-        ref="message"
-        v-model="message"
-        class="form-control mb-2"
-        :placeholder="$t('labels.message')"
-        rows="5"
-      />
-      <div>
-        
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as bcd from '@/scripts/bcd.js'
+import VCard from '@/components/generic/VCard.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: 'CompBCD'
+})
 
-  name: 'CompBCD',
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      selBCD : 0,
-      packed : false,
-      bcdformats: [],
-      fill: "",
-      errormsg: "",
-      showinfo: true,
+// --- State ---
+const message = ref("")
+const selBCD = ref(0)
+const packed = ref(false)
+const fill = ref("")
+const mode = ref("to") // 'to' for code->BCD, 'from' for BCD->code
+const bcdformats = ref([])
+const showinfo = ref(true)
+
+// --- Template Ref ---
+const messageRef = ref(null)
+
+// --- Lifecycle ---
+onMounted(() => {
+  if (messageRef.value) {
+    messageRef.value.focus()
+  }
+
+  // Map the BCD formats with localized labels
+  // Using .vars as per your snippet
+  bcdformats.value = bcd.formats.vars.map((e, idx) => ({
+    label: t(e.name),
+    value: idx
+  }))
+})
+
+// --- Computed Conversion Logic ---
+
+/**
+ * translationData handles the logic for both the result and the error message.
+ * It updates automatically whenever message, selBCD, packed, fill, or mode changes.
+ */
+const translationData = computed(() => {
+  const input = message.value.trim()
+  
+  if (!input) {
+    return { result: "", error: "" }
+  }
+
+  try {
+    let output = ""
+    if (mode.value === "from") {
+      output = bcd.BCD2Code(input, selBCD.value, packed.value, fill.value)
+    } else {
+      output = bcd.code2BCD(input, selBCD.value, packed.value, fill.value)
     }
-  },
+    
+    return { result: output, error: "" }
+  } catch (e) {
+    console.error(e)
+    return { result: "", error: t('errors.invalidinput') }
+  }
+})
 
-  mounted: function() {
-    this.$refs.message.focus();
-    this.bcdformats = bcd.formats;
-  },
+// Helper computed properties for cleaner template usage
+const result = computed(() => translationData.value.result)
+const errormsg = computed(() => translationData.value.error)
 
-  methods: {
-
-    // Translate the input
-    fromBCD : function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
-
-      try {
-        
-        this.result += bcd.BCD2Code(this.message, this.selBCD, this.packed, this.fill);
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.invalidinput');
-        console.log(e);
-
-      }
-    },
-
-    // Translate the input
-    toBCD : function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
-
-      try {
-        
-        // For each word convert and add to the output
-        this.result = bcd.code2BCD(this.message, this.selBCD, this.packed, this.fill);
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.invalidinput');
-        console.log(e);
-
-      }
-    },
-
-  },
-}
 </script>
+
+
+
 
 <style scoped>
 </style>

@@ -1,11 +1,11 @@
 <template>
-  <div class="d-flex flex-column mx-4">
+  <div class="page-container mx-4">
     <div class="sectionhead">
       {{ $t('encryption.title') }}
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2 pb-2"
         v-html="$t('encryption.long')"
       />
       <div class="row">
@@ -142,7 +142,7 @@
       >
         {{ errormsg }}
       </p>
-      <p v-if="result" class="resultbox">
+      <p v-if="result" class="card resultbox">
         {{ result }}
       </p>
     </div>

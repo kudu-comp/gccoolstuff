@@ -1,109 +1,111 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('numberprop.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('numberprop.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="n"
-        >{{ $t('numberprop.num') }}</label>
-        <input
-          id="n"
-          ref="n"
-          v-model="n"
-          type="number"
-          min="1"
-          max="1000000000"
-          class="form-control md-size mb-2 me-2"
-          @keyup.enter="getProperties"
-        >
-        <v-calculate class="sm-size" @calculate = "getProperties" :disabled="working"></v-calculate>
-        <div v-if="working" class="spinner-border ms-2" role="status">
-          <span class="sr-only">Loading...</span>
+
+   <header class="page-header">
+    <h1>{{ $t('numberprop.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('numberprop.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('numberprop.num') }}</label>
+          <input type="number" v-model="n" ref="nInput" @keyup.enter="getProperties">
         </div>
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <h4>
-        {{ $t('numberprop.t1') }}
-      </h4>
-      <table>
-        <tr v-for="p in props" :key="p.ref">
-          <td v-if="!p.group">
-            <div v-show="p.value">
-              &#x2713;
-            </div><div v-show="!p.value">
-              &#x2717;
-            </div>
-          </td>
-          <td v-if="!p.group">{{ $t('numberprop.' + p.ref) }}</td>
-          <td v-if="p.group" colspan="2"><h6>{{ $t('numberprop.' + p.ref) }}</h6></td>
-        </tr>          
-      </table>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate @calculate = "getProperties"></v-calculate>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('numberprop.t1')">     
+        <table>
+          <tr v-for="p in props" :key="p.ref">
+            <td v-if="!p.group">
+              <div v-show="p.value">
+                &#x2713;
+              </div><div v-show="!p.value">
+                &#x2717;
+              </div>
+            </td>
+            <td v-if="!p.group">{{ $t('numberprop.' + p.ref) }}</td>
+            <td v-if="p.group" colspan="2"><h4>{{ $t('numberprop.' + p.ref) }}</h4></td>
+          </tr>          
+        </table>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCalculate from '@/components/generic/VCalculate.vue'
+import VCard from '@/components/generic/VCard.vue'
+import * as mathtools from '../../scripts/mathtools'
 
-import VCalculate from '@/components/generic/VCalculate.vue';
-import * as mathtools from '../../scripts/mathtools';
+defineOptions({
+  name: 'MathProperties'
+})
 
-export default {
-  name: 'MathProperties',
+const { t } = useI18n()
 
-  components: {
-    VCalculate
-  },
+// --- State ---
+const n = ref(0)
+const result = ref(0) // Declared in original, though logic uses p.value
+const props = ref([])
+const errormsg = ref("")
 
-  data: function () {
-    return {
-      n: 0,
-      result: 0,
-      working: false,
-      props: [],
-      errormsg: ""
+// --- Template Ref ---
+const nInput = ref(null)
+
+onMounted(() => {
+  // Focus the input field
+  nInput.value?.focus()
+  
+  // Initialize the properties list from mathtools
+  // We make a shallow copy to avoid mutating the original script data directly
+  props.value = mathtools.numprops.map(p => ({ ...p, value: "" }))
+})
+
+// --- Methods ---
+
+const getProperties = () => {
+  // Reset
+  errormsg.value = ""
+  
+  // Validation: check if n is too big
+  if (n.value > 1000000000) {
+    errormsg.value = t('numberprop.toobig')
+    return
+  }
+
+  // Set a tiny timeout to allow the UI to show the 'working' state if needed
+  // and process calculations
+  try {
+    for (let p of props.value) {
+      // If it's not a group header, run the associated math function
+      if (!p.group && typeof p.func === 'function') {
+        p.value = p.func(n.value)
+      }
     }
-  },
-
-  mounted: function() {
-    this.$refs.n.focus();
-    this.props = mathtools.numprops;
-  },
-
-  methods: {
-
-    getProperties: function() {
-
-      // Reset error
-      this.errormsg = "";
-      this.working = true
-
-      // Check if n is too big
-      if (this.n > 1000000000) {
-          this.errormsg = this.$t('numberprop.toobig');
-          return;
-      }
-
-      // Update all properties
-      for (let p of this.props) {
-        if (!p.group) p.value = p.func(this.n);
-      }
-      this.working = false;
-
-      
-    },
-  },
+  } catch (e) {
+    console.error(e)
+    errormsg.value = t('errors.generic')
+  }
 }
 </script>
+
+<style scoped>
+h4 {
+  margin: 0.5em 0 0.25em;
+}
+</style>
 

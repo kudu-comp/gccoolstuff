@@ -1,153 +1,143 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('gcdandlcm.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('gcdandlcm.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="input"
-        >{{ $t('gcdandlcm.num') }}</label>
-        <input
-          id="input"
-          v-model="input"
-          type="text"
-          ref="input"
-          min="0"
-          class="form-control md-size me-2 mb-2"
-          @keyup.enter="getGCDandLCM"
+
+  <header class="page-header">
+    <h1>{{ $t('gcdandlcm.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('gcdandlcm.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('gcdandlcm.num') }}</label>
+          <input type="text" v-model="input" ref="inputRef" @keyup.enter="getGCDandLCM">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-        <v-calculate id="getdec" class="sm-size mb-2" @calculate="getGCDandLCM"></v-calculate>
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <p class="resultbox">
-        {{ $t('gcdandlcm.t1') }} <br>
-        {{ $t('gcdandlcm.gcd') }} <strong>{{ gcd }}</strong>.<br>
-        {{ $t('gcdandlcm.lcm') }} <strong>{{ lcm }}</strong>.
-      </p>
-      <p class="resultbox">
-        {{ $t('gcdandlcm.t2') }}
-        <table class="table table-sm table-borderless">
-          <tr
-            v-for="a in primes"
-            :key="a"
-            :value="a.n"
-          >
-            <td>{{ a.n }}</td><td>{{ a.primes }}</td>
-          </tr>
+          {{ errormsg }}.
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate @calculate="getGCDandLCM"></v-calculate>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <p class="card resultbox">
+          {{ $t('gcdandlcm.t1') }} <br>
+          {{ $t('gcdandlcm.gcd') }} <strong>{{ gcd }}</strong>.<br>
+          {{ $t('gcdandlcm.lcm') }} <strong>{{ lcm }}</strong>.
+        </p>
+        <table class="p-table">
+          <thead>
+            <tr><th scope="col">{{ $t('labels.number') }}</th>
+            <th scope="col">{{ $t('gcdandlcm.t2') }}</th></tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="a in primes"
+              :key="a"
+              :value="a.n"
+            >
+              <td>{{ a.n }}</td><td>{{ a.primes }}</td>
+            </tr>
+          </tbody>
         </table>
-      </p>
+     </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as mathtools from '@/scripts/mathtools.js'
 import VCalculate from '@/components/generic/VCalculate.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'MathGCDandLCM',
+defineOptions({
+  name: 'MathGCDandLCM'
+})
 
-  components: {
-    VCalculate
-  },
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      input: "",
-      errormsg: "",
-      gcd: 0,
-      lcm: 0,
-      primes: [],
-      showitem: true,
-      hidebutton: true
-    }
-  },
+// --- State ---
+const input = ref("")
+const errormsg = ref("")
+const gcd = ref(0)
+const lcm = ref(0)
+const primes = ref([])
+const showitem = ref(true)
+const hidebutton = ref(true)
 
-  mounted: function() {
-    this.$refs.input.focus();
-  },
+// --- Template Ref ---
+const inputRef = ref(null)
 
-  methods: {
+onMounted(() => {
+  inputRef.value?.focus()
+})
 
-    // Function to find gcd of array of numbers
-    findGCD: function (arr, n) {
-      let result = arr[0];
+// --- Internal Helper Functions ---
 
-      // Take the GCD of two pairs
-      for (let i = 1; i < n; i++)    {
-          result = mathtools.gcd(arr[i], result);
-          if(result == 1)
-          {
-             return 1;
-          }
-      }
-      return result;
-
-    },
-
-    // Find the lowest common multiple
-    findLCM: function (arr, n) {
-
-      let result = arr[0];
-
-      // Take the GCD of two pairs
-      for (let i = 1; i < n; i++)    {
-          result = mathtools.lcm(arr[i], result);
-          if(result == 1)
-          {
-             return 1;
-          }
-      }
-      return result;
-
-    },
-
-    // Function called when pressing go
-    getGCDandLCM: function() {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Convert input to array of numbers
-      let a = this.input.match(/[0-9]+/g);
-
-      // Check for empty input
-      if (a === null) {
-        this.errormsg = this.$t('errors.noinput');
-        return;
-      }
-
-      // Check for zeroes (GCD is undefined for zero)
-      for (let i=0; i < a.length; i++) {
-        if (parseInt(a[i]) == 0) {
-          this.errormsg = this.$t('gcdandlcm.inperror');
-          return;
-        }
-      }
-
-      // Get GCD and LCM
-      this.gcd = this.findGCD (a, a.length);
-      this.lcm = this.findLCM (a, a.length);
-
-      // List prime factors
-      this.primes = [];
-      for (let i=0; i < a.length; i++) {
-        this.primes.push({ n: a[i], primes: mathtools.primeFactorizationString(parseInt(a[i])) });
-      }
-    },
-
-  },
+// Function to find gcd of array of numbers
+const findGCD = (arr, n) => {
+  let result = arr[0]
+  for (let i = 1; i < n; i++) {
+    result = mathtools.gcd(arr[i], result)
+    if (result == 1) return 1
+  }
+  return result
 }
 
+// Find the lowest common multiple
+const findLCM = (arr, n) => {
+  let result = arr[0]
+  for (let i = 1; i < n; i++) {
+    result = mathtools.lcm(arr[i], result)
+    // Preservation note: if the result is 1, return early 
+    // (matches your original component logic)
+    if (result == 1) return 1
+  }
+  return result
+}
+
+// --- Primary Action ---
+
+const getGCDandLCM = () => {
+  // Reset outputs
+  errormsg.value = ""
+  gcd.value = 0
+  lcm.value = 0
+  primes.value = []
+
+  // Convert input string to array of number strings
+  const matchedNumbers = input.value.match(/[0-9]+/g)
+
+  if (matchedNumbers === null) {
+    errormsg.value = t('errors.noinput')
+    return
+  }
+
+  // Convert to actual numbers
+  const nums = matchedNumbers.map(Number)
+
+  // Check for zeroes (GCD is undefined for zero)
+  if (nums.some(n => n === 0)) {
+    errormsg.value = t('gcdandlcm.inperror')
+    return
+  }
+
+  // Calculate results
+  gcd.value = findGCD(nums, nums.length)
+  lcm.value = findLCM(nums, nums.length)
+
+  // Build prime factorization data
+  primes.value = nums.map(n => ({
+    n: n,
+    primes: mathtools.primeFactorizationString(n)
+  }))
+}
 </script>

@@ -1,240 +1,188 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('sequences.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('sequences.long')"
-      />
-      <div class="form-label mb-2">
-        {{ $t('sequences.sel') }}
-      </div>
-      <div v-for="s in seqs">
-        <div class="form-check">
-          <input
-            v-model="number"
-            type="radio"
-            :value="s.ref"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-          >{{ $t('sequences.'+s.ref) }}</label>
+
+  <header class="page-header">
+    <h1>{{ $t('sequences.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('sequences.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <h4>{{ $t('sequences.sel') }}</h4>
+        <div class="radio-group mb-2">
+          <div class="radio-options-vertical">
+            <label class="radio-item" v-for="s in seqs" :key="s.ref">
+              <input type="radio" :value="s.ref" v-model="number">
+              <span class="radio-mark"></span> {{ $t('sequences.'+s.ref) }}
+            </label>
+          </div>
+        </div>  
+        <div class="radio-group mb-2">
+          <h4>{{ $t('sequences.stop') }}</h4>
+          <div class="radio-options-vertical">
+            <label class="radio-item">
+              <input type="radio" value="stopiter" v-model="stop">
+              <span class="radio-mark"></span> {{ $t('sequences.stopiter') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="stopat" v-model="stop" >
+              <span class="radio-mark"></span> {{ $t('sequences.stopat') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="stopend" v-model="stop" :disabled="['hailstone','kaprekar','palindrome'].indexOf(number) < 0">
+              <span class="radio-mark"></span> {{ $t('sequences.stopend') }}
+            </label>
+          </div>
         </div>
-      </div>
-      <div 
-        class="row"
-        v-show="['hailstone', 'conway', 'revconway','kaprekar', 'palindrome'].indexOf(number) >= 0"
-      >
-        <label
-          class="form-label md-size mt-2 mb-2"
-          for="start"
-        >{{ $t('sequences.start') }}</label>
-        <input
-          id="start"
-          v-model="start"
-          type="number"
-          min="0"
-          max="1000000"
-          class="form-control md-size mt-2 mb-2"
+        <div 
+          class="form-horizontal"
+          v-show="['hailstone', 'conway', 'revconway','kaprekar', 'palindrome'].indexOf(number) >= 0"
         >
-      </div>
-      <div>
-        <div class="form-label mb-2">
-            {{ $t('sequences.stop') }}
+          <label>{{ $t('sequences.start') }}</label>
+          <input type="number" v-model="start" min="0" max="1000000">
         </div>
-        <div class="form-check">
-          <input
-            id="stop1"
-            v-model="stop"
-            type="radio"
-            value="stopiter"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="stop1"
-          >{{ $t('sequences.stopiter') }}</label>
+        <div class="form-horizontal" v-show="stop === 'stopiter'">
+          <label>{{ $t('sequences.niter') }}</label>
+          <input type="number" ref="niterInput" v-model="niter" min="0" max="1000000">
         </div>
-        <div class="form-check">
-          <input
-            id="stop3"
-            v-model="stop"
-            type="radio"
-            value="stopat"
-            class="form-check-input"
-          >
-          <label
-            class="form-check-label"
-            for="stop3"
-          >{{ $t('sequences.stopat') }}</label>
+        <div class="form-horizontal" v-show="stop === 'stopat'">
+          <label>{{ $t('sequences.endat') }}</label>
+          <input type="number" v-model="endat" min="0" max="1000000">
         </div>
-        <div class="form-check">
-          <input
-            id="stop2"
-            v-model="stop"
-            type="radio"
-            value="stopend"
-            class="form-check-input"
-            :disabled="['hailstone','kaprekar','palindrome'].indexOf(number) < 0"
-          >
-          <label
-            class="form-check-label"
-            for="stop2"
-          >{{ $t('sequences.stopend') }}</label>
+        <p
+          v-show="errormsg"
+          class="errormsg mb-2"
+        >
+          {{ errormsg }}.
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate @calculate="sequence"/>
         </div>
-        <div class="row mt-2" v-show="stop === 'stopiter'">
-          <label
-            class="form-label md-size mb-2"
-            for="niter"
-          >{{ $t('sequences.niter') }}</label>
-          <input
-            id="niter"
-            ref="niter"
-            v-model="niter"
-            type="number"
-            min="0"
-            max="1000000"
-            class="form-control md-size mb-2"
-          >
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">     
+        <div
+          v-if="result"
+          class="card resultbox monospace"
+        >
+          <p>{{ $t('sequences.res1') }} {{ count }}: {{ result }}.</p>
+          <p>{{ $t('sequences.res2') }}: </p>
+          <div v-html="seq"></div>
         </div>
-        <div class="row mt-2" v-show="stop === 'stopat'">
-          <label
-            class="form-label md-size mb-2"
-            for="n"
-          >{{ $t('sequences.endat') }}</label>
-          <input
-            id="endat"
-            v-model="endat"
-            type="number"
-            min="0"
-            max="1000000"
-            class="form-control md-size mb-2"
-          >
-        </div>
-      </div>
-      <v-calculate @calculate="sequence"/>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}.
-      </p>
-      <div
-        v-if="result"
-        class="resultbox monospace"
-      >
-        <p>{{ $t('sequences.res1') }} {{ cntiter }}: {{ result }}.</p>
-        <p>{{ $t('sequences.res2') }} </p>
-        <div v-html="seq"></div>
-      </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import * as mathtools from '@/scripts/mathtools.js'
-import VCalculate from '../generic/VCalculate.vue';
+import VCalculate from '@/components/generic/VCalculate.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'mathtools',
+defineOptions({
+  name: 'Sequences'
+})
 
-  components : {
-    VCalculate
-  },
+const route = useRoute()
+const { t } = useI18n()
 
-  mounted: function() {
-    this.$refs.niter.focus();
-    this.seqs = mathtools.sequences;
-    if (this.$route.params.seq) {
-      this.number = this.$route.params.seq;
-    }  
-  },
+// --- State ---
+const number = ref('hailstone')
+const niter = ref(1)
+const start = ref(1)
+const result = ref("")
+const count = ref(0)
+const seq = ref("")
+const errormsg = ref("")
+const stop = ref("stopiter")
+const endat = ref(0)
+const seqs = ref([])
+
+// --- Template Ref ---
+const niterInput = ref(null)
+
+onMounted(() => {
+  // Focus logic
+  niterInput.value?.focus()
   
-  data: function () {
-    return {
-      number: 'hailstone',
-      niter: 1,
-      start: 1,
-      result: 0,
-      seq: "",
-      errormsg: "",
-      stop: "stopiter",
-      endat: 0,
-      cntiter: 0,
-      seqs: []
-    }
-  },
+  // Load sequence metadata
+  seqs.value = mathtools.sequences
 
-  methods: {
-    sequence: function() {
+  // Handle route params
+  if (route.params.seq) {
+    number.value = route.params.seq
+  }
+})
 
-      let seq = null;
-      this.errormsg = "";
-      this.result = "";
-      if (this.stop === "stopat") this.niter = 0;
-      if (this.stop === "stopiter") this.endat = 0;
-      if (this.stop === "stopend") {
-        this.count = 0;
-        this.endat = 0;
-      }
+// --- Methods ---
 
-      try {
+const sequence = () => {
+  let calculatedSeq = null
+  errormsg.value = ""
+  result.value = ""
 
-        switch (this.number) {
-          case 'hailstone' :
-            seq = mathtools.hailstone (this.start, this.niter, this.endat, this.stop === "stopend");
-            break;
-          case "golomb" :
-            seq = mathtools.golomb (this.niter, this.endat);
-            break;
-          case "abundant" :
-            seq = mathtools.abundant (this.niter, this.endat);
-            break;
-          case "deficient" :
-            seq = mathtools.deficient (this.niter, this.endat);
-            break;
-          case "conway" :
-            if (this.n > 50) {
-              this.errormsg = this.$t('sequences.maxconway');
-              return;
-            }
-            seq = mathtools.conway (this.start, this.niter, this.endat);
-            break;
-          case "revconway" :
-            if (this.n > 50) {
-              this.errormsg = this.$t('sequences.maxconway');
-              return;
-            }
-            seq = mathtools.revconway (this.start, this.niter, this.endat);
-            break;
-          case "niven" :
-            seq = mathtools.niven (this.niter, this.endat);
-            break;
-          case "kaprekar" :
-            seq = mathtools.kaprekar (this.start, this.niter, this.endat, this.stop === "stopend");
-            break;
-          case "palindrome" :
-            seq = mathtools.palindrome (this.start, this.niter, this.endat, this.stop === "stopend");
-            break;      
+  // Adjust input parameters based on stop mode
+  if (stop.value === "stopat") niter.value = 0
+  if (stop.value === "stopiter") endat.value = 0
+  if (stop.value === "stopend") {
+    niter.value = 0
+    endat.value = 0
+  }
+
+  try {
+    switch (number.value) {
+      case 'hailstone':
+        calculatedSeq = mathtools.hailstone(start.value, niter.value, endat.value, stop.value === "stopend")
+        break
+      case "golomb":
+        calculatedSeq = mathtools.golomb(niter.value, endat.value)
+        break
+      case "abundant":
+        calculatedSeq = mathtools.abundant(niter.value, endat.value)
+        break
+      case "deficient":
+        calculatedSeq = mathtools.deficient(niter.value, endat.value)
+        break
+      case "conway":
+        if (niter.value > 50) {
+          errormsg.value = t('sequences.maxconway')
+          return
         }
+        calculatedSeq = mathtools.conway(start.value, niter.value, endat.value)
+        break
+      case "revconway":
+        if (niter.value > 50) {
+          errormsg.value = t('sequences.maxconway')
+          return
+        }
+        calculatedSeq = mathtools.revconway(start.value, niter.value, endat.value)
+        break
+      case "niven":
+        calculatedSeq = mathtools.niven(niter.value, endat.value)
+        break
+      case "kaprekar":
+        calculatedSeq = mathtools.kaprekar(start.value, niter.value, endat.value, stop.value === "stopend")
+        break
+      case "palindrome":
+        calculatedSeq = mathtools.palindrome(start.value, niter.value, endat.value, stop.value === "stopend")
+        break
+    }
 
-        this.cntiter = seq.cnt;
-        this.result = seq.n;
-        this.seq = seq.seq;
-        
-      } catch (error) {
+    if (calculatedSeq) {
+      count.value = calculatedSeq.cnt
+      result.value = calculatedSeq.n
+      seq.value = calculatedSeq.seq
+    }
 
-          console.error('Error ', error);
-          this.errormsg = this.$t('errors.generic');
-
-      }
-      
-    },
-  },
+  } catch (error) {
+    console.error('Sequence Calculation Error: ', error)
+    errormsg.value = t('errors.generic')
+  }
 }
 </script>
 
@@ -242,6 +190,14 @@ export default {
 
 .monospace {
   font-family: "Lucida Console", Courier, monospace;
+  word-break: break-word;
+}
+
+h4 {
+  margin-bottom: 0.5em;
+  margin-top: 0.2em;
+  font-size: 1.1em;
+  color: var(--accent-green)
 }
 
 </style>

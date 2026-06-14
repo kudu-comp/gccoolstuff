@@ -1,309 +1,295 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('wordsearch.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('wordsearch.long')"
-      />
-      <!-- Form fields -->
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="text1"
-        >{{$t('wordsearch.ignore')}}</label>
-        <input
-          id="ignore"
-          v-model="ignore"
-          type="text"
-          length="1"
-          class="form-control mb-2 me-2"
-          style="width: 35px"
+
+  <header class="page-header">
+    <h1>{{ $t('wordsearch.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('wordsearch.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('wordsearch.ignore') }}</label>
+          <input type="text" v-model="ignore" lenght="1">
+        </div>
+        <div class="card-grid">
+          <div class="form-row">
+            <label>{{ $t('wordsearch.grid') }}</label>
+            <textarea
+              v-model="grid"
+              class="font-monospace"
+              rows="10"
+            />
+          </div>
+          <div class="form-row">
+            <label>{{ $t('wordsearch.words') }}</label>
+            <textarea
+              v-model="words"
+              class="font-monospace"
+              rows="10"
+            />
+          </div>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-      </div>
-      <label
-          for="grid"
-          class="form-label sm-size mb-2"
-        >{{ $t('wordsearch.grid') }}
-      </label>
-      <div class="mb-2">
-        <textarea
-          id="grid"
-          v-model="grid"
-          style="font-family:'Courier New', Courier, monospace"
-          class="form-control"
-          rows="5"
-          autofocus
-        />
-      </div>
-      <label
-          for="words"
-          class="form-label sm-size mb-2"
-        >{{ $t('wordsearch.words') }}
-      </label>
-      <div class="mb-2">
-        <textarea
-          id="words"
-          v-model="words"
-          style="font-family:'Courier New', Courier, monospace"
-          class="form-control"
-          rows="5"
-        />
-      </div>
-      <!-- <v-calculate class="mb-2" id="calc" @calculate="doAction()"></v-calculate> -->
-      <button class="btn mb-2" id="btn1" @click="solve()">
-        <i class="fa-solid fa-puzzle-piece me-2"></i>{{$t('buttons.solve')}}
-      </button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" >
-        {{ result }} 
-      </div>
-      <div>
-        <canvas id="puzzle"></canvas>
-      </div>
+          {{ errormsg }}.
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="solve">
+            {{ $t('buttons.solve') }}
+          </button>
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div class="card resultbox" >
+          {{ result }} 
+          <div class="canvas-container">
+            <canvas ref="puzzleCanvas"></canvas>
+          </div>
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: "WordSearch"
+});
 
-  name: "WordSearch",
+const { t } = useI18n();
 
-  components: {
-        
-  },
+// --- State ---
+const grid = ref("");
+const words = ref("");
+const gridarr = ref([]);
+const checkarr = ref([]);
+const nrow = ref(0);
+const ncol = ref(0);
+const ignore = ref("-");
+const result = ref("");
+const errormsg = ref("");
 
-  data() {
-    return {
-      grid: "",
-      words: "",
-      gridarr: [],
-      checkarr: [],
-      nrow: 0,
-      ncol: 0,
-      ignore: "-",
-      result: "",
-      errormsg: "",
-      boxsize: 30,
-      bgcolor : "#eeeeee",
-      txtcolor : "#09776E",
-      strikecolor : "#59e2d7",
-      circlecolor: "#95a832"
-    };
-  },
+// Styling Settings
+const boxsize = ref(30);
+const bgcolor = ref("#fafafa");
+const txtcolor = ref("#84a98c");
+const strikecolor = ref("#c05d4d");
+const circlecolor = ref("#6b8e23");
 
-  methods: {
+// --- Template Refs ---
+const puzzleCanvas = ref(null);
 
-    // Try word starting at position r, c
-    tryPos: function (r, c, w) {
-      // Try all direction but only if the word would fit
-      for (let dir = 0; dir < 8; dir++) {
-        switch (dir) {
-          case 0: // North
-            if (r - w.length < -1) continue;
-            break;
-          case 1: // Northeast
-            if (r - w.length < -1 || c + w.length > this.ncol) continue;
-            break;
-          case 2: // East
-            if (c + w.length > this.ncol) continue;
-            break;
-          case 3: // Southeast
-            if (r + w.length > this.nrow || c + w.length > this.ncol) continue;
-            break;
-          case 4: // South
-            if (r + w.length > this.nrow) continue;
-            break;
-          case 5: // Southwest
-            if (r + w.length > this.nrow || c - w.length < -1) continue;
-            break;
-          case 6: // West
-            if (c - w.length < -1) continue;
-            break;
-          case 7: // Northwest
-            if (r - w.length < -1 || c - w.length < -1) continue;
-            break;
-        }
-        if (this.tryDir(r, c, dir, w)) return true;
-      }
-      return false;
-    },
+// --- Directional Logic ---
+const moves = [
+  [-1, 0],  // 0: North
+  [-1, 1],  // 1: Northeast
+  [0, 1],   // 2: East
+  [1, 1],   // 3: Southeast
+  [1, 0],   // 4: South
+  [1, -1],  // 5: Southwest
+  [0, -1],  // 6: West
+  [-1, -1], // 7: Northwest
+];
 
-    // Try word started at r,c in the given direction
-    tryDir: function (r, c, dir, w) {
-      // Check the word in the given direction NESW is 0 to 7
-      let moves = [
-        [-1, 0],
-        [-1, 1],
-        [0, 1],
-        [1, 1],
-        [1, 0],
-        [1, -1],
-        [0, -1],
-        [-1, -1],
-      ];
-      for (let i = 1; i < w.length; i++) {
-        if (this.gridarr[r + moves[dir][0] * i][c + moves[dir][1] * i] !== w[i])
-          return false;
-      }
+// --- Drawing Methods ---
 
-      // Check if this was part of a longer word, these are already found
-      // To do
+const drawCanvas = () => {
+  const canvas = puzzleCanvas.value;
+  if (!canvas) return;
 
-      // Cross the used letters
-      for (let i = 0; i < w.length; i++) {
-        this.checkarr[r + moves[dir][0] * i][c + moves[dir][1] * i] = true;
-      }
-      // Strike through word
-      this.strikethroughWord(
-        r,
-        c,
-        r + moves[dir][0] * (w.length - 1),
-        c + moves[dir][1] * (w.length - 1)
+  canvas.width = ncol.value * boxsize.value;
+  canvas.height = nrow.value * boxsize.value;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = bgcolor.value;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  ctx.fillStyle = txtcolor.value;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "20px courier"; // Adjusted font size for default boxsize
+
+  for (let r = 0; r < nrow.value; r++) {
+    for (let c = 0; c < ncol.value; c++) {
+      ctx.fillText(
+        gridarr.value[r][c],
+        (c + 0.5) * boxsize.value,
+        (r + 0.5) * boxsize.value
       );
-      return true;
-    },
-    
-    // Draw canvas
-    drawCanvas: function () {
-      let canvas = document.getElementById("puzzle");
-      canvas.width = this.ncol * this.boxsize;
-      canvas.height = this.nrow * this.boxsize;
-      let ctx = canvas.getContext("2d");
-      ctx.fillStyle = this.bgcolor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = this.txtcolor;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "32px courier";
-      for (let r = 0; r < this.nrow; r++)
-        for (let c = 0; c < this.ncol; c++)
-          ctx.fillText(
-            this.gridarr[r][c],
-            (c + 0.5) * this.boxsize,
-            (r + 0.5) * this.boxsize
-          );
-    },
-
-    strikethroughWord: function (startr, startc, endr, endc) {
-      let canvas = document.getElementById("puzzle");
-      let ctx = canvas.getContext("2d");
-      ctx.strokeStyle = this.strikecolor;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo((startc + 0.5) * this.boxsize, (startr + 0.5) * this.boxsize);
-      ctx.lineTo((endc + 0.5) * this.boxsize, (endr + 0.5) * this.boxsize);
-      ctx.stroke();
-    },
-
-    circleRemainingLetters: function () {
-      let canvas = document.getElementById("puzzle");
-      let ctx = canvas.getContext("2d");
-      ctx.strokeStyle = this.circlecolor;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.font = "48px courier";
-      for (let r = 0; r < this.nrow; r++)
-        for (let c = 0; c < this.ncol; c++)
-          if (!this.checkarr[r][c] && this.gridarr[r][c] !== this.ignore) {
-            ctx.beginPath();
-            ctx.arc(
-              (c + 0.5) * this.boxsize,
-              (r + 0.5) * this.boxsize,
-              this.boxsize * 0.47,
-              0,
-              2 * Math.PI
-            );
-            ctx.stroke();
-          }
-    },
-
-    solve: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      this.gridarr = [];
-      this.checkarr = [];
-
-      // Split the grid in lines and check if each line has the same length
-      let gridlines = this.grid
-        .trim()
-        .toUpperCase()
-        .split(/[\n\r]/g);
-      let h = gridlines[0].length;
-      if (h === 0) {
-        this.errormsg = this.$t('errors.noinput');
-        return;
-      }
-      for (let i = 1; i < gridlines.length; i++) {
-        if (gridlines[i].length !== h) {
-          this.errormsg = this.$t("wordsearch.griderror");
-          return;
-        }
-      }
-
-      // Split each gridline into chars and fill the arrays
-      for (let g of gridlines) {
-        this.gridarr.push([...g]);
-        this.checkarr.push([...g].map((e) => false));
-      }
-      this.nrow = this.gridarr.length;
-      this.ncol = this.gridarr[0].length;
-      
-      // Build a list of words
-      let words = this.words
-        .trim()
-        .toUpperCase()
-        .split(/[\n\r]/g);
-      // Sort the list descending so longer words come first
-      words = words.sort().reverse();
-
-      // Draw the puzzle
-      this.drawCanvas();
-
-      // Try to find all the words
-      for (let w = 0; w < words.length; w++) {
-        // Get starting positions
-        let found = false;
-        for (let r = 0; r < this.nrow && !found; r++)
-          for (let c = 0; c < this.ncol && !found; c++)
-            if (this.gridarr[r][c] === words[w][0]) {
-              found = this.tryPos(r, c, words[w].replace(/\s+/g, ''));
-            }
-
-        // If word hasn't been found raise an error
-        if (!found) {
-          this.errormsg = words[w] + this.$t('wordsearch.notfound');
-          return;
-        }
-      }
-
-      // Print all the letters that are not checked
-      this.circleRemainingLetters();
-      this.result = this.$t('wordsearch.remletters');
-      for (let r = 0; r < this.nrow; r++)
-        for (let c = 0; c < this.ncol; c++)
-          if (!this.checkarr[r][c] && this.gridarr[r][c] !== this.ignore) this.result += this.gridarr[r][c];
-    },
-  },
-
+    }
+  }
 };
 
+const strikethroughWord = (startr, startc, endr, endc) => {
+  const ctx = puzzleCanvas.value.getContext("2d");
+  ctx.strokeStyle = strikecolor.value;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo((startc + 0.5) * boxsize.value, (startr + 0.5) * boxsize.value);
+  ctx.lineTo((endc + 0.5) * boxsize.value, (endr + 0.5) * boxsize.value);
+  ctx.stroke();
+};
+
+const circleRemainingLetters = () => {
+  const ctx = puzzleCanvas.value.getContext("2d");
+  ctx.strokeStyle = circlecolor.value;
+  ctx.lineWidth = 2;
+
+  for (let r = 0; r < nrow.value; r++) {
+    for (let c = 0; c < ncol.value; c++) {
+      if (!checkarr.value[r][c] && gridarr.value[r][c] !== ignore.value) {
+        ctx.beginPath();
+        ctx.arc(
+          (c + 0.5) * boxsize.value,
+          (r + 0.5) * boxsize.value,
+          boxsize.value * 0.4,
+          0,
+          2 * Math.PI
+        );
+        ctx.stroke();
+      }
+    }
+  }
+};
+
+// --- Search Logic ---
+
+const tryDir = (r, c, dir, w) => {
+  for (let i = 1; i < w.length; i++) {
+    const nextR = r + moves[dir][0] * i;
+    const nextC = c + moves[dir][1] * i;
+    if (gridarr.value[nextR][nextC] !== w[i]) return false;
+  }
+
+  // Cross the used letters
+  for (let i = 0; i < w.length; i++) {
+    checkarr.value[r + moves[dir][0] * i][c + moves[dir][1] * i] = true;
+  }
+
+  strikethroughWord(
+    r,
+    c,
+    r + moves[dir][0] * (w.length - 1),
+    c + moves[dir][1] * (w.length - 1)
+  );
+  return true;
+};
+
+const tryPos = (r, c, w) => {
+  for (let dir = 0; dir < 8; dir++) {
+    const dr = moves[dir][0];
+    const dc = moves[dir][1];
+
+    // Boundary check
+    const finalR = r + dr * (w.length - 1);
+    const finalC = c + dc * (w.length - 1);
+
+    if (finalR < 0 || finalR >= nrow.value || finalC < 0 || finalC >= ncol.value) {
+      continue;
+    }
+
+    if (tryDir(r, c, dir, w)) return true;
+  }
+  return false;
+};
+
+// --- Main Action ---
+
+const solve = () => {
+  result.value = "";
+  errormsg.value = "";
+  gridarr.value = [];
+  checkarr.value = [];
+
+  // Draw Background Grid
+  drawCanvas();
+
+  // Parse Grid
+  let gridlines = grid.value.trim().toUpperCase().split(/[\n\r]+/g);
+  if (gridlines.length === 0 || gridlines[0].length === 0) {
+    errormsg.value = t('errors.noinput');
+    return;
+  }
+
+  let width = gridlines[0].length;
+  for (let i = 0; i < gridlines.length; i++) {
+    if (gridlines[i].length !== width) {
+      errormsg.value = t("wordsearch.griderror");
+      return;
+    }
+    gridarr.value.push([...gridlines[i]]);
+    checkarr.value.push(new Array(width).fill(false));
+  }
+
+  nrow.value = gridarr.value.length;
+  ncol.value = width;
+
+  // Parse and Sort Words (longest first)
+  let wordList = words.value.trim().toUpperCase().split(/[\n\r]+/g)
+    .map(w => w.replace(/\s+/g, ''))
+    .filter(w => w.length > 0)
+    .sort((a, b) => b.length - a.length);
+
+  if (wordList.length === 0) {
+    errormsg.value = t('errors.noinput');
+    return;
+  }
+
+  // Find Words
+  for (let w = 0; w < wordList.length; w++) {
+    const currentWord = wordList[w];
+    let found = false;
+
+    for (let r = 0; r < nrow.value && !found; r++) {
+      for (let c = 0; c < ncol.value && !found; c++) {
+        if (gridarr.value[r][c] === currentWord[0]) {
+          found = tryPos(r, c, currentWord);
+        }
+      }
+    }
+
+    if (!found) {
+      errormsg.value = currentWord + " " + t('wordsearch.notfound');
+      return;
+    }
+  }
+
+  // Final Result Generation
+  circleRemainingLetters();
+  let remaining = "";
+  for (let r = 0; r < nrow.value; r++) {
+    for (let c = 0; c < ncol.value; c++) {
+      if (!checkarr.value[r][c] && gridarr.value[r][c] !== ignore.value) {
+        remaining += gridarr.value[r][c];
+      }
+    }
+  }
+  
+  result.value = t('wordsearch.remletters') + ": " + remaining;
+};
 </script>
+
+<style scoped>
+.canvas-container {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+canvas {
+  image-rendering: crisp-edges;
+}
+.font-monospace {
+  font-family: 'Courier New', Courier, monospace;
+}
+</style>
 
 <style scoped>
 </style>

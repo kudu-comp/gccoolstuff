@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column mx-4">
+  <div class="page-container mx-4">
     <div class="sectionhead">
       <div class="text-center">
         {{ cp[selcp].name }} {{ $t('ciphers.title') }}
@@ -7,7 +7,7 @@
     </div>
     <div class="mainpage">
       <div
-        class="infoblock"
+        class="card mb-2 pb-2"
         v-html="$t('ciphers.long')"
       />
       <div class="row">
@@ -23,7 +23,7 @@
           </option>
         </select>
       </div>
-      <div class="infoblock">
+      <div class="card mb-2 pb-2">
         {{ explanation }}
       </div>
       <div v-for="(item, idx) in cp[selcp].keys">
@@ -243,7 +243,7 @@
       </div>
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
       </div>

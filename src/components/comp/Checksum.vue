@@ -1,231 +1,204 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('checksum.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('checksum.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('checksum.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <CustomDropdown
+            :title="$t('checksum.checkmethod')"
+            :options="checks"
+            v-model="checksel"
+          />
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('labels.number') }}</label>
+          <input type="text" v-model="txt" ref="inputRef">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate id="run" @calculate="runChecksum" />
+        </div>  
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('checksum.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="check"
-        >{{ $t('checksum.checkmethod') }}</label>
-        <select
-          id="check"
-          v-model="checksel"
-          class="form-select mb-2 lg-size"
-          style="width: 150px;"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-          <option value="0">Modulo 10</option>
-          <option value="2">GS1 standard (EAN, GLN, GTIN, UCC, GSIN, SSCC)</option>
-          <option value="3">Elfproef / Modulo 11</option>
-          <option value="4">Dutch BSN</option>
-          <option value="5">ISBN-10 (old), use GS1 for ISBN-13</option>
-          <option value="6">Luhn (credit card, IMEI and many others)</option>
-          <option value="7">IBAN (International Bank Account Number)</option>
-          <option value="1">Universal Product Code (UPC)</option>
-          <option value="8">Parity bit (only works on 0s and 1s)</option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="input"
-        >{{ $t('labels.number') }}</label>
-        <input
-          id="input"
-          ref="input"
-          v-model="txt"
-          type="text"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <v-calculate id="run" @calculate="runChecksum" />
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCalculate from '@/components/generic/VCalculate.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-import VCalculate from '@/components/generic/VCalculate.vue' 
+defineOptions({
+  name: 'CompChecksum'
+})
 
-export default {
+const { t } = useI18n()
 
-  name: 'CompChecksum',
+// --- State ---
+const checksel = ref("0")
+const result = ref("")
+const txt = ref("")
+const errormsg = ref("")
 
-  data: function () {
-    return {
-      checksel : "0",
-      result : "",
-      txt: "",
-      errormsg: ""
-    }
-  },
+const checks = [
+  { value: "0", label: "Modulo 10" },
+  { value: "2", label: "GS1 standard (EAN, GLN, GTIN, UCC, GSIN, SSCC)" },
+  { value: "3", label: "Elfproef / Modulo 11" },
+  { value: "4", label: "Dutch BSN" },
+  { value: "5", label: "ISBN-10 (old), use GS1 for ISBN-13" },
+  { value: "6", label: "Luhn (credit card, IMEI and many others)" },
+  { value: "7", label: "IBAN (International Bank Account Number)" },
+  { value: "1", label: "Universal Product Code (UPC)" },
+  { value: "8", label: "Parity bit (only works on 0s and 1s)" }
+]
 
-  components: {
-    VCalculate
-  },
+// --- Template Ref ---
+const inputRef = ref(null)
 
-  mounted: function() {
-    this.$refs.input.focus();
-  },
+onMounted(() => {
+  inputRef.value?.focus()
+})
 
-  methods: {
+// --- Logic ---
 
-    // Translate the input
-    runChecksum : function () {
+const runChecksum = () => {
+  // Init
+  result.value = ""
+  errormsg.value = ""
+  let nums = []
+  let h = 0
+  const charset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-      // Init
-      this.result = "";
-      this.errormsg = "";
-      let nums = [];
-      let h = 0;
-      
-      try {
-
-        // IBAN checksum is totally different
-        if (this.checksel === "7") {
-          // Skip the first four for now
-          // Add digits as is
-          // Add letters as position in alphabet plus 9
-          let s = "";
-          for (let i = 4; i < this.txt.length; i++) {
-            s += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-              .indexOf(this.txt[i])
-              .toString();
-          }
-
-          // Append the first two positions (country code)
-          s += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            .indexOf(this.txt[0])
-            .toString();
-          s += "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            .indexOf(this.txt[1])
-            .toString();
-
-          // Multiply by 100
-          s += "00";
-
-          // Module 97 after adding the checksum should be 1
-          let b = BigInt(s);
-          s = (BigInt(98) - (b % BigInt(97))).toString().padStart(2, "0");
-
-          // Write the result
-          this.result = this.$t('checksum.checkres') + s;
-          return;
-        }
-
-        // Non IBAN check digits
-        // Check and convert input to int
-        for (let c of this.txt) {
-          if (c === "?") continue;
-          let i = parseInt(c, 10);
-          if (isNaN(i)) {
-            this.errormsg = this.$t('errors.notanumber');
-            return;
-          }
-          nums.push(i);
-        }
-
-        // Swap array if checksum is calculated right to left
-        if ("23456".indexOf(this.selmode) >= 0) {
-          let rev = [];
-          for (let e of nums) rev.unshift(e);
-          nums = rev;
-        }
-
-        this.result = this.$t('checksum.checkres'); //"The checksum is: ";
-
-        // Step 1: run over all the digits
-        let sum = 0;
-        for (let i = 0; i < nums.length; i++) {
-          switch (this.checksel) {
-            case "0":
-            case "8":
-              sum += nums[i];
-              break;
-            case "1":
-            case "2":
-              // First position is 1, but i is zero!
-              // So odd / even switched
-              sum += i % 2 === 0 ? nums[i] * 3 : nums[i];
-              break;
-            case "3":
-            case "4":
-            case "5":
-              sum += nums[i] * (i + 2);
-              break;
-            case "6":
-              h = i % 2 === 0 ? nums[i] * 2 : nums[i];
-              sum += h > 9 ? (h % 10) + 1 : h;
-              break;
-            default:
-              break;
-          }
-        }
-
-        // Step 2: finalize checksum
-        switch (this.checksel) {
-          case "0":
-            this.result += sum % 10;
-            break;
-          case "1":
-          case "2":
-          case "6":
-            this.result += sum % 10 === 0 ? 0 : 10 - (sum % 10);
-            break;
-          case "3":
-          case "5":
-            h = 11 - (sum % 11);
-            if (h < 10) this.result += h;
-            if (h === 10) this.result += "0 or 10";
-            if (h === 11) this.result += "X or 11";
-            break;
-          case "4":
-            h = sum % 11;
-            if (h < 10) this.result += h;
-            if (h === 10) this.result += "0 or 10";
-            if (h === 11) this.result += "X or 11";
-            break;
-          case "8":
-            if (sum % 2 === 0) {
-              this.result += this.$t('checksum.checkpar1'); // "0 (even parity) or 1 (odd parity)";
-            } else {
-              this.result += this.$t('checksum.checkpar2'); //"1 (even parity) or 0 (odd parity)";
-            }
-            break;
-          default:
-            break;
-        }
-          
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
+  try {
+    // IBAN checksum logic
+    if (checksel.value === "7") {
+      let s = ""
+      // Move first 4 chars to end is handled here by starting loop at index 4
+      for (let i = 4; i < txt.value.length; i++) {
+        s += charset.indexOf(txt.value[i].toUpperCase()).toString()
       }
 
-    },
+      // Append the first two positions (country code)
+      s += charset.indexOf(txt.value[0]?.toUpperCase()).toString()
+      s += charset.indexOf(txt.value[1]?.toUpperCase()).toString()
 
-  },
+      // Multiply by 100 (append 00)
+      s += "00"
 
+      let b = BigInt(s)
+      let checksum = (BigInt(98) - (b % BigInt(97))).toString().padStart(2, "0")
+
+      result.value = t('checksum.checkres') + checksum
+      return
+    }
+
+    // Standard check digit logic
+    for (let c of txt.value) {
+      if (c === "?") continue
+      let i = parseInt(c, 10)
+      if (isNaN(i)) {
+        errormsg.value = t('errors.notanumber')
+        return
+      }
+      nums.push(i)
+    }
+
+    // Swap array if checksum is calculated right to left
+    // Note: checksel is used here as it contains the logic type
+    if ("23456".indexOf(checksel.value) >= 0) {
+      nums.reverse()
+    }
+
+    let sum = 0
+    // Step 1: Run over all the digits
+    for (let i = 0; i < nums.length; i++) {
+      switch (checksel.value) {
+        case "0":
+        case "8":
+          sum += nums[i]
+          break
+        case "1":
+        case "2":
+          // Alternating weights 3 and 1
+          sum += i % 2 === 0 ? nums[i] * 3 : nums[i]
+          break
+        case "3":
+        case "4":
+        case "5":
+          // Weights i + 2 (Modulo 11 style)
+          sum += nums[i] * (i + 2)
+          break
+        case "6":
+          // Luhn Logic
+          h = i % 2 === 0 ? nums[i] * 2 : nums[i]
+          sum += h > 9 ? (h % 10) + 1 : h
+          break
+      }
+    }
+
+    let finalRes = t('checksum.checkres')
+
+    // Step 2: Finalize checksum based on sum
+    switch (checksel.value) {
+      case "0":
+        finalRes += (sum % 10).toString()
+        break
+      case "1":
+      case "2":
+      case "6":
+        finalRes += (sum % 10 === 0 ? 0 : 10 - (sum % 10)).toString()
+        break
+      case "3":
+      case "5":
+        h = 11 - (sum % 11)
+        if (h < 10) finalRes += h
+        if (h === 10) finalRes += "0 or 10"
+        if (h === 11) finalRes += "X or 11"
+        break
+      case "4":
+        h = sum % 11
+        if (h < 10) finalRes += h
+        if (h === 10) finalRes += "0 or 10"
+        if (h === 11) finalRes += "X or 11"
+        break
+      case "8":
+        if (sum % 2 === 0) {
+          finalRes += t('checksum.checkpar1') // Even parity
+        } else {
+          finalRes += t('checksum.checkpar2') // Odd parity
+        }
+        break
+    }
+
+    result.value = finalRes
+
+  } catch (e) {
+    errormsg.value = t('errors.generic')
+    console.error(e)
+  }
 }
 </script>
 
-<style scoped>
-</style>

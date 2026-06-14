@@ -1,324 +1,222 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('bintotext.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('bintotext.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="selfromenc"
-        >{{ $t('bintotext.selfrom') }} </label>
-        <select
-          id="selfromenc"
+
+  <header class="page-header">
+    <h1>{{ $t('bintotext.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('bintotext.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <CustomDropdown
+          :title="$t('bintotext.selfrom')"
+          :options="encodings"
           v-model="selfromenc"
-          class="form-select mb-2 md-size"
           @change="selFromEncoding"
-        >
-          <option value="b85">
-            Ascii85 (a.k.a. Base85)
-          </option>
-          <option value="b32">
-            Base32 (e.g. RFC4648)
-          </option>
-          <option value="b58">
-            Base58 (e.g. Bitcoin)
-          </option>
-          <option value="b64">
-            Base64 (Base64 and uuencode)
-          </option>
-          <option value="b91">
-            Base91
-          </option>
-          <option value="bin">
-            Binary number
-          </option>
-          <option value="dec">
-            Decimal number
-          </option>
-          <option value="hex">
-            Hexadecimal number (a.k.a. Base16)
-          </option>
-          <option value="txt">
-            Text (ASCII UTF8)
-          </option>
-        </select>
-      </div>
-      <div
-        v-show="fromtables"
-        class="row mb-2"
-      >
-        <label
-          class="form-label mb-2 sm-size"
-          for="fromtable"
-        >{{ $t('bintotext.selfromtable') }}</label>
-        <select
-          id="fromtable"
+        />
+        <CustomDropdown
+          v-if="fromtables && fromtables.length > 0"
+          :title="$t('bintotext.selfromtable')"
+          :options="fromtables"
           v-model="selfromtable"
-          class="form-select mb-2 md-size"
-        >
-          <option
-            v-for="tb in fromtables"
-            :key="tb"
-            :value="tb.value"
-          >
-            {{ tb.name }}
-          </option>
-        </select>
-        <p class="xl-size">
-          {{ selfromtable }}
-        </p>
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="seltoenc"
-        >{{ $t('bintotext.selto') }} </label>
-        <select
-          id="seltoenc"
+        />
+        <h6>
+          Codestring: {{ selfromtable }}
+        </h6>
+        <CustomDropdown
+          :title="$t('bintotext.selfrom')"
+          :options="encodings"
           v-model="seltoenc"
-          class="form-select mb-2 md-size"
           @change="selToEncoding"
-        >
-          <option value="b85">
-            Ascii85 (a.k.a. Base85)
-          </option>
-          <option value="b32">
-            Base32 (e.g. RFC4648)
-          </option>
-          <option value="b58">
-            Base58 (e.g. Bitcoin)
-          </option>
-          <option value="b64">
-            Base64 (Base64 and uuencode)
-          </option>
-          <option value="b91">
-            Base91
-          </option>
-          <option value="bin">
-            Binary number
-          </option>
-          <option value="dec">
-            Decimal number
-          </option>
-          <option value="hex">
-            Hexadecimal number (a.k.a. Base16)
-          </option>
-          <option value="txt">
-            Text (ASCII UTF8)
-          </option>
-        </select>
-      </div>
-      <div
-        v-show="totables"
-        class="row mb-2"
-      >
-        <label
-          class="form-label mb-2 sm-size"
-          for="totable"
-        >{{ $t('bintotext.seltotable') }} </label>
-        <select
-          id="totable"
+        />
+        <CustomDropdown
+          v-if="totables && totables.length > 0"
+          :title="$t('bintotext.seltotable')"
+          :options="totables"
           v-model="seltotable"
-          class="form-select mb-2 md-size"
-        >
-          <option
-            v-for="tb in totables"
-            :key="tb"
-            :value="tb.value"
-          >
-            {{ tb.name }}
-          </option>
-        </select>
-        <p class="xl-size">
-          {{ seltotable }}
-        </p>
-      </div>
-      <button id="convert" class="btn mb-2"  @click="convertBase">{{ $t('buttons.convert') }}</button>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div class="form-row mb-2">
+        />
+        <h6>
+          Codestring: {{ seltotable }}
+        </h6>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.input')">
         <textarea
-          id="message"
+          ref="messageRef"
           v-model="message"
-          ref="message"
-          class="form-control"
           :placeholder="$t('labels.message')"
           rows="5"
+          @input="doSomething"
         />
-      </div>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
+        >
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
-// Import binary to text encoding tools
-// For info see https://en.wikipedia.org/wiki/Binary-to-text_encoding
-// Add this one https://en.wikipedia.org/wiki/Base62?
-// Get ideas from https://cryptii.com/pipes/urldecode
-
+<script setup>
+import { ref, computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import * as bt from '@/scripts/bintotext.js'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+defineOptions({
+  name: 'BinToText'
+})
 
-  name: 'BinToText',
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      basefrom: "bin",
-      baseto: "bin",
-      errormsg: "",
-      seltoenc : "b64",
-      totables : [],
-      seltotable: "",
-      selfromenc : "txt",
-      fromtables: [],
-      selfromtable: ""
-    }
-  },
+// --- State ---
+const message = ref("")
+const selfromenc = ref("txt")
+const fromtables = ref([])
+const selfromtable = ref("")
 
-  mounted: function() {
-    this.fromtables = null;
-    this.selfromtable = "";
-    this.totables = bt.base64encodings;
-    this.seltotable = this.totables[0].value;
-    this.$refs.message.focus();
-  },
+const seltoenc = ref("b64")
+const totables = ref([])
+const seltotable = ref("")
 
-  methods: {
+const messageRef = ref(null)
 
-    // Translate the input
-    selFromEncoding : function () {
+const encodings = [
+  { label: 'Text (ASCII UTF8)', value: 'txt' },
+  { label: 'Binary number', value: 'bin' },
+  { label: 'Hexadecimal number (a.k.a. Base16)', value: 'hex' },
+  { label: 'Decimal number', value: 'dec' },
+  { label: 'Base32 (e.g. RFC4648)', value: 'b32' },
+  { label: 'Base58 (e.g. Bitcoin)', value: 'b58' },
+  { label: 'Base64 (Base64 and uuencode)', value: 'b64' },
+  { label: 'Ascii85 (a.k.a. Base85)', value: 'b85' },
+  { label: 'Base91', value: 'b91' }
+]
 
-      this.fromtables = null;
-      
-      switch (this.selfromenc) {
-        case "b58" : this.fromtables = bt.base58encodings; break;
-        case "b32" : this.fromtables = bt.base32encodings; break;
-        case "b64" : this.fromtables = bt.base64encodings; break;
-        case "b85" : this.fromtables = bt.ascii85encodings; break;
-        case "b91" : this.fromtables = bt.base91encodings; break;
-      }
-      
-      if (this.fromtables) this.selfromtable = this.fromtables[0].value;
-      
-    },
+// --- Table Management Methods ---
+// These remain as methods because they perform "side-effects" (resetting other refs)
 
-    selToEncoding : function () {
-
-      this.totables = null;
-      
-      switch (this.seltoenc) {
-        case "b58" : this.totables = bt.base58encodings; break;
-        case "b32" : this.totables = bt.base32encodings; break;
-        case "b64" : this.totables = bt.base64encodings; break;
-        case "b85" : this.totables = bt.ascii85encodings; break;
-        case "b91" : this.totables = bt.base91encodings; break;
-      }
-      
-      if (this.totables) this.seltotable = this.totables[0].value;
-
-    },
-
-    // Translate the input
-    convertBase : function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";
-      let buffer = [];
-
-      try {
-        
-        // For each word convert and add to the output
-        switch (this.selfromenc) {
-          case "bin" :
-            buffer = bt.binaryToBuffer(this.message);
-            break;
-          case "hex" :
-            buffer = bt.hexToBuffer(this.message);
-            break;
-          case "dec" :
-            buffer = bt.decimalToBuffer(this.message);
-            break;
-          case "txt" :
-            buffer = bt.textToBuffer(this.message);
-            break;
-          case "b32" :
-            buffer = bt.base32ToBuffer(this.message, this.selfromtable);
-            break;
-          case "b58" :
-            buffer = bt.base58ToBuffer(this.message, this.selfromtable);
-            break;
-          case "b64" :
-            buffer = bt.base64ToBuffer(this.message, this.selfromtable);
-            break;
-          case "b85" :
-            buffer = bt.ascii85ToBuffer(this.message, this.selfromtable);
-            break;
-          case "b91" :
-            buffer = bt.base91ToBuffer(this.message, this.selfromtable);
-            break;
-        }
-
-        switch (this.seltoenc) {
-          case "bin" :
-            this.result = bt.bufferToBinary(buffer);
-            break;
-          case "hex" :
-            this.result = bt.bufferToHex(buffer);
-            break;
-          case "dec" :
-            this.result = bt.bufferToDecimal(buffer);
-            break;
-          case "txt" :
-            this.result = bt.bufferToText(buffer);
-            break;
-          case "b32" :
-            this.result = bt.bufferToBase32(buffer, this.seltotable);
-            break;
-          case "b58" :
-            this.result = bt.bufferToBase58(buffer, this.seltotable);
-            break;
-          case "b64" :
-            this.result = bt.bufferToBase64(buffer, this.seltotable);
-            break;
-          case "b85" :
-            this.result = bt.bufferToAscii85(buffer, this.seltotable);
-            break;
-          case "b91" :
-            this.result = bt.bufferToBase91(buffer, this.seltotable);
-            break;
-        }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.invalidinput');
-        console.log(e);
-
-      }
-    },
-
-  },
+const selFromEncoding = () => {
+  fromtables.value = null
+  switch (selfromenc.value) {
+    case "b58": fromtables.value = bt.base58encodings; break
+    case "b32": fromtables.value = bt.base32encodings; break
+    case "b64": fromtables.value = bt.base64encodings; break
+    case "b85": fromtables.value = bt.ascii85encodings; break
+    case "b91": fromtables.value = bt.base91encodings; break
+  }
+  if (fromtables.value && fromtables.value.length > 0) {
+    selfromtable.value = fromtables.value[0].value
+  } else {
+    selfromtable.value = ""
+  }
 }
+
+const selToEncoding = () => {
+  totables.value = null
+  switch (seltoenc.value) {
+    case "b58": totables.value = bt.base58encodings; break
+    case "b32": totables.value = bt.base32encodings; break
+    case "b64": totables.value = bt.base64encodings; break
+    case "b85": totables.value = bt.ascii85encodings; break
+    case "b91": totables.value = bt.base91encodings; break
+  }
+  if (totables.value && totables.value.length > 0) {
+    seltotable.value = totables.value[0].value
+  } else {
+    seltotable.value = ""
+  }
+}
+
+// --- Computed Conversion ---
+
+/**
+ * We wrap both result and error in one computed object.
+ * This prevents the heavy conversion logic from running twice per change.
+ */
+const conversion = computed(() => {
+  const input = message.value
+  if (!input) return { result: "", error: "" }
+
+  try {
+    let buffer = []
+
+    // 1. Convert source to intermediate buffer
+    switch (selfromenc.value) {
+      case "bin": buffer = bt.binaryToBuffer(input); break
+      case "hex": buffer = bt.hexToBuffer(input); break
+      case "dec": buffer = bt.decimalToBuffer(input); break
+      case "txt": buffer = bt.textToBuffer(input); break
+      case "b32": buffer = bt.base32ToBuffer(input, selfromtable.value); break
+      case "b58": buffer = bt.base58ToBuffer(input, selfromtable.value); break
+      case "b64": buffer = bt.base64ToBuffer(input, selfromtable.value); break
+      case "b85": buffer = bt.ascii85ToBuffer(input, selfromtable.value); break
+      case "b91": buffer = bt.base91ToBuffer(input, selfromtable.value); break
+    }
+
+    let out = ""
+    // 2. Convert buffer to target encoding
+    switch (seltoenc.value) {
+      case "bin": out = bt.bufferToBinary(buffer); break
+      case "hex": out = bt.bufferToHex(buffer); break
+      case "dec": out = bt.bufferToDecimal(buffer); break
+      case "txt": out = bt.bufferToText(buffer); break
+      case "b32": out = bt.bufferToBase32(buffer, seltotable.value); break
+      case "b58": out = bt.bufferToBase58(buffer, seltotable.value); break
+      case "b64": out = bt.bufferToBase64(buffer, seltotable.value); break
+      case "b85": out = bt.bufferToAscii85(buffer, seltotable.value); break
+      case "b91": out = bt.bufferToBase91(buffer, seltotable.value); break
+    }
+
+    return { result: out, error: "" }
+  } catch (e) {
+    console.error(e)
+    return { result: "", error: t('errors.invalidinput') }
+  }
+})
+
+// Flatten the computed object for use in the template
+const result = computed(() => conversion.value.result)
+const errormsg = computed(() => conversion.value.error)
+
+// --- Lifecycle & Watchers ---
+
+// We need to trigger the table updates when the main encoding selection changes
+watch(selfromenc, selFromEncoding)
+watch(seltoenc, selToEncoding)
+
+onMounted(() => {
+  selFromEncoding()
+  selToEncoding()
+  messageRef.value?.focus()
+})
 </script>
 
 <style scoped>
+
+.resultbox {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+h6 {
+  font-size: 1em;
+  color: var(--accent-green);
+  font-weight: normal;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+}
 </style>

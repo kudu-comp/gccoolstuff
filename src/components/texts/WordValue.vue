@@ -1,64 +1,47 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('wordvalue.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('wordvalue.long')"
-      />
-      <v-alphabets-ext
-        id="listofalpha"
-        v-model:alphabet="selectedalphabet"
-        @change="wordValue"
-      />
-      <div class="form-check mb-2">
-        <input
-          id="reverse"
-          v-model="reverse"
-          type="checkbox"
-          class="form-check-input"
-          @change="wordValue"
-        >
-        <label
-          for="reverse"
-          class="form-check-label"
-        >{{ $t('wordvalue.reverse') }}</label>
+  <header class="page-header">
+    <h1 style="padding-left: 2rem;">{{ $t('wordvalue.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('wordvalue.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-group-vertical">
+        <v-alphabets-ext
+          id="listofalpha"
+          v-model:alphabet="selectedalphabet"
+          @click="wordValue"
+        />
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="reverse" @change="wordValue">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.reverse') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="startatzero" @change="wordValue">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.startzero') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="replacediac" @change="wordValue">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.replacediac') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="showvalues" @change="showTable">
+          <span class="checkmark"></span>
+          {{ $t('wordvalue.showhide') }}
+        </label>        
       </div>
-      <div class="form-check mb-2">
-        <input
-          id="startatzero"
-          v-model="startatzero"
-          type="checkbox"
-          class="form-check-input"
-          @change="wordValue"
-        >
-        <label
-          for="startatzero"
-          class="form-check-label"
-        >{{ $t('wordvalue.startzero') }}</label>
-      </div>
-      <v-calculate @calculate="wordValue" class="mb-2 me-2"/>
-      <button
-        id="replace"
-        class="btn mb-2 me-2"
-        @click="removeDiacr"
-      >
-        {{ $t('wordvalue.replacediac') }}
-      </button>
-      <button
-        id="remove"
-        class="btn mb-2 me-2"
-        @click="showTable"
-      >
-        {{ $t('wordvalue.showhide') }}
-      </button>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <textarea
         id="message"
-        ref="message"
+        ref="messageInput"
         v-model="message"
-        class="form-control mb-2"
         :placeholder="$t('labels.message')"
         rows="5"
         @input="wordValue"
@@ -69,8 +52,18 @@
       >
         {{ errormsg }}.
       </p>
-      <div v-show="showvalues">
-        <table class="table table-borderless table-sm">
+    </VCard>
+    <VCard :title="$t('labels.result')">
+      <div
+        v-if="result"
+        v-html="result"
+      />
+    </VCard>
+  </div>
+  <div v-show="showvalues" class="card-grid mb-2">
+    <VCard title="">
+      <table class="p-table">
+        <tbody>
           <tr>
             <td
               v-for="s in values"
@@ -87,124 +80,140 @@
               {{ s[1] }}
             </td>
           </tr>
-        </table>
-      </div>
-      <div
-        v-if="result"
-        class="resultbox"
-        v-html="result"
-      />
-      <va-item
-        :showitem="showinfo"
-        @toggle="showinfo = !showinfo"
-      >
-        <template #header>
-          {{ $t('wordvalue.someinfo') }}
-        </template>
-        <template #content>
-          <div v-html="$t('wordvalue.someinfo2')" />
-        </template>
-      </va-item>
-    </div>
+        </tbody>
+      </table>
+    </VCard>
   </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.addinfo')">
+      <div v-html="$t('wordvalue.someinfo2')" />
+    </VCard>
+  </div>  
 </template>
 
-<script>
-import * as textHelper from '@/scripts/texthelper.js';
+<script setup>
+
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import * as textHelper from '@/scripts/texthelper.js'
 import VAlphabetsExt from '@/components/generic/VAlphabetsExt.vue'
-import VaItem from '@/components/generic/VaItem.vue'
+import VCard from '@/components/generic/VCard.vue'
 import VCalculate from '@/components/generic/VCalculate.vue'
 
-export default {
-  name: 'WordValue',
+// Define the name of the component
+defineOptions({
+  name: 'WordValue'
+})
 
-  components: {
-    VAlphabetsExt,
-    VaItem,
-    VCalculate
-  },
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      showvalues: false,
-      values: null,
-      message: "",
-      alphabets: "",
-      selectedalphabet: "English",
-      reverse : false,
-      startatzero : false,
-      result : "",
-      showinfo: true,
-      errormsg: ""
-    }
-  },
+// State (formerly data)
+const showvalues = ref(false)
+const values = ref(null)
+const message = ref("")
+const alphabets = ref("")
+const selectedalphabet = ref("English")
+const reverse = ref(false)
+const startatzero = ref(false)
+const replacediac = ref(true)
+const result = ref("")
+const showinfo = ref(true)
+const errormsg = ref("")
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+// Template Ref for focusing the textarea
+const messageInput = ref(null)
 
-  methods: {
+onMounted(() => {
+  if (messageInput.value) {
+    messageInput.value.focus()
+  }
+})
 
-    // Remove diacritics
-    removeDiacr: function() {
-      this.message = textHelper.removeDiacritics(this.message);
-      this.wordValue();
-    },
+// Methods
 
-    // Load the tablie with row 0 the letters and row 1 the values
-    showTable: function () {
-      this.values = textHelper.getTable(this.selectedalphabet, this.reverse, this.startatzero);
-      this.showvalues = !this.showvalues;
-    },
-
-    // Calculate the word values and square root of the entire text and each word individually
-    wordValue : function() {
-
-      this.errormsg = "";
-      this.result = "";
-
-      try {
-
-        // Check if we need to display table with values first
-        if (this.showvalues) { this.showTable(); this.showvalues = !this.showvalues }
-
-        // Do nothing if message is empty
-        if (this.message.length == 0) return;
-
-        //  Calculate value of the entire text
-        let value = textHelper.wordValue(this.message, this.reverse, this.startatzero, this.selectedalphabet);
-        let wordvalues = [ { name : "All text", value : value, squareroot : textHelper.squareRoot(value)} ];
-
-        // Split message in words
-        let words = this.message.match(/([^\s.,:;]+)/ug);
-
-        // Calculate values for each word, skip values of 0
-        for (let i=0; i < words.length; i++) {
-          value = textHelper.wordValue(words[i], this.reverse, this.startatzero, this.selectedalphabet);
-          if (value > 0) wordvalues.push ( { name : words[i], value : value, squareroot : textHelper.squareRoot(value)} );
-        }
-
-        // Display table with all values
-        let html = "<table class='table table-sm table-striped'><thead><tr><th scope='col'>Word(s)</th><th class='text-center' scope='col'>Value</th><th class='text-center' scope='col'>Square root</th></tr></thead>";
-        for (let i = 0; i < wordvalues.length; i++) {
-          html += "<tr";
-          if (i === 0) html += " style='color:#722727;'";
-          html += "><th scope='row'>" + wordvalues[i].name + "</th><td class='text-center'>" + wordvalues[i].value + "</td><td class='text-center'>" + wordvalues[i].squareroot + "</td></tr>";
-        }
-        html += "</table>";
-        this.result = html;
-
-      } catch (e) {
-
-        console.log(e);
-        this.errormsg = this.$t('errors.generic');
-        
-      }      
-
-    },
-  },
+// Load the table with row 0 the letters and row 1 the values
+const showTable = () => {
+  values.value = textHelper.getTable(
+    selectedalphabet.value, 
+    reverse.value, 
+    startatzero.value
+  )
 }
 
+// Calculate the word values and square root
+const wordValue = () => {
+  errormsg.value = ""
+  result.value = ""
+
+  try {
+
+    // Update table
+    showTable();
+
+    //Check is we need to remove diacretics
+    let h = "";
+    if (replacediac.value) {
+      h = textHelper.removeDiacritics(message.value)
+    } else {
+      h = message.value;    
+    }
+
+    // Do nothing if message is empty
+    if (h.length === 0) return
+
+    // Calculate value of the entire text
+    let totalVal = textHelper.wordValue(
+      h, 
+      reverse.value, 
+      startatzero.value, 
+      selectedalphabet.value
+    )
+    
+    let wordvalues = [
+      { 
+        name: "All text", 
+        value: totalVal, 
+        squareroot: textHelper.squareRoot(totalVal) 
+      }
+    ]
+
+    // Split message in words
+    let words = h.match(/([^\s.,:;]+)/ug) || [];
+
+    // Calculate values for each word, skip values of 0
+    words.forEach(word => {
+      const val = textHelper.wordValue(
+        word, 
+        reverse.value, 
+        startatzero.value, 
+        selectedalphabet.value
+      )
+      if (val > 0) {
+        wordvalues.push({ 
+          name: word, 
+          value: val, 
+          squareroot: textHelper.squareRoot(val) 
+        })
+      }
+    })
+
+    // Display table with all values
+    let html = "<table class='p-table'><thead><tr><th style='text-align:left'>Word(s)</th><th>Value</th><th>Square root</th></tr></thead>"
+    
+    wordvalues.forEach((item, index) => {
+      html += "<tr"
+      if (index === 0) html += " style='color:#6b8e23;'"
+      html += "><th>" + item.name + "</th><td>" + item.value + "</td><td>" + item.squareroot + "</td></tr>"
+    })
+    
+    html += "</table>"
+    result.value = html
+
+  } catch (e) {
+    console.error(e)
+    errormsg.value = t('errors.generic')
+  }
+}
 </script>
 
 <style scoped>

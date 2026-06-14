@@ -21,6 +21,12 @@
 
   "labels": {
     "selectfile": "Select file",
+    "selaction": "Select action",
+    "settings": "Settings",
+    "input": "Input",
+    "intro": "Introduction",
+    "map": "Map",
+    "addinfo": "More information",
     "from": "From",
     "to": "To",
     "message": "Message",
@@ -39,6 +45,7 @@
     "result": "Result",
     "alphabet": "Alphabet",
     "search": "Search for",
+    "searchcol": "Search column",
     "sum": "Sum",
     "count": "Count",
     "perc" : "Percentage",
@@ -501,16 +508,16 @@
     "title": "Codebook",
     "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search.",
     "availtags": "Available tags",
-    "pagesfound": "codes found"
+    "pagesfound": "Codes found - "
   },
 
   "fonts": {
     "title": "Fonts",
     "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>",
     "selfont": "Select font",
-    "fontsize": "Select fontsize",
+    "fontsize": "Select fontsize (e.g. 24px)",
     "selcolor": "Select color",
-    "lineheight": "Line height",
+    "lineheight": "Line height (e.g. 1.5)",
     "standard": "Standard"
   },
 
@@ -555,7 +562,7 @@
 
   "bitplane" : {
     "title": "Bitplane Steganography",
-    "long": "<p>The Bitplane Steganography Tool is a specialized forensic tool for hiding and extracting data within the pixel structures of digital images. It operates by isolating bitplanes — the individual binary layers of color channels like Red, Green, Blue, or Alpha. By targeting the Least Significant Bit (Bit 0), users can embed secrets that are visually indistinguishable from natural image noise, as the resulting color shifts are too subtle for the human eye to detect.</p><p>The application enables deep analysis across multiple color spaces, including native RGBA and calculated HSV or CMYK planes. To hide information, the tool converts text, files, or black-and-white graphics into a binary stream and injects it into the carrier. By saving the result as a lossless PNG, the tool ensures pixel-level precision is maintained, enabling secure, covert communication.</p>"
+    "long": "<p>The Bitplane Steganography Tool is a specialized tool for hiding and extracting data within the pixel structures of digital images. It operates by isolating bitplanes — the individual binary layers of color channels like Red, Green, Blue, or Alpha. By targeting the Least Significant Bit (Bit 0), users can embed secrets that are visually indistinguishable from natural image noise, as the resulting color shifts are too subtle for the human eye to detect.</p><p>The application enables analysis across multiple color spaces, including native RGBA and calculated HSV or CMYK planes.</p><p>You can hide your own secrets as well. To hide information, the tool converts text, files, or black-and-white graphics into a binary stream and injects it into the carrier. By saving the result as a lossless PNG, the tool ensures pixel-level precision is maintained, enabling secure, covert communication.</p>"
   },
 
   "dataappended" : {
@@ -565,7 +572,7 @@
 
   "pngchunk" : {
     "title": "PNG Metadata Editor",
-    "long": "<p>This PNG Metadata Editor is a specialized utility designed for the deep inspection and modification of PNG image chunks. Users can load any PNG file to visualize its internal structure, specifically targeting metadata while filtering out raw image data (IDAT) for a cleaner interface. The application supports the three primary PNG text formats: tEXt (plain Latin-1), zTXt (compressed), and iTXt (international UTF-8). Beyond viewing, the tool empowers users to inject new metadata or sanitize files by deleting existing entries. Key features include mandatory keyword validation (enforcing the 79-character specification limit), dynamic CRC32 checksum calculation for binary integrity, and a utility to export individual metadata values as standalone .txt files. The modified images can be saved, making it an essential tool for developers and users managing hidden image data.</p>"
+    "long": "<p>This PNG Metadata Editor is a utility designed for the inspection and modification of PNG image chunks. Users can load any PNG file to visualize its internal structure, specifically targeting metadata while filtering out raw image data (IDAT) for a cleaner interface. Most viewers don't show the text data in PNG files and this can be a great way to hide information.</p><p>The application supports the three primary PNG text formats: tEXt (plain Latin-1), zTXt (compressed), and iTXt (international UTF-8). Beyond viewing, the tool empowers users to inject new metadata or sanitize files by deleting existing entries. Key features include mandatory keyword validation (enforcing the 79-character specification limit), dynamic CRC32 checksum calculation for binary integrity, and a utility to export individual metadata values as standalone .txt files. The modified images can be saved, making it an essential tool for developers and users managing hidden image data.</p>"
   },
 
   "exifscanner": {
@@ -640,9 +647,17 @@
   },
 
   "pixeldata": {
-    "title": "Pixel data",
-    "long": "<p>Tool to calculate the total of red, green and blue values. Tool to calculate the number of pixels with a specific RGB value. Also show size and total number of pixels of the image.</p><p>Works perfectly with PNG files but seems to have an issue with JPG.</p>",
-    "count": "To count the number of pixels select values for red, green and blue and press Count"
+    "title": "Pixel analysis",
+    "long": "<p>With Pixel Analysis users can upload any image and extract comprehensive metadata, including precise dimensions, total pixel counts, and perceived average brightness. The application performs analysis by calculating the cumulative intensity of red, green, and blue channels while identifying 'dead-zones'—specific pixels where color data is absent. By clicking anywhere on the image preview, users can capture exact RGB values and count the number of exact matches. The count is alpha-aware meaning that transparent areas do not skew the results.</p><p>To aid in visual data interpretation, the suite features a dynamic histogram. This visualizer provides a frequency distribution map for individual color channels and overall luminance.</p>",
+    "count": "To count the number of pixels select values for red, green and blue or click the preview",
+    "targetcolor": "Target color search",
+    "metadata": "Image metadata",
+    "histogram": "Frequency distribution",
+    "channel": "Channel Intensity",
+    "channelexpl": "Sum of all R, G and B values in the image",
+    "deadzones": "Dead zones",
+    "deadzonesexpl": "Visible pixels where channel is 0",
+    "avgcol": "Average color"
   },
 
   "pixelbuild": {
@@ -670,7 +685,7 @@
 
   "textextractor": {
     "title": "Text extractor",
-    "long": "The tool tries to locate text by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely.",
+    "long": "<p>Hiding texts in images, sounds or other files is a simple way to disguise a message. These small changes are often unnoticable. This kind of steganograpy works especially well on uncompressed data such as bitmaps and WAV files.</p<p>The tool can easily find those messages. This id done by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely.</p>",
     "length": "Minimum string length",
     "max": "Maximum number of results",
     "start": "Start at position",
@@ -1090,6 +1105,9 @@
     "selcat": "Select a category",
     "unitfrom": "From unit",
     "unitto": "To unit",
+    "amount": "Amount",
+    "symbol": "Symbol",
+    "unit": "Unit",
     "cat" : {
       "length": {
         "name": "Length & distance",
@@ -1191,7 +1209,7 @@
 
   "convert": {
     "title": "Convert",
-    "long" : "There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard. Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates. Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).",
+    "long" : "<p>There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard.</p<p>Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates.</p><p>Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).</p>",
     "proj4jsmsg": "You can convert any coordinate system using the definition below. The convertor uses Proj4js. First select Proj4js from the dropdown. The definition to use can be found on <a href='http://epsg.io'>EPSG.io</a>. Take the Proj4js.def (it can be found near the bottom of the page). Take the second string (the one that starts with +) without the quotes and copy / paste it in the field below.",
     "proj4jslabel": "Proj4js definition",
     "phfrom": "Coordinates to convert",
@@ -1215,7 +1233,7 @@
     "title": "Map maker",
     "long" : "Maps a list of coordinates with markers and labels on a map. Optionally draw a circle with a given radius around each coordinate. Ideal for showing possible geocache locations, for placing a geocache or finding a possible location of a mystery cache. Supports many different coordinate systems. Placing of markers and labels can be disabled.",
     "phcoord": "Coordinates go here",
-    "phlabel": "Labels go here",
+    "phlabel": "Labels go here (optional)",
     "showmark": "Show markers",
     "showlabel": "Show marker labels",
     "drawcircle": "Draw circles",
@@ -1230,6 +1248,11 @@
     "fillpoly": "Fill polygon"
   },
 
+  "triangulation": {
+    "title": "Triangulation",
+    "long" : "Triangulation is old way mapping areas on maps. It was used to calculate the grid based coordinates which are still around. Such as the Dutch Rijksdriehoeksmeting (RD) or the Belgina Lambert system. There are two main methods: Forward Intersection and Backward Resection. In Intersection mode, the application determines the exact location of a distant target based on bearings reported from two known observer stations. Conversely, the Resection mode — a classic technique for traditional map-and-compass navigation — calculates an unknown user position by analyzing sightings taken toward three distinct landmarks using the mathematically rigorous Tienstra Formula.",
+    "result": "The triangulated coordinate is "
+  },
 
   "incomplete": {
     "title": "Incomplete coordinates",
@@ -1280,23 +1303,6 @@
     "long" : "The antipode is the point exactly on the opposite side of the earth. To calculate the latitude of an antipode, change the sign and direction of the latitude of the reference point. To calculate the longitude of an antipode, subtract the absolute value of the reference-point longitude from 180 degrees and change the sign and direction of the answer with reference to the reference point.",
     "result": "The antipode coordinate is ",
     "or": " or "
-  },
-
-  "w3w" : {
-    "title": "What3words",
-    "long": "<h4>As of November 2024 this is a paid service and no longer supported by gctools.nl</h4><p>What3words translates a coordinate in 3 single words.<b></b></p><p>It supports multiple languages. It also has an auto suggest feature for incomplete or wrongly spelled words. When converting a normal coordinate you can select the language of the what3words coordinate. When converting a what3words coordinate the language is irrelevant.</p><p>Auto suggest is slightly more complicated. You can clip the results to a country, using the ISO two letter code, e.g. NL, GB or DE. You can clip the results in a circle around a given coordinate. You can also focus the suggestions relevant from the focus point. Maximum 3 suggestions are returned, sometimes there are none.</p><p>As of november 2024 the free service doesn't allow conversion from a coordinate to what3words anymore. This feature is no longer available on gctools.nl.</p>",
-    "languages": "Available languages",
-    "convertto": "Convert to w3w",
-    "convertfrom": "Convert to ...",
-    "suggest": "Show suggestions",
-    "w3wcode": "What3words coordinate",
-    "w3wsugg": "What3words suggestion",
-    "countries": "Clip to country",
-    "focus": "Focus on coordinate",
-    "clip": "Clip to circle",
-    "words": "Words",
-    "country": "Country",
-    "nearest": "Nearest place"
   },
 
   "tryanswers" : {
@@ -1354,6 +1360,7 @@
 
   "substcipher": {
     "title": "Smart replace",
+    "hint": "Hints",
     "long" : "A tool to solve any kind of substitution cipher. It uses frequency analysis to find the most likely matches for the selected language (English, Dutch, German, French and Spanish). Specify the original and replaced characters and the updated text will be shown with highlighted replacements. It can automatically replace the first 8 most likely candidates.",
     "errorlength": "From / to must have same length",
     "errordouble": "Double characters found",
@@ -1416,10 +1423,9 @@
 
   "textchunks": {
     "title": "Text chunks",
-    "long": "<p>Cuts text in equal length chunks to find patterns. Optionally ignoring all whitespace. Provide a range to try multiple chunk sizes. Look for repeating letters, numbers or symbols. </p><p>One possible use is chunking a seemingly binary code of 0s and 1s to reveal hidden patterns.</p>",
+    "long": "<p>Cuts text in equal length chunks to find patterns. Optionally ignoring all whitespace or make everything uppercase. Look for repeating letters, numbers or symbols. Just increase or decrease the chunk size and the result will show immediately.</p><p>One possible use is chunking a seemingly binary code of 0s and 1s to reveal hidden patterns. But it can be anything that is hidden.</p>",
     "dir": "Direction",
-    "start": "Chunk size start",
-    "end": "Chunk size end",
+    "size": "Chunk size",
     "ignore": "Ignore whitespace",
     "upper": "All uppercase"
   },
@@ -1800,7 +1806,8 @@
     "lowcase": "Include lowercase letters (a-z)",
     "numbers": "Include numbers (0-9)",
     "symbols": "Include symbols",
-    "result": "The generated password"
+    "result": "The generated password",
+    "errnosel": "Please select at least one type of characters to include"
   },
 
   "encryption": {
@@ -1838,7 +1845,7 @@
     "long" : "<p>Numerology is the practice of assigning a numerical value to a name, word or phrase by reading it as a number. Each letter represents a value. Values are not related to the position in the alphabet (as when calculating Word Value), but to their supposed numerological meaning.</p><p>The modern Latin alphabet is mostly used. Gematria uses the Hebrew alphabet. Isopsephy the Greek alphabet. Agrippan the classic Latin alphabet. In these cases latin characters are 'replaced' by their alternatives.</p>",
     "selmethod" : "Select method",
     "res1" : "The numerological value is ",
-    "res2" : "Calculation :",
+    "res2" : "Calculation ",
     "valtab": "Values of each letter",
     "err1" : "One or more unknown characters found."
   },
@@ -1891,6 +1898,7 @@
   "rotciphers" : {
     "title": "Rotation ciphers",
     "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters. You can rotate hexadecimal numbers or specify a customized alphabet to use.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>",
+    "selmethod": "Select rotation",
     "rot5" : "Numbers (ROT5)",
     "rot13": "Latin (ROT13)",
     "rot47": "Printable ASCII (ROT47)",
@@ -1944,7 +1952,7 @@
     "tot": "Total finds (%tot%)",
     "day": "Total finds for today (%day%)",
     "ph": "Type a log. Use %tot% and %day% for counters",
-    "random": "Random log",
+    "random": "Random template",
     "template": "Generate log using template "
   },
 

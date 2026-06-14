@@ -1,182 +1,164 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('wordle.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('wordle.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('wordle.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+          <div class="form-horizontal mt-4">
+            <label>{{ $t('wordle.length') }}</label>
+            <input type="number" v-model="len">
+          </div>
+          <div class="form-horizontal">
+            <label>{{ $t('wordle.pattern') }}</label>
+            <input type="text" v-model="wordlePattern">
+          </div>
+          <div class="form-horizontal">
+            <label>{{ $t('wordle.yellows') }}</label>
+            <input type="text" v-model="yellows">
+          </div>
+          <div class="form-horizontal">
+            <label>{{ $t('wordle.greys') }}</label>
+            <input type="text" v-model="greys">
+          </div>
+          <p
+            v-show="errormsg"
+            class="errormsg"
+          >
+            {{ errormsg }}
+          </p>
+          <div class="button-row mt-2">
+            <button :disabled="dictloading" class="btn btn-primary"  @click="findwordle">
+              {{ $t('buttons.search') }}
+            </button>
+          </div>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('wordle.long')"
-      />
-      <!-- Form fields -->
-      <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
-      <hr class="mb-2"/>
-      <!-- Part 1 -->
-      <div class="row">
-        <label for="len" class="form-label md-size mb-2">{{$t('wordle.length')}}</label>
-        <input type="number" min="0" v-model="len" id="len" class="form-control md-size mb-2"/>
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="wordle"
-        >{{$t('wordle.pattern')}}</label>
-        <input
-          id="wordle"
-          v-model="wordle"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-          autofocus
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="yellows"
-        >{{$t('wordle.yellows')}}</label>
-        <input
-          id="yellows"
-          v-model="yellows"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="greys"
-        >{{$t('wordle.greys')}}</label>
-        <input
-          id="greys"
-          v-model="greys"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-        >
-      </div>
-      <button :disabled="dictloading" class="btn sm-size mb-2" id="btn1" @click="findwordle()">
-        <i class="fa-solid fa-puzzle-piece me-2"></i>{{$t('buttons.solve')}}
-      </button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" v-html="result" />
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="result" class="card resultbox" v-html="result" />
+      </VCard>  
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref } from "vue";
+import { useI18n } from "vue-i18n";
 import VLanguage from "@/components/generic/VLanguage.vue";
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: "WordleSolver"
+});
 
-  name: "wordle",
+const { t } = useI18n();
 
-  components: {
-    VLanguage  
-  },
+// --- State ---
+const result = ref("");
+const errormsg = ref("");
+const wordlePattern = ref("?????"); // pattern input
+const yellows = ref("");
+const greys = ref("");
+const len = ref(5);
+const cnt = ref(0);
+const finds = ref([]);
+const dict = ref({});
+const dictloading = ref(true);
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      wordle: "?????",
-      letters: "",
-      yellows: "",
-      greys: "",
-      len: 5,
-      cnt: 0,
-      maxcnt: 2500,
-      finds: [],
-      dict: {},
-      dictloading: true,
-      chunk: ""
-    };
-  },
+const maxcnt = 2500;
+let availableLetters = ""; // Local variable used during recursion
 
-  methods: {
+// --- Logic Methods ---
 
-    nextTry: function(word) {
+/**
+ * Recursive backtracking function to generate candidates matching the pattern
+ */
+const nextTry = (word) => {
+  // 1. Safety check for performance
+  if (cnt.value > maxcnt) {
+    errormsg.value = t("wordle.toomany");
+    return;
+  }
 
-      // Check if we have too many words
-      if (this.cnt > this.maxcnt) {
-        this.errormsg = this.$t("wordle.toomany");
-        return;
+  // 2. Base case: we reached the target length
+  if (word.length === wordlePattern.value.length) {
+    // Check if the candidate contains all the "yellow" (mandatory) letters
+    for (let i = 0; i < yellows.value.length; i++) {
+      if (word.indexOf(yellows.value[i]) < 0) return;
+    }
+
+    // Lookup word in the loaded dictionary
+    if (dict.value.find(word)) {
+      finds.value.push(word);
+      cnt.value++;
+    }
+  } else {
+    // 3. Recursive step: build the word position by position
+    const pos = word.length;
+    const charAtPos = wordlePattern.value[pos];
+
+    if (charAtPos === "?") {
+      // Try every letter in the filtered alphabet
+      for (let j = 0; j < availableLetters.length; j++) {
+        nextTry(word + availableLetters[j]);
       }
-
-      if (word.length === this.wordle.length) {
-        // Verify mandatory letters
-        for (let i = 0; i < this.yellows.length; i++) {
-          if (word.indexOf(this.yellows[i]) < 0) return;
-        }
-        // Check word
-        let h = this.dict.find(word);
-        if (h) {
-          this.finds.push(word);
-          this.cnt++;
-        }
-      } else {
-        let pos = word.length;
-        if (this.wordle[pos] === "?") {
-          for (let j = 0; j < this.letters.length; j++) {
-            this.nextTry(word + this.letters[j]);
-          }
-        } else {
-          this.nextTry(word + this.wordle[pos]);
-        }
-      }
-    },
-
-    findwordle: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      this.cnt = 0;
-      this.wordle = this.dict.cleanStr(this.wordle.trim());
-      this.yellows = this.dict.cleanStr(this.yellows.trim());
-      this.greys = this.dict.cleanStr(this.greys.trim());
-      this.finds = [];
-
-      // Checks
-      if (this.len !== this.wordle.length) {
-        this.errormsg = this.$t("wordle.errpattern");
-        return;
-      }
-
-      // Build alphabet
-      this.letters = this.dict.alphabet;
-      for (let i = 0; i < this.greys.length; i++)
-        this.letters = this.letters.replace(this.greys[i], "");
-
-      this.nextTry("");
-
-      // Due to duplicate letters we get duplicate finds, remove those
-      let h2 = this.finds.filter(
-        (item, index) => this.finds.indexOf(item) === index
-      );
-      h2 = h2.sort();
-      
-      // Print the finds
-      this.result = h2.length + this.$t("wordle.wordsfound") + "<br><br>";
-      for (let f of h2) {
-        this.result += f + "<br>";
-      }
-
-    },
-
-  },
-
+    } else {
+      // Use the fixed letter from the pattern
+      nextTry(word + charAtPos);
+    }
+  }
 };
 
-</script>
+/**
+ * Main execution function
+ */
+const findwordle = () => {
+  // Reset outputs
+  result.value = "";
+  errormsg.value = "";
+  cnt.value = 0;
+  finds.value = [];
 
-<style scoped>
-</style>
+  // 1. Validate and clean inputs using dictionary rules
+  if (!dict.value.cleanStr) return;
+
+  wordlePattern.value = dict.value.cleanStr(wordlePattern.value.trim());
+  yellows.value = dict.value.cleanStr(yellows.value.trim());
+  greys.value = dict.value.cleanStr(greys.value.trim());
+
+  // 2. Initial checks
+  if (len.value !== wordlePattern.value.length) {
+    errormsg.value = t("wordle.errpattern");
+    return;
+  }
+
+  // 3. Prepare the allowed alphabet (Alphabet minus Grey letters)
+  availableLetters = dict.value.alphabet;
+  for (let i = 0; i < greys.value.length; i++) {
+    // Escape special characters just in case, though usually A-Z
+    const char = greys.value[i];
+    availableLetters = availableLetters.split(char).join("");
+  }
+
+  // 4. Start search
+  nextTry("");
+
+  // 5. Deduplicate and sort results
+  const uniqueFinds = [...new Set(finds.value)].sort();
+  
+  // 6. Format result for display
+  if (uniqueFinds.length === 0) {
+    result.value = t("errors.noresult") || "No words found.";
+  } else {
+    let output = uniqueFinds.length + t("wordle.wordsfound") + "<br><br>";
+    output += uniqueFinds.join("<br>");
+    result.value = output;
+  }
+};
+</script>

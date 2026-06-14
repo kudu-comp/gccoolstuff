@@ -1,226 +1,203 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('cow.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('cow.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('cow.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('brainfuck.input') }}</label>
+          <input type="text" v-model="input">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="debug">
+          <span class="checkmark"></span>
+          {{ $t('brainfuck.debug') }}
+        </label>
+        <div class="form-horizontal">
+          <textarea
+            ref="codeInput"
+            v-model="message"
+            :placeholder="$t('brainfuck.code')"
+            rows="5"
+          />
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="runCow">
+            {{ $t('brainfuck.run') }}
+          </button>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('cow.long')"
-      />
-      <div class="row mb-2">
-        <label
-          class="form-label md-size"
-          for="input"
-        >{{ $t('brainfuck.input') }}</label>
-        <input
-          id="input"
-          v-model="input"
-          type="text"
-          class="form-control lg-size"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-      </div>
-      <div class="form-check">
-        <input
-          id="debug"
-          v-model="debug"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="debug"
-          class="form-check-label mb-2"
-        >{{ $t('brainfuck.debug') }}</label>
-      </div>
-      <button id="run" class="btn mb-2 me-2" @click="runCow">
-        {{ $t('brainfuck.run') }}
-      </button>
-      <div class="form-row mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          class="form-control"
-          :placeholder="$t('brainfuck.code')"
-          rows="5"
-        />
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: 'CompCow'
+})
 
-  name: 'CompCow',
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      selBF : 0,
-      input: "",
-      debug: false,
-      fill: "",
-      errormsg: ""
+// --- State ---
+const message = ref("")
+const result = ref("")
+const input = ref("")
+const debug = ref(false)
+const errormsg = ref("")
+
+// --- Template Ref ---
+const codeInput = ref(null)
+
+onMounted(() => {
+  codeInput.value?.focus()
+})
+
+// --- Interpreter Logic ---
+
+const runCow = () => {
+  // Reset state
+  result.value = ""
+  errormsg.value = ""
+  
+  let regs = [0]
+  let current = 0
+  let loops = []
+  let cache = null
+  let rep = false
+  const cmdidx = ["moo", "mOo", "moO", "mOO", "Moo", "MOo", "MoO", "MOO", "OOO", "MMM", "OOM", "oom"]
+
+  try {
+    // Parse commands (only triplets of m/o)
+    const cmds = message.value.match(/[mo]{3}/ig)
+    if (!cmds) {
+      console.log("No COW commands found")
+      return
     }
-  },
 
-  mounted: function() {
-    this.$refs.code.focus();
-  },
+    // Parse inputs
+    const inputs = input.value.match(/[A-Z0-9]+/ig) || []
+    let nextinput = 0
 
-  methods: {
+    for (let i = 0; i < cmds.length; i++) {
+      let cmd = cmds[i]
 
-    // Translate the input
-    runCow : function () {
+      do {
+        rep = false
 
-      // reset interpreter
-      this.result = "";
-			let regs = [0];
-      let current = 0;
-      let loops = [];
-      let cache = null;
-      let rep = false;
-      let cmdidx = ["moo", "mOo", "moO", "mOO", "Moo", "MOo", "MoO", "MOO", "OOO", "MMM", "OOM", "oom"]
-      
-      try {
-
-        // Get command
-        let cmds = this.message.match(/[mo]{3}/ig);
-        
-        if (!cmds) {
-          console.log("No input");
-          return;
+        if (debug.value) {
+          console.log(`Command: ${cmd} | Current Reg: ${current} | Value: ${regs[current]} | Cache: ${cache}`)
+          console.log(`Memory:`, regs)
         }
-        
-        // Read inputs
-        let inputs = this.input.match(/[A-Z0-9]+/ig);
-        let nextinput = 0;
-        
-        for (let i = 0; i < cmds.length; i++) {
-        
-          let cmd = cmds[i];
-          
-          do {
-          
-            rep = false;
-    
-            if (this.debug) {
-              console.log(`Command: ${cmd} Current: ${current} Cache: ${cache}`);
-              console.log(`Registers: ${regs}`);        
+
+        switch (cmd) {
+          case 'moo': // End of loop
+            if (regs[current] !== 0) {
+              i = loops[loops.length - 1]
+            } else {
+              loops.pop()
             }
-            
-            switch (cmd) {        
-              case 'moo' :
-                // end of loop
-                if (regs[current] != 0) {
-                  i = loops[loops.length-1];
-                } else {
-                  loops.pop();          
-                }
-                break;
-              case 'mOo' :
-                // back one register
-                current = Math.max(0, current-1);
-                break;
-              case 'moO' :
-                // forward one register
-                if (current == regs.length-1) regs.push(0);
-                current++;
-                break;
-              case 'mOO' :
-                // Check if current register is valid command
-                if (regs[current] < 0 || regs[current] == 3 || regs[current] > 11) {
-                  throw ("Illegal command");
-                }
-                // Execute current register as a command
-                rep = true;
-                cmd = cmdidx[regs[current]];
-                break;
-              case 'Moo' :
-                // If 0 read input ASCII, else print ASCII
-                if (regs[current] == 0) {
-                  if (nextinput >= inputs.length) throw("Not enough inputs");
-                  regs[current] = inputs[nextinput++].charCodeAt(0);
-                } else {
-                  this.result += String.fromCharCode(regs[current]);          
-                }
-                break;
-              case 'MOo' :
-                // Decrement current register
-                regs[current]--;
-                break;
-              case 'MoO' :
-                regs[current]++;
-                break;
-              case 'MOO' :
-                // Start of loop
-                loops.push(i);
-                if (regs[current] == 0) {
-                  // Find end of loop skipping next statement
-                  while (cmds[i+2] != "moo" && i < this.text.length) i++;
-                  loops.pop();
-                }
-                break;
-              case 'OOO' :
-                // Reset
-                regs[current] = 0;
-                break;
-              case 'MMM' :
-                // Use cache
-                if (cache === null) {
-                  cache = regs[current]
-                } else {
-                  regs[current] = cache;
-                  cache = null
-                }
-                break;
-              case 'OOM' :
-                // Print as integer
-                this.result += regs[current];
-                break;
-              case 'oom' :
-                // Read as integer
-                if (nextinput >= inputs.length) throw("Not enough inputs");
-                regs[current] = parseInt(inputs[nextinput++]);
-                break;
-              default :
-                // Ignore as comment
-                console.log("Comment" + cmd);        
-                
-            }      
+            break
 
-          } while (rep);
+          case 'mOo': // Previous register
+            current = Math.max(0, current - 1)
+            break
 
+          case 'moO': // Next register
+            if (current === regs.length - 1) regs.push(0)
+            current++
+            break
+
+          case 'mOO': // Execute register value as command
+            if (regs[current] < 0 || regs[current] === 3 || regs[current] > 11) {
+              throw new Error("Illegal command in register")
+            }
+            rep = true
+            cmd = cmdidx[regs[current]]
+            break
+
+          case 'Moo': // Input/Output ASCII
+            if (regs[current] === 0) {
+              if (nextinput >= inputs.length) throw new Error("Not enough inputs")
+              regs[current] = inputs[nextinput++].charCodeAt(0)
+            } else {
+              result.value += String.fromCharCode(regs[current])
+            }
+            break
+
+          case 'MOo': // Decrement
+            regs[current]--
+            break
+
+          case 'MoO': // Increment
+            regs[current]++
+            break
+
+          case 'MOO': // Start of loop
+            loops.push(i)
+            if (regs[current] === 0) {
+              // Find end of loop skipping next statement
+              while (i < cmds.length && cmds[i + 2] !== "moo") {
+                i++
+              }
+              loops.pop()
+            }
+            break
+
+          case 'OOO': // Set current to 0
+            regs[current] = 0
+            break
+
+          case 'MMM': // Cache current value
+            if (cache === null) {
+              cache = regs[current]
+            } else {
+              regs[current] = cache
+              cache = null
+            }
+            break
+
+          case 'OOM': // Print as integer
+            result.value += regs[current]
+            break
+
+          case 'oom': // Read as integer
+            if (nextinput >= inputs.length) throw new Error("Not enough inputs")
+            regs[current] = parseInt(inputs[nextinput++])
+            break
+
+          default:
+            if (debug.value) console.log("Comment: " + cmd)
         }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
-      }
-
-    },
-
-  },
-
+      } while (rep)
+    }
+  } catch (e) {
+    errormsg.value = t('errors.generic')
+    console.error(e)
+  }
 }
 </script>
-
-<style scoped>
-</style>

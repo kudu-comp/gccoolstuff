@@ -1,54 +1,63 @@
 <template>
-  <div class="sectionhead">
-    {{ $t('dataappended.title') }}
-  </div>
-  <div class="mainpage mx-4 d-flex flex-column">
-    <div
-      class="card pb-2"
-      v-html="$t('dataappended.long')"
-    />
-    <div class="card card-body">
-      <div class="h4 card-title">{{$t('labels.selectfile')}}</div>
-      <input class="form-control mb-2" type="file" @change="handleCarrierUpload" />
-    </div>
 
-    <div v-if="carrierFile" class="results">
-      <div class="card card-body">
-        <div class="h4 card-title">Carrier: {{ carrierFile.name }}</div>
-        <p class="card-text">Format: <strong>{{ carrierStats.hostType }}</strong></p>
-        <p :class="carrierStats.hasExtra ? 'found' : 'not-found'">
-          {{ carrierStats.hasExtra ? `⚠️ Found ${carrierStats.extraSize} appended bytes` : '✅ No existing secret found.' }}
+  <header class="page-header">
+    <h1>{{ $t('dataappended.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('dataappended.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input type="file" accept="image/*" @change="handleCarrierUpload" />
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}.
         </p>
-      </div>
-
-      <!-- Existing Secret Analysis -->
-      <div v-if="carrierStats.hasExtra">
-        <ShowSecret :data="existingSecretData" />
-      </div>
-
-      <!-- Append New Secret -->
-      <div class="card">
-        <label class="form-check-label">
-          <input class="form-check-input me-2" type="checkbox" v-model="wantsToAppend" />
-          <strong>Append new secret to this file</strong>
+      </VCard>
+      <VCard title="Injection">
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="wantsToAppend">
+          <span class="checkmark"></span>
+          Append new secret
         </label>
-
-        <div v-if="wantsToAppend">
-          <LoadSecret ref="loader" @update:secret="(val) => { newSecretData = val }" />
-          
-          <div class="mt-2">
+        <div v-if="wantsToAppend" class="mt-2">
+          <div style="border-style: solid; border-width: 2px; border-radius: 6px; border-color: var(--border-color); padding: 5px;">
+            <LoadSecret ref="loader" @update:secret="(val) => { newSecretData = val }" />
+          </div>
+          <div class="button-row">
             <button @click="saveCombined" class="btn md-size">
               Download Carrier + Secret
             </button>
           </div>
         </div>
-      </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="carrierFile" class="results">
+          <div class="h4 card-title">Carrier: <strong>{{ carrierFile.name }}</strong></div>
+          <p class="card-text">Format: <strong>{{ carrierStats.hostType }}</strong></p>
+          <p :class="carrierStats.hasExtra ? 'found' : 'not-found'">
+            {{ carrierStats.hasExtra ? `⚠️ Found ${carrierStats.extraSize} appended bytes` : '✅ No existing secret found.' }}
+          </p>
+          <div v-if="carrierStats.hasExtra">
+            <ShowSecret :data="existingSecretData" />
+          </div>
+        </div>  
+      </VCard>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
+import VCard from '@/components/generic/VCard.vue';
 import LoadSecret from '@/components/generic/LoadSecret.vue';
 import ShowSecret from '@/components/generic/ShowSecret.vue';
 

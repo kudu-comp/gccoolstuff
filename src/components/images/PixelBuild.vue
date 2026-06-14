@@ -1,336 +1,176 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('pixelbuild.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card mb-2 pb-0"
-        v-html="$t('pixelbuild.long')"
-      />
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div class="card flex-row">
-        <div
-          id="preview"
-          class="col-9"
-        >
-          <canvas
-            id="canvas"
+
+  <header class="page-header">
+    <h1>{{ $t('pixelbuild.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('pixelbuild.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <textarea
+            v-model="message"
+            ref="messageInput"
+            :placeholder="$t('labels.message')"
+            rows="5"
           />
-        </div>
-        <div class="col-3">
-          <button id="draw" class="btn me-2 mb-2" @click="drawPixels">
-              {{ $t('buttons.show') }}
+        <div class="button-row mt-2">
+          <button id="draw" class="btn btn-primary" @click="drawPixels">
+            {{ $t('buttons.show') }}
           </button>
           <v-download 
-            v-model:canvas = "canvas"
+            v-model:canvas = "canvasRef"
           />
-          <div class="box">
-            <div class="box-header">
-              {{ $t('pixelbuild.input') }}
-            </div>
-            <div class="box-body">
-              <textarea
-                id="message"
-                v-model="message"
-                ref="message"
-                class="form-control"
-                :placeholder="$t('labels.message')"
-                rows="5"
-              />
-            </div>
-          </div>
-          <div class="box">
-            <div class="box-header">
-              {{ $t('pixelbuild.options') }}
-            </div>
-            <div class="box-body">
-              <div class="row mx-1">
-                <label
-                  class="form-label mb-2 sm-size"
-                  for="imgheight"
-                >{{ $t('exifscanner.height') }}</label>
-                <input
-                  id="imgheight"
-                  v-model="imgHeight"
-                  type="number"
-                  class="form-control mb-2 sm-size"
-                >
-              </div>
-              <div class="row mx-1">
-                <label
-                  class="form-label mb-2 sm-size"
-                  for="imgwidth"
-                >{{ $t('exifscanner.width') }}</label>
-                <input
-                  id="imgwidth"
-                  v-model="imgWidth"
-                  type="number"
-                  class="form-control mb-2 sm-size"
-                >
-              </div>
-              <div class="row mx-1">                
-                <table class="table table-sm table-borderless">
-                  <thead>
-                    <tr>
-                      <th>{{ $t('labels.variable') }}</th>
-                      <th>{{ $t('labels.color') }}</th>
-                    </tr>
-                  </thead>
-                  <tr>
-                    <td>
-                      <input
-                        id="v0"
-                        v-model="vars[0]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c0"
-                        v-model="cols[0]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v1"
-                        v-model="vars[1]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c1"
-                        v-model="cols[1]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v2"
-                        v-model="vars[2]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c2"
-                        v-model="cols[2]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v3"
-                        v-model="vars[3]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c3"
-                        v-model="cols[3]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v4"
-                        v-model="vars[4]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c4"
-                        v-model="cols[4]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v5"
-                        v-model="vars[5]"
-                        type="text"
-                        class="form-control sm-size"
-                     >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c5"
-                        v-model="cols[5]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v6"
-                        v-model="vars[6]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c6"
-                        v-model="cols[6]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v7"
-                        v-model="vars[7]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c7"
-                        v-model="cols[7]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v8"
-                        v-model="vars[8]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c8"
-                        v-model="cols[8]"
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <input
-                        id="v9"
-                        v-model="vars[9]"
-                        type="text"
-                        class="form-control sm-size"
-                      >
-                    </td>
-                    <td>
-                      <input type="color"
-                        id="c9"
-                        v-model="cols[9]"
-                      >
-                    </td>
-                  </tr>
-                </table> 
-              </div>
-            </div>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <label>{{ $t('exifscanner.height') }}</label>
+          <input
+            id="imgheight"
+            v-model="imgHeight"
+            type="number"
+          >
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('exifscanner.width') }}</label>
+          <input
+            id="imgwidth"
+            v-model="imgWidth"
+            type="number"
+          >
+        </div>
+        <div v-for="(v, idx) in vars">
+          <div class="form-horizontal">
+            <label>{{ $t('labels.variable') }}</label>
+            <input type="text" v-model="vars[idx]">
+            <label>{{ $t('labels.color') }}</label>
+            <input type="color" v-model="cols[idx]">
           </div>
         </div>
-      </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard title='Preview'>
+        <canvas
+          ref="canvasRef"
+        />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, shallowRef, onMounted } from 'vue'
 import VDownload from '@/components/generic/VDownload.vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+defineOptions({
+  name: 'PixelBuild'
+})
 
-  name: 'PixelBuild',
+// --- Template Refs ---
+const canvasRef = ref(null)
+const messageInput = ref(null)
 
-  components: {
-    VDownload
-  },
+// --- State ---
+const errormsg = ref("")
+const message = ref("")
+const imgHeight = ref(null)
+const imgWidth = ref(null)
+
+// Constants
+const vars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+const cols = [
+  "#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF", 
+  "#FFFF00", "#FF00FF", "#00FFFF", "#888888", "#444444"
+]
+
+// Non-reactive context
+let ctx = null
+
+onMounted(() => {
+  if (canvasRef.value) {
+    ctx = canvasRef.value.getContext('2d')
+    const rect = canvasRef.value.getBoundingClientRect()
+    // Setup initial size
+    canvasRef.value.width = rect.width
+    canvasRef.value.height = rect.width
+  }
   
-  data: function() {
-    return {
-      errormsg: "",
-      canvas: null,
-      ctx: null,
-      width: 800,
-      height: 800,
-      img: null,
-      imgHeight: null,
-      imgWidth: null,
-      vars: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],      
-      cols: ["#FFFFFF", "#000000", "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF", "#888888", "#444444"],
-      message: ""     
-    }
-  },
+  // Focus textarea
+  messageInput.value?.focus()
+})
 
-  mounted: function() {
+// --- Methods ---
 
-    this.canvas = document.getElementById('canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.canvas.width = this.canvas.getBoundingClientRect().width
-    this.canvas.height = this.canvas.width;
-    this.$refs.message.focus();
+const drawPixels = () => {
+  if (!ctx || !message.value) return
+  
+  errormsg.value = ""
+  const lines = message.value.split(/\n/g)
+  
+  if (lines.length === 0 || lines[0].length === 0) {
+    errormsg.value = "No valid data to draw"
+    return
+  }
 
-  },
+  // Determine grid dimensions
+  const h = imgHeight.value || lines.length
+  const w = imgWidth.value || lines[0].length
 
-  methods: {
+  // Clear previous drawings
+  ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height)
 
-    drawPixels: function () {
+  // Size of a rectangle
+  const rectHeight = Math.trunc(canvasRef.value.height / h)
+  const rectWidth = Math.trunc(canvasRef.value.width / w)
 
-      let lines = this.message.split(/\n/g)
+  // Draw rectangles
+  for (let r = 0; r < h; r++) {
+    // Safety check for row existence
+    if (!lines[r]) continue;
+
+    for (let c = 0; c < w; c++) {
+      // Default to transparent if no match
+      ctx.fillStyle = "rgba(0,0,0,0)"
       
-      // Number of rectangels to draw
-      let h, w;
-      if (this.imgHeight) {
-        h = this.imgHeight
-      } else {
-        h = lines.length;
-      }
-      if (this.imgWidth) {
-        w = this.imgWidth
-      } else {
-        w = lines[0].length
-      }
-
-      // Size of a rectangle
-      let rectHeight = Math.trunc(this.canvas.height / h);
-      let rectWidth = Math.trunc(this.canvas.width / w);
-
-      // Draw rectangles
-      for (let r = 0; r < h; r++) {
-        for (let c = 0; c < w; c++) {
-          this.ctx.fillStyle = "rgba(0,0,0,0)";
-          for (let i = 0; i < 10; i++)
-            if (lines[r][c] == this.vars[i]) this.ctx.fillStyle = this.cols[i];
-          this.ctx.fillRect(c*rectWidth+5, r*rectHeight, rectWidth, rectHeight)
+      const char = lines[r][c]
+      
+      // Map character to color
+      for (let i = 0; i < 10; i++) {
+        if (char === vars[i]) {
+          ctx.fillStyle = cols[i]
+          break
         }
       }
 
-    },
-
-
+      // Draw the pixel
+      // Note: kept the +5 offset from your original code
+      ctx.fillRect(c * rectWidth + 5, r * rectHeight, rectWidth, rectHeight)
+    }
   }
 }
 </script>
 
 <style scoped>
+
+.card-grid {
+   grid-template-columns: 1fr;
+}
+
+@media (min-width: 750px) {
+  .card-grid {
+    grid-template-columns: 33% 1fr;
+  }
+}
 
 canvas {
   width: 100%;
@@ -338,4 +178,7 @@ canvas {
   padding-right: 15px
 }
 
+.form-horizontal label{
+  flex: 0 0 100px;
+}
 </style>

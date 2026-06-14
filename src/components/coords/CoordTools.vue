@@ -1,87 +1,42 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="row justify-content-around">
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <img class="card-img-top" src="@/assets/images/coordinates.jpg" alt="Text" style="height: 200px">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('menu.coordinates')}}</h5>
-          <p class="card-text" v-html="$t('coordinates.intro')"></p>
-        </div>
+  <div class="card-grid mb-2">
+    <!-- Intro Card -->
+    <VCard :title="$t('menu.coordinates')">
+      <img class="card-img-top" src="@/assets/images/coordinates.jpg" alt="Coordinates" style="width: 100%; height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <p class="card-text" v-html="$t('coordinates.intro')"></p>
       </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('convert.title')}}</h5>
-          <p class="card-text" v-html="$t('convert.long')"></p>
-          <router-link to="/convert"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
+    </VCard>
+
+    <!-- Coordinate Tool Cards (Looped) -->
+    <VCard 
+      v-for="tool in coordTools" 
+      :key="tool" 
+      :title="$t(`${tool}.title`)"
+    >
+      <div class="card-body">
+        <p class="card-text" v-html="$t(`${tool}.long`)"></p>
+        <router-link :to="`/${tool}`">
+          <span class="btn">{{ $t('labels.letsgo') }}</span>
+        </router-link>
       </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('project.title')}}</h5>
-          <p class="card-text" v-html="$t('project.long')"></p>
-          <router-link to="/project"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('mapmaker.title')}}</h5>
-          <p class="card-text" v-html="$t('mapmaker.long')"></p>
-          <router-link to="/mapmaker"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('incomplete.title')}}</h5>
-          <p class="card-text" v-html="$t('incomplete.long')"></p>
-          <router-link to="/incomplete"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('lines.title')}}</h5>
-          <p class="card-text" v-html="$t('lines.long')"></p>
-          <router-link to="/lines"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('triangles.title')}}</h5>
-          <p class="card-text" v-html="$t('triangles.long')"></p>
-          <router-link to="/triangles"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('circles.title')}}</h5>
-          <p class="card-text" v-html="$t('circles.long')"></p>
-          <router-link to="/circles"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('antipode.title')}}</h5>
-          <p class="card-text" v-html="$t('antipode.long')"></p>
-          <router-link to="/antipode"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('plotcoord.title')}}</h5>
-          <p class="card-text" v-html="$t('plotcoord.long')"></p>
-          <router-link to="/plotcoord"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('revwherigo.title')}}</h5>
-          <p class="card-text" v-html="$t('revwherigo.long')"></p>
-          <router-link to="/revwherigo"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import VCard from "@/components/generic/VCard.vue"
 
+const coordTools = [
+  'convert',
+  'project',
+  'mapmaker',
+  'incomplete',
+  'lines',
+  'triangles',
+  'circles',
+  'antipode',
+  'plotcoord',
+  'revwherigo'
+]
 </script>

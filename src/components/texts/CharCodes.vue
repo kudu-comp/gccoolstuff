@@ -1,305 +1,188 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('charcodes.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('charcodes.long')"
+  <header class="page-header">
+    <h1>{{ $t('charcodes.title') }}</h1>
+  </header>
+  
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('charcodes.long')" />
+    </VCard>
+
+    <VCard :title="$t('labels.settings')">
+      <div class="form-horizontal">
+      <label>{{ $t('charcodes.input') }}</label>
+      <v-code
+        id="codes-in"
+        v-model:code="selectedcode"
       />
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="codes"
-        >{{ $t('charcodes.input') }}</label>
+    </div>
+    <div class="form-horizontal">
+        <label>{{ $t('charcodes.output') }}</label>
         <v-code
-          id="codes"
-          v-model:code="selectedcode"
-          class="mb-2"
-          @change="translateInput"
-        />
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="codesout"
-        >{{ $t('charcodes.output') }}</label>
-        <v-code
-          id="codesout"
+          id="codes-out"
           v-model:code="selectedoutput"
-          class="mb-2"
-          @change="translateInput"
         />
       </div>
-      <input
-        id="convert"
-        type="button"
-        :value="$t('buttons.convert')"
-        class="btn col mb-2 me-2"
-        @click="translateInput"
-      >
-      <div class="mb-2">
-        <textarea
-          id="message"
-          ref="message"
-          v-model="message"
-          class="form-control"
-          :placeholder="$t('labels.message')"
-          rows="5"
-        />
-      </div>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
+      <textarea
+        id="message"
+        ref="messageInput"
+        v-model="message"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
       <p
         v-show="errormsg"
-        class="errormsg mt-2"
+        class="errormsg mb-2 mt-2"
       >
         {{ errormsg }}
-      </p>
+      </p>          
+    </VCard>
+
+    <VCard :title="$t('labels.result')"">
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
       </div>
-      <va-item
-        :showitem="showinfo"
-        @toggle="showinfo = !showinfo"
-      >
-        <template #header>
-          {{ $t('charcodes.someinfo') }}
-        </template>
-        <template #content>
-          <div v-html="$t('charcodes.someinfo2')" />
-        </template>
-      </va-item>
-    </div>
+    </VCard>
+  </div>
+  <div class="card-grid">
+    <VCard :title="$t('charcodes.someinfo')">
+      <div class="card-body">
+        <div v-html="$t('charcodes.someinfo2')" />
+      </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import VCode from '@/components/generic/VCode.vue'
+import VCard from '@/components/generic/VCard.vue'
 import * as baudotcode from '@/scripts/baudotcode.js'
 import * as codepages from '@/scripts/codepages.js'
 import { codePoints, fromCodePoint } from 'utf16-char-codes'
-import VaItem from '@/components/generic/VaItem.vue'
 
-export default {
+defineOptions({
+  name: 'CharCodes'
+})
 
-  name: 'CharCodes',
+const { t } = useI18n()
 
-  components: {
-    VCode,
-    VaItem,
-  },
+// Reactive State
+const message = ref("")
+const selectedcode = ref("Decimal")
+const selectedoutput = ref("UTF16")
+const messageInput = ref(null)
 
-  data: function () {
-    return {
-      message: "",
-      result : this.$t('labels.result'),
-      selectedcode : "Decimal",
-      selectedoutput: "UTF16",
-      errormsg: "",
-      showinfo: true,
-    }
-  },
+onMounted(() => {
+  messageInput.value?.focus()
+})
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+// --- Internal Logic Helpers ---
 
-  methods: {
-
-    // Decide if input is read one by one or divided by whitespace
-    getMany: function (s) {
-      switch (s) {
-        case "Baudotcode" :
-        case "BaudotcodeR" :
-        case "Murraycode" :
-        case "MurraycodeR" :
-        case "MurrayMTK2" :
-        case "MurrayMTK2R" :
-        case "Binary" :
-        case "Octal" :
-        case "Decimal" :
-        case "Hexadecimal" :
-          return true;
-        default :
-          return false;
-      }
-    },
-
-    // Convert the intermediate result (a decimal number) to the requested output
-    decimalToOutput : function (w) {
-      // If input is -1 a control character has been used and output is empty
-      if (w == -1) return "";
-
-      // Convert to w to the requested output
-      switch (this.selectedoutput) {
-
-        case "Baudotcode" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.baudotASCIIToCode(w);
-
-        case "BaudotcodeR" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.baudotReversedASCIIToCode(w);
-
-        case "Murraycode" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.murrayASCIIToCode(w);
-
-        case "MurraycodeR" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.murrayReversedASCIIToCode(w);
-
-        case "MurrayMTK2" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.murrayMTK2ASCIIToCode(w);
-
-        case "MurrayMTK2R" :
-          // Input is decimal value of ASCII character to be converted Baudotcode (could be two)
-          return baudotcode.murrayMTK2ReversedASCIIToCode(w);
-
-        case "UTF16" :
-          // Input is a decimal number of the UTF character, fromCodePoint comes from the utf-16 lib
-          return [fromCodePoint(w)];
-
-        case "Binary" :
-          // Input is a decimal number to be converted to binary
-          return [w.toString(2)];
-
-        case "Octal" :
-          // Input is a decimal number to be converted to octal
-          return [w.toString(8)];
-
-        case "Decimal" :
-          // Input is a decimal number
-          return [w.toString(10)];
-
-        case "Hexadecimal" :
-          // Input is a decimal number to be converted to hex
-          return [w.toString(16)];
-
-        default :
-          // Default find the codepage in codepages.js
-          var cp = codepages.findCodepage(this.selectedoutput);
-          if (cp >= 0)
-            return [codepages.codeToChar(parseInt(w), cp)];
-          else {
-            // This should never happen
-            this.errormsg = this.$t('errors.generic');
-            return [""];
-          }
-      }
-    },
-
-    // Convert the input to the intermediate result (a decimal number)
-    inputToDecimal : function (w) {
-
-      switch (this.selectedcode) {
-
-        case "Baudotcode" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-          return baudotcode.baudotCodeToASCII(w);
-
-        case "BaudotcodeR" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-            return baudotcode.baudotReversedCodeToASCII(w);
-
-        case "Murraycode" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-          return baudotcode.murrayCodeToASCII(w);
-
-        case "MurraycodeR" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-          return baudotcode.murrayReversedCodeToASCII(w);
-
-        case "MurrayMTK2" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-          return baudotcode.murrayMTK2ToASCII(w);
-
-        case "MurrayMTK2R" :
-          // Input is a binary string representing the baudotcode
-          // Or returns -1 for a control character
-          return baudotcode.murrayMTK2ReversedCodeToASCII(w);
-
-        case "UTF16" :
-          // input is an UTF character
-          // codePoints returns an array of integers, but we always have only one
-          return codePoints(w)[0];
-
-        case "Binary" :
-          // Input is a binary number convert to decimal
-          return parseInt(w, 2);
-
-        case "Octal" :
-          // Input is a octal number convert to decimal
-          return parseInt(w, 8);
-
-        case "Decimal" :
-          // Input is a binary number convert to decimal
-          return parseInt(w);
-
-        case "Hexadecimal" :
-          // Input is a binary number convert to decimal
-          return parseInt(w, 16);
-
-        default :
-          // This should never happen
-          var cp = codepages.findCodepage(this.selectedcode)
-          if (cp >= 0)
-            return codepages.charToCode(w, cp);
-          else {
-            this.errormsg = this.$t('errors.generic');
-            return -1;
-          }
-      }
-    },
-
-    // Translate the input
-    translateInput : function () {
-
-      // Reset error flag and reset baudotcode flag to letters
-      this.errormsg = "" ;
-      baudotcode.reset();
-
-      try {
-        
-        // Break down input in words
-        this.message = this.message.trim();
-        let words;
-        if (!this.getMany(this.selectedcode)) {
-          words = this.message.match(/./gu);
-        } else {
-          words = this.message.split(/[,.\s]+/g);
-        }
-
-        // For each word convert and add to the output
-        // Baudotcode and Murraycode might output two strings, so arrays are used
-        this.result = "";
-        for (let i=0; i < words.length; i++) {
-          let inp = this.inputToDecimal(words[i]);
-          let outp = this.decimalToOutput(inp);
-          for (let i=0; i < outp.length; i++) {
-            this.result += outp[i] + " ";
-          }
-        }
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.invalidinput');
-        console.log(e);
-
-      }
-    },
-  },
+const getMany = (s) => {
+  return [
+    "Baudotcode", "BaudotcodeR", "Murraycode", "MurraycodeR",
+    "MurrayMTK2", "MurrayMTK2R", "Binary", "Octal", "Decimal", "Hexadecimal"
+  ].includes(s)
 }
+
+const inputToDecimal = (w) => {
+  switch (selectedcode.value) {
+    case "Baudotcode": return baudotcode.baudotCodeToASCII(w)
+    case "BaudotcodeR": return baudotcode.baudotReversedCodeToASCII(w)
+    case "Murraycode": return baudotcode.murrayCodeToASCII(w)
+    case "MurraycodeR": return baudotcode.murrayReversedCodeToASCII(w)
+    case "MurrayMTK2": return baudotcode.murrayMTK2ToASCII(w)
+    case "MurrayMTK2R": return baudotcode.murrayMTK2ReversedCodeToASCII(w)
+    case "UTF16": return codePoints(w)[0]
+    case "Binary": return parseInt(w, 2)
+    case "Octal": return parseInt(w, 8)
+    case "Decimal": return parseInt(w)
+    case "Hexadecimal": return parseInt(w, 16)
+    default: {
+      const cp = codepages.findCodepage(selectedcode.value)
+      if (cp >= 0) return codepages.charToCode(w, cp)
+      throw new Error('generic')
+    }
+  }
+}
+
+const decimalToOutput = (w) => {
+  if (w === -1) return ""
+  switch (selectedoutput.value) {
+    case "Baudotcode": return baudotcode.baudotASCIIToCode(w)
+    case "BaudotcodeR": return baudotcode.baudotReversedASCIIToCode(w)
+    case "Murraycode": return baudotcode.murrayASCIIToCode(w)
+    case "MurraycodeR": return baudotcode.murrayReversedASCIIToCode(w)
+    case "MurrayMTK2": return baudotcode.murrayMTK2ASCIIToCode(w)
+    case "MurrayMTK2R": return baudotcode.murrayMTK2ReversedASCIIToCode(w)
+    case "UTF16": return [fromCodePoint(w)]
+    case "Binary": return [w.toString(2)]
+    case "Octal": return [w.toString(8)]
+    case "Decimal": return [w.toString(10)]
+    case "Hexadecimal": return [w.toString(16)]
+    default: {
+      const cp = codepages.findCodepage(selectedoutput.value)
+      if (cp >= 0) return [codepages.codeToChar(parseInt(w), cp)]
+      throw new Error('generic')
+    }
+  }
+}
+
+// --- Computed Properties ---
+
+/**
+ * We calculate both result and error in one computed object 
+ * to ensure they are always in sync and the loop only runs once.
+ */
+const translationData = computed(() => {
+  const inputString = message.value.trim()
+  
+  // Reset internal library state
+  baudotcode.reset()
+
+  try {
+    let words
+    if (!getMany(selectedcode.value)) {
+      words = inputString.match(/./gu) || []
+    } else {
+      words = inputString.split(/[,.\s]+/g)
+    }
+
+    let outputBuilder = ""
+    for (const word of words) {
+      if (!word) continue
+      const decimalValue = inputToDecimal(word)
+      const convertedParts = decimalToOutput(decimalValue)
+      convertedParts.forEach(part => {
+        outputBuilder += part + " "
+      })
+    }
+
+    return { 
+      result: outputBuilder.trim(), 
+      error: "" 
+    }
+  } catch (e) {
+    console.error(e)
+    return { 
+      result: "", 
+      error: e.message === 'generic' ? t('errors.generic') : t('errors.invalidinput')
+    }
+  }
+})
+
+// Flattened for use in the template
+const result = computed(() => translationData.value.result)
+const errormsg = computed(() => translationData.value.error)
+
 </script>
 
-<style scoped>
-</style>

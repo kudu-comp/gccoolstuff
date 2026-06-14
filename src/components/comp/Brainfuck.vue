@@ -1,153 +1,137 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('brainfuck.title') }}
+
+   <header class="page-header">
+    <h1>{{ $t('brainfuck.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('brainfuck.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <CustomDropdown
+            :options="bfvars"
+            v-model="selBF"
+            :title="$t('brainfuck.vars')"
+          />
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('brainfuck.input') }}</label>
+          <input type="text" v-model="input">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="shorthand">
+          <span class="checkmark"></span>
+          {{ $t('brainfuck.shorthand') }}
+        </label>
+        <div class="form-horizontal">
+          <textarea
+            ref="codeInput"
+            v-model="message"
+            :placeholder="$t('labels.message')"
+            rows="5"
+            @input="doSomething"
+          />
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="runBrainfuck">
+            {{ $t('brainfuck.run') }}
+          </button>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('brainfuck.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="bfvar"
-        >{{ $t('brainfuck.vars') }}</label>
-        <select
-          id="bfvar"
-          v-model="selBF"
-          class="form-select mb-2 md-size"
-          style="width: 150px;"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-          <option
-            v-for="(bfvar, index) in bfvars"
-            :key="index"
-            :value="index"
-          >
-            {{ bfvar }}
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="input"
-        >{{ $t('brainfuck.input') }}</label>
-        <input
-          id="input"
-          v-model="input"
-          type="text"
-          class="form-control mb-2 lg-size"
-        >
-      </div>
-      <div class="form-check">
-        <input
-          id="shorthand"
-          v-model="shorthand"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="shorthand"
-          class="form-check-label mb-2"
-        >{{ $t('brainfuck.shorthand') }}</label>
-      </div>
-      <input
-        id="run"
-        type="button"
-        :value="$t('brainfuck.run')"
-        class="btn mb-2 me-2"
-        @click="runBrainfuck"
-      >
-      <div class="mb-2">
-        <textarea
-          id="code"
-          ref="code"
-          v-model="message"
-          class="form-control"
-          :placeholder="$t('brainfuck.code')"
-          rows="5"
-        />
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mt-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import * as bf from '@/scripts/brainfuck.js'
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: 'Brainfuck'
+})
 
-  name: 'Brainfuck',
+const route = useRoute()
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      selBF : 0,
-      input: "",
-      shorthand: false,
-      bfvars: [],
-      fill: "",
-      errormsg: ""
+// --- State ---
+const message = ref("")
+const result = ref("")
+const selBF = ref(0)
+const input = ref("")
+const shorthand = ref(false)
+const bfvars = ref([])
+const errormsg = ref("")
+
+// --- Template Ref ---
+const codeInput = ref(null)
+
+// --- Lifecycle ---
+onMounted(() => {
+  // Focus the code textarea
+  codeInput.value?.focus()
+  
+  // Load Brainfuck variants from script
+  bfvars.value = bf.vars.map((v, index) => ({ label: v, value: index }))
+
+  // Handle route parameters (e.g., /brainfuck/cow)
+  if (route.params.bf) {
+    const param = route.params.bf.toLowerCase()
+    const foundIndex = bfvars.value.findIndex(v => v.toLowerCase() === param)
+    if (foundIndex !== -1) {
+      selBF.value = foundIndex
     }
-  },
+  }
+})
 
-  mounted: function() {
-    this.$refs.code.focus();
-    this.bfvars = bf.vars;
-    if (this.$route.params.bf) {
-      for (let i = 0; i < this.bfvars.length; i++)
-        if (this.bfvars[i].toLowerCase() === this.$route.params.bf.toLowerCase()) this.selBF = i;
+// --- Methods ---
+
+const runBrainfuck = () => {
+  // Reset error flag and result
+  errormsg.value = ""
+  result.value = ""	
+  let bfcode = ""
+
+  try {
+    // 1. Run preprocessor 
+    // Translates Trivial Brainfuck Substitutes (like 'moo') to standard '+-><'
+    bfcode = bf.preprocess(message.value, selBF.value)
+    
+    // 2. Expand shorthand if enabled (e.g., 10+ becomes ++++++++++)
+    if (shorthand.value) {
+      bfcode = bf.extendshorthand(bfcode)
     }
-  },
+    
+    // 3. Run the interpreter
+    result.value = bf.run(bfcode, input.value)
 
-  methods: {
-
-    // Translate the input
-    runBrainfuck : function () {
-
-      // Reset error flag
-      this.errormsg = "";
-      this.result = "";	
-      let bfcode = "";
-
-      try {
-        
-        // Run preprocessor if not plain brainfuck
-        // Preprocessor removes comments (any character not brainfuck)
-        // Preprocessor translates Trivial Brainfuck Substitutes to standard Brainfuck
-        bfcode = bf.preprocess(this.message, this.selBF);
-        
-        // If shorthand is used expand before running the code
-        if (this.shorthand) bfcode = bf.extendshorthand(bfcode)
-        
-        // Run the code
-        this.result = bf.run(bfcode, this.input);
-
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-
-      }
-    },
-
-  },
+  } catch (e) {
+    errormsg.value = t('errors.generic')
+    console.error(e)
+  }
 }
 </script>
 
-<style scoped>
-</style>

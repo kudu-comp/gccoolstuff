@@ -1,432 +1,368 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('printlog.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('printlog.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('printlog.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.printlog') }} 1</label>
+          <input type="text" v-model="hdr1">
+        </div>        
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.printlog') }} 2</label>
+          <input type="text" v-model="hdr2">
+        </div>        
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.printlog') }} 3</label>
+          <input type="text" v-model="hdr3">
+        </div>        
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.ncol') }}</label>
+          <input type="number" v-model="ncol">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.lpl') }}</label>
+          <input type="number" v-model="linesperlog">
+        </div>
+        <div class="form-horizontal">
+          <CustomDropdown
+            :title = "$t('printlog.lh')"
+            :options = lhOpt
+            v-model = lh
+          />
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.hdrcol') }}</label>
+          <input type="color" v-model="hdrcol">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.txtcol') }}</label>
+          <input type="color" v-model="txtcol">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('printlog.linecol') }}</label>
+          <input type="color" v-model="linecol">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="nolines">
+          <span class="checkmark"></span>
+          {{ $t('printlog.nolines') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showimg">
+          <span class="checkmark"></span>
+          {{ $t('printlog.showimg') }}
+        </label>
+        <div v-if="showimg" class="form-horizontal">
+          <label>{{ $t('printlog.selimg') }}</label>
+          <input type="file" @change="selectFile">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showlbl">
+          <span class="checkmark"></span>
+          {{ $t('printlog.nmdttm') }}
+        </label>
+        <div v-if = 'showlbl' class="form-horizontal">
+          <label>Label 1</label>
+          <input type="text" v-model="lbl1">
+        </div>
+        <div v-if = 'showlbl' class="form-horizontal">
+          <label>Label 2</label>
+          <input type="text" v-model="lbl2">
+        </div>
+        <div v-if = 'showlbl' class="form-horizontal">
+          <label>Label 3</label>
+          <input type="text" v-model="lbl3">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showftf">
+          <span class="checkmark"></span>
+          {{ $t('printlog.printftf') }}
+        </label>
+        <div v-if="showftf" class="form-horizontal">
+          <label>{{ $t('printlog.ftfcol') }}</label>
+          <input type="color" v-model="ftfcol">
+        </div>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary" @click="save">
+            {{ $t('printlog.savepdf')}}
+          </button>
+          <button class="btn btn-primary" @click="savepng">
+            {{ $t('printlog.savepng')}}
+          </button>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('printlog.long')"
-      />
-      <!-- Form fields -->
-      <div class="row">
-        <div class='col-4'>
-          <div class="row">
-            <label for="hdr1" class="form-label mb-2 sm-size">{{ $t('printlog.header')}} 1</label>
-            <input
-              id="hdr1"
-              ref="hdr1"
-              class="form-control mb-2 md-size"
-              type="text"
-              length="20"
-              v-model="hdr1"
-              @change='redraw()'
-            />
-          </div>
-          <div class="row">
-            <label for="hdr2" class="form-label mb-2 sm-size">{{ $t('printlog.header')}} 2</label>
-            <input
-              id="hdr2"
-              class="form-control mb-2 md-size"
-              type="text"
-              length="20"
-              v-model="hdr2"
-              @change='redraw()'
-            />
-          </div>
-          <div class="row">
-            <label for="hdr3" class="form-label mb-2 sm-size">{{ $t('printlog.header')}} 3</label>
-            <input
-              id="hdr3"
-              class="form-control mb-2 md-size"
-              type="text"
-              length="20"
-              v-model="hdr3"
-              @change='redraw()'
-            />
-          </div>
-          <div class="row">
-            <label for="ncol" class="form-label sm-size mb-2">{{ $t('printlog.ncol')}}</label>
-            <input
-              id="ncol"
-              type="number"
-              v-model="ncol"
-              class="form-control mb-2 sm-size"
-              min="1"
-              @change='redraw()'
-            />
-          </div>
-          <div class="row">
-            <label for="nlpl" class="form-label sm-size mb-2">{{ $t('printlog.lpl')}}</label>
-            <input
-              id="nlpl"
-              type="number"
-              v-model="linesperlog"
-              class="form-control mb-2 sm-size"
-              min="1"
-              @change='redraw()'
-            />
-          </div>
-          <div class="row">
-            <label
-              class="form-label mb-2 sm-size"
-              for="lh"
-            >{{ $t('printlog.lh') }}</label>    
-            <select
-              id="lh"
-              v-model="lh"
-              class="form-select mb-2 sm-size"
-              @change='redraw()'
-            >
-              <option value="15">{{ $t('printlog.lh1') }}</option>
-              <option value="21">{{ $t('printlog.lh2') }}</option>
-              <option value="27">{{ $t('printlog.lh3') }}</option>
-              <option value="33">{{ $t('printlog.lh4') }}</option>
-              <option value="39">{{ $t('printlog.lh5') }}</option>
-            </select>
-          </div>
-          <div class='row'>
-            <label for='hdrcol' class='form-label sm-size mb-2'>{{ $t('printlog.hdrcol')}}</label>
-            <input id='hdrcol' type='color' v-model='hdrcol' class='form-control mb-2 sm-size' @change='redraw()' />
-          </div>
-          <div class='row'>
-            <label for='txtcol' class='form-label sm-size mb-2'>{{ $t('printlog.txtcol')}}</label>
-            <input id='txtcol' type='color' v-model='txtcol' class='form-control mb-2 sm-size' @change='redraw()' />
-          </div>
-          <div class='row'>
-            <label for='linecol' class='form-label mb-2 sm-size'>{{ $t('printlog.linecol')}}</label>
-            <input id='linecol' type='color' v-model='linecol' class='form-control mb-2 sm-size' @change='redraw()' />
-          </div>
-          <div class='row'><h4>{{ $t('printlog.extra')}}</h4></div>
-          <div class='form-check'>
-            <input type='checkbox' id='nolines' class='form-check-input mb-2' v-model='nolines' @change='redraw()' />
-            <label for='nolines' class='form-check-label mb-2'>{{ $t('printlog.nolines')}}</label>
-          </div>
-          <div class='form-check'>
-            <input type='checkbox' id='showimg' class='form-check-input mb-2' v-model='showimg' @change='redraw()' />
-            <label for='showimg' class='form-check-label mb-2'>{{ $t('printlog.showimg')}}</label>
-          </div>
-          <div class='row' v-show='showimg'>
-            <label for='selfile' class='form-label mb-2'>{{ $t('printlog.selimg')}}</label>
-            <input id='selfile' type='file' class='form-control mb-2' @change="selectFile"/>
-          </div>
-          <div class='form-check'>
-            <input type='checkbox' id='showlbl' class='form-check-input mb-2' v-model='showlbl' @change='redraw()' />
-            <label for='showlbl' class='form-check-label mb-2'>{{ $t('printlog.nmdttm')}}</label>
-          </div>
-          <div class='row' v-show='showlbl'>
-            <label for='lbl1' class='form-label mb-2 sm-size'>Label 1</label>
-            <input id='lbl1' type='text' class='form-control mb-2 sm-size' v-model='lbl1' @change='redraw()' />
-          </div>
-          <div class='row' v-show='showlbl'>
-            <label for='lbl2' class='form-label mb-2 sm-size'>Label 2</label>
-            <input id='lbl2' type='text' class='form-control mb-2 sm-size' v-model='lbl2' @change='redraw()' />
-          </div>
-          <div class='row' v-show='showlbl'>
-            <label for='lbl3' class='form-label mb-2 sm-size'>Label 3</label>
-            <input id='lbl3' type='text' class='form-control mb-2 sm-size' v-model='lbl3' @change='redraw()' />
-          </div>
-          <div class='form-check'>
-            <input type='checkbox' id='showftf' class='form-check-input mb-2' v-model='showftf' @change='redraw()' />
-            <label for='showftf' class='form-check-label mb-2'>{{ $t('printlog.printftf')}}</label>
-          </div>
-          <div class='row' v-show='showftf'>
-            <label for='ftfcol' class='form-label mb-2 sm-size'>{{ $t('printlog.ftfcol')}}</label>
-            <input id='ftfcol' type='color' v-model='ftfcol' class='form-control mb-2 sm-size' @change='redraw()' />
-          </div>
-          <div class='row'>
-            <button @click="save()" class="btn sm2-size mb-2 me-2"><i class="fa-solid fa-file-pdf"></i>
-              {{ $t('printlog.savepdf')}}
-            </button>
-            <button @click="savepng()" class="btn sm2-size mb-2"><i class="fa-solid fa-file-image"></i>
-              {{ $t('printlog.savepng')}}
-            </button>
-          </div>
-          <!-- Error message -->
-          <p
-            v-show="errormsg"
-            class="errormsg"
-          >
-            {{ errormsg }}
-          </p>
-        </div>
-        <div class='col-7 m-2 p-2' id='preview' style='background-color: #FFF;'>
-          <canvas id="logCanvas"></canvas>
-        </div>
-      </div>
+    <div class="card-stack">
+      <VCard title="Preview">
+        <canvas ref="canvasRef"></canvas>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, shallowRef, onMounted, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { jsPDF } from "jspdf";
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: "PrintLog"
+});
 
-  name: "PrintLog",
+const { t } = useI18n();
 
-  data() {
-    return {
-      ncol: 5,
-      showimg: false,
-      img: null,
-      hdr1: "GC Name",
-      hdr2: "GC Owner",
-      hdr3: "Bonus info",
-      width : 0,
-      height: 0,
-      canvas: null,
-      ctx: null,
-      errormsg: "",
-      linesperlog: 3,
-      lh: "27",
-      hdrcol: "#000000",
-      txtcol: '#000000',
-      linecol: '#000000',
-      ftfcol: '#000000',
-      showlbl: false,
-      lbl1: this.$t('labels.name'),
-      lbl2: this.$t('labels.date'),
-      lbl3: this.$t('labels.time'),
-      showftf: false
-    };
-  },
+// --- Template Refs ---
+const canvasRef = ref(null);
+const hdr1Input = ref(null);
 
-  mounted: function () {
+// --- State ---
+const ncol = ref(5);
+const showimg = ref(false);
+const img = shallowRef(null);
+const hdr1 = ref("GC Name");
+const hdr2 = ref("GC Owner");
+const hdr3 = ref("Bonus info");
+const width = ref(800);
+const height = ref(800 * 1.55);
+const errormsg = ref("");
+const linesperlog = ref(3);
+const lh = ref(27);
+const hdrcol = ref("#000000");
+const txtcol = ref("#000000");
+const linecol = ref("#000000");
+const ftfcol = ref("#000000");
+const showlbl = ref(false);
+const lbl1 = ref(t('labels.name'));
+const lbl2 = ref(t('labels.date'));
+const lbl3 = ref(t('labels.time'));
+const showftf = ref(false);
+const nolines = ref(false);
 
-    // get canvas and context
-    this.canvas = document.getElementById("logCanvas");
-    this.ctx = this.canvas.getContext("2d");
-    // set widht and height = width*ratio
-    this.width = 800;
-    this.height = this.width * 1.55;
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    // call redraw
-    this.redraw();
-    this.$refs.hdr1.focus();
+const lhOpt = [
+  { value : 15, label : t('printlog.lh1')},
+  { value : 21, label : t('printlog.lh2')},
+  { value : 27, label : t('printlog.lh3')},
+  { value : 33, label : t('printlog.lh4')},
+  { value : 39, label : t('printlog.lh5')},
+]
 
-  },
+// Non-reactive context
+let ctx = null;
 
+// --- Logic Methods ---
 
-  methods: {
+const drawImageScaled = (image, x, y, colwidth) => {
+  if (!image) return 0;
+  // Print image, shrink but don't enlarge
+  const ratio = Math.min(colwidth / image.width, 1);
+  const xoffset = x + Math.max(0, (colwidth - image.width * ratio) / 2);
+  
+  ctx.drawImage(
+    image, 
+    0, 0, image.width, image.height, 
+    xoffset, y, image.width * ratio, image.height * ratio
+  );
 
-    // Triggered when the file is loaded
-    selectFile: function (event) {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Get the input file
-      let input = event.target;
-
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-
-        // create a new image
-        this.img = new Image();
-        this.img.crossOrigin = 'anonymous';
-        this.img.src = URL.createObjectURL(input.files[0]);
-
-        // Define a callback function to run, when image has errors loading
-        this.img.onerror = () => {
-          this.errormsg = this.$t('errors.loadingimage')        
-        }
-
-        // Define a callback function to run, when image has loaded finishes its job
-        this.img.onload = () => {
-            try {
-              this.redraw();
-            } catch(err) {
-              this.errormsg = this.$t('errors.generic')
-            }
-        }
-
-      }
-    },
-
-    drawImageScaled: function (img, x, y, colwidth) {
-
-      // If no image return
-      if (!img) return 0;
-
-      // Print image, shrink but don't enlarge
-      let ratio = Math.min(colwidth  / img.width, 1);
-      let xoffset = x + Math.max(0,(colwidth - img.width)/2);
-      this.ctx.drawImage(img, 0, 0, img.width, img.height, xoffset, y, img.width*ratio, img.height*ratio);
-
-      // Return space used
-      return Math.floor(img.height * ratio);
-    },
-
-    redraw: function () {
-
-      // Clean the canvas
-      this.ctx.clearRect(0, 0, this.width, this.height);
-
-      // Set styles
-      this.ctx.lineWidth = "1";
-      this.ctx.setLineDash([]);
-      this.ctx.strokeStyle = this.linecol;
-      this.ctx.fillStyle = this.txtcol;
-      this.ctx.font = "15px Helvetica";
-      let margin = 4;
-      let lineHeight = parseInt(this.lh);
-      let headerLh = 18;
-
-      // Draw the box
-      if (!this.nolines) {
-        this.ctx.beginPath();
-        this.ctx.rect(1, 1, this.width-2, this.height-2);
-        this.ctx.stroke();
-      }
-
-      // Draw lines between columns
-      let colWidth = Math.floor(this.width / this.ncol);
-      if (!this.nolines) {
-        for (let i = 1; i < this.ncol; i++) {
-          this.ctx.beginPath();
-          this.ctx.moveTo(i*colWidth, 0);
-          this.ctx.lineTo(i*colWidth, this.height);
-          this.ctx.stroke();
-        } 
-      }
-
-      // Draw each column
-      for (let i = 0; i < this.ncol; i++) {
-
-        let currentY = margin;
-        // Draw img at top if available
-        if (this.showimg) {
-          let imgSize = 
-          currentY += this.drawImageScaled(this.img, i*colWidth + margin, currentY, colWidth - 2*margin);
-        }
-
-        // Draw titles centered and bold
-        currentY += margin;
-        this.ctx.textAlign = 'center';
-        this.ctx.font = "bold 15px Helvetica";
-        this.ctx.fillStyle = this.hdrcol;
-        if (this.hdr1) {
-          currentY += headerLh;
-          this.ctx.fillText(this.hdr1, i*colWidth + colWidth/2, currentY, colWidth-margin);
-        }
-        if (this.hdr2) {
-          currentY += headerLh;
-          this.ctx.fillText(this.hdr2, i*colWidth + colWidth/2 + margin, currentY, colWidth-margin);
-        }
-        if (this.hdr3) {
-          currentY += headerLh;
-          this.ctx.fillText(this.hdr3, i*colWidth + colWidth/2 + margin, currentY, colWidth-margin);
-        }
-        this.ctx.textAlign = 'left';
-        this.ctx.font = "15px Helvetica";
-        this.ctx.fillStyle = this.txtcol;
-        currentY += margin;
-
-        // Calculate number of logs in column
-        let sizeOfLog = this.linesperlog * lineHeight + margin;
-        let nlogs = Math.trunc((this.height - currentY) / sizeOfLog);
-
-        // Draw each log area
-        for (let j = 0; j < nlogs; j++) {
-
-          // Draw solid line between logs
-          this.ctx.beginPath();
-          this.ctx.setLineDash([]);
-          this.ctx.moveTo(i*colWidth + margin, currentY);
-          this.ctx.lineTo(i*colWidth + colWidth - margin, currentY);
-          this.ctx.stroke();
-
-          // Draw dashed lines in each log
-          // Print labels and podium if selected
-          this.ctx.beginPath();
-          this.ctx.setLineDash(['5']);
-          for (let k = 0; k < this.linesperlog; k++) {
-            currentY += lineHeight;
-            let offset = 0;
-
-            // Print top three
-            if (k === 0 && this.showftf && j === 0 && i === 0) {
-              this.ctx.fillStyle = this.ftfcol;
-              this.ctx.fillText('FTF', i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-              this.ctx.fillStyle = this.txtcol;
-            }
-            if (k === 0 && this.showftf && j === 1 && i === 0) {
-              this.ctx.fillStyle = this.ftfcol;
-              this.ctx.fillText('STF', i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-              this.ctx.fillStyle = this.txtcol;
-            }
-            if (k === 0 && this.showftf && j === 2 && i === 0) {
-              this.ctx.fillStyle = this.ftfcol;
-              this.ctx.fillText('TTF', i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-              this.ctx.fillStyle = this.txtcol;
-            }
-
-            // Print labels, use 25% of the width
-            if (this.showlbl && k === 0 && this.lbl1 && (!this.showftf || j>2 || i>0)) {
-              this.ctx.fillText(this.lbl1, i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-            }
-            if (this.showlbl && k === 1 && this.lbl2) {
-              this.ctx.fillText(this.lbl2, i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-            }
-            if (this.showlbl && k === 2 && this.lbl3) {
-              this.ctx.fillText(this.lbl3, i*colWidth + margin, currentY, Math.trunc(0.25*colWidth-margin));
-              offset += Math.trunc(0.25*colWidth-margin) + margin;
-            }
-
-            // Print line
-            this.ctx.moveTo(i*colWidth + offset + margin, currentY);
-            this.ctx.lineTo(i*colWidth + colWidth - margin, currentY)
-          }
-          this.ctx.stroke();
-          currentY += margin;
-        }
-
-      }
-
-    },
-
-    save: function () {
-
-      // Redraw just in case
-      this.redraw();
-
-      // Save to jsPDF// Default export is a4 paper, portrait, using millimeters for units
-      const doc = new jsPDF( 'p', 'mm');
-
-      // A4 is 210 x 297 mm - leave 15mm margin)
-      // So usable size is 180mm by 267mm, ratio 1.55
-      const imgData = this.canvas.toDataURL('image/png');
-      doc.addImage(imgData, 'PNG', 15, 15, 180, 267);
-      doc.setFontSize(7);
-      doc.text('jsPDF Copyright (c) 2010-2021 James Hall, https://github.com/MrRio/jsPDF (c) 2015-2021 yWorks GmbH, https://www.yworks.com/', 10, 292)
-      doc.save('gclog.pdf'); 
-
-    },
-
-    savepng: function() {
-
-      // Download canvas
-      const link = document.createElement('a');
-      link.download = 'gclog.png';
-      link.href = this.canvas.toDataURL();
-      link.click();
-      link.delete;
-
-    }
-  },
+  return Math.floor(image.height * ratio);
 };
 
+const redraw = () => {
+  if (!canvasRef.value || !ctx) return;
+
+  // Clean the canvas
+  ctx.clearRect(0, 0, width.value, height.value);
+
+  // Set styles
+  ctx.lineWidth = 1;
+  ctx.setLineDash([]);
+  ctx.strokeStyle = linecol.value;
+  ctx.fillStyle = txtcol.value;
+  ctx.font = "15px Helvetica";
+
+  const margin = 4;
+  const lineHeight = parseInt(lh.value);
+  const headerLh = 18;
+
+  // Draw the border box
+  if (!nolines.value) {
+    ctx.beginPath();
+    ctx.rect(1, 1, width.value - 2, height.value - 2);
+    ctx.stroke();
+  }
+
+  // Draw lines between columns
+  const colWidth = Math.floor(width.value / ncol.value);
+  if (!nolines.value) {
+    for (let i = 1; i < ncol.value; i++) {
+      ctx.beginPath();
+      ctx.moveTo(i * colWidth, 0);
+      ctx.lineTo(i * colWidth, height.value);
+      ctx.stroke();
+    }
+  }
+
+  // Draw each column
+  for (let i = 0; i < ncol.value; i++) {
+    let currentY = margin;
+
+    // Draw img at top if available
+    if (showimg.value && img.value) {
+      currentY += drawImageScaled(img.value, i * colWidth + margin, currentY, colWidth - 2 * margin);
+    }
+
+    // Draw titles centered and bold
+    currentY += margin;
+    ctx.textAlign = 'center';
+    ctx.font = "bold 15px Helvetica";
+    ctx.fillStyle = hdrcol.value;
+
+    if (hdr1.value) {
+      currentY += headerLh;
+      ctx.fillText(hdr1.value, i * colWidth + colWidth / 2, currentY, colWidth - margin);
+    }
+    if (hdr2.value) {
+      currentY += headerLh;
+      ctx.fillText(hdr2.value, i * colWidth + colWidth / 2, currentY, colWidth - margin);
+    }
+    if (hdr3.value) {
+      currentY += headerLh;
+      ctx.fillText(hdr3.value, i * colWidth + colWidth / 2, currentY, colWidth - margin);
+    }
+
+    ctx.textAlign = 'left';
+    ctx.font = "15px Helvetica";
+    ctx.fillStyle = txtcol.value;
+    currentY += margin;
+
+    // Calculate number of logs in column
+    const sizeOfLog = linesperlog.value * lineHeight + margin;
+    const nlogs = Math.trunc((height.value - currentY) / sizeOfLog);
+
+    // Draw each log area
+    for (let j = 0; j < nlogs; j++) {
+      // Draw solid line between logs
+      ctx.beginPath();
+      ctx.setLineDash([]);
+      ctx.moveTo(i * colWidth + margin, currentY);
+      ctx.lineTo(i * colWidth + colWidth - margin, currentY);
+      ctx.stroke();
+
+      // Draw dashed lines in each log
+      ctx.beginPath();
+      ctx.setLineDash([5]);
+      for (let k = 0; k < linesperlog.value; k++) {
+        currentY += lineHeight;
+        let offset = 0;
+
+        // Print Podium (FTF/STF/TTF)
+        if (showftf.value && i === 0 && k === 0 && j < 3) {
+          ctx.fillStyle = ftfcol.value;
+          const podium = j === 0 ? 'FTF' : j === 1 ? 'STF' : 'TTF';
+          ctx.fillText(podium, i * colWidth + margin, currentY, Math.trunc(0.25 * colWidth - margin));
+          offset += Math.trunc(0.25 * colWidth - margin) + margin;
+          ctx.fillStyle = txtcol.value;
+        }
+
+        // Print labels
+        const isPodiumSpace = showftf.value && i === 0 && j < 3;
+        if (showlbl.value && !isPodiumSpace) {
+          let label = "";
+          if (k === 0) label = lbl1.value;
+          if (k === 1) label = lbl2.value;
+          if (k === 2) label = lbl3.value;
+          
+          if (label) {
+            ctx.fillText(label, i * colWidth + margin, currentY, Math.trunc(0.25 * colWidth - margin));
+            offset += Math.trunc(0.25 * colWidth - margin) + margin;
+          }
+        }
+
+        // Print writing line
+        ctx.moveTo(i * colWidth + offset + margin, currentY);
+        ctx.lineTo(i * colWidth + colWidth - margin, currentY);
+      }
+      ctx.stroke();
+      currentY += margin;
+    }
+  }
+};
+
+// --- Action Handlers ---
+
+const selectFile = (event) => {
+  errormsg.value = "";
+  const input = event.target;
+
+  if (input.files && input.files[0]) {
+    const newImg = new Image();
+    newImg.crossOrigin = 'anonymous';
+    newImg.src = URL.createObjectURL(input.files[0]);
+
+    newImg.onerror = () => {
+      errormsg.value = t('errors.loadingimage');
+    };
+
+    newImg.onload = () => {
+      try {
+        img.value = newImg;
+        showimg.value = true;
+        redraw();
+      } catch (err) {
+        errormsg.value = t('errors.generic');
+      }
+    };
+  }
+};
+
+const save = () => {
+  redraw();
+  const doc = new jsPDF('p', 'mm');
+  const imgData = canvasRef.value.toDataURL('image/png');
+  // Usable size is 180mm by 267mm
+  doc.addImage(imgData, 'PNG', 15, 15, 180, 267);
+  doc.setFontSize(7);
+  doc.text('Generated via jsPDF', 10, 292);
+  doc.save('gclog.pdf');
+};
+
+const savepng = () => {
+  const link = document.createElement('a');
+  link.download = 'gclog.png';
+  link.href = canvasRef.value.toDataURL();
+  link.click();
+};
+
+// --- Watchers for Auto-Redraw ---
+// This makes the UI feel very responsive
+watch([ncol, hdr1, hdr2, hdr3, lh, linesperlog, nolines, showimg, showlbl, showftf, linecol, txtcol, hdrcol, ftfcol], () => {
+  redraw();
+});
+
+// --- Lifecycle ---
+onMounted(() => {
+  const canvas = canvasRef.value;
+  ctx = canvas.getContext("2d");
+  
+  canvas.width = width.value;
+  canvas.height = height.value;
+  
+  redraw();
+  hdr1Input.value?.focus();
+});
 </script>
 
 <style scoped>

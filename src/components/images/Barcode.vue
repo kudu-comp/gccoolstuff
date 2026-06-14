@@ -1,156 +1,152 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('barcode.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="card"
-        v-html="$t('barcode.long')"
-      />
-      <!-- Form fields -->
-      <!-- Selection dropdown -->
-      <div class="card">
-        <div class="row">
-          <label
-            class="form-label mb-2 sm-size"
-            for="bctype"
-          >{{ $t('barcode.bctype') }}</label>    
-          <select
-            id="bctype"
-            v-model="bctype"
-            class="form-select mb-2 md-size"
-          >
-            <optgroup label="2D">
-              <option value="qrcode">QR Code</option>
-              <option value="datamatrix">Data matrix</option>
-              <option value="azteccode">Aztec code</option>
-              <option value="pdf417">PDF417</option>
-            </optgroup>
-            <optgroup label="1D">
-              <option value="ean13">EAN13</option>
-              <option value="ean8">EAN8</option>
-              <option value="upca">UPCA</option>
-              <option value="upce">UPCE</option>
-              <option value="isbn">ISBN</option>
-              <option value="code39">CODE39</option>
-              <option value="code93">CODE93</option>
-              <option value="code128">CODE128</option>
-              <option value="rationalizedCodabar">CODABAR</option>
-              <option value="itf14">ITF14</option>
-              <option value="msi">MSI</option>
-              <option value="pharmacode">Pharmacode</option>
-            </optgroup>
-          </select>
+
+  <header class="page-header">
+    <h1>{{ $t('barcode.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('barcode.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <CustomDropdown 
+            v-model="bctype" 
+            :options="bcdefs" 
+            :title="$t('barcode.bctype')"
+          />
         </div>
-        <div class="row">
-          <label
-            class="form-label mb-2 sm-size"
-            for="msg"
-          >{{$t('barcode.msg')}}</label>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="form-horizontal">
+          <label>{{$t('barcode.msg')}}</label>
           <input
-            id="msg"
             v-model="msg"
             type="text"
-            class="form-control md-size mb-2 me-2"
             autofocus
           >
         </div>
-        <div class="form-check">
-          <input
-            id="showtxt"
-            v-model="showtxt"
-            type="checkbox"
-            class="form-check-input me-2 mb-2"
-          >
-          <label
-            for="showtxt"
-            class="form-check-label mb-2"
-          >{{ $t('barcode.showtxt') }}</label>
+         <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showtxt">
+          <span class="checkmark"></span>
+          {{ $t('barcode.showtxt') }}
+        </label>
+        <div class='form-horizontal'>
+          <label>{{ $t('barcode.clr')}}</label>
+          <input type='color' v-model='clr' style="flex: 0 0 40px"/>
         </div>
-        <div class='row'>
-          <label for='clr' class='form-label sm-size mb-2'>{{ $t('barcode.clr')}}</label>
-          <input id='clr' type='color' v-model='clr' class='form-control mb-2 sm-size' />
+        <div class='form-horizontal'>
+          <label >{{ $t('barcode.bgclr')}}</label>
+          <input type='color' v-model='bgclr' style="flex: 0 0 40px" />
         </div>
-        <div class='row'>
-          <label for='bgclr' class='form-label sm-size mb-2'>{{ $t('barcode.bgclr')}}</label>
-          <input id='bgclr' type='color' v-model='bgclr' style="border-width: 0px;" class='form-control mb-2 sm-size' />
+        <div class="button-row">
+          <button id="convert" class="btn btn-primary"  @click="generate()">
+            {{ $t('buttons.generate') }}
+          </button>
         </div>
-        <!-- Action buttons -->
-        <button class="btn md-size mb-2" id="btn1" @click="generate()">{{$t('buttons.generate')}}</button>
-      </div>
-      <canvas id="barcode"></canvas>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      
+      </VCard>
+      <VCard :title="$t('labels.result')">     
+        <canvas ref="canvasRef"></canvas>      
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import bwipjs from "bwip-js"
+import VCard from '@/components/generic/VCard.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-import bwipjs from "bwip-js";
+defineOptions({
+  name: "Barcode"
+})
 
-export default {
+// --- Constants ---
+const bcdefs = [
+  { value : "", label : "--- 2D ---", disabled: true},
+  { value : "qrcode", label : "QR Code"},
+  { value : "datamatrix", label : "Data matrix"},
+  { value : "azteccode", label : "Aztec code"},
+  { value : "pdf417", label : "PDF417"},
+  { value : "", label : "--- 1D ---", disabled: true},
+  { value : "ean13", label : "EAN13"},
+  { value : "ean8", label : "EAN8"},
+  { value : "upca", label : "UPCA"},
+  { value : "upce", label : "UPCE"},
+  { value : "isbn", label : "ISBN"},
+  { value : "code39", label : "CODE39"},
+  { value : "code93", label : "CODE93"},
+  { value : "code128", label : "CODE128"},
+  { value : "rationalizedCodabar", label : "CODABAR"},
+  { value : "itf14", label : "ITF14"},
+  { value : "msi", label : "MSI"},
+  { value : "pharmacode", label : "Pharmacode"},
+]
 
-  name: "Barcode",
+// --- State ---
+const errormsg = ref("")
+const msg = ref("Hello World")
+const num1 = ref(0)
+const bctype = ref("qrcode")
+const showtxt = ref(true)
+const clr = ref("#000000")
+const bgclr = ref("#FFFFFF")
 
-  components: {
-        
-  },
+// --- Template Ref ---
+const canvasRef = ref(null)
 
-  data() {
-    return {
-      errormsg: "",
-      msg: "",
-      num1: 0,
-      bctype: "qrcode",
-      showtxt: true,
-      clr: "#000000",
-      bgclr: "#FFFFFF"
-    };
-  },
+// --- Methods ---
 
-  methods: {
+const generate = () => {
+  errormsg.value = ""
+  
+  if (!canvasRef.value) return
+  if (!msg.value) {
+    // Clear canvas if message is empty
+    const ctx = canvasRef.value.getContext('2d')
+    ctx.clearRect(0, 0, canvasRef.value.width, canvasRef.value.height)
+    return
+  }
 
-    generate: function () {
+  // Generate the code
+  // Note: clr.value and bgclr.value usually need to be stripped of the '#' 
+  // for some bwip-js versions, but typically hex strings work.
+  const options = {
+    bcid: bctype.value,
+    text: msg.value,
+    backgroundcolor: bgclr.value.replace('#', ''),
+    barcolor: clr.value.replace('#', ''),
+    textcolor: clr.value.replace('#', ''),
+    padding: 8,
+    includetext: showtxt.value,
+    scale: 2 // Added scale for better quality
+  }
 
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      let canvas = document.getElementById("barcode");
+  try {
+    bwipjs.toCanvas(canvasRef.value, options)
+  } catch (e) {
+    // Clean up error message
+    const rawError = e.message || String(e)
+    errormsg.value = rawError.includes(":") 
+        ? rawError.slice(rawError.indexOf(":") + 1).trim() 
+        : rawError
+  }
+}
 
-      // Generate the code
-      let options = {
-        bcid: this.bctype,
-        text: this.msg,
-        backgroundcolor: this.bgclr,
-        padding: 8,
-        barcolor: this.clr,
-        textcolor: this.clr,
-        includetext: this.showtxt
-      }
+// --- Watchers & Lifecycle ---
 
-      try {
-        bwipjs.toCanvas(canvas, options);
-      } catch (e) {
-        this.errormsg = e.message.slice(e.message.indexOf(":")+1);
-      }
+// Automatically update whenever any setting changes
+watch([msg, bctype, clr, bgclr, showtxt], () => {
+  generate()
+})
 
-    },
-
-  },
-};
-
+onMounted(() => {
+  generate()
+})
 </script>
 
-<style scoped>
-</style>

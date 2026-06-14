@@ -1,117 +1,108 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('morsecode.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('morsecode.long')"
+  <header class="page-header">
+    <h1>{{ $t('morsecode.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('morsecode.long')" />
+    </VCard>
+    <VCard :title="$t('morsecode.textmorse')">
+      <!-- Coder controls -->
+      <p>{{$t('morsecode.textmorsectl')}}</p>
+      <div class="form-horizontal">
+        <label for="spacesep">{{$t('morsecode.spacesep')}}</label>
+        <input type="text" v-model="spaceSep" id="spacesep"/>
+      </div>
+      <textarea
+        class="mb-2"
+        v-model="message2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        autofocus
       />
-      <!-- Text to mose and vice verse -->
-      <div>
-        <h3 class="mt-5">{{ $t('morsecode.textmorse') }}</h3>
-        <!-- Coder controls -->
-        <div class="infoblock">{{$t('morsecode.textmorsectl')}}</div>
-        <div class="row">
-          <label for="spacesep" class="form-label md-size mb-2">{{$t('morsecode.spacesep')}}</label>
-          <input type="text" v-model="spaceSep" id="spacesep" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="mb-2">
-          <textarea
-            id="msg"
-            v-model="message2"
-            class="form-control"
-            :placeholder="$t('labels.message')"
-            rows="5"
-            autofocus
-          />
-        </div>
-        <p
-          v-show="errormsg3"
-          class="errormsg"
-        >
-          {{ errormsg3 }}
-        </p><button class="btn mb-2 me-2 sm-size" id="btn1" :disabled="!message2" @click="toText()">{{$t('buttons.decode')}}</button>
-        <button class="btn mb-2 sm-size" id="btn2" :disabled="!message2" @click="toMorse()">{{$t('buttons.encode')}}</button>
+      <p
+        v-show="errormsg3"
+        class="errormsg"
+      >
+        {{ errormsg3 }}
+      </p>
+      <div class="button-row">
+        <button class="btn btn-primary" id="btn1" :disabled="!message2" @click="toText()">{{$t('buttons.decode')}}</button>
+        <button class="btn btn-primary" id="btn2" :disabled="!message2" @click="toMorse()">{{$t('buttons.encode')}}</button>
+     </div>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title=" $t('morsecode.decodeaudio') ">
+      <!-- Decoder controls -->
+      <p>{{$t('morsecode.decodectl')}}</p>
+      <!-- File input -->
+      <input
+        id="file"
+        type="file"
+        ref="file"
+        class="mb-2"
+        @change="onFileChange"
+      />
+      <div class="form-horizontal">
+        <label for="thres">{{$t('morsecode.thres')}}</label>
+        <input type="number" min="0" max="1" step="0.01" v-model="thres" id="thres" />
       </div>
-      <!-- Decode a WAV file -->
-      <div>
-        <h3 class="mt-5">{{ $t('morsecode.decodeaudio') }}</h3>
-        <!-- File input -->
-        <input
-          id="file"
-          type="file"
-          ref="file"
-          class="form-control mb-2"
-          @change="onFileChange"
-        />
-        <!-- Decoder controls -->
-        <div class="infoblock">{{$t('morsecode.decodectl')}}</div>
-        <div class="row">
-          <label for="thres" class="form-label lg-size mb-2">{{$t('morsecode.thres')}}</label>
-          <input type="number" min="0" max="1" step="0.01" v-model="thres" id="thres" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="row">
-          <label for="dottohyphen" class="form-label lg-size mb-2">{{$t('morsecode.dottohyphen')}}</label>
-          <input type="number" min="1" max="4" step="0.1" v-model="dotToHyphen" id="dottohyphen" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="row">
-          <label for="dottopause" class="form-label lg-size mb-2">{{$t('morsecode.dottopause')}}</label>
-          <input type="number" min="1" max="4" step="0.1" v-model="dotToPause" id="dottopause" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="row">
-          <label for="dottospace" class="form-label lg-size mb-2">{{$t('morsecode.dottospace')}}</label>
-          <input type="number" min="1" max="9" step="0.1" v-model="dotToSpace" id="dottospace" class="form-control md-size mb-2"/>
-        </div>
-        <button class="btn mb-2 sm-size" id="btn1" :disabled="isProcessing || !isLoaded" @click="decode()">{{$t('buttons.decode')}}</button>
-        <!-- Error message -->
-        <p
-          v-show="errormsg"
-          class="errormsg"
-        >
-          {{ errormsg }}
-        </p>
-        <!-- Result area or use v-html -->
-        <div v-if="decodedText" class="resultbox" >
-          {{ decodedText }} 
-        </div>
+      <div class="form-horizontal">
+        <label for="dottohyphen" >{{$t('morsecode.dottohyphen')}}</label>
+        <input type="number" min="1" max="4" step="0.1" v-model="dotToHyphen" id="dottohyphen" />
       </div>
-      <!-- Play a morse code message -->
-      <div>
-        <h3 class="mt-5">{{ $t('morsecode.playmessage') }}</h3>
-        <!-- Coder controls -->
-        <div class="infoblock">{{$t('morsecode.encodectl')}}</div>
-        <div class="row">
-          <label for="wpm" class="form-label md-size mb-2">{{$t('morsecode.wpm')}}</label>
-          <input type="number" min="5" max="50" step="1" v-model="wpm" id="wpm" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="row">
-          <label for="freq" class="form-label md-size mb-2">{{$t('morsecode.freq')}}</label>
-          <input type="number" min="100" max="15000" step="50" v-model="freq" id="freq" class="form-control md-size mb-2"/>
-        </div> 
-        <div class="mb-2">
-          <textarea
-            id="msg"
-            v-model="message"
-            class="form-control"
-            :placeholder="$t('labels.message')"
-            rows="5"
-          />
-        </div>
-        <p
-          v-show="errormsg2"
-          class="errormsg"
-        >
-          {{ errormsg2 }}
-        </p><button class="btn mb-2 me-2 sm-size" id="btn1" :disabled="!message" @click="PlayMessage()">{{$t('buttons.play')}}</button>
-        <button class="btn mb-2 sm-size" id="btn2" :disabled="!message" @click="SaveMessage()">{{$t('buttons.save')}}</button>
+      <div class="form-horizontal">
+        <label for="dottopause" >{{$t('morsecode.dottopause')}}</label>
+        <input type="number" min="1" max="4" step="0.1" v-model="dotToPause" id="dottopause" />
       </div>
-      
-    </div>
+      <div class="form-horizontal">
+        <label for="dottospace" >{{$t('morsecode.dottospace')}}</label>
+        <input type="number" min="1" max="9" step="0.1" v-model="dotToSpace" id="dottospace" />
+      </div>
+      <div class="button-row mb-2">
+        <button class="btn btn-primary" id="btn1" :disabled="isProcessing || !isLoaded" @click="decode()">{{$t('buttons.decode')}}</button>
+      </div>
+      <!-- Error message -->
+      <p
+        v-show="errormsg"
+        class="errormsg mt-2"
+      >
+        {{ errormsg }}
+      </p>
+      <!-- Result area or use v-html -->
+      <div v-if="decodedText" class="resultbox" >
+        {{ decodedText }} 
+      </div>
+    </VCard>
+    <VCard :title=" $t('morsecode.playmessage') ">
+      <!-- Coder controls -->
+      <p>{{$t('morsecode.encodectl')}}</p>
+      <div class="form-horizontal">
+        <label for="wpm">{{$t('morsecode.wpm')}}</label>
+        <input type="number" min="5" max="50" step="1" v-model="wpm" id="wpm"/>
+      </div>
+      <div class="form-horizontal">
+        <label for="freq">{{$t('morsecode.freq')}}</label>
+        <input type="number" min="100" max="15000" step="50" v-model="freq" id="freq"/>
+      </div> 
+      <textarea
+        v-model="message"
+        class="mb-2"
+        :placeholder="$t('labels.message')"
+        rows="5"
+      />
+      <p
+        v-show="errormsg2"
+        class="errormsg mt-2"
+      >
+        {{ errormsg2 }}
+      </p>
+      <div class="button-row">
+        <button class="btn btn-primary" id="btn1" :disabled="!message" @click="PlayMessage()">{{$t('buttons.play')}}</button>
+        <button class="btn btn-primary" id="btn2" :disabled="!message" @click="SaveMessage()">{{$t('buttons.save')}}</button>
+      </div>
+    </VCard>      
   </div>
 </template>
 
@@ -119,6 +110,7 @@
 
 import { MorseDecoder, playMorse, downloadMorseWav, textToMorse, morseToText } from '@/scripts/morse.js';
 import { ref } from 'vue';
+import VCard from '@/components/generic/VCard.vue'
 
 import { useI18n } from 'vue-i18n'
 const { t } = useI18n()

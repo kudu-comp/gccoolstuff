@@ -1,277 +1,314 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('pixeldata.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card mb-2 pb-0"
-        v-html="$t('pixeldata.long')"
-      />
-      <div class="card card-body mb-2">
-        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
-        <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
-      </div>
-      <div class="card flex-row">
-        <div class="col-6">
-          <div class="row">
-            <label
-              class="form-label lg-size mb-2"
-              for="red"
-            >{{ $t('colors.red') }}</label>
-            <input
-              id="red"
-              v-model="red"
-              type="number"
-              min="0"
-              max="255"
-              class="form-control sm-size mb-2"
-            >
-          </div>
-          <div class="row">
-            <label
-              class="form-label lg-size mb-2"
-              for="green"
-            >{{ $t('colors.green') }}</label>
-            <input
-              id="green"
-              v-model="green"
-              type="number"
-              min="0"
-              max="255"
-              class="form-control sm-size mb-2"
-            >
-          </div>
-          <div class="row">
-            <label
-              class="form-label lg-size mb-2"
-              for="blue"
-            >{{ $t('colors.blue') }}</label>
-            <input
-              id="blue"
-              v-model="blue"
-              type="number"
-              min="0"
-              max="255"
-              class="form-control sm-size mb-2"
-            >
-          </div>
-          <div class="row">
-            <p class="lg-size">{{ $t('pixeldata.count') }}</p>
-            <input
-              id="count"
-              type="button"
-              :value="$t('buttons.count')"
-              class="btn sm-size mb-2"
-              @click="pixelCount(img)"
-            >
-          </div>
-          <p
-            v-show="errormsg"
-            class="errormsg"
+
+  <header class="page-header">
+    <h1>{{ $t('pixeldata.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('pixeldata.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input
+            type="file"
+            ref="fileInputRef"
+            class="form-control"
+            @change="handleFileChange"
+            accept="image/*"
           >
-            {{ errormsg }}
-          </p>
-          <div
-            class="card card-text p-2"
-            v-html="result"
-          />
         </div>
-        <div
-          id="preview"
-          class="col-6"
+        <p
+          v-show="errormsg"
+          class="errormsg"
         >
-          <canvas
-            id="canvas"
-            :width="width"
-            :height="height"
-          />
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard title="Preview">
+          <!-- Hidden Canvas for Data Extraction -->
+          <img :src="previewUrl" class="image-preview" @click="pickColor">
+          <canvas ref="dataCanvasRef" style="display: none;"></canvas>    
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('pixeldata.title')">
+        <div class="card-grid mb-2">
+          <VCard :title="$t('pixeldata.targetcolor')">
+            <p>{{ $t('pixeldata.count')}}</p>
+            <div class="rgb-inputs">
+              <div class="input-group red">
+                <label>R</label>
+                <input type="number" v-model.number="targetColor.r" min="0" max="255" @input="countSpecificColor">
+              </div>
+              <div class="input-group green">
+                <label>G</label>
+                <input type="number" v-model.number="targetColor.g" min="0" max="255" @input="countSpecificColor">
+              </div>
+              <div class="input-group blue">
+                <label>B</label>
+                <input type="number" v-model.number="targetColor.b" min="0" max="255" @input="countSpecificColor">
+              </div>
+            </div>
+            <div class="target-swatch" :style="{ backgroundColor: `rgb(${targetColor.r}, ${targetColor.g}, ${targetColor.b})` }"></div>
+            <div v-if="matchCount !== null" class="match-result">
+              <div class="match-total">{{ formatNum(matchCount) }}</div>
+              <div class="match-label">Visible Matches</div>
+            </div>
+          </VCard>
+          <VCard :title="$t('pixeldata.metadata')">
+              <div v-if="stats" class="stat-row"><span>{{$t('exifscanner.width')}}</span> <strong>{{ stats.width }}px</strong></div>
+              <div v-if="stats" class="stat-row"><span>{{$t('exifscanner.height')}}</span> <strong>{{ stats.height }}px</strong></div>
+              <div v-if="stats" class="stat-row"><span>Total Pixels</span> <strong>{{ formatNum(stats.totalPixels) }}</strong></div>
+              <div v-if="stats" class="stat-row"><span>Avg Brightness</span> <strong>{{ stats.avgBrightness }}%</strong></div>
+          </VCard>
         </div>
-      </div>
+        <div class="mb-2">
+          <div v-if="isLoading" class="empty-state"><div class="spinner"></div><p>Crunching pixels...</p></div>
+          <div v-else-if="!imageLoaded" class="empty-state">
+            <div class="icon-bg">📸</div>
+            <p>Please upload an image to begin analysis.</p>
+          </div>
+
+          <template v-if="!isLoading && imageLoaded">
+            <!-- 4. Histogram Section -->
+          <VCard :title="$t('pixeldata.histogram')">
+              <div class="histogram-header">
+                <div class="radio-group">
+                  <label v-for="mode in ['red', 'green', 'blue', 'brightness']" :key="mode" :class="['radio-btn', mode, { active: histoMode === mode }]">
+                    <input type="radio" :value="mode" v-model="histoMode" @change="drawHistogram" hidden />
+                    {{ mode }}
+                  </label>
+                </div>
+              </div>
+              <div class="histogram-view">
+                <canvas ref="histoCanvasRef" width="512" height="150"></canvas>
+              </div>
+            </VCard>
+
+            <!-- Analysis Grid -->
+            <div class="card-grid mt-2" v-if="stats">
+              <!-- Channel Intensity Bars -->
+              <VCard :title="$t('pixeldata.channel')">
+                <p>{{$t('pixeldata.channelexpl')}}</p>
+                <div class="channel-group">
+                  <div v-for="c in ['red', 'green', 'blue']" :key="c" class="channel-item">
+                    <div class="label-row"><span class="capitalize">{{ c }}</span> <span>{{ formatNum(stats[`${c.charAt(0)}Sum`]) }}</span></div>
+                    <div class="bar-bg"><div :class="['fill', c]" :style="{ width: (stats[`${c.charAt(0)}Sum`] / stats.maxPossible * 100) + '%' }"></div></div>
+                  </div>
+                </div>
+              </VCard>
+
+              <!-- Zero Channels -->
+              <VCard :title="$t('pixeldata.deadzones')">
+                <p>{{$t('pixeldata.deadzonesexpl')}}</p>
+                <div class="pill red">Zero Red: {{ formatNum(stats.zeroR) }}</div>
+                <div class="pill green">Zero Green: {{ formatNum(stats.zeroG) }}</div>
+                <div class="pill blue">Zero Blue: {{ formatNum(stats.zeroB) }}</div>
+              </VCard>
+
+              <!-- Avg Color -->
+              <VCard title="Average color">
+                <div class="swatch-large" :style="{ backgroundColor: stats.avgColorHex }"></div>
+                <div class="hex-display">{{ stats.avgColorHex }}</div>
+              </VCard>
+            </div>
+          </template>
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, watch, nextTick } from 'vue'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+const dataCanvasRef = ref(null)
+const histoCanvasRef = ref(null)
+const previewUrl = ref(null)
+const fileName = ref('')
+const imageLoaded = ref(false)
+const isLoading = ref(false)
+const stats = ref(null)
+const matchCount = ref(null)
 
-  name: 'PixelData',
+const histoMode = ref('brightness')
+const targetColor = reactive({ r: 255, g: 255, b: 255 })
 
-  data: function() {
-    return {
-      fileurl: "",
-      errormsg: "",
-      ctx: null,
-      img: null,
-      width: 400,
-      height: 400,
-      red: 0,
-      green: 0,
-      blue: 0,
-      result: this.$t('labels.result')
-    }
-  },
+// We store 256 bins for each channel
+let histoData = { red: [], green: [], blue: [], brightness: [] }
 
-  mounted: function() {
-
-    // Set focus on file input
-    // this.$refs.file.focus();
-
-    const canvas = document.getElementById('canvas');
-    this.ctx = canvas.getContext('2d');
-
-    // Resize canvas
-    this.resizeCanvas();
-    this.$refs.file.focus();
-
-  },
-
-  methods: {
-
-    resizeCanvas: function () {
-
-      // Resize canvas
-      let pv = document.getElementById("preview");
-      this.width = pv.offsetWidth - 10;
-      
-    },
-
-    // Draw the previewed image
-    drawImageScaled: function (img) {
-
-      let canvas = this.ctx.canvas ;
-      let hRatio = canvas.width  / img.width    ;
-      let vRatio =  canvas.height / img.height  ;
-      let ratio  = Math.min ( hRatio, vRatio );
-      let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-      // let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-      let centerShift_y = 0;
-      this.ctx.clearRect(0,0,canvas.width, canvas.height);
-      this.ctx.drawImage(img, 0, 0, img.width, img.height,
-                         centerShift_x, centerShift_y, img.width*ratio, img.height*ratio); 
-
-    },
-
-    // Print header for result
-    printHeader: function () {
-      this.result = this.$t('exifscanner.width') + ": " + this.img.width + "<br>";
-      this.result += this.$t('exifscanner.height') + ": " + this.img.height + "<br>";
-      this.result += this.$t('exifscanner.npixels') + ": " + this.img.width * this.img.height + "<br><br>";
-    },
-
-    // Get the pixel data
-    pixelSum: function (img) {
-
-      // Create a canvas the size of the image in memory 
-      let canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      let context = canvas.getContext('2d');
-      context.drawImage(img, 0, 0, img.width, img.height);
-
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      
-      // Make a copy of the imagedata
-      let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-
-      // Get the sum of RGB values
-      for (let i = 0; i < data.length; i += 4) {
-        r += data[i];      // red
-        g += data[i + 1];  // green
-        b += data[i + 2];  // blue
-      }
-
-      this.printHeader();
-      this.result += this.$t('labels.sum') + " " + this.$t('colors.red') + ": " + r + "<br>"
-      this.result += this.$t('labels.sum') + " " + this.$t('colors.green') + ": " + g + "<br>"
-      this.result += this.$t('labels.sum') + " " + this.$t('colors.blue') + ": " + b;
-
-    },
-
-    // Get the pixel data
-    pixelCount: function (img) {
-
-      // Create a canvas the size of the image in memory 
-      let canvas = document.createElement('canvas');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      let context = canvas.getContext('2d');
-      context.drawImage(img, 0, 0, img.width, img.height);
-
-      // Make a copy of the imagedata
-      let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imageData.data;
-
-      let count = 0;
-
-      for (let i = 0; i < data.length; i += 4) {
-        if ( (data[i] == this.red) && (data[i+1] == this.green) && (data[i+2] == this.blue) ) {
-          count++;
-        }
-      }
-
-      this.printHeader();
-      this.result += this.$t('labels.count') + " " + this.$t('colors.red') + "/"
-      this.result += this.$t('colors.green') + "/" + this.$t('colors.blue') + ":" + count
-
-    },
-
-    // Triggered when the file is loaded
-    selectFile: function (event) {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Get the input file
-      let input = event.target;
-
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-
-        // create a new image
-        this.img = new Image();
-        this.img.crossOrigin = 'anonymous';
-        this.img.src = URL.createObjectURL(input.files[0]);
-
-        // Define a callback function to run, when image has errors loading
-        this.img.onerror = () => {
-          this.errormsg = this.$t('errors.loadingimage')        
-        }
-
-        // Define a callback function to run, when image has loaded finishes its job
-        this.img.onload = () => {
-
-            try {
-
-              this.drawImageScaled(this.img);
-              this.printHeader();
-              this.pixelSum(this.img)
-
-            } catch(err) {
-
-              console.log(err);
-              this.errormsg = this.$t('errors.generic')
-            
-            }
-        }
-
-      }
-    },
-
+const handleFileChange = (e) => {
+  const file = e.target.files[0]
+  if (file) {
+    fileName.value = file.name
+    isLoading.value = true
+    imageLoaded.value = false
+    const reader = new FileReader()
+    reader.onload = (ev) => analyzeImage(ev.target.result)
+    reader.readAsDataURL(file)
   }
 }
+
+function analyzeImage(url) {
+  const img = new Image()
+  img.src = url
+  img.onload = () => {
+    previewUrl.value = url
+    const canvas = dataCanvasRef.value
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
+    canvas.width = img.width
+    canvas.height = img.height
+    ctx.drawImage(img, 0, 0)
+    
+    setTimeout(() => {
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      const data = imageData.data
+      
+      // Initialize Histogram Bins
+      histoData = { red: Array(256).fill(0), green: Array(256).fill(0), blue: Array(256).fill(0), brightness: Array(256).fill(0) }
+      
+      let rSum = 0, gSum = 0, bSum = 0, zeroR = 0, zeroG = 0, zeroB = 0, brightnessSum = 0, visiblePixels = 0
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i+1], b = data[i+2], a = data[i+3]
+        
+        // Fix: Only process non-transparent pixels
+        if (a > 0) {
+          visiblePixels++
+          rSum += r; gSum += g; bSum += b
+          if (r === 0) zeroR++
+          if (g === 0) zeroG++
+          if (b === 0) zeroB++
+          
+          const lum = Math.round(r * 0.299 + g * 0.587 + b * 0.114)
+          brightnessSum += lum
+          
+          // Populate Histogram
+          histoData.red[r]++
+          histoData.green[g]++
+          histoData.blue[b]++
+          histoData.brightness[lum]++
+        }
+      }
+
+      stats.value = {
+        width: img.width, height: img.height, totalPixels: visiblePixels,
+        rSum, gSum, bSum, zeroR, zeroG, zeroB,
+        maxPossible: visiblePixels * 255,
+        avgBrightness: Math.round((brightnessSum / visiblePixels) / 2.55),
+        avgColorHex: rgbToHex(Math.round(rSum/visiblePixels), Math.round(gSum/visiblePixels), Math.round(bSum/visiblePixels))
+      }
+      imageLoaded.value = true
+      isLoading.value = false
+
+      // Wait for one "tick" so the histoCanvasRef is actually available in the DOM
+      nextTick(() => {
+        drawHistogram()
+      })    }, 50)
+  }
+}
+
+function drawHistogram() {
+  if (!histoCanvasRef.value) return
+  const canvas = histoCanvasRef.value
+  const ctx = canvas.getContext('2d')
+  const data = histoData[histoMode.value]
+  const max = Math.max(...data)
+  
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  
+  const colors = { red: '#ef4444', green: '#22c55e', blue: '#3b82f6', brightness: '#6b7280' }
+  ctx.fillStyle = colors[histoMode.value]
+  
+  const binWidth = canvas.width / 256
+  for (let i = 0; i < 256; i++) {
+    const height = (data[i] / max) * canvas.height
+    ctx.fillRect(i * binWidth, canvas.height - height, binWidth, height)
+  }
+}
+
+const pickColor = (event) => {
+  const canvas = dataCanvasRef.value
+  const ctx = canvas.getContext('2d')
+  const rect = event.target.getBoundingClientRect()
+  const scaleX = canvas.width / rect.width
+  const scaleY = canvas.height / rect.height
+  const x = (event.clientX - rect.left) * scaleX
+  const y = (event.clientY - rect.top) * scaleY
+  
+  const pixel = ctx.getImageData(x, y, 1, 1).data
+  targetColor.r = pixel[0]
+  targetColor.g = pixel[1]
+  targetColor.b = pixel[2]
+  countSpecificColor()
+}
+
+const countSpecificColor = () => {
+  if (!imageLoaded.value) return
+  const data = dataCanvasRef.value.getContext('2d').getImageData(0, 0, dataCanvasRef.value.width, dataCanvasRef.value.height).data
+  let count = 0
+  const { r, g, b } = targetColor
+  for (let i = 0; i < data.length; i += 4) {
+    if (data[i] === r && data[i+1] === g && data[i+2] === b && data[i+3] > 0) count++
+  }
+  matchCount.value = count
+}
+
+const rgbToHex = (r, g, b) => "#" + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')
+const formatNum = (num) => new Intl.NumberFormat().format(num)
 </script>
 
 <style scoped>
+.pixel-analyzer { font-family: 'Inter', sans-serif; padding: 25px; background: #f3f4f6; min-height: 100vh; color: #1f2937; }
+.analyzer-header h1 { margin: 0 0 20px 0; font-size: 1.8rem; color: #111827; }
+.main-layout { display: grid; grid-template-columns: 320px 1fr; gap: 25px; max-width: 1400px; margin: 0 auto; }
 
-canvas {
-  width: 100%;
-  height: auto;
-  padding-left: 15px;
-}
+/* Histogram */
+.histogram-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.radio-group { display: flex; gap: 5px; }
+.radio-btn { font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; cursor: pointer; border: 1px solid #e5e7eb; text-transform: capitalize; }
+.radio-btn.active { color: white; border-color: transparent; }
+.radio-btn.red.active { background: #ef4444; }
+.radio-btn.green.active { background: #22c55e; }
+.radio-btn.blue.active { background: #3b82f6; }
+.radio-btn.brightness.active { background: #6b7280; }
+.histogram-view canvas { width: 100%; height: 200px; background: #f9fafb; border-radius: 4px; }
 
+/* Existing Sidebar Styles */
+.stat-row { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 6px 0; border-bottom: 1px solid #f9fafb; }
+.rgb-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+.input-group { display: flex; flex-direction: column; align-items: center; padding: 8px; border-radius: 8px; }
+.input-group label { font-size: 0.7rem; font-weight: bold; margin-bottom: 4px; }
+.input-group input { width: 100%; border: 1px solid #ddd; border-radius: 4px; text-align: center; }
+.input-group.red { background: #fee2e2; }
+.input-group.green { background: #dcfce7; }
+.input-group.blue { background: #dbeafe; }
+.target-swatch { height: 30px; border-radius: 4px; border: 1px solid #d1d5db; margin-bottom: 10px; }
+.match-result { text-align: center; background: #f9fafb; padding: 8px; }
+.match-total { font-size: 1.2rem; font-weight: 800; }
+
+.image-preview { max-width: 100%; max-height: 400px; cursor: crosshair; display: block; margin: 0 auto; border-radius: 8px; }
+.analysis-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+.channel-item { margin-bottom: 12px; }
+.label-row { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; margin-bottom: 4px; }
+.bar-bg { background: #e5e7eb; height: 8px; border-radius: 4px; overflow: hidden; }
+.fill { height: 100%; }
+.fill.red { background: #ef4444; }
+.fill.green { background: #22c55e; }
+.fill.blue { background: #3b82f6; }
+.pill { padding: 8px; border-radius: 6px; font-weight: 600; margin-bottom: 6px; font-size: 0.8rem; border-left: 4px solid; }
+.pill.red { background: var(--bg-color); border-color: #ef4444; }
+.pill.green { background: var(--bg-color); border-color: #22c55e; }
+.pill.blue { background: var(--bg-color); border-color: #3b82f6; }
+.swatch-large { height: 60px; border-radius: 8px; margin-bottom: 10px; }
+.hex-display { text-align: center; font-family: monospace; font-weight: bold; }
+
+.spinner { width: 30px; height: 30px; border: 3px solid #e5e7eb; border-top-color: #6366f1; border-radius: 50%; animation: spin 1s infinite linear; margin: 0 auto 10px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-state { text-align: center; padding: 100px 20px; color: #9ca3af; background: white; border-radius: 12px; }
+.capitalize { text-transform: capitalize; }
 </style>

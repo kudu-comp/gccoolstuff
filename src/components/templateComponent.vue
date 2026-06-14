@@ -1,163 +1,116 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('compname.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('compname.long')"
-      />
-      <!-- Form fields -->
-      <!-- Text input -->
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="text1"
-        >{{$t('compname.text1')}}</label>
-        <input
-          id="text1"
-          v-model="text1"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-        >
-      </div>
-      <!-- Number input -->
-      <div class="row">
-        <label for="num1" class="form-label sm-size mb-2">{{$t('compname.num1')}}</label>
-        <input type="num1" min="0" v-model="num1" id="num1" class="form-control md-size mb-2"/>
-      </div>
-      <!-- Checkbox -->
-      <div class="form-check">
-        <input
-          id="chk1"
-          v-model="chk1"
-          type="checkbox"
-          class="form-check-input me-2 mb-2"
-        >
-        <label
-          for="chk1"
-          class="form-check-label mb-2"
-        >{{ $t('compname.chk1') }}</label>
-      </div>
-      <!-- Selection dropdown -->
-      <div class="row">
-        <label
-          class="form-label mb-2 sm-size"
-          for="sel1"
-        >{{ $t('compname.sel1') }}</label>    
-        <select
-          id="sel1"
-          v-model="sel1"
-          class="form-select mb-2 md-size"
-        >
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-      </div>
-      <!-- Radios-->
-      <span
-        class="form-label mb-2"
-      >{{ $t('vanitycode.sel') }}</span>
-      <div class="form-check">
-        <input
-          id="radio1"
-          v-model="sel"
-          type="radio"
-          value="0"
-          class="form-check-input"
-        >
-        <label
-          class="form-check-label"
-          for="number1"
-        >{{ $t('buttons.encode') }}</label>
-      </div>
-      <div class="form-check">
-        <input
-          id="radio2"
-          v-model="sel"
-          type="radio"
-          value="1"
-          class="form-check-input"
-        >
-        <label
-          class="form-check-label"
-          for="number2"
-        >{{ $t('buttons.decode') }}</label>
-      </div>      
-      <!-- Date input -->
-      <div class="row" >
-        <label for="date1" class="form-label sm-size mb-2">{{$t('compname.date1')}} </label>
-        <input type="date" v-model="date1" id="date1" class="form-control md-size mb-2"/>
-      </div>
-      <!-- Action buttons -->
-      <!-- <v-calculate class="mb-2" id="calc" @calculate="doAction()"></v-calculate> -->
-      <button class="btn mb2" id="btn1" @click="doAction()">{{$t('buttons.action')}}</button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Text area input -->
-      <div class="mb-2">
+
+  <header class="page-header">
+    <h1>{{ $t('compname.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('compname.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+      </VCard>
+      <VCard :title="$t('labels.input')">
         <textarea
-          id="msg"
+          ref="messageInput"
           v-model="message"
-          class="form-control"
-          :placeholder="$t('labels.msg')"
+          :placeholder="$t('labels.message')"
           rows="5"
+          @input="doSomething"
         />
-      </div>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" >
-        {{ result }} 
-      </div>
+        <p v-show="errormsg" class="errormsg mt-2">
+          {{ errormsg }}.
+        </p>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary"  @click="doSomething">
+            {{ $t('buttons.convert') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="result"
+          class="card resultbox"
+        >
+          {{ result }}
+        </div>
+      </VCard>
+      <VCard title="Preview">
+     </VCard>
+      <VCard :title="$t('labels.addinfo')">
+     </VCard>
     </div>
   </div>
+
+  <div class="form-horizontal">
+    <label>{{ $t('compname.label') }}</label>
+    <input type="number" v-model="count">
+  </div>
+
+  <div class="form-horizontal">
+    <label>{{ $t('compname.label') }}</label>
+    <input type="text" v-model="text">
+  </div>
+
+  <div class="form-horizontal">
+    <label>{{ $t('compname.label') }}</label>
+    <input type="range" v-model="range" min="0" max="100" class="range-input">
+  </div>
+
+  <label class="checkbox-container mb-2">
+    <input type="checkbox" v-model="chk">
+    <span class="checkmark"></span>
+    {{ $t('compname.label') }}
+  </label>
+
+  <CustomDropdown
+    v-model="fontFamily"
+    :options="fontdef"
+    :title="$t('fonts.selfont')"
+  />
+
+  <label>{{ $t('compname.label') }}</label>
+  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+    <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+      {{ categories.find(c => c.value === formData.category).label }}
+      <span class="chevron">▾</span>
+    </div>
+    <transition name="fade-slide">
+      <div v-if="isDropdownOpen" class="custom-options-list">
+        <div v-for="opt in categories" :key="opt.value" class="custom-option" :class="{ 'selected': formData.category === opt.value }" @click="selectCategory(opt.value)">
+          {{ opt.label }}
+          <span v-if="formData.category === opt.value" class="check">✓</span>
+        </div>
+      </div>
+    </transition>
+  </div>
+
+  <div class="radio-group">
+    <label>{{ $t('compname.label') }}</label>
+    <div class="radio-options">
+      <label class="radio-item" v-for="lvl in ['Low', 'Med', 'High']" :key="lvl">
+        <input type="radio" :value="lvl" v-model="formData.priority">
+        <span class="radio-mark"></span> {{ lvl }}
+      </label>
+    </div>
+  </div>
+
 </template>
 
-<script>
+<script setup>
 
-export default {
+import { ref, reactive, computed } from 'vue';
+import VMenu from '@/components/generic/VMenu.vue';
+import VCard from '@/components/generic/VCard.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+const lettersRef=ref(null)
 
-  name: "ComponentName",
-
-  components: {
-        
-  },
-
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      text1: "",
-      num1: 0,
-      sel1: "0",
-      chk1: false,
-      msg: ""
-    };
-  },
-
-  methods: {
-
-    doAction: function () {
-
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-
-    },
-
-  },
-};
+onMounted(() => {
+  lettersRef.value?.focus()
+})
 
 </script>
-
-<style scoped>
-</style>

@@ -1,398 +1,350 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('colorpicker.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="card mb-2"
-        v-html="$t('colorpicker.long')"
-      />
-      <div class="card card-body mb-2">
-        <div class="h4 card-title">{{ $t('labels.selectfile') }}</div>
-        <input class="form-control mb-2" ref="file" type="file" accept="image/*" @change="selectFile" />
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div class="card flex-row">
-        <div
-          id="preview"
-          class="col-9"
-        >
-          <canvas
-            id="canvas"
-            @click="selColor"
-          />
+
+  <header class="page-header">
+    <h1>{{ $t('colorpicker.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('colorpicker.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-group-vertical">
+          <label>{{ $t('labels.selectfile') }}</label>
+          <input
+            type="file"
+            ref="fileInput"
+            class="form-control"
+            @change="selectFile"
+          >
         </div>
-        <div class="col-3">
-          <table class="table table-sm table-borderless">
-            <tr>
-              <td colspan="2" class="subhead" >
-                {{ $t('colorpicker.selcolor') }}
-              </td>
-            </tr>
-            <tr>
-              <td
-                id="selcolor"
-                colspan="2"
-                style="height: 50px"
-              />
-            </tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.rgbval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colors.red') }}</td><td>{{ slr }}</td></tr>
-            <tr><td>{{ $t('colors.green') }}</td><td>{{ slg }}</td></tr>
-            <tr><td>{{ $t('colors.blue') }}</td><td>{{ slb }}</td></tr>
-            <tr><td>{{ $t('colorpicker.alpha') }}</td><td>{{ sla }}</td></tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.hexval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colorpicker.hex') }}</td><td>{{ slx }}</td></tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.hslval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue }}</td></tr>
-            <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat }}</td></tr>
-            <tr><td>{{ $t('colorpicker.lum') }}</td><td>{{ lum }}</td></tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.hsvval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue2 }}</td></tr>
-            <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat2 }}</td></tr>
-            <tr><td>{{ $t('colorpicker.bri') }}</td><td>{{ bri }}</td></tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.cmykval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c }}</td></tr>
-            <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m }}</td></tr>
-            <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y }}</td></tr>
-            <tr><td>{{ $t('colors.black') }}</td><td>{{ k }}</td></tr>
-            <tr>
-              <td
-                colspan="2"
-                class="subhead"
-              >
-                {{ $t('colorpicker.cmyval') }}
-              </td>
-            </tr>
-            <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c2 }}</td></tr>
-            <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m2 }}</td></tr>
-            <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y2 }}</td></tr>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
+      <VCard :title="$t('labels.result')">
+        <div class="form-horizontal">
+          <label>{{ $t('colorpicker.selcolor') }}</label>
+          <span
+            ref="selColorBox"
+            colspan="2"
+            style="height: 50px;"
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </div>
+        <div class="table-responsive">
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.rgbval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colors.red') }}</td><td>{{ slr }}</td></tr>
+              <tr><td>{{ $t('colors.green') }}</td><td>{{ slg }}</td></tr>
+              <tr><td>{{ $t('colors.blue') }}</td><td>{{ slb }}</td></tr>
+              <tr><td>{{ $t('colorpicker.alpha') }}</td><td>{{ sla }}</td></tr>
+            </tbody>
+          </table>
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.hexval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colorpicker.hex') }}</td><td>{{ slx }}</td></tr>
+            </tbody>
+          </table>
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.hslval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue }}°</td></tr>
+              <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat }}</td></tr>
+              <tr><td>{{ $t('colorpicker.lum') }}</td><td>{{ lum }}</td></tr>
+            </tbody>
+          </table>
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.hsvval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue2 }}°</td></tr>
+              <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat2 }}</td></tr>
+              <tr><td>{{ $t('colorpicker.bri') }}</td><td>{{ bri }}</td></tr>
+            </tbody>
+          </table>
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.cmykval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c }}</td></tr>
+              <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m }}</td></tr>
+              <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y }}</td></tr>
+              <tr><td>{{ $t('colors.black') }}</td><td>{{ k }}</td></tr>
+            </tbody>
+          </table>
+          <table class="p-table-small mb-2">
+            <thead>
+              <tr>
+                <th colspan="2" class="subhead">
+                  {{ $t('colorpicker.cmyval') }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c2 }}</td></tr>
+              <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m2 }}</td></tr>
+              <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y2 }}</td></tr>
+            </tbody>
           </table>
         </div>
-      </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard title="Preview">
+        <canvas
+          ref="canvas"
+          @mousedown="selColor"
+        />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
-  name: 'ColorPicker',
+defineOptions({
+  name: 'ColorPicker'
+})
 
-  data: function() {
-    return {
-      fileurl: "",
-      errormsg: "",
-      ctx: null,
-      img: null,
-      slr: 0, 
-      slg: 0, 
-      slb: 0, 
-      sla: 0,
-      slx: "#",
-      hue: 0,
-      sat: 0,
-      lum: 0,
-      hue2: 0,
-      sat2: 0,
-      bri: 0,
-      c: 0,
-      m: 0,
-      y: 0,
-      k: 0,
-      c2: 0,
-      m2: 0,
-      y2: 0
+const { t } = useI18n()
+
+// --- Template Refs ---
+const fileInput = ref(null)
+const canvas = ref(null)
+const selColorBox = ref(null)
+
+// --- State ---
+const errormsg = ref("")
+const slr = ref(0)
+const slg = ref(0)
+const slb = ref(0)
+const sla = ref(0)
+const slx = ref("#")
+const hue = ref(0)
+const sat = ref(0)
+const lum = ref(0)
+const hue2 = ref(0)
+const sat2 = ref(0)
+const bri = ref(0)
+const c = ref(0)
+const m = ref(0)
+const y = ref(0)
+const k = ref(0)
+const c2 = ref(0)
+const m2 = ref(0)
+const y2 = ref(0)
+
+// Internal variables (non-reactive or used for DOM)
+let ctx = null
+let img = null
+
+onMounted(() => {
+  // Set focus on file input
+  fileInput.value?.focus()
+
+  // Initialize Canvas
+  if (canvas.value) {
+    ctx = canvas.value.getContext('2d')
+    const rect = canvas.value.getBoundingClientRect()
+    canvas.value.width = rect.width
+    canvas.value.height = rect.width // Keep it square as per original logic
+  }
+})
+
+// --- Helper Methods ---
+
+const rgbToHsl = (r, g, b) => {
+  const rf = r / 255, gf = g / 255, bf = b / 255
+  const min = Math.min(rf, gf, bf), max = Math.max(rf, gf, bf)
+  let l = Math.round((max + min) / 2 * 100)
+  let s = 0, h = 0
+
+  if (min !== max) {
+    s = l <= 50 ? (max - min) / (max + min) : (max - min) / (2.0 - max - min)
+    s = Math.round(s * 100)
+    if (rf === max) h = (gf - bf) / (max - min)
+    if (gf === max) h = 2.0 + (bf - rf) / (max - min)
+    if (bf === max) h = 4.0 + (rf - gf) / (max - min)
+    h = Math.round(h * 60)
+    if (h < 0) h += 360
+  }
+  return { h, s, l }
+}
+
+const rgbToHsv = (r, g, b) => {
+  const rf = r / 255, gf = g / 255, bf = b / 255
+  const min = Math.min(rf, gf, bf), max = Math.max(rf, gf, bf)
+  let s = 0, h = 0
+
+  if (min !== max) {
+    s = (max - min) / max
+    s = Math.round(s * 100)
+    if (rf === max) h = (gf - bf) / (max - min)
+    if (gf === max) h = 2.0 + (bf - rf) / (max - min)
+    if (bf === max) h = 4.0 + (rf - gf) / (max - min)
+    h = Math.round(h * 60)
+    if (h < 0) h += 360
+  }
+  return { h, s, v: Math.round(max * 100) }
+}
+
+const rgbToCmy = (r, g, b) => {
+  c2.value = Math.round((1 - r / 255) * 100) + "%"
+  m2.value = Math.round((1 - g / 255) * 100) + "%"
+  y2.value = Math.round((1 - b / 255) * 100) + "%"
+}
+
+const rgbToCmyk = (r, g, b) => {
+  const rf = r / 255, gf = g / 255, bf = b / 255
+  const kVal = 1 - Math.max(rf, gf, bf)
+  if (kVal === 1) {
+    c.value = m.value = y.value = "0%"
+  } else {
+    c.value = Math.round((1 - rf - kVal) / (1 - kVal) * 100) + "%"
+    m.value = Math.round((1 - gf - kVal) / (1 - kVal) * 100) + "%"
+    y.value = Math.round((1 - bf - kVal) / (1 - kVal) * 100) + "%"
+  }
+  k.value = Math.round(kVal * 100) + "%"
+}
+
+const drawImageScaled = (image) => {
+  const cvs = canvas.value
+  const hRatio = cvs.width / image.width
+  const vRatio = cvs.height / image.height
+  const ratio = Math.min(hRatio, vRatio)
+  ctx.clearRect(0, 0, cvs.width, cvs.height)
+  ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width * ratio, image.height * ratio)
+}
+
+// --- Event Handlers ---
+
+const selColor = (event) => {
+  if (!ctx) return
+
+  // Adjust for CSS scaling vs Canvas coordinate system
+  const x = Math.floor(event.offsetX * canvas.value.width / canvas.value.clientWidth)
+  const y = Math.floor(event.offsetY * canvas.value.height / canvas.value.clientHeight)
+
+  const pixel = ctx.getImageData(x, y, 1, 1)
+  const data = pixel.data
+
+  // Update Color Preview
+  const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`
+  if (selColorBox.value) {
+    selColorBox.value.style.background = rgba
+  }
+
+  // RGB values
+  slr.value = data[0]
+  slg.value = data[1]
+  slb.value = data[2]
+  sla.value = (data[3] / 255).toFixed(4)
+
+  // Hex
+  slx.value = "#" + data[0].toString(16).padStart(2, '0') + 
+                  data[1].toString(16).padStart(2, '0') + 
+                  data[2].toString(16).padStart(2, '0')
+
+  // HSL
+  const hsl = rgbToHsl(data[0], data[1], data[2])
+  hue.value = hsl.h
+  sat.value = hsl.s + "%"
+  lum.value = hsl.l + "%"
+
+  // HSV
+  const hsv = rgbToHsv(data[0], data[1], data[2])
+  hue2.value = hsv.h
+  sat2.value = hsv.s + "%"
+  bri.value = hsv.v + "%"
+
+  // CMYK / CMY
+  rgbToCmyk(data[0], data[1], data[2])
+  rgbToCmy(data[0], data[1], data[2])
+}
+
+const selectFile = (event) => {
+  errormsg.value = ""
+  const input = event.target
+
+  if (input.files && input.files[0]) {
+    img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.src = URL.createObjectURL(input.files[0])
+
+    img.onerror = () => {
+      errormsg.value = t('errors.loadingimage')
     }
-  },
 
-  mounted: function() {
-
-    // Set focus on file input
-    this.$refs.file.focus();
-
-    this.canvas = document.getElementById('canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.canvas.width = this.canvas.getBoundingClientRect().width
-    this.canvas.height = this.canvas.width;
-
-  },
-
-  methods: {
-
-    rgbToHsl: function (r, g, b) {
-
-      // Source https://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
-
-      let rf = r / 255;
-      let gf = g / 255;
-      let bf = b / 255;
-      let min = Math.min(rf, gf, bf);
-      let max = Math.max(rf, gf, bf);
-
-      let l = Math.round((max + min) / 2 * 100)
-      let s = 0;
-      let h = 0;
-
-      if (min == max) {
-
-        // Min == max there is no saturation
-        s = 0;
-        h = 0;
-
-      } else {
-
-        // Min != max, so there is saturation
-        
-        if (l <= 50) {
-          s = (max-min)/(max+min)
-        } else {
-          s = (max-min)/(2.0-max-min)
-        }
-        s = Math.round(s*100);
-
-        if (rf == max) h = (gf - bf)/(max - min);
-        if (gf == max) h = 2.0 + (bf - rf)/(max-min);
-        if (bf == max) h = 4.0 + (rf - gf)/(max-min);
-        h = h * 60;
-        h = Math.round(h);
-        if (h < 0) h += 360;
-
+    img.onload = () => {
+      try {
+        drawImageScaled(img)
+      } catch (err) {
+        errormsg.value = t('colorpicker.error')
+        console.log(err)
       }
-
-      return {
-        h: h,
-        s: s,
-        l: l
-      }
-
-    },
-
-    rgbToHsv: function (r, g, b) {
-
-      // Source https://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
-
-      let rf = r / 255;
-      let gf = g / 255;
-      let bf = b / 255;
-      let min = Math.min(rf, gf, bf);
-      let max = Math.max(rf, gf, bf);
-
-      let s = 0;
-      let h = 0;
-
-      if (min == max) {
-
-        // Min == max there is no saturation
-        s = 0;
-        h = 0;
-
-      } else {
-
-        // Min != max, so there is saturation
-        
-        s = (max-min)/max;
-        s = Math.round(s*100);
-
-        if (rf == max) h = (gf - bf)/(max - min);
-        if (gf == max) h = 2.0 + (bf - rf)/(max-min);
-        if (bf == max) h = 4.0 + (rf - gf)/(max-min);
-        h = h * 60;
-        h = Math.round(h);
-        if (h < 0) h += 360;
-
-      }
-
-      return {
-        h: h,
-        s: s,
-        v: Math.round(max*100)
-      }
-
-    },
-
-     rgbToCmy: function (r, g, b) {
-
-      let rf = r/255;
-      let gf = g/255;
-      let bf = b/255;
-
-      this.c2 = Math.round( (1 - rf) * 100) + "%";
-      this.m2 = Math.round( (1 - gf) * 100) + "%";
-      this.y2 = Math.round( (1 - bf) * 100) + "%";
-
-    },
-
-    rgbToCmyk: function (r, g, b) {
-
-      let rf = r/255;
-      let gf = g/255;
-      let bf = b/255;
-      let k = 1 - Math.max(rf,gf,bf);
-
-      this.c = Math.round( (1 - rf - k) / (1 - k) * 100) + "%";
-      this.m = Math.round( (1 - gf - k) / (1 - k) * 100) + "%";
-      this.y = Math.round( (1 - bf - k) / (1 - k) * 100) + "%";
-      this.k = Math.round( k * 100) + "%";
-
-    },
-
-    selColor: function (event) {
-
-      // x and y are in CSS pixels, but the canvas still has the original drawing size
-      // (unless we would implement resize drawing)
-      // Read https://webglfundamentals.org/webgl/lessons/webgl-resizing-the-canvas.html
-
-      let x = Math.floor(event.offsetX * this.canvas.width / this.canvas.clientWidth);
-      let y = Math.floor(event.offsetY * this.canvas.height / this.canvas.clientHeight);
-
-      let pixel = this.ctx.getImageData(x, y, 1, 1);
-      let data = pixel.data;
-      let destination = document.getElementById('selcolor');
-
-      // Set color in table
-      const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
-      destination.style.background = rgba;
-
-      // RGB values
-      this.slr = data[0];
-      this.slg = data[1];
-      this.slb = data[2];
-      this.sla = (data[3]/255).toFixed(4);
-
-      // RGB value as hex
-      this.slx = "#"+ data[0].toString(16).padStart(2,'0') + data[1].toString(16).padStart(2,'0') + data[2].toString(16).padStart(2,'0');
-
-      // HSL values
-      let hsl = this.rgbToHsl (data[0], data[1], data[2]);
-      this.hue = hsl.h;
-      this.sat = hsl.s + "%";
-      this.lum = hsl.l + "%";
-      
-      // HSV values
-      let hsv = this.rgbToHsv (data[0], data[1], data[2]);
-      this.hue2 = hsv.h;
-      this.sat2 = hsv.s + "%";
-      this.bri  = hsv.v + "%";
-
-      // CMYK values
-      this.rgbToCmyk (data[0], data[1], data[2]);
-      this.rgbToCmy (data[0], data[1], data[2]);
-      
-    },
-
-    drawImageScaled: function (img) {
-
-      let canvas = this.ctx.canvas ;
-      let hRatio = canvas.width  / img.width    ;
-      let vRatio =  canvas.height / img.height  ;
-      let ratio  = Math.min ( hRatio, vRatio );
-      // let centerShift_x = ( canvas.width - img.width*ratio ) / 2;
-      let centerShift_x = 0;
-      // let centerShift_y = ( canvas.height - img.height*ratio ) / 2;  
-      let centerShift_y = 0;
-      this.ctx.clearRect(0,0,canvas.width, canvas.height);
-      this.ctx.drawImage(img, 0, 0, img.width, img.height,
-                         centerShift_x, centerShift_y, img.width*ratio, img.height*ratio); 
-
-    },
-
-    // Triggered when the file is loaded
-    selectFile: function (event) {
-
-      // Reset error flag
-      this.errormsg = "";
-
-      // Get the input file
-      let input = event.target;
-
-      // Ensure that you have a file before attempting to read it
-      if (input.files && input.files[0]) {
-
-        // create a new image
-        this.img = new Image();
-        this.img.crossOrigin = 'anonymous';
-        this.img.src = URL.createObjectURL(input.files[0]);
-
-        // Define a callback function to run, when image has errors loading
-        this.img.onerror = () => {
-          this.errormsg = this.$t('errors.loadingimage')        
-        }
-
-        // Define a callback function to run, when image has loaded finishes its job
-        this.img.onload = () => {
-
-            try {
-
-              this.drawImageScaled(this.img);
-
-            } catch(err) {
-
-              this.errormsg = this.$t('colorpicker.error')
-            
-            }
-        }
-
-      }
-    },
-
+    }
   }
 }
 </script>
 
 <style scoped>
 
+.card-grid {
+   grid-template-columns: 1fr;
+}
+
+@media (min-width: 750px) {
+  .card-grid {
+    grid-template-columns: 33% 1fr;
+  }
+}
 
 .subhead {
   font-weight: bold;
-  color: #09776E;
+  color: var(--primary-green);
 }
 
 canvas {
   width: 100%;
   height: auto;
-  padding-right: 15px;
+  border-radius: 10px;
+  cursor: crosshair;
 }
 
 </style>

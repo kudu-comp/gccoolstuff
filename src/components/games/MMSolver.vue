@@ -1,314 +1,251 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('mmsolver.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('mmsolver.long')"
-      />
-      <div class="row">
-        <label
-          for="npin"
-          class="form-label sm-size mb-2"
-        >{{ $t('mmsolver.npin') }}</label>
-        <select
-          id="npin"
-          ref="npin"
-          v-model="npin"
-          class="form-control sm-size mb-2"
-        >
-          <option value="3">
-            3
-          </option>
-          <option value="4">
-            4
-          </option>
-          <option value="5">
-            5
-          </option>
-          <option value="6">
-            6
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          for="ncolor"
-          class="form-label sm-size mb-2"
-        >{{ $t('mmsolver.ncolor') }}</label>
-        <select
-          id="ncolor"
-          v-model="ncolor"
-          class="form-control sm-size mb-2"
-        >
-          <option value="4">
-            4
-          </option>
-          <option value="5">
-            5
-          </option>
-          <option value="6">
-            6
-          </option>
-          <option value="7">
-            7
-          </option>
-          <option value="8">
-            8
-          </option>
-          <option value="9">
-            9
-          </option>
-        </select>
-      </div>
-      <div class="form-check">
-        <input
-          id="unique"
-          v-model="unique"
-          type="checkbox"
-          class="form-check-input"
-        >
-        <label
-          for="unique"
-          class="form-check-label"
-        >{{ $t('mmsolver.unique') }}</label>
-      </div>
-      <div class="mb-2">
-        <table class="table-sm table-borderless">
+
+  <header class="page-header">
+    <h1>{{ $t('mmsolver.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('mmsolver.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <label>{{ $t('mmsolver.npin') }}</label>
+          <input type="number" v-model="npin" min="3" max="6" ref="npinInput">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('mmsolver.ncolor') }}</label>
+          <input type="number" v-model="ncolor" min="3" max="9">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="unique">
+          <span class="checkmark"></span>
+          {{ $t('mmsolver.unique') }}
+        </label>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+       <div class="form-horizontal">
+        <table class="p-table-small">
           <thead>
             <tr>
-              <th scope="col">
-                {{ $t('mmsolver.pins') }}
-              </th>
-              <th scope="col">
-                {{ $t('mmsolver.pos') }}
-              </th>
-              <th scope="col">
-                {{ $t('mmsolver.col') }}
-              </th>
+              <th scope="col"> {{ $t('mmsolver.pins') }} </th>
+              <th scope="col"> {{ $t('mmsolver.pos') }} </th>
+              <th scope="col"> {{ $t('mmsolver.col') }} </th>
             </tr>
           </thead>
-          <tr
-            v-for="(str, index) in pins"
-            :key="index"
-          >
-            <td>
-              <input
-                v-model="pins[index]"
-                type="text"
-                size="4"
-                min="1"
-                max="999999"
-                class="form-control"
-              >
-            </td>
-            <td>
-              <input
-                v-model="pos[index]"
-                type="number"
-                size="1"
-                min="1"
-                max="9"
-                class="form-control"
-              >
-            </td>
-            <td>
-              <input
-                v-model="col[index]"
-                type="number"
-                size="1"
-                min="1"
-                max="9"
-                class="form-control"
-              >
-            </td>
-          </tr>
+          <tbody>
+            <tr v-for="i in maxhints" :key="i">
+              <td>
+                <input v-model="pinsArr[i-1]" type="text" placeholder="Pins" style="width: 150px;">
+              </td>
+              <td>
+                <input v-model.number="posArr[i-1]" type="number" style="width: 60px;">
+              </td>
+              <td>
+                <input v-model.number="colArr[i-1]" type="number" style="width: 60px;">
+              </td>
+            </tr>
+          </tbody>
         </table>
-      </div>
-      <button id="solve" class="btn sm-size mb-2 me-2" @click="solveMM">
-        <i class="fa-solid fa-puzzle-piece me-2"></i>{{ $t('buttons.solve') }}
-      </button>
-      <button id="reset" class="btn sm-size mb-2" @click="resetMM">
-        {{ $t('buttons.reset') }}
-      </button>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-show="solved"
-        class="mt-2"
-      >
-        <span style="font-weight: bold;">
-          {{ $t('sudokusolv.thereare') }} {{ results.length }} {{ $t('sudokusolv.sols') }}
-        </span>
-        <div class="form-inline mt-2 mb-2">
-          <select
-            id="listofresults"
-            v-model="selectedsolution"
-            size="10"
-            class="form-select"
-          >
-            <option
-              v-for="result in results"
-              :key="result"
-            >
-              {{ result }}
-            </option>
-          </select>
         </div>
-      </div>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button  class="btn btn-primary" @click="solveMM">
+            {{ $t('buttons.solve') }}
+          </button>
+          <button class="btn btn-secondary" @click="resetMM">
+            {{ $t('buttons.reset') }}
+          </button>
+        </div>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-show="solved"
+          class="resultbox"
+        >
+          <h4>
+            {{ $t('sudokusolv.thereare') }} {{ results.length }} {{ $t('sudokusolv.sols') }}
+          </h4>
+          <template v-for="r in results">
+              {{ r }}<br>          
+          </template>
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-  name: 'MastermindSolver',
+defineOptions({
+  name: 'MastermindSolver'
+})
 
-  data: function() {
-    return {
-      maxhints: 12,
-      npin : 4,
-      ncolor : 6,
-      unique: false,
-      // hints
-      pins:[],
-      pos: [],
-      col: [],
-      nhints: 0,
-      errormsg: "",
-      results: [],
-      selectedsolution: "",
-      solved: false
+const { t } = useI18n()
+
+// --- State ---
+const maxhints = 12
+const npin = ref(4)
+const ncolor = ref(6)
+const unique = ref(false)
+
+const pinsArr = ref([])
+const posArr = ref([])
+const colArr = ref([])
+const nhints = ref(0)
+
+const errormsg = ref("")
+const results = ref([])
+const solved = ref(false)
+
+// --- Template Ref ---
+const npinInput = ref(null)
+
+// --- Methods ---
+
+const resetMM = () => {
+  pinsArr.value = Array(maxhints).fill("")
+  posArr.value = Array(maxhints).fill(0)
+  colArr.value = Array(maxhints).fill(0)
+  results.value = []
+  solved.value = false
+  errormsg.value = ""
+}
+
+/**
+ * Validates a candidate solution against the hints provided by user
+ */
+const checkCandidate = (candidate) => {
+  for (let i = 0; i < nhints.value; i++) {
+    // Make a mutable copy of the hint pins for color matching
+    let tempHint = pinsArr.value[i].split("")
+    let candidateArr = candidate.split("")
+
+    let blackMatches = 0
+    let whiteMatches = 0
+
+    // 1. Check for Black Matches (Position and Color)
+    for (let j = 0; j < npin.value; j++) {
+      if (tempHint[j] === candidateArr[j]) {
+        blackMatches++
+        tempHint[j] = "x" // Mark as used
+        candidateArr[j] = "z" // Mark as used
+      }
     }
-  },
+    if (blackMatches !== posArr.value[i]) return false
 
-  mounted: function() {
-    this.$refs.npin.focus();
-    this.resetMM();
-  },
-
-  methods: {
-
-    // Reset the board
-    resetMM: function() {
-      for(let i = 0; i < this.maxhints; i++) {
-        this.pins[i] = "";
-        this.pos[i] = 0;
-        this.col[i] = 0;
+    // 2. Check for White Matches (Color only)
+    for (let j = 0; j < npin.value; j++) {
+      if (candidateArr[j] === "z") continue
+      
+      let foundIdx = tempHint.indexOf(candidateArr[j])
+      if (foundIdx >= 0) {
+        whiteMatches++
+        tempHint[foundIdx] = "y" // Mark as used
       }
-    },
+    }
+    if (whiteMatches !== colArr.value[i]) return false
+  }
 
-    checkpins: function check (pins) {
+  return true
+}
 
-      for (let i=0; i < this.nhints; i++) {
+/**
+ * Brute force recursive generator
+ */
+const generatePins = (currentString) => {
+  // If result set gets too large, stop to prevent crash
+  if (results.value.length > 5000) return
 
-        // Reset pins for new match
-        let temp = this.pins[i].split("");
-
-        // Position and color match
-        let pos = 0;
-        for (let j=0; j < this.npin; j++) {
-          if (temp[j] == pins[j]) {
-            pos++;
-            // Avoid counting again for color match
-            temp[j] = "x";
-          }
-        }
-        if (pos != this.pos[i]) return false;
-
-        // Color only match
-        let col = 0;
-        for (let j=0; j < this.npin; j++) {
-          // Numbers who have been matched on position must be skipped
-          if (temp[j] == 'x') continue;
-          let idx = temp.indexOf(pins[j]);
-          if (idx >= 0) {
-            col++;
-            // Avoid counting again, do not set to x because that assumed it was matched on position
-            temp[idx] = "y";
-          }
-        }
-        if (col != this.col[i]) return false;
-
-      }
-
-      // All tests passed
-      return true;
-
-    },
-
-    generatePins: function gen(s, np, nc, uniq, check, res) {
-
-      // While the string is not the required length generate
-      // recursive function calls
-      if (s.length < np) {
-        for (let p=1; p <= nc; p++) {
-          if (uniq && s.indexOf(p) >= 0) continue;
-          gen(s + p, np, nc, uniq, check, res);
-        }
-      } else {
-        if (check(s)) {
-          res.push(s);
-        }
-      }
-
-    },
-
-    // solve the mastermind puzzle
-    solveMM : function () {
-
-      // reset
-      this.errormsg = "";
-      this.results = [];
-      this.solved = false;
-
-      // Check the hints
-      for (let i=0; i < this.maxhints; i++) {
-
-        // On first empty hint stop and set number of hints
-        if (this.pins[i].length === 0) {
-          this.nhints = i;
-          break;
-        }
-
-        // Check if #pins is correct
-        if (this.pins[i].length !== this.npin) {
-          this.errormsg = this.$t('mmsolver.invalidhint1');
-          return;
-        }
-
-        // Check if pins are correct colors
-        for (let j=0; j < this.npin; j++) {
-          if (this.pins[i][j] < 1 ||  this.pins[i][j] > this.ncolor) {
-            this.errormsg = this.$t('mmsolver.invalidhint2');
-            return;
-          }
-        }
-
-        // Check if pos and col are okay
-        if ( parseInt(this.pos[i]) + parseInt(this.col[i]) > this.ncolor ) {
-          this.errormsg = this.$t('mmsolver.invalidhint3');
-          return;
-        }
-      }
-
-      // Solve the puzzle
-      this.generatePins("", this.npin, this.ncolor, this.unique, this.checkpins, this.results);
-
-      // Print the results
-      this.solved = true;
-
-    },
+  if (currentString.length < npin.value) {
+    for (let c = 1; c <= ncolor.value; c++) {
+      const char = c.toString()
+      // If unique is required, check if color is already used in this string
+      if (unique.value && currentString.indexOf(char) >= 0) continue
+      
+      generatePins(currentString + char)
+    }
+  } else {
+    if (checkCandidate(currentString)) {
+      results.value.push(currentString)
+    }
   }
 }
+
+/**
+ * Main Solve Action
+ */
+const solveMM = () => {
+  // Reset outputs
+  errormsg.value = ""
+  results.value = []
+  solved.value = false
+  nhints.value = 0
+
+  // 1. Validate the hints table
+  for (let i = 0; i < maxhints; i++) {
+    const currentGuess = pinsArr.value[i].trim()
+
+    // Stop at the first empty row
+    if (currentGuess.length === 0) {
+      nhints.value = i
+      break
+    }
+    // Final row reached
+    if (i === maxhints - 1) nhints.value = maxhints
+
+    // Check guess length
+    if (currentGuess.length !== npin.value) {
+      errormsg.value = t('mmsolver.invalidhint1')
+      return
+    }
+
+    // Check color range
+    for (let char of currentGuess) {
+      const val = parseInt(char)
+      if (isNaN(val) || val < 1 || val > ncolor.value) {
+        errormsg.value = t('mmsolver.invalidhint2')
+        return
+      }
+    }
+
+    // Check if black + white matches exceed pin count
+    if (posArr.value[i] + colArr.value[i] > npin.value) {
+      errormsg.value = t('mmsolver.invalidhint3')
+      return
+    }
+  }
+
+  if (nhints.value === 0) {
+    errormsg.value = "Please enter at least one hint."
+    return
+  }
+
+  // 2. Run solver
+  generatePins("")
+  solved.value = true
+}
+
+// --- Lifecycle ---
+onMounted(() => {
+  resetMM()
+  npinInput.value?.focus()
+})
 </script>
 
 <style scoped>
+.p-table-small input {
+  padding: 0.4rem;
+  font-size: 0.9rem;
+}
 </style>

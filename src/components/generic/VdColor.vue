@@ -1,13 +1,8 @@
 <template>
-  <label
-    class="form-label sm-size"
-    for="color"
-  >
+  <label>
     <slot name="label" />
   </label>
   <select
-    id="color"
-    class="form-select sm-size"
     :value="color"
     @input="updateColor($event.target.value)"
   >

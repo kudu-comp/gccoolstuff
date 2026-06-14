@@ -1,225 +1,190 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('anagrams.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('anagrams.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('anagrams.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+        <div class="form-horizontal mt-4">
+          <label>{{ $t('anagrams.letters') }}</label>
+          <input type="text" v-model="letters" ref="lettersRef">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('anagrams.maxw') }}</label>
+          <input type="number" v-model="maxw">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('anagrams.minl') }}</label>
+          <input type="number" v-model="minl">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('anagrams.maxl') }}</label>
+          <input type="number" v-model="maxl">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <button :disabled="dictloading" class="btn btn-primary" @click="runAnagramSearch">
+            {{$t('buttons.search')}}
+          </button>
+        </div>
+      </VCard>
     </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('anagrams.long')"
-      />
-      <!-- Form fields -->
-      <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
-      <div class="row mt-2">
-        <label
-          class="form-label mb-2 md-size"
-          for="letters"
-        >{{$t('anagrams.letters')}}</label>
-        <input
-          id="letters"
-          v-model="letters"
-          type="text"
-          class="form-control md-size mb-2 me-2"
-          autofocus
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="maxw"
-        >{{$t('anagrams.maxw')}}</label>
-        <input
-          id="maxw"
-          v-model="maxw"
-          type="number"
-          class="form-control md-size mb-2 me-2"
-          min="1"
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="minl"
-        >{{$t('anagrams.minl')}}</label>
-        <input
-          id="minl"
-          v-model="minl"
-          type="number"
-          class="form-control md-size mb-2 me-2"
-          min="1"	
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label mb-2 md-size"
-          for="maxl"
-        >{{$t('anagrams.maxl')}}</label>
-        <input
-          id="maxl"
-          v-model="maxl"
-          type="number"
-          class="form-control md-size mb-2 me-2"
-          min="1"	
-        >
-      </div>
-      <!-- Action buttons -->
-      <button :disabled="dictloading" class="btn sm-size mb-2" id="btn1" @click="anagrams()"><i class="fa-solid fa-search me-2"></i>{{$t('buttons.search')}}</button>
-      <!-- Error message -->
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" v-html="result" />
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="result" class="card resultbox" v-html="result" />
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
 
+<script setup>
+import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 import VLanguage from "@/components/generic/VLanguage.vue";
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: "Anagrams"
+});
 
-  name: "Anagrams",
+const { t } = useI18n();
 
-  components: {
-    VLanguage  
-  },
+// --- State ---
+const result = ref("");
+const errormsg = ref("");
+const letters = ref("");
+const maxw = ref(1);
+const minl = ref(1);
+const maxl = ref(999);
+const dict = ref({});
+const dictloading = ref(true);
+const finds = ref([]);
+const base = ref("");
+const maxcnt = 2500;
+const lettersRef=ref(null)
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      letters: "",
-      maxw: 1,
-      minl: 1,
-      maxl: 999,
-      dict: {},
-      dictloading: true,
-      finds: [],
-      maxcnt: 2500,
-      base: ""
-    };
-  },
+onMounted(() => {
+  lettersRef.value?.focus()
+})
+// --- Logic Methods ---
 
-  methods: {
+/**
+ * Recursive function to try permutations and word breaks
+ */
+const nextTry = (anagram, wordbreaks, start) => {
+  // Check if we have too many finds
+  if (finds.value.length > maxcnt) {
+    errormsg.value = t("anagrams.toomany");
+    return;
+  }
 
-    nextTry: function (anagram, wordbreaks, start) {
+  // Build the string for the current anagram segment
+  let hword = "";
+  for (let i = start; i < anagram.length; i++) {
+    hword += base.value[anagram[i]];
+  }
 
-      // Check if we have too many finds
-      if (this.finds.length > this.maxcnt) {
-        this.errormsg = this.$t("anagrams.toomany");
-        return;
-      }
+  // Find the anagram segment in dictionary
+  const fullmatch = dict.value.findWord(hword);
 
-      // Build the string for the anagram
-      let hword = "";
-      for (let i = start; i < anagram.length; i++)
-        hword += this.base[anagram[i]];
+  // Check if the anagram is at least the start of a word
+  const partmatch = fullmatch.word
+    ? dict.value.compStr(
+        dict.value.cleanStr(fullmatch.word.slice(0, hword.length)),
+        dict.value.cleanStr(hword)
+      ) === 0
+    : true;
 
-      // Find the anagram
-      let fullmatch = this.dict.findWord(hword);
-      // Check if the anagram is the start of a word, empty always good
-      let partmatch = fullmatch.word
-        ? this.dict.compStr(
-            this.dict.cleanStr(fullmatch.word.slice(0, hword.length)),
-            this.dict.cleanStr(hword)
-          ) === 0
-        : true;
+  if (!partmatch) return;
 
-      // What we got here is not even the start of a word
-      if (!partmatch) return;
-
-      // We got a find
-      if (
-        fullmatch.fnd &&
-        anagram.length === this.base.length &&
-        hword.length >= this.minl
-      ) {
-        hword = "";
-        // Make the anagram
-        for (let j = 0; j < this.base.length; j++)
-          hword += this.base[anagram[j]];
-        // Insert spaces
-        for (let j = 1; j < wordbreaks.length; j++) {
-          hword =
-            hword.slice(0, wordbreaks[j]) + " " + hword.slice(wordbreaks[j]);
-        }
-        // Add result to finds
-        this.finds.push(hword);
-        return;
-      }
-
-      // If max word length is exceeded, stop
-      if (hword.length >= this.maxl) return;
-
-      // What we got is the start of a word or full word
-      // If multiple words start with a new word
-      if (
-        fullmatch.fnd &&
-        this.maxw > wordbreaks.length &&
-        hword.length >= this.minl
-      ) {
-        wordbreaks.push(anagram.length);
-        for (let i = 0; i < this.base.length; i++) {
-          // For permutations without replacements skip i if already used
-          if (anagram.indexOf(i) >= 0) continue;
-          anagram.push(i);
-          this.nextTry(anagram, wordbreaks, anagram.length - 1);
-          anagram.pop();
-        }
-        wordbreaks.pop();
-      }
-
-      // Continue for longer words
-      for (let i = 0; i < this.base.length; i++) {
-        // For permutations without replacements skip i if already used
-        if (anagram.indexOf(i) >= 0) continue;
-        anagram.push(i);
-        this.nextTry(anagram, wordbreaks, start);
-        anagram.pop();
-      }
-    },
-
-    anagrams: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-
-      // Anagrams
-      // First remove whitespace and diacretics from input
-      this.base = this.dict.cleanStr(this.letters.replace(/\s/g, ""));
-
-      // Start generating
-      this.finds = [];
-      for (let i = 0; i < this.base.length; i++) {
-        this.nextTry([i], [0], 0);
-      }
-      // this.nextTry([], [0], 0);
-
-      // Due to duplicate letters we get duplicate finds, remove those
-      let h2 = this.finds.filter(
-        (item, index) => this.finds.indexOf(item) === index
-      );
-      h2 = h2.sort();
-
-      // Print the finds
-      this.result = h2.length + this.$t("anagrams.wordsfound") + "<br><br>";
-      for (let f of h2) {
-        this.result += f + "<br>";
-      }
+  // We got a full anagram match
+  if (
+    fullmatch.fnd &&
+    anagram.length === base.value.length &&
+    hword.length >= minl.value
+  ) {
+    let finalString = "";
+    // Build the full sequence
+    for (let j = 0; j < base.value.length; j++) {
+      finalString += base.value[anagram[j]];
     }
+    // Insert spaces at word breaks (reverse order to keep indices valid)
+    for (let j = wordbreaks.length - 1; j >= 1; j--) {
+      finalString =
+        finalString.slice(0, wordbreaks[j]) + " " + finalString.slice(wordbreaks[j]);
+    }
+    finds.value.push(finalString);
+    return;
+  }
 
-  },
+  // If max individual word length is exceeded, stop this branch
+  if (hword.length >= maxl.value) return;
+
+  // Branching: If we found a word and haven't hit the max word count, try starting a new word
+  if (
+    fullmatch.fnd &&
+    maxw.value > wordbreaks.length &&
+    hword.length >= minl.value
+  ) {
+    wordbreaks.push(anagram.length);
+    for (let i = 0; i < base.value.length; i++) {
+      if (anagram.indexOf(i) >= 0) continue;
+      anagram.push(i);
+      nextTry(anagram, wordbreaks, anagram.length - 1);
+      anagram.pop();
+    }
+    wordbreaks.pop();
+  }
+
+  // Branching: Continue extending the current word
+  for (let i = 0; i < base.value.length; i++) {
+    if (anagram.indexOf(i) >= 0) continue;
+    anagram.push(i);
+    nextTry(anagram, wordbreaks, start);
+    anagram.pop();
+  }
 };
 
+/**
+ * Entry point for search
+ */
+const runAnagramSearch = () => {
+  // Reset
+  result.value = "";
+  errormsg.value = "";
+  finds.value = [];
+
+  if (!letters.value) return;
+
+  // Sanitize input using dictionary rules
+  base.value = dict.value.cleanStr(letters.value.replace(/\s/g, ""));
+
+  if (!base.value) return;
+
+  // Kick off recursion
+  for (let i = 0; i < base.value.length; i++) {
+    nextTry([i], [0], 0);
+  }
+
+  // Filter unique results and sort
+  const uniqueFinds = [...new Set(finds.value)].sort();
+
+  // Print results
+  let output = uniqueFinds.length + t("anagrams.wordsfound") + "<br><br>";
+  output += uniqueFinds.join("<br>");
+
+  result.value = output;
+};
 </script>
 
-<style scoped>
-</style>

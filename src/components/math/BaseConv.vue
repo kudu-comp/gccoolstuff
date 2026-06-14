@@ -1,164 +1,164 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('baseconv.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('baseconv.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('baseconv.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+          <label>{{ $t('baseconv.from') }}</label>
+          <input type="number" v-model="from" min="2" max="36">
+          <input type="text" v-model="fromstr">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('baseconv.to') }}</label>
+          <input type="number" v-model="to" min="2" max="36">
+          <input type="text" v-model="tostr">
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('baseconv.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label md-size mb-2"
-          for="from"
-        >{{ $t('baseconv.from') }}</label>
-        <input
-          id="from"
-          v-model="from"
-          type="number"
-          min="2"
-          max="36"
-          class="form-control sm-size mb-2"
+    <div class="card-stack">
+      <VCard :title="$t('labels.input')">
+        <textarea
+          ref="inputRef"
+          v-model="input"
+          :placeholder="$t('labels.message')"
+          rows="5"
+        />
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
         >
-        <div class="lg-size">
-          <input
-            id="fromstr"
-            v-model="fromstr"
-            type="text"
-            class="form-control mb-2"
-          >
+          {{ errormsg }}.
+        </p>          
+        <div class="button-row mt-2">
+          <button id="convert" class="btn btn-primary"  @click="toConvert">
+            {{ $t('buttons.convert') }}
+          </button>
         </div>
-      </div>
-      <div class="row">
-        <label
-          class="form-label md-size mb-2"
-          for="to"
-        >{{ $t('baseconv.to') }}</label>
-        <input
-          id="to"
-          v-model="to"
-          type="number"
-          min="2"
-          max="36"
-          class="form-control sm-size mb-2"
-        >
-        <div class="lg-size">
-          <input
-            id="tostr"
-            v-model="tostr"
-            type="text"
-            class="form-control mb-2"
-          >
+      </VCard>
+      <VCard :title="$t('labels.result')">     
+        <div class="card resultbox" v-if="result">
+          {{ result }}      
         </div>
-      </div>
-      <button id="convert" class="btn mb-2" @click="toConvert()">
-        {{ $t('buttons.convert') }}
-      </button>
-      <textarea
-        id="input"
-        ref="input"
-        v-model="input"
-        class="form-control mb-2"
-        placeholder="input"
-        rows="2"
-      />
-      <div class="resultbox" v-if="result">
-        {{ result }}      
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg"
-      >
-        {{ errormsg }}
-      </p>
+      </VCard>
     </div>
   </div>
+
 </template>
 
-<script>
-export default {
-  name: 'MathBase',
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-  data: function () {
-    return {
-      input: "",
-      result: "",
-      errormsg: "",
-      fromstr: "",
-      tostr: "",
-      defstr: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      from: 2,
-      to: 10,
+defineOptions({
+  name: 'BaseConv'
+})
+
+const { t } = useI18n()
+
+// --- Constants ---
+const DEF_STR = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+// --- State ---
+const input = ref("")
+const result = ref("")
+const errormsg = ref("")
+const fromstr = ref("")
+const tostr = ref("")
+const from = ref(2)
+const to = ref(10)
+
+// --- Template Refs ---
+const inputRef = ref(null)
+
+onMounted(() => {
+  inputRef.value?.focus()
+})
+
+// --- Methods ---
+
+const toConvert = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
+  
+  const cleanFromStr = fromstr.value.trim()
+  const cleanToStr = tostr.value.trim()
+
+  // Validation: Check if custom symbol strings match the selected base lengths
+  if (
+    (cleanFromStr !== "" && cleanFromStr.length !== from.value) ||
+    (cleanToStr !== "" && cleanToStr.length !== to.value)
+  ) {
+    errormsg.value = t("baseconv.symbolserr")
+    return
+  }
+
+  if (!input.value) {
+    errormsg.value = t("errors.noinput")
+    return
+  }
+
+  // Parse numbers from input (find chunks of non-whitespace)
+  const nums = input.value.matchAll(/(\S+)/gi)
+  const mappingFrom = cleanFromStr.length > 0 ? cleanFromStr : DEF_STR
+  const mappingTo = cleanToStr.length > 0 ? cleanToStr : DEF_STR
+
+  let outputBuilder = ""
+
+  // Process all extracted number strings
+  for (const n of nums) {
+    let standardBaseStr = ""
+    const currentWord = n[0]
+
+    // 1. Convert input word from custom symbols to standard 0-9A-Z alphabet
+    for (const char of currentWord) {
+      const idx = mappingFrom.toUpperCase().indexOf(char.toUpperCase())
+      if (idx === -1) {
+        standardBaseStr = null
+        break
+      }
+      standardBaseStr += DEF_STR[idx]
     }
-  },
 
-  mounted: function() {
-    this.$refs.input.focus();
-  },
+    if (standardBaseStr === null) {
+      errormsg.value = t("errors.unknowninput")
+      outputBuilder += " error "
+      continue
+    }
 
-  methods: {
+    // 2. Perform the actual base conversion
+    // Parse from 'from' base to decimal, then to 'to' base string
+    const converted = parseInt(standardBaseStr, from.value).toString(to.value)
 
-    // Convert the base using the ciphertoolkit
-    toConvert: function() {
+    if (isNaN(parseInt(standardBaseStr, from.value))) {
+      errormsg.value = t("errors.unknowninput")
+      outputBuilder += " error "
+      continue
+    }
 
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      this.fromstr = this.fromstr.trim();
-      this.tostr = this.tostr.trim();
-
-      // Check input
-      if (
-        (this.fromstr !== "" && this.fromstr.length !== this.from) ||
-        (this.tostr !== "" && this.tostr.length !== this.to)
-      ) {
-        this.errormsg = this.$t("baseconv.symbolserr");
-        return;
+    // 3. Convert result string from standard alphabet back to custom symbols
+    let customBaseResult = ""
+    for (const char of converted) {
+      const idx = DEF_STR.indexOf(char.toUpperCase())
+      if (idx !== -1 && mappingTo[idx]) {
+        customBaseResult += mappingTo[idx]
       }
-      if (!this.input) {
-        this.errormsg = this.$t("errors.noinput");
-        return;
-      }
+    }
 
-      // Parse numbers from input
-      let nums = this.input.matchAll(/(\S+)/gi);
-      let fromstr = this.fromstr.length > 0 ? this.fromstr : this.defstr;
-      let tostr = this.tostr.length > 0 ? this.tostr : this.defstr;
+    if (!customBaseResult) {
+      errormsg.value = t("errors.unknowninput")
+    } else {
+      outputBuilder += customBaseResult + " "
+    }
+  } 
 
-      // Process all numbers
-      for (let n of nums) {
-        // Convert input string from custom symbols to 0-9A-Z
-        let h = "";
-        for (let c of n[0]) {
-          h += this.defstr[fromstr.toUpperCase().indexOf(c.toUpperCase())];
-        }
-
-        // Convert
-        h = parseInt(h, this.from).toString(this.to);
-        if (isNaN(h)) {
-          this.errormsg = this.$t("errors.unknowninput");
-          this.result += " error ";
-          continue;
-        }
-        let h2 = "";
-
-        // Convert output string from 0-9A-Z to custom symbols
-        for (let c of h) {
-          h2 += tostr[this.defstr.indexOf(c.toUpperCase())];
-        }
-
-        if (!h2) {
-          this.errormsg = this.$t("errors.unknowninput");
-        } else {
-          // Print output
-          this.result += h2 + " ";
-        }
-      } 
-    },
-  },
+  result.value = outputBuilder.trim()
 }
 </script>
-
-<style scoped>
-</style>

@@ -1,53 +1,53 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('decabit.title') }}
-    </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('decabit.long')"
-      />
-      <div class="row mt-2">
-        <label
-          for="selenc"
-          class="form-label mb-2 sm-size"
-        >{{ $t('decabit.selenc') }}</label>
-        <select
-          id="selenc"
-          v-model="format"
-          class="form-select mb-2 md-size"
-        >
-          <option value="0">
-            {{ $t('decabit.selnum') }}
-          </option>
-          <option value="1">
-            {{ $t('decabit.selascii') }}
-          </option>
-          <option value="2">
-            {{ $t('decabit.selalpha') }}
-          </option>
-        </select>
-      </div>
-      <input
-        id="enc"
-        type="button"
-        :value="$t('buttons.encode')"
-        class="btn mb-2 me-2"
-        @click="encodeDeca"
-      >
-      <input
-        id="dec"
-        type="button"
-        :value="$t('buttons.decode')"
-        class="btn mb-2"
-        @click="decodeDeca"
-      >
+
+ <header class="page-header">
+    <h1>{{ $t('decabit.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('decabit.long')" />
+    </VCard>
+    <VCard :title="$t('labels.settings')">
+      <div class="form-group-vertical">
+        <div class="radio-group">
+          <label>{{ $t('decabit.selenc') }}</label>
+          <div class="radio-options-vertical">
+            <label class="radio-item">
+              <input type="radio" value="0" v-model="format">
+              <span class="radio-mark"></span>  {{ $t('decabit.selnum') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="1" v-model="format">
+              <span class="radio-mark"></span>  {{ $t('decabit.selascii') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="2" v-model="format">
+              <span class="radio-mark"></span>  {{ $t('decabit.selalpha') }}
+            </label>
+          </div>
+        </div>
+        <div class="radio-group">
+          <label>{{ $t('labels.selaction') }}</label>
+          <div class="radio-options-vertical">
+            <label class="radio-item">
+              <input type="radio" value="encode" v-model="mode">
+              <span class="radio-mark"></span>  {{ $t('buttons.encode') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="decode" v-model="mode">
+              <span class="radio-mark"></span>  {{ $t('buttons.decode') }}
+            </label>
+          </div>
+        </div>
+        </div>
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
       <textarea
-        id="message"
-        ref="message"
+        class="mb-2"
+        ref="messageInput"
         v-model="message"
-        class="form-control"
         :placeholder="$t('labels.message')"
         rows="5"
       />
@@ -56,165 +56,138 @@
         class="errormsg mt-2"
       >
         {{ errormsg }}
-      </p>
+      </p>          
+      <div class="button-row">
+        <button id="convert" class="btn btn-primary"  @click="encodeDeca">
+          {{ $t('buttons.encode') }}
+        </button>
+        <button id="convert" class="btn btn-primary"  @click="decodeDeca">
+          {{ $t('buttons.decode') }}
+        </button>
+      </div>
+    </VCard>
+    <VCard :title="$t('labels.result')">
       <div
         v-if="result"
-        class="resultbox"
+        class="card resultbox"
       >
         {{ result }}
       </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
 
-export default {
+defineOptions({
+  name: 'DecaBit'
+})
 
-  name: 'DecaBit',
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      message: "",
-      result : "",
-      errormsg: "",
-      format: 0,
-      decabit: [
-        "--+-+++-+-", "+--+++--+-", "+--++-+-+-", "+--+-++-+-",
-        "----+++-++", "++--+++---",	"++--++--+-", "++--+-+-+-",
-        "++---++-+-",	"---++++-+-", "+-+-+++---", "+-+-+-+-+-",
-        "+-+--++-+-", "+---++-++-", "+---++--++", "--+++-++--",
-        "---++-+++-", "+---+-++-+", "+--++--+-+", "+--++-+--+",
-        "+-+++--+--", "+--+++-+--", "++--+-++--", "-+-++-++--",
-        "+--++--++-", "+-+++-+---", "++-+--++--",	"+-+-+-++--",
-        "+--+-+++--",	"+--+--++-+", "+-++-++---", "+-++-+-+--",
-        "+-+-++-+--", "+---++++--", "+-+--+-++-", "+++--++---",
-        "+++--+-+--", "+++---++--",	"++---+++--", "--+-++++--",
-        "++--++-+--", "-+-+-+-++-", "++----+++-", "+----+-+++",
-        "++---+-+-+", "++-+-+-+--", "++-+-+--+-", "+++----++-",
-        "++--+--++-", "+--+-+-++-", "++++----+-", "++-++---+-",
-        "+-+++---+-", "-++++---+-", "+-+-+---++", "+++-++----",
-        "+++-+-+---", "+-+-+--++-", "-++-+--++-", "+++-+----+",
-        "++++-+----", "-+++-++---", "-+-+-++-+-", "++---++--+",
-        "++-+--+--+", "++-+++----", "++++--+---", "+--++++---",
-        "-+-++++---", "++-+--+-+-", "-++---+++-", "+---+-+++-",
-        "--+-+-+++-", "+----++++-", "--+--++++-", "+++---+-+-",
-        "+-++---++-", "+--+--+++-", "--++--+++-", "+-+---+-++",
-        "-+++--+-+-", "-+-++-+-+-", "-+++---++-", "-+-++--++-",
-        "-+---++++-", "-++++--+--", "-++-++-+--", "--++++-+--",
-        '--++-+++--', "--++-+-++-", "+-++++----", "--++++--+-",
-        "--++-++-+-", "+--+-+--++", "+-++----++", "-+-+++--+-",
-        "-++-+-+-+-", "-+--++-++-", "---+++-++-", "-+--+-+++-",
-        "+---+++-+-", "-+--+++-+-", "+-+-++--+-", "+--++-++--",
-        "++-++--+--",	"+-++--++--",	"+-+--+++--", "-++--+++--",
-        "++---+-++-", "++-+---++-",	"+++-+---+-",	"+++-+--+--",
-        "++-+-++---", "++-++-+---", "+-+---+++-", "+-++--+-+-",
-        "-+-+--+++-", "-+++-+-+--", "+-++-+--+-", "-++-+++---",
-        "+++--+--+-", "+++++-----", "-+++++----",	"--+++++---",
-        "---+++++--", "----+++++-", "++++++++++"
-      ]
-    }
-  },
+// --- Static Data ---
+const DECABIT_TABLE = [
+  "--+-+++-+-", "+--+++--+-", "+--++-+-+-", "+--+-++-+-", "----+++-++", "++--+++---", "++--++--+-", "++--+-+-+-",
+  "++---++-+-", "---++++-+-", "+-+-+++---", "+-+-+-+-+-", "+-+--++-+-", "+---++-++-", "+---++--++", "--+++-++--",
+  "---++-+++-", "+---+-++-+", "+--++--+-+", "+--++-+--+", "+-+++--+--", "+--+++-+--", "++--+-++--", "-+-++-++--",
+  "+--++--++-", "+-+++-+---", "++-+--++--", "+-+-+-++--", "+--+-+++--", "+--+--++-+", "+-++-++---", "+-++-+-+--",
+  "-+-+-++-+--", "+---++++--", "+-+--+-++-", "+++--++---", "+++--+-+--", "+++---++--", "++---+++--", "--+-++++--",
+  "++--++-+--", "-+-+-+-++-", "++----+++-", "+----+-+++", "++---+-+-+", "++-+-+-+--", "++-+-+--+-", "+++----++-",
+  "++--+--++-", "+--+-+-++-", "++++----+-", "++-++---+-", "+-+++---+-", "-++++---+-", "+-+-+---++", "+++-++----",
+  "+++-+-+---", "+-+-+--++-", "-++-+--++-", "+++-+----+", "++++-+----", "-+++-++---", "-+-+-++-+-", "++---++--+",
+  "++-+--+--+", "++-+++----", "++++--+---", "+--++++---", "-+-++++---", "++-+--+-+-", "-++---+++-", "+---+-+++-",
+  "--+-+-+++-", "+----++++-", "--+--++++-", "+++---+-+-", "+-++---++-", "+--+--+++-", "--++--+++-", "+-+---+-++",
+  "-+++--+-+-", "-+-++-+-+-", "-+++---++-", "-+-++--++-", "-+---++++-", "-++++--+--", "-++-++-+--", "--++++-+--",
+  "--++-+++--", "--++-+-++-", "+-++++----", "--++++--+-", "--++-++-+-", "+--+-+--++", "+-++----++", "-+-+++--+-",
+  "-++-+-+-+-", "-+--++-++-", "---+++-++-", "-+--+-+++-", "+---+++-+-", "-+--+++-+-", "+-+-++--+-", "+--++-++--",
+  "++-++--+--", "+-++--++--", "+-+--+++--", "-++--+++--", "++---+-++-", "++-+---++-", "+++-+---+-", "+++-+--+--",
+  "++-+-++---", "++-++-+---", "+-+---+++-", "+-++--+-+-", "-+-+--+++-", "-+++-+-+--", "+-++-+--+-", "-++-+++---",
+  "+++--+--+-", "+++++-----", "-+++++----", "--+++++---", "---+++++--", "----+++++-", "++++++++++"
+]
 
-  mounted: function() {
-    this.$refs.message.focus();
-  },
+// --- State ---
+const message = ref("")
+const format = ref(0)
+const mode = ref("encode") // 'encode' or 'decode'
+const messageInput = ref(null)
 
-  methods: {
+onMounted(() => {
+  messageInput.value?.focus()
+})
 
-    encodeDeca: function () {
+// --- Computed Logic ---
 
-      // Reset
-      this.errormsg = "";
-      this.result = "";
+const translation = computed(() => {
+  let outputText = ""
+  let errorMsg = ""
+  const input = message.value
 
-      try {
+  if (!input) return { text: "", error: "" }
 
-        let words = (this.format == 0) ? this.message.match(/[0-9]+/g) : this.message.match(/./g)
-        
-        if (!words) {
-          this.errormsg = this.$t('errors.cannotparse');
-          return
-        }
-        
-        for (let w of words) {
-        
-          let idx = 0;
-          if (this.format == 0) {
-            // Input numbers
-            idx = parseInt(w);
-          } else if (this.format == 1) {
-            // Input ASCII
-            idx = w.charCodeAt(0)
-          } else {
-            // Input alphabet order
-            idx = w.toUpperCase().charCodeAt(0) - "A".charCodeAt(0);
-          }
-          if (idx >= 0 && idx <= 126) 
-            this.result += this.decabit[idx] + " "
-          else {
-            this.errormsg += this.$t('errors.unknowninput') + w + " ";
-          }
-
-        }
+  try {
+    if (mode.value === 'encode') {
+      // ENCODING
+      const words = format.value === 0 ? input.match(/[0-9]+/g) : input.match(/./g)
       
-      } catch (e) {
-      
-        console.log(e);
-        this.errormsg = e;
-        
+      if (!words) {
+        return { text: "", error: t('errors.cannotparse') }
       }
 
-    },
-
-    decodeDeca: function () {
-
-      // Reset
-      this.errormsg = "";
-      this.result = "";
-        
-      try {
-      
-        let words = this.message.match(/[-+]{10}/g);
-      
-        if (!words) {
-          this.errormsg = this.$t('errors.cannotparse');
-          return
+      for (let w of words) {
+        let idx = -1
+        if (format.value === 0) {
+          idx = parseInt(w)
+        } else if (format.value === 1) {
+          idx = w.charCodeAt(0)
+        } else {
+          idx = w.toUpperCase().charCodeAt(0) - "A".charCodeAt(0)
         }
+
+        if (idx >= 0 && idx < DECABIT_TABLE.length) {
+          outputText += DECABIT_TABLE[idx] + " "
+        } else {
+          errorMsg += t('errors.unknowninput') + w + " "
+        }
+      }
+    } else {
+      // DECODING
+      const words = input.match(/[-+]{10}/g)
+      
+      if (!words) {
+        return { text: "", error: t('errors.cannotparse') }
+      }
+
+      for (let w of words) {
+        const idx = DECABIT_TABLE.indexOf(w)
         
-        for (let w of words) {
-        
-          let idx = this.decabit.indexOf(w);
-          
-          if (idx < 0) {
-            this.errormsg += this.$t('errors.unknowninput') + w + " ";
+        if (idx < 0) {
+          errorMsg += t('errors.unknowninput') + w + " "
+        } else {
+          if (format.value === 0) {
+            outputText += idx + " "
+          } else if (format.value === 1) {
+            outputText += String.fromCharCode(idx)
           } else {
-
-            if (this.format == 0) {
-              // Input numbers
-              this.result += idx + " ";
-            } else if (this.format == 1) {
-              // Input ASCII
-              this.result += String.fromCharCode(idx)
-            } else {
-              // Input alphabet order
-              this.result += String.fromCharCode("A".charCodeAt(0) + idx);
-            }
-
+            outputText += String.fromCharCode("A".charCodeAt(0) + idx)
           }
-          
         }
-        
-      } catch (e) {
-      
-        this.errormsg = this.$t('error.generic');
-        console.log(e);
-
       }
     }
-
+  } catch (e) {
+    console.error(e)
+    errorMsg = t('error.generic')
   }
 
-}
+  return {
+    text: outputText.trim(),
+    error: errorMsg.trim()
+  }
+})
 
+// Flattened for template
+const result = computed(() => translation.value.text)
+const errormsg = computed(() => translation.value.error)
 </script>

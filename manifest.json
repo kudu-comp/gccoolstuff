@@ -1,18 +1,55 @@
 {
- "name": "GC Tools",
- "short_name": "GC Tools",
- "version": "1.0",
- "manifest-version": 3,
- "description": "GC Tools has all the tools needed for geocaching.",
- "theme_color": "#09776E",
- "background_color": "#eeeeee",
- "display": "standalone",
- "icons": [
-  {
-   "src": "\/icons\/android-icon-192x192.png",
-   "sizes": "192x192",
-   "type": "image\/png",
-   "density": "4.0"
-  }
- ]
+  "id": "/?source=pwa",
+  "name": "GC Tools: Geocaching Toolkit",
+  "short_name": "GC Tools",
+  "description": "The ultimate toolkit for geocaching: includes coordinate converters, cipher decoders, and field tools.",
+  "version": "1.0.0",
+  "start_url": "/?source=pwa",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#09776E",
+  "background_color": "#eeeeee",
+  "scope": "/",
+  "categories": ["utilities", "entertainment"],
+  "icons": [
+    {
+      "src": "/icons/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/android-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Coordinate Converter",
+      "url": "/convert",
+      "icons": [{ "src": "/icons/convert.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Cipher Decoder",
+      "url": "/decode",
+      "icons": [{ "src": "/icons/decode.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile-view.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "GC Tools Dashboard"
+    }
+  ]
 }

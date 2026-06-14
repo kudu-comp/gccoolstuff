@@ -1,237 +1,211 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('formulasolver.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('formulasolver.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('formulasolver.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('formulasolver.formula') }}</label>
+          <input type="text" v-model="formula" ref="formulaInput">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('formulasolver.base') }}</label>
+          <input type="number" v-model="base" min="2" max="16">
+        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="unique">
+          <span class="checkmark"></span>
+          {{ $t('formulasolver.unique') }}
+        </label>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate id="calc" @calculate="solveFormula" :disabled="working"></v-calculate>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('formulasolver.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="formula"
-        >{{ $t('formulasolver.formula') }}</label>
-        <input
-          id="formula"
-          v-model="formula"
-          ref="formula"
-          type="text"
-          size="30"
-          class="form-control lg-size mb-2"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div
+          v-if="results.length > 0"
+          class="card resultbox"
         >
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="base"
-        >{{ $t('formulasolver.base') }}</label>
-        <input
-          id="base"
-          v-model="base"
-          type="number"
-          min="2"
-          max="16"
-          class="form-control md-size mb-2"
-        >
-        <div class="form-check ms-3">
-          <input
-            id="unique"
-            v-model="unique"
-            type="checkbox"
-            class="form-check-input mb-2 me-2"
-          >
-          <label
-            for="unique"
-            class="form-check-label mb-2"
-          >{{ $t('formulasolver.unique') }}</label>
+          <template v-for="(res, idx) in results">
+            {{ printSolution(idx) }}<br>
+          </template>
         </div>
-      </div>
-      <v-calculate id="calc" @calculate="solveFormula"></v-calculate>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-show="results.length > 0"
-        class="mt-2"
-      >
-        {{ $t('sudoku.thereare') }} {{ results.length }} {{ $t('sudoku.sols') }}
-        <div class="row mt-2 mb-2">
-          <label
-            for="listofresults"
-            class="form-label sm-size"
-          >{{ $t('sudoku.sols') }}</label>
-          <select
-            id="listofresults"
-            v-model="selectedsolution"
-            class="form-control lg-size"
-            @change="printSolution"
-          >
-            <option
-              v-for="r in results"
-              :key="r"
-            >
-              {{ result }}
-            </option>
-          </select>
+        <div v-else class="card resultbox">
+          {{ result }}
         </div>
-      </div>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}
-      </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { evaluate } from 'mathjs';
-import VCalculate from '@/components/generic/VCalculate.vue'
+import VCalculate from '@/components/generic/VCalculate.vue';
+import VCard from '@/components/generic/VCard.vue';
 
-export default {
+defineOptions({
+  name: 'MathFormula'
+});
 
-  name: 'MathFormula',
+const { t } = useI18n();
 
-  components : {
-    VCalculate
-  },
+// --- State ---
+const formula = ref("");
+const varnames = ref(""); // String of unique letters
+const base = ref(10);
+const unique = ref(true);
+const errormsg = ref("");
+const result = ref("");
+const results = ref([]);
+const working = ref(false);
 
-  data: function () {
-    return {
-      formula: "",
-      varnames: "",
-      base: 10,
-      unique: true,
-      errormsg: "",
-      result: "",
-      results: [],
-      selectedsolution: ""
+// --- Template Ref ---
+const formulaInput = ref(null);
+
+onMounted(() => {
+  formulaInput.value?.focus();
+});
+
+// --- Logic Helpers ---
+
+/**
+ * Formats a specific solution for display
+ */
+const printSolution = (idx) => {
+  let str = "";
+  const solDigits = results.value[idx];
+  const digitsRef = "0123456789abcdef";
+
+  // Build key (A=1 | B=2...)
+  for (let i = 0; i < varnames.value.length; i++) {
+    const digitVal = digitsRef.indexOf(solDigits[i]);
+    str += `${varnames.value[i]}=${digitVal} | `;
+  }
+
+  // Build substituted formula
+  let ucform = formula.value.toUpperCase();
+  for (let i = 0; i < varnames.value.length; i++) {
+    ucform = ucform.replaceAll(varnames.value[i], solDigits[i]);
+  }
+  
+  return str + ucform;
+};
+
+/**
+ * Checks if the current digit assignment satisfies the equation
+ */
+const checkSolution = (currentDigits) => {
+  let ucform = formula.value.toUpperCase();
+
+  for (let v = 0; v < currentDigits.length; v++) {
+    ucform = ucform.replaceAll(varnames.value[v], currentDigits[v]);
+  }
+
+  // Split equation at '='
+  const sides = ucform.match(/[^=]+/g);
+  if (!sides || sides.length < 2) return false;
+
+  try {
+    return evaluate(sides[0]) === evaluate(sides[1]);
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
+ * Recursive Brute-force Generator
+ */
+const genVars = (depth, currentAssignment, isUnique, currentBase, resultsArr) => {
+  const digitChars = "0123456789abcdef";
+
+  if (depth < varnames.value.length) {
+    for (let v = 0; v < currentBase; v++) {
+      const char = digitChars[v];
+      
+      // Skip if digit is already used (if unique mode is on)
+      if (isUnique && currentAssignment.includes(char)) continue;
+
+      currentAssignment[depth] = char;
+      genVars(depth + 1, currentAssignment, isUnique, currentBase, resultsArr);
+      currentAssignment[depth] = ""; // Backtrack
     }
-  },
+  } else {
+    // We have a full assignment, verify it
+    if (checkSolution(currentAssignment)) {
+      resultsArr.push(currentAssignment.join(""));
+    }
+  }
+};
 
-  mounted: function() {
-    this.$refs.formula.focus();
-  },
+// --- Main Action ---
 
-  methods: {
+const solveFormula = () => {
+  // Reset
+  result.value = "";
+  errormsg.value = "";
+  results.value = [];
+  varnames.value = "";
+  
+  if (!formula.value) {
+    errormsg.value = t('errors.noinput');
+    return;
+  }
 
-    // Testers
-    // 1. THIS + IS + TOO = FUNNY
-    // 2. HOW + SWEET + COFFEE = TASTES
-    // 3. CHECK + THE = TIRES
+  // 1. Identify unique variables in the formula
+  let uniqueLetters = "";
+  for (let c of formula.value.toUpperCase()) {
+    if (uniqueLetters.indexOf(c) < 0 && /[A-Z]/.test(c)) {
+      uniqueLetters += c;
+    }
+  }
+  varnames.value = uniqueLetters;
 
-    printSolution: function () {
+  // 2. Validation
+  if (varnames.value.length > base.value) {
+    errormsg.value = t('formulasolver.toomanyvars');
+    return;
+  }
+
+  working.value = true;
+
+  // 3. Recursive solve wrapped in a slight delay to allow UI to show 'working' state
+  setTimeout(() => {
+    try {
+      let currentAssignment = new Array(varnames.value.length).fill("");
       
-      // Print solution selected from the dropdown
-      this.result = "";
-      let sol = [...this.selectedsolution];
-      for (let i=0; i < this.varnames.length; i++) {
-        this.result += this.varnames[i] + "=" + "0123456789abcdef".indexOf(sol[i]) + " | ";
+      genVars(0, currentAssignment, unique.value, base.value, results.value);
+
+      if (results.value.length === 0) {
+        result.value = t('formulasolver.nosol');
       }
-
-      // Print the formula
-      let ucform = this.formula.toUpperCase();
-
-      // Replace variables with values
-      for (let i=0; i < this.varnames.length; i++) {
-        ucform = ucform.replaceAll(this.varnames[i], sol[i]);
-      }
-      this.result += ucform;
-
-    },
-
-    checkSolution: function check (vars) {
-
-      let ucform = this.formula.toUpperCase();
-
-      // Replace variables with values
-      for (let v = 0; v < vars.length; v++) {
-        ucform = ucform.replaceAll(this.varnames[v], vars[v]);
-      }
-
-      // Evaluate formula
-      // Get left and right hand side of the formula
-
-      let sides = ucform.match(/[^=]+/g);
-      const lefthand = sides[0];
-      const righthand = sides[1];
-
-      return evaluate(lefthand) == evaluate(righthand);
-
-    },
-
-    genVars: function gen (depth, vars, uniq, base, res, check) {
-
-      const digit = "0123456789abcdef";
-
-      // While there are still numbers to generate
-      if (depth < vars.length) {
-      
-        for (let v=0; v < base; v++) {
-
-          if (uniq && vars.indexOf(digit[v]) >= 0) continue;
-          vars[depth] = digit[v];
-          gen(depth + 1, vars, uniq, base, res, check);
-          vars[depth] = "";
-
-        }
-
-      } else {
-
-        if (check(vars)) {
-          res.push(vars.join(""));
-        }
-
-      }
-
-    },
-
-    solveFormula: function() {
-
-      // Reset everything
-      this.result = "";
-      this.errormsg = "";
-      this.results = [];
-      this.varnames = [];
-
-      // Find unknown in formula
-      for (let c of this.formula.toUpperCase()) {
-        if (this.varnames.indexOf(c) < 0 && "ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(c.toUpperCase()) >= 0 ) this.varnames += c
-      }
-    
-      if (this.varnames.length > this.base) {
-        this.errormsg = this.$t('formulasolver.toomanyvars')
-      }
-
-      // Generate candidates
-      try {
-
-        // Create an array with var names (will be replaced with values)
-        let vars = [...this.varnames];
-        this.genVars(0, vars, this.unique, this.base, this.results, this.checkSolution);
-
-        if (this.results.length > 0) {
-          this.selectedsolution = this.results[0];
-          this.printSolution();
-        } else {
-          this.result = this.$t('formulasolver.nosol');
-        }
-
-      } catch(e) {
-
-        this.errormsg = this.$t('formulasolver.exprerror');
-        console.log(e);
-
-      }
-
-    },
-  },
-}
+    } catch (e) {
+      console.error(e);
+      errormsg.value = t('formulasolver.exprerror');
+    } finally {
+      working.value = false;
+    }
+  }, 50);
+};
 </script>
+
+<style scoped>
+.font-monospace {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9rem;
+}
+</style>

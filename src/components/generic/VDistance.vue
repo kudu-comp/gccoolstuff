@@ -1,73 +1,88 @@
 <template>
-  <div class="row">
     <label
-      class="form-label sm-size mb-2"
-      for="distance"
-    >
-      <slot name="label">{{ $t('labels.distance') }}</slot>
+      ><slot name="label">{{ $t('labels.distance') }}</slot>
     </label>
     <input
+      id="coordinput"
       type="number"
-      class="form-control md-size mb-2 me-2"
-      id="distance"
+      class="fixed-input"
       :value="dist"
-      @input="updateDist($event.target.value)"
+      @input="$emit('update:dist', Number($event.target.value))"
     >
-    <select
-      id="distunit"
-      class="form-select sm-size mb-2"
-      :value="unit"
-      @input="updateUnit($event.target.value)"
-    >
-      <option value="1">
-        Meter (m)
-      </option>
-      <option value="1000">
-        Kilometer (km)
-      </option>
-      <option value="0.3048">
-        Feet (ft)
-      </option>
-      <option value="1.0936133">
-        Yard (yd)
-      </option>
-      <option value="1760">
-        Mile intnl (mi)
-      </option>
-      <option value="1609.344">
-        Mile US (mi)
-      </option>
-    </select>
+    <!-- <label
+      ><slot name="label2">&nbsp;</slot>
+    </label> -->
+    <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+      <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+        {{ selectUnit }}
+        <span class="chevron">▾</span>
+      </div>
+      <transition name="fade-slide">
+        <div v-if="isDropdownOpen" class="custom-options-list">
+          <div 
+            v-for="option in unitOptions"
+            class="custom-option" 
+            :class="{ 'selected': unit === option.value }" 
+            :disabled="option.disabled"
+            @click="$emit('update:unit', option.value)"
+          >
+            {{ option.label }}
+            <span v-if="unit ===  option.value" class="check">✓</span>
+          </div>
+        </div>
+      </transition>
   </div>
+
 </template>
 
-<script>
-export default {
+<script setup>
 
-  props: {
-    dist: {
-      type: Number,
-      required: true
-    },
-    unit: {
-      type: Number,
-      required: true
-    }
+import { ref, computed } from 'vue'
+
+const props = defineProps({
+  dist: {
+    type: [Number, String],
+    required: true
   },
-
-  emits: [
-    'update:dist',
-    'update:unit'
-  ],
-
-  methods: {
-    updateDist: function (value) {
-      this.$emit ('update:dist', value);
-    },
-    updateUnit: function (value) {
-      this.$emit ('update:unit', value);
-    }
+  unit: {
+    type: [Number, String],
+    required: true
   }
+})
 
-}
+defineEmits(['update:dist', 'update:unit'])
+
+// Reference for auto-focusing the input
+const isDropdownOpen = ref(false);
+
+const selectUnit = computed(() =>  {
+
+  // Check if categories exists and has items
+    if (!unitOptions || unitOptions.length === 0) {
+      return 'Loading...'; 
+    }
+    
+    // Find the selected item
+    const found = unitOptions.find(a => a.value === props.unit);
+    isDropdownOpen.value = false;
+    
+    // Return the label if found, otherwise a default placeholder
+    return found ? found.label : 'Select a unit';
+  });
+
+const unitOptions = [
+  { label: 'Meter (m)', value: 1 },
+  { label: 'Kilometer (km)', value: 1000 },
+  { label: 'Feet (ft)', value: 0.3048 },
+  { label: 'Yard (yd)', value: 1.0936133 },
+  { label: 'Mile intnl (mi)', value: 1760 },
+  { label: 'Mile US (mi)', value: 1609.344 }
+]
 </script>
+
+<style scoped>
+
+.form-horizontal label{
+  flex: 0 0 100px;
+}
+</style>

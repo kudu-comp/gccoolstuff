@@ -1,195 +1,208 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('randomizer.title') }}
+  <header class="page-header">
+    <h1>{{ $t('randomizer.title') }}</h1>
+  </header>
+
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <!-- Intro Card -->
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('randomizer.long')" />
+      </VCard>
+
+      <!-- Settings Card -->
+      <VCard :title="$t('labels.settings')">
+        <div class="form-group-vertical">
+          <!-- Selection Mode -->
+          <div class="form-horizontal">
+            <CustomDropdown
+              :title="$t('randomizer.sel') "
+              :options="[
+                { value: 0, label: $t('randomizer.selbin')},
+                { value: 1, label: $t('randomizer.selrng')},
+                { value: 2, label: $t('randomizer.seltxt')},
+                { value: 3, label: $t('randomizer.selcol')},
+                { value: 4, label: $t('randomizer.selascii')},
+              ]"
+              v-model="sel"
+            />
+          </div>
+
+          <!-- Quantity -->
+          <div class="form-horizontal">
+            <label for="cnt">{{ $t('randomizer.numberof') }}</label>
+            <input
+              id="cnt"
+              type="number"
+              v-model.number="cnt"
+              class="form-control"
+              min="1"
+            />
+          </div>
+
+          <!-- Min / Max (Only show for Range mode) -->
+          <div v-if="sel === 1" class="form-horizontal mb-3">
+            <label>{{ $t('randomizer.minmax') }}</label>
+            <input type="number" v-model.number="min" class="form-control" placeholder="Min">
+            <input type="number" v-model.number="max" class="form-control" placeholder="Max">
+          </div>
+
+          <!-- Character Set (Only show for Characters mode) -->
+          <div v-if="sel === 2" class="form-horizontal mb-3">
+            <label for="txt">{{ $t('randomizer.chars') }}</label>
+            <input id="txt" type="text" v-model="txt" class="form-control" />
+          </div>
+
+          <!-- Collection (Only show for Collection mode) -->
+          <div v-if="sel === 3" class="form-horizontal mb-3">
+            <label for="coll">{{ $t('randomizer.coll') }}</label>
+            <input id="coll" type="text" v-model="coll" class="form-control" />
+          </div>
+
+          <!-- Separator -->
+          <div class="form-horizontal mb-3">
+            <CustomDropdown
+              :title="$t('randomizer.sep')"
+              :options="[
+                { value: '', label: $t('randomizer.sepnone')},
+                { value: ' ', label: $t('randomizer.sepspace')},
+                { value: ',', label: $t('randomizer.sepcomma')},
+                { value: ':', label: $t('randomizer.sepcolon')},
+                { value: '-', label: $t('randomizer.sephyphen')},
+              ]"
+              v-model="sep"
+            />
+          </div>
+          <p v-if="errormsg" class="errormsg">
+            {{ errormsg }}
+          </p>
+          <div class="button-row">
+            <VCalculate @calculate="generate" />
+          </div>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('randomizer.long')"
-      />
-      <div class="row mb-2">
-        <label for="sel" class="form-label md-size mb2" style="width: 20rem">
-          {{$t('randomizer.sel')}}
-        </label>
-        <select v-model="sel" id="sel" ref="sel" class="form-control sm-size mb2" style="width: 25rem">
-          <option value="0">{{$t('randomizer.selbin')}}</option>
-          <option value="1">{{$t('randomizer.selrng')}}</option>
-          <option value="2">{{$t('randomizer.seltxt')}}</option>
-          <option value="3">{{$t('randomizer.selcol')}}</option>
-          <option value="4">{{$t('randomizer.selascii')}}</option>
-        </select>
-      </div>
-      <div class="row mb-2">
-        <label for="cnt" class="form-label md-size mb2" style="width: 20rem">
-          {{$t('randomizer.numberof')}}
-        </label>
-        <input
-          id="cnt"
-          type="number"
-          v-model="cnt"
-          class="form-control md-size mb2"
-          style="width: 5rem"
-          min="0"
-        />
-      </div>
-      <div class="row mb-2">
-        <label for="max" class="form-label sm-size mb2" style="width: 20rem"
-          >{{$t('randomizer.minmax')}}</label
-        >
-        <input
-          id="min"
-          type="number"
-          v-model="min"
-          class="form-control sm-size mb2 me-2"
-        />
-        <input
-          id="max"
-          type="number"
-          v-model="max"
-          class="form-control sm-size mb2"
-        />
-      </div>
-      <div class="row mb-2">
-        <label for="txt" class="form-label md-size mb2" style="width: 20rem"
-          >{{$t('randomizer.chars')}}</label
-        >
-        <input
-          id="txt"
-          class="form-control xl-size mb2"
-          type="text"
-          size="35"
-          v-model="txt"
-          style="width: 25rem"
-        />
-      </div>
-      <div class="row mb-2">
-        <label for="coll" class="form-label  md-size mb2" style="width: 20rem"
-          >{{$t('randomizer.coll')}}</label
-        >
-        <input
-          id="coll"
-          class="form-control xl-size mb2"
-          type="text"
-          size="35"
-          v-model="coll"
-          style="width: 25rem"
-        />
-      </div>
-      <div class="row mb-2">
-        <label for="sep" class="form-label mb-2" style="width: 20rem">{{$t('randomizer.sep')}}</label>
-        <select v-model="sep" class="form-control mb-2" id="sep" style="width: 25rem">
-          <option value="">{{$t('randomizer.sepnone')}}</option>
-          <option value=" ">{{$t('randomizer.sepspace')}}</option>
-          <option value=",">{{$t('randomizer.sepcomma')}}</option>
-          <option value=":">{{$t('randomizer.sepcolon')}}</option>
-          <option value="-">{{$t('randomizer.sephyphen')}}</option>
-        </select>
-      </div>
-      <v-calculate class="mb-2" id="calc" @calculate="generate()"></v-calculate>
-      <div v-if="result" class="resultbox" >
-        {{ result }}
-      </div>
+
+    <!-- Result Card -->
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">
+        <div v-if="result" class="resultbox font-monospace">
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import VCard from '@/components/generic/VCard.vue';
 import VCalculate from '@/components/generic/VCalculate.vue';
+import CustomDropdown from '@/components/generic/CustomDropdown.vue';
 
-export default {
+defineOptions({ name: 'Randomizer' });
 
-  name: "Randomizer",
+const { t } = useI18n();
 
-  components: {
-    VCalculate    
-  },
+// --- State ---
+const sel = ref(0);
+const cnt = ref(10);
+const max = ref(9);
+const min = ref(0);
+const txt = ref("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+const coll = ref("purple,indigo,blue,green,yellow,orange,red");
+const sep = ref("");
+const result = ref("");
+const errormsg = ref("");
 
-  data() {
-    return {
-      sel: "0",
-      cnt: 10,
-      max: 9,
-      min: 0,
-      txt: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-      coll: "purple,indigo,blue,green,yellow,orange,red",
-      sep: "",
-      result: "",
-      errormsg: "",
-    };
-  },
-  
-  mounted: function() {
-    this.$refs.sel.focus();
-  },
-  
-  methods: {
+// Template Ref
+const selRef = ref(null);
 
-    generate: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      let maxgen = 0;
-      let mingen = 0;
-      let coll = this.coll.split(",");
+onMounted(() => {
+  selRef.value?.focus();
+});
 
-      switch (this.sel) {
-        case "0":
-          mingen = 0;
-          maxgen = 1;
-          break;
-        case "1":
-          mingen = this.min;
-          maxgen = this.max;
-          break;
-        case "2":
-          mingen = 0;
-          maxgen = this.txt.length - 1;
-          break;
-        case "3":
-          mingen = 0;
-          maxgen = coll.length - 1;
-          break;
-        case "4":
-          mingen = 33;
-          maxgen = 126;
-          break;
-      }
+// --- Methods ---
 
-      let range = maxgen - mingen + 1;
-      for (let i = 0; i < this.cnt; i++) {
-        // Generate random whole nuber
-        let c = Math.floor(Math.random() * range) + mingen;
+const generate = () => {
+  result.value = "";
+  errormsg.value = "";
 
-        // Convert random number to char
-        switch (this.sel) {
-          case "0":
-          case "1":
-            this.result += c.toString();
-            break;
-          case "2":
-            this.result += this.txt[c];
-            break;
-          case "3":
-            this.result += coll[c].trim();
-            break;
-          case "4":
-            this.result += String.fromCharCode(c);
-        }
-        this.result += this.sep;
-      }
+  let maxgen = 0;
+  let mingen = 0;
+  const collArray = coll.value.split(",");
 
-      // Remove last separator
-      if (this.sep !== "") {
-        this.result = this.result.slice(0, -1);
-      }
-    },
+  // 1. Determine the logical range based on selection
+  switch (sel.value) {
+    case 0: // Binary
+      mingen = 0;
+      maxgen = 1;
+      break;
+    case 1: // Range
+      mingen = min.value;
+      maxgen = max.value;
+      break;
+    case 2: // Characters
+      mingen = 0;
+      maxgen = txt.value.length - 1;
+      break;
+    case 3: // Collection
+      mingen = 0;
+      maxgen = collArray.length - 1;
+      break;
+    case 4: // ASCII
+      mingen = 33;
+      maxgen = 126;
+      break;
+  }
 
-  },
+  // 2. Range validation
+  if (maxgen < mingen) {
+    errormsg.value = "Error: Max is smaller than min.";
+    return;
+  }
+
+  const range = maxgen - mingen + 1;
+  let builder = "";
+
+  // 3. Generation Loop
+  for (let i = 0; i < cnt.value; i++) {
+    const randomVal = Math.floor(Math.random() * range) + mingen;
+
+    switch (sel.value) {
+      case 0:
+      case 1:
+        builder += randomVal.toString();
+        break;
+      case 2:
+        builder += txt.value[randomVal];
+        break;
+      case 3:
+        builder += collArray[randomVal].trim();
+        break;
+      case 4:
+        builder += String.fromCharCode(randomVal);
+        break;
+    }
+
+    // Add separator if not the last item
+    if (sep.value !== "" && i < cnt.value - 1) {
+      builder += sep.value;
+    }
+  }
+
+  result.value = builder;
 };
-
 </script>
 
 <style scoped>
+.resultbox {
+  min-height: 100px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+.font-monospace {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
 </style>

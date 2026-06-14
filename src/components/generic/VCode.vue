@@ -1,98 +1,87 @@
-<template>
-  <select
-    class="form-select md-size"
-    :value="code"
-    @input="updateCode($event.target.value)"
-  >
-    <option value="UTF16">
-      Text (UTF8/UTF16)
-    </option>
-    <option disabled>
-      --- Numbers ---
-    </option>
-    <option value="Binary">
-      Binary (0,1)
-    </option>
-    <option value="Octal">
-      Octal (0-7)
-    </option>
-    <option value="Decimal">
-      Decimal (0-9)
-    </option>
-    <option value="Hexadecimal">
-      Hexadecimal (0-F)
-    </option>
-    <option disabled>
-      --- Older codepages &amp; alt codes ---
-    </option>
-    <option value="ASCII">
-      Text Ascii
-    </option>
-    <option value="CP1252">
-      Windows Western European (CP1252)
-    </option>
-    <option value="CP437">
-      Original IBM Hardware (CP437)
-    </option>
-    <option value="CP850">
-      MS DOS Western European(CP850)
-    </option>
-    <option value="CP852">
-      MS DOS Eastern European (CP852)
-    </option>
-    <option value="CP857">
-      MS DOS Turkish codepage (CP857)
-    </option>
-    <option value="CP866">
-      MS DOS Cyrillic codepage (CP866)
-    </option>
-    <option value="ATASCII">
-      Atari ASCII variant (ATASCII)
-    </option>
-    <option value="EBCDIC">
-      EBCDIC character set
-    </option>
-    <option disabled>
-      --- Telegraphy &amp; telex ---
-    </option>
-    <option value="Baudotcode">
-      Baudot code (ITA-1)
-    </option>
-    <option value="BaudotcodeR">
-      Baudot code (ITA-1) - reversed
-    </option>
-    <option value="Murraycode">
-      Murray code (ITA-2)
-    </option>
-    <option value="MurraycodeR">
-      Murray code (ITA-2) - reversed
-    </option>
-    <option value="MurrayMTK2">
-      Murray Cyrillic (MTK-2)
-    </option>
-    <option value="MurrayMTK2R">
-      Murray Cyrillic (MTK-2) - reversed
-    </option>
-  </select>
-</template>
+<script setup>
+import { ref, computed } from 'vue';
 
-<script>
-export default {
-  props: {
-    code: {
-      type: String,
-      required: true
-    }
-  },
-
-  emits: [
-    'update:code'
-  ],
-  
-  methods: {
-    updateCode: function (value) {
-      this.$emit ('update:code', value);
-    },
+// 1. Assign props to a variable to access them in script
+const props = defineProps({
+  code: {
+    type: String,
+    required: true
   }
-}
+})
+
+const emit = defineEmits(['update:code'])
+
+// 2. Define the missing ref for the dropdown state
+const isDropdownOpen = ref(false)
+
+const codeOptions = [
+  { label: 'Text (UTF8/UTF16)', value: 'UTF16' },
+  { label: '--- Numbers ---', disabled: true },
+  { label: 'Binary (0,1)', value: 'Binary' },
+  { label: 'Octal (0-7)', value: 'Octal' },
+  { label: 'Decimal (0-9)', value: 'Decimal' },
+  { label: 'Hexadecimal (0-F)', value: 'Hexadecimal' },
+  { label: '--- Older codepages & alt codes ---', disabled: true },
+  { label: 'Text Ascii', value: 'ASCII' },
+  { label: 'Windows Western European (CP1252)', value: 'CP1252' },
+  { label: 'Original IBM Hardware (CP437)', value: 'CP437' },
+  { label: 'MS DOS Western European(CP850)', value: 'CP850' },
+  { label: 'MS DOS Eastern European (CP852)', value: 'CP852' },
+  { label: 'MS DOS Turkish codepage (CP857)', value: 'CP857' },
+  { label: 'MS DOS Cyrillic codepage (CP866)', value: 'CP866' },
+  { label: 'Atari ASCII variant (ATASCII)', value: 'ATASCII' },
+  { label: 'EBCDIC character set', value: 'EBCDIC' },
+  { label: '--- Telegraphy & telex ---', disabled: true },
+  { label: 'Baudot code (ITA-1)', value: 'Baudotcode' },
+  { label: 'Baudot code (ITA-1) - reversed', value: 'BaudotcodeR' },
+  { label: 'Murray code (ITA-2)', value: 'Murraycode' },
+  { label: 'Murray code (ITA-2) - reversed', value: 'MurraycodeR' },
+  { label: 'Murray Cyrillic (MTK-2)', value: 'MurrayMTK2' },
+  { label: 'Murray Cyrillic (MTK-2) - reversed', value: 'MurrayMTK2R' }
+]
+
+const selectedCategoryLabel = computed(() => {
+  // Use props.code instead of code.value
+  const found = codeOptions.find(a => a.value === props.code);
+  return found ? found.label : 'Select a category';
+});
+
+// 3. Create a selection function to handle closing the dropdown
+const selectOption = (option) => {
+  if (option.disabled) return;
+  
+  emit('update:code', option.value);
+  isDropdownOpen.value = false;
+};
 </script>
+
+<template>
+  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+    <div 
+      class="custom-select-trigger" 
+      @click="isDropdownOpen = !isDropdownOpen" 
+      :class="{ 'is-active': isDropdownOpen }"
+    >
+      {{ selectedCategoryLabel }}
+      <span class="chevron">▾</span>
+    </div>
+
+    <transition name="fade-slide">
+      <div v-if="isDropdownOpen" class="custom-options-list">
+        <div 
+          v-for="option in codeOptions" 
+          :key="option.value || option.label" 
+          class="custom-option" 
+          :class="{ 
+            'selected': props.code === option.value, 
+            'is-disabled': option.disabled 
+          }" 
+          @click="selectOption(option)"
+        >
+          {{ option.label }}
+          <span v-if="props.code === option.value" class="check">✓</span>
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>

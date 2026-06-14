@@ -1,64 +1,54 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('nimbers.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('nimbers.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('nimbers.long')" />
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('nimbers.num1') }}</label>
+          <input type="number" v-model="x" ref="x">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('nimbers.num2') }}</label>
+          <input type="number" v-model="y">
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mt-2"
+        >
+          {{ errormsg }}
+        </p>
+        <div class="button-row mt-2">
+          <v-calculate @calculate = "nimberProduct"></v-calculate>
+        </div>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('nimbers.long')"
-      />
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="x"
-        >{{ $t('nimbers.num1') }}</label>
-        <input
-          id="x"
-          ref="x"
-          v-model="x"
-          type="number"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          for="y"
-        >{{ $t('nimbers.num2') }}</label>
-        <input
-          id="y"
-          v-model="y"
-          type="number"
-          class="form-control md-size mb-2"
-          @keyup.enter="nimberProduct"
-        >
-      </div>
-      <div>
-        <v-calculate class="col-md-2" @calculate = "nimberProduct"></v-calculate>
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <p class="resultbox" v-if="prod">
-        {{ $t('nimbers.prod') }} <strong>{{ prod }}</strong>.<br>
-        {{ $t('nimbers.sum') }} <strong>{{ sum }}</strong>.
-      </p>
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">     
+        <p class="card resultbox" v-if="prod">
+          {{ $t('nimbers.prod') }} <strong>{{ prod }}</strong>.<br>
+          {{ $t('nimbers.sum') }} <strong>{{ sum }}</strong>.
+        </p>
+      </VCard>
     </div>
   </div>
 </template>
 
 <script>
 
+import VCard from '@/components/generic/VCard.vue' 
 import VCalculate from '@/components/generic/VCalculate.vue' 
 
 export default {
-  name: 'MathNimbers',
+  name: 'Nimbers',
 
   components: {
+    VCard,
     VCalculate
   },
 

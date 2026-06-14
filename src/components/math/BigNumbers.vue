@@ -1,250 +1,178 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="sectionhead">
-      {{ $t('bignumbers.title') }}
+
+  <header class="page-header">
+    <h1>{{ $t('bignumbers.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <div class="card-stack">
+      <VCard :title="$t('labels.intro')">
+        <div v-html="$t('bignumbers.long')" />
+      </VCard>
+      <VCard :title="$t('labels.settings')">
+        <div class="form-horizontal">
+        <CustomDropdown 
+            v-model="base" 
+            :options="BASE_OPTIONS" 
+            :title="$t('bignumbers.selnum')"
+          />
+        </div>
+      </VCard>
+      <VCard :title="$t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ $t('bignumbers.num1') }}</label>
+          <input type="text" v-model="n1" ref="n1Input">
+        </div>
+        <div class="form-horizontal">
+          <label>{{ $t('bignumbers.num2') }}</label>
+          <input type="text" v-model="n2">
+        </div>
+        <h4>{{ $t('bignumbers.arithmetic') }}</h4>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary" @click="calcBig('ADD')">A + B</button>
+          <button class="btn btn-primary" @click="calcBig('SUB')">A - B</button>
+          <button class="btn btn-primary" @click="calcBig('MUL')">A * B</button>
+          <button class="btn btn-primary" @click="calcBig('DIV')">A \ B</button>
+          <button class="btn btn-primary" @click="calcBig('MOD')">A % B</button>
+          <!-- <input type="button" id="pow" value="A ** B" class="btn mb-2" v-on:click="calcBig('POW')"> -->
+        </div>
+        <h4>{{ $t('bignumbers.logical') }}</h4>
+        <div class="button-row mt-2">
+          <button class="btn btn-primary" @click="calcBig('AND')">A and B</button>
+          <button class="btn btn-primary" @click="calcBig('OR')">A or B</button>
+          <button class="btn btn-primary" @click="calcBig('XOR')">A xor B</button>
+          <button class="btn btn-primary" @click="calcBig('NOT')">not A</button>
+        </div>
+        <p
+          v-show="errormsg"
+          class="errormsg mb-2"
+        >
+          {{ errormsg }}
+        </p>
+      </VCard>
     </div>
-    <div class="mainpage">
-      <div
-        class="infoblock"
-        v-html="$t('bignumbers.long')"
-      />
-      <div class="row">
-        <label
-          for="selnum"
-          class="form-label sm-size mb-2"
-        >{{ $t('bignumbers.selnum') }}</label>
-        <select
-          id="selnum"
-          v-model="base"
-          class="form-select md-size mb-2"
+    <div class="card-stack">
+      <VCard :title="$t('labels.result')">     
+        <div
+          v-if="result"
+          class="card resultbox"
         >
-          <option value="10">
-            {{ $t('bignumbers.decimal') }}
-          </option>
-          <option value="2">
-            {{ $t('bignumbers.binary') }}
-          </option>
-          <option value="8">
-            {{ $t('bignumbers.octal') }}
-          </option>
-          <option value="16">
-            {{ $t('bignumbers.hexadecimal') }}
-          </option>
-        </select>
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          size="40"
-          for="n1"
-        >{{ $t('bignumbers.num1') }}</label>
-        <input
-          id="n1"
-          ref="n1"
-          v-model="n1"
-          type="text"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <div class="row">
-        <label
-          class="form-label sm-size mb-2"
-          size="40"
-          for="n2"
-        >{{ $t('bignumbers.num2') }}</label>
-        <input
-          id="n2"
-          v-model="n2"
-          type="text"
-          class="form-control md-size mb-2"
-        >
-      </div>
-      <div>
-        <h6>{{ $t('bignumbers.arithmetic') }}</h6>
-        <button
-          id="add"
-          class="btn sm-size mb-2 me-2"
-          @click="calcBig('ADD')"
-        >
-          A + B
-        </button>
-        <button
-          id="sub"
-          class="btn sm-size mb-2 me-2"
-          @click="calcBig('SUB')"
-        >
-          A - B
-        </button>
-        <button
-          id="mul"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('MUL')"
-        >
-          A * B
-        </button>
-        <button
-          id="div"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('DIV')"
-        >
-          A \ B
-        </button>
-        <button
-          id="mod"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('MOD')"
-        >
-          A % B
-        </button>
-        <!-- <input type="button" id="pow" value="A ** B" class="btn mb-2" v-on:click="calcBig('POW')"> -->
-        <h6>{{ $t('bignumbers.logical') }}</h6>
-        <button
-          id="and"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('AND')"
-        >
-          A and B
-        </button>
-        <button
-          id="or"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('OR')"
-        >
-          A or B
-        </button>
-        <button
-          id="xor"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('XOR')"
-        >
-          A xor B
-        </button>
-        <button
-          id="not"
-          class="btn mb-2 sm-size mb-2 me-2"
-          @click="calcBig('NOT')"
-        >
-          not A
-        </button>
-      </div>
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}
-      </p>
-      <div
-        v-if="result"
-        class="resultbox"
-      >
-        {{ result }}.
-      </div>
+          {{ result }}
+        </div>
+      </VCard>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import VCard from '@/components/generic/VCard.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
-export default {
+defineOptions({
+  name: 'BigNumbers'
+})
 
-  name: 'BigNumbers',
+const { t } = useI18n()
 
-  data: function () {
-    return {
-      errormsg: "",
-      n1: "0",
-      n2: "0",
-      result: "",
-      base: 10
-    }
-  },
+// --- Static Data ---
+const BASE_OPTIONS = [
+  { value: 10, label: "Decimal" },
+  { value: 2, label: "Binary" },
+  { value: 8, label: "Octal" },
+  { value: 16, label: "Hexadecimal" }
+]
 
-  mounted: function() {
-    this.$refs.n1.focus();
-  },
+// --- State ---
+const errormsg = ref("")
+const n1 = ref("0")
+const n2 = ref("0")
+const result = ref("")
+const base = ref(10)
 
-  methods: {
+// --- Template Refs ---
+const n1Input = ref(null)
 
-    // Calculate the nimber product and sum
-    calcBig: function(oper) {
+onMounted(() => {
+  n1Input.value?.focus()
+})
 
-      // reset calculator
-      this.errormsg = "";
-      let prefix = "";
-      let s1, r;
-      switch (this.base) {
-        case "2"  : prefix = "0b"; break;
-        case "8"  : prefix = "0o"; break;
-        case "16" : prefix = "0x"; break;
-      }
-      
-      try {
+// --- Methods ---
 
-        let n1 = BigInt(prefix + this.n1);
-        let n2 = BigInt(prefix + this.n2);
+const calcBig = (oper) => {
+  // Reset
+  errormsg.value = ""
+  
+  let prefix = ""
+  // Note: Cast to string for switch safety in case dropdown returns number
+  switch (String(base.value)) {
+    case "2":  prefix = "0b"; break
+    case "8":  prefix = "0o"; break
+    case "16": prefix = "0x"; break
+  }
 
-        switch (oper) {
-        
-          case "ADD" :
-            this.result = (n1 + n2).toString(this.base);
-            break;
-          case "SUB":  
-            this.result = (n1 - n2).toString(this.base);
-            break;
-          case "MUL":  
-            this.result = (n1 * n2).toString(this.base);
-            break;
-          case "DIV":  
-            this.result = (n1 / n2).toString(this.base);
-            break;
-          case "MOD":  
-            this.result = (n1 % n2).toString(this.base);
-            break;
-          case "POW":  
-            this.result = (n1 ** n2).toString(this.base);
-            break;
-          case "AND" :
-            this.result = (n1 & n2).toString(this.base);
-            break;
-          case "OR" :
-            this.result = (n1 | n2).toString(this.base);
-            break;
-          case "XOR" :
-            this.result = (n1 ^ n2).toString(this.base);
-            break;
-          case "NOT" :
-          
-            s1 = n1.toString(2);
-            r = "";
-            for (let i = 0; i < s1.length; i++) {
-              r += (s1[i] == "1") ? "0" : "1";
-            }
-            this.result = BigInt("0b" + r).toString(this.base);
-            break;
-            
-          default :
-            // Illegal operator
-          
+  try {
+    const val1 = BigInt(prefix + n1.value)
+    const val2 = BigInt(prefix + n2.value)
+
+    switch (oper) {
+      case "ADD":
+        result.value = (val1 + val2).toString(base.value)
+        break
+      case "SUB":
+        result.value = (val1 - val2).toString(base.value)
+        break
+      case "MUL":
+        result.value = (val1 * val2).toString(base.value)
+        break
+      case "DIV":
+        result.value = (val1 / val2).toString(base.value)
+        break
+      case "MOD":
+        result.value = (val1 % val2).toString(base.value)
+        break
+      case "POW":
+        result.value = (val1 ** val2).toString(base.value)
+        break
+      case "AND":
+        result.value = (val1 & val2).toString(base.value)
+        break
+      case "OR":
+        result.value = (val1 | val2).toString(base.value)
+        break
+      case "XOR":
+        result.value = (val1 ^ val2).toString(base.value)
+        break
+      case "NOT": {
+        const s1 = val1.toString(2)
+        let flipped = ""
+        for (let i = 0; i < s1.length; i++) {
+          flipped += (s1[i] === "1") ? "0" : "1"
         }
+        result.value = BigInt("0b" + flipped).toString(base.value)
+        break
+      }
+    }
+    
+    // Ensure result is converted to uppercase if it's Hex
+    if (base.value === 16) {
+      result.value = result.value.toUpperCase()
+    }
 
-      } catch (e) {
-
-        this.errormsg = this.$t('errors.generic');
-        console.log(e);
-        
-      }      
- 
-      
-    },
-
-  },
+  } catch (e) {
+    errormsg.value = t('errors.generic')
+    console.error("BigInt Calculation Error:", e)
+  }
 }
 </script>
 
 <style scoped>
 
-h6 {
-	color: #2E1E03;
+h4 {
+	text-align: right;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 </style>

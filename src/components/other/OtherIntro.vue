@@ -1,101 +1,44 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <div class="row justify-content-around">
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <img class="card-img-top" src="@/assets/images/other.jpg" alt="Text" style="height: 200px">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('menu.other')}}</h5>
-          <p class="card-text" v-html="$t('othertools.intro')"></p>
-        </div>
+  <div class="card-grid mb-2">
+    <!-- Intro Card -->
+    <VCard :title="$t('menu.other')">
+      <img class="card-img-top" src="@/assets/images/other.jpg" alt="Other" style="width: 100%; height: 200px; object-fit: cover;">
+      <div class="card-body">
+        <p class="card-text" v-html="$t('othertools.intro')"></p>
       </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('printlog.title')}}</h5>
-          <p class="card-text" v-html="$t('printlog.long')"></p>
-          <router-link to="/printlog"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
+    </VCard>
+
+    <!-- Tool Cards -->
+    <VCard 
+      v-for="tool in otherTools" 
+      :key="tool" 
+      :title="$t(`${tool}.title`)"
+    >
+      <div class="card-body">
+        <p class="card-text" v-html="$t(`${tool}.long`)"></p>
+        <router-link :to="`/${tool}`">
+          <span class="btn">{{ $t('labels.letsgo') }}</span>
+        </router-link>
       </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('genlog.title')}}</h5>
-          <p class="card-text" v-html="$t('genlog.long')"></p>
-          <router-link to="/genlog"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('htmlparser.title')}}</h5>
-          <p class="card-text" v-html="$t('htmlparser.long')"></p>
-          <router-link to="/htmlparser"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('unitconvertor.title')}}</h5>
-          <p class="card-text" v-html="$t('unitconvertor.long')"></p>
-          <router-link to="/unitconvertor"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('datecalc.title')}}</h5>
-          <p class="card-text" v-html="$t('datecalc.long')"></p>
-          <router-link to="/datecalc"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('randomizer.title')}}</h5>
-          <p class="card-text" v-html="$t('randomizer.long')"></p>
-          <router-link to="/randomizer"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('periodictable.title')}}</h5>
-          <p class="card-text" v-html="$t('periodictable.long')"></p>
-          <router-link to="/periodictable"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('countries.title')}}</h5>
-          <p class="card-text" v-html="$t('countries.long')"></p>
-          <router-link to="/countries"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('usastates.title')}}</h5>
-          <p class="card-text" v-html="$t('usastates.long')"></p>
-          <router-link to="/usastates"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('regions.title')}}</h5>
-          <p class="card-text" v-html="$t('regions.long')"></p>
-          <router-link to="/regions"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('dnacode.title')}}</h5>
-          <p class="card-text" v-html="$t('dnacode.long')"></p>
-          <router-link to="/regions"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-      <div class="card m-2 px-0" style="width: 25rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{$t('booksearch.title')}}</h5>
-          <p class="card-text" v-html="$t('booksearch.long')"></p>
-          <router-link to="/booksearch"><span class="btn">{{$t('labels.letsgo')}}</span></router-link>
-        </div>
-      </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import VCard from "@/components/generic/VCard.vue"
 
+const otherTools = [
+  'printlog',
+  'genlog',
+  'htmlparser',
+  'unitconvertor',
+  'datecalc',
+  'randomizer',
+  'periodictable',
+  'countries',
+  'usastates',
+  'regions',
+  'dnacode',
+  'booksearch'
+]
 </script>

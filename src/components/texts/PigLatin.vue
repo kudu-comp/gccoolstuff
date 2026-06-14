@@ -1,133 +1,138 @@
 <template>
-  <div class="d-flex flex-column mx-4">
-    <!-- Section head / page title -->
-    <div class="sectionhead">
-      {{ $t('piglatin.title') }}
-    </div>
-    <!-- Main page -->
-    <div class="mainpage">
-      <!-- Start with info block -->
-      <div
-        class="infoblock"
-        v-html="$t('piglatin.long')"
-      />
-      <!-- Form fields -->
+
+  <header class="page-header">
+    <h1>{{ $t('piglatin.title') }}</h1>
+  </header>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.intro')">
+      <div v-html="$t('piglatin.long')" />
+      <h4>{{argots[sel].name}}</h4>
+      <p style="margin-top: 0px; opacity:0.65;">{{ argots[sel].descr }}</p>
+    </VCard>
+    <VCard :title="$t('labels.settings')">
       <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
-      <label class="form-check-label mb-2">{{$t('piglatin.sel')}}</label>
-      <div v-for="(a, index) in argots" class="form-check">
-        <input
-          :id="'radio' + idx"
-          v-model="sel"
-          type="radio"
-          :value="index"
-          class="form-check-input"
-        />
-        <label class="form-check-label" for="radio1">{{ a.name }}</label>
-        <p>{{ a.descr }}</p>
+      <div class="radio-group mt-2">
+        <label>{{$t('piglatin.sel')}}</label>
+        <div class="radio-options-vertical">
+          <label class="radio-item" v-for="(a, index) in argots" :key="index">
+            <input type="radio" :value="index" v-model="sel">
+            <span class="radio-mark"></span> {{ a.name }}
+          </label>
+        </div>
       </div>
-      <button :disabled="dictloading" class="btn mb-2 me-2 sm-size" id="encode" @click="encode()">{{$t('buttons.encode')}}</button>
-      <button :disabled="dictloading" class="btn mb-2 sm-size" id="decode" @click="decode()">{{$t('buttons.decode')}}</button>
-      <!-- Error message -->
+    </VCard>
+  </div>
+  <div class="card-grid mb-2">
+    <VCard :title="$t('labels.input')">
+      <textarea
+        id="message"
+        ref="messageInput"
+        v-model="msg"
+        :placeholder="$t('labels.message')"
+        rows="5"
+        @input="wordValue"
+      />
+      <div class="button-row">
+        <button :disabled="dictloading" class="btn btn-primary" @click="encode()">{{$t('buttons.encode')}}</button>
+        <button :disabled="dictloading" class="btn btn-primary" @click="decode()">{{$t('buttons.decode')}}</button>
+      </div>
       <p
         v-show="errormsg"
-        class="errormsg"
+        class="errormsg mb-2"
       >
-        {{ errormsg }}
-      </p>
-      <!-- Text area input -->
-      <div class="mb-2">
-        <textarea
-          id="msg"
-          v-model="msg"
-          ref="msg"
-          class="form-control"
-          rows="5"
-        />
-      </div>
-      <!-- Result area or use v-html -->
-      <div v-if="result" class="resultbox" >
+        {{ errormsg }}.
+      </p>          
+    </VCard>
+    <VCard :title="$t('labels.result')">
+      <div v-if="result" class="card resultbox" >
         {{ result }} 
       </div>
-    </div>
+    </VCard>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import VLanguage from "@/components/generic/VLanguage.vue"
+import VCard from "@/components/generic/VCard.vue"
+import { piglatin } from "@/scripts/piglatin.js"
 
-import VLanguage from "@/components/generic/VLanguage.vue";
-import { piglatin } from "@/scripts/piglatin.js";
+defineOptions({
+  name: "PigLatin"
+})
 
-export default {
+const route = useRoute()
 
-  name: "PigLatin",
+// --- State ---
+const result = ref("")
+const errormsg = ref("")
+const dict = ref({})
+const dictloading = ref(true)
+const sel = ref(0)
+const msg = ref("")
 
-  components: {
-    VLanguage   
-  },
+// Static reference to the piglatin logic
+const argots = piglatin
 
-  data() {
-    return {
-      result: "",
-      errormsg: "",
-      dict: null,
-      dict: {},
-      dictloading: true,
-      sel: 0,
-      argots: null,
-      msg: ""
-    };
-  },
+// --- Template Ref ---
+const msgInput = ref(null)
 
-  mounted() {
-    this.argots = piglatin;
-    this.$refs.msg.focus();
-    if (this.$route.params.pig) {
-      if (this.$route.params.pig >= "0" && this.$route.params.pig <= "7") this.sel = parseInt(this.$route.params.pig);
+onMounted(() => {
+  // Focus the input
+  msgInput.value?.focus()
+
+  // Handle route params
+  const pigParam = route.params.pig
+  if (pigParam !== undefined) {
+    const val = parseInt(pigParam)
+    if (val >= 0 && val <= 7) {
+      sel.value = val
     }
-  },
+  }
+})
 
-  methods: {
+// --- Methods ---
 
-    decode: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
-      let words = this.msg.trim().match(/[^\s]+|[\s]+/gi);
+const decode = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
+  
+  const trimmedMsg = msg.value.trim()
+  const words = trimmedMsg.match(/[^\s.,:;?!]+|[\s.,:;?!]+/gi)
 
-      if (!words) {
-        this.errormsg = "No input";
-        return;
-      }
+  if (!words) {
+    errormsg.value = "No input"
+    return
+  }
 
-      // Decode all the words
-      console.log(this.dict.name)
-      for (let w of words) {
-        this.result += this.argots[this.sel].decodeWord(this.dict, w);
-      }
-    },
+  // Decode all the words
+  let builder = ""
+  for (let w of words) {
+    builder += argots[sel.value].decodeWord(dict.value, w)
+  }
+  result.value = builder
+}
 
-    encode: function () {
-      // Reset
-      this.result = "";
-      this.errormsg = "";
+const encode = () => {
+  // Reset
+  result.value = ""
+  errormsg.value = ""
 
-      // Split in words and other stuff
-      let words = this.msg.trim().match(/[^\s]+|[\s]+/gi);
-      if (!words) {
-        this.errormsg = "No input";
-        return;
-      }
+  const trimmedMsg = msg.value.trim()
+  const words = trimmedMsg.match(/[^\s.,:;?!]+|[\s.,:;?!]+/gi)
+  
+  if (!words) {
+    errormsg.value = "No input"
+    return
+  }
 
-      // Start generating
-      for (let w of words) {
-        this.result += this.argots[this.sel].encodeWord(this.dict, w);
-      }
-    },
-
-  },
-};
-
+  // Start generating
+  let builder = ""
+  for (let w of words) {
+    builder += argots[sel.value].encodeWord(dict.value, w)
+  }
+  result.value = builder
+}
 </script>
-
-<style scoped>
-</style>
