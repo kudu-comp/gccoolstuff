@@ -1,23 +1,23 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('pixelbuild.title') }}</h1>
+    <h1>{{ t('pixelbuild.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('pixelbuild.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('pixelbuild.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
             v-model="message"
             ref="messageInput"
-            :placeholder="$t('labels.message')"
+            :placeholder="t('labels.message')"
             rows="5"
           />
         <div class="button-row mt-2">
           <button id="draw" class="btn btn-primary" @click="drawPixels">
-            {{ $t('buttons.show') }}
+            {{ t('buttons.show') }}
           </button>
           <v-download 
             v-model:canvas = "canvasRef"
@@ -30,9 +30,9 @@
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{ $t('exifscanner.height') }}</label>
+          <label>{{ t('exifscanner.height') }}</label>
           <input
             id="imgheight"
             v-model="imgHeight"
@@ -40,7 +40,7 @@
           >
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('exifscanner.width') }}</label>
+          <label>{{ t('exifscanner.width') }}</label>
           <input
             id="imgwidth"
             v-model="imgWidth"
@@ -49,9 +49,9 @@
         </div>
         <div v-for="(v, idx) in vars">
           <div class="form-horizontal">
-            <label>{{ $t('labels.variable') }}</label>
+            <label>{{ t('labels.variable') }}</label>
             <input type="text" v-model="vars[idx]">
-            <label>{{ $t('labels.color') }}</label>
+            <label>{{ t('labels.color') }}</label>
             <input type="color" v-model="cols[idx]">
           </div>
         </div>
@@ -71,6 +71,11 @@
 import { ref, shallowRef, onMounted } from 'vue'
 import VDownload from '@/components/generic/VDownload.vue'
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: 'PixelBuild'

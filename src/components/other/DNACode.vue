@@ -1,17 +1,17 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('dnacode.title') }}</h1>
+    <h1>{{ t('dnacode.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('dnacode.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('dnacode.long')" />
       </VCard>
 
       <!-- Table Card -->
-      <VCard :title="$t('dnacode.title')">
+      <VCard :title="t('dnacode.title')">
         <VTable
           :phsearch="phsearch"
           :defsearch="defsearch"
@@ -27,7 +27,7 @@
 
     <!-- Results Card (Displays search output emitted from VTable) -->
     <div class="card-stack">
-      <VCard  :title="$t('labels.result')">
+      <VCard  :title="t('labels.result')">
         <div v-if="formattedResult" class="resultbox" v-html="formattedResult" />
       </VCard>
     </div>

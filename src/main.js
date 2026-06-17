@@ -18,8 +18,8 @@ const i18n = createI18n({
   globalInjection: true,
   locale: navigator.language.slice(0,2),
   fallbackLocale: 'en',
-  silentTranslationWarn: true,
-  silentFallbackWarn: true,
+  missingWarn: false,     // Suppresses "Can't find translation..."
+  fallbackWarn: false,    // Suppresses "Fall back to en..."
   messages: {
     en,
     nl

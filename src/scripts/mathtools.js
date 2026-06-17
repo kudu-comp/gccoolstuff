@@ -582,21 +582,24 @@ export function ispalindrome (n) {
  * 
  */
 
-export function isevil (n) {
-  if (n === "") return false;
-  if (n === 0) return true;
-  return n.toString(2).match(/1/g).length % 2 === 0;
+export function isevil(n) {
+  let count = 0;
+  let temp = n;
+  while (temp > 0) {
+    temp &= (temp - 1); // Clears the least significant bit set to 1
+    count++;
+  }
+  return count % 2 === 0;
 }
 
 export function isodious (n) {
-  if (n === "" || n === 0) return false;
-  return n.toString(2).match(/1/g).length % 2 === 1;
+  return !isevil(n);
 }
 
-export function issquarefree (n) {
-  // Niet deelbaar door kwadraat > 1
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (n % i ** 2 === 0) return false;
+export function issquarefree(n) {
+  if (n % 4 === 0) return false;
+  for (let i = 3; i * i <= n; i += 2) {
+    if (n % (i * i) === 0) return false;
   }
   return true;
 }
@@ -661,13 +664,19 @@ export function isdecagonal (n) {
   return Math.floor(h) === h;
 }
 
-export function ispowerful (n) {
-  // Powerful, For every prime p dividing n, p**2 also divides n
-  let h = primeFactorization(n);
-  for (let i = 0; i < h.length; i++) {
-    if (n % h[i] ** 2 !== 0) return false;
+export function ispowerful(n) {
+  if (n === 1) return true;
+  for (let i = 2; i * i <= n; i++) {
+    if (n % i === 0) {
+      let count = 0;
+      while (n % i === 0) {
+        count++;
+        n /= i;
+      }
+      if (count < 2) return false; // If a prime divides n, its square must also divide n
+    }
   }
-  return true;
+  return n === 1; // If n > 1 now, it's a prime factor with power 1
 }
 
 export function iscube(n) {
@@ -699,24 +708,61 @@ export function issquarepyramidal (n) {
   return tot === n;
 }
 
-export function islucky (n) {
-  let h = [];
-  for (let i = 1; i <= n; i++) h.push(i);
-  let cnt = 1;
-  let sieve = h[1];
-  while (h[sieve] < n && h[h.length - 1] === n) {
-    let h1 = [];
-    for (let i = 0; i < h.length; i++) {
-      if ((i + 1) % sieve !== 0) {
-        h1.push(h[i]);
-      } else if (h[i] === n) {
-        return false;
-      }
+export function islucky(n) {
+    // Cache to store the lucky numbers we've found so far to use as future sieves.
+    // For n = 10^9, we only need to find ~31,000 lucky numbers, which is tiny.
+    const luckyCache = [1, 3];
+
+    // Helper to find the next lucky number to be used as a sieve
+    function getNextSieve(index) {
+        if (index < luckyCache.length) return luckyCache[index];
+
+        let candidate = luckyCache[luckyCache.length - 1] + 2;
+        while (true) {
+            let p = candidate;
+            // Does 'candidate' survive the first sieve (2)?
+            if (p % 2 !== 0) {
+                p -= Math.floor(p / 2);
+                let survived = true;
+                // Does it survive all subsequent lucky number sieves?
+                for (let i = 1; i < luckyCache.length; i++) {
+                    let s = luckyCache[i];
+                    if (s > p) break;
+                    if (p % s === 0) { survived = false; break; }
+                    p -= Math.floor(p / s);
+                }
+                if (survived) {
+                    luckyCache.push(candidate);
+                    return candidate;
+                }
+            }
+            candidate += 2;
+        }
     }
-    sieve = h1[cnt++];
-    h = [...h1];
-  }
-  return h[h.length - 1] === n;
+
+    // --- Main Logic ---
+    let position = n;
+
+    // 1. First step: Sieve by 2 (removes even numbers)
+    if (position % 2 === 0) return false;
+    position -= Math.floor(position / 2);
+
+    // 2. Subsequent steps: Sieve by lucky numbers L_2, L_3, L_4...
+    let sieveIndex = 1; // luckyCache[1] is 3
+    while (true) {
+        let sieveValue = getNextSieve(sieveIndex);
+
+        // If the current sieve value is greater than n's current position, 
+        // n will never be hit/removed by any future sieves.
+        if (sieveValue > position) return true;
+
+        // If n's position is a multiple of the sieveValue, it's removed.
+        if (position % sieveValue === 0) return false;
+
+        // Update position for the next round
+        position -= Math.floor(position / sieveValue);
+        sieveIndex++;
+    }
 }
 
 export function isstar (n) {
@@ -731,20 +777,19 @@ export function isaspiring (n) {
 	return aspiringNumbers.indexOf (n) >= 0;
 }
 
-export function ishappy (n) {
-	// Check if number is happy, see wiki for explanation
-	let str = n.toString();
-	let mem = [];
-	while (true) {
-		let sum = 0;
-		for (let i = 0; i < str.length; i++) {
-			sum = sum + str[i]**2;
-		}
-		if (sum === 1) return true;
-		if (mem.indexOf(sum) >= 0) return false;
-		mem.push(sum);
-		str = sum.toString();
-	}
+export function ishappy(n) {
+  let mem = new Set();
+  while (n !== 1 && !mem.has(n)) {
+    mem.add(n);
+    let sum = 0;
+    while (n > 0) {
+      let digit = n % 10;
+      sum += digit * digit;
+      n = Math.floor(n / 10);
+    }
+    n = sum;
+  }
+  return n === 1;
 }
 
 export function isfibonacci(n) {

@@ -1,71 +1,71 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('printlog.title') }}</h1>
+    <h1>{{ t('printlog.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('printlog.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('printlog.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{ $t('printlog.printlog') }} 1</label>
+          <label>{{ t('printlog.header') }} 1</label>
           <input type="text" v-model="hdr1">
         </div>        
         <div class="form-horizontal">
-          <label>{{ $t('printlog.printlog') }} 2</label>
+          <label>{{ t('printlog.header') }} 2</label>
           <input type="text" v-model="hdr2">
         </div>        
         <div class="form-horizontal">
-          <label>{{ $t('printlog.printlog') }} 3</label>
+          <label>{{ t('printlog.header') }} 3</label>
           <input type="text" v-model="hdr3">
         </div>        
         <div class="form-horizontal">
-          <label>{{ $t('printlog.ncol') }}</label>
+          <label>{{ t('printlog.ncol') }}</label>
           <input type="number" v-model="ncol">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('printlog.lpl') }}</label>
+          <label>{{ t('printlog.lpl') }}</label>
           <input type="number" v-model="linesperlog">
         </div>
         <div class="form-horizontal">
           <CustomDropdown
-            :title = "$t('printlog.lh')"
+            :title = "t('printlog.lh')"
             :options = lhOpt
             v-model = lh
           />
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('printlog.hdrcol') }}</label>
+          <label>{{ t('printlog.hdrcol') }}</label>
           <input type="color" v-model="hdrcol">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('printlog.txtcol') }}</label>
+          <label>{{ t('printlog.txtcol') }}</label>
           <input type="color" v-model="txtcol">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('printlog.linecol') }}</label>
+          <label>{{ t('printlog.linecol') }}</label>
           <input type="color" v-model="linecol">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="nolines">
           <span class="checkmark"></span>
-          {{ $t('printlog.nolines') }}
+          {{ t('printlog.nolines') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showimg">
           <span class="checkmark"></span>
-          {{ $t('printlog.showimg') }}
+          {{ t('printlog.showimg') }}
         </label>
         <div v-if="showimg" class="form-horizontal">
-          <label>{{ $t('printlog.selimg') }}</label>
+          <label>{{ t('printlog.selimg') }}</label>
           <input type="file" @change="selectFile">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showlbl">
           <span class="checkmark"></span>
-          {{ $t('printlog.nmdttm') }}
+          {{ t('printlog.nmdttm') }}
         </label>
         <div v-if = 'showlbl' class="form-horizontal">
           <label>Label 1</label>
@@ -82,18 +82,18 @@
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showftf">
           <span class="checkmark"></span>
-          {{ $t('printlog.printftf') }}
+          {{ t('printlog.printftf') }}
         </label>
         <div v-if="showftf" class="form-horizontal">
-          <label>{{ $t('printlog.ftfcol') }}</label>
+          <label>{{ t('printlog.ftfcol') }}</label>
           <input type="color" v-model="ftfcol">
         </div>
         <div class="button-row mt-2">
           <button class="btn btn-primary" @click="save">
-            {{ $t('printlog.savepdf')}}
+            {{ t('printlog.savepdf')}}
           </button>
           <button class="btn btn-primary" @click="savepng">
-            {{ $t('printlog.savepng')}}
+            {{ t('printlog.savepng')}}
           </button>
         </div>
         <p

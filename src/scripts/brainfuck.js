@@ -12,6 +12,50 @@ const BF_TERNARY = 8;
 const BF_PIKALANG = 9;
 const BF_REVERSEFUCK = 10;
 
+export function textToBrainfuck(text) {
+    if (!text) return "";
+    
+    // Start by setting a base value (e.g., 72) using a loop: 
+    // ++++++++ [ > +++++++++ < - ] >
+    // This sets cell #1 to 72 (8 * 9)
+    let bf = "++++++++[>+++++++++<-]>"; 
+    let currentVal = 72;
+    
+    for (let i = 0; i < text.length; i++) {
+        const target = text.charCodeAt(i);
+        const diff = target - currentVal;
+        bf += (diff >= 0 ? "+".repeat(diff) : "-".repeat(-diff)) + ".";
+        currentVal = target;
+    }
+    return bf;
+}
+
+/**
+ * Generates a Brainfuck program in shorthand notation (+n/-n).
+ * @param {string} text - The input string (e.g., "Hi")
+ * @returns {string} - The shorthand Brainfuck code (e.g., "+72.+33.")
+ */
+export function textToBrainfuckShorthand(text) {
+    let bf = "";
+    let currentCellValue = 0;
+
+    for (let i = 0; i < text.length; i++) {
+        const targetValue = text.charCodeAt(i);
+        const delta = targetValue - currentCellValue;
+
+        if (delta > 0) {
+            bf += "+" + delta;
+        } else if (delta < 0) {
+            bf += "-" + Math.abs(delta);
+        }
+
+        bf += "."; // Output the current cell
+        currentCellValue = targetValue;
+    }
+
+    return bf;
+}
+
 export const vars = [
   "Brainfuck",
   "Ook!",

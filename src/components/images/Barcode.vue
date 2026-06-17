@@ -1,19 +1,19 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('barcode.title') }}</h1>
+    <h1>{{ t('barcode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('barcode.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('barcode.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <CustomDropdown 
             v-model="bctype" 
             :options="bcdefs" 
-            :title="$t('barcode.bctype')"
+            :title="t('barcode.bctype')"
           />
         </div>
         <p
@@ -23,7 +23,7 @@
           {{ errormsg }}
         </p>
         <div class="form-horizontal">
-          <label>{{$t('barcode.msg')}}</label>
+          <label>{{t('barcode.msg')}}</label>
           <input
             v-model="msg"
             type="text"
@@ -33,23 +33,23 @@
          <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showtxt">
           <span class="checkmark"></span>
-          {{ $t('barcode.showtxt') }}
+          {{ t('barcode.showtxt') }}
         </label>
         <div class='form-horizontal'>
-          <label>{{ $t('barcode.clr')}}</label>
+          <label>{{ t('barcode.clr')}}</label>
           <input type='color' v-model='clr' style="flex: 0 0 40px"/>
         </div>
         <div class='form-horizontal'>
-          <label >{{ $t('barcode.bgclr')}}</label>
+          <label >{{ t('barcode.bgclr')}}</label>
           <input type='color' v-model='bgclr' style="flex: 0 0 40px" />
         </div>
         <div class="button-row">
           <button id="convert" class="btn btn-primary"  @click="generate()">
-            {{ $t('buttons.generate') }}
+            {{ t('buttons.generate') }}
           </button>
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <canvas ref="canvasRef"></canvas>      
       </VCard>
     </div>
@@ -61,6 +61,11 @@ import { ref, watch, onMounted } from 'vue'
 import bwipjs from "bwip-js"
 import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: "Barcode"

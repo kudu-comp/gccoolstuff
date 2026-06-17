@@ -161,7 +161,7 @@ onUnmounted(() => document.removeEventListener('click', handleClickOutside));
   gap: 8px;
   transition: all 0.2s ease;
   white-space: normal;       /* Allows text to wrap to the next line */
-  word-wrap: break-word;      /* Breaks extremely long words if necessary */
+  overflow-wrap: break-word; /* Breaks extremely long words if necessary */
   line-height: 1.4;           /* Adds space between lines for readability */
   align-items: flex-start;    /* Aligns the arrow/icon to the top of the text */
 }

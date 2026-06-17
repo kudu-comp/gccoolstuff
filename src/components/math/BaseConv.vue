@@ -1,58 +1,53 @@
 <template>
-
   <header class="page-header">
-    <h1>{{ $t('baseconv.title') }}</h1>
+    <h1>{{ t('baseconv.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('baseconv.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('baseconv.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{ $t('baseconv.from') }}</label>
-          <input type="number" v-model="from" min="2" max="36">
-          <input type="text" v-model="fromstr">
+          <label>{{ t('baseconv.from') }}</label>
+          <!-- Using .number modifier to ensure numeric values -->
+          <input type="number" v-model.number="from" min="2" max="36">
+          <input type="text" v-model="fromstr" :placeholder="t('baseconv.custsym')">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('baseconv.to') }}</label>
-          <input type="number" v-model="to" min="2" max="36">
-          <input type="text" v-model="tostr">
+          <label>{{ t('baseconv.to') }}</label>
+          <input type="number" v-model.number="to" min="2" max="36">
+          <input type="text" v-model="tostr" :placeholder="t('baseconv.custsym')">
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           ref="inputRef"
+          class="mb-2"
           v-model="input"
-          :placeholder="$t('labels.message')"
+          :placeholder="t('labels.message')"
           rows="5"
         />
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <!-- Error message now comes from computed property -->
+        <p v-show="errormsg" class="errormsg">
           {{ errormsg }}.
         </p>          
-        <div class="button-row mt-2">
-          <button id="convert" class="btn btn-primary"  @click="toConvert">
-            {{ $t('buttons.convert') }}
-          </button>
-        </div>
+        <!-- Convert button removed: logic is now automatic -->
       </VCard>
-      <VCard :title="$t('labels.result')">     
-        <div class="card resultbox" v-if="result">
+      
+      <VCard :title="t('labels.result')">     
+        <div class="card resultbox font-monospace" v-if="result">
           {{ result }}      
         </div>
       </VCard>
     </div>
   </div>
-
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import VCard from '@/components/generic/VCard.vue'
 
@@ -67,60 +62,51 @@ const DEF_STR = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 // --- State ---
 const input = ref("")
-const result = ref("")
-const errormsg = ref("")
 const fromstr = ref("")
 const tostr = ref("")
 const from = ref(2)
 const to = ref(10)
-
-// --- Template Refs ---
 const inputRef = ref(null)
 
 onMounted(() => {
   inputRef.value?.focus()
 })
 
-// --- Methods ---
+// --- Computed Logic ---
 
-const toConvert = () => {
-  // Reset
-  result.value = ""
-  errormsg.value = ""
-  
+const conversion = computed(() => {
+  const text = input.value.trim()
   const cleanFromStr = fromstr.value.trim()
   const cleanToStr = tostr.value.trim()
 
-  // Validation: Check if custom symbol strings match the selected base lengths
+  // 1. Initial State / Validation
+  if (!text) return { result: "", error: "" }
+
   if (
     (cleanFromStr !== "" && cleanFromStr.length !== from.value) ||
     (cleanToStr !== "" && cleanToStr.length !== to.value)
   ) {
-    errormsg.value = t("baseconv.symbolserr")
-    return
+    return { result: "", error: t("baseconv.symbolserr") }
   }
 
-  if (!input.value) {
-    errormsg.value = t("errors.noinput")
-    return
-  }
-
-  // Parse numbers from input (find chunks of non-whitespace)
-  const nums = input.value.matchAll(/(\S+)/gi)
+  // 2. Setup Mappings
   const mappingFrom = cleanFromStr.length > 0 ? cleanFromStr : DEF_STR
   const mappingTo = cleanToStr.length > 0 ? cleanToStr : DEF_STR
 
   let outputBuilder = ""
+  let currentError = ""
 
-  // Process all extracted number strings
+  // 3. Process Input Chunks
+  const nums = text.matchAll(/(\S+)/gi)
+
   for (const n of nums) {
     let standardBaseStr = ""
     const currentWord = n[0]
 
-    // 1. Convert input word from custom symbols to standard 0-9A-Z alphabet
+    // Step A: Map custom symbols to standard 0-9A-Z alphabet
     for (const char of currentWord) {
       const idx = mappingFrom.toUpperCase().indexOf(char.toUpperCase())
-      if (idx === -1) {
+      if (idx === -1 || idx >= from.value) {
         standardBaseStr = null
         break
       }
@@ -128,22 +114,21 @@ const toConvert = () => {
     }
 
     if (standardBaseStr === null) {
-      errormsg.value = t("errors.unknowninput")
-      outputBuilder += " error "
+      currentError = t("errors.unknowninput")
+      outputBuilder += " ? "
       continue
     }
 
-    // 2. Perform the actual base conversion
-    // Parse from 'from' base to decimal, then to 'to' base string
-    const converted = parseInt(standardBaseStr, from.value).toString(to.value)
-
-    if (isNaN(parseInt(standardBaseStr, from.value))) {
-      errormsg.value = t("errors.unknowninput")
-      outputBuilder += " error "
+    // Step B: Convert standard string to Target Base
+    const parsed = parseInt(standardBaseStr, from.value)
+    if (isNaN(parsed)) {
+      currentError = t("errors.unknowninput")
+      outputBuilder += " ? "
       continue
     }
+    const converted = parsed.toString(to.value)
 
-    // 3. Convert result string from standard alphabet back to custom symbols
+    // Step C: Map standard characters back to target custom symbols
     let customBaseResult = ""
     for (const char of converted) {
       const idx = DEF_STR.indexOf(char.toUpperCase())
@@ -152,13 +137,23 @@ const toConvert = () => {
       }
     }
 
-    if (!customBaseResult) {
-      errormsg.value = t("errors.unknowninput")
-    } else {
-      outputBuilder += customBaseResult + " "
-    }
-  } 
+    outputBuilder += customBaseResult + " "
+  }
 
-  result.value = outputBuilder.trim()
-}
+  return {
+    result: outputBuilder.trim(),
+    error: currentError
+  }
+})
+
+// Helpers to expose specific parts of the computed object to the template
+const result = computed(() => conversion.value.result)
+const errormsg = computed(() => conversion.value.error)
 </script>
+
+<style scoped>
+.resultbox {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+</style>

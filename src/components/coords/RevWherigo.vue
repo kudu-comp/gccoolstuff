@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('revwherigo.title') }}</h1>
+    <h1>{{ t('revwherigo.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('revwherigo.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('revwherigo.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal mb-2">
-          <label>{{ $t('labels.input') }}</label>
+          <label>{{ t('labels.input') }}</label>
           <input type="text" ref="messageInput" v-model="message">
         </div>
         <div
@@ -23,7 +23,7 @@
           <v-show-on-map id="go" class="btn btn-primary" @Show="solveReverse()" />
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
@@ -32,7 +32,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="message" />     
       </VCard>
     </div>

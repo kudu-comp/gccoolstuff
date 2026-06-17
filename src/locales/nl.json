@@ -1,6 +1,11 @@
 {
   "language": "Taal",
 
+  "texttransform" : {
+    "title" : "Tekstverwerker",
+    "long": "Transformeer je tekst door deze op te schonen, hoofdletters aan te passen, de tekst om te draaien of leuke filters toe te passen."
+  },
+
   "errors": {
     "generic": "Er ging iets mis. Probeer het opnieuw.",
     "noinput": "Er zijn geen gegevens ingevoerd",
@@ -23,6 +28,9 @@
     "intro": "Introductie",
     "selaction": "Wat wil je doen?",
     "settings": "Instellingen",
+    "replacediac": "Vervang diakrieten",
+    "reverse": "Omgekeerde volgorde Z→A",
+    "startzero": "Begin met nul (A=0 of Z=0 indien omgekeerd)",
     "input": "Invoer",
     "map": "Kaart",
     "result": "Resultaat",
@@ -66,6 +74,7 @@
     "convert": "Converteer",
     "calc": "Bereken",
     "search": "Zoek",
+    "copy": "Kopiëren",
     "solve": "Los op",
     "format": "Formatteer",
     "reset": "Reset",
@@ -730,7 +739,7 @@
   "sudokusolv": {
     "title": "Sudoku oplosser",
     "long": "Sudoku en Sudoku X oplosser, afmetingen 2x2 en 3x3. 4x4 uitgeschakeld vanwege belasting server. Vul het vierkant of voer de hints in als rij, kolom, cijfer gescheiden door komma's, bijv. 125,243,254",
-    "error": "Fout bij het oplossen van de sudoky. Te veel oplossing of timeout van de server",
+    "error": "Fout bij het oplossen van de sudoku. Te veel oplossing of timeout van de server",
     "type": "Sudoku type",
     "size": "Afmeting",
     "alt": "Hints",
@@ -1349,13 +1358,7 @@
 
   "wordvalue": {
     "title": "Woordwaarde",
-    "long" : "Een tool voor het berekenen van woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon. De telling kan ook in omgekeerde volgorde (bijv. Z=1 en A=26). De telling begint standaard met 1, maar kan ook met 0 beginnen (bijv. A=0 en Z=25). Vervang diakrieten indien gewenst, maar let erop dat in sommige alfabetten diakrieten een eigen letter vertegenwoordigen!",
-    "reverse": "Omgekeerde volgorde Z→A",
-    "startzero": "Begin met nul (A=0 of Z=0 indien omgekeerd)",
-    "replacediac": "Vervang diakrieten",
-    "showhide": "Toon/verberg alfabet",
-    "someinfo": "Informatie over alfabetten",
-    "someinfo2": "<p>Er wordt gerekend met de officiële alfabetten. In sommige talen zijn diakrieten aparte letters (zoals Ä in het Duits of Å in het Zweeds) en in sommige talen komen zij overeen met de originele letter (zoals é of ô in het Frans). <b>Vervang diakrieten</b> is echter genadeloos en vervangt alle diakrieten. Dat werkt goed in de meeste gevallen, maar niet voor talen waarbij deze letters deel zijn van het alfabet</p><p>De Griekse en Cyrillische alfabetten hebben letters die grote gelijkenis vertonen met de Westerse versies, zoals A of B. Maar ze zijn wel degelijk verschillend. Indien ingevoerd met een Westers toetsenbord komen ze niet overeen en krijgen een waarde 0. Indien je een Russische/Griekse tekst zou kopieren, bijvoorbeeld plaatsnamen van Wikipedia (zoals Амстердам) dan worden de juiste letters gebruikt en de berekening correct uitgevoerd.</p><p>De Scrabble waardes zijn die van de laatst bekende versies. Er zijn nog veel meer versies in omloop. Een goed overzicht is te vinden op <a href='https://en.wikipedia.org/wiki/Scrabble_letter_distributions'>Wikipedia</a>, maar je moet dan zelf de berekening uitvoeren.</p>"
+    "long" : "Een tool voor het berekenen van woordwaarde en stapeltelling van een tekst en van elk woord in de tekst. Ondersteund diverse alfabetten zoals Grieks, Cyrillisch, Scrabble en telefoon. De telling kan ook in omgekeerde volgorde (bijv. Z=1 en A=26). De telling begint standaard met 1, maar kan ook met 0 beginnen (bijv. A=0 en Z=25). Vervang diakrieten indien gewenst, maar let erop dat in sommige alfabetten diakrieten een eigen letter vertegenwoordigen!"
   },
 
   "charcodes": {
@@ -1499,6 +1502,7 @@
     "long" : "Een tool voor conversie van één getalstelsel naar een ander. Converteert vanaf base 2 (binair) tot en met base 36. De gebruikte symbolen zijn standaard 0-9A-Z maar kunnen eventueel worden aangepast, bijv. + en - voor binair of A t/m J voor decimaal. Meerdere nummers kunnen tegelijk worden ingevoerd gescheiden door spaties. Binair is base 2, octaal is base 8, decimaal is base 10 en hexadecimaal is base 16.",
     "from": "Van",
     "to": "Naar",
+    "custsym": "Aangepaste symbolen (optioneel)",
     "symbolserr": "Aantal symbolen moet overeenkomen met grondtal of leeg zijn."
   },
 
@@ -1654,7 +1658,7 @@
     "allowadd": "Optellen",
     "allowsub": "Aftrekken",
     "allowmult": "Vermenigvuldigen",
-    "allowmod": "Module, bijv. 11 % 3 = 2",
+    "allowmod": "Modulo, bijv. 11 % 3 = 2",
     "allowpow": "Machtsverheffen, bijv 2 ^ 3 = 8",
     "allowdiv": "Delen",
     "nosolution": "Geen oplossing gevonden.",
@@ -1737,13 +1741,7 @@
 
   "brainfuck": {
     "title": "Brainfuck",
-    "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's +-><.,[]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>",
-    "vars" : "Selecteer programmeertaal",
-    "shorthand" : "Verkorte notatie",
-    "code": "Programmacode",
-    "input": "Input variabelen",
-    "run": "Run code",
-    "debug": "Debug info naar console"
+    "long":  "<p>Brainfuck is een esoterische programmeertaal (esolang) die met opzet totaal onleesbaar is. Er zijn slechts 8 commando's +-><.,[]. De d, i, l en r vervangen soms de commandos '+, -, < en >. De verkorte notatie gebruikt nummers die het voorgaande commando herhalen.</p><p>Ook! is gelijk aan Brainfuck maar elke commando is vervangen door oerang oetang geluiden. Spoon is een derde variant waarbij een ondubbelzinnige combinatie van 0 en 1 wordt gebruikt. Er zijn nog veel meer zogenaamde <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substituties</a>. Enkele kunnen hier ook worden uitgevoerd.</p>"
   },
 
   "deadfish" : {
@@ -1782,13 +1780,7 @@
 
   "duckspeak" : {
     "title": "Duckspeak",
-    "long": "Duckspeak klinkt alsof een eend loopt te kwaken (Nak). De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde.",
-    "invalidint": " is een ongeldig getal\n",
-    "format": "Invoer/uitvoer formaat",
-    "ascii": "Tekst (ASCII)",
-    "hex": "Hexadecimaal",
-    "dec": "Getallen (decimaal",
-    "invalidcmd": " is geen duckspeak\n"
+    "long": "Duckspeak klinkt alsof een eend loopt te kwaken (Nak). De invoer is hexadecimaal (0-9A-F) waarbij elke getal wordt omgezet naar eendentaal. De invoer kan ook tekst of getallen (kleiner dan 256) zijn. Decoderen doet het omgekeerde."
   },
 
   "checksum": {
@@ -1867,8 +1859,8 @@
   "datecalc" :{
     "title" : "Datum rekenen",
     "long" : "Bereken het aantal dagen tussen twee data. Tel een aantal dagen op of trek een aantal dagen af van een datum. Bereken de dag van de week of de dag in het jaar. Bereken het aantal dagen in het jaar en in de maand van een gegeven datum.",
-    "date1" : "Eerste date",
-    "date2" : "Tweede date",
+    "date1" : "Eerste datum",
+    "date2" : "Tweede datum",
     "days" : "Dagen optellen of aftrekken",
     "res1a" : "Het aantal dagen tussen de eerste en tweede datum is ",
     "res1b" : " dagen.",

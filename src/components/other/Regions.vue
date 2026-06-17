@@ -1,20 +1,20 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('regions.title') }}</h1>
+    <h1>{{ t('regions.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('regions.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('regions.long')" />
       </VCard>
 
       <!-- Settings Card -->
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('regions.list')"
+            :title="t('regions.list')"
             :options="countries"
             v-model="country"
           />
@@ -30,7 +30,7 @@
           @reset="handleReset"
         />
       </VCard>
-      <VCard  :title="$t('labels.result')">
+      <VCard  :title="t('labels.result')">
         <div v-if="formattedResult"class="resultbox" v-html="formattedResult" />
       </VCard>
     </div>

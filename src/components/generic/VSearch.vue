@@ -2,7 +2,7 @@
   <div>
     <div class="form-horizontal">
       <label
-      >{{ $t('labels.search') }}</label>
+      >{{ t('labels.search') }}</label>
       <input
         type="text"
         ref="searchInput"
@@ -15,6 +15,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 // Define Props
 const props = defineProps({

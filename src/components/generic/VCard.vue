@@ -41,7 +41,7 @@ const toggle = () => {
       When finished, we allow items to spill out.
     -->
     <transition name="collapse">
-      <div v-if="isExpanded" class="v-card-body">
+      <div v-show="isExpanded" class="v-card-body">
         <slot></slot>
       </div>
     </transition>

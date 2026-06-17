@@ -1,17 +1,17 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('sudokusolv.title') }}</h1>
+    <h1>{{ t('sudokusolv.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('sudokusolv.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('sudokusolv.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
          <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('sudokusolv.type')"
+            :title="t('sudokusolv.type')"
             :options="[
               { label: 'Sudoku', value: 'Sudoku'} ,
               { label: 'Sudoku X', value: 'SudokuX' }
@@ -22,7 +22,7 @@
          </div>
          <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('sudokusolv.size')"
+            :title="t('sudokusolv.size')"
             :options="[
               { label: '2', value: '2'},
               { label: '3', value: '3'}
@@ -32,15 +32,15 @@
           />
          </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
       <!-- Reactive Sudoku Table -->
          <div class="form-row mb-2">
           <label>Grid</label>
           <div class="p-table">
             <table class="sudoku-table">
               <tr v-for="(row, rIdx) in grid" :key="'row-' + rIdx">
-                <td 
-                  v-for="(cell, cIdx) in row" 
+                <td
+                  v-for="(cell, cIdx) in row"
                   :key="'cell-' + rIdx + '-' + cIdx"
                   :class="getBorderClass(rIdx, cIdx)"
                 >
@@ -57,7 +57,7 @@
           </div>
         </div>
          <div class="form-row">
-          <label>{{ $t('sudokusolv.alt') }}</label>
+          <label>{{ t('sudokusolv.alt') }}</label>
           <input type="text" v-model="knownnumbers">
         </div>
         <p
@@ -67,38 +67,27 @@
           {{ errormsg }}.
         </p>
         <div class="button-row mt-2">
-          <button class="btn btn-primary"  @click="solveSudoku">
-            {{ $t('buttons.solve') }}
+          <button class="btn btn-primary"  :disabled="working" @click="solveSudoku">
+            {{ t('buttons.solve') }}
           </button>
-          <button class="btn btn-primary"  @click="resetSudoku">
-            {{ $t('buttons.reset') }}
+          <button class="btn btn-primary"  :disabled="working" @click="resetSudoku">
+            {{ t('buttons.reset') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
-        <div
-          v-show="solved"
-          class="mb-2"
-        >
+      <VCard :title="t('labels.result')">
+        <div v-if="results" class="mb-2">
           <span style="font-weight:bold;">
-            {{ $t('sudokusolv.thereare') }} {{ numberofsolutions }} {{ $t('sudokusolv.sols') }}
+            {{ t('sudokusolv.thereare') }} {{ numberofsolutions }} {{ t('sudokusolv.sols') }}
           </span>
-          <div class="form-inline mb-2">
-            <select
-              id="listofresults"
-              v-model="selectedsolution"
-              class="form-select"
+          <div v-if='results.length > 0'>
+            <CustomDropdown
+              title=""
+              :options="results"
               @change="printSolution"
-            >
-              <option
-                v-for="result in results"
-                :key="result"
-              >
-                {{ result }}
-              </option>
-            </select>
+            />
           </div>
         </div>
       </VCard>
@@ -121,25 +110,24 @@ const CODES = "123456789ABCDEFG"
 const PHP_URL = `${window.location.protocol}//${window.location.hostname}/sudokusolver/sudokusolver.php`
 
 // --- State ---
-const size = ref('3') 
+const size = ref('3')
 const sudokutype = ref("Sudoku")
-const grid = ref([]) 
-const solved = ref(false)
+const grid = ref([])
+const working = ref(false)
 const results = ref([])
 const numberofsolutions = ref(0)
-const selectedsolution = ref("")
 const errormsg = ref("")
 
 const sideLength = computed(() => size.value ** 2)
 
 /**
- * Initializes the grid. 
+ * Initializes the grid.
  */
 const initGrid = () => {
   const side = sideLength.value
   grid.value = Array.from({ length: side }, () => Array(side).fill(''))
-  solved.value = false
   results.value = []
+  errormsg.value = ""
 }
 
 // Watch for size changes to resize the grid automatically
@@ -169,12 +157,12 @@ const getBorderClass = (r, c) => {
 
 const getBoxStyle = (r, c) => {
   const side = sideLength.value
-  const style = { 
-    width: side > 9 ? '2rem' : '2.8rem', 
-    height: side > 9 ? '2rem' : '2.8rem', 
+  const style = {
+    width: side > 9 ? '2rem' : '2.8rem',
+    height: side > 9 ? '2rem' : '2.8rem',
     fontSize: side > 9 ? '0.9rem' : '1.2rem'
   }
-  
+
   if (sudokutype.value === "SudokuX") {
     if (r === c || r + c === side - 1) {
       style.backgroundColor = '#e9ecef'
@@ -200,9 +188,9 @@ const generateKnownNumbers = () => {
   return hints.join(',')
 }
 
-const printSolution = () => {
-  if (!selectedsolution.value) return
-  const sol = selectedsolution.value
+const printSolution = (idx) => {
+  const sol = results.value[idx].label;
+  console.log(idx, sol);
   const side = sideLength.value
   for (let r = 0; r < side; r++) {
     for (let c = 0; c < side; c++) {
@@ -217,6 +205,8 @@ const resetSudoku = () => {
 
 const solveSudoku = async () => {
   errormsg.value = ""
+  working.value = true;
+  
   const payload = {
     sudokutype: sudokutype.value,
     size: size.value,
@@ -226,22 +216,25 @@ const solveSudoku = async () => {
   try {
     const response = await fetch(PHP_URL, { method: 'POST', body: JSON.stringify(payload) })
     const data = await response.json()
-    solved.value = true
-    results.value = data.results || []
+    results.value = data.results.map ( (r, idx) => ({ value: idx, label: r})) || []
     numberofsolutions.value = data.numberofsolutions
     if (results.value.length > 0) {
-      selectedsolution.value = results.value[0]
-      printSolution()
-    } else {
-      errormsg.value = t('sudokusolv.no_solution') || "No solution found"
-    }
+      printSolution(0)
+    } 
   } catch (error) {
     errormsg.value = t('sudokusolv.error')
+  } finally {
+    // 2. Use a timeout before enabling the button again (e.g., 1 second)
+    // This prevents the user from clicking the solve button too rapidly
+    setTimeout(() => {
+      working.value = false;
+    }, 1000);
   }
 }
 </script>
 
 <style scoped>
+
 .sudoku-table {
   border: 3px solid #333;
   border-collapse: collapse;

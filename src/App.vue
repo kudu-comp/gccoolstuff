@@ -118,6 +118,7 @@ const menuItems = ref([
     { label: t('wordvalue.title'), to: '/wordvalue' },
     { label: t('charcodes.title'), to: '/charcodes' },
     { label: t('analtxt.title'), to: '/analtxt' },
+    { label: t('texttransform.title'), to: '/texttransform' },
     { label: t('texttonum.title'), to: '/texttonum' },
     { label: t('keyboards.title'), to: '/keyboards' },
     { label: t('texttoss.title'), to: '/texttoss' },
@@ -260,7 +261,11 @@ const menuItems = ref([
   --border-color: #d8e2d7;    /* Subtle green-gray border */
   --error-red: #c05d4d;       /* Muted Terracotta */
   --error-bg: #fdf2f0;        /* Very soft red/pink */
+  --info-bg: #f0f7ff;
+  --info-blue: #0056b3;
 }
+
+.font-monospace { font-family: SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -279,6 +284,12 @@ hr {
   background: linear-gradient(to right, transparent, var(--border-color), transparent);
   margin: 2rem 0;
   opacity: 0.8;
+}
+
+.subhead {
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: 1.2rem;
 }
 
 
@@ -394,7 +405,7 @@ html, body {
 .form-horizontal label {
   flex: 0 1 150px;       /* Do not grow, do not shrink, fixed at 150px */
   width: 150px;          /* Ensure width is respected */
-  word-wrap: break-word; /* Ensures long words wrap if necessary */
+  overflow-wrap: break-word; /* Ensures long words wrap if necessary */
   line-height: 1.2;      /* Optional: improves readability when wrapping */
 }
 
@@ -482,12 +493,6 @@ html, body {
   .form-row .input-wrapper {
     flex: 0 0 100% !important;
   }
-}
-
-.form-group-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
 }
 
 /* =========================================
@@ -874,12 +879,12 @@ textarea {
 .table-responsive {
   display: block;        /* Force it to behave like a block-level container */
   width: 100%;           /* Attempt to be full width */
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
   max-width: 100%;       /* STRICTLY prevent it from growing wider than its parent */
   overflow-x: auto;      /* Enable horizontal scroll */
   overflow-y: hidden;    /* Prevent vertical scroll interference */
   -webkit-overflow-scrolling: touch; /* Enables smooth "momentum" scrolling on iOS */
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
 }
 
 .p-table {
@@ -907,6 +912,7 @@ textarea {
   padding: 0.5rem;
   border-bottom: 1px solid var(--soft-green);
   color: var(--text-dark);
+  overflow-wrap: break-word; /* Ensures long words wrap if necessary */
   vertical-align: middle;
   text-align: center;
 }
@@ -927,7 +933,6 @@ textarea {
   border-collapse: collapse;
   background-color: var(--white);
   text-align: left;
-  /* 1. Smaller font size */
   font-size: 0.8rem; 
 }
 
@@ -956,6 +961,7 @@ textarea {
   padding: 0.3rem 0.5rem; 
   border-bottom: 1px solid var(--soft-green);
   color: var(--text-dark);
+  overflow-wrap: break-word; /* Ensures long words wrap if necessary */
   vertical-align: middle;
   text-align: center;
 }
@@ -1018,6 +1024,25 @@ textarea {
 
 .errormsg::before {
   content: "⚠"; /* Icon-free warning symbol */
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.infomsg {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  background-color: var(--info-bg);
+  color: var(--info-blue);
+  border: 1px solid rgba(0, 86, 179, 0.2);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0rem;
+}
+
+.infomsg::before {
+  content: "ℹ";
   font-size: 1.1rem;
   margin-right: 0.5rem;
 }
@@ -1103,6 +1128,7 @@ a:focus {
   border-left: 5px solid var(--primary-green);
   padding-left: 0.5rem;
   opacity: 65%;
+  overflow-wrap: anywhere;
 }
 
 .v-card-header {

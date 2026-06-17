@@ -1,48 +1,48 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('freqanal.title') }}</h1>
+    <h1>{{ t('freqanal.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('freqanal.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('freqanal.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{$t('labels.alphabet')}}</label>
+          <label>{{t('labels.alphabet')}}</label>
           <input
             v-model="alphabet"
             type="text"
           >
         </div>
         <div class="form-horizontal">
-          <label>{{$t('freqanal.size')}}</label>
+          <label>{{t('freqanal.size')}}</label>
           <input type="number" min="1" max="6" v-model="size" id="size"/>
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="slide">
           <span class="checkmark"></span>
-          {{ $t('freqanal.slide') }}
+          {{ t('freqanal.slide') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="bound">
           <span class="checkmark"></span>
-          {{ $t('freqanal.bound') }}
+          {{ t('freqanal.bound') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showmissing">
           <span class="checkmark"></span>
-          {{ $t('freqanal.showmissing') }}
+          {{ t('freqanal.showmissing') }}
         </label>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <!-- Text area input -->
         <textarea
           ref="msgInput"
           v-model="msg"
           class="mb-2"
-          :placeholder="$t('labels.message')"
+          :placeholder="t('labels.message')"
           rows="5"
         />
         <p
@@ -57,7 +57,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <!-- Result area or use v-html -->
         <div v-if="result" class="resultbox" v-html="result"></div>
       </VCard>

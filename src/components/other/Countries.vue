@@ -1,17 +1,17 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('countries.title') }}</h1>
+    <h1>{{ t('countries.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('countries.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('countries.long')" />
       </VCard>
 
       <!-- Table Card -->
-      <VCard :title="$t('countries.title')">
+      <VCard :title="t('countries.title')">
         <VTable
           :phsearch="phsearch"
           :defsearch="defsearch"
@@ -22,7 +22,7 @@
           @reset="handleReset"
         />
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="formattedResult" class="resultbox" v-html="formattedResult" />
       </VCard>
     </div>

@@ -1,18 +1,18 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('bcd.title') }}</h1>
+    <h1>{{ t('bcd.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('bcd.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('bcd.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <CustomDropdown
           :options="bcdformats"
           v-model="selBCD"
-          :title="$t('bcd.seltype')"
+          :title="t('bcd.seltype')"
         />
         <CustomDropdown v-if="!packed"
           :options="[
@@ -21,44 +21,45 @@
             { label: '1111', value: '1111' }
           ]"
           v-model="fill"
-          :title="$t('bcd.fill')"
+          :title="t('bcd.fill')"
         />
         <label class="checkbox-container mt-2 mb-2">
           <input type="checkbox" v-model="packed">
           <span class="checkmark"></span>
-          {{ $t('bcd.packed') }}
+          {{ t('bcd.packed') }}
         </label> 
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="radio-group mb-2">
           <div class="radio-options">
             <label class="radio-item">
               <input type="radio" value="from" v-model="mode">
-              <span class="radio-mark"></span> {{ $t('bcd.bcdfrom') }}
+              <span class="radio-mark"></span> {{ t('bcd.bcdfrom') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="to" v-model="mode">
-              <span class="radio-mark"></span> {{ $t('bcd.bcdto') }}
+              <span class="radio-mark"></span> {{ t('bcd.bcdto') }}
             </label>
           </div>
         </div>        
         <textarea
           ref="messageInput"
+          class="mb-2"
           v-model="message"
-          :placeholder="$t('labels.message')"
+          :placeholder="t('labels.message')"
           rows="5"
           @input="doSomething"
         />
         <p
           v-show="errormsg"
-          class="errormsg mt-2"
+          class="errormsg"
         >
           {{ errormsg }}.
         </p>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"

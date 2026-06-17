@@ -1,71 +1,69 @@
 <template>
 
    <header class="page-header">
-    <h1>{{ $t('segment.title') }}</h1>
+    <h1>{{ t('segment.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('segment.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('segment.long')" />
       <img width="400px" max-width="100%"src="~@\assets\images\segment2.png">
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <div class="radio-group">
-          <label>{{ $t('segment.segsize') }}</label>
-          <div class="radio-options-vertical">
-            <label class="radio-item">
-              <input type="radio" value="0" v-model="seg">
-              <span class="radio-mark"></span> 7 Segment display
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="1" v-model="seg">
-              <span class="radio-mark"></span> 14 Segment display
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="2" v-model="seg">
-              <span class="radio-mark"></span> 16 Segment display
-            </label>
-          </div>
-        </div>
-        <div class="radio-group">
-          <label>{{ $t('segment.input') }}</label>
-          <div class="radio-options-vertical">
-            <label class="radio-item">
-              <input type="radio" value="1" v-model="inp">
-              <span class="radio-mark"></span> {{ $t('segment.letters') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="3" v-model="inp">
-              <span class="radio-mark"></span> {{ $t('segment.binary') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="2" v-model="inp">
-              <span class="radio-mark"></span> {{ $t('segment.numeric') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="4" v-model="inp">
-              <span class="radio-mark"></span> {{ $t('segment.octal') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="5" v-model="inp">
-              <span class="radio-mark"></span> {{ $t('segment.hexa') }}
+    <VCard :title="t('labels.settings')">
+      <div class="radio-group mb-2">
+        <label>{{ t('segment.segsize') }}</label>
+        <div class="radio-options-vertical">
+          <label class="radio-item">
+            <input type="radio" value="0" v-model="seg">
+            <span class="radio-mark"></span> 7 Segment display
           </label>
-          </div>
+          <label class="radio-item">
+            <input type="radio" value="1" v-model="seg">
+            <span class="radio-mark"></span> 14 Segment display
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="2" v-model="seg">
+            <span class="radio-mark"></span> 16 Segment display
+          </label>
         </div>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="space">
-          <span class="checkmark"></span>{{ $t('segment.space') }}
-        </label>
       </div>
+      <div class="radio-group mb-2">
+        <label>{{ t('segment.input') }}</label>
+        <div class="radio-options-vertical">
+          <label class="radio-item">
+            <input type="radio" value="1" v-model="inp">
+            <span class="radio-mark"></span> {{ t('segment.letters') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="3" v-model="inp">
+            <span class="radio-mark"></span> {{ t('segment.binary') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="2" v-model="inp">
+            <span class="radio-mark"></span> {{ t('segment.numeric') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="4" v-model="inp">
+            <span class="radio-mark"></span> {{ t('segment.octal') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="5" v-model="inp">
+            <span class="radio-mark"></span> {{ t('segment.hexa') }}
+        </label>
+        </div>
+      </div>
+      <label class="checkbox-container">
+        <input type="checkbox" v-model="space">
+        <span class="checkmark"></span>{{ t('segment.space') }}
+      </label>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         class="mb-2"
         ref="messageInput"
         v-model="message"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         @input="wordValue"
       />
@@ -77,14 +75,14 @@
       </p>
       <div class="button-row">
         <button id="enc" class="btn btn-primary" @click="encodeSeg">
-          {{ $t('buttons.encode') }}
+          {{ t('buttons.encode') }}
         </button>
         <button id="dec" class="btn btn-primary" @click="decodeSeg">
-          {{$t('buttons.decode')}}
+          {{t('buttons.decode')}}
         </button>
       </div>
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
         <div v-if="result" v-html="result" />
     </VCard>
   </div>

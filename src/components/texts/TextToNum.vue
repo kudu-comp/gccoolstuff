@@ -1,63 +1,46 @@
 <template>
 
 <header class="page-header">
-    <h1>{{ $t('texttonum.title') }}</h1>
+    <h1>{{ t('texttonum.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('texttonum.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('texttonum.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <v-alphabets v-model:alphabet="selectedalphabet" />
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="reverse">
-          <span class="checkmark"></span>
-          {{ $t('wordvalue.reverse') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="startatzero">
-          <span class="checkmark"></span>
-          {{ $t('wordvalue.startzero') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="leadzero">
-          <span class="checkmark"></span>
-          {{ $t('texttonum.leadzero') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="replacediac">
-          <span class="checkmark"></span>
-          {{ $t('wordvalue.replacediac') }}
-        </label>
-        <div class="button-row">
-          <button
-            id="texttonumbers"
-            class="btn btn-primary"
-            @click="textToNumbers"
-          >
-            {{ $t('texttonum.btnttn') }}
-          </button>
-          <button
-            id="numberstotext"
-            class="btn btn-primary"
-            @click="numbersToText"
-          >
-            {{ $t('texttonum.btnntt') }}
-          </button>
-        </div>
-      </div>
+    <VCard :title="t('labels.settings')">
+      <v-alphabets v-model:alphabet="selectedalphabet"/>
+      <label class="checkbox-container mb-2 mt-2">
+        <input type="checkbox" v-model="reverse">
+        <span class="checkmark"></span>
+        {{ t('labels.reverse') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="startatzero">
+        <span class="checkmark"></span>
+        {{ t('labels.startzero') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="leadzero">
+        <span class="checkmark"></span>
+        {{ t('texttonum.leadzero') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="replacediac">
+        <span class="checkmark"></span>
+        {{ t('labels.replacediac') }}
+      </label>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         id="message"
         ref="messageInput"
         v-model="message"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         @input="wordValue"
+        class="mb-2"
       />
       <p
         v-show="errormsg"
@@ -65,8 +48,24 @@
       >
         {{ errormsg }}.
       </p>          
+      <div class="button-row">
+        <button
+          id="texttonumbers"
+          class="btn btn-primary"
+          @click="textToNumbers"
+        >
+          {{ t('texttonum.btnttn') }}
+        </button>
+        <button
+          id="numberstotext"
+          class="btn btn-primary"
+          @click="numbersToText"
+        >
+          {{ t('texttonum.btnntt') }}
+        </button>
+      </div>
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div
         v-if="result"
         class="card resultbox"
@@ -82,6 +81,11 @@ import { ref, onMounted } from 'vue'
 import * as textHelper from '@/scripts/texthelper.js'
 import VAlphabets from '@/components/generic/VAlphabets.vue'
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: 'TextToNum'

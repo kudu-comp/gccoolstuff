@@ -1,14 +1,14 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('periodictable.title') }}</h1>
+    <h1>{{ t('periodictable.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('periodictable.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('periodictable.long')" />
       </VCard>
-      <VCard :title="$t('periodictable.title')">
+      <VCard :title="t('periodictable.title')">
         <VTable
           :phsearch="phsearch"
           :cols="cols"
@@ -19,7 +19,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
          <div
           v-if="formattedResult"
           v-html="formattedResult"

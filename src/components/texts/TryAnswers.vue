@@ -1,79 +1,76 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('tryanswers.title') }}</h1>
+    <h1>{{ t('tryanswers.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('tryanswers.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('tryanswers.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="onlysq">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.onlysq') }}
+    <VCard :title="t('labels.settings')">
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="onlysq">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.onlysq') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="leng">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.tryleng') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="first">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.tryfirst') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="last">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.trylast') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="rev">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.tryrev') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="zero">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.tryzero') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="scrabble">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.trysv') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="lang">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.trylang') }}
+      </label>
+      <label class="checkbox-container">
+        <input type="checkbox" v-model="cnts">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.trycnts') }}
         </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="leng">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.tryleng') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="first">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.tryfirst') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="last">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.trylast') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="rev">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.tryrev') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="zero">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.tryzero') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="scrabble">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.trysv') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="lang">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.trylang') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="cnts">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.trycnts') }}
-        </label>
-
-      </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <!-- Answers input-->
       <textarea
           v-model="txt"
           ref="msgInput"
-          class="form-control"
-          :placeholder="$t('tryanswers.answers') + '|.'"
+          class="mb-2"
+          :placeholder="t('tryanswers.answers') + '|.'"
           rows="5"
         />
       <!-- Formulas input-->
-      <label for="formulas" class="form-label mb-2">{{$t('tryanswers.formulas')}}</label>
+      <label for="formulas" class="form-label mb-2">{{t('tryanswers.formulas')}}</label>
       <textarea
-        class="form-control mb-2"
+        class="mb-2"
         v-model="formulas"
-        :placeholder="$t('tryanswers.phformulas')"
+        :placeholder="t('tryanswers.phformulas')"
         rows="5"
       />
       <p
@@ -83,23 +80,21 @@
         {{ errormsg }}.
       </p>
       <div class="button-row">
-        <button class="btn btn-primary" @click="doAction()">{{$t('buttons.try')}}</button>
+        <button class="btn btn-primary" @click="doAction()">{{t('buttons.try')}}</button>
       </div>
     </VCard>
-    <VCard :title="$t('labels.result')">
-      <div class="form-group-vertical">
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="table" @change="doAction()">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.showtable') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="long" @change="doAction()">
-          <span class="checkmark"></span>
-          {{ $t('tryanswers.showdescr') }}
-        </label>
-        <div v-if="result" v-html="result" class="resultbox" >
-        </div>
+    <VCard :title="t('labels.result')">
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="table" @change="doAction()">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.showtable') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="long" @change="doAction()">
+        <span class="checkmark"></span>
+        {{ t('tryanswers.showdescr') }}
+      </label>
+      <div v-if="result" v-html="result" class="resultbox" >
       </div>
     </VCard>
   </div>

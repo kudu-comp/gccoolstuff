@@ -2,13 +2,30 @@
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import path from 'path'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
 
   plugins: [
     vue(),
+    // VueI18nPlugin({
+    //   // if you want to use named components in <i18n> blocks
+    //   include: [path.resolve(__dirname, './src/locales/**')],
+    // }),
+    VueI18nPlugin({
+      // This is important for SFC i18n blocks:
+      include: [path.resolve(__dirname, './src/locales/**')], 
+      // DISABLE STRICT MESSAGE COMPILATION (This fixes your error)
+      strictMessage: false, 
+      // Ensure HTML is allowed
+      escapeHtml: false,
+      // Ensures the compiler doesn't trip over HTML-like characters
+      fullInstall: true,
+      compositionOnly: true    
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png' ],
@@ -16,6 +33,7 @@ export default defineConfig({
           enabled: false 
         },
         manifest: {
+        id: '/',
         name: 'GC Tools: Geocaching Toolkit',
         short_name: 'GC Tools',
         description: 'The ultimate toolkit for geocaching',

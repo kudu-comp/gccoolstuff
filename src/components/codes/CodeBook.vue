@@ -1,12 +1,12 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('codebook.title') }}</h1>
+    <h1>{{ t('codebook.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('codebook.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('codebook.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <v-search
         id="searchstr"
         v-model:search="searchstr"
@@ -16,7 +16,7 @@
         <CustomDropdown 
           v-model="selectedtag" 
           :options="tags" 
-          :title="$t('codebook.availtags')"
+          :title="t('codebook.availtags')"
         />
       </div>
       <p
@@ -42,7 +42,7 @@
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('codebook.pagesfound') + foundpages.length">
+    <VCard :title="t('codebook.pagesfound') + foundpages.length">
       <div class="button-row-icons mb-2">
         <button id="first" class="btn btn-primary" :disabled="currentpage === 0" @click="currentpage = 0; selectCodepage()" >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round">
@@ -100,6 +100,11 @@ import { codepages } from '@/scripts/codebook.js'
 import VSearch from '@/components/generic/VSearch.vue'
 import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const props = defineProps({
   code: {
@@ -197,7 +202,6 @@ onMounted(() => {
   
   tags.value = ["", ...Array.from(tagSet).sort()].map( t => ({ value: t, label: t}));
   tags.value[0].label = "All tags"
-  console.log(tags);
   
   // Default: show all pages
   foundpages.value = codepages.map((_, index) => index)

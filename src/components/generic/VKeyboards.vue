@@ -25,6 +25,8 @@
 
 import { ref, computed, onMounted } from 'vue';
 import * as keyBoardsScript from '@/scripts/keyboards.js';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 // --- Props & Emits ---
 const props = defineProps({

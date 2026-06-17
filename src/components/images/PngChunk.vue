@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('pngchunk.title') }}</h1>
+    <h1>{{ t('pngchunk.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('pngchunk.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('pngchunk.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input type="file" accept="image/*" @change="handleFileUpload" />
           <p v-if="originalFileName !== 'image'" class="card-text mt-2">
             File: <strong>{{ originalFileName }}.png</strong>
@@ -47,7 +47,7 @@
             <button class="btn btn-primary" @click="addChunk('zTXt')">Add zTXt</button>
             <button class="btn btn-primary" @click="addChunk('iTXt')">Add iTXt</button>
             <button class="btn btn-primary" :disabled="!hasBeenModified" @click="downloadPng">
-              {{ $t('buttons.download') }}
+              {{ t('buttons.download') }}
             </button>
           </div>
       </div>
@@ -55,7 +55,7 @@
       </VCard>
     </div>  
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <!-- Chunks Display (Hiding IDAT) -->
         <div v-if="filteredChunks.length" class="card card-body">
           <div class="card-title h4">
@@ -69,8 +69,8 @@
                 <span class="chunk-size">{{ chunk.length.toLocaleString() }} bytes</span>
               </div>
               <div class="button-row">
-                <button v-if="chunk.metadata" class="btn btn-secondary" @lick="saveChunkAsTxt(chunk)">{{$t('buttons.save')}} .txt</button>
-                <button v-if="isMetadataType(chunk.type)" class="btn btn-secondary" @click="removeChunk(chunk.originalIndex)">{{$t('buttons.delete')}}</button>
+                <button v-if="chunk.metadata" class="btn btn-secondary" @lick="saveChunkAsTxt(chunk)">{{t('buttons.save')}} .txt</button>
+                <button v-if="isMetadataType(chunk.type)" class="btn btn-secondary" @click="removeChunk(chunk.originalIndex)">{{t('buttons.delete')}}</button>
               </div>
             </div>
             
@@ -94,6 +94,11 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import VCard from '@/Components/generic/VCard.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const PNG_SIG = new Uint8Array([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
 

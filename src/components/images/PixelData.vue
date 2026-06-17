@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('pixeldata.title') }}</h1>
+    <h1>{{ t('pixeldata.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('pixeldata.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('pixeldata.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             ref="fileInputRef"
@@ -33,10 +33,10 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('pixeldata.title')">
+      <VCard :title="t('pixeldata.title')">
         <div class="card-grid mb-2">
-          <VCard :title="$t('pixeldata.targetcolor')">
-            <p>{{ $t('pixeldata.count')}}</p>
+          <VCard :title="t('pixeldata.targetcolor')">
+            <p>{{ t('pixeldata.count')}}</p>
             <div class="rgb-inputs">
               <div class="input-group red">
                 <label>R</label>
@@ -57,9 +57,9 @@
               <div class="match-label">Visible Matches</div>
             </div>
           </VCard>
-          <VCard :title="$t('pixeldata.metadata')">
-              <div v-if="stats" class="stat-row"><span>{{$t('exifscanner.width')}}</span> <strong>{{ stats.width }}px</strong></div>
-              <div v-if="stats" class="stat-row"><span>{{$t('exifscanner.height')}}</span> <strong>{{ stats.height }}px</strong></div>
+          <VCard :title="t('pixeldata.metadata')">
+              <div v-if="stats" class="stat-row"><span>{{t('exifscanner.width')}}</span> <strong>{{ stats.width }}px</strong></div>
+              <div v-if="stats" class="stat-row"><span>{{t('exifscanner.height')}}</span> <strong>{{ stats.height }}px</strong></div>
               <div v-if="stats" class="stat-row"><span>Total Pixels</span> <strong>{{ formatNum(stats.totalPixels) }}</strong></div>
               <div v-if="stats" class="stat-row"><span>Avg Brightness</span> <strong>{{ stats.avgBrightness }}%</strong></div>
           </VCard>
@@ -73,7 +73,7 @@
 
           <template v-if="!isLoading && imageLoaded">
             <!-- 4. Histogram Section -->
-          <VCard :title="$t('pixeldata.histogram')">
+          <VCard :title="t('pixeldata.histogram')">
               <div class="histogram-header">
                 <div class="radio-group">
                   <label v-for="mode in ['red', 'green', 'blue', 'brightness']" :key="mode" :class="['radio-btn', mode, { active: histoMode === mode }]">
@@ -90,8 +90,8 @@
             <!-- Analysis Grid -->
             <div class="card-grid mt-2" v-if="stats">
               <!-- Channel Intensity Bars -->
-              <VCard :title="$t('pixeldata.channel')">
-                <p>{{$t('pixeldata.channelexpl')}}</p>
+              <VCard :title="t('pixeldata.channel')">
+                <p>{{t('pixeldata.channelexpl')}}</p>
                 <div class="channel-group">
                   <div v-for="c in ['red', 'green', 'blue']" :key="c" class="channel-item">
                     <div class="label-row"><span class="capitalize">{{ c }}</span> <span>{{ formatNum(stats[`${c.charAt(0)}Sum`]) }}</span></div>
@@ -101,8 +101,8 @@
               </VCard>
 
               <!-- Zero Channels -->
-              <VCard :title="$t('pixeldata.deadzones')">
-                <p>{{$t('pixeldata.deadzonesexpl')}}</p>
+              <VCard :title="t('pixeldata.deadzones')">
+                <p>{{t('pixeldata.deadzonesexpl')}}</p>
                 <div class="pill red">Zero Red: {{ formatNum(stats.zeroR) }}</div>
                 <div class="pill green">Zero Green: {{ formatNum(stats.zeroG) }}</div>
                 <div class="pill blue">Zero Blue: {{ formatNum(stats.zeroB) }}</div>
@@ -124,6 +124,11 @@
 <script setup>
 import { ref, reactive, watch, nextTick } from 'vue'
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const dataCanvasRef = ref(null)
 const histoCanvasRef = ref(null)

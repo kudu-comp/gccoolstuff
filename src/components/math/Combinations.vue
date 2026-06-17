@@ -1,42 +1,44 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('combinations.title') }}</h1>
+    <h1>{{ t('combinations.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('combinations.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('combinations.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('combinations.cnt') }}</label>
+          <label>{{ t('combinations.cnt') }}</label>
           <input type="number" min="0" v-model="cnt" ref="cntInput">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('combinations.size') }}</label>
+          <label>{{ t('combinations.size') }}</label>
           <input type="number" min="0" v-model="size">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="rpt">
           <span class="checkmark"></span>
-          {{ $t('combinations.rpt') }}
+          {{ t('combinations.rpt') }}
         </label>
-        <CustomDropdown 
-          :options="options" 
-          v-model="sel"
-          :title="$t('combinations.sel')"
-          @change="doAction()"
-        ></CustomDropdown>
-        <CustomDropdown 
-          v-if="sel === '2' || sel === '3'"
-          :options="sets" 
-          v-model="set"
-          :title="$t('combinations.set')"
-          @change="doAction()"
-        ></CustomDropdown>
+        <div class="form-horizontal">
+          <CustomDropdown 
+            :options="options" 
+            v-model="sel"
+            :title="t('combinations.sel')"
+          />
+        </div>
+        <div class="form-horizontal">
+          <CustomDropdown 
+            v-if="sel === '2' || sel === '3'"
+            :options="sets" 
+            v-model="set"
+            :title="t('combinations.set')"
+          ></CustomDropdown>
+        </div>
         <div class="form-horizontal mt-2" v-if="set === '2' && (sel === '2' || sel === '3')">
-          <label >{{ $t('combinations.list') }}</label>
+          <label >{{ t('combinations.list') }}</label>
           <input type="text" v-model="txt"/>
         </div>
         <p
@@ -47,13 +49,13 @@
         </p>
         <div class="button-row mt-2">
           <button id="convert" class="btn btn-primary"  @click="doAction">
-            {{ $t('buttons.show') }}
+            {{ t('buttons.show') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <div v-if="result" class="card resultbox" v-html="result" />
       </VCard>
     </div>

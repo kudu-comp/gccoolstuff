@@ -1,37 +1,37 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('passwordgen.title') }}</h1>
+    <h1>{{ t('passwordgen.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('passwordgen.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('passwordgen.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('passwordgen.len') }}</label>
+          <label>{{ t('passwordgen.len') }}</label>
           <input type="number" v-model="len" min="4" ref="lenInput">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="uppcase">
           <span class="checkmark"></span>
-          {{ $t('passwordgen.uppcase') }}
+          {{ t('passwordgen.uppcase') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="lowcase">
           <span class="checkmark"></span>
-          {{ $t('passwordgen.lowcase') }}
+          {{ t('passwordgen.lowcase') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="numbers">
           <span class="checkmark"></span>
-          {{ $t('passwordgen.numbers') }}
+          {{ t('passwordgen.numbers') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="symbols">
           <span class="checkmark"></span>
-          {{ $t('passwordgen.symbols') }}
+          {{ t('passwordgen.symbols') }}
         </label>
         <p
           v-show="errormsg"
@@ -41,18 +41,18 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="generate">
-            {{ $t('buttons.generate') }}
+            {{ t('buttons.generate') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
         >
-          {{ $t('passwordgen.result') }}<br><br>
+          {{ t('passwordgen.result') }}<br><br>
           <span class="monospace">{{ result }}</span>
         </div>
       </VCard>

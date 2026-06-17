@@ -1,35 +1,35 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('beatnik.title') }}</h1>
+    <h1>{{ t('beatnik.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('beatnik.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('beatnik.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <CustomDropdown
             :options="alphabets"
             v-model="selectedalphabet"
-            :title="$t('labels.alphabet')"
+            :title="t('labels.alphabet')"
           />
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('brainfuck.input') }}</label>
+          <label>{{ t('beatnik.input') }}</label>
           <input type="text" v-model="input">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="debug">
           <span class="checkmark"></span>
-          {{ $t('brainfuck.debug') }}
+          {{ t('beatnik.debug') }}
         </label>
         <div class="form-horizontal">
           <textarea
             ref="codeInput"
             v-model="message"
-            :placeholder="$t('brainfuck.code')"
+            :placeholder="t('beatnik.code')"
             rows="5"
           />
         </div>
@@ -41,13 +41,13 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="runBeatnik">
-            {{ $t('brainfuck.run') }}
+            {{ t('brainfuck.run') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
@@ -212,3 +212,25 @@ const runBeatnik = () => {
   }
 };
 </script>
+
+<i18n locale="en">
+{
+  "beatnik": {
+    "debug": "Debug to console",
+    "code": "Program code",
+    "input": "Input variables",
+    "run": "Run Beatnik"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "beatnik": {
+    "code": "Programmacode",
+    "debug": "Debug info naar console",
+    "input": "Input variabelen",
+    "run": "Run Beatnik"
+  }
+}
+</i18n>

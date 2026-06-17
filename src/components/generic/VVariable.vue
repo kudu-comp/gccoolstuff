@@ -1,7 +1,7 @@
 <template>
   <label
     for="var"
-  >{{ $t('labels.variable') }}</label>
+  >{{ t('labels.variable') }}</label>
   <input
     type="text"
     :value="variable"
@@ -9,7 +9,7 @@
   >
   <label
     for="varoptions"
-  >{{ $t('labels.option') }}</label>
+  >{{ t('labels.option') }}</label>
   <input
     type="text"
     :value="varoptions"
@@ -18,6 +18,10 @@
 </template>
 
 <script setup>
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 // Define the props
 const props = defineProps({
   variable: {

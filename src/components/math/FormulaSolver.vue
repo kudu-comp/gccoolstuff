@@ -1,26 +1,26 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('formulasolver.title') }}</h1>
+    <h1>{{ t('formulasolver.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('formulasolver.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('formulasolver.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('formulasolver.formula') }}</label>
+          <label>{{ t('formulasolver.formula') }}</label>
           <input type="text" v-model="formula" ref="formulaInput">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('formulasolver.base') }}</label>
+          <label>{{ t('formulasolver.base') }}</label>
           <input type="number" v-model="base" min="2" max="16">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="unique">
           <span class="checkmark"></span>
-          {{ $t('formulasolver.unique') }}
+          {{ t('formulasolver.unique') }}
         </label>
         <p
           v-show="errormsg"
@@ -34,7 +34,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="results.length > 0"
           class="card resultbox"
@@ -203,9 +203,3 @@ const solveFormula = () => {
 };
 </script>
 
-<style scoped>
-.font-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.9rem;
-}
-</style>

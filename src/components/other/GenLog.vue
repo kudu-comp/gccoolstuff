@@ -1,24 +1,24 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('genlog.title') }}</h1>
+    <h1>{{ t('genlog.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('genlog.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('genlog.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('genlog.n') }}</label>
+          <label>{{ t('genlog.n') }}</label>
           <input type="number" v-model="n" min="1">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('genlog.tot') }}</label>
+          <label>{{ t('genlog.tot') }}</label>
           <input type="number" v-model="tot" min="1">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('genlog.day') }}</label>
+          <label>{{ t('genlog.day') }}</label>
           <input type="number" v-model="tot" min="1">
         </div>
         <p
@@ -29,29 +29,29 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="random">
-            {{ $t('genlog.random') }}
+            {{ t('genlog.random') }}
           </button>
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="card resultbox" >
           {{ result }}
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <template v-for="t, index) in txt" :key index>
+      <template v-for="(tmp, index) in txt" :key index>
         <VCard :title="'Template ' + (index+1)">
           <textarea
             id="txt"
             class="form-control mb-2"
             v-model="txt[index]"
             rows="5"
-            :placeholder="$t('genlog.ph')"
+            :placeholder="t('genlog.ph')"
           />
           <div class="button-row mt-2">
             <button @click="genlog(index)" class="btn btn-primary">
-              {{$t('genlog.template')}} {{ index + 1 }}
+              {{t('genlog.template')}} {{ index + 1 }}
             </button>
           </div>
         </VCard>
@@ -63,7 +63,11 @@
 <script setup>
 import { ref, watch } from 'vue';
 import VCard from '@/components/generic/VCard.vue';
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: "GenLog"

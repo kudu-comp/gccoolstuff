@@ -28,14 +28,14 @@ export function code2BCD (s, format = 0, packed = false, fill = "") {
   
   for (let i=0; i < s.length; i++) {
     pos = formats.vars[format].char.indexOf(s[i]);
-    if (pos) {
+    if (pos >= 0) {
       if (!packed) {
         res += fill + formats.code[pos] + " ";
       } else {
         res += formats.code[pos];
         if (i % 2 == 1) res += " ";
       }
-    }
+    } 
   }
 
   // Remove last space if any
@@ -62,6 +62,8 @@ export function BCD2Code (s, format = 0, packed = false, fill = "") {
     nums = s.match(/[0-1]{4}/g);
   }
 
+  if (!nums) return "";
+  
   for (let n of nums) {
     pos = formats.code.indexOf(n);
     if (pos >= 0) res += formats.vars[format].char[pos];

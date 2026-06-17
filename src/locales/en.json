@@ -1,6 +1,11 @@
 {
   "language": "Language",
 
+  "texttransform" : {
+    "title" : "Text Transfomer",
+    "long": "Transform your text by cleaning it up, changing cases, reversing it, or applying fun filters."
+  },
+
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
     "noinput": "Please provide some input",
@@ -22,6 +27,9 @@
   "labels": {
     "selectfile": "Select file",
     "selaction": "Select action",
+    "replacediac": "Replace diacritics",
+    "reverse": "Reverse order Z→A",
+    "startzero": "Start at zero (A=0 or Z=0 with reverse)",
     "settings": "Settings",
     "input": "Input",
     "intro": "Introduction",
@@ -66,6 +74,7 @@
     "convert": "Convert",
     "calc": "Calculate",
     "solve": "Solve",
+    "copy": "Copy",
     "search": "Search",
     "format": "Format",
     "reset": "Reset",
@@ -503,7 +512,7 @@
     "keyfromalph" : " must be composed of the alphabet.",
     "keymustbenumeric" : " must be numeric."
   },
-  
+
   "codebook": {
     "title": "Codebook",
     "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search.",
@@ -1340,13 +1349,7 @@
 
   "wordvalue": {
     "title": "Word value & square root",
-    "long" : "A tool to calculate the word value and square root of a text and each word individually. Supports many alphabets, including Greek and Cyrillic, Scrabble and Vanity code. Alphabets can be used in reverse order. Count starts default at one but can also start at zero. Replace diacritics if needed (but please be aware that sometimes diacritics are unique in the used alphabet).",
-    "reverse": "Reverse order Z→A",
-    "startzero": "Start at zero (A=0 or Z=0 with reverse)",
-    "replacediac": "Replace diacritics",
-    "showhide": "Show/hide alphabet",
-    "someinfo": "Some information on alphabets",
-    "someinfo2": "<p>The calculator uses the official alphabets. So in some languages diacritics are separate letters in the alphabet (e.g. Ä in German or Å in Swedish) and in some languages they represent the original letter (e.g. é or ô in French). The <b>remove diacritics</b> however is merciless and replaces all diacritics, which is okay in most cases. But for languages were diacritics are separate letters (like German or Swedish) you better not use Remove Diacritics.</p><p>The Greek and Cyrillic (such as Russian) alphabets have characters that look exactly like their Western versions, such as A or B. But they are different, they have different character codes. When typed with a Western keyboard they will still resolve to a value of zero. If you would copy for example place names from Wikipedia (e.g. Амстердам) the right symbols are used and the values are calculated correctly.</p><p>The Scrabble values used are those of the latest known version. There are quite a few other versions out there. If you want the values of one those, you can find them on <a href='https://en.wikipedia.org/wiki/Scrabble_letter_distributions'>Wikipedia</a>, but you have to do the hard work yourself.</p>"
+    "long" : "A tool to calculate the word value and square root of a text and each word individually. Supports many alphabets, including Greek and Cyrillic, Scrabble and Vanity code. Alphabets can be used in reverse order. Count starts default at one but can also start at zero. Replace diacritics if needed (but please be aware that sometimes diacritics are unique in the used alphabet)."
   },
 
   "charcodes": {
@@ -1474,7 +1477,7 @@
     "values": "Words with a given word value",
     "lettersused": "Letters in alphabet"
   },
-  
+
   "anagrams": {
     "title": "Anagrams",
     "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device.",
@@ -1491,6 +1494,7 @@
     "long" : "A simple tool to convert the radix (2 to 36). Default the string 0-9A-Z is used as symbols, But it can be anything, you can use + and - for binary for example or the letters A to J for decimal numbers. Multiple numbers can be entered, use spaces in between.",
     "from": "Radix from",
     "to": "Radix to",
+    "custsym": "Custom symbols (optional)",
     "symbolserr": "Number of symbols should match radix or symbols should be empty."
   },
 
@@ -1690,7 +1694,7 @@
     "tethed": "Tetrahedral - a pyramid with a triangular base",
     "sqpyr": "Square pyramid",
     "cube": "Cube",
-    "others": "Other properties",	
+    "others": "Other properties",
     "niven": "Niven or Harshad - Numbers which are divisable by the sum of their digits",
     "narc": "Narcistic - Sum of digits ** (#digits) equals n",
     "kap": "Kaprekar - sort the number, reverse it, subtract the reversed from the original, it should be the same",
@@ -1729,20 +1733,14 @@
 
   "brainfuck": {
     "title": "Brainfuck",
-    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands +-><.,[]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>",
-    "vars" : "Select programming language",
-    "shorthand" : "Shorthand notation",
-    "code": "Program code",
-    "input": "Input variables",
-    "run": "Run code",
-    "debug": "Debug to console"
+    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands +-><.,[]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>"
   },
 
   "cow" : {
     "title": "Cow",
     "long": "<p>The COW programming language is an esoteric programming language created by Sean Heber in 2003. It is a Brainfuck variant designed humorously with Bovinae in mind. COW has twelve instructions (four more than Brainfuck) and is Turing-complete. Most instructions are moos, only the capitalization varies: mOo, moO, mOO, Moo, and so on. MMM, OOO, oom and OOM are the exceptions. All other character combinations are ignored and treated as comments. The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
   },
-  
+
   "beatnik": {
     "title": "Beatnik",
     "long": "Beatnik calculates the Scrabble value of each word. The value is then treated as a command. Words consist only of letters, so Boeing747Dreamliner gives two words (and two commands). Multiple Scrabble versions are available, but English is the most likely choice. More info can be found <a href='https://esolangs.org/wiki/Beatnik'>here.</a></p><p>The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
@@ -1769,13 +1767,7 @@
 
   "duckspeak": {
     "title": "Duckspeak",
-    "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing.",
-    "invalidint": " is not valid number\n",
-    "format": "Input/output format",
-    "ascii": "Text (ASCII)",
-    "hex": "Hexadecimal",
-    "dec": "Numbers (decimal",
-    "invalidcmd": " it not duckspeak\n"
+    "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
   },
 
   "deadfish" : {
@@ -1892,7 +1884,7 @@
     "sepspace": "Space",
     "sepcomma": "Comma",
     "sepcolon": "Colon",
-    "sephyphen": "Hyphen" 
+    "sephyphen": "Hyphen"
   },
 
   "rotciphers" : {

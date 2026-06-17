@@ -1,17 +1,17 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('convert.title') }}</h1>
+    <h1>{{ t('convert.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('convert.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('convert.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
-          >{{ $t('labels.from') }}</label>
+          >{{ t('labels.from') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
@@ -19,7 +19,7 @@
         </div>
         <div class="form-horizontal">
           <label
-          >{{ $t('labels.to') }}</label>
+          >{{ t('labels.to') }}</label>
           <v-datums
             id="to"
             v-model:datum="to"
@@ -31,10 +31,10 @@
             v-model:format="wgsformat"
           />
           <div v-if="to == 'Proj4js' || from == 'Proj4js'">
-            <div v-html="$t('convert.proj4jsmsg')" />
+            <div v-html="t('convert.proj4jsmsg')" />
             <label
               for="proj4jsdef"
-            >{{ $t('convert.proj4jslabel') }}</label>
+            >{{ t('convert.proj4jslabel') }}</label>
             <input
               id="proj4jsdef"
               v-model="proj4jsdef"
@@ -44,16 +44,16 @@
         </div>
         <div class="button-row">
           <button id="convert" class="btn btn-primary"  @click="convertCoordinates">
-            {{ $t('buttons.convert') }}
+            {{ t('buttons.convert') }}
           </button>
         </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           id="coordfrom"
           ref="coordFromInput"
           v-model="coordfrom"
-          :placeholder="$t('convert.phfrom')"
+          :placeholder="t('convert.phfrom')"
           rows="5"
           @input="wordValue"
         />
@@ -64,7 +64,7 @@
           {{ errormsg }}.
       </div>          
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           v-html="result"
@@ -74,7 +74,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordfrom" />     
       </VCard>
     </div>

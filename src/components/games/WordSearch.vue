@@ -1,32 +1,30 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('wordsearch.title') }}</h1>
+    <h1>{{ t('wordsearch.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('wordsearch.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('wordsearch.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('wordsearch.ignore') }}</label>
+          <label>{{ t('wordsearch.ignore') }}</label>
           <input type="text" v-model="ignore" lenght="1">
         </div>
         <div class="card-grid">
           <div class="form-row">
-            <label>{{ $t('wordsearch.grid') }}</label>
+            <label>{{ t('wordsearch.grid') }}</label>
             <textarea
               v-model="grid"
-              class="font-monospace"
               rows="10"
             />
           </div>
           <div class="form-row">
-            <label>{{ $t('wordsearch.words') }}</label>
+            <label>{{ t('wordsearch.words') }}</label>
             <textarea
               v-model="words"
-              class="font-monospace"
               rows="10"
             />
           </div>
@@ -39,11 +37,11 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="solve">
-            {{ $t('buttons.solve') }}
+            {{ t('buttons.solve') }}
           </button>
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div class="card resultbox" >
           {{ result }} 
           <div class="canvas-container">
@@ -56,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
 
@@ -203,14 +201,12 @@ const tryPos = (r, c, w) => {
 
 // --- Main Action ---
 
-const solve = () => {
+const solve = async () => {
   result.value = "";
   errormsg.value = "";
   gridarr.value = [];
   checkarr.value = [];
 
-  // Draw Background Grid
-  drawCanvas();
 
   // Parse Grid
   let gridlines = grid.value.trim().toUpperCase().split(/[\n\r]+/g);
@@ -231,6 +227,10 @@ const solve = () => {
 
   nrow.value = gridarr.value.length;
   ncol.value = width;
+
+  // Draw Background Grid
+  await nextTick();
+  drawCanvas();
 
   // Parse and Sort Words (longest first)
   let wordList = words.value.trim().toUpperCase().split(/[\n\r]+/g)
@@ -285,9 +285,6 @@ const solve = () => {
 }
 canvas {
   image-rendering: crisp-edges;
-}
-.font-monospace {
-  font-family: 'Courier New', Courier, monospace;
 }
 </style>
 

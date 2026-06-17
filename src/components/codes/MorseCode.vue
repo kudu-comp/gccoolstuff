@@ -1,22 +1,22 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('morsecode.title') }}</h1>
+    <h1>{{ t('morsecode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('morsecode.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('morsecode.long')" />
     </VCard>
-    <VCard :title="$t('morsecode.textmorse')">
+    <VCard :title="t('morsecode.textmorse')">
       <!-- Coder controls -->
-      <p>{{$t('morsecode.textmorsectl')}}</p>
+      <p>{{t('morsecode.textmorsectl')}}</p>
       <div class="form-horizontal">
-        <label for="spacesep">{{$t('morsecode.spacesep')}}</label>
+        <label for="spacesep">{{t('morsecode.spacesep')}}</label>
         <input type="text" v-model="spaceSep" id="spacesep"/>
       </div>
       <textarea
         class="mb-2"
         v-model="message2"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         autofocus
       />
@@ -27,15 +27,15 @@
         {{ errormsg3 }}
       </p>
       <div class="button-row">
-        <button class="btn btn-primary" id="btn1" :disabled="!message2" @click="toText()">{{$t('buttons.decode')}}</button>
-        <button class="btn btn-primary" id="btn2" :disabled="!message2" @click="toMorse()">{{$t('buttons.encode')}}</button>
+        <button class="btn btn-primary" id="btn1" :disabled="!message2" @click="toText()">{{t('buttons.decode')}}</button>
+        <button class="btn btn-primary" id="btn2" :disabled="!message2" @click="toMorse()">{{t('buttons.encode')}}</button>
      </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title=" $t('morsecode.decodeaudio') ">
+    <VCard :title=" t('morsecode.decodeaudio') ">
       <!-- Decoder controls -->
-      <p>{{$t('morsecode.decodectl')}}</p>
+      <p>{{t('morsecode.decodectl')}}</p>
       <!-- File input -->
       <input
         id="file"
@@ -45,23 +45,23 @@
         @change="onFileChange"
       />
       <div class="form-horizontal">
-        <label for="thres">{{$t('morsecode.thres')}}</label>
+        <label for="thres">{{t('morsecode.thres')}}</label>
         <input type="number" min="0" max="1" step="0.01" v-model="thres" id="thres" />
       </div>
       <div class="form-horizontal">
-        <label for="dottohyphen" >{{$t('morsecode.dottohyphen')}}</label>
+        <label for="dottohyphen" >{{t('morsecode.dottohyphen')}}</label>
         <input type="number" min="1" max="4" step="0.1" v-model="dotToHyphen" id="dottohyphen" />
       </div>
       <div class="form-horizontal">
-        <label for="dottopause" >{{$t('morsecode.dottopause')}}</label>
+        <label for="dottopause" >{{t('morsecode.dottopause')}}</label>
         <input type="number" min="1" max="4" step="0.1" v-model="dotToPause" id="dottopause" />
       </div>
       <div class="form-horizontal">
-        <label for="dottospace" >{{$t('morsecode.dottospace')}}</label>
+        <label for="dottospace" >{{t('morsecode.dottospace')}}</label>
         <input type="number" min="1" max="9" step="0.1" v-model="dotToSpace" id="dottospace" />
       </div>
       <div class="button-row mb-2">
-        <button class="btn btn-primary" id="btn1" :disabled="isProcessing || !isLoaded" @click="decode()">{{$t('buttons.decode')}}</button>
+        <button class="btn btn-primary" id="btn1" :disabled="isProcessing || !isLoaded" @click="decode()">{{t('buttons.decode')}}</button>
       </div>
       <!-- Error message -->
       <p
@@ -75,21 +75,21 @@
         {{ decodedText }} 
       </div>
     </VCard>
-    <VCard :title=" $t('morsecode.playmessage') ">
+    <VCard :title=" t('morsecode.playmessage') ">
       <!-- Coder controls -->
-      <p>{{$t('morsecode.encodectl')}}</p>
+      <p>{{t('morsecode.encodectl')}}</p>
       <div class="form-horizontal">
-        <label for="wpm">{{$t('morsecode.wpm')}}</label>
+        <label for="wpm">{{t('morsecode.wpm')}}</label>
         <input type="number" min="5" max="50" step="1" v-model="wpm" id="wpm"/>
       </div>
       <div class="form-horizontal">
-        <label for="freq">{{$t('morsecode.freq')}}</label>
+        <label for="freq">{{t('morsecode.freq')}}</label>
         <input type="number" min="100" max="15000" step="50" v-model="freq" id="freq"/>
       </div> 
       <textarea
         v-model="message"
         class="mb-2"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
       />
       <p
@@ -99,8 +99,8 @@
         {{ errormsg2 }}
       </p>
       <div class="button-row">
-        <button class="btn btn-primary" id="btn1" :disabled="!message" @click="PlayMessage()">{{$t('buttons.play')}}</button>
-        <button class="btn btn-primary" id="btn2" :disabled="!message" @click="SaveMessage()">{{$t('buttons.save')}}</button>
+        <button class="btn btn-primary" id="btn1" :disabled="!message" @click="PlayMessage()">{{t('buttons.play')}}</button>
+        <button class="btn btn-primary" id="btn2" :disabled="!message" @click="SaveMessage()">{{t('buttons.save')}}</button>
       </div>
     </VCard>      
   </div>

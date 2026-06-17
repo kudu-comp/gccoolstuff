@@ -1,22 +1,22 @@
 <template>
 
 <header class="page-header">
-    <h1>{{ $t('keyboards.title') }}</h1>
+    <h1>{{ t('keyboards.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('keyboards.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('keyboards.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <div class="form-horizontal">
-        <label>{{ $t('keyboards.inputkb') }}</label>
+        <label>{{ t('keyboards.inputkb') }}</label>
         <v-keyboards
           v-model:keyboard="fromkeyboard"
           @click="translateKeyboard"
         />
       </div>
       <div class="form-horizontal">
-        <label>{{ $t('keyboards.outputkb') }}</label>
+        <label>{{ t('keyboards.outputkb') }}</label>
         <v-keyboards
           v-model:keyboard="tokeyboard"
           @click="translateKeyboard"
@@ -25,12 +25,12 @@
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         id="message"
         ref="messageInput"
         v-model="message"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         @input="translateKeyboard"
       />
@@ -41,7 +41,7 @@
         {{ errormsg }}.
       </p>          
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div
         v-if="result"
         class="card resultbox"

@@ -1,46 +1,44 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('vanitycode.title') }}</h1>
+    <h1>{{ t('vanitycode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('vanitycode.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('vanitycode.long')" />
       <img width="200px" max-width="100%" src="~@\assets\images\vanitycode.png">
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="spaces">
-          <span class="checkmark"></span>
-          {{ $t('vanitycode.spaces') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="ignorespaces">
-          <span class="checkmark"></span>
-          {{ $t('vanitycode.ignorespaces') }}
-        </label>
-        <div class="radio-group">
-          <label>{{ $t('labels.selaction') }}</label>
-          <div class="radio-options-vertical">
-            <label class="radio-item">
-              <input type="radio" value="0" v-model="sel">
-              <span class="radio-mark"></span> {{ $t('buttons.encode') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="1" v-model="sel">
-              <span class="radio-mark"></span> {{ $t('buttons.decode') }}
-            </label>
-          </div>
+    <VCard :title="t('labels.settings')">
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="spaces">
+        <span class="checkmark"></span>
+        {{ t('vanitycode.spaces') }}
+      </label>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="ignorespaces">
+        <span class="checkmark"></span>
+        {{ t('vanitycode.ignorespaces') }}
+      </label>
+      <div class="radio-group">
+        <label>{{ t('labels.selaction') }}</label>
+        <div class="radio-options">
+          <label class="radio-item">
+            <input type="radio" value="0" v-model="sel">
+            <span class="radio-mark"></span> {{ t('buttons.encode') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="1" v-model="sel">
+            <span class="radio-mark"></span> {{ t('buttons.decode') }}
+          </label>
         </div>
       </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         v-model="msg"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         class="mb-2"
         @input="updateResult"
@@ -53,13 +51,13 @@
         {{ errormsg }}
       </p>
       <div class="button-row">
-        <button class="btn btn-primary" id="btn1" @click="addSpaces()">{{$t('vanitycode.addspaces')}}</button>  
+        <button class="btn btn-primary" id="btn1" @click="addSpaces()">{{t('vanitycode.addspaces')}}</button>
       </div>
       <!-- Result area or use v-html -->
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div v-if="result" class="card resultbox" >
-        {{ result }} 
+        {{ result }}
       </div>
     </VCard>
   </div>
@@ -139,8 +137,8 @@ const translation = computed(() => {
   // Determine localized error message
   let finalError = "";
   if (errorChars) {
-    const errorPrefix = sel.value === "0" 
-      ? t('vanitycode.unknownchar') 
+    const errorPrefix = sel.value === "0"
+      ? t('vanitycode.unknownchar')
       : t('vanitycode.unknowncode');
     finalError = `${errorPrefix}: ${errorChars.trim()}`;
   }

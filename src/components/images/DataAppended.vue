@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('dataappended.title') }}</h1>
+    <h1>{{ t('dataappended.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('dataappended.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('dataappended.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input type="file" accept="image/*" @change="handleCarrierUpload" />
         </div>
         <p
@@ -39,7 +39,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="carrierFile" class="results">
           <div class="h4 card-title">Carrier: <strong>{{ carrierFile.name }}</strong></div>
           <p class="card-text">Format: <strong>{{ carrierStats.hostType }}</strong></p>
@@ -60,6 +60,11 @@ import { ref, reactive } from 'vue';
 import VCard from '@/components/generic/VCard.vue';
 import LoadSecret from '@/components/generic/LoadSecret.vue';
 import ShowSecret from '@/components/generic/ShowSecret.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const carrierFile = ref(null);
 const carrierBuffer = ref(null);

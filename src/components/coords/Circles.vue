@@ -1,14 +1,14 @@
 <template>
 
 <header class="page-header">
-    <h1>{{ $t('circles.title') }}</h1>
+    <h1>{{ t('circles.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('circles.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('circles.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="input-box mb-2">
           <span class="input-box-title">Circle 1</span>
           <div class="form-horizontal">
@@ -17,14 +17,14 @@
               v-model:datum="selecteddatum1"
             >
               <template #label>
-                {{ $t('labels.center') }} 1
+                {{ t('labels.center') }} 1
               </template>
               <!-- <template #popup>
                 <button 
                   class="btn sm-size mb-2 ms-2" 
                   @click="modal1 = true"
                 >
-                  {{ $t('circles.from3p') }}
+                  {{ t('circles.from3p') }}
                 </button>
               </template>      -->
             </v-coord>
@@ -35,7 +35,7 @@
               v-model:unit="unit1"
             >
               <template #label>
-                {{ $t('labels.radius') }}
+                {{ t('labels.radius') }}
               </template>
             </v-distance>
           </div>
@@ -48,14 +48,14 @@
               v-model:datum="selecteddatum2"
             >
                 <template #label>
-                {{ $t('labels.center') }} 2
+                {{ t('labels.center') }} 2
               </template>
               <!-- <template #popup>
                 <button 
                   class="btn sm-size mb-2 ms-2" 
                   @click="modal2 = true"
                 >
-                  {{ $t('circles.from3p') }}
+                  {{ t('circles.from3p') }}
                 </button>
               </template>     -->
             </v-coord>
@@ -66,7 +66,7 @@
               v-model:unit="unit2"
             >
               <template #label>
-                {{ $t('labels.radius') }}
+                {{ t('labels.radius') }}
               </template>
             </v-distance>
           </div>
@@ -95,7 +95,7 @@
           {{ errormsg }}
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
@@ -104,7 +104,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordinate1" />
       </VCard>
     </div>

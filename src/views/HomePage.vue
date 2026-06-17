@@ -1,13 +1,13 @@
 <template>
   <div class="card-grid">
-    <v-card :title="$t('labels.welcome')">
+    <v-card :title="t('labels.welcome')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/welcome.jpg" alt="Welcome">
       <div class="card-body">
-        <p v-html="$t('home.intro')"></p>
-        <router-link to="/alltools"><span class="btn">{{$t('labels.alltools')}}</span></router-link>
+        <p v-html="t('home.intro')"></p>
+        <router-link to="/alltools"><span class="btn">{{t('labels.alltools')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('home.whatare')">
+    <v-card :title="t('home.whatare')">
       <div class="card-body">
         <div class="form-horizontal mb-2">
             <input
@@ -26,133 +26,152 @@
               </svg>
             </button>
         </div>
-        <h5 class="card-title mt-2">{{$t('home.favs')}}</h5>
+        <h5 class="card-title mt-2">{{t('home.favs')}}</h5>
         <div class="card-text">
           <ul>
             <li>
-              <router-link to="/wordvalue">{{$t('wordvalue.title')}}</router-link>
+              <router-link to="/wordvalue">{{t('wordvalue.title')}}</router-link>
             </li>
             <li>
               <router-link to="/rotciphers">ROT13</router-link>
             </li>
             <li>
-              <router-link to="/tryanswers">{{$t('tryanswers.title')}}</router-link>
+              <router-link to="/tryanswers">{{t('tryanswers.title')}}</router-link>
             </li>
             <li>
-              <router-link to="/convert">{{$t('convert.title')}} {{$t('menu.coordinates')}}</router-link>
+              <router-link to="/convert">{{t('convert.title')}} {{t('menu.coordinates')}}</router-link>
             </li>
             <li>
-              <router-link to="/project">{{$t('project.title')}} {{$t('menu.coordinates')}}</router-link>
+              <router-link to="/printlog">{{t('printlog.title')}}</router-link>
             </li>
             <li>
-              <router-link to="/printlog">{{$t('printlog.title')}}</router-link>
+              <router-link to="/codebook">{{t('codebook.title')}}</router-link>
             </li>
             <li>
-              <router-link to="/codebook">{{$t('codebook.title')}}</router-link>
+              <router-link to="/htmlparser">{{t('htmlparser.title')}}</router-link>
             </li>
             <li>
-              <router-link to="/htmlparser">{{$t('htmlparser.title')}}</router-link>
-            </li>
-            <li>
-              <router-link to="/wordsearch">{{$t('wordsearch.title')}}</router-link>
+              <router-link to="/wordsearch">{{t('wordsearch.title')}}</router-link>
             </li>
           </ul>
         </div>
-        <h5 class="card-title mt-2">{{$t('home.contact')}}</h5>
+        <h5 class="card-title mt-2">{{t('home.contact')}}</h5>
         <div class="card-text">
-          {{$t('home.contacttxt')}}
+          {{t('home.contacttxt')}}
         </div>
       </div>
     </v-card>
-    <v-card :title="$t('labels.featured') + ' - ' + $t('tryanswers.title')" >
+    <v-card :title="t('home.new')" >
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/featured.jpg" alt="Featured" >
       <div class="card-body">
-        <p class="card-text" v-html="$t('tryanswers.short')">
+        <p class="card-text" v-html="t('home.info')">
         </p>
-        <router-link to="/tryanswers"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.coordinates')">
+    <v-card :title="t('menu.coordinates')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/coordinates.jpg" alt="Coordinates">
       <div class="card-body">
-        <p class="card-text" v-html="$t('coordinates.intro')"></p>
-        <router-link to="/helpcoord"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('coordinates.intro')"></p>
+        <router-link to="/helpcoord"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.codes')">
+    <v-card :title="t('menu.codes')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/codes.jpg" alt="Codes">
       <div class="card-body">
-        <p class="card-text" v-html="$t('codes.intro')"></p>
-        <router-link to="/helpcodes"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('codes.intro')"></p>
+        <router-link to="/helpcodes"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.texttools')">
+    <v-card :title="t('menu.texttools')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/text.jpg" alt="Text">
       <div class="card-body">
-        <p class="card-text" v-html="$t('texttools.intro')"></p>
-        <router-link to="/helptext"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('texttools.intro')"></p>
+        <router-link to="/helptext"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.mathtools')">
+    <v-card :title="t('menu.mathtools')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/math.jpg" alt="Mathematics">
       <div class="card-body">
-        <p class="card-text" v-html="$t('mathtools.intro')"></p>
-        <router-link to="/helpmath"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('mathtools.intro')"></p>
+        <router-link to="/helpmath"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.imagetools')">
+    <v-card :title="t('menu.imagetools')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/images.jpg" alt="Images">
       <div class="card-body">
-        <p class="card-text" v-html="$t('imagetools.intro')"></p>
-        <router-link to="/helpimage"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('imagetools.intro')"></p>
+        <router-link to="/helpimage"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.comptools')">
+    <v-card :title="t('menu.comptools')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/comp.jpg" alt="Programming">
       <div class="card-body">
-        <p class="card-text" v-html="$t('comptools.intro')"></p>
-        <router-link to="/helpcomp"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('comptools.intro')"></p>
+        <router-link to="/helpcomp"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.games')">
+    <v-card :title="t('menu.games')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/games.jpg" alt="Games and puzzles">
       <div class="card-body">
-        <p class="card-text" v-html="$t('games.intro')"></p>
-        <router-link to="/helpgames"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('games.intro')"></p>
+        <router-link to="/helpgames"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
-    <v-card :title="$t('menu.other')">
+    <v-card :title="t('menu.other')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/other.jpg" alt="Other tools">
       <div class="card-body">
-        <p class="card-text" v-html="$t('othertools.intro')"></p>
-        <router-link to="/helpother"><span class="btn">{{$t('labels.moreinfo')}}</span></router-link>
+        <p class="card-text" v-html="t('othertools.intro')"></p>
+        <router-link to="/helpother"><span class="btn">{{t('labels.moreinfo')}}</span></router-link>
       </div>
     </v-card>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import VCard from '@/components/generic/VCard.vue';
+import { useI18n } from 'vue-i18n'
 
-export default {
-  
-  components: {
-    VCard
-  },
+const { t } = useI18n({
+  useScope: 'local'
+});
 
-  data() {
-    return {
-      searchstr: ""
-    }
-  },
+// Define the name of the component (optional)
+defineOptions({
+  name: 'SearchComponent'
+});
 
-  methods: {
-    
-    goSearch: function() {
-      this.$router.push({ name: 'AllTools', query: { s: this.searchstr } })
-    }
-  }
+// Setup Router hook
+const router = useRouter();
 
-}
+// --- State ---
+const searchstr = ref("");
+
+// --- Methods ---
+const goSearch = () => {
+  // Use router.push instead of this.$router.push
+  router.push({ 
+    name: 'AllTools', 
+    query: { s: searchstr.value } 
+  });
+};
 </script>
+
+<i18n locale="en">
+{
+  "home": {
+    "new" : "What's new",
+    "info" : "<p>GCTools has been upgraded. The user inferface works better om mobile and uses cards. All tools have been tested thoroughly.</p><p>And there are some great new tools especially for <b>Steganography</b>. You can now easily find hidden messages in images and sound files. And you create your own secret messages!</p>"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "home": {
+    "new" : "Laatste updates",
+    "info" : "<p>GCTools is flink verbeterd. The website werkt nu nog beter op mobiel. Alle tools maken gebruik van kaarten, zodat alle informatie overzichtelijk wordt gepresetneerd. En we alles nog eens flink getest.</p><p>En er zijn enkele nieuwe tools. Probeer de verschillende opties voor steganografie eens. Hiermee kan je simpel boodschappen verstoppen in afbeeldingen of geluiden.</p>"
+  }
+}
+</i18n>

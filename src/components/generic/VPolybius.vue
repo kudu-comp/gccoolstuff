@@ -5,7 +5,7 @@
         <div class="modal-container p-4">
           <div class="modal-header">
             <slot name="header">
-              <h2>{{ $t('dialogpb.title') }}</h2>
+              <h2>{{ t('dialogpb.title') }}</h2>
             </slot>
           </div>
 
@@ -16,7 +16,7 @@
                   <label
                     class="form-label sm-size"
                     for="startalphabet"
-                  >{{ $t('dialogpb.start') }}</label>
+                  >{{ t('dialogpb.start') }}</label>
                   <select
                     id="startalphabet"
                     v-model="startalphabet"
@@ -39,7 +39,7 @@
                     <label
                       class="form-label sm-size"
                       for="key1"
-                    >{{ $t('dialogpb.key') }}</label>
+                    >{{ t('dialogpb.key') }}</label>
                     <input
                       id="key"
                       v-model="key"
@@ -52,7 +52,7 @@
                     <label
                       class="form-label sm-size"
                       for="direction"
-                    >{{ $t('dialogpb.dir') }}</label>
+                    >{{ t('dialogpb.dir') }}</label>
                     <select
                       id="direction"
                       v-model="dir"
@@ -60,19 +60,19 @@
                       @change="genSquare"
                     >
                       <option value="HOR">
-                        {{ $t('dialogpb.d.hor') }}
+                        {{ t('dialogpb.d.hor') }}
                       </option>
                       <option value="VER">
-                        {{ $t('dialogpb.d.ver') }}
+                        {{ t('dialogpb.d.ver') }}
                       </option>
                       <option value="DIAH">
-                        {{ $t('dialogpb.d.diah') }}
+                        {{ t('dialogpb.d.diah') }}
                       </option>
                       <option value="DIAV">
-                        {{ $t('dialogpb.d.diav') }}
+                        {{ t('dialogpb.d.diav') }}
                       </option>
                       <option value="SI">
-                        {{ $t('dialogpb.d.si') }}
+                        {{ t('dialogpb.d.si') }}
                       </option>
                     </select>
                   </div>
@@ -80,7 +80,7 @@
                     <label
                       class="form-label sm-size"
                       for="start"
-                    >{{ $t('dialogpb.corner') }}</label>
+                    >{{ t('dialogpb.corner') }}</label>
                     <select
                       id="start"
                       v-model="start"
@@ -88,16 +88,16 @@
                       @change="genSquare"
                     >
                       <option value="TL">
-                        {{ $t('dialogpb.c.tl') }}
+                        {{ t('dialogpb.c.tl') }}
                       </option>
                       <option value="TR">
-                        {{ $t('dialogpb.c.tr') }}
+                        {{ t('dialogpb.c.tr') }}
                       </option>
                       <option value="BL">
-                        {{ $t('dialogpb.c.bl') }}
+                        {{ t('dialogpb.c.bl') }}
                       </option>
                       <option value="BR">
-                        {{ $t('dialogpb.c.br') }}
+                        {{ t('dialogpb.c.br') }}
                       </option>
                     </select>
                   </div>
@@ -113,7 +113,7 @@
                       <label
                         for="flip"
                         class="form-check-label ms-2"
-                      >{{ $t('dialogpb.flip') }}</label>
+                      >{{ t('dialogpb.flip') }}</label>
                     </div>
                   </div>
                 </div>
@@ -143,7 +143,7 @@
               <input
                 id="reset"
                 type="button"
-                :value="$t('buttons.reset')"
+                :value="t('buttons.reset')"
                 class="btn me-2"
                 @click="genReset"
               >
@@ -151,13 +151,13 @@
                 class="btn me-2"
                 @click="$emit('close')"
               >
-                {{ $t('buttons.cancel') }}
+                {{ t('buttons.cancel') }}
               </button>
               <button
                 class="btn"
                 @click="closeModal()"
               >
-                {{ $t('buttons.save') }}
+                {{ t('buttons.save') }}
               </button>
             </slot>
           </div>

@@ -1,29 +1,29 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('dictsearch.title') }}</h1>
+    <h1>{{ t('dictsearch.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('dictsearch.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('dictsearch.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
         <div class="form-horizontal mt-4">
-          <label>{{ $t('dictsearch.searchstr') }}</label>
+          <label>{{ t('dictsearch.searchstr') }}</label>
           <input type="text" v-model="searchstr" ref="searchRef">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('dictsearch.maxlength') }}</label>
+          <label>{{ t('dictsearch.maxlength') }}</label>
           <input type="number" v-model="maxlen">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('dictsearch.minlength') }}</label>
+          <label>{{ t('dictsearch.minlength') }}</label>
           <input type="number" v-model="minlen">
         </div>
         <div class="radio-group">
-          <label>{{ $t('dictsearch.searchfor') }}</label>
+          <label>{{ t('dictsearch.searchfor') }}</label>
           <div class="radio-options-vertical">
             <label class="radio-item" v-for="r in radios" :key="r">
               <input type="radio" :value="r.value" v-model="sf">
@@ -39,13 +39,13 @@
         </p>
         <div class="button-row mt-2">
           <button :disabled="dictloading" class="btn btn-primary" @click="dictsearch()">
-            {{$t('buttons.search')}}
+            {{t('buttons.search')}}
           </button>
         </div>
     </VCard>
   </div>
   <div class="card-stack">
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div v-if="result" class="card resultbox" v-html="result" />
     </VCard>
     </div>

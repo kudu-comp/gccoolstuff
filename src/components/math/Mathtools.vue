@@ -1,10 +1,10 @@
 <template>
   <div class="card-grid mb-2">
     <!-- Intro Card -->
-    <VCard :title="$t('menu.mathtools')">
+    <VCard :title="t('menu.mathtools')">
       <img class="card-img-top" src="@/assets/images/math.jpg" alt="Math" style="width: 100%; height: 200px; object-fit: cover;">
       <div class="card-body">
-        <p class="card-text" v-html="$t('mathtools.intro')"></p>
+        <p class="card-text" v-html="t('mathtools.intro')"></p>
       </div>
     </VCard>
 
@@ -12,12 +12,12 @@
     <VCard 
       v-for="tool in mathTools" 
       :key="tool" 
-      :title="$t(`${tool}.title`)"
+      :title="t(`${tool}.title`)"
     >
       <div class="card-body">
-        <p class="card-text" v-html="$t(`${tool}.long`)"></p>
+        <p class="card-text" v-html="t(`${tool}.long`)"></p>
         <router-link :to="`/${tool}`">
-          <span class="btn">{{ $t('labels.letsgo') }}</span>
+          <span class="btn">{{ t('labels.letsgo') }}</span>
         </router-link>
       </div>
     </VCard>
@@ -26,6 +26,11 @@
 
 <script setup>
 import VCard from '@/components/generic/VCard.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const mathTools = [
   'baseconv',

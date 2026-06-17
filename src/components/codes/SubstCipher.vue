@@ -1,125 +1,126 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('substcipher.title') }}</h1>
+    <h1>{{ t('substcipher.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('substcipher.long')" />
-    </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <div class="radio-group">
-          <label>{{ $t('substcipher.highlight') }}</label>
+    <div class="card-stack">
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('substcipher.long')" />
+      </VCard>
+      <VCard :title="t('labels.settings')">
+        <div class="radio-group mb-2">
+          <label>{{ t('substcipher.highlight') }}</label>
           <div class="radio-options-vertical">
             <label class="radio-item">
               <input type="radio" value="red" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ $t('colors.red') }}
+              <span class="radio-mark"></span> {{ t('colors.red') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="blue" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ $t('colors.blue') }}
+              <span class="radio-mark"></span> {{ t('colors.blue') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="yellow" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ $t('colors.yellow') }}
+              <span class="radio-mark"></span> {{ t('colors.yellow') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="bold" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ $t('highlights.bold') }}
+              <span class="radio-mark"></span> {{ t('highlights.bold') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="upper" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ $t('highlights.upper') }}
+              <span class="radio-mark"></span> {{ t('highlights.upper') }}
             </label>
           </div>
         </div>
-        <div class="radio-group">
-          <label>{{ $t('language') }}</label>
+        <div class="radio-group mb-2">
+          <label>{{ t('language') }}</label>
           <div class="radio-options-vertical">
             <label class="radio-item">
               <input type="radio" value="en" v-model="language" @change="setLanguage">
-              <span class="radio-mark"></span> {{ $t('languages.english') }}
+              <span class="radio-mark"></span> {{ t('languages.english') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="nl" v-model="language" @change="setLanguage">
-              <span class="radio-mark"></span> {{ $t('languages.dutch') }}
+              <span class="radio-mark"></span> {{ t('languages.dutch') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="de" v-model="language" @change="setLanguage">
-              <span class="radio-mark"></span> {{ $t('languages.german') }}
+              <span class="radio-mark"></span> {{ t('languages.german') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="fr" v-model="language" @change="setLanguage">
-              <span class="radio-mark"></span> {{ $t('languages.french') }}
+              <span class="radio-mark"></span> {{ t('languages.french') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="es" v-model="language" @change="setLanguage">
-              <span class="radio-mark"></span> {{ $t('languages.spanish') }}
+              <span class="radio-mark"></span> {{ t('languages.spanish') }}
             </label>
           </div>
         </div>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="remdiacr">
-            <span class="checkmark"></span>
-            {{$t('wordvalue.replacediac')}}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="casesens">
-            <span class="checkmark"></span>
-            {{$t('substcipher.casesens')}}
-          </label>
-      </div>
-    </VCard>
-  </div>
-  <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
-      <div class="form-group-vertical">
-        <div class="input-wrapper mb-2">
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="remdiacr">
+          <span class="checkmark"></span>
+          {{t('labels.replacediac')}}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="casesens">
+          <span class="checkmark"></span>
+          {{t('substcipher.casesens')}}
+        </label>
+      </VCard>
+    </div>
+    <div class="card-stack">
+      <VCard :title="t('labels.input')">
+        <div class="form-horizontal">
           <label
-          >{{ $t('substcipher.orig') }}</label>
+          >{{ t('substcipher.orig') }}</label>
           <input
             v-model="from"
             type="text"
             size="50"
             @keyup="replaceInput"
           >{{ error1 }}
+        </div> 
+        <div class="form-horizontal">
           <label
-          >{{ $t('substcipher.repl') }}</label>
+          >{{ t('substcipher.repl') }}</label>
           <input
             v-model="to"
             type="text"
             size="50"
             @keyup="replaceInput"
           >{{ error2 }}
-          <label
-          >{{ $t('labels.input') }}</label>
-          <textarea
-            ref="messageRef"
-            v-model="message"
-            :placeholder="$t('labels.message')"
-            rows="5"
-            @keyup="replaceInput"
-          />
-        </div>
-      </div>
-      <div class="button-row">
-        <button id="hint1" class="btn btn-primary"  @click="printHints">
-          {{ $t('substcipher.get') }}
-        </button>
-        <button id="hint2" class="btn btn-primary"  @click="applyHints">
-          {{ $t('substcipher.apply') }}
-        </button>
-      </div>
-    </VCard>
-     <VCard :title="$t('labels.result')">
-        <p
-          class="col-6 card resultbox"
-          v-html="result"
+        </div>  
+        <label
+        >{{ t('labels.input') }}</label>
+        <textarea
+          ref="messageRef"
+          v-model="message"
+          :placeholder="t('labels.message')"
+          rows="5"
+          @keyup="replaceInput"
+          class="mb-2"
         />
-    </VCard>
+        <div class="button-row">
+          <button id="hint1" class="btn btn-primary"  @click="printHints">
+            {{ t('substcipher.get') }}
+          </button>
+          <button id="hint2" class="btn btn-primary"  @click="applyHints">
+            {{ t('substcipher.apply') }}
+          </button>
+        </div>
+      </VCard>
+      <VCard :title="t('labels.result')">
+          <p
+            class="col-6 card resultbox"
+            v-html="result"
+          />
+      </VCard>
+    </div>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('substcipher.hint')">
+    <VCard :title="t('substcipher.hint')">
       <div v-html="hints" />      
     </VCard>
   </div>
@@ -224,9 +225,9 @@ const printHints = () => {
   calculatedPercentages.sort((a, b) => b.count - a.count);
   percentages.value = calculatedPercentages;
 
-  let html = "<div class='table-responsive'><table class='p-table'><tbody><tr><td>Letter</td>";
-  for (let i = 0; i < freq.value.length; i++) html += "<td>" + freq.value[i] + "</td>";
-  html += "</tr><tr><td>Frequency</td>";
+  let html = "<div class='table-responsive'><table class='p-table'><thead><tr><th scope='col'>Letter</th>";
+  for (let i = 0; i < freq.value.length; i++) html += "<th scope='col'>" + freq.value[i] + "</th>";
+  html += "</tr></thead><tbody><tr><td>Frequency</td>";
   for (let i = 0; i < freqperc.value.length; i++) html += "<td>" + freqperc.value[i] + "</td>";
   html += "</tr><tr><td>Hint letters</td>";
   for (let i = 0; i < percentages.value.length; i++) html += "<td>" + percentages.value[i].char + "</td>";
@@ -313,8 +314,3 @@ watch(language, () => {
 });
 </script>
 
-<style scoped>
-.result {
-  word-wrap: break-word;
-}
-</style>

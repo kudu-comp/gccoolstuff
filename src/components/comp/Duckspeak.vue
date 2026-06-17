@@ -1,21 +1,21 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('duckspeak.title') }}</h1>
+    <h1>{{ t('duckspeak.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('duckspeak.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('duckspeak.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('duckspeak.format')"
+            :title="t('duckspeak.format')"
             :options="[
-              { value: '0', label: $t('duckspeak.ascii') },
-              { value: '1', label: $t('duckspeak.hex') },
-              { value: '2', label: $t('duckspeak.dec') }
+              { value: '0', label: t('duckspeak.ascii') },
+              { value: '1', label: t('duckspeak.hex') },
+              { value: '2', label: t('duckspeak.dec') }
             ]"
             v-model="selDS"
           />
@@ -24,7 +24,7 @@
           <textarea
             ref="codeInput"
             v-model="message"
-            :placeholder="$t('brainfuck.code')"
+            :placeholder="t('duckspeak.code')"
             rows="5"
           />
         </div>
@@ -36,16 +36,21 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="encode">
-            {{ $t('buttons.encode') }}
+            {{ t('buttons.encode') }}
           </button>
           <button class="btn btn-primary"  @click="decode">
-            {{ $t('buttons.decode') }}
+            {{ t('buttons.decode') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
+        <div v-if="result" class="button-row mb-2">
+          <button @click="copyToClipboard" class="btn btn-small btn-primary" :class="{ copied: copiedStatus }">
+            {{ copiedStatus ? '✓' : t('buttons.copy') }}
+          </button>
+        </div>
         <div
           v-if="result"
           class="card resultbox"
@@ -86,9 +91,20 @@ const message = ref("");
 const result = ref("");
 const selDS = ref("0"); // 0: ASCII, 1: Hex, 2: Dec
 const errormsg = ref("");
+const copiedStatus = ref(false);
 
 // --- Template Ref ---
 const codeInput = ref(null);
+
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(result.value);
+    copiedStatus.value = true;
+    setTimeout(() => copiedStatus.value = false, 2000);
+  } catch (err) {
+    console.error('Failed to copy!', err);
+  }
+};
 
 onMounted(() => {
   if (codeInput.value) {
@@ -206,3 +222,31 @@ const decode = () => {
   }
 };
 </script>
+
+<i18n locale="en">
+{
+  "duckspeak": {
+    "code": "Program code",
+    "invalidint": " is not valid number\n",
+    "format": "Input/output format",
+    "ascii": "Text (ASCII)",
+    "hex": "Hexadecimal",
+    "dec": "Numbers (decimal",
+    "invalidcmd": " it not duckspeak\n"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "duckspeak": {
+    "code": "Programmacode",
+    "invalidint": " is een ongeldig getal\n",
+    "format": "Invoer/uitvoer formaat",
+    "ascii": "Tekst (ASCII)",
+    "hex": "Hexadecimaal",
+    "dec": "Getallen (decimaal",
+    "invalidcmd": " is geen duckspeak\n"
+  }
+}
+</i18n>

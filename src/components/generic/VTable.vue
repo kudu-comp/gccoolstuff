@@ -6,13 +6,13 @@
         <CustomDropdown
           v-model="searchIndex"
           :options="searchOptions"
-          :title="$t('labels.searchcol')"
+          :title="t('labels.searchcol')"
         />
       </div>
       
       <!-- Search Input -->
       <div class="form-horizontal">
-        <label>{{ $t('labels.search') }}</label>
+        <label>{{ t('labels.search') }}</label>
         <input 
           type="text" 
           v-model="searchInput" 
@@ -43,7 +43,7 @@
       </p>
 
       <!-- Main Table -->
-      <table v-show="showTable" class="p-table mt-2">
+      <table v-show="showTable" class="table-responsive p-table mt-2">
         <thead class="v-table-header">
           <tr>
             <th
@@ -93,8 +93,12 @@
 
 <script setup>
 import { ref, reactive, watch, onMounted, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const props = defineProps({
   phsearch: { type: String, default: "Type searches" },
@@ -106,8 +110,6 @@ const props = defineProps({
 
 // Define emits to send data to parent
 const emit = defineEmits(['update:results', 'update:error', 'reset']);
-
-const { t } = useI18n();
 
 // --- State ---
 const sortArr = ref([]);

@@ -1,26 +1,26 @@
 <template>
 
    <header class="page-header">
-    <h1>{{ $t('primes.title') }}</h1>
+    <h1>{{ t('primes.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('primes.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('primes.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('primes.check') }}</label>
+          <label>{{ t('primes.check') }}</label>
           <input type="number" v-model="checkprime">
           <v-calculate @calculate="checkPrime"></v-calculate>
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('primes.pos') }}</label>
+          <label>{{ t('primes.pos') }}</label>
           <input type="number" v-model="pos">
           <v-calculate @calculate="getPrime"></v-calculate>
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('primes.primefact') }}</label>
+          <label>{{ t('primes.primefact') }}</label>
           <input type="number" v-model="primefact">
           <v-calculate @calculate="primeFactors"></v-calculate>
         </div>
@@ -33,10 +33,10 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -86,11 +86,11 @@ const primeFactors = () => {
     errormsg.value = t('errors.toobig')
   } else {
     const factors = mathtools.primeFactorization(primefact.value)
-    result.value = factors.join(" - ")
+    result.value =  t('gcdandlcm.t2') + " " + primefact.value + ": "+ factors.join(" - ")
   }
 }
 
-const checkPrimeAction = () => {
+const checkPrime = () => {
   result.value = t('labels.result')
   errormsg.value = ""
 

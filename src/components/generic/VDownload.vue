@@ -2,14 +2,18 @@
   <button 
     id="download" 
     class="btn btn-primary" 
-    :title="$t('buttons.download')" 
+    :title="t('buttons.download')" 
     @click="downloadCanvas"
   >
-    {{ $t('buttons.download') }}
+    {{ t('buttons.download') }}
   </button>
 </template>
 
 <script setup>
+
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 // Props definition
 const props = defineProps({
   canvas: {

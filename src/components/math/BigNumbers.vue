@@ -1,32 +1,32 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('bignumbers.title') }}</h1>
+    <h1>{{ t('bignumbers.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('bignumbers.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('bignumbers.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
         <CustomDropdown 
             v-model="base" 
             :options="BASE_OPTIONS" 
-            :title="$t('bignumbers.selnum')"
+            :title="t('bignumbers.selnum')"
           />
         </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('bignumbers.num1') }}</label>
+          <label>{{ t('bignumbers.num1') }}</label>
           <input type="text" v-model="n1" ref="n1Input">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('bignumbers.num2') }}</label>
+          <label>{{ t('bignumbers.num2') }}</label>
           <input type="text" v-model="n2">
         </div>
-        <h4>{{ $t('bignumbers.arithmetic') }}</h4>
+        <h4>{{ t('bignumbers.arithmetic') }}</h4>
         <div class="button-row mt-2">
           <button class="btn btn-primary" @click="calcBig('ADD')">A + B</button>
           <button class="btn btn-primary" @click="calcBig('SUB')">A - B</button>
@@ -35,7 +35,7 @@
           <button class="btn btn-primary" @click="calcBig('MOD')">A % B</button>
           <!-- <input type="button" id="pow" value="A ** B" class="btn mb-2" v-on:click="calcBig('POW')"> -->
         </div>
-        <h4>{{ $t('bignumbers.logical') }}</h4>
+        <h4>{{ t('bignumbers.logical') }}</h4>
         <div class="button-row mt-2">
           <button class="btn btn-primary" @click="calcBig('AND')">A and B</button>
           <button class="btn btn-primary" @click="calcBig('OR')">A or B</button>
@@ -51,7 +51,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <div
           v-if="result"
           class="card resultbox"

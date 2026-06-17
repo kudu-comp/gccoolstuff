@@ -1,10 +1,10 @@
 <template>
   <div class="card-grid mb-2">
     <!-- Intro Card -->
-    <VCard :title="$t('menu.games')">
+    <VCard :title="t('menu.games')">
       <img class="card-img-top" src="@/assets/images/games.jpg" alt="Games" style="width: 100%; height: 200px; object-fit: cover;">
       <div class="card-body">
-        <p class="card-text" v-html="$t('games.intro')"></p>
+        <p class="card-text" v-html="t('games.intro')"></p>
       </div>
     </VCard>
 
@@ -12,12 +12,12 @@
     <VCard 
       v-for="game in games" 
       :key="game" 
-      :title="$t(`${game}.title`)"
+      :title="t(`${game}.title`)"
     >
       <div class="card-body">
-        <p class="card-text" v-html="$t(`${game}.long`)"></p>
+        <p class="card-text" v-html="t(`${game}.long`)"></p>
         <router-link :to="`/${game}`">
-          <span class="btn">{{ $t('labels.letsgo') }}</span>
+          <span class="btn">{{ t('labels.letsgo') }}</span>
         </router-link>
       </div>
     </VCard>
@@ -26,6 +26,11 @@
 
 <script setup>
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const games = [
   'sudokusolv',

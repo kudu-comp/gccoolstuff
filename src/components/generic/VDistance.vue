@@ -1,6 +1,6 @@
 <template>
     <label
-      ><slot name="label">{{ $t('labels.distance') }}</slot>
+      ><slot name="label">{{ t('labels.distance') }}</slot>
     </label>
     <input
       id="coordinput"
@@ -38,6 +38,8 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   dist: {

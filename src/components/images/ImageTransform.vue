@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('imagetransform.title') }}</h1>
+    <h1>{{ t('imagetransform.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('imagetransform.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('imagetransform.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             ref="fileInputRef"
@@ -25,74 +25,74 @@
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.settings')">
-        <h4>{{ $t('imagetransform.shift') }}</h4>
-        <p>{{ $t('imagetransform.shiftinfo') }}</p>
+      <VCard :title="t('labels.settings')">
+        <h4>{{ t('imagetransform.shift') }}</h4>
+        <p>{{ t('imagetransform.shiftinfo') }}</p>
         <div class="form-horizontal">
-          <label>{{ $t('imagetransform.shiftr') }}</label>
+          <label>{{ t('imagetransform.shiftr') }}</label>
           <input v-model="shiftr" type="number"/>
           <div class="button-row">
             <button 
               class="btn btn-primary"  
               @click="shiftRows"
             > 
-              {{ $t('buttons.apply') }}
+              {{ t('buttons.apply') }}
             </button>
           </div>
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('imagetransform.shiftc') }}</label>
+          <label>{{ t('imagetransform.shiftc') }}</label>
           <input v-model="shiftc" type="number"/>
           <div class="button-row">
             <button 
               class="btn btn-primary"  
               @click="shiftCols"
             > 
-              {{ $t('buttons.apply') }}
+              {{ t('buttons.apply') }}
             </button>
           </div>
         </div>
         <hr>
-        <h4>{{ $t('imagetransform.fliphalf') }}</h4>
-        <p>{{ $t('imagetransform.flipinfo') }}</p>
+        <h4>{{ t('imagetransform.fliphalf') }}</h4>
+        <p>{{ t('imagetransform.flipinfo') }}</p>
         <div class="form-horizontal">
-          <label>{{ $t('imagetransform.flipr') }}</label>
+          <label>{{ t('imagetransform.flipr') }}</label>
           <input v-model="flipr" type="number"/>
           <div class="button-row">
             <button 
               class="btn btn-primary"  
               @click="flipRows"
             > 
-              {{ $t('buttons.apply') }}
+              {{ t('buttons.apply') }}
             </button>
           </div>
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('imagetransform.flipc') }}</label>
+          <label>{{ t('imagetransform.flipc') }}</label>
           <input v-model="flipc" type="number"/>
           <div class="button-row">
             <button 
               class="btn btn-primary"  
               @click="flipCols"
             > 
-              {{ $t('buttons.apply') }}
+              {{ t('buttons.apply') }}
             </button>
           </div>
         </div>
         <hr>
-        <h4>{{ $t('imagetransform.transform') }}</h4>
+        <h4>{{ t('imagetransform.transform') }}</h4>
         <div class="button-row">
           <button 
             class="btn btn-primary"  
             @click="flipH"
           > 
-            {{ $t('imagetransform.fliph') }}
+            {{ t('imagetransform.fliph') }}
           </button>
           <button 
             class="btn btn-primary"  
             @click="flipV"
           > 
-            {{ $t('imagetransform.flipv') }}
+            {{ t('imagetransform.flipv') }}
           </button>
         </div>
       </VCard>
@@ -101,10 +101,10 @@
       <VCard title="Preview">
         <div class="button-row mb-2">
           <button class="btn btn-primary" @click="undoEdit"> 
-            {{  $t('buttons.undo') }} 
+            {{  t('buttons.undo') }} 
           </button>
           <button class="btn btn-primary" @click="restore"> 
-            {{  $t('buttons.original') }} 
+            {{  t('buttons.original') }} 
           </button>
           <v-download 
             v-model:canvas ="canvasRef"

@@ -1,7 +1,7 @@
 <template>
   <div class="input-wrapper">
     <label
-    >{{ $t('labels.alphabet') }}</label>
+    >{{ t('labels.alphabet') }}</label>
     <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
       <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
         {{ selectedCategoryLabel }}
@@ -28,6 +28,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import * as textHelper from '@/scripts/texthelper.js';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const props = defineProps({
   alphabet: {

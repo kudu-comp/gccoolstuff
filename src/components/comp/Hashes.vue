@@ -1,17 +1,17 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('hashes.title') }}</h1>
+    <h1>{{ t('hashes.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('hashes.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('hashes.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('hashes.hashes')"
+            :title="t('hashes.hashes')"
             :options="hashes"
             v-model="selhash"
           />
@@ -20,23 +20,25 @@
           <textarea
             ref="messageRef"
             v-model="message"
-            :placeholder="$t('labels.message')"
+            :placeholder="t('labels.message')"
             rows="5"
             @input="doSomething"
           />
         </div>
-        <div class="form-horizontal">
-          <label>{{ $t('hashes.verify') }}</label>
+        <div class="form-horizontal mb-2">
+          <label>{{ t('hashes.verify') }}</label>
           <input type="text" v-model="verify">
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
-          {{ errormsg }}.
+        <p v-if="errormsg" class="errormsg">
+          {{ errormsg }}
+        </p>
+        <p v-else-if="infomsg" class="infomsg">
+          {{ infomsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.result')">
+    </div>
+    <div class="card-stack">
+      <VCard :title="t('labels.result')">
         <div class="resultbox" v-if="result">
           {{ result }}
         </div>
@@ -120,10 +122,23 @@ const errormsg = computed(() => {
   if (!verify.value || !result.value) return "";
 
   // Check if the calculated hash matches the verification string
+  if (verify.value.toLowerCase() !== result.value.toLowerCase()) {
+    return t('hashes.errornok');
+  } else {
+    return "";
+  }
+});
+
+// --- Computed Error/Verification Message ---
+const infomsg = computed(() => {
+  // If there's nothing to verify against, return empty
+  if (!verify.value || !result.value) return "";
+
+  // Check if the calculated hash matches the verification string
   if (verify.value.toLowerCase() === result.value.toLowerCase()) {
     return t('hashes.errorok');
   } else {
-    return t('hashes.errornok');
+    return "";
   }
 });
 </script>

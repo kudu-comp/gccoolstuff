@@ -1,6 +1,6 @@
 <template>
-  <button class="btn btn-primary" :title="$t('buttons.calc')" @click="calculate()">
-    {{$t('buttons.calc')}}
+  <button class="btn btn-primary" :title="t('buttons.calc')" @click="calculate()">
+    {{t('buttons.calc')}}
   </button>
 </template>
 
@@ -9,6 +9,8 @@ defineOptions({
   name: 'VCalculate'
 })
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const emit = defineEmits(['calculate'])
 
 const calculate = () => {

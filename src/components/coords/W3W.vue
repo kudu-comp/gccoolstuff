@@ -1,12 +1,12 @@
 <template>
   <div class="page-container mx-4">
     <div class="sectionhead">
-      {{ $t('w3w.title') }}
+      {{ t('w3w.title') }}
     </div>
     <div class="mainpage">
       <div
         class="card mb-2 pb-2"
-        v-html="$t('w3w.long')"
+        v-html="t('w3w.long')"
       />
       <!-- <v-coord
         v-model:coord="coordinate1"
@@ -17,7 +17,7 @@
         <label
           class="form-label sm-size mb-2"
           for="language"
-        >{{ $t('w3w.languages') }}</label>
+        >{{ t('w3w.languages') }}</label>
         <select
           id="language"
           v-model="sellanguage"
@@ -42,7 +42,7 @@
         <input
             id="calc1"
             type="button"
-            :value="$t('w3w.convertto')"
+            :value="t('w3w.convertto')"
             class="btn md-size mb-2"
             @click="doConv()"
           >
@@ -52,7 +52,7 @@
         <label
           class="form-label sm-size  mb-2"
           for="str"
-        >{{ $t('w3w.w3wcode') }}</label>
+        >{{ t('w3w.w3wcode') }}</label>
         <input
           id="str"
           v-model="str"
@@ -64,7 +64,7 @@
           id="calc2"
           type="button"
           disabled
-          :value="$t('w3w.convertfrom')"
+          :value="t('w3w.convertfrom')"
           class="btn sm-size ms-2 mb-2"
           @click="doConv2()"
         >
@@ -79,7 +79,7 @@
         <label
           class="form-label sm-size mb-2"
           for="str2"
-        >{{ $t('w3w.w3wsugg') }}</label>
+        >{{ t('w3w.w3wsugg') }}</label>
         <input
           id="str2"
           v-model="str2"
@@ -91,7 +91,7 @@
           id="calc2"
           type="button"
           disabled
-          :value="$t('w3w.suggest')"
+          :value="t('w3w.suggest')"
           class="btn md-size mb-2"
           @click="suggestW3W()"
         >
@@ -100,7 +100,7 @@
         <label
           class="form-label sm-size mb-2"
           for="country"
-        >{{ $t('w3w.countries') }}</label>
+        >{{ t('w3w.countries') }}</label>
         <input
           id="country"
           v-model="country"
@@ -115,7 +115,7 @@
           v-model:datum="datumfocus"
         >
           <template #label>
-            {{ $t('w3w.focus') }}
+            {{ t('w3w.focus') }}
           </template>
         </v-coord>
       </div>
@@ -125,7 +125,7 @@
           v-model:datum="datumclip"
         >
           <template #label>
-            {{ $t('w3w.clip') }}
+            {{ t('w3w.clip') }}
           </template>
         </v-coord>
         <v-distance
@@ -133,7 +133,7 @@
           v-model:unit="clipunit"
         >
           <template #label>
-            {{ $t('labels.radius') }}
+            {{ t('labels.radius') }}
           </template>
         </v-distance>
       </div>      
@@ -206,7 +206,7 @@ export default {
         .then (data => {
 
           // Set Marker
-          coords.displayMarker(this.$store.state.mymap, data, this.$t('labels.point'));
+          coords.displayMarker(this.$store.state.mymap, data, this.t('labels.point'));
 
           // Convert to W3W with the selected language
           return w3w.wgs84ToW3W(data, this.sellanguage)
@@ -219,7 +219,7 @@ export default {
         })
         .catch (error => {
 
-          this.errormsg = this.$t('errors.incorrectcoords');
+          this.errormsg = this.t('errors.incorrectcoords');
           console.log(error);
 
         });
@@ -237,7 +237,7 @@ export default {
         .then (data => {
 
           // Set Marker
-          coords.displayMarker(this.$store.state.mymap, data, this.$t('labels.point'));
+          coords.displayMarker(this.$store.state.mymap, data, this.t('labels.point'));
 
           // Convert to W3W with the selected language
           return coords.convertCoordFromWGS(data, this.selecteddatum2)
@@ -251,7 +251,7 @@ export default {
         .catch (error => {
 
           console.log(error);
-          this.errormsg = this.$t('errors.incorrectcoords');
+          this.errormsg = this.t('errors.incorrectcoords');
 
         });
     },
@@ -261,7 +261,7 @@ export default {
       // Check 3 words are given
       let words = this.str2.split(/[.,\s]/g);
       if (words.length != 3) {
-        this.errormsg = this.$t('w3w.err3words');
+        this.errormsg = this.t('w3w.err3words');
         return;
       } else {
         this.str2 = words[0] + "." + words[1] + "." + words[2];
@@ -271,8 +271,8 @@ export default {
       let focus = (this.coordfocus);
       let promises = [];
       let suggestions = [];
-      this.result = "<table class='table table-sm table-bordered text-center'><thead><th>" + this.$t('labels.coordinate') + "</th><th>" + this.$t('w3w.words') + 
-                    "</th><th>" + this.$t('w3w.country') + "</th><th>" + this.$t('w3w.nearest') + "</th></thead>";
+      this.result = "<table class='table table-sm table-bordered text-center'><thead><th>" + this.t('labels.coordinate') + "</th><th>" + this.t('w3w.words') + 
+                    "</th><th>" + this.t('w3w.country') + "</th><th>" + this.t('w3w.nearest') + "</th></thead>";
       this.errormsg = "";
 
       if (focus) {
@@ -323,7 +323,7 @@ export default {
         })
         .catch( error => {
           console.log(error);
-          this.errormsg = this.$t('errors.incorrectcoords');
+          this.errormsg = this.t('errors.incorrectcoords');
         })
     }
 

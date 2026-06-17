@@ -1,20 +1,20 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('nimbers.title') }}</h1>
+    <h1>{{ t('nimbers.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('nimbers.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('nimbers.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('nimbers.num1') }}</label>
-          <input type="number" v-model="x" ref="x">
+          <label>{{ t('nimbers.num1') }}</label>
+          <input type="number" v-model="x" ref="xInput">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('nimbers.num2') }}</label>
+          <label>{{ t('nimbers.num2') }}</label>
           <input type="number" v-model="y">
         </div>
         <p
@@ -29,73 +29,77 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <p class="card resultbox" v-if="prod">
-          {{ $t('nimbers.prod') }} <strong>{{ prod }}</strong>.<br>
-          {{ $t('nimbers.sum') }} <strong>{{ sum }}</strong>.
+          {{ t('nimbers.prod') }} <strong>{{ prod }}</strong>.<br>
+          {{ t('nimbers.sum') }} <strong>{{ sum }}</strong>.
         </p>
       </VCard>
     </div>
   </div>
 </template>
 
-<script>
-
+<script setup>
+import { ref, onMounted } from 'vue'
 import VCard from '@/components/generic/VCard.vue' 
 import VCalculate from '@/components/generic/VCalculate.vue' 
+import { useI18n } from 'vue-i18n'
 
-export default {
-  name: 'Nimbers',
+const { t } = useI18n({
+  useScope: 'local'
+});
 
-  components: {
-    VCard,
-    VCalculate
-  },
+defineOptions({
+  name: 'Nimbers'
+})
 
-  data: function () {
-    return {
-      errormsg: "",
-      x: 0,
-      y: 0,
-      prod: 0,
-      sum: 0,
-      phpurl: window.location.protocol + "//"  + window.location.hostname + "/math/nimbermultiplication.php",
-      showitem: true,
-      hidebutton: true
-    }
-  },
+// --- State ---
+const errormsg = ref("")
+const x = ref(0)
+const y = ref(0)
+const prod = ref(0)
+const sum = ref(0)
 
-  mounted: function() {
-    this.$refs.x.focus();
-  },
+const phpurl = `${window.location.protocol}//${window.location.hostname}/math/nimbermultiplication.php`
+
+// --- Template Refs ---
+const xInput = ref(null)
+
+onMounted(() => {
+  xInput.value?.focus()
+})
+
+// --- Methods ---
+
+/**
+ * Performs the nimber calculation via PHP backend
+ */
+const nimberProduct = async () => {
+  errormsg.value = ""
   
-  methods: {
+  const payload = {
+    x: x.value,
+    y: y.value,
+  }
 
-    // Calculate the nimber product and sum
-    nimberProduct: function() {
-      this.errormsg = "";
-      let data = {
-        x: this.x,
-        y: this.y,
-      };
+  try {
+    const response = await fetch(phpurl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
 
-      // Call php script on server
-      fetch(this.phpurl, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.prod = data.nimberproduct;
-            this.sum = data.nimbersum;
-        })
-        .catch((error) => {
-            console.error('Error ', error);
-            this.errormsg = this.$t('errors.generic');
-        });
-    },
+    if (!response.ok) throw new Error("Network response was not ok")
 
-  },
+    const data = await response.json()
+    prod.value = data.nimberproduct
+    sum.value = data.nimbersum
+  } catch (error) {
+    console.error('Error fetching nimber data:', error)
+    errormsg.value = t('errors.generic')
+  }
 }
 </script>
 

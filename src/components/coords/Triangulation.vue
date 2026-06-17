@@ -1,19 +1,19 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('triangulation.title') }}</h1>
+    <h1>{{ t('triangulation.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('triangulation.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('triangulation.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="toggle-group">
           <button :class="{ active: mode === 'intersection' }" @click="mode = 'intersection'; result = null">Intersection<br><small>2 Observers → Target</small></button>
           <button :class="{ active: mode === 'resection' }" @click="mode = 'resection'; result = null">Resection<br><small>3 Landmarks → Me</small></button>
         </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div v-for="(item, idx) in (mode === 'intersection' ? observers : landmarks)" :key="idx" class="input-box mb-2">
           <label class="input-box-title">{{ item.name || 'Obs ' + item.id }}</label>
           <div class="form-horizontal">
@@ -39,13 +39,13 @@
           {{ errormsg }}.
         </p>  
       </VCard>
-      <VCard :title="$t('labels.result')">
-        <span v-if="result?.x !== undefined"><strong>{{ $t('triangulation.result') + result.text }}</strong></span>
+      <VCard :title="t('labels.result')">
+        <span v-if="result?.x !== undefined"><strong>{{ t('triangulation.result') + result.text }}</strong></span>
         <span v-else-if="result?.error" class="err">{{ result.error }}</span>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="observers[0].coordinate" />     
       </VCard>
     </div>
@@ -62,6 +62,11 @@ import VAngle from '@/components/generic/VAngle.vue';
 import VShowOnMap from '@/components/generic/VShowOnMap.vue';
 import * as coords from '@/scripts/coords.js';
 import L from 'leaflet';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const mode = ref('intersection'); 
 const result = ref(null); 

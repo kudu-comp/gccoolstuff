@@ -1,23 +1,23 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('bintotext.title') }}</h1>
+    <h1>{{ t('bintotext.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('bintotext.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('bintotext.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <CustomDropdown
-          :title="$t('bintotext.selfrom')"
+          :title="t('bintotext.selfrom')"
           :options="encodings"
           v-model="selfromenc"
           @change="selFromEncoding"
         />
         <CustomDropdown
           v-if="fromtables && fromtables.length > 0"
-          :title="$t('bintotext.selfromtable')"
+          :title="t('bintotext.selfromtable')"
           :options="fromtables"
           v-model="selfromtable"
         />
@@ -25,14 +25,14 @@
           Codestring: {{ selfromtable }}
         </h6>
         <CustomDropdown
-          :title="$t('bintotext.selfrom')"
+          :title="t('bintotext.selto')"
           :options="encodings"
           v-model="seltoenc"
           @change="selToEncoding"
         />
         <CustomDropdown
           v-if="totables && totables.length > 0"
-          :title="$t('bintotext.seltotable')"
+          :title="t('bintotext.seltotable')"
           :options="totables"
           v-model="seltotable"
         />
@@ -42,22 +42,23 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           ref="messageRef"
           v-model="message"
-          :placeholder="$t('labels.message')"
+          :placeholder="t('labels.message')"
           rows="5"
           @input="doSomething"
+          class="mb-2"
         />
         <p
           v-show="errormsg"
-          class="errormsg mt-2"
+          class="errormsg"
         >
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"

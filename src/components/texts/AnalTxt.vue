@@ -1,258 +1,217 @@
 <template>
-
   <header class="page-header">
-    <h1>{{ $t('analtxt.title') }}</h1>
+    <h1>{{ t('analtxt.title') }}</h1>
   </header>
+  
   <div class="card-grid mb-2">
     <div class="card-stack">      
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('analtxt.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('analtxt.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
-        <div class="form-group-vertical">
-          <textarea
-            id="message"
-            ref="messageInput"
-            v-model="message"
-            :placeholder="$t('labels.message')"
-            rows="5"
-            @input="wordValue"
-          />
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="replacediac" @change="wordValue">
-            <span class="checkmark"></span>
-            {{ $t('wordvalue.replacediac') }}
-          </label>
-          <div class="button-row">
-            <button
-              id="analyze"
-              class="btn btn-primary"
-              @click="analyzeText"
-            > {{ $t('analtxt.analyze') }} 
-            </button>          
-          </div>
-        </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
-          {{ errormsg }}.
-        </p>          
+
+      <VCard :title="t('labels.input')">
+        <textarea
+          id="message"
+          ref="messageInput"
+          v-model="message"
+          :placeholder="t('labels.message')"
+          rows="5"
+          class="mb-2"
+        />
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="replacediac">
+          <span class="checkmark"></span>
+          {{ t('labels.replacediac') }}
+        </label>
+        <p v-show="errormsg" class="errormsg">{{ errormsg }}.</p>          
       </VCard>
     </div>
-    <VCard :title="$t('labels.result')">
+
+    <!-- Summary Results Card -->
+    <VCard :title="t('labels.result')">
       <div class="table-responsive">
-        <table class="p-table-small">
+        <table class="p-table">
           <tbody>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nwords') }}</td><td>{{ totalwords }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nlines') }}</td><td>{{ totallines }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nchar') }}</td><td>{{ totalchar }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nalpha') }}</td><td>{{ totalalphabet }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.ndigit') }}</td><td>{{ totaldigit }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nwhite') }}</td><td>{{ totalwhite }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nupper') }}</td><td>{{ totaluppercase }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nlower') }}</td><td>{{ totallowercase }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nnonalpha') }}</td><td>{{ totalnonalphabet }}</td></tr>
-            <tr><td style="text-align: left;">{{ $t('analtxt.nnonwhite') }}</td><td>{{ totalnonwhite }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nwords') }}</td><td>{{ stats.totalwords }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nlines') }}</td><td>{{ stats.totallines }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nchar') }}</td><td>{{ stats.totalchar }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nalpha') }}</td><td>{{ stats.totalalphabet }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.ndigit') }}</td><td>{{ stats.totaldigit }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nwhite') }}</td><td>{{ stats.totalwhite }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nupper') }}</td><td>{{ stats.totaluppercase }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nlower') }}</td><td>{{ stats.totallowercase }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nnonalpha') }}</td><td>{{ stats.totalnonalphabet }}</td></tr>
+            <tr><td style="text-align: left;">{{ t('analtxt.nnonwhite') }}</td><td>{{ stats.totalnonwhite }}</td></tr>
           </tbody>
         </table>      
       </div>
     </VCard>
   </div>
+
+  <!-- Detailed Frequency Tables Card -->
   <div class="card-grid">
-    <VCard :title="$t('labels.result')">
-      <div
-        v-if="result"
-        class="resultbox"
-        v-html="result"
-      />
+    <VCard :title="t('freqanal.title')">
+      <div v-if="stats.totalchar > 0" class="resultbox" v-html="frequencyTablesHtml" />
     </VCard>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as textHelper from '@/scripts/texthelper.js'
 import VCard from '@/components/generic/VCard.vue'
 
-defineOptions({
-  name: 'AnalTxt'
-})
+defineOptions({ name: 'AnalTxt' })
 
 const { t } = useI18n()
 
 // --- State ---
 const message = ref("")
-const result = ref("")
 const replacediac = ref(true)
-const totalchar = ref(0)
-const totalwords = ref(0)
-const totallines = ref(0)
-const totalwhite = ref(0)
-const totalnonwhite = ref(0)
-const totalalphabet = ref(0)
-const totaluppercase = ref(0)
-const totallowercase = ref(0)
-const totalnonalphabet = ref(0)
-const totaldigit = ref(0)
-
-// --- Template Ref ---
+const errormsg = ref("")
 const messageInput = ref(null)
 
 onMounted(() => {
   messageInput.value?.focus()
 })
 
-// --- Methods ---
+// --- Analysis Logic (The "Listener") ---
 
-const analyzeText = () => {
-  // Definition of uppercase, lowercase and digits
+const stats = computed(() => {
   const UpperCaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   const LowerCaseAlphabet = "abcdefghijklmnopqrstuvwxyz"
   const DigitAlphabet = "0123456789"
 
-  // Reset local arrays with counters
-  let lowerchararr = new Array(LowerCaseAlphabet.length).fill(0)
-  let upperchararr = new Array(UpperCaseAlphabet.length).fill(0)
-  let digitarr = new Array(DigitAlphabet.length).fill(0)
-  let freqarr = []
+  // Start with empty stats object
+  const s = {
+    totalchar: 0, totalwords: 0, totallines: 0, totalwhite: 0,
+    totalnonwhite: 0, totalalphabet: 0, totaluppercase: 0,
+    totallowercase: 0, totalnonalphabet: 0, totaldigit: 0,
+    upperchararr: new Array(26).fill(0),
+    lowerchararr: new Array(26).fill(0),
+    digitarr: new Array(10).fill(0),
+    freqarr: []
+  }
 
-  // Reset all reactive counters
-  totalchar.value = 0
-  totalwhite.value = 0
-  totalnonwhite.value = 0
-  totalalphabet.value = 0
-  totaluppercase.value = 0
-  totallowercase.value = 0
-  totalnonalphabet.value = 0
-  totaldigit.value = 0
+  let input = message.value
+  if (!input || !input.trim()) return s
 
-  // Remove diacritics if setting is enabled
+  // Clean diacritics if needed
   if (replacediac.value) {
-    message.value = textHelper.removeDiacritics(message.value)
+    input = textHelper.removeDiacritics(input)
   }
 
-  // Handle empty message to prevent regex errors
-  if (!message.value.trim()) {
-    totalwords.value = 0
-    totallines.value = 0
-    result.value = ""
-    return
-  }
+  // Basic counts
+  s.totalwords = (input.trim().match(/[^\s]+/g) || []).length
+  s.totallines = (input.match(/[^\r\n.]+/g) || []).length
 
-  // Use regex to count words and lines
-  totalwords.value = (message.value.trim().match(/[^\s]+/g) || []).length
-  totallines.value = (message.value.match(/[^\r\n.]+/g) || []).length
-
-  // Start scanning the message
-  for (let i = 0; i < message.value.length; i++) {
-    const char = message.value[i]
-    totalchar.value++
+  // Process String
+  for (let i = 0; i < input.length; i++) {
+    const char = input[i]
+    s.totalchar++
 
     let idx = UpperCaseAlphabet.indexOf(char)
     if (idx >= 0) {
-      upperchararr[idx]++
-      totalalphabet.value++
-      totaluppercase.value++
+      s.upperchararr[idx]++
+      s.totalalphabet++
+      s.totaluppercase++
     } 
     else if (" \n\r\t".indexOf(char) >= 0) {
-      totalwhite.value++
+      s.totalwhite++
     } 
     else if ((idx = LowerCaseAlphabet.indexOf(char)) >= 0) {
-      lowerchararr[idx]++
-      totalalphabet.value++
+      s.lowerchararr[idx]++
+      s.totalalphabet++
     } 
     else if ((idx = DigitAlphabet.indexOf(char)) >= 0) {
-      digitarr[idx]++
-      totaldigit.value++
+      s.digitarr[idx]++
+      s.totaldigit++
     } 
     else {
-      // Other characters
-      idx = freqarr.findIndex((element) => element.char === char)
-      if (idx >= 0) {
-        freqarr[idx].count++
+      // Other symbols
+      const fIdx = s.freqarr.findIndex((el) => el.char === char)
+      if (fIdx >= 0) {
+        s.freqarr[fIdx].count++
       } else {
-        freqarr.push({ char: char, count: 1, perc: 0.0 })
+        s.freqarr.push({ char: char, count: 1 })
       }
     }
   }
 
-  // Calculate final totals
-  totalnonalphabet.value = totalchar.value - totalalphabet.value - totalwhite.value
-  totallowercase.value = totalalphabet.value - totaluppercase.value
-  totalnonwhite.value = totalchar.value - totalwhite.value
+  // Final cross-calculations
+  s.totalnonalphabet = s.totalchar - s.totalalphabet - s.totalwhite
+  s.totallowercase = s.totalalphabet - s.totaluppercase
+  s.totalnonwhite = s.totalchar - s.totalwhite
 
-  // --- Generate HTML Tables ---
+  return s
+})
 
-  // Alphabet Table
-  let html = `<div class="table-responsive"><table class='p-table-small mb-2'><thead><tr><th scope='col'>${t('analtxt.letter')}</th>`
-  for (let i = 0; i < UpperCaseAlphabet.length; i++) html += `<th scope='col'>${UpperCaseAlphabet[i]}</th>`
-  
+// --- HTML Generation for Tables ---
+
+const frequencyTablesHtml = computed(() => {
+  const s = stats.value
+  if (s.totalchar === 0) return ""
+
+  const UpperCaseAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const DigitAlphabet = "0123456789"
+
+  // 1. Alphabet Table
+  let html = `<div class="table-responsive"><table class='p-table-small mb-4'><thead><tr><th scope='col'>${t('analtxt.letter')}</th>`
+  for (let i = 0; i < 26; i++) html += `<th scope='col'>${UpperCaseAlphabet[i]}</th>`
   html += `</tr></thead><tbody><tr><td>${t('analtxt.count')}</td>`
-  for (let i = 0; i < lowerchararr.length; i++) html += `<td>${lowerchararr[i] + upperchararr[i]}</td>`
-  
+  for (let i = 0; i < 26; i++) html += `<td>${s.lowerchararr[i] + s.upperchararr[i]}</td>`
   html += `</tr><tr><td># ${t('analtxt.upper')}</td>`
-  for (let i = 0; i < upperchararr.length; i++) html += `<td>${upperchararr[i]}</td>`
-  
+  for (let i = 0; i < 26; i++) html += `<td>${s.upperchararr[i]}</td>`
   html += `</tr><tr><td># ${t('analtxt.lower')}</td>`
-  for (let i = 0; i < lowerchararr.length; i++) html += `<td>${lowerchararr[i]}</td>`
-  
+  for (let i = 0; i < 26; i++) html += `<td>${s.lowerchararr[i]}</td>`
   html += `</tr><tr><td>${t('analtxt.perc')}</td>`
-  for (let i = 0; i < upperchararr.length; i++) {
-    const perc = ((lowerchararr[i] + upperchararr[i]) * 100 / totalchar.value).toFixed(1)
+  for (let i = 0; i < 26; i++) {
+    const perc = ((s.lowerchararr[i] + s.upperchararr[i]) * 100 / s.totalchar).toFixed(1)
     html += `<td>${perc}%</td>`
   }
   html += "</tbody></table>"
 
-  // Digits Table
-  html += `<table class='p-table-small mb-2'><thead><tr><th scope='col'>${t('analtxt.digit')}</th>`
-  for (let i = 0; i < DigitAlphabet.length; i++) html += `<th scope='col'>${DigitAlphabet[i]}</th>`
-  
+  // 2. Digits Table
+  html += `<table class='p-table-small mb-4'><thead><tr><th scope='col'>${t('analtxt.digit')}</th>`
+  for (let i = 0; i < 10; i++) html += `<th scope='col'>${DigitAlphabet[i]}</th>`
   html += `</tr></thead><tbody><tr><td>${t('analtxt.count')}</td>`
-  for (let i = 0; i < digitarr.length; i++) html += `<td>${digitarr[i]}</td>`
-  
+  for (let i = 0; i < 10; i++) html += `<td>${s.digitarr[i]}</td>`
   html += `</tr><tr><td>${t('analtxt.perc')}</td>`
-  for (let i = 0; i < digitarr.length; i++) {
-    const perc = (digitarr[i] * 100 / totalchar.value).toFixed(1)
+  for (let i = 0; i < 10; i++) {
+    const perc = (s.digitarr[i] * 100 / s.totalchar).toFixed(1)
     html += `<td>${perc}%</td>`
   }
   html += "</tbody></table>"
 
-  // Symbols Table
-  freqarr.sort((a, b) => (a.char > b.char ? 1 : a.char < b.char ? -1 : 0))
-  
+  // 3. Symbols Table
+  const sortedFreq = [...s.freqarr].sort((a, b) => a.char.localeCompare(b.char))
   html += `<table class='p-table-small'><thead><tr><th scope='col'>${t('analtxt.symbol')}</th>`
-  for (let i = 0; i < freqarr.length; i++) html += `<th scope='col'>${freqarr[i].char}</th>`
-  
-  html += `</tr></thead><tr><td>${t('analtxt.count')}</td>`
-  for (let i = 0; i < freqarr.length; i++) html += `<td>${freqarr[i].count}</td>`
-  
+  for (let item of sortedFreq) html += `<th scope='col'>${item.char}</th>`
+  html += `</tr></thead><tbody><tr><td>${t('analtxt.count')}</td>`
+  for (let item of sortedFreq) html += `<td>${item.count}</td>`
   html += `</tr><tr><td>${t('analtxt.perc')}</td>`
-  for (let i = 0; i < freqarr.length; i++) {
-    const perc = (freqarr[i].count * 100 / totalchar.value).toFixed(1)
+  for (let item of sortedFreq) {
+    const perc = (item.count * 100 / s.totalchar).toFixed(1)
     html += `<td>${perc}%</td>`
   }
-  html += "</table></div>"
+  html += "</tbody></table></div>"
 
-  result.value = html
-}
+  return html
+})
 </script>
 
 <style scoped>
-
 th {
   text-align: left;
 }
 
 .p-table-small th:first-child,
 .p-table-small td:first-child {
-  width: 400px;        /* Set your preferred width */
-  min-width: 80px;
-  max-width: 400px;
-  text-align: left;    /* Labels often look better left-aligned */
+  width: 150px;
+  min-width: 120px;
+  text-align: left;
   padding-left: 0.5rem;
+  font-weight: bold;
 }
-
 </style>
-

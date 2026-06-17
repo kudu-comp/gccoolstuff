@@ -1,37 +1,37 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('sequences.title') }}</h1>
+    <h1>{{ t('sequences.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('sequences.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('sequences.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
-        <h4>{{ $t('sequences.sel') }}</h4>
+      <VCard :title="t('labels.input')">
+        <h4>{{ t('sequences.sel') }}</h4>
         <div class="radio-group mb-2">
           <div class="radio-options-vertical">
             <label class="radio-item" v-for="s in seqs" :key="s.ref">
               <input type="radio" :value="s.ref" v-model="number">
-              <span class="radio-mark"></span> {{ $t('sequences.'+s.ref) }}
+              <span class="radio-mark"></span> {{ t('sequences.'+s.ref) }}
             </label>
           </div>
         </div>  
         <div class="radio-group mb-2">
-          <h4>{{ $t('sequences.stop') }}</h4>
+          <h4>{{ t('sequences.stop') }}</h4>
           <div class="radio-options-vertical">
             <label class="radio-item">
               <input type="radio" value="stopiter" v-model="stop">
-              <span class="radio-mark"></span> {{ $t('sequences.stopiter') }}
+              <span class="radio-mark"></span> {{ t('sequences.stopiter') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="stopat" v-model="stop" >
-              <span class="radio-mark"></span> {{ $t('sequences.stopat') }}
+              <span class="radio-mark"></span> {{ t('sequences.stopat') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="stopend" v-model="stop" :disabled="['hailstone','kaprekar','palindrome'].indexOf(number) < 0">
-              <span class="radio-mark"></span> {{ $t('sequences.stopend') }}
+              <span class="radio-mark"></span> {{ t('sequences.stopend') }}
             </label>
           </div>
         </div>
@@ -39,15 +39,15 @@
           class="form-horizontal"
           v-show="['hailstone', 'conway', 'revconway','kaprekar', 'palindrome'].indexOf(number) >= 0"
         >
-          <label>{{ $t('sequences.start') }}</label>
+          <label>{{ t('sequences.start') }}</label>
           <input type="number" v-model="start" min="0" max="1000000">
         </div>
         <div class="form-horizontal" v-show="stop === 'stopiter'">
-          <label>{{ $t('sequences.niter') }}</label>
+          <label>{{ t('sequences.niter') }}</label>
           <input type="number" ref="niterInput" v-model="niter" min="0" max="1000000">
         </div>
         <div class="form-horizontal" v-show="stop === 'stopat'">
-          <label>{{ $t('sequences.endat') }}</label>
+          <label>{{ t('sequences.endat') }}</label>
           <input type="number" v-model="endat" min="0" max="1000000">
         </div>
         <p
@@ -62,13 +62,13 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <div
           v-if="result"
           class="card resultbox monospace"
         >
-          <p>{{ $t('sequences.res1') }} {{ count }}: {{ result }}.</p>
-          <p>{{ $t('sequences.res2') }}: </p>
+          <p>{{ t('sequences.res1') }} {{ count }}: {{ result }}.</p>
+          <p>{{ t('sequences.res2') }}: </p>
           <div v-html="seq"></div>
         </div>
       </VCard>
@@ -190,7 +190,7 @@ const sequence = () => {
 
 .monospace {
   font-family: "Lucida Console", Courier, monospace;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 h4 {

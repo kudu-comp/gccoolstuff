@@ -1,21 +1,21 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('fibonacci.title') }}</h1>
+    <h1>{{ t('fibonacci.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('fibonacci.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('fibonacci.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
          <div class="form-horizontal">
-          <label>{{ $t('fibonacci.pos') }}</label>
+          <label>{{ t('fibonacci.pos') }}</label>
           <input type="text" v-model="pos" ref="posInput">
           <v-calculate @calculate="getFib"></v-calculate>
         </div>
          <div class="form-horizontal">
-          <label>{{ $t('fibonacci.check') }}</label>
+          <label>{{ t('fibonacci.check') }}</label>
           <input type="text" v-model="check">
           <v-calculate @calculate="checkFib"></v-calculate>
         </div>
@@ -28,7 +28,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"

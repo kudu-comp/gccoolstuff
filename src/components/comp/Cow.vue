@@ -1,28 +1,28 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('cow.title') }}</h1>
+    <h1>{{ t('cow.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('cow.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('cow.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('brainfuck.input') }}</label>
+          <label>{{ t('cow.input') }}</label>
           <input type="text" v-model="input">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="debug">
           <span class="checkmark"></span>
-          {{ $t('brainfuck.debug') }}
+          {{ t('cow.debug') }}
         </label>
         <div class="form-horizontal">
           <textarea
             ref="codeInput"
             v-model="message"
-            :placeholder="$t('brainfuck.code')"
+            :placeholder="t('cow.code')"
             rows="5"
           />
         </div>
@@ -34,13 +34,21 @@
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="runCow">
-            {{ $t('brainfuck.run') }}
+            {{ t('cow.run') }}
+          </button>
+          <button class="btn btn-primary"  @click="writeCow(message)">
+            {{ t('cow.write') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
+        <div v-if="result" class="button-row mb-2">
+          <button @click="copyToClipboard" class="btn btn-small btn-primary" :class="{ copied: copiedStatus }">
+            {{ copiedStatus ? '✓' : t('buttons.copy') }}
+          </button>
+        </div>
         <div
           v-if="result"
           class="card resultbox"
@@ -69,6 +77,7 @@ const result = ref("")
 const input = ref("")
 const debug = ref(false)
 const errormsg = ref("")
+const copiedStatus = ref(false);
 
 // --- Template Ref ---
 const codeInput = ref(null)
@@ -77,8 +86,49 @@ onMounted(() => {
   codeInput.value?.focus()
 })
 
-// --- Interpreter Logic ---
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(result.value);
+    copiedStatus.value = true;
+    setTimeout(() => copiedStatus.value = false, 2000);
+  } catch (err) {
+    console.error('Failed to copy!', err);
+  }
+};
 
+// Write cow
+/**
+ * Generates a COW program that prints the provided text string.
+ * @param {string} text - The input string.
+ * @returns {string} - The resulting COW code.
+ */
+const writeCow = (text) => {
+    let cow = "";
+    let currentCellValue = 0;
+
+    for (let i = 0; i < text.length; i++) {
+        const targetValue = text.charCodeAt(i);
+        const delta = targetValue - currentCellValue;
+
+        if (delta > 0) {
+            // MoO is increment (+)
+            cow += "MoO ".repeat(delta);
+        } else if (delta < 0) {
+            // MOo is decrement (-)
+            cow += "MOo ".repeat(Math.abs(delta));
+        }
+
+        // Moo is output (.)
+        // (Note: In COW, Moo performs output if the cell is > 0)
+        cow += "Moo "; 
+        
+        currentCellValue = targetValue;
+    }
+
+    result.value = cow.trim();
+}
+
+// --- Interpreter Logic ---
 const runCow = () => {
   // Reset state
   result.value = ""
@@ -201,3 +251,27 @@ const runCow = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "cow": {
+    "debug": "Debug to console",
+    "code": "Program code",
+    "input": "Input variables",
+    "run": "Run Cow",
+    "write": "Create Cow program"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "cow": {
+    "code": "Programmacode",
+    "debug": "Debug info naar console",
+    "input": "Input variabelen",
+    "run": "Run Cow",
+    "write": "Schrijf Cow programma"
+  }
+}
+</i18n>

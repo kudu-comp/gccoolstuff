@@ -1,42 +1,42 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('fonts.title') }}</h1>
+    <h1>{{ t('fonts.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('fonts.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('fonts.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <div class="form-horizontal">
         <CustomDropdown 
           v-model="styleObject.fontFamily" 
           :options="fontdef" 
-          :title="$t('fonts.selfont')"
+          :title="t('fonts.selfont')"
         />
       </div>
       <div class="form-horizontal">
-        <label>{{ $t('fonts.fontsize') }}</label>
+        <label>{{ t('fonts.fontsize') }}</label>
         <input type="text" v-model="styleObject.fontSize">
       </div>
       <div class="form-horizontal">
-        <label>{{ $t('fonts.selcolor') }}</label>
-        <input id="ofc" v-model="styleObject.color" type="color" class="mb-2 sm-size me-2"/>
+        <label>{{ t('fonts.selcolor') }}</label>
+        <input v-model="styleObject.color" type="color"/>
       </div>
       <div class="form-horizontal">
-        <label>{{ $t('fonts.lineheight') }}</label>
+        <label>{{ t('fonts.lineheight') }}</label>
         <input type="number" v-model="styleObject.lineHeight">
       </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <div class="row mb-2">
         <textarea
           id="message"
           ref="messageRef"
           v-model="message"
-          :placeholder="$t('labels.message')"
+          :placeholder="t('labels.message')"
           rows="5"
         />
       </div>
@@ -47,7 +47,7 @@
         {{ errormsg }}
       </p>
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <textarea
         readonly
         v-model="message"
@@ -65,6 +65,11 @@ import { useRoute } from 'vue-router'
 import { fontdefs } from '@/scripts/fontspecials.js'
 import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 // Define Props
 const props = defineProps({

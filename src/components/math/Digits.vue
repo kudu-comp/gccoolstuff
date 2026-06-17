@@ -1,16 +1,16 @@
 <template>
 
    <header class="page-header">
-    <h1>{{ $t('digits.title') }}</h1>
+    <h1>{{ t('digits.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('digits.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('digits.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="radio-group">
-          <label>{{ $t('digits.sel') }}</label>
+          <label>{{ t('digits.sel') }}</label>
           <div class="radio-options-vertical">
             <label class="radio-item" v-for="dec in decOptions" :key="dec.id">
               <input type="radio" :value="dec.id" v-model="number">
@@ -21,13 +21,13 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('digits.from') }}</label>
+          <label>{{ t('digits.from') }}</label>
           <input type="number" v-model="start" ref="startInput" min="0" max="1000000">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('digits.to') }}</label>
+          <label>{{ t('digits.to') }}</label>
           <input type="number" v-model="end" min="0" max="1000000">
         </div>
         <p
@@ -40,12 +40,12 @@
           <VCalculate @calculate="getDigits" />
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">     
+      <VCard :title="t('labels.result')">     
         <div
           v-if="result"
           class="card resultbox"
         >
-          {{ $t('digits.res1') }} {{ start }} {{ $t('digits.res2') }} {{ end }} {{ $t('digits.res3') }} {{ result }}.
+          {{ t('digits.res1') }} {{ start }} {{ t('digits.res2') }} {{ end }} {{ t('digits.res3') }} {{ result }}.
         </div>
       </VCard>
     </div>
@@ -129,3 +129,4 @@ const getDigits = async () => {
   }
 }
 </script>
+

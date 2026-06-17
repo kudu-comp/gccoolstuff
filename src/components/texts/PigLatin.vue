@@ -1,18 +1,18 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('piglatin.title') }}</h1>
+    <h1>{{ t('piglatin.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('piglatin.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('piglatin.long')" />
       <h4>{{argots[sel].name}}</h4>
       <p style="margin-top: 0px; opacity:0.65;">{{ argots[sel].descr }}</p>
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
       <div class="radio-group mt-2">
-        <label>{{$t('piglatin.sel')}}</label>
+        <label>{{t('piglatin.sel')}}</label>
         <div class="radio-options-vertical">
           <label class="radio-item" v-for="(a, index) in argots" :key="index">
             <input type="radio" :value="index" v-model="sel">
@@ -23,27 +23,26 @@
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
-        id="message"
         ref="messageInput"
         v-model="msg"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
-        @input="wordValue"
+        class="mb-2"
       />
-      <div class="button-row">
-        <button :disabled="dictloading" class="btn btn-primary" @click="encode()">{{$t('buttons.encode')}}</button>
-        <button :disabled="dictloading" class="btn btn-primary" @click="decode()">{{$t('buttons.decode')}}</button>
-      </div>
       <p
         v-show="errormsg"
         class="errormsg mb-2"
       >
         {{ errormsg }}.
       </p>          
+      <div class="button-row">
+        <button :disabled="dictloading" class="btn btn-primary" @click="encode()">{{t('buttons.encode')}}</button>
+        <button :disabled="dictloading" class="btn btn-primary" @click="decode()">{{t('buttons.decode')}}</button>
+      </div>
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div v-if="result" class="card resultbox" >
         {{ result }} 
       </div>
@@ -57,6 +56,11 @@ import { useRoute } from 'vue-router'
 import VLanguage from "@/components/generic/VLanguage.vue"
 import VCard from "@/components/generic/VCard.vue"
 import { piglatin } from "@/scripts/piglatin.js"
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: "PigLatin"

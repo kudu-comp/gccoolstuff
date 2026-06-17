@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('filltool.title') }}</h1>
+    <h1>{{ t('filltool.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('filltool.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('filltool.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             accept="image/*"
@@ -20,26 +20,26 @@
         </div>
         <p
           v-show="errormsg"
-          class="errormsg mt-2"
+          class="errormsg"
         >
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
           <div class="input-box mb-2">
             <h4>
-              {{ $t('filltool.fill') }}
+              {{ t('filltool.fill') }}
             </h4>
-            <p>{{ $t('filltool.fillinfo') }}</p>
+            <p>{{ t('filltool.fillinfo') }}</p>
             <div class="form-horizontal">
               <label
                 class="form-label sm-size"
                 for="pick"
-              >{{ $t('filltool.selfill') }}</label>
+              >{{ t('filltool.selfill') }}</label>
               <input id="pick" v-model="selfill" type="color" class="form-control sm-size" />
             </div>
             <div class="form-horizontal">
-              <label> {{ $t('filltool.tol') }}: {{ tol }}</label>
+              <label> {{ t('filltool.tol') }}: {{ tol }}</label>
               <input
                 v-model="tol"
                 class="range-input"
@@ -49,10 +49,10 @@
           </div>
           <div class="input-box mb-2">
             <h4>
-              {{ $t('filltool.conbri') }}
+              {{ t('filltool.conbri') }}
             </h4>
             <div class="form-horizontal">
-              <label>{{ $t('filltool.brigh') }}: {{ brigh }}</label>
+              <label>{{ t('filltool.brigh') }}: {{ brigh }}</label>
               <input
                 v-model="brigh"
                 class="range-input"
@@ -60,7 +60,7 @@
               />
             </div>
             <div class="form-horizontal">
-              <label>{{ $t('filltool.contr') }}: {{ contr }}</label>
+              <label>{{ t('filltool.contr') }}: {{ contr }}</label>
               <input
                 v-model="contr"
                 class="range-input"
@@ -72,13 +72,13 @@
                 class="btn btn-primary"  
                 @click="contrastBrightness"
               > 
-                {{ $t('buttons.apply') }}
+                {{ t('buttons.apply') }}
               </button>
             </div>
           </div>
           <div class="input-box mb-2">
             <div class="form-horizontal">
-              <label>{{ $t('filltool.filter') }}</label>
+              <label>{{ t('filltool.filter') }}</label>
               <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
                 <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
                   {{ selectedFilter }}
@@ -96,13 +96,13 @@
             </div>
             <div class="button-row">
               <button class="btn btn-primary" @click="filterColor">
-                {{ $t('buttons.apply') }}
+                {{ t('buttons.apply') }}
               </button>
             </div>
           </div>
           <div class="input-box">
             <div class="form-horizontal">
-              <label>{{ $t('filltool.colordepth') }}</label>
+              <label>{{ t('filltool.colordepth') }}</label>
               <div class="custom-select-container" v-click-outside="() => isDropdownOpen2 = false">
                 <div class="custom-select-trigger" @click="isDropdownOpen2 = !isDropdownOpen2" :class="{ 'is-active': isDropdownOpen2 }">
                   {{ selectedCDepth }}
@@ -120,7 +120,7 @@
             </div>
             <div class="button-row">
               <button class="btn btn-primary" @click="colorDepth">
-                {{ $t('buttons.apply') }}
+                {{ t('buttons.apply') }}
               </button>
             </div>
           </div>
@@ -130,7 +130,7 @@
       <VCard title="Preview">
         <div class="button-row mb-2">
           <button class="btn btn-primary" @click="restore"> 
-            {{  $t('buttons.original') }} 
+            {{  t('buttons.original') }} 
           </button>
           <v-download 
             v-model:canvas ="canvasRef"
@@ -420,38 +420,6 @@ h4 {
 @media (min-width: 750px) {
   .card-grid {
     grid-template-columns: 33% 1fr;
-  }
-
-  .form-horizontal {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px; /* Tighten the space between label and input */
-  }
-
-  .form-horizontal label {
-    /* KEY FIX: Reset flex so 150px height doesn't apply */
-    flex: none !important; 
-    width: 100% !important;
-    height: auto !important;
-    margin-bottom: 2px;
-    /* Optional: reduce font size slightly for mobile if needed */
-    font-size: 0.85rem; 
-  }
-
-  .form-horizontal .range-input {
-    height: 6px;
-    min-height: 6px;
-  }
-
-  .form-horizontal input, 
-  .form-horizontal select, 
-  .form-horizontal textarea 
-  .form-horizontal .custom-select-container {
-    /* KEY FIX: Ensure it doesn't try to grow vertically */
-    flex: none !important; 
-    width: 100% !important;
-    height: 25px; /* Set a standard touch-friendly height */
-    min-height: 25px;
   }
 }
 

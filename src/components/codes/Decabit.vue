@@ -1,54 +1,52 @@
 <template>
 
  <header class="page-header">
-    <h1>{{ $t('decabit.title') }}</h1>
+    <h1>{{ t('decabit.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('decabit.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('decabit.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <div class="radio-group">
-          <label>{{ $t('decabit.selenc') }}</label>
-          <div class="radio-options-vertical">
-            <label class="radio-item">
-              <input type="radio" value="0" v-model="format">
-              <span class="radio-mark"></span>  {{ $t('decabit.selnum') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="1" v-model="format">
-              <span class="radio-mark"></span>  {{ $t('decabit.selascii') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="2" v-model="format">
-              <span class="radio-mark"></span>  {{ $t('decabit.selalpha') }}
-            </label>
-          </div>
+    <VCard :title="t('labels.settings')">
+      <div class="radio-group mb-2">
+        <label>{{ t('decabit.selenc') }}</label>
+        <div class="radio-options-vertical">
+          <label class="radio-item">
+            <input type="radio" value="0" v-model="format">
+            <span class="radio-mark"></span>  {{ t('decabit.selnum') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="1" v-model="format">
+            <span class="radio-mark"></span>  {{ t('decabit.selascii') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="2" v-model="format">
+            <span class="radio-mark"></span>  {{ t('decabit.selalpha') }}
+          </label>
         </div>
-        <div class="radio-group">
-          <label>{{ $t('labels.selaction') }}</label>
-          <div class="radio-options-vertical">
-            <label class="radio-item">
-              <input type="radio" value="encode" v-model="mode">
-              <span class="radio-mark"></span>  {{ $t('buttons.encode') }}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="decode" v-model="mode">
-              <span class="radio-mark"></span>  {{ $t('buttons.decode') }}
-            </label>
-          </div>
+      </div>
+      <div class="radio-group">
+        <label>{{ t('labels.selaction') }}</label>
+        <div class="radio-options">
+          <label class="radio-item">
+            <input type="radio" value="encode" v-model="mode">
+            <span class="radio-mark"></span>  {{ t('buttons.encode') }}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="decode" v-model="mode">
+            <span class="radio-mark"></span>  {{ t('buttons.decode') }}
+          </label>
         </div>
-        </div>
+      </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         class="mb-2"
         ref="messageInput"
         v-model="message"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
       />
       <p
@@ -56,17 +54,9 @@
         class="errormsg mt-2"
       >
         {{ errormsg }}
-      </p>          
-      <div class="button-row">
-        <button id="convert" class="btn btn-primary"  @click="encodeDeca">
-          {{ $t('buttons.encode') }}
-        </button>
-        <button id="convert" class="btn btn-primary"  @click="decodeDeca">
-          {{ $t('buttons.decode') }}
-        </button>
-      </div>
+      </p>
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div
         v-if="result"
         class="card resultbox"
@@ -131,7 +121,7 @@ const translation = computed(() => {
     if (mode.value === 'encode') {
       // ENCODING
       const words = format.value === 0 ? input.match(/[0-9]+/g) : input.match(/./g)
-      
+
       if (!words) {
         return { text: "", error: t('errors.cannotparse') }
       }
@@ -155,14 +145,14 @@ const translation = computed(() => {
     } else {
       // DECODING
       const words = input.match(/[-+]{10}/g)
-      
+
       if (!words) {
         return { text: "", error: t('errors.cannotparse') }
       }
 
       for (let w of words) {
         const idx = DECABIT_TABLE.indexOf(w)
-        
+
         if (idx < 0) {
           errorMsg += t('errors.unknowninput') + w + " "
         } else {

@@ -1,14 +1,14 @@
 <template>
 
 <header class="page-header">
-    <h1>{{ $t('incomplete.title') }}</h1>
+    <h1>{{ t('incomplete.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('incomplete.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('incomplete.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
         <v-coord
           v-model:coord="coordinate"
@@ -52,7 +52,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordinate" />     
       </VCard>
     </div>

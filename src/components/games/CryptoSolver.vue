@@ -1,66 +1,66 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('cryptosolver.title') }}</h1>
+    <h1>{{ t('cryptosolver.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('cryptosolver.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('cryptosolver.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('cryptosolver.nums') }}</label>
+          <label>{{ t('cryptosolver.nums') }}</label>
           <input type="text" v-model="nums" ref="numsRef">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('cryptosolver.outcome') }}</label>
+          <label>{{ t('cryptosolver.outcome') }}</label>
           <input type="number" v-model="outcome">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="useall">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.useall') }}
+          {{ t('cryptosolver.useall') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowneg">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowneg') }}
+          {{ t('cryptosolver.allowneg') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowdec">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowdec') }}
+          {{ t('cryptosolver.allowdec') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowadd">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowadd') }}
+          {{ t('cryptosolver.allowadd') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowsub">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowsub') }}
+          {{ t('cryptosolver.allowsub') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowmult">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowmult') }}
+          {{ t('cryptosolver.allowmult') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowdiv">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowdiv') }}
+          {{ t('cryptosolver.allowdiv') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowmod">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowmod') }}
+          {{ t('cryptosolver.allowmod') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="allowpow">
           <span class="checkmark"></span>
-          {{ $t('cryptosolver.allowpow') }}
+          {{ t('cryptosolver.allowpow') }}
         </label>
         <p
           v-show="errormsg"
@@ -74,7 +74,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="card resultbox" v-html="result"></div>
       </VCard>
     </div>
@@ -123,7 +123,7 @@ const nextTry = (a, calc) => {
   // Base Case: Only one number left in the array
   if (a.length === 1) {
     if (a[0] === outcome.value) {
-      result.value = `${t('cryptosolver.found')} ${outcome.value}<br>${calc}`
+      result.value = `${t('cryptosolver.found')} ${outcome.value}<br><br>${calc}`
       found.value = true
     }
     return
@@ -235,7 +235,7 @@ const findCalculation = () => {
   errormsg.value = ""
   found.value = false
 
-  if (outcome.value === null || outcome.value === undefined) {
+  if (outcome.value === null || outcome.value === undefined || outcome.value === "") {
     errormsg.value = t('cryptosolver.nooutcome')
     return
   }

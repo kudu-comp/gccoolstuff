@@ -1,39 +1,37 @@
 <template>
 
 <header class="page-header">
-    <h1>{{ $t('mapmaker.title') }}</h1>
+    <h1>{{ t('mapmaker.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('mapmaker.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('mapmaker.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
-          >{{ $t('labels.from') }}</label>
+          >{{ t('labels.from') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
           />
         </div>
-        <div class="form-group-vertical mb-2">
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="showmarkers">
-            <span class="checkmark"></span>
-            {{ $t('mapmaker.showmark') }}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="showlabels">
-            <span class="checkmark"></span>
-            {{ $t('mapmaker.showlabel') }}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="drawcircles">
-            <span class="checkmark"></span>
-            {{ $t('mapmaker.drawcircle') }}
-          </label>
-        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showmarkers">
+          <span class="checkmark"></span>
+          {{ t('mapmaker.showmark') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showlabels">
+          <span class="checkmark"></span>
+          {{ t('mapmaker.showlabel') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="drawcircles">
+          <span class="checkmark"></span>
+          {{ t('mapmaker.drawcircle') }}
+        </label>
         <div class="form-horizontal" v-if="drawcircles">
           <v-distance
             v-model:dist="dist"
@@ -43,28 +41,25 @@
               <label
                 class="form-label"
                 for="distance"
-              >{{ $t('labels.radius') }}</label>
+              >{{ t('labels.radius') }}</label>
             </template>
           </v-distance>
         </div>  
-        <div class="button-row">
-          <v-show-on-map id="go" class="btn btn-primary" @Show="makeMap()" />
-        </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           id="coordfrom"
-          ref="coordfrom"
+          ref="coordFromRef"
           v-model="coordfrom"
           class="form-control mt-2"
-          :placeholder="$t('mapmaker.phcoord')"
+          :placeholder="t('mapmaker.phcoord')"
           rows="5"
         />
         <textarea
           id="labels"
           v-model="labels"
           class="form-control mt-2 mb-2"
-          :placeholder="$t('mapmaker.phlabel')"
+          :placeholder="t('mapmaker.phlabel')"
           rows="5"
         />
         <div
@@ -72,134 +67,128 @@
           class="errormsg"
         >
           {{ errormsg }}
-      </div>
+        </div>
+        <div class="button-row">
+          <v-show-on-map id="go" class="btn btn-primary" @Show="makeMap()" />
+        </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordfrom" />
       </VCard>
       </div>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import L from 'leaflet';
 import * as coords from '@/scripts/coords.js';
-import VMap from '@/components/generic/VMap.vue'
-import VCard from '@/components/generic/VCard.vue'
+
+// Component Imports
 import VDatums from '@/components/generic/VDatums.vue';
 import VDistance from '@/components/generic/VDistance.vue';
+import VMap from '@/components/generic/VMap.vue';
+import VCard from '@/components/generic/VCard.vue';
 import VShowOnMap from '@/components/generic/VShowOnMap.vue';
-import L from 'leaflet';
 
-export default {
-  name: 'MapMaker',
+defineOptions({
+  name: 'MapMaker'
+});
 
-  components: {
-    VDatums,
-    VDistance,
-    VMap,
-    VCard,
-    VShowOnMap
-  },
+const store = useStore();
+const { t } = useI18n();
 
-  data: function() {
-    return {
-      errormsg: "",
-      from: "WGS84",
-      coordfrom : "",
-      labels: "",
-      drawcircles: false,
-      showlabels: true,
-      showmarkers: true,
-      unit: 1,
-      dist: 165,
+// --- State ---
+const errormsg = ref("");
+const from = ref("WGS84");
+const coordfrom = ref("");
+const labels = ref("");
+const drawcircles = ref(false);
+const showlabels = ref(true);
+const showmarkers = ref(true);
+const unit = ref(1);
+const dist = ref(165);
+
+// --- Template Refs ---
+const coordFromRef = ref(null);
+
+// --- Lifecycle ---
+onMounted(() => {
+  // Focus the coordinate input on load
+  if (coordFromRef.value) {
+    coordFromRef.value.focus();
+  }
+});
+
+// --- Methods ---
+
+const makeMap = () => {
+  // Reset error flag
+  errormsg.value = "";
+  let markertext = [];
+
+  // 1. Validation: Check if input exists
+  if (!coordfrom.value) {
+    errormsg.value = t('errors.nocoords');
+    return;
+  }
+
+  // 2. Parse labels: If empty, use coordinates as labels
+  const inputLines = coordfrom.value.match(/[^\r\n]+/g) || [];
+  if (!labels.value) {
+    markertext = inputLines;
+  } else {
+    markertext = labels.value.match(/[^\r\n]+/g) || [];
+  }
+
+  // 3. Validation: Check if label count matches coordinate count
+  if (inputLines.length !== markertext.length) {
+    errormsg.value = t('mapmaker.error1');
+    return;
+  }
+
+  // 4. Process each line
+  inputLines.forEach((line, i) => {
+    try {
+      coords.convertCoordFromText(line, from.value, 'WGS84')
+        .then((mapcoord) => {
+          const mymap = store.state.mymap;
+
+          // Add a marker to the map
+          if (showmarkers.value) {
+            const marker = new L.marker(mapcoord).addTo(mymap);
+
+            // Create a popup that doesn't close
+            if (showlabels.value) {
+              const p = new L.Popup({ autoClose: false, closeOnClick: false })
+                .setContent(markertext[i])
+                .setLatLng(mapcoord);
+              marker.bindPopup(p).openPopup();
+            }
+          }
+
+          // Draw circles if requested
+          if (drawcircles.value) {
+            L.circle(mapcoord, {
+              color: "#E72E1C",
+              fillColor: "#EC7F74",
+              fillOpacity: 0.5,
+              radius: dist.value * unit.value
+            }).addTo(mymap);
+          }
+        })
+        .catch((e) => {
+          errormsg.value = t('errors.incorrectcoords');
+          console.error(e);
+        });
+    } catch (e) {
+      errormsg.value = t('errors.incorrectcoords');
+      console.error(e);
     }
-  },
-
-  mounted: function() {
-    this.$refs.coordfrom.focus();
-  },
-
-  methods: {
-
-    // Convert the coordinates
-    makeMap: function() {
-
-      // Reset error flag
-      this.errormsg = "" ;
-      this.result = "";
-      let markertext = [];
-
-      // No input
-      if (!this.coordfrom) {
-        this.errormsg = this.$t('errors.nocoords');
-        return;
-      }
-
-      // If there are no labels default to coordinates
-            if (!this.labels) {
-        markertext = this.coordfrom.match(/[^\r\n]+/g);
-      } else {
-        markertext = this.labels.match(/[^\r\n]+/g);
-      }
-
-      // Get all the lines form input and convert them one by one
-      let input = this.coordfrom.match(/[^\r\n]+/g);
-
-      // Check if there are enough Labels
-      if (input.length != markertext.length) {
-        this.errormsg = this.$t('mapmaker.error1');
-        return;
-      }
-
-      // Parse input line by line
-      for (let i = 0; i < input.length; i++) {
-
-        try {
-
-          // Get the coordinates
-          coords.convertCoordFromText(input[i], this.from, 'WGS84')
-            .then ( mapcoord => {
-
-              // Add a marker to the map for each coordinate
-              if (this.showmarkers) {
-                let marker = new L.marker(mapcoord).addTo(this.$store.state.mymap);
-
-                // Create a popup that doesn't close and bind it to the marker
-                if (this.showlabels) {
-                  let p = new L.Popup({ autoClose: false, closeOnClick: false })
-                        .setContent(markertext[i])
-                        .setLatLng(mapcoord);
-                  marker.bindPopup(p).openPopup();
-                }
-              }
-
-              // Draw circles if requested
-              if (this.drawcircles) {
-                L.circle(mapcoord, {
-                  color: "#E72E1C",
-                  fillColor: "#EC7F74",
-                  fillOpacity: 0.5,
-                  radius: this.dist * this.unit
-                }).addTo(this.$store.state.mymap);
-                
-              }
-
-            })
-            .catch ( (e) => {
-              this.errormsg = this.$t('errors.incorrectcoords')
-              console.log(e);
-            });
-
-        } catch(e) {
-
-          this.errormsg = this.$t('errors.incorrectcoords')
-          console.log(e);
-          
-        }
-      }
-    },
-  },
-}
+  });
+};
 </script>

@@ -1,56 +1,53 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('datecalc.title') }}</h1>
+    <h1>{{ t('datecalc.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('datecalc.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('datecalc.long')" />
       </VCard>
 
       <!-- Input Card -->
-      <VCard :title="$t('labels.settings')">
-        <div class="form-group-vertical">
-          <div class="form-horizontal mb-3">
-            <label for="date1">{{ $t('datecalc.date1') }}</label>
-            <input 
-              ref="date1Input"
-              type="date" 
-              v-model="date1" 
-              class="form-control"
-            />
-          </div>
-          <div class="form-horizontal">
-            <label for="date2">{{ $t('datecalc.date2') }}</label>
-            <input 
-              type="date" 
-              v-model="date2" 
-              class="form-control"
-            />
-          </div>
-          <div class="form-horizontal mb-3">
-            <label for="extradays">{{ $t('datecalc.days') }}</label>
-            <input 
-              type="number" 
-              min="0" 
-              v-model.number="extradays" 
-              class="form-control"
-            />
-          </div>
+      <VCard :title="t('labels.settings')">
+        <div class="form-horizontal mb-2">
+          <label for="date1">{{ t('datecalc.date1') }}</label>
+          <input 
+            ref="date1Input"
+            type="date" 
+            v-model="date1" 
+            class="form-control"
+          />
+        </div>
+        <div class="form-horizontal">
+          <label for="date2">{{ t('datecalc.date2') }}</label>
+          <input 
+            type="date" 
+            v-model="date2" 
+            class="form-control"
+          />
+        </div>
+        <div class="form-horizontal">
+          <label for="extradays">{{ t('datecalc.days') }}</label>
+          <input 
+            type="number" 
+            min="0" 
+            v-model.number="extradays" 
+            class="form-control"
+          />
         </div>
       </VCard>
     </div>
 
     <!-- Results Card -->
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="date1 && date2" class="resultbox">
+          <div class="subhead mb-2">{{ results.diff }}</div>
+          <div class="subhead">{{ t('datecalc.date1') }}:</div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item px-0">
-              <strong>{{ results.diff }}</strong>
-            </li>
             <li class="list-group-item px-0">
               {{ results.add }}
             </li>
@@ -72,7 +69,7 @@
           </ul>
         </div>
         <div v-else class="text-center p-4 text-muted">
-          {{ $t('labels.no_result') }}
+          {{ t('labels.no_result') }}
         </div>
       </VCard>
     </div>

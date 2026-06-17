@@ -1,40 +1,40 @@
 <template>
 
  <header class="page-header">
-    <h1>{{ $t('rotciphers.title') }}</h1>
+    <h1>{{ t('rotciphers.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('rotciphers.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('rotciphers.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="input-wrapper">
           <div class="radio-group">
-          <label>{{$t('rotciphers.selmethod')}}</label>
+          <label>{{t('rotciphers.selmethod')}}</label>
           <div class="radio-options-vertical">
             <label class="radio-item">
               <input type="radio" value="0" v-model="selalph">
-              <span class="radio-mark"></span> {{$t('rotciphers.rot13')}}
+              <span class="radio-mark"></span> {{t('rotciphers.rot13')}}
             </label>
             <label class="radio-item">
               <input type="radio" value="1" v-model="selalph">
-              <span class="radio-mark"></span> {{$t('rotciphers.rot5')}}
+              <span class="radio-mark"></span> {{t('rotciphers.rot5')}}
             </label>
             <label class="radio-item">
               <input type="radio" value="2" v-model="selalph">
-              <span class="radio-mark"></span> {{$t('rotciphers.rot47')}}
+              <span class="radio-mark"></span> {{t('rotciphers.rot47')}}
             </label>
             <label class="radio-item">
               <input type="radio" value="3" v-model="selalph">
-              <span class="radio-mark"></span> {{$t('rotciphers.hexa')}}
+              <span class="radio-mark"></span> {{t('rotciphers.hexa')}}
             </label>
             <label class="radio-item">
               <input type="radio" value="4" v-model="selalph">
-              <span class="radio-mark"></span> {{$t('rotciphers.custom')}}
+              <span class="radio-mark"></span> {{t('rotciphers.custom')}}
             </label>
             <div v-show='selalph === "4"'>
-              <label>{{$t('rotciphers.other')}}</label>
+              <label>{{t('rotciphers.other')}}</label>
               <input
                 v-model="other"
                 type="text"
@@ -44,7 +44,7 @@
         </div>
       </div>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea class="form-control mb-2" lines="5" v-model="txt" id="txt" ref="txtInput"></textarea>
         <p
           v-show="errormsg"
@@ -55,13 +55,14 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
-        <div
-          v-if="resultHtml"
-          class="card resultbox"
-          v-html="resultHtml"
-          style="overflow-wrap: break-word"
+      <VCard :title="t('labels.result')">
+        <div v-if="resultHtml" class="table-responsive">
+          <div          
+            class="resultbox"
+            v-html="resultHtml"
+            style="overflow-wrap: break-word"
         />
+        </div>
       </VCard>
     </div>
   </div>
@@ -70,6 +71,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import VCard from '@/components/generic/VCard.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 defineOptions({
   name: 'RotCiphers'
@@ -139,8 +145,8 @@ const resultHtml = computed(() => {
   const half = Math.floor(alphabet.length / 2);
   html += `
     <tr>
-      <td style="width: 100px; font-weight: 800;">Default ${half}</td>
-      <td style="font-weight:800;">${rotateText(alphabet, processedTxt, half)}</td>
+      <td style="text-align: left; width: 100px; font-weight: 800;">Default ${half}</td>
+      <td style="text-align: left; font-weight:800;">${rotateText(alphabet, processedTxt, half)}</td>
     </tr>
   `;
 
@@ -151,8 +157,8 @@ const resultHtml = computed(() => {
 
     html += `
       <tr>
-        <td class="text-muted">ROT ${i}</td>
-        <td>${rotateText(alphabet, processedTxt, i)}</td>
+        <td style="text-align: left;">ROT ${i}</td>
+        <td style="text-align: left;">${rotateText(alphabet, processedTxt, i)}</td>
       </tr>
     `;
   }

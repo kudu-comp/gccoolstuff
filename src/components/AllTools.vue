@@ -1,37 +1,37 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('alltools.title') }}</h1>
+    <h1>{{ t('alltools.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('alltools.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('alltools.long')" />
       </VCard>
-      <VCard :title="$t('labels.search')">
+      <VCard :title="t('labels.search')">
         <v-search
           id="searchstr"
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />
         <div class="button-row">
-          <button class="btn btn-primary" @click="goSearch" :title="$t('buttons.search')">
+          <button class="btn btn-primary" @click="goSearch" :title="t('buttons.search')">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </button>
-          <button class="btn btn-primary" :title="$t('buttons.reset')" @click="reset" >
+          <button class="btn btn-primary" :title="t('buttons.reset')" @click="reset" >
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
               <path d="M21 3v5h-5"/>
             </svg>
           </button>
-          <button class="btn btn-primary" :title="$t('buttons.collall')" @click="collapseList">
-            {{ $t('buttons.collall') }}
+          <button class="btn btn-primary" :title="t('buttons.collall')" @click="collapseList">
+            {{ t('buttons.collall') }}
           </button>
-          <button class="btn btn-primary" :title="$t('buttons.expall')" @click="expandList">
-            {{ $t('buttons.expall') }}
+          <button class="btn btn-primary" :title="t('buttons.expall')" @click="expandList">
+            {{ t('buttons.expall') }}
           </button>
         </div>
         <!-- Error message -->
@@ -44,7 +44,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <!-- isVisible tools -->
          <TreeList 
           ref="listComponent" 
@@ -112,6 +112,7 @@ const alltools = ref([
       { link: "/circles", name: "", isVisible: true },
       { link: "/antipode", name: "", isVisible: true },
       { link: "/plotcoord", name: "", isVisible: true },
+      { link: "/triangulation", name: "", isVisible: true },
       { link: "/revwherigo", name: "", isVisible: true }
     ],
   },
@@ -122,6 +123,7 @@ const alltools = ref([
       { link: "/wordvalue", name: "", isVisible: true },
       { link: "/charcodes", name: "", isVisible: true },
       { link: "/analtxt", name: "", isVisible: true },
+      { link: "/texttransform", name: "", isVisible: true },
       { link: "/texttonum", name: "", isVisible: true },
       { link: "/keyboards", name: "", isVisible: true },
       { link: "/texttoss", name: "", isVisible: true },
@@ -136,14 +138,14 @@ const alltools = ref([
       { link: "/ciphers", name: "", isVisible: true, expand: false, children: [] },
       { link: "/rotciphers", name: "", isVisible: true },
       { link: "/substcipher", name: "", isVisible: true },
+      { link: "/freqanal", name: "", isVisible: true },
       { link: "/codebook", name: "", isVisible: true, expand: false, children: [] },
-      { link: "/fonts", name: "", isVisible: true, expand: false, children: [] },
       { link: "/segment", name: "", isVisible: true },
       { link: "/morsecode", name: "", isVisible: true },
       { link: "/resistor", name: "", isVisible: true },
       { link: "/vanitycode", name: "", isVisible: true },
+      { link: "/fonts", name: "", isVisible: true, expand: false, children: [] },
       { link: "/decabit", name: "", isVisible: true },
-      { link: "/freqanal", name: "", isVisible: true },
     ],
   },
   {
@@ -153,8 +155,12 @@ const alltools = ref([
       { link: "/colorpicker", name: "", isVisible: true },
       { link: "/filltool", name: "", isVisible: true },
       { link: "/pixeldata", name: "", isVisible: true },
+      { link: "/pixelbuild", name: "", isVisible: true },
       { link: "/imagetransform", name: "", isVisible: true },
       { link: "/textextractor", name: "", isVisible: true },
+      { link: "/bitplane", name: "", isVisible: true },
+      { link: "/dataappended", name: "", isVisible: true },
+      { link: "/pngchunk", name: "", isVisible: true },
       { link: "/barcode", name: "", isVisible: true }
     ]
   },

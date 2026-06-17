@@ -1,23 +1,23 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('checksum.title') }}</h1>
+    <h1>{{ t('checksum.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('checksum.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('checksum.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('checksum.checkmethod')"
+            :title="t('checksum.checkmethod')"
             :options="checks"
             v-model="checksel"
           />
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('labels.number') }}</label>
+          <label>{{ t('labels.number') }}</label>
           <input type="text" v-model="txt" ref="inputRef">
         </div>
         <p
@@ -32,7 +32,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"

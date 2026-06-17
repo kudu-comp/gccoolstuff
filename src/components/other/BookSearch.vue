@@ -1,54 +1,52 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('booksearch.title') }}</h1>
+    <h1>{{ t('booksearch.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('booksearch.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('booksearch.long')" />
       </VCard>
 
       <!-- Settings/Search Card -->
-      <VCard :title="$t('labels.settings')">
-        <div class="form-group-vertical">
-          <v-search
-            v-model:search="txt"
-            @keyup.enter="goSearch"
-          />
-          <div class="radio-group">
-            <label>{{ $t('booksearch.sel') }}</label>
-            <div class="radio-options-vertical">
-              <label class="radio-item">
-                <input type="radio" value="1" v-model="sel">
-                <span class="radio-mark"></span> {{ $t('booksearch.short') }}
-              </label>
-              <label class="radio-item">
-                <input type="radio" value="2" v-model="sel">
-                <span class="radio-mark"></span> {{ $t('booksearch.extra') }}
-              </label>
-            </div>
+      <VCard :title="t('labels.settings')">
+        <v-search
+          v-model:search="txt"
+          @keyup.enter="goSearch"
+        />
+        <div class="radio-group mb-2">
+          <label>{{ t('booksearch.sel') }}</label>
+          <div class="radio-options-vertical">
+            <label class="radio-item">
+              <input type="radio" value="1" v-model="sel">
+              <span class="radio-mark"></span> {{ t('booksearch.short') }}
+            </label>
+            <label class="radio-item">
+              <input type="radio" value="2" v-model="sel">
+              <span class="radio-mark"></span> {{ t('booksearch.extra') }}
+            </label>
           </div>
-          <p v-show="errormsg" class="errormsg">
-            {{ errormsg }}
-          </p>
-          <div class="button-row mt-2">
-            <button 
-              class="btn btn-primary" 
-              :disabled="loading" 
-              @click="goSearch"
-            >
-              {{ $t('buttons.search') }}
-            </button>
-          </div>
+        </div>
+        <p v-show="errormsg" class="errormsg mb-2">
+          {{ errormsg }}
+        </p>
+        <div class="button-row">
+          <button 
+            class="btn btn-primary" 
+            :disabled="loading" 
+            @click="goSearch"
+          >
+            {{ t('buttons.search') }}
+          </button>
         </div>
       </VCard>
     </div>
 
     <!-- Results Card -->
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="resultbox" v-html="result" />
       </VCard>
     </div>

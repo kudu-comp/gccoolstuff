@@ -1,29 +1,29 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('wordle.title') }}</h1>
+    <h1>{{ t('wordle.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('wordle.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('wordle.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
           <div class="form-horizontal mt-4">
-            <label>{{ $t('wordle.length') }}</label>
+            <label>{{ t('wordle.length') }}</label>
             <input type="number" v-model="len">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('wordle.pattern') }}</label>
+            <label>{{ t('wordle.pattern') }}</label>
             <input type="text" v-model="wordlePattern">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('wordle.yellows') }}</label>
+            <label>{{ t('wordle.yellows') }}</label>
             <input type="text" v-model="yellows">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('wordle.greys') }}</label>
+            <label>{{ t('wordle.greys') }}</label>
             <input type="text" v-model="greys">
           </div>
           <p
@@ -34,13 +34,13 @@
           </p>
           <div class="button-row mt-2">
             <button :disabled="dictloading" class="btn btn-primary"  @click="findwordle">
-              {{ $t('buttons.search') }}
+              {{ t('buttons.search') }}
             </button>
           </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="card resultbox" v-html="result" />
       </VCard>  
     </div>

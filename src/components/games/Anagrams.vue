@@ -1,29 +1,29 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('anagrams.title') }}</h1>
+    <h1>{{ t('anagrams.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('anagrams.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('anagrams.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
         <div class="form-horizontal mt-4">
-          <label>{{ $t('anagrams.letters') }}</label>
+          <label>{{ t('anagrams.letters') }}</label>
           <input type="text" v-model="letters" ref="lettersRef">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('anagrams.maxw') }}</label>
+          <label>{{ t('anagrams.maxw') }}</label>
           <input type="number" v-model="maxw">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('anagrams.minl') }}</label>
+          <label>{{ t('anagrams.minl') }}</label>
           <input type="number" v-model="minl">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('anagrams.maxl') }}</label>
+          <label>{{ t('anagrams.maxl') }}</label>
           <input type="number" v-model="maxl">
         </div>
         <p
@@ -34,13 +34,13 @@
         </p>
         <div class="button-row mt-2">
           <button :disabled="dictloading" class="btn btn-primary" @click="runAnagramSearch">
-            {{$t('buttons.search')}}
+            {{t('buttons.search')}}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="card resultbox" v-html="result" />
       </VCard>
     </div>

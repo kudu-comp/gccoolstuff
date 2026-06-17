@@ -1,14 +1,14 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('lines.title') }}</h1>
+    <h1>{{ t('lines.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('lines.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('lines.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <v-coord
             v-model:coord="coordinate1"
@@ -16,14 +16,14 @@
             class="mb-2"
           >
             <template #label>
-              {{ $t('labels.point') }} 1
+              {{ t('labels.point') }} 1
             </template>
             <!-- <template #popup>
               <button 
                 class="btn btn-primary" 
                 @click="modal1 = true"
               >
-                {{ $t('linepointdir.pdir') }}
+                {{ t('linepointdir.pdir') }}
               </button>
             </template>    -->
           </v-coord>
@@ -35,7 +35,7 @@
             class="mb-2"
           >
             <template #label>
-              {{ $t('labels.point') }} 2
+              {{ t('labels.point') }} 2
             </template>
           </v-coord>
         </div>
@@ -46,14 +46,14 @@
             class="mb-2"
           >
             <template #label>
-              {{ $t('labels.point') }} 3
+              {{ t('labels.point') }} 3
             </template>
             <!-- <template #popup>
               <button 
                 class="btn btn-primary" 
                 @click="modal2 = true"
               >
-                {{ $t('linepointdir.pdir') }}
+                {{ t('linepointdir.pdir') }}
               </button>
             </template>         -->
           </v-coord>
@@ -65,7 +65,7 @@
             class="mb-2"
           >
             <template #label>
-              {{ $t('labels.point') }} 4
+              {{ t('labels.point') }} 4
             </template>
           </v-coord>
           <v-line-point-dir
@@ -92,19 +92,19 @@
           {{ errormsg }}
         </div>
         <div class="button-row mb-2">
-          <label>{{ $t('lines.calc1') }}</label>
+          <label>{{ t('lines.calc1') }}</label>
           <v-show-on-map id="line1" class="btn btn-primary" @show="doLine1()" />
         </div>
         <div class="button-row mb-2">
-          <label>{{ $t('lines.calc2') }}</label>
+          <label>{{ t('lines.calc2') }}</label>
           <v-show-on-map id="line2" class="btn btn-primary" @show="doLine2()" />
         </div>
         <div class="button-row">
-          <label>{{ $t('lines.calc3') }}</label>
+          <label>{{ t('lines.calc3') }}</label>
           <v-show-on-map id="line3" class="btn btn-primary" @show="doLine3()" />
         </div>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
@@ -113,7 +113,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordinate1" />     
       </VCard>
     </div>

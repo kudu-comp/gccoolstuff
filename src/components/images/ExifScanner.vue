@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('exifscanner.title') }}</h1>
+    <h1>{{ t('exifscanner.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('exifscanner.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('exifscanner.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             ref="file"
@@ -26,75 +26,75 @@
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div class="exifinfo table-responsive">
           <h4>
-            {{ $t('exifscanner.info') }}
+            {{ t('exifscanner.info') }}
           </h4>
           <div class="mb-2">
             <table class="p-table-small">
               <tbody>
-                <tr><td>{{ $t('exifscanner.filename') }}</td><td>{{ Filename }}</td></tr>
-                <tr><td>{{ $t('exifscanner.filetype') }}</td><td>{{ Filetype }}</td></tr>
-                <tr><td>{{ $t('exifscanner.size') }}</td><td>{{ Filesize }}</td></tr>
-                <tr><td>{{ $t('exifscanner.width') }}</td><td>{{ ImageWidth }}</td></tr>
-                <tr><td>{{ $t('exifscanner.height') }}</td><td>{{ ImageHeight }}</td></tr>
-                <tr><td>{{ $t('exifscanner.npixels') }}</td><td>{{ ImagePixels }}</td></tr>
-                <tr><td>{{ $t('exifscanner.date') }}</td><td>{{ DateTime }}</td></tr>
-                <tr><td>{{ $t('exifscanner.datec') }}</td><td>{{ DateTimeOriginal }}</td></tr>
+                <tr><td>{{ t('exifscanner.filename') }}</td><td>{{ Filename }}</td></tr>
+                <tr><td>{{ t('exifscanner.filetype') }}</td><td>{{ Filetype }}</td></tr>
+                <tr><td>{{ t('exifscanner.size') }}</td><td>{{ Filesize }}</td></tr>
+                <tr><td>{{ t('exifscanner.width') }}</td><td>{{ ImageWidth }}</td></tr>
+                <tr><td>{{ t('exifscanner.height') }}</td><td>{{ ImageHeight }}</td></tr>
+                <tr><td>{{ t('exifscanner.npixels') }}</td><td>{{ ImagePixels }}</td></tr>
+                <tr><td>{{ t('exifscanner.date') }}</td><td>{{ DateTime }}</td></tr>
+                <tr><td>{{ t('exifscanner.datec') }}</td><td>{{ DateTimeOriginal }}</td></tr>
               </tbody>
             </table>
           </div>
           <h4>
-            {{ $t('exifscanner.cinfo') }}
+            {{ t('exifscanner.cinfo') }}
           </h4>
           <div class="mb-2">
             <table class="p-table-small">
               <tbody>
-                <tr><td>{{ $t('exifscanner.camera') }}</td><td>{{ Camera }}</td></tr>
-                <tr><td>{{ $t('exifscanner.lens') }}</td><td>{{ LensModel }}</td></tr>
-                <tr><td>{{ $t('exifscanner.aperture') }}</td><td>{{ Aperture }}</td></tr>
-                <tr><td>{{ $t('exifscanner.shutter') }}</td><td>{{ Shutter }}</td></tr>
+                <tr><td>{{ t('exifscanner.camera') }}</td><td>{{ Camera }}</td></tr>
+                <tr><td>{{ t('exifscanner.lens') }}</td><td>{{ LensModel }}</td></tr>
+                <tr><td>{{ t('exifscanner.aperture') }}</td><td>{{ Aperture }}</td></tr>
+                <tr><td>{{ t('exifscanner.shutter') }}</td><td>{{ Shutter }}</td></tr>
               </tbody>
             </table>
           </div>
           <h4>
-            {{ $t('exifscanner.desc') }}
+            {{ t('exifscanner.desc') }}
           </h4>
           <div class="mb-2">
             <table class="p-table-small">
               <tbody>
-                <tr><td>{{ $t('exifscanner.title2') }}</td><td>{{ Title }}</td></tr>
-                <tr><td>{{ $t('exifscanner.title2') }} 2</td><td>{{ XPTitle }}</td></tr>
-                <tr><td>{{ $t('exifscanner.desc') }}</td><td>{{ Description }}</td></tr>
-                <tr><td>{{ $t('exifscanner.desc') }} 2</td><td>{{ ImageDescription }}</td></tr>
-                <tr><td>{{ $t('exifscanner.subject') }}</td><td>{{ XPSubject }}</td></tr>
-                <tr><td>{{ $t('exifscanner.about') }}</td><td>{{ About }}</td></tr>
-                <tr><td>{{ $t('exifscanner.keywords') }}</td><td>{{ XPKeywords }}</td></tr>
-                <tr><td>{{ $t('exifscanner.comment') }}</td><td>{{ XPComment }}</td></tr>
+                <tr><td>{{ t('exifscanner.title2') }}</td><td>{{ Title }}</td></tr>
+                <tr><td>{{ t('exifscanner.title2') }} 2</td><td>{{ XPTitle }}</td></tr>
+                <tr><td>{{ t('exifscanner.desc') }}</td><td>{{ Description }}</td></tr>
+                <tr><td>{{ t('exifscanner.desc') }} 2</td><td>{{ ImageDescription }}</td></tr>
+                <tr><td>{{ t('exifscanner.subject') }}</td><td>{{ XPSubject }}</td></tr>
+                <tr><td>{{ t('exifscanner.about') }}</td><td>{{ About }}</td></tr>
+                <tr><td>{{ t('exifscanner.keywords') }}</td><td>{{ XPKeywords }}</td></tr>
+                <tr><td>{{ t('exifscanner.comment') }}</td><td>{{ XPComment }}</td></tr>
               </tbody>
             </table>
           </div>
           <h4>
-            {{ $t('exifscanner.ainfo') }}
+            {{ t('exifscanner.ainfo') }}
           </h4>
           <div class="mb-2">
             <table class="p-table-small">
               <tbody>
-                <tr><td>{{ $t('exifscanner.artist') }}</td><td>{{ Artist }}</td></tr>
-                <tr><td>{{ $t('exifscanner.creator') }}</td><td>{{ Creator }}</td></tr>
-                <tr><td>{{ $t('exifscanner.author') }}</td><td>{{ XPAuthor }}</td></tr>
-                <tr><td>{{ $t('exifscanner.copyright') }}</td><td>{{ Copyright }}</td></tr>
+                <tr><td>{{ t('exifscanner.artist') }}</td><td>{{ Artist }}</td></tr>
+                <tr><td>{{ t('exifscanner.creator') }}</td><td>{{ Creator }}</td></tr>
+                <tr><td>{{ t('exifscanner.author') }}</td><td>{{ XPAuthor }}</td></tr>
+                <tr><td>{{ t('exifscanner.copyright') }}</td><td>{{ Copyright }}</td></tr>
               </tbody>
             </table>
           </div>
           <h4>
-            {{ $t('exifscanner.gps') }}
+            {{ t('exifscanner.gps') }}
           </h4>
           <div class="mb-2">
             <table class="p-table-small">
               <tbody>
-                <tr><td>{{ $t('exifscanner.gps') }}</td><td>{{ GPSfromCamera }}</td></tr>
+                <tr><td>{{ t('exifscanner.gps') }}</td><td>{{ GPSfromCamera }}</td></tr>
               </tbody>
             </table>
           </div>
@@ -110,7 +110,7 @@
           >
         </div>
       </VCard>
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map />
       </VCard>
     </div>

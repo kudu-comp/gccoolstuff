@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('truthtable.title') }}</h1>
+    <h1>{{ t('truthtable.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('truthtable.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('truthtable.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('truthtable.expr') }}</label>
+          <label>{{ t('truthtable.expr') }}</label>
           <input type="text" v-model="expr">
         </div>
         <p
@@ -25,12 +25,13 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
-        <div
-          v-if="result"
-          v-html="result"
-          class="card resultbox"
-        >
+      <VCard :title="t('labels.result')">
+        <div v-if="result" class="resultbox">
+          <div class="table-responsive">
+            <div
+              v-html="result"              
+            />
+          </div>
         </div>
       </VCard>
     </div>

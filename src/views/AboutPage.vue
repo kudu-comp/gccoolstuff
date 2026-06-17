@@ -4,7 +4,7 @@
     <h1>About</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('About')">
+    <VCard :title="t('About')">
       <p>
         I love to solve mystery geocaches. I've been doing it for years. There are some great websites out there to help you,
         but sometimes I needed tools for unknown problems. So I started programming. Then I got the idea to make a
@@ -14,17 +14,17 @@
         This website is also optimized for mobile. It is small and responsive.
       </p>
     </VCard>
-     <VCard :title="$t('Free to use')">
+     <VCard :title="t('Free to use')">
       <p>
         You are free to use GC Tools. There are no cookies, no commercial messages, no subscription fees.
       </p>
     </VCard>
-     <VCard :title="$t('Contact')">
+     <VCard :title="t('Contact')">
         <p>
           If you have suggestions or remarks please contact me. Our geocaching name is Team Chaenaan.
         </p>
     </VCard>
-     <VCard :title="$t('Under construction')">
+     <VCard :title="t('Under construction')">
         <p>
           This website is continuously under construction. I also use it to practice my coding skills on JavaScript, Vue3, Vue-router, Vuex
           and PHP. The front end is build as components and using Vite. There is a great set of Javascript modules in use. Leaflet is used for maps, proj4 is
@@ -42,5 +42,10 @@
 <script setup>
 
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 </script>

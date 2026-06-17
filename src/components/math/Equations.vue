@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('equations.title') }}</h1>
+    <h1>{{ t('equations.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('equations.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('equations.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('equations.numvar') }}</label>
+          <label>{{ t('equations.numvar') }}</label>
           <input type="number" v-model="size" ref="sizeInput" min="1" max="26" @change="updateMatrixSize()">
         </div>
         <table class="mb-2">
@@ -39,15 +39,15 @@
           </tbody>
         </table>
         <div class="radio-group">
-          <label>{{$t('equations.output')}}</label>
+          <label>{{t('equations.output')}}</label>
           <div class="radio-options">
             <label class="radio-item">
               <input type="radio" value="1" v-model="format">
-              <span class="radio-mark"></span> {{ $t('equations.fractions') }}
+              <span class="radio-mark"></span> {{ t('equations.fractions') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="2" v-model="format">
-              <span class="radio-mark"></span> {{ $t('equations.decimals') }}
+              <span class="radio-mark"></span> {{ t('equations.decimals') }}
             </label>
           </div>
         </div>
@@ -63,7 +63,7 @@
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="result" class="card resultbox" v-html="result">
         </div>
       </VCard>

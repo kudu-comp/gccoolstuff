@@ -1,36 +1,36 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('mmsolver.title') }}</h1>
+    <h1>{{ t('mmsolver.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('mmsolver.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('mmsolver.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{ $t('mmsolver.npin') }}</label>
+          <label>{{ t('mmsolver.npin') }}</label>
           <input type="number" v-model="npin" min="3" max="6" ref="npinInput">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('mmsolver.ncolor') }}</label>
+          <label>{{ t('mmsolver.ncolor') }}</label>
           <input type="number" v-model="ncolor" min="3" max="9">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="unique">
           <span class="checkmark"></span>
-          {{ $t('mmsolver.unique') }}
+          {{ t('mmsolver.unique') }}
         </label>
       </VCard>
-      <VCard :title="$t('labels.input')">
-       <div class="form-horizontal">
+      <VCard :title="t('labels.input')">
+       <div class="table-responsive">
         <table class="p-table-small">
           <thead>
             <tr>
-              <th scope="col"> {{ $t('mmsolver.pins') }} </th>
-              <th scope="col"> {{ $t('mmsolver.pos') }} </th>
-              <th scope="col"> {{ $t('mmsolver.col') }} </th>
+              <th scope="col"> {{ t('mmsolver.pins') }} </th>
+              <th scope="col"> {{ t('mmsolver.pos') }} </th>
+              <th scope="col"> {{ t('mmsolver.col') }} </th>
             </tr>
           </thead>
           <tbody>
@@ -56,22 +56,22 @@
         </p>
         <div class="button-row mt-2">
           <button  class="btn btn-primary" @click="solveMM">
-            {{ $t('buttons.solve') }}
+            {{ t('buttons.solve') }}
           </button>
           <button class="btn btn-secondary" @click="resetMM">
-            {{ $t('buttons.reset') }}
+            {{ t('buttons.reset') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-show="solved"
           class="resultbox"
         >
           <h4>
-            {{ $t('sudokusolv.thereare') }} {{ results.length }} {{ $t('sudokusolv.sols') }}
+            {{ t('sudokusolv.thereare') }} {{ results.length }} {{ t('sudokusolv.sols') }}
           </h4>
           <template v-for="r in results">
               {{ r }}<br>          

@@ -1,49 +1,49 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('gameoflife.title') }}</h1>
+    <h1>{{ t('gameoflife.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('gameoflife.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('gameoflife.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <CustomDropdown
-            :title="$t('gameoflife.fillgrid')"
+            :title="t('gameoflife.fillgrid')"
             :options="genOptions"
             v-model="sel"
           />
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('gameoflife.rows') }}</label>
+          <label>{{ t('gameoflife.rows') }}</label>
           <input type="number" v-model="rows">
         </div>
         <div class="form-horizontal">
-          <label>{{ $t('gameoflife.cols') }}</label>
+          <label>{{ t('gameoflife.cols') }}</label>
           <input type="number" v-model="cols">
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="chgrules">
           <span class="checkmark"></span>
-          {{ $t('gameoflife.chgrules') }}
+          {{ t('gameoflife.chgrules') }}
         </label>
         <div class="input-box" v-if="chgrules">
           <div class="form-horizontal mt-2">
-            <label>{{ $t('gameoflife.diebelow') }}</label>
+            <label>{{ t('gameoflife.diebelow') }}</label>
             <input type="number" v-model="diebelow">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('gameoflife.dieabove') }}</label>
+            <label>{{ t('gameoflife.dieabove') }}</label>
             <input type="number" v-model="dieabove">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('gameoflife.bornbelow') }}</label>
+            <label>{{ t('gameoflife.bornbelow') }}</label>
             <input type="number" v-model="bornbelow">
           </div>
           <div class="form-horizontal">
-            <label>{{ $t('gameoflife.bornabove') }}</label>
+            <label>{{ t('gameoflife.bornabove') }}</label>
             <input type="number" v-model="bornabove">
           </div>
         </div>
@@ -52,16 +52,16 @@
           </p>
          <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="fillGrid">
-            {{ $t('gameoflife.newgrid') }}
+            {{ t('gameoflife.newgrid') }}
           </button>
           <button class="btn btn-primary"  @click="step">
-            {{ $t('gameoflife.step') }}
+            {{ t('gameoflife.step') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div class="card resultbox">
           {{  result1 }}<br>
           {{  result2 }}<br><br>

@@ -1,16 +1,16 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('bitplane.title') }}</h1>
+    <h1>{{ t('bitplane.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('bitplane.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('bitplane.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input type="file" accept="image/*" @change="handleImageUpload" />
         </div>
         <p
@@ -75,6 +75,11 @@ import VCard from '@/Components/generic/VCard.vue';
 import CustomDropdown from '@/Components/generic/CustomDropdown.vue';
 import LoadSecret from '@/Components/generic/LoadSecret.vue';
 import ShowSecret from '@/Components/generic/ShowSecret.vue';
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const imageLoaded = ref(false);
 const originalCanvas = ref(null);

@@ -1,18 +1,18 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('romans.title') }}</h1>
+    <h1>{{ t('romans.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('romans.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('romans.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           ref="inputRef"
           v-model="input"
-          :placeholder="$t('labels.number')"
+          :placeholder="t('labels.number')"
           rows="1"
         />
         <p
@@ -23,16 +23,16 @@
         </p>
         <div class="button-row mt-2">
           <button id="convert" class="btn btn-primary"  @click="romanToDec">
-            {{ $t('romans.btnrtd') }}
+            {{ t('romans.btnrtd') }}
           </button>
           <button id="convert" class="btn btn-primary"  @click="decToRoman">
-            {{ $t('romans.btndtr') }}
+            {{ t('romans.btndtr') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"

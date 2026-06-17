@@ -1,15 +1,15 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('numerology.title') }}</h1>
+    <h1>{{ t('numerology.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('numerology.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('numerology.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <div class="radio-group">
-        <label>{{$t('numerology.selmethod')}}</label>
+        <label>{{t('numerology.selmethod')}}</label>
         <div class="radio-options-vertical">
           <label class="radio-item">
             <input type="radio" value="0" v-model="selmode">
@@ -48,11 +48,12 @@
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         ref="messageInput"
+        class="mb-2"
         v-model="txt"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
       />
       <p
@@ -62,7 +63,7 @@
         {{ errormsg }}.
       </p>          
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div
         v-if="result"
         class="card resultbox"
@@ -73,23 +74,25 @@
     </VCard>
   </div>
   <div class="card-grid">
-    <VCard :title="$t('numerology.valtab')">
-      <table class="p-table">
-          <tr>
-            <td class="sm-size"
-              v-for="a in alphabet"
-            >
-              {{ a }}
-            </td>
-          </tr>
-          <tr>
-            <td
-              v-for="s in SYSTEM_VALUES[selmode]"
-            >
-              {{ s }}
-            </td>
-          </tr>
-        </table>
+    <VCard :title="t('numerology.valtab')">
+      <div class="table-responsive">
+        <table class="p-table">
+            <tr>
+              <td class="sm-size"
+                v-for="a in alphabet"
+              >
+                {{ a }}
+              </td>
+            </tr>
+            <tr>
+              <td
+                v-for="s in SYSTEM_VALUES[selmode]"
+              >
+                {{ s }}
+              </td>
+            </tr>
+          </table>
+      </div>
     </VCard>
   </div>
 </template>

@@ -1,28 +1,28 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('htmlparser.title') }}</h1>
+    <h1>{{ t('htmlparser.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <!-- Input Column -->
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('htmlparser.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('htmlparser.long')" />
       </VCard>
 
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-row mb-2">
           <textarea
             ref="gchtmlInput"
             v-model="gchtml"
-            :placeholder="$t('htmlparser.ph')"
+            :placeholder="t('htmlparser.ph')"
             rows="5"
           />
         </div>
         <p v-show="errormsg" class="errormsg mt-2">{{ errormsg }}</p>
         <div class="button-row mt-2">
           <button class="btn btn-primary" @click="scanHTML">
-            {{ $t('htmlparser.btnscan') }}
+            {{ t('htmlparser.btnscan') }}
           </button>
         </div>
       </VCard>
@@ -30,7 +30,7 @@
 
     <!-- Results Column -->
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <h4 class="mb-2 mt-2">{{ scanresult }}</h4>
 
         <!-- Universal Result Loop -->

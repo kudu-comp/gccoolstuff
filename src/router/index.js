@@ -1,18 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Static imports (always available)
-import HomePage from '@/views/HomePage.vue' 
-import WordValue from '@/components/texts/WordValue.vue' 
-import TryAnswers from '@/components/texts/TryAnswers.vue' 
-import Convert from '@/components/coords/Convert.vue'
-import Project from '@/components/coords/Project.vue' 
-import RotCiphers from '@/components/codes/RotCiphers.vue' 
+import HomePage from '@/views/HomePage.vue'
 
 const routes = [
   { path: '/',                    name: 'home',                  component: HomePage  },
   { path: "/alltools/:s?",        name: 'AllTools',              component: () => import('@/components/AllTools.vue') }, //Param: s is immediate search for s
-  { path: "/convert",             name: 'Convert',               component: Convert },
-  { path: "/project",             name: 'Project',               component: Project },
+  { path: "/convert",             name: 'Convert',               component: () => import('@/components/coords/Convert.vue')  },
+  { path: "/project",             name: 'Project',               component: () => import('@/components/coords/Project.vue') },
   { path: "/lines",               name: 'Lines',                 component: () => import('@/components/coords/Lines.vue') },
   { path: "/triangles",           name: 'Triangles',             component: () => import('@/components/coords/Triangles.vue') },
   { path: "/circles",             name: 'Circles',               component: () => import('@/components/coords/Circles.vue') },
@@ -22,18 +17,19 @@ const routes = [
   { path: "/revwherigo",          name: 'RevWherigo',            component: () => import('@/components/coords/RevWherigo.vue') },
   { path: "/plotcoord",           name: 'PlotCoord',             component: () => import('@/components/coords/PlotCoord.vue') },
   { path: "/triangulation",       name: 'Triangulation',         component: () => import('@/components/coords/Triangulation.vue') },
-  { path: "/tryanswers",          name: 'TryAnswers',            component: TryAnswers },
-  { path: "/wordvalue",           name: 'WordValue',             component: WordValue },
+  { path: "/tryanswers",          name: 'TryAnswers',            component: () => import('@/components/texts/TryAnswers.vue') },
+  { path: "/wordvalue",           name: 'WordValue',             component: () => import('@/components/texts/WordValue.vue') },
   { path: "/analtxt",             name: 'AnalTxt',               component: () => import('@/components/texts/AnalTxt.vue') },
   { path: "/texttonum",           name: 'TextToNum',             component: () => import('@/components/texts/TextToNum.vue') },
   { path: "/charcodes",           name: 'CharCodes',             component: () => import('@/components/texts/CharCodes.vue') },
   { path: "/keyboards",           name: 'Keyboards',             component: () => import('@/components/texts/Keyboards.vue') },
   { path: "/texttoss",            name: 'TextToss',              component: () => import('@/components/texts/TextToss.vue') },
+  { path: "/texttransform",       name: 'TextTransform',         component: () => import('@/components/texts/TextTransform.vue') },
   { path: "/textchunks",          name: 'TextChunks',            component: () => import('@/components/texts/TextChunks.vue') },
   { path: "/piglatin/:pig?",      name: 'PigLatin',              component: () => import('@/components/texts/PigLatin.vue') },    //Param: pig
   { path: "/numerology/:num?",    name: 'Numerology',            component: () => import('@/components/texts/Numerology.vue') },
   { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },   //Param: cphr
-  { path: '/rotciphers',          name: 'RotCiphers',            component: RotCiphers },
+  { path: '/rotciphers',          name: 'RotCiphers',            component: () => import('@/components/codes/RotCiphers.vue')  },
   { path: "/substcipher",         name: 'SubstCipher',           component: () => import('@/components/codes/SubstCipher.vue') },
   { path: "/codebook/:code?",     name: 'Codebook',              component: () => import('@/components/codes/CodeBook.vue') },    //Param: code
   { path: "/fonts/:font?",        name: 'Fonts',                 component: () => import('@/components/codes/Fonts.vue') },       //Param: font

@@ -1,14 +1,14 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('antipode.title') }}</h1>
+    <h1>{{ t('antipode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('antipode.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('antipode.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <v-coord
             v-model:coord="coordinate"
@@ -25,17 +25,17 @@
           {{ errormsg }}.
         </p>          
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div
           v-if="result"
           class="card resultbox"
         >
-          {{ $t('antipode.result') }}{{ result }}
+          {{ t('antipode.result') }}{{ result }}
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordinate" />
       </VCard>
     </div>

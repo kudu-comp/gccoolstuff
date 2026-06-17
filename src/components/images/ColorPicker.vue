@@ -1,20 +1,19 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('colorpicker.title') }}</h1>
+    <h1>{{ t('colorpicker.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('colorpicker.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('colorpicker.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
-        <div class="form-group-vertical">
-          <label>{{ $t('labels.selectfile') }}</label>
+      <VCard :title="t('labels.input')">
+        <div class="form-horizontal">
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             ref="fileInput"
-            class="form-control"
             @change="selectFile"
           >
         </div>
@@ -25,9 +24,9 @@
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div class="form-horizontal">
-          <label>{{ $t('colorpicker.selcolor') }}</label>
+          <div class='subhead'>{{ t('colorpicker.selcolor') }}</div>
           <span
             ref="selColorBox"
             colspan="2"
@@ -39,84 +38,84 @@
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.rgbval') }}
+                  {{ t('colorpicker.rgbval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colors.red') }}</td><td>{{ slr }}</td></tr>
-              <tr><td>{{ $t('colors.green') }}</td><td>{{ slg }}</td></tr>
-              <tr><td>{{ $t('colors.blue') }}</td><td>{{ slb }}</td></tr>
-              <tr><td>{{ $t('colorpicker.alpha') }}</td><td>{{ sla }}</td></tr>
+              <tr><td>{{ t('colors.red') }}</td><td>{{ slr }}</td></tr>
+              <tr><td>{{ t('colors.green') }}</td><td>{{ slg }}</td></tr>
+              <tr><td>{{ t('colors.blue') }}</td><td>{{ slb }}</td></tr>
+              <tr><td>{{ t('colorpicker.alpha') }}</td><td>{{ sla }}</td></tr>
             </tbody>
           </table>
           <table class="p-table-small mb-2">
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.hexval') }}
+                  {{ t('colorpicker.hexval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colorpicker.hex') }}</td><td>{{ slx }}</td></tr>
+              <tr><td>{{ t('colorpicker.hex') }}</td><td>{{ slx }}</td></tr>
             </tbody>
           </table>
           <table class="p-table-small mb-2">
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.hslval') }}
+                  {{ t('colorpicker.hslval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue }}°</td></tr>
-              <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat }}</td></tr>
-              <tr><td>{{ $t('colorpicker.lum') }}</td><td>{{ lum }}</td></tr>
+              <tr><td>{{ t('colorpicker.hue') }}</td><td>{{ hue }}°</td></tr>
+              <tr><td>{{ t('colorpicker.sat') }}</td><td>{{ sat }}</td></tr>
+              <tr><td>{{ t('colorpicker.lum') }}</td><td>{{ lum }}</td></tr>
             </tbody>
           </table>
           <table class="p-table-small mb-2">
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.hsvval') }}
+                  {{ t('colorpicker.hsvval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colorpicker.hue') }}</td><td>{{ hue2 }}°</td></tr>
-              <tr><td>{{ $t('colorpicker.sat') }}</td><td>{{ sat2 }}</td></tr>
-              <tr><td>{{ $t('colorpicker.bri') }}</td><td>{{ bri }}</td></tr>
+              <tr><td>{{ t('colorpicker.hue') }}</td><td>{{ hue2 }}°</td></tr>
+              <tr><td>{{ t('colorpicker.sat') }}</td><td>{{ sat2 }}</td></tr>
+              <tr><td>{{ t('colorpicker.bri') }}</td><td>{{ bri }}</td></tr>
             </tbody>
           </table>
           <table class="p-table-small mb-2">
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.cmykval') }}
+                  {{ t('colorpicker.cmykval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c }}</td></tr>
-              <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m }}</td></tr>
-              <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y }}</td></tr>
-              <tr><td>{{ $t('colors.black') }}</td><td>{{ k }}</td></tr>
+              <tr><td>{{ t('colors.cyan') }}</td><td>{{ c }}</td></tr>
+              <tr><td>{{ t('colors.magenta') }}</td><td>{{ m }}</td></tr>
+              <tr><td>{{ t('colors.yellow') }}</td><td>{{ y }}</td></tr>
+              <tr><td>{{ t('colors.black') }}</td><td>{{ k }}</td></tr>
             </tbody>
           </table>
           <table class="p-table-small mb-2">
             <thead>
               <tr>
                 <th colspan="2" class="subhead">
-                  {{ $t('colorpicker.cmyval') }}
+                  {{ t('colorpicker.cmyval') }}
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>{{ $t('colors.cyan') }}</td><td>{{ c2 }}</td></tr>
-              <tr><td>{{ $t('colors.magenta') }}</td><td>{{ m2 }}</td></tr>
-              <tr><td>{{ $t('colors.yellow') }}</td><td>{{ y2 }}</td></tr>
+              <tr><td>{{ t('colors.cyan') }}</td><td>{{ c2 }}</td></tr>
+              <tr><td>{{ t('colors.magenta') }}</td><td>{{ m2 }}</td></tr>
+              <tr><td>{{ t('colors.yellow') }}</td><td>{{ y2 }}</td></tr>
             </tbody>
           </table>
         </div>

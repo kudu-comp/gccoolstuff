@@ -5,7 +5,7 @@
         <div class="modal-container p-4">
           <div class="modal-header">
             <slot name="header">
-              <h2>{{ $t('linepointdir.title') }}</h2>
+              <h2>{{ t('linepointdir.title') }}</h2>
             </slot>
           </div>
 
@@ -16,7 +16,7 @@
                 v-model:datum="selecteddatum1"
               >
                 <template #label>
-                  {{ $t('linepointdir.start') }}
+                  {{ t('linepointdir.start') }}
                 </template>
               </v-coord>
               <v-angle
@@ -42,13 +42,13 @@
                 class="btn me-2"
                 @click="$emit('close')"
               >
-                {{ $t('buttons.cancel') }}
+                {{ t('buttons.cancel') }}
               </button>
               <button
                 class="btn"
                 @click="closeModal()"
               >
-                {{ $t('buttons.save') }}
+                {{ t('buttons.save') }}
               </button>
             </slot>
           </div>

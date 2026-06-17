@@ -1,39 +1,39 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('texttoss.title') }}</h1>
+    <h1>{{ t('texttoss.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('texttoss.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('texttoss.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
+    <VCard :title="t('labels.settings')">
       <div class="radio-group">
-        <label>{{ $t('texttoss.mode') }}</label>
+        <label>{{ t('texttoss.mode') }}</label>
         <div class="radio-options-vertical">
           <label class="radio-item">
             <input type="radio" value="3" v-model="mode">
-            <span class="radio-mark"></span> {{ $t('texttoss.mode3') }}
+            <span class="radio-mark"></span> {{ t('texttoss.mode3') }}
           </label>
           <label class="radio-item">
             <input type="radio" value="2" v-model="mode">
-            <span class="radio-mark"></span> {{ $t('texttoss.mode2') }}
+            <span class="radio-mark"></span> {{ t('texttoss.mode2') }}
           </label>
           <label class="radio-item">
             <input type="radio" value="1" v-model="mode">
-            <span class="radio-mark"></span> {{ $t('texttoss.mode1') }}
+            <span class="radio-mark"></span> {{ t('texttoss.mode1') }}
           </label>
         </div>
       </div>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         id="message"
         ref="messageInput"
         v-model="message"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
       />
       <p
@@ -43,7 +43,7 @@
         {{ errormsg }}.
       </p>          
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div
         v-if="result"
         class="card resultbox"

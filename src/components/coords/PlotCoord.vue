@@ -1,61 +1,54 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('plotcoord.title') }}</h1>
+    <h1>{{ t('plotcoord.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('plotcoord.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('plotcoord.long')" />
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
-          >{{ $t('labels.from') }}</label>
+          >{{ t('labels.from') }}</label>
           <v-datums
             id="from"
             v-model:datum="from"
           />
         </div>
-        <div class="form-group-vertical">
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="showmarkers">
-            <span class="checkmark"></span>
-            {{ $t('mapmaker.showmark') }}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="showlabels">
-            <span class="checkmark"></span>
-            {{ $t('mapmaker.showlabel') }}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="drawlines">
-            <span class="checkmark"></span>
-            {{ $t('plotcoord.drawlines') }}
-          </label>
-          <label class="checkbox-container">
-            <input type="checkbox" v-model="fillpoly">
-            <span class="checkmark"></span>
-            {{ $t('plotcoord.fillpoly') }}
-          </label>
-        </div>
-        <div class="button-row mt-2">
-          <button class="btn btn-primary"  @click="makeMap">
-            {{ $t('buttons.show') }}
-          </button>
-        </div>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showmarkers">
+          <span class="checkmark"></span>
+          {{ t('mapmaker.showmark') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="showlabels">
+          <span class="checkmark"></span>
+          {{ t('mapmaker.showlabel') }}
+        </label>
+        <label class="checkbox-container mb-2">
+          <input type="checkbox" v-model="drawlines">
+          <span class="checkmark"></span>
+          {{ t('plotcoord.drawlines') }}
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" v-model="fillpoly">
+          <span class="checkmark"></span>
+          {{ t('plotcoord.fillpoly') }}
+        </label>
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <textarea
           ref="coordFromInput"
           v-model="coordfrom"
           class="mb-2"
-          :placeholder="$t('mapmaker.phcoord')"
+          :placeholder="t('mapmaker.phcoord')"
           rows="5"
         />
         <textarea
           v-model="labels"
-          :placeholder="$t('mapmaker.phlabel')"
+          :placeholder="t('mapmaker.phlabel')"
           rows="5"
           class="mb-2"
         />
@@ -65,10 +58,15 @@
         >
           {{ errormsg }}.
         </p>          
+        <div class="button-row">
+          <button class="btn btn-primary"  @click="makeMap">
+            {{ t('buttons.show') }}
+          </button>
+        </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.map')">
+      <VCard :title="t('labels.map')">
         <v-map v-model:mylocation="coordfrom" />     
       </VCard>
     </div>

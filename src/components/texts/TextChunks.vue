@@ -1,50 +1,48 @@
 <template>
 
   <header class="page-header">
-    <h1>{{ $t('textchunks.title') }}</h1>
+    <h1>{{ t('textchunks.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.intro')">
-      <div v-html="$t('textchunks.long')" />
+    <VCard :title="t('labels.intro')">
+      <div v-html="t('textchunks.long')" />
     </VCard>
-    <VCard :title="$t('labels.settings')">
-      <div class="form-group-vertical">
-        <div class="radio-group">
-          <label>{{$t('textchunks.dir')}}</label>
-          <div class="radio-options">
-            <label class="radio-item">
-              <input type="radio" value="H" v-model="dir">
-              <span class="radio-mark"></span> {{ $t('dialogpb.d.hor')}}
-            </label>
-            <label class="radio-item">
-              <input type="radio" value="V" v-model="dir">
-              <span class="radio-mark"></span> {{ $t('dialogpb.d.ver')}}
-            </label>
-          </div>
+    <VCard :title="t('labels.settings')">
+      <div class="form-horizontal">
+        <label>{{t('textchunks.dir')}}</label>
+        <div class="radio-options">
+          <label class="radio-item">
+            <input type="radio" value="H" v-model="dir">
+            <span class="radio-mark"></span> {{ t('dialogpb.d.hor')}}
+          </label>
+          <label class="radio-item">
+            <input type="radio" value="V" v-model="dir">
+            <span class="radio-mark"></span> {{ t('dialogpb.d.ver')}}
+          </label>
         </div>
-        <div class="form-horizontal">
-          <label>{{$t('textchunks.size')}}</label>
-          <input type="number" min="0" v-model="size">
-        </div>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="ignore">
-          <span class="checkmark"></span>
-          {{ $t('textchunks.ignore') }}
-        </label>
-        <label class="checkbox-container">
-          <input type="checkbox" v-model="upper">
-          <span class="checkmark"></span>
-          {{ $t('textchunks.upper') }}
-        </label>
       </div>
+      <div class="form-horizontal">
+        <label>{{t('textchunks.size')}}</label>
+        <input type="number" min="0" v-model="size">
+      </div>
+      <label class="checkbox-container mb-2">
+        <input type="checkbox" v-model="ignore">
+        <span class="checkmark"></span>
+        {{ t('textchunks.ignore') }}
+      </label>
+      <label class="checkbox-container">
+        <input type="checkbox" v-model="upper">
+        <span class="checkmark"></span>
+        {{ t('textchunks.upper') }}
+      </label>
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="$t('labels.input')">
+    <VCard :title="t('labels.input')">
       <textarea
         ref="txtInput"
         v-model="txt"
-        :placeholder="$t('labels.message')"
+        :placeholder="t('labels.message')"
         rows="5"
         @input="wordValue"
       />
@@ -55,7 +53,7 @@
         {{ errormsg }}.
       </p>          
     </VCard>
-    <VCard :title="$t('labels.result')">
+    <VCard :title="t('labels.result')">
       <div v-if="result" style="font-family: Courier" class="card resultbox" v-html="result" />     
     </VCard>
   </div>

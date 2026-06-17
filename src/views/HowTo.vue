@@ -1,12 +1,10 @@
 <template>
 
   <div class="card-grid mb-2">
-    <VCard title="How to solve mystery caches">
-      <div class="card mb-2 pb-2">
-        {{ $t('dialoghowto.info') }}
-      </div>
-    </VCard>
-    <VCard title="Getting Started">
+    <VCard title="How to solve mystery caches" :initialOpen="open">
+      <p>
+        {{ t('dialoghowto.info') }}
+      </p>
       <p>
         Solving mystery caches can be very simple and almost impossible. It's best to get started with the simple ones. They would have a low D-rating.
         Most of the mysteries out there tend to be in this category. No matter how easy or difficult the puzzle your always have to find the coordinates
@@ -29,7 +27,7 @@
       You might want to read the Essential Skills before you start: Word Values, Binary Numbers, Codebooks. It is also useful to know
       a little bit about coordinates. With these skills you can probably solve 80% of all the mystery caches.
     </VCard>
-    <VCard title="Find the puzzle &amp; find hints">
+    <VCard title="Find the puzzle &amp; find hints"  :initialOpen="open">
       <p>Geocaching HQ rules are clear. A mystery cache must contain all the info you need to solve it. But where to look?</p>
       <ul>
         <li>
@@ -68,7 +66,7 @@
         </li>
       </ul>
     </VCard>
-    <VCard title="Checkers">
+    <VCard title="Checkers" :initialOpen="open">
       <p>There are a couple of different checkers, each with its own behaviour.</p>
       <ul>
         <li>
@@ -96,7 +94,7 @@
       Brute force use of the checker is limited to 10 attempts per 10 minutes, which means that if you miss parts of the
       checker you can try a few options. It's not cheating everybody does it!
     </VCard>
-    <VCard title="Essential skill: Word value and square root">
+    <VCard title="Essential skill: Word value and square root" :initialOpen="closed">
       <p>
         You have a geocache where you have to answer some questions. The questions give you the values for A, B, C and so on. And with these
         letters you can calculate the coordinate, e.g. N52 23.ABC E004 38.DEF. But how do you get from an answer to a number. Using word value
@@ -114,7 +112,7 @@
         Word value &amp; square root
       </router-link>. Saving you all the hard work.
     </VCard>
-    <VCard title="Essential skill: Binary numbers">
+    <VCard title="Essential skill: Binary numbers" :initialOpen="closed">
       <p>
         You don't need to know the math of binary numbers (although it can help). Basically binary numbers are a combination of 0's and 1's. To
         use them in geocaches you have to convert them to normal (decimal) numbers. For example:
@@ -158,7 +156,7 @@
         telegraph (Baudot) code (see Text &amp; codes) or it could be a Gray Code (see Ciphers).
       </p>
     </VCard>
-    <VCard title="Essential skill: Codebooks">
+    <VCard title="Essential skill: Codebooks" :initialOpen="closed">
       <p>
         Geocachers seem to have a weak spot for obscure codes. Codes used in video games, TV series, movies, books, ancient manuscripts
         or weird fonts all have found there way into geoaches. The cache listing would show a couple of weird looking symbols. There
@@ -185,7 +183,7 @@
         </li>
       </ul>
     </VCard>
-    <VCard title="Coordinates">
+    <VCard title="Coordinates" :initialOpen="closed">
         <p>
           You are always looking for coordinates. The only exception is the Certitude checker in which case you might look for strings or numbers.
           But coordinates come in many different versions and formats. So it might not be so straightforward.
@@ -237,7 +235,7 @@
           </router-link>.
         </p>
     </VCard>
-    <VCard title="I got a bunch of random numbers...">
+    <VCard title="I got a bunch of random numbers..." :initialOpen="closed">
       <p>There are quite a few possibilities to make sense out of a bunch of random numbers. Here are a few options</p>
       <ul>
         <li>
@@ -253,16 +251,16 @@
           <b>Decimal</b>. If you see the numbers 0 to 9 it's decimal. Try to convert to ASCII using <router-link to="/charcodes">
             Character codes
           </router-link>. Or try <router-link to="/bintotext">
-            {{ $t('comptools.compbintotext.title') }}
+            {{ t('comptools.compbintotext.title') }}
           </router-link> with the input set to decimal.
         </li>
         <li>
           <b>Hexadecimal</b>. If you see 0 to 9 and A to Z it's hexadecimal. Try to convert to ASCII using <router-link to="/charcodes">
             Character codes
           </router-link>. Or try <router-link to="/bintotext">
-            {{ $t('comptools.compbintotext.title') }}
+            {{ t('comptools.compbintotext.title') }}
           </router-link> with the input set to hexadecimal. Or it might be a hash. Try <router-link to="/hashes">
-            {{ $t('comptools.hashes.title') }}
+            {{ t('comptools.hashes.title') }}
           </router-link>
         </li>
         <li>
@@ -314,7 +312,7 @@
         <p>If none of this works please let me know!</p>
       </ul>
     </VCard>
-    <VCard title="I got a bunch of random letters...">
+    <VCard title="I got a bunch of random letters..." :initialOpen="closed">
       <p>This can get quite complicated but there are a few easy ones you should try first</p>
       <ul>
         <li>
@@ -373,7 +371,7 @@
         to try all possible options
       </p>
     </VCard>
-    <VCard title="I got a bunch of symbols...">
+    <VCard title="I got a bunch of symbols..." :initialOpen="closed">
       Again there are many possibilities. Try these ones:
       <ul>
         <li>
@@ -388,7 +386,7 @@
         </li>
         <li>
           <b>Encoded text</b> - the text is binary encoded using <router-link to="/bintotext">
-            {{ $t('bintotext.title') }}
+            {{ t('bintotext.title') }}
           </router-link>
           In these cases the text is likely a combination of symbols, letters and digits.
         </li>
@@ -408,12 +406,12 @@
         </li>
         <li>
           <b>Brainfuck</b> - the text has a lot of + and some -&gt;&lt;[],. Use <router-link to="/brainfuck">
-            {{ $t('brainfuck.title') }}
+            {{ t('brainfuck.title') }}
           </router-link> to solve the code.
         </li>
         <li>
           <b>Decabit</b> - if you see a lot of + and - you might be looking at <router-link to="/decabit">
-            {{ $t('decabit.title') }}
+            {{ t('decabit.title') }}
           </router-link>
         </li>
         <li>
@@ -434,14 +432,14 @@
           <b>Hashed text</b> - hashes are used for example to encrypt passwords. They are normally hexadecimal and would use the numbers 0 to 9 and A to F.
           The coded hash can not be converted back to the original text. The only way to solve it is trying all options and find the one that matches. 
           You can try your luck with <router-link to="/hashes">
-            {{ $t('hashes.title') }}
+            {{ t('hashes.title') }}
           </router-link>
         </li>
         <li><b>Geohash</b> - read the topic on coordinates to recognize geohashes.</li>
       </ul>
       <p>If none of this works, please let me know!</p>
     </VCard>
-    <VCard title="I got a bunch of colors...">
+    <VCard title="I got a bunch of colors..." :initialOpen="closed">
       Some options to try:
       <ul>
         <li>
@@ -469,7 +467,7 @@
         </li>
       </ul>
     </VCard>
-    <VCard title="I only got an image...">
+    <VCard title="I only got an image..." :initialOpen="closed">
       The art of hiding information in an image can become really complex. The easy ones to try first are:
       <ul>
         <li>
@@ -522,7 +520,7 @@
         All of these tools can also hide secrets for you if you want to create your own steganography mystery cache.
       </p>
     </VCard>
-    <VCard title="Incomplete coordinates">
+    <VCard title="Incomplete coordinates" :initialOpen="closed">
         <p>
           After all the hard work you still might not have been able to get the entire coordinate. There might be one or two or more
           digits missing. You can quickly plot the options using <router-link to="/incomplete">
@@ -532,7 +530,7 @@
           the cache must be within 1600m of the posted coordinates.
         </p>
     </VCard>
-    <VCard title="I still have no clue">
+    <VCard title="I still have no clue" :initialOpen="closed">
       <p>
         If nothing helps there is always the art of elimination. First keep in mind that the cache must be within 3200m (2mi) of the posted
         coordinates (but mostly they are closer to the posted coordinates). And geocaches need to be 160m (or 0.1mi) away from each other.
@@ -549,7 +547,7 @@
         give it a try.
       </p>
     </VCard>
-    <VCard title="Ciphers">
+    <VCard title="Ciphers" :initialOpen="closed">
       All ciphers use a couple of basic techniques:
       <ul>
         <li>
@@ -607,6 +605,15 @@
 <script setup>
 
 import VCard from '@/components/generic/VCard.vue'
+import { useI18n } from 'vue-i18n'
+import { ref } from 'vue'
+
+const { t } = useI18n({
+  useScope: 'local'
+});
+
+const closed=ref(false)
+const open=ref(true)
 
 </script>
 

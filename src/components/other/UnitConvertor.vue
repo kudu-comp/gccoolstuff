@@ -1,53 +1,51 @@
 <template>
   <header class="page-header">
-    <h1>{{ $t('unitconvertor.title') }}</h1>
+    <h1>{{ t('unitconvertor.title') }}</h1>
   </header>
 
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('unitconvertor.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('unitconvertor.long')" />
       </VCard>
 
-      <VCard :title="$t('labels.settings')">
-        <div class="form-group-vertical">
-          <div class="form-horizontal">
-            <CustomDropdown
-              v-model="cat"
-              :options="categoryOptions"
-              :title="$t('unitconvertor.selcat')"
-            />
-          </div>
-          <div class="desc" v-if="definedUnits[cat]">
-            {{ $t('unitconvertor.cat.' + definedUnits[cat].category + '.desc') }}
-          </div>
-          <div class="form-horizontal">
-            <CustomDropdown
-              v-model="idfrom"
-              :options="unitOptions[cat]"
-              :title="$t('unitconvertor.unitfrom')"
-            />
-          </div>
-          <div class="form-horizontal">
+      <VCard :title="t('labels.settings')">
+        <div class="form-horizontal">
           <CustomDropdown
-            v-model="idto"
-            :options="unitOptions[cat]"
-            :title="$t('unitconvertor.unitto')"
+            v-model="cat"
+            :options="categoryOptions"
+            :title="t('unitconvertor.selcat')"
           />
-          </div>
+        </div>
+        <div class="desc mb-2" v-if="definedUnits[cat]">
+          {{ t('unitconvertor.cat.' + definedUnits[cat].category + '.desc') }}
+        </div>
+        <div class="form-horizontal">
+          <CustomDropdown
+            v-model="idfrom"
+            :options="unitOptions[cat]"
+            :title="t('unitconvertor.unitfrom')"
+          />
+        </div>
+        <div class="form-horizontal">
+        <CustomDropdown
+          v-model="idto"
+          :options="unitOptions[cat]"
+          :title="t('unitconvertor.unitto')"
+        />
         </div>
       </VCard>
 
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('unitconvertor.value') }}</label>
+          <label>{{ t('unitconvertor.value') }}</label>
           <input type="number" v-model.number="valfrom" class="form-control">
         </div>
       </VCard>
     </div>
 
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
+      <VCard :title="t('labels.result')">
         <div v-if="valfrom !== null" class="result-content">
           <!-- Simple string result -->
           <h4>{{ valfrom }} {{ sourceUnit.name }} = {{ targetValue.toFixed(5) }} {{ targetUnit.name }}</h4>
@@ -56,9 +54,9 @@
           <table class="p-table-small">
             <thead>
               <tr>
-                <th class="text-end">{{ $t('unitconvertor.amount') }}</th>
-                <th>{{ $t('unitconvertor.symbol') }}</th>
-                <th>{{ $t('unitconvertor.unit') }}</th>
+                <th class="text-end">{{ t('unitconvertor.amount') }}</th>
+                <th>{{ t('unitconvertor.symbol') }}</th>
+                <th>{{ t('unitconvertor.unit') }}</th>
               </tr>
             </thead>
             <tbody>
@@ -67,7 +65,7 @@
                 :key="index"
                 :class="{ 'table-primary fw-bold': index === idto }"
               >
-                <td class="text-end font-monospace">{{ item.value.toFixed(5) }}</td>
+                <td class="text-end">{{ item.value.toFixed(5) }}</td>
                 <td>{{ item.symbol }}</td>
                 <td>{{ item.name }}</td>
               </tr>
@@ -75,7 +73,7 @@
           </table>
         </div>
         <div v-else class="text-center p-4 text-muted">
-          {{ $t('labels.no_result') }}
+          {{ t('labels.no_result') }}
         </div>
       </VCard>
     </div>

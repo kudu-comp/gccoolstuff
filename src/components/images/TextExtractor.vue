@@ -2,16 +2,16 @@
 
 
   <header class="page-header">
-    <h1>{{ $t('textextractor.title') }}</h1>
+    <h1>{{ t('textextractor.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="$t('labels.intro')">
-        <div v-html="$t('textextractor.long')" />
+      <VCard :title="t('labels.intro')">
+        <div v-html="t('textextractor.long')" />
       </VCard>
-      <VCard :title="$t('labels.input')">
+      <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <label>{{ $t('labels.selectfile') }}</label>
+          <label>{{ t('labels.selectfile') }}</label>
           <input
             type="file"
             ref="fileInputRef"
@@ -26,10 +26,10 @@
           {{ errormsg }}
         </p>
       </VCard>
-      <VCard :title="$t('labels.settings')">
+      <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
-          >{{ $t('textextractor.length') }}</label>
+          >{{ t('textextractor.length') }}</label>
           <input
             v-model="length"
             type="number"
@@ -37,7 +37,7 @@
         </div>
         <div class="form-horizontal">
           <label
-          >{{ $t('textextractor.max') }}</label>
+          >{{ t('textextractor.max') }}</label>
           <input
             v-model="max"
             type="number"
@@ -45,7 +45,7 @@
         </div>
         <div class="form-horizontal">
           <label
-          >{{ $t('textextractor.start') }}</label>
+          >{{ t('textextractor.start') }}</label>
           <input
             v-model="start"
             type="number"
@@ -53,27 +53,29 @@
         </div>
         <div class="button-row">
           <button :disabled="!loaded" class="btn btn-primary" @click="scanFile()">
-            {{ $t('buttons.search') }}        
+            {{ t('buttons.search') }}        
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
-      <VCard :title="$t('labels.result')">
-        <table class="p-table">
-          <thead>
-            <tr>
-              <th>Match</th>
-              <th>Position</th>
-              <th>Text</th>
+      <VCard :title="t('labels.result')">
+        <div class="resultbox table-responsive">
+          <table class="p-table">
+            <thead>
+              <tr>
+                <th>Match</th>
+                <th>Position</th>
+                <th>Text</th>
+              </tr>
+            </thead>
+            <tr class="flex-row d-flex" v-for="r in results" :key="r.id">
+              <td>{{ r.id }}</td>
+              <td>{{ r.at }}</td>
+              <td>{{ r.text }}</td>
             </tr>
-          </thead>
-          <tr class="flex-row d-flex" v-for="r in results" :key="r.id">
-            <td>{{ r.id }}</td>
-            <td>{{ r.at }}</td>
-            <td>{{ r.text }}</td>
-          </tr>
-        </table>      
+          </table>      
+        </div>
       </VCard>
     </div>
   </div>
@@ -198,5 +200,5 @@ const selectFile = (event) => {
 </script>
 <style scoped>
 td {
-  word-wrap: break-word; 
+  overflow-wrap: break-word;
 }</style>

@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 // 1. Assign props to a variable to access them in script
 const props = defineProps({
