@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <!-- Input Column -->
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('htmlparser.long')" />
       </VCard>
 
@@ -79,6 +79,7 @@ const gchtml = ref("")
 const scanresult = ref("")
 const errormsg = ref("")
 const cacheNode = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // Data Containers
 const links = ref([])
@@ -244,3 +245,53 @@ h6 {
   margin-left: 4px;
 }
 </style>
+
+<i18n locale="en">
+{
+  "htmlparser": {
+    "ph": "Paste the page source here",
+    "btnscan": "Scan",
+    "links": "Links found - select to open the link",
+    "images": "Images found - select to view the image",
+    "bgimages": "Background images found - select to view the image",
+    "comms": "(Hidden) comments found",
+    "white": "White text found",
+    "strong": "Strong text",
+    "bold": "Bold text",
+    "ital": "Italic text",
+    "sup": "Superscript text",
+    "sub": "Subscript text",
+    "size": "Font sized",
+    "del": "Deleted text",
+    "em": "Emphasized text",
+    "nocache": "No cache details found, please load correct page source",
+    "complete": "Scan completed, details below (could be none)",
+    "error": "Error loading or scanning the page source"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "htmlparser": {
+    "ph": "Plak de paginabron hier",
+    "btnscan": "Scan",
+    "links": "Links - selecteer om de link te openen",
+    "images": "Afbeeldingen - selecteer om de afbeelding te bekijken",
+    "bgimages": "Achtergronden - selecteer om de afbeelding te bekijken",
+    "comms": "(Verborgen) commentaren gevonden",
+    "white": "Witte tekst gevonden",
+    "strong": "Belangrijke tekst",
+    "bold": "Vette tekst",
+    "ital": "Cursieve tekst",
+    "sup": "Superscript tekst",
+    "sub": "Subscript tekst",
+    "size": "Afwijkende lettergrootte",
+    "del": "Verwijderde tekst",
+    "em": "Benadrukte tekst",
+    "nocache": "Geen cache details gevonden. Laad een correcte paginabron.",
+    "complete": "Scan compleet, details hieronder (kan eventueel leeg zijn).",
+    "error": "Fout bij het laden of scannen van de paginabron."
+  }
+}
+</i18n>

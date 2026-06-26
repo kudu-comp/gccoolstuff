@@ -28,9 +28,7 @@
 import VCard from '@/components/generic/VCard.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 const games = [
   'sudokusolv',

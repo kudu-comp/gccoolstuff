@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('triangles.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -39,20 +39,17 @@
             </template>
           </v-coord>
         </div>
-        <div class="button-row">
-          <v-show-on-map id="go" class="btn bn-primary" @Show="getPoints()" />
-        </div>  
-        <div
-          v-show="errormsg"
-          class="errormsg"
-        >
+        <div v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}
         </div>
+        <div class="button-row">
+          <ButtonShowOnMap @Show="getPoints()" />
+        </div>  
       </VCard>
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
           v-html="result"
         />
       </VCard>
@@ -79,7 +76,7 @@ import { calculateTriangleProperties } from '@/scripts/triangle.js'
 import VCoord from '@/components/generic/VCoord.vue'
 import VCard from '@/components/generic/VCard.vue'
 import VMap from '@/components/generic/VMap.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
   name: 'Triangles'
@@ -97,6 +94,7 @@ const selecteddatum2 = ref("WGS84")
 const selecteddatum3 = ref("WGS84")
 const result = ref("")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -176,3 +174,29 @@ const getPoints = async () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "triangles": {
+    "centroid": "Centroid",
+    "orthocenter": "Orthocenter",
+    "incenter": "Incenter",
+    "circumcenter": "Circumcenter",
+    "ninepoint": "Ninepointcenter",
+    "or": " or in WGS84 notation "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "triangles": {
+    "centroid": "Zwaartepunt",
+    "orthocenter": "Hoogtepunt",
+    "incenter": "Middelpunt ingeschreven cirkel",
+    "circumcenter": "Middelpunt omgeschreven cirkel",
+    "ninepoint": "Negenpuntspunt",
+    "or": " of in WGS84 notatie "
+  }
+}
+</i18n>

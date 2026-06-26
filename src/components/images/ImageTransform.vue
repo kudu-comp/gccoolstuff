@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('imagetransform.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -106,13 +106,11 @@
           <button class="btn btn-primary" @click="restore"> 
             {{  t('buttons.original') }} 
           </button>
-          <v-download 
+          <DownloadButton 
             v-model:canvas ="canvasRef"
           />
         </div>
-        <canvas
-          ref="canvasRef"
-        />
+        <canvas ref="canvasRef" />
       </VCard>
     </div>
   </div>
@@ -121,7 +119,7 @@
 <script setup>
 import { ref, shallowRef, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VDownload from '@/components/generic/VDownload.vue'
+import DownloadButton from '@/components/generic/DownloadButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 import '@/components/css/slidertheme.css'
 
@@ -142,6 +140,7 @@ const shiftc = ref(0)
 const flipr = ref(1)
 const flipc = ref(1)
 const undo = ref([])
+const startOpen = window.innerWidth > 768;
 
 // Image placement/dimensions
 const dx = ref(0)
@@ -432,3 +431,39 @@ h4 {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "imagetransform": {
+    "shift": "Shift",
+    "shiftinfo": "Select the number of pixels to shift each row/column.",
+    "shiftr": "Shift row #pixels",
+    "shiftc": "Shift column #pixels",
+    "fliphalf": "Flip half",
+    "flipinfo": "Select the width in pixels of row/column.",
+    "flipr": "Flip rows of #pixels",
+    "flipc": "Flip columns of #pixels",
+    "transform": "Mirror image",
+    "fliph": "Flip horizontal",
+    "flipv": "Flip vertical"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "imagetransform": {
+    "shift": "Verschuif",
+    "shiftinfo": "Selecteer het aantal pixels om rijen/kolommen te verschuifen",
+    "shiftr": "Verschuif rij #pixels",
+    "shiftc": "Verschuif kolom #pixels",
+    "fliphalf": "Spiegel de halve afbeelding",
+    "flipinfo": "Selecteer de breedte van een rij of kolom.",
+    "flipr": "Rijen van #pixels",
+    "flipc": "Kolommen van #pixels",
+    "transform": "Spiegelen",
+    "fliph": "Spiegel horizontaal",
+    "flipv": "Spiegel verticaal"
+  }
+}
+</i18n>

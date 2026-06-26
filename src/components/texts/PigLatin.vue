@@ -4,7 +4,7 @@
     <h1>{{ t('piglatin.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('piglatin.long')" />
       <h4>{{argots[sel].name}}</h4>
       <p style="margin-top: 0px; opacity:0.65;">{{ argots[sel].descr }}</p>
@@ -43,7 +43,7 @@
       </div>
     </VCard>
     <VCard :title="t('labels.result')">
-      <div v-if="result" class="card resultbox" >
+      <div v-if="result" class="resultbox" >
         {{ result }} 
       </div>
     </VCard>
@@ -58,9 +58,7 @@ import VCard from "@/components/generic/VCard.vue"
 import { piglatin } from "@/scripts/piglatin.js"
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: "PigLatin"
@@ -81,6 +79,7 @@ const argots = piglatin
 
 // --- Template Ref ---
 const msgInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   // Focus the input
@@ -140,3 +139,19 @@ const encode = () => {
   result.value = builder
 }
 </script>
+
+<i18n locale="en">
+{
+  "piglatin": {
+    "sel" : "What kind of pig latin do you want to speak?"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "piglatin": {
+    "sel" : "Wat voor soort varkenslatijn wil je spreken?"
+  }
+}
+</i18n>

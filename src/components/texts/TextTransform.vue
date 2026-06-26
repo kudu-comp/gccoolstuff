@@ -71,9 +71,7 @@
       
       <VCard :title="t('labels.result')">
         <div class="button-row mb-2">
-          <button @click="copyToClipboard" class="btn btn-primary" :class="{ copied: copiedStatus }">
-            {{ copiedStatus ? '✓' : t('buttons.copy') }}
-          </button>
+          <CopyButton :content="transformedText" />
         </div>
 
         <textarea 
@@ -91,17 +89,15 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 const startOpen = window.innerWidth > 768;
 
 const inputText = ref('');
 const selectedOptions = ref([]);
 const gridType = ref('none');
 const gridSize = ref(5);
-const copiedStatus = ref(false);
 
 const resetOptions = () => {
   selectedOptions.value = [];
@@ -144,16 +140,6 @@ const groups = [
 const getGraphemes = (str) => {
   const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
   return Array.from(segmenter.segment(str), (s) => s.segment);
-};
-
-const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(transformedText.value);
-    copiedStatus.value = true;
-    setTimeout(() => copiedStatus.value = false, 2000);
-  } catch (err) {
-    console.error('Failed to copy!', err);
-  }
 };
 
 const transformedText = computed(() => {

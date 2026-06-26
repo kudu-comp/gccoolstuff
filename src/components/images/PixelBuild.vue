@@ -5,21 +5,21 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('pixelbuild.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
         <textarea
             v-model="message"
             ref="messageInput"
-            :placeholder="t('labels.message')"
+            :placeholder="t('pixelbuild.input')"
             rows="5"
           />
         <div class="button-row mt-2">
           <button id="draw" class="btn btn-primary" @click="drawPixels">
             {{ t('buttons.show') }}
           </button>
-          <v-download 
+          <DownloadButton
             v-model:canvas = "canvasRef"
           />
         </div>
@@ -32,7 +32,7 @@
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label>{{ t('exifscanner.height') }}</label>
+          <label>{{ t('pixelbuild.height') }}</label>
           <input
             id="imgheight"
             v-model="imgHeight"
@@ -40,7 +40,7 @@
           >
         </div>
         <div class="form-horizontal">
-          <label>{{ t('exifscanner.width') }}</label>
+          <label>{{ t('pixelbuild.width') }}</label>
           <input
             id="imgwidth"
             v-model="imgWidth"
@@ -69,13 +69,11 @@
 
 <script setup>
 import { ref, shallowRef, onMounted } from 'vue'
-import VDownload from '@/components/generic/VDownload.vue'
+import DownloadButton from '@/components/generic/DownloadButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: 'PixelBuild'
@@ -84,6 +82,7 @@ defineOptions({
 // --- Template Refs ---
 const canvasRef = ref(null)
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // --- State ---
 const errormsg = ref("")
@@ -187,3 +186,23 @@ canvas {
   flex: 0 0 100px;
 }
 </style>
+
+<i18n locale="en">
+{
+  "pixelbuild": {
+    "width": "Width",
+    "height": "Height",
+    "input": "Use variables to draw the picture..."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "pixelbuild": {
+    "size": "Grootte",
+    "width": "Breedte",
+    "input": "Gebruik de variabelen om een afbeelding te tekenen..."
+  }
+}
+</i18n>

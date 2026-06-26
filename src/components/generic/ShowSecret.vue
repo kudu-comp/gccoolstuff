@@ -1,26 +1,26 @@
 <template>
   <div class="mb-2" style="display: flex; justify-content: space-between; align-items: center;">
-    <div class="h4">Detected filetype: {{ detected.ext.toUpperCase()  }}</div>
+    <div class="h4">{{ t('show_secret.detected_type', { type: detected.ext.toUpperCase() }) }}</div>
     <div class="badge" :class="detected.ext">{{ detected.ext.toUpperCase() }}</div>
   </div>
 
-  <div class="card-title mb-2">Choose how to view and save your secret:</div>
+  <div class="card-title mb-2">{{ t('show_secret.view_instructions') }}</div>
   <div class="radio-group">
     <div class="radio-options">
-      <label class="radio-item"><input type="radio" v-model="previewMode" value="auto" /><span class="radio-mark"></span> Detected</label>
-      <label class="radio-item"><input type="radio" v-model="previewMode" value="binary" /><span class="radio-mark"></span> Binary</label>
-      <label class="radio-item"><input type="radio" v-model="previewMode" value="hex" /><span class="radio-mark"></span> Hex</label>
-      <label class="radio-item"><input type="radio" v-model="previewMode" value="txt" /><span class="radio-mark"></span> TXT</label>
-      <label class="radio-item"><input type="radio" v-model="previewMode" value="bin" /><span class="radio-mark"></span> BIN</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="auto" /><span class="radio-mark"></span> {{ t('show_secret.modes.auto') }}</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="binary" /><span class="radio-mark"></span> {{ t('show_secret.modes.binary') }}</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="hex" /><span class="radio-mark"></span> {{ t('show_secret.modes.hex') }}</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="txt" /><span class="radio-mark"></span> {{ t('show_secret.modes.txt') }}</label>
+      <label class="radio-item"><input type="radio" v-model="previewMode" value="bin" /><span class="radio-mark"></span> {{ t('show_secret.modes.bin') }}</label>
     </div>
   </div>
   <div class="preview-display">
     <!-- Image Preview -->
     <div v-if="previewMode === 'auto' && isImage" class="image-preview">
-      <img :src="imageUrl" alt="Secret preview" />
+      <img :src="imageUrl" :alt="t('show_secret.alt_image')" />
     </div>
     
-    <!-- NEW: Audio Preview -->
+    <!-- Audio Preview -->
     <div v-else-if="previewMode === 'auto' && isAudio" class="audio-preview">
       <audio controls :src="audioUrl"></audio>
     </div>
@@ -31,15 +31,18 @@
 
   <div class="button-row">
     <button @click="save" class="btn btn-primary mt-2">
-      Save Secret as .{{ saveExt }}
-      </button>
+      {{ t('show_secret.save_button', { ext: saveExt }) }}
+    </button>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, watch, onUnmounted } from 'vue';
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const props = defineProps({
   data: { type: Uint8Array, required: true }
@@ -76,7 +79,6 @@ const isImage = computed(() => detected.value.mime?.startsWith('image/'));
 const isAudio = computed(() => detected.value.mime?.startsWith('audio/'));
 
 watch(() => props.data, (newData) => {
-  // Cleanup
   if (imageUrl.value) URL.revokeObjectURL(imageUrl.value);
   if (audioUrl.value) URL.revokeObjectURL(audioUrl.value);
   imageUrl.value = null;
@@ -116,8 +118,46 @@ const save = () => {
   URL.revokeObjectURL(a.href);
 };
 
-onUnmounted(() => imageUrl.value && URL.revokeObjectURL(imageUrl.value));
+onUnmounted(() => {
+  if (imageUrl.value) URL.revokeObjectURL(imageUrl.value);
+  if (audioUrl.value) URL.revokeObjectURL(audioUrl.value);
+});
 </script>
+
+<i18n lang="json">
+{
+  "en": {
+    "show_secret": {
+      "detected_type": "Detected filetype: {type}",
+      "view_instructions": "Choose how to view and save your secret:",
+      "alt_image": "Secret preview",
+      "save_button": "Save Secret as .{ext}",
+      "modes": {
+        "auto": "Detected",
+        "binary": "Binary",
+        "hex": "Hex",
+        "txt": "TXT",
+        "bin": "BIN"
+      }
+    }
+  },
+  "nl": {
+    "show_secret": {
+      "detected_type": "Gevonden bestandstype: {type}",
+      "view_instructions": "Kies hoe je het geheim wilt bekijken en opslaan:",
+      "alt_image": "Geheim voorbeeld",
+      "save_button": "Geheim opslaan als .{ext}",
+      "modes": {
+        "auto": "Gedetecteerd",
+        "binary": "Binair",
+        "hex": "Hex",
+        "txt": "TXT",
+        "bin": "BIN"
+      }
+    }
+  }
+}
+</i18n>
 
 <style scoped>
 .preview-display { background: #2d3436; border-radius: 8px; max-height: 350px; overflow-y: auto; margin-top: 10px; }

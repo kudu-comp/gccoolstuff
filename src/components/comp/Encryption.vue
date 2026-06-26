@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- 1. Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('encryption.long')" />
       </VCard>
 
@@ -96,6 +96,9 @@
 
       <!-- 4. Result Card -->
       <VCard :title="t('labels.result')">
+        <div class="button-row mb-2">
+          <CopyButton :content="result" />
+        </div>
         <div v-if="result" class="resultbox font-monospace">
           {{ result }}
         </div>
@@ -111,6 +114,7 @@ import { useI18n } from 'vue-i18n'
 import CryptoJS from 'crypto-js'
 import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import CopyButton from '@/components/generic/CopyButton.vue'
 
 defineOptions({ name: 'Encryption' })
 
@@ -130,6 +134,7 @@ const selpad = ref(0)
 const action = ref("encode") // 'encode' or 'decode'
 const errormsg = ref("")
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   messageInput.value?.focus()
@@ -244,3 +249,31 @@ const result = computed(() => {
   color: var(--primary-color);
 }
 </style>
+
+<i18n locale="en">
+{
+  "encryption": {
+    "codes": "Select encryption",
+    "key": "Key",
+    "coded": "Coded message",
+    "advanced": "Advanced options",
+    "modes": "Mode",
+    "padding": "Padding",
+    "keytooshort": "Key for Okto3 needs to be at least 10 characters"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "encryption": {
+    "codes": "Kies een encryptie",
+    "key": "Sleutel",
+    "coded": "Gecodeerd bericht",
+    "advanced": "Geavanceerde opties",
+    "modes": "Mode",
+    "padding": "Padding",
+    "keytooshort": "Sleutel voor Okto3 moet tenminste 10 karakters zijn"
+  }
+}
+</i18n>

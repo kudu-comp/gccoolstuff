@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('rotciphers.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -73,9 +73,7 @@ import { ref, computed, onMounted } from 'vue';
 import VCard from '@/components/generic/VCard.vue';
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: 'RotCiphers'
@@ -87,6 +85,7 @@ const selalph = ref("0");
 const other = ref("");
 const errormsg = ref("");
 const txtInput = ref(null);
+const startOpen = window.innerWidth > 768;
 
 const ALF_PRESETS = [
   "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -167,3 +166,35 @@ const resultHtml = computed(() => {
   return html;
 });
 </script>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "rotciphers": {
+    "selmethod": "Select rotation",
+    "rot5" : "Numbers (ROT5)",
+    "rot13": "Latin (ROT13)",
+    "rot47": "Printable ASCII (ROT47)",
+    "hexa": "Hexadecimal (ROT8)",
+    "custom": "Specify your own rotation",
+    "other": "Specify the alphabet to use (use CAPS)"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "rotciphers": {
+    "selmethod": "Selecteer rotatie",
+    "rot5" : "Getallen (ROT5)",
+    "rot13": "Standaard (ROT13)",
+    "rot47": "Printbare ASCII (ROT47)",
+    "hexa": "Hexadecimaal (ROT8)",
+    "custom": "Aangepaste verschuiving",
+    "other": "Te gebruiken aangepaste alfabet (gebruik hoofdletters)"
+  }
+}
+</i18n>

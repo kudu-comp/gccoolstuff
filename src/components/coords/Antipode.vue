@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('antipode.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -15,22 +15,19 @@
             v-model:datum="selecteddatum"
           />
         </div>
-        <div class="button-row">
-          <v-show-on-map id="go" class="btn btn-primary" @Show="doCalc()" />
-        </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
-        </p>          
+        </p>
+        <div class="button-row">
+          <ButtonShowOnMap @Show="doCalc()" />
+        </div>
       </VCard>
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
-          {{ t('antipode.result') }}{{ result }}
+          {{ result }}
         </div>
       </VCard>
     </div>
@@ -52,7 +49,7 @@ import * as coords from '@/scripts/coords.js'
 import VCoord from '@/components/generic/VCoord.vue'
 import VCard from '@/components/generic/VCard.vue'
 import VMap from '@/components/generic/VMap.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
   name: 'Antipode'
@@ -66,6 +63,7 @@ const coordinate = ref("")
 const selecteddatum = ref("WGS84")
 const result = ref("")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 const doCalc = () => {
@@ -77,14 +75,14 @@ const doCalc = () => {
     // 1. Translate input coordinate to WGS84 for math and map display
     coords.convertCoordFromText(coordinate.value, selecteddatum.value, "WGS84")
       .then(startcoord => {
-        
+
         // 2. Antipode math
         // Flip latitude and shift longitude by 180 degrees
-        let anticoord = { 
-          lon: startcoord.lon - 180, 
-          lat: -1 * startcoord.lat 
+        let anticoord = {
+          lon: startcoord.lon - 180,
+          lat: -1 * startcoord.lat
         }
-        
+
         // Normalize longitude
         if (anticoord.lon < -180) {
           anticoord.lon += 360
@@ -99,21 +97,36 @@ const doCalc = () => {
           .then(convcoord => ({ convcoord, anticoord }))
       })
       .then(({ convcoord, anticoord }) => {
-        
+
         // 5. Format and display the results
-        let output = coords.getTextFromCoord(convcoord, selecteddatum.value, 7, coordinate.value)
-        output += t('antipode.or') + coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456")
-        
-        result.value = output
+        let c1 = coords.getTextFromCoord(convcoord, selecteddatum.value, 7, coordinate.value)
+        let c2 = coords.printCoordinateFromDMS(anticoord, "N12 34.567 E1 23.456")
+        result.value = t('antipode.result', {c1 : c1, c2: c2})
       })
       .catch((e) => {
         errormsg.value = t('errors.incorrectcoords')
         console.error(e.message)
       })
-      
+
   } catch (e) {
     console.error(e)
     errormsg.value = t('errors.incorrectcoords')
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "antipode": {
+    "result": "The antipode coordinate is {c1} or in WGS84 it is {c2}."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "antipode": {
+    "result": "Het antipode coördinaat is {c1} of in WGS84 is het {c2},"
+  }
+}
+</i18n>

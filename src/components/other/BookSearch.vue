@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('booksearch.long')" />
       </VCard>
 
@@ -69,6 +69,7 @@ const sel = ref("1"); // "1" for short, "2" for extra
 const result = ref("");
 const errormsg = ref("");
 const loading = ref(false);
+const startOpen = window.innerWidth > 768;
 
 const API_URL = "https://openlibrary.org/search.json?q=";
 
@@ -157,3 +158,38 @@ const goSearch = async () => {
   }
 };
 </script>
+
+<i18n locale="en">
+{
+  "booksearch": {
+    "sel" : "Show results",
+    "short": "Author(s), title, one ISBN",
+    "extra": "Author(s), title, all ISBN, year published, languages, publishers",
+    "bkfnd": "Books found: ",
+    "isbn": "ISBN(s): ",
+    "author": "Author(s): ",
+    "titles": "Title: ",
+    "firstpub": "First published: ",
+    "lang": "Language(s): ",
+    "pub": "Publisher(s): ",
+    "edcnt": "Edition count: "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "booksearch": {
+    "sel" : "Resultaten",
+    "short": "Auteur, titel, één ISBN",
+    "extra": "Auteur(s), title, alle ISBN, jaar van publicatie, talen, uitgevers",
+    "bkfnd": "Aantal boeken gevonden: ",
+    "author": "Auteurs(s): ",
+    "titles": "Titel: ",
+    "firstpub": "Jaar van eerste uitgifte: ",
+    "lang": "Taal: ",
+    "pub": "Uitgever(s): ",
+    "edcnt": "Aantal edities: "
+  }
+}
+</i18n>

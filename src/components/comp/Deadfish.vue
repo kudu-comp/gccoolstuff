@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('deadfish.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -32,11 +32,11 @@
             rows="5"
           />
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-if="errormsg" class="errormsg">
           {{ errormsg }}
+        </p>
+        <p v-else-if="infomsg" class="infomsg">
+          {{ infomsg }}
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="runCode">
@@ -50,9 +50,14 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
+        <div v-if="result" class="button-row mb-2">
+          <CopyButton 
+            :content="result"
+          />
+        </div>
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -65,6 +70,7 @@
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 // Component name is optional in script setup, 
 // but can be defined via defineOptions for devtools
@@ -78,9 +84,11 @@ const { t } = useI18n();
 const message = ref("");
 const result = ref("");
 const errormsg = ref("");
+const infomsg = ref("")
 const debug = ref(false);
 const tilde = ref(false);
 const ascii = ref(false);
+const startOpen = window.innerWidth > 768;
 
 // --- Template Ref ---
 // Must match the 'ref' attribute in your template (ref="codeRef")
@@ -208,6 +216,8 @@ const runCode = () => {
   try {
     // We pass message.value to the function
     result.value = runDeadfish(message.value);
+    infomsg.value = t('deadfish.success')
+
   } catch (e) {
     // Localized error message
     errormsg.value = t('errors.genericerror');
@@ -226,7 +236,8 @@ const runCode = () => {
     "code": "Program code",
     "input": "Input variables",
     "run": "Run Deadfish",
-    "write": "Write Deadfish program"
+    "write": "Write Deadfish program",
+    "success": "Code completed, if you don't see a result the code has no output commands"
   }
 }
 </i18n>
@@ -240,7 +251,8 @@ const runCode = () => {
     "debug": "Debug info naar console",
     "input": "Input variabelen",
     "run": "Run Deadfish",
-    "write": "Schrijf Deadfish programma"
+    "write": "Schrijf Deadfish programma",
+    "success": "Code uitgevoerd, als er geen resultaat wordt getoond bevat de code geen uitvoercommando's"
   }
 }
 </i18n>

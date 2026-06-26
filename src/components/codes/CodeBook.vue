@@ -3,7 +3,7 @@
     <h1>{{ t('codebook.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('codebook.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -42,7 +42,7 @@
     </VCard>
   </div>
   <div class="card-grid mb-2">
-    <VCard :title="t('codebook.pagesfound') + foundpages.length">
+    <VCard :title="t('codebook.pagesfound', foundpages.length)">
       <div class="button-row-icons mb-2">
         <button id="first" class="btn btn-primary" :disabled="currentpage === 0" @click="currentpage = 0; selectCodepage()" >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round">
@@ -102,9 +102,7 @@ import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 const props = defineProps({
   code: {
@@ -127,7 +125,7 @@ const codepagefile = ref("")
 const foundpages = ref([])
 const tags = ref([])
 const showitem = ref(true)
-const isDropdownOpen = ref(false)
+const startOpen = window.innerWidth > 768;
 
 // --- Computed ---
 const codepageImage = computed(() => {
@@ -180,12 +178,6 @@ const goSearch = () => {
   selectCodepage()
 }
 
-const handleTagSelect = (tag) => {
-  selectedtag.value = tag
-  isDropdownOpen.value = false
-  goSearch()
-}
-
 const resetSearch = () => {
   selectedtag.value = ""
   searchstr.value = ""
@@ -228,3 +220,28 @@ onMounted(() => {
 }
 
 </style>
+
+<style scoped>
+</style>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "codebook": {
+    "availtags": "Available tags",
+    "pagesfound": "No codes found | One code found | Found {n} codes"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "codebook": {
+    "availtags": "Beschikbare tags",
+    "pagesfound": "Geen codes gevonden | Eén code gevonden | Er zijn {n} codes gevonden"
+  }
+}
+</i18n>

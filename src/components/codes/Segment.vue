@@ -4,7 +4,7 @@
     <h1>{{ t('segment.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('segment.long')" />
       <img width="400px" max-width="100%"src="~@\assets\images\segment2.png">
     </VCard>
@@ -170,6 +170,7 @@ const errormsg = ref("")
 const space = ref(true)
 const seg = ref(0)
 const inp = ref(1)
+const startOpen = window.innerWidth > 768;
 
 // --- Template Ref ---
 const messageInput = ref(null)
@@ -332,3 +333,37 @@ const encodeSeg = () => {
 <style scoped>
 img { max-width: 100%; max-height: 200px; display: block; margin: 0 auto; }
 </style>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "segment": {
+    "segsize": "Number of segments",
+    "input": "Segments as letters or as binary",
+    "letters": "Letter notation",
+    "binary": "Binary notation",
+    "numeric": "Numeric notation (0-9)",
+    "octal": "Octal notation (0-7)",
+    "hexa": "Hexadecimal notation (0-9A-F)",
+    "space": "Space is all segments off"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "segment": {
+    "segsize": "Aantal segmenten",
+    "input": "Segmenten notatie letters of binair",
+    "letters": "Letternotatie",
+    "binary": "Binaire notatie",
+    "numeric": "Numerieke notatie (0-9)",
+    "octal": "Octale notatie (0-7)",
+    "hexa": "Hexadecimale notatie (0-9A-F)",
+    "space": "Spatie is alle segmenten uit"
+  }
+}
+</i18n>

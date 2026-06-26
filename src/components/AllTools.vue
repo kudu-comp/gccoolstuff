@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('alltools.long')" />
       </VCard>
       <VCard :title="t('labels.search')">
@@ -27,11 +27,11 @@
               <path d="M21 3v5h-5"/>
             </svg>
           </button>
-          <button class="btn btn-primary" :title="t('buttons.collall')" @click="collapseList">
-            {{ t('buttons.collall') }}
+          <button class="btn btn-primary" @click="collapseList">
+            {{ t('alltools.collall') }}
           </button>
-          <button class="btn btn-primary" :title="t('buttons.expall')" @click="expandList">
-            {{ t('buttons.expall') }}
+          <button class="btn btn-primary" @click="expandList">
+            {{ t('alltools.expall') }}
           </button>
         </div>
         <!-- Error message -->
@@ -87,6 +87,7 @@ const props = defineProps({
 const { t } = useI18n()
 const route = useRoute()
 const listComponent = ref(null);
+const startOpen = window.innerWidth > 768;
 
 // --- State ---
 const errormsg = ref("")
@@ -268,7 +269,7 @@ const goSearch = () => {
             l3.isVisible = false
             switch (l2.link) {
               case "/ciphers":
-                if (t(`ciphers.${ciphers.value[l3.idx].ref}.info`).toLowerCase().includes(s)) l3.isVisible = true
+                if (t(`ciphers.info.${ciphers.value[l3.idx].ref}`).toLowerCase().includes(s)) l3.isVisible = true
                 if (ciphers.value[l3.idx].name.toLowerCase().includes(s)) l3.isVisible = true
                 break
               case "/codebook":
@@ -399,3 +400,27 @@ onMounted(() => {
   }
 })
 </script>
+
+<i18n locale="en">
+{
+  "alltools": {
+    "title" : "Search all tools",
+    "long" : "Search all tools, ciphers, codes or fonts or just show all the tools",
+    "expall": "Expand all",
+    "collall": "Collapse all",
+    "showall": "Show all"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "alltools": {
+    "title" : "Zoek in alle tools",
+    "long" : "Doorzoek alle tools, geheimschriften, codes, fonts of toon alle tools.",
+    "expall": "Alles uitvouwen",
+    "collall": "Alles inklappen",
+    "showall": "Toon alle tools"
+  }
+}
+</i18n>

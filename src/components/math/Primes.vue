@@ -5,24 +5,24 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('primes.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <label>{{ t('primes.check') }}</label>
           <input type="number" v-model="checkprime">
-          <v-calculate @calculate="checkPrime"></v-calculate>
+          <CalculateButton @calculate="checkPrime" />
         </div>
         <div class="form-horizontal">
           <label>{{ t('primes.pos') }}</label>
           <input type="number" v-model="pos">
-          <v-calculate @calculate="getPrime"></v-calculate>
+          <CalculateButton @calculate="getPrime" />
         </div>
         <div class="form-horizontal">
           <label>{{ t('primes.primefact') }}</label>
           <input type="number" v-model="primefact">
-          <v-calculate @calculate="primeFactors"></v-calculate>
+          <CalculateButton @calculate="primeFactors" />
         </div>
         <p
           v-show="errormsg"
@@ -50,7 +50,7 @@
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as mathtools from '@/scripts/mathtools.js'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 
 defineOptions({
@@ -71,6 +71,7 @@ const phpurl = `${window.location.protocol}//${window.location.hostname}/math/pr
 
 // --- Template Ref ---
 const checkprimeInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   checkprimeInput.value?.focus()
@@ -86,7 +87,7 @@ const primeFactors = () => {
     errormsg.value = t('errors.toobig')
   } else {
     const factors = mathtools.primeFactorization(primefact.value)
-    result.value =  t('gcdandlcm.t2') + " " + primefact.value + ": "+ factors.join(" - ")
+    result.value =  t('primes.fact', {num : primefact.value, result: factors.join(" - ")})
   }
 }
 
@@ -158,3 +159,41 @@ const getPos = async () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "primes": {
+    "check": "Check if this is a prime",
+    "pos": "Get prime at position",
+    "primepos": "Get position of prime",
+    "primefact": "Prime factors of",
+    "toobig": "Number is too big",
+    "isprime": "is a prime number",
+    "isnotprime": "is not a prime number",
+    "primeatpos": "The prime number at position",
+    "primeis": "is",
+    "primenotfound": "Prime number not found",
+    "fact": "The prime factors of {num} are {result}.",
+    "posofprime": "The position of prime"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "primes": {
+    "check": "Check priem of niet",
+    "pos": "Priemgetal op positie",
+    "primepos": "Positie van priemgetal",
+    "primefact": "Priemfactoren van",
+    "toobig": "Nummer is te hoog",
+    "isprime": "is een priemgetal",
+    "isnotprime": "is geen priemgetal",
+    "primeatpos": "Het priemgetal op positie",
+    "primeis": "is",
+    "primenotfound": "Priemgetal is niet gevonden",
+    "fact": "De priemfactoren van {num} zijn {result}.",
+    "posofprime": "De positie van priemgetal"
+  }
+}
+</i18n>

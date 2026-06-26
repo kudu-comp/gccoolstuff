@@ -4,7 +4,7 @@
     <h1>{{ t('numerology.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('numerology.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -66,7 +66,7 @@
     <VCard :title="t('labels.result')">
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
       >
         {{ result }}<br>
         {{ result2 }}
@@ -132,6 +132,7 @@ const alphabet = ref("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 // --- Template Ref ---
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 watch([txt, selmode], () => {
   calculateValue()
@@ -198,3 +199,26 @@ const calculateValue = () => {
 }
 </script>
 
+<i18n locale="en">
+{
+  "numerology": {
+    "selmethod" : "Select method",
+    "res1" : "The numerological value is ",
+    "res2" : "Calculation ",
+    "valtab": "Values of each letter",
+    "err1" : "One or more unknown characters found."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "numerology": {
+    "selmethod" : "Selecteer methode",
+    "res1" : "De numerologische waarde is ",
+    "res2" : "Berekening ",
+    "valtab": "Waardes van elke letter",
+    "err1" : "Eén of meerdere onbekende letters gevonden."
+  }
+}
+</i18n>

@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('incomplete.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -40,15 +40,12 @@
           v-model:varoptions="var4options"
         />
         </div>
-        <div class="button-row">
-          <v-show-on-map id="project" class="btn btn-primary" @show="showCoordinates()" />
-        </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
         </p>          
+        <div class="button-row">
+          <ButtonShowOnMap @show="showCoordinates()" />
+        </div>
       </VCard>
     </div>
     <div class="card-stack">
@@ -71,7 +68,7 @@ import VCoord from '@/components/generic/VCoord.vue'
 import VMap from '@/components/generic/VMap.vue'
 import VCard from '@/components/generic/VCard.vue'
 import VVariable from '@/components/generic/VVariable.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
   name: 'CoordIncomplete'
@@ -92,6 +89,7 @@ const var3options = ref("0123456789")
 const var4 = ref("d")
 const var4options = ref("0123456789")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -175,3 +173,19 @@ const showCoordinates = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "incomplete": {
+    "error1": "Maximum number of coordinates is 500. Reduce the number of options."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "incomplete": {
+    "error1": "Maximaal aantal coördinaten is 500. Reduceer het aantal opties."
+  }
+}
+</i18n>

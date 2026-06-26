@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('project.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -27,18 +27,15 @@
             v-model:unit="angleunit"
           />
         </div>
-        <div class="button-row mb-2">
-          <v-show-on-map class="btn btn-primary" @show="doCalc()" />
-        </div>
-        <p
-          v-if="errormsg"
-          class="errormsg"
-        >
+        <div v-if="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
-        </p>          
+        </div>          
+        <div class="button-row">
+          <ButtonShowOnMap @show="doCalc()" />
+        </div>
       </VCard>
       <VCard :title="t('labels.result')">
-          {{ t('project.projcoord') }}{{ result }}        
+        {{ result }}        
       </VCard>
     </div>
     <div class="card-stack">
@@ -62,7 +59,7 @@ import VCard from '@/components/generic/VCard.vue'
 import VAngle from '@/components/generic/VAngle.vue'
 import VDistance from '@/components/generic/VDistance.vue'
 import VMap from '@/components/generic/VMap.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
   name: 'Project'
@@ -80,6 +77,7 @@ const dist = ref(0)
 const unit = ref(1)
 const result = ref("")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -129,10 +127,10 @@ const doCalc = () => {
       })
       .then(data => {
         // 6. Format the output result
-        let output = coords.getTextFromCoord(data, selecteddatum.value, 7, coordinate.value)
-        output += " or " + coords.printCoordinateFromDMS(projcoord, "N12 34.567 E1 23.456")
+        let c1 = coords.getTextFromCoord(data, selecteddatum.value, 7, coordinate.value)
+        let c2 = coords.printCoordinateFromDMS(projcoord, "N12 34.567 E1 23.456")
         
-        result.value = output
+        result.value = t('project.projcoord', {c1: c1, c2: c2});
       })
       .catch(e => {
         console.error(e)
@@ -145,3 +143,23 @@ const doCalc = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "project": {
+    "projcoord": "The projected coordinate is {c1} or in WGS84 notation {c2}.",
+    "startpoint": "Starting point",
+    "projpoint": "Projected point"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "project": {
+    "projcoord": "Het geprojecteerde coördinaat is {c1} of in WGS84 notatie {c2}.",
+    "startpoint": "Startpunt",
+    "projpoint": "Geprojecteerde punt"
+  }
+}
+</i18n>

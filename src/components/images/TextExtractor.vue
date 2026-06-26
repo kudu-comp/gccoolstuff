@@ -6,7 +6,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('textextractor.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -64,9 +64,9 @@
           <table class="p-table">
             <thead>
               <tr>
-                <th>Match</th>
-                <th>Position</th>
-                <th>Text</th>
+                <th>{{ t('textextractor.match') }}</th>
+                <th>{{ t('textextractor.pos') }}</th>
+                <th>{{ t('textextractor.text') }}</th>
               </tr>
             </thead>
             <tr class="flex-row d-flex" v-for="r in results" :key="r.id">
@@ -94,6 +94,7 @@ const { t } = useI18n()
 
 // --- Template Refs ---
 const fileInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // --- State ---
 const result = ref(t('labels.result'))
@@ -202,3 +203,33 @@ const selectFile = (event) => {
 td {
   overflow-wrap: break-word;
 }</style>
+
+<i18n locale="en">
+{
+  "textextractor": {
+    "match": "Match",
+    "pos": "Position",
+    "text": "Text",
+    "length": "Minimum string length",
+    "max": "Maximum number of results",
+    "start": "Start at position",
+    "maxexceeded": "Maximum number of results found. Use start position to continue search.",
+    "fileerror": "Error loading file."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "textextractor": {
+    "match": "Match",
+    "pos": "Positie",
+    "text": "Tekst",
+    "length": "Minimale lengte",
+    "max": "Maximaal aantal resultaten",
+    "start": "Start op positie",
+    "maxexceeded": "Maximaal aantal zoekresultaten bereikt. Om verder te zoeken gebruik startpositie.",
+    "fileerror": "Fout tijdens het laden van de file"
+  }
+}
+</i18n>

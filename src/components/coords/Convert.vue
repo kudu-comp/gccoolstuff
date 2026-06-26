@@ -5,14 +5,14 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('convert.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
           >{{ t('labels.from') }}</label>
-          <v-datums
+          <DatumSelect
             id="from"
             v-model:datum="from"
           />
@@ -20,7 +20,7 @@
         <div class="form-horizontal">
           <label
           >{{ t('labels.to') }}</label>
-          <v-datums
+          <DatumSelect
             id="to"
             v-model:datum="to"
           />
@@ -42,33 +42,30 @@
             >
           </div>
         </div>
+      </VCard>
+      <VCard :title="t('labels.input')">
+        <textarea
+          ref="coordFromInput"
+          v-model="coordfrom"
+          :placeholder="t('convert.phfrom')"
+          rows="5"
+          @input="wordValue"
+          class="mb-2"
+        />
+        <div v-show="errormsg" class="errormsg mb-2">
+          {{ errormsg }}
+        </div>          
         <div class="button-row">
           <button id="convert" class="btn btn-primary"  @click="convertCoordinates">
             {{ t('buttons.convert') }}
           </button>
         </div>
       </VCard>
-      <VCard :title="t('labels.input')">
-        <textarea
-          id="coordfrom"
-          ref="coordFromInput"
-          v-model="coordfrom"
-          :placeholder="t('convert.phfrom')"
-          rows="5"
-          @input="wordValue"
-        />
-        <div
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
-          {{ errormsg }}.
-      </div>          
-      </VCard>
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
           v-html="result"
-          class="card resultbox"
+          class="resultbox"
         >
         </div>
       </VCard>
@@ -86,7 +83,7 @@ import { ref, onMounted, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import * as coords from '@/scripts/coords.js'
-import VDatums from '@/components/generic/VDatums.vue'
+import DatumSelect from '@/components/generic/DatumSelect.vue'
 import VCard from '@/components/generic/VCard.vue'
 import VWgsformat from '@/components/generic/VWgsformat.vue'
 import VMap from '@/components/generic/VMap.vue'
@@ -111,6 +108,7 @@ const wgsformat = ref("N52 12.345 E4 12.345")
 
 // --- Template Ref ---
 const coordFromInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 watch([wgsformat, to], () => {
   convertCoordinates()
@@ -186,3 +184,25 @@ const convertCoordinates = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "convert": {
+    "proj4jsmsg": "You can convert any coordinate system using the definition below. The convertor uses Proj4js. First select Proj4js from the dropdown. The definition to use can be found on <a href='http://epsg.io'>EPSG.io</a>. Take the Proj4js.def (it can be found near the bottom of the page). Take the second string (the one that starts with +) without the quotes and copy / paste it in the field below.",
+    "proj4jslabel": "Proj4js definition",
+    "phfrom": "Coordinates to convert",
+    "phto": "Converted coordinates"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "convert": {
+    "proj4jsmsg": "Je kan elk coördinaat systeem converteren door hieronder de proj4js definitie in te voeren. De definitie kan gevonden worden op <a href='http://epsg.io'>EPSG.io</a>. Neem de Proj4js.def (onderaan op de pagina) en kopieer de string die begint met + (zonder de aanhalingstekens).",
+    "proj4jslabel": "Proj4js definitie",
+    "phfrom": "Coördinaten om te converteren",
+    "phto": "Geconverteerde coördinaten"
+  }
+}
+</i18n>

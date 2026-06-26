@@ -4,18 +4,18 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('triangulation.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="toggle-group">
-          <button :class="{ active: mode === 'intersection' }" @click="mode = 'intersection'; result = null">Intersection<br><small>2 Observers → Target</small></button>
-          <button :class="{ active: mode === 'resection' }" @click="mode = 'resection'; result = null">Resection<br><small>3 Landmarks → Me</small></button>
+          <button :class="{ active: mode === 'intersection' }" @click="mode = 'intersection'; result = null">{{t('triangulation.intersect')}}<br><small>2 {{t('triangulation.observer')}} → {{ t('triangulation.target') }}</small></button>
+          <button :class="{ active: mode === 'resection' }" @click="mode = 'resection'; result = null">{{ t('triangulation.resect') }}<br><small>3 {{ t('triangulation.landmark') }} → {{ t('triangulation.me') }}</small></button>
         </div>
       </VCard>
       <VCard :title="t('labels.input')">
         <div v-for="(item, idx) in (mode === 'intersection' ? observers : landmarks)" :key="idx" class="input-box mb-2">
-          <label class="input-box-title">{{ item.name || 'Obs ' + item.id }}</label>
+          <label class="input-box-title">{{ item.name + item.id }}</label>
           <div class="form-horizontal">
             <v-coord
               v-model:coord="item.coordinate"
@@ -29,19 +29,17 @@
             />
           </div>
         </div>
-        <div class="button-row">
-          <v-show-on-map id="go" class="btn btn-primary" @Show="calculatePosition()" />
-        </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
         </p>  
+        <div class="button-row">
+          <ButtonShowOnMap @Show="calculatePosition()" />
+        </div>
       </VCard>
       <VCard :title="t('labels.result')">
-        <span v-if="result?.x !== undefined"><strong>{{ t('triangulation.result') + result.text }}</strong></span>
-        <span v-else-if="result?.error" class="err">{{ result.error }}</span>
+        <div class="resultbox" v-if="result">
+          {{ t('triangulation.result') + result }}
+        </div>
       </VCard>
     </div>
     <div class="card-stack">
@@ -59,33 +57,33 @@ import VMap from '@/components/generic/VMap.vue';
 import VCard from '@/components/generic/VCard.vue';
 import VCoord from '@/components/generic/VCoord.vue';
 import VAngle from '@/components/generic/VAngle.vue';
-import VShowOnMap from '@/components/generic/VShowOnMap.vue';
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue';
 import * as coords from '@/scripts/coords.js';
 import L from 'leaflet';
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
+const startOpen = window.innerWidth > 768;
 
 const mode = ref('intersection'); 
 const result = ref(null); 
 const store = useStore();
 const mymap = computed(() => store.state.mymap);
 const gridsys = "RD";
+const errormsg=ref('')
 
 const toRad = (deg) => deg * (Math.PI / 180);
 const cot = (rad) => 1 / Math.tan(rad);
 
 const observers = ref([
-  { id: 1, x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
-  { id: 2, x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 }
+  { name: t('triangulation.obs'), id: 1, x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
+  { name: t('triangulation.obs'), id: 2, x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 }
 ]);
 
 const landmarks = ref([
-  { name: 'Alpha', x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
-  { name: 'Bravo', x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
-  { name: 'Charlie', x: 0,  y: 0,   bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0  }
+  { name: t('triangulation.land'), id: 'Alpha', x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
+  { name: t('triangulation.land'), id: 'Bravo', x: 0, y: 0, bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0 },
+  { name: t('triangulation.land'), id: 'Charlie', x: 0,  y: 0,   bearing: 0, coordinate: '', selecteddatum: 'WGS84', angle: 0, angleunit: '0.0174532925', lat: 0, lon: 0  }
 ]);
 
 const calculateIntersection = () => {
@@ -129,17 +127,17 @@ const calculateIntersection = () => {
     .then (data => {
       result.value.lat = data.lat; result.value.lon = data.lon;
       // Show result on map and draw line from observers to result
-      coords.displayMarker(mymap.value, { lat: result.value.lat, lon: result.value.lon }, "Result");
+      coords.displayMarker(mymap.value, { lat: result.value.lat, lon: result.value.lon }, t('labels.result'));
       L.polyline([[observers.value[0].lat, observers.value[0].lon], [result.value.lat, result.value.lon], [observers.value[1].lat, observers.value[1].lon]], { color: 'blue', dashArray: '5,10' }).addTo(mymap.value);
       // Convert result back to selected datum
       return coords.convertCoordFromWGS (data, observers.value[0].selecteddatum);
     })
     .then (data => {
-      result.value.lat = data.lat; result.value.lon = data.lon;
-      result.value.text = coords.getTextFromCoord(data, observers.value[0].selecteddatum);
+      result.value = coords.getTextFromCoord(data, observers.value[0].selecteddatum);
     })
     .catch (err => { 
-      console.error(err); result.value = { error: 'Invalid' }; 
+      console.error(err); 
+      errormsg.value = t('errors.incorrectcoords'); 
     });
 };
 
@@ -210,11 +208,11 @@ const calculateResection = () => {
       return coords.convertCoordFromWGS (data, landmarks.value[0].selecteddatum);
     })
     .then (data => {
-      result.value.lat = data.lat; result.value.lon = data.lon;
-      result.value.text = coords.getTextFromCoord(data, landmarks.value[0].selecteddatum);
+      result.value = coords.getTextFromCoord(data, landmarks.value[0].selecteddatum);
     })
     .catch (err => { 
-      console.error(err); result.value = { error: 'Invalid' }; 
+      console.error(err); 
+      errormsg.value = t('errors.generic'); 
     });
   
 };
@@ -247,3 +245,35 @@ const calculatePosition = () => {
   background: white; color: #09776E; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 </style>
+
+<i18n locale="en">
+{
+  "triangulation": {
+    "result": "The triangulated coordinate is ",
+    "intersect": "Intersection",
+    "resect": "Resection",
+    "obs": "Observer ",
+    "observer": "Observers",
+    "target": "Target",
+    "land": "Landmark ",
+    "landmark": "Landmarks",
+    "me": "Me"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "triangulation": {
+    "result": "Het getrianguleerde coördinaat is ",
+    "intersect": "Voorwaartse insnijding",
+    "resect": "Achterwaartse insnijding",
+    "obs": "Waarnemer ",
+    "observer": "Waarnemers",
+    "target": "Doellocatie",
+    "land": "Herkenningspunt ",
+    "landmark": "Herkenningspunten",
+    "me": "Ik"
+  }
+}
+</i18n>

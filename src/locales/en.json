@@ -1,11 +1,6 @@
 {
   "language": "Language",
 
-  "texttransform" : {
-    "title" : "Text Transfomer",
-    "long": "Transform your text by cleaning it up, changing cases, reversing it, or applying fun filters."
-  },
-
   "errors": {
     "generic": "Somewhing went wrong. Please retry.",
     "noinput": "Please provide some input",
@@ -16,15 +11,12 @@
     "cannotparse": "Cannot parse input",
     "unknowninput": "Unknown input ",
     "loadingimage": "Error loading image",
-    "loadingfile": "Error loading file",
-    "notanumber": "Input is not a number",
-    "notbinary" : "Not a binary number",
-    "notdecimal" : "Not a decimal number",
-    "nothexadecimal": "Not a hexadecimal number",
-    "invalidchecksum": "Warning: Invalid checksum"
+    "loadingfile": "Error loading file"
   },
 
   "labels": {
+    "intro": "Introduction",
+    "preview": "Preview",
     "selectfile": "Select file",
     "selaction": "Select action",
     "replacediac": "Replace diacritics",
@@ -32,7 +24,6 @@
     "startzero": "Start at zero (A=0 or Z=0 with reverse)",
     "settings": "Settings",
     "input": "Input",
-    "intro": "Introduction",
     "map": "Map",
     "addinfo": "More information",
     "from": "From",
@@ -61,9 +52,6 @@
     "name": "Name",
     "date": "Date",
     "time" : "Time",
-    "welcome": "GC Tools",
-    "whatsnew": "What's new",
-    "featured": "Featured",
     "help" : "Help ",
     "moreinfo" : "More info",
     "letsgo" : "Let's go",
@@ -72,34 +60,20 @@
 
   "buttons": {
     "convert": "Convert",
-    "calc": "Calculate",
     "solve": "Solve",
-    "copy": "Copy",
     "search": "Search",
-    "format": "Format",
     "reset": "Reset",
     "cancel": "Cancel",
     "save": "Save",
-    "de;lete": "Delete",
-    "get": "Get",
-    "check": "Check",
     "show": "Show",
     "showtab": "Show/hide table",
     "showres": "Show/hide results",
     "apply": "Apply",
     "original": "Original",
-    "count": "Count",
-    "sum": "Totals",
     "showtable": "Show table",
     "undo": "Undo",
     "encode": "Encode",
     "decode": "Decode",
-    "download": "Download",
-    "try" : "Try all",
-    "prev" : "Previous",
-    "next" : "Next",
-    "expall": "Expand all",
-    "collall": "Collapse all",
     "generate": "Generate",
     "play": "Play"
   },
@@ -126,13 +100,7 @@
     "spanish": "Spanish"
   },
 
-  "highlights": {
-    "bold": "Bold",
-    "upper": "Uppercase"
-  },
-
   "menu": {
-    "home": "Home",
     "coordinates": "Coordinates",
     "texttools": "Text",
     "codes": "Codes",
@@ -144,14 +112,6 @@
     "help": "Help",
     "howto": "How to",
     "about": "About"
-  },
-
-  "home" : {
-    "whatare" : "What are you looking for?",
-    "favs" : "Favorites",
-    "intro": "GC Tools has all the tools needed to solve your geocache puzzles. Use search to find the tool you need or use the menu. GC Tools is 100% free, no ads, no cookies!",
-    "contact": "Contact",
-    "contacttxt": "We love to hear from you. Please let us know your suggestions. Send us a message through Geocaching.com to Team Chaenaan or send us an email to info{'@'}gctools.nl"
   },
 
   "coordinates": {
@@ -184,389 +144,93 @@
     "intro": "A collection of tools for various topics. Make and print logs. Scan the HTML source of a geocache. A unit convertor for hundreds of units. A calculator for dates. A random generator. Tables of the periodic system, countries of the world, states of the USA, European provinces and DNA codes. Search the OpenLibraby.org database for a book."
   },
 
-  "alltools" : {
-    "title" : "Search all tools",
-    "long" : "Search all tools, ciphers, codes or fonts or just show all the tools",
-    "showall": "Show all"
-  },
-
   "ciphers": {
     "title" : "Ciphers",
     "long": "Ciphers are used to encrypt messages by means of substitution and transposition or a combination of both. Simple ciphers use only one alphabet, such as Atbash or ROT13. More complex ciphers use more alphabets, for example Vigenere or Beaufort. Some ciphers encrypt one letter at a team, but there are many who encrypt bigrams of two letters. Examples are Polybius, Bazeries or Condi.Transposition ciphers simple reorder the message, such as the Railfence, Cadenus or Skip ciphers. The most complex ciphers use combinations of the above, such as the Bifid, Trifid and Digrafid cipher.</p><p>Select one of the ciphers from the list. Enter you message and press encode or decode. If the cipher requires a key it will show. Use expertmode to change the default behavior.</p>",
-    "cipher": "Cipher",
-    "selcipher": "Select cipher",
-    "keepcase": "Keep lowercase characters",
-    "keepdiacrit": "Keep diacritics (do not change to normal letters)",
-    "keepunknown": "Keep letters that are not in the alphabet",
-    "replacechars": "Replace characters as specified below",
-    "formatoutput": "Format output in blocks with separator as specified below",
-    "expertmode": "Expert mode",
-    "hideexpertmode": "Standard mode",
-    "gensq": "Generate square",
-    "genalp": "Generate alphabet",
-    "errdec": "Message could not be decoded, please check.",
-    "errenc": "Message could not be encoded, please check.",
-    "sep": "Separator",
-    "bs": "Block size",
-    "repl": "Replacements",
-    "adfgvx": {
-      "info": "The ADFGX(V) cipher is Polybius cipher. A 5x5 or 6x6 square is used. The result is fractionated and the columns are transposed using the key.",
-      "k1": "Square",
-      "k2": "Column transposition key"
-    },
-    "affine": {
-      "info": "The Affine cipher is a substitution cipher. It uses the function ax + b to calculate the ciphered text. The value of A must be coprime with the length of the alphabet.",
-      "k1": "A (greater than 1)",
-      "k2": "B (greater than 0)"
-    },
-    "amsco": {
-      "info": "AMSCO Encryption consists in writing a text in a grid according to a cutting sequence (2,1) then use a permutation key to switch columns.",
-      "k1": "Column transposition key:"
-    },
-    "atbash": {
-      "info": "Atbash is a very simpel cipher where each letter is replaced with the one in the reversed alphabet, so A=Z, B=Y ..."
-    },
-    "atomtom": {
-      "info": "A-tom-tom is a very simple subsitution cipher where each letter is replaced with a combination of forward / and backward \\ slashes"
-    },
-    "autokey": {
-      "info": "An autokey cipher (also known as the autoclave cipher) is a cipher that incorporates the message (the plaintext) into the key. This one uses Vigenere.",
-      "k1": "Enter key:"
-    },
-    "bacon": {
-      "info": "Each character is replaced by 5 characters (normally A and B). There are two versions. Versions 1 uses the same combination for I and J, and U and V. Version 2 is different for each letter. You can also hide Bacon in any text using a different font for B or using lower- and uppercase for A and B.",
-      "k1": "Version (1 or 2)",
-      "k2": "Value to use for A",
-      "k3": "Value to use for B"
-    },
-    "bazeries": {
-      "info": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. It uses two squares. The first square by default is a vertically arranged square. The second key square is optional. If none is given the numeric key is also used to generate the second sqaure. The numeric key is also used for transpositioning. J is replaced by I, but this can be changed in expert mode, e.g. V replaces U.",
-      "k1": "Square 1",
-      "k2": "Square 2",
-      "k3": "Numeric key"
-    },
-    "beaufort": {
-      "info": "The Beaufort cipher, created by Sir Francis Beaufort, is a substitution cipher similar to the Vigenère cipher, with a slightly modified enciphering mechanism and tableau. Keyword is required.",
-      "k1": "Key (mandatory)"
-    },
-    "bibibinary": {
-      "info": "Bibi-binary is a numeric encoding system. It converts the number to hexadecimal and translates into something that pronounces funny. Only numbers are allowed."
-    },
-    "bifid": {
-      "info": "The bifid cipher uses a standard Polybius square to fractionate each plaintext letter into a bigram, mixes the constituents of the bigrams, and then applies the Polybius square in reverse to turn these mixed bigrams into ciphertext letters.",
-      "k1": "Enter key"
-    },
-    "burrowswheeler": {
-      "info": "The Burrow Wheeler cipher is a transposition cipher. It uses a character to indicate end-of-file. This on is mandatory.",
-      "k1": "End of file character"
-    },
-    "cadenus": {
-      "info": "The Cadenus cipher is a columnar transposition. The key both reorders columns and sets the starting point of each column. The message must be a 25 * keylength characters.",
-      "k1": "Columnar transposition key"
-    },
-    "caesar": {
-      "info": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
-      "k1": "Shift"
-    },
-    "rot13": {
-      "info": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
-      "k1": "Shift"
-    },
-    "chaocipher": {
-      "info": "The chaocipher is polyalphabetic cipher with continuously changing alphabets. It was invented in 1918 by John F. Byrne.",
-      "k1": "Left starting alphabet",
-      "k2": "Right starting alphabet"
-    },
-    "collon": {
-      "info": "Collon uses a grid (a Polybius square) to convert letters into bigram. The bigram is taken from the first/last row/column in the grid. The period is then used for fractionation.",
-      "k1": "Select order of digrams",
-      "k2": "Polybius square",
-      "k3": "Period:",
-      "s1": {
-        "rfcl": "Row first, column last",
-        "rlcl": "Row last, column last",
-        "rfcf": "Row first, column first",
-        "rlcf": "Row last, column first",
-        "clrl": "Column last, row last",
-        "clrf": "Column last, row first",
-        "cfrf": "Column first, row first",
-        "cfrl": "Column first, row last"
-      }
-    },
-    "columnartransposition": {
-      "info": "Columnar transposition writes the message in columns, reorders it and writes the result column after column",
-      "k1": "Columnar transposition key"
-    },
-    "condi": {
-      "info": "The condi cipher (consecutive digrams) uses digrams to calculate the offset for the next letter.",
-      "k1": "Key for the cipher alphabet",
-      "k2": "Initial offset"
-    },
-    "digrafid": {
-      "info": "A fractionated cipher using a tableau in which two alphabets are organized in grids (of 3x9 and 9x3) with 27 characters (ABCDEFGHIJKLMNOPQRSTUVWXYZ#) are mixed. The plaintext is divided into digraphs, and the digraphs are written in groups, the number of digraphs in each group being the period of the cipher",
-      "k1": "Key first grid",
-      "k2": "Key second grid",
-      "k3": "Period (required)"
-    },
-    "foursquare": {
-      "info": "The foursquare cipher is a polygraphic substitution cipher that replaces diagrams using two Polybius squares.",
-        "k1": "Square 1",
-        "k2": "Square 2"
-    },
-    "gcid": {
-      "info": "Geocache id, a.k.a base 31, translates a geocache id (a number) to its geocache code like GC001. You can enter multiple geoaches or ids."
-    },
-    "goldbug": {
-      "info": "The Gold-Bug cipher was included in a short story by Edgar Allan Poe and which was published in 1843. It is a simple substitution cipher."
-    },
-    "graycode": {
-      "info": "The reflected binary code (RBC), also known just as reflected binary (RB) or Gray code after Frank Gray, is an ordering of the binary numeral system such that two successive values differ in only one bit (binary digit).",
-      "k1": "Number of digits:"
-    },
-    "gromark": {
-      "info": "The gromark uses the key to reorder the alphabet and then uses the same key for columnar transposition of the cipher. The 5-digit primer is used to determine the shift of each letter.",
-      "k1": "Key (required)",
-      "k2": "Primer (5 digits)"
-    },
-    "gronsfeld": {
-      "info": "The Gronsfeld cipher a Vigenere cipher using a numeric key. The key is mandatory.",
-      "k1": "Enter key (numeric)"
-    },
-    "kennycode": {
-      "info": "Kenny code is based on the mumbling of the Southpark character. Each letter is encoded with a combination of m, p and f (fff is not used)."
-    },
-    "monomedinome": {
-      "info": "The Monome-dinome cipher uses a 24 char alphabet. The first key is used to generate a 3x8 square. The second key is used to detemine the numbers for the rows and columns. Both keys are mandatory.",
-      "k1": "Key to reorder the alphabet",
-      "k2": "Key for transposition (min 10 chars)"
-    },
-    "morbit": {
-      "info": "Morbit first translates the message into Morse. Then the morse code is split into couples of 2 characters, which are translated into numbers using a 9-digit key.",
-      "k1": "Enter key (9 letters)"
-    },
-    "morse": {
-      "info": "Morse code is well known. It uses short and long beeps (. and -) to transmit messages. This one also does morse for numbers and punctuation."
-    },
-    "myszkowski": {
-      "info": "The Myszkowski cipher is a columnar transposition that uses a key with double letters. Plaintext columns with unique letters are transcribed downward; those with recurring letters are first transcribed left to right.",
-      "k1": "Key for columnar transposition (should contain double letters):"
-    },
-    "nicodemus": {
-      "info": "The Nicodemus cipher first uses columnar transposition with the given key. The message is then encoded with Vigenere using the same key. The result is written column by column in blocks of 5 letters.",
-      "k1": "Key for columnar transposition and Vigenere:"
-    },
-    "nesw": {
-      "info": "The NESW or NEWS cipher takes a square a encodes a character by taking the N, E, S, W, NE, SE, SW or NW wind direction to encode a character. Decoding takes the opposite direction",
-      "k1": "Square"
-    },
-    "nihilist": {
-      "info": "The Nihilist cipher is a Polybius cipher. The first key is used to generate a 5x5 square. The second key is added to the generated numbers. The alphabet must be 25 characters and both keys are required.",
-      "k1": "Polybius square",
-      "k2": "Key to be added"
-    },
-    "nihilisttransposition": {
-      "info": "The Nihilist transposition cipher is a columnar followed by a row based transposition, using the same key for both. The transposed grid can be read by rows or columns. The message size equals square of the key length.",
-      "k1": "Key for columnar transposition",
-      "k2": "Read by rows or columns",
-      "s1": {
-        "row": "Rows",
-        "col": "Columns"
-      }
-    },
-    "onetimepad": {
-      "info": "The one time pad has a key with the same length as the message. It is the only truly unbreakable cipher (if you never reuse the pad).",
-      "k1": "Enter pad"
-    },
-    "phillips": {
-      "info": "The Phillips cipher is based on a Polybius square whose rows, columns or both are reordered to form 8 different squares. The plaintext is enciphered using each square in turn for groups of 5 letters.",
-      "k1": "Polybius square"
-    },
-    "playfair": {
-      "info": "The Playfair cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters.",
-      "k1": "Polybius square"
-    },
-    "polybius": {
-      "info": "The Polybius cipher uses a 5x5 (or 6x6) square. The rows and columns are normally numbered 1 to 5 (or 1 to 6) but this can be changed. The alphabet must be 25 or 36 characters and both keys are required.",
-      "k1": "Square",
-      "k2": "Rows",
-      "k3": "Columns"
-    },
-    "pollux": {
-      "info": "The Pollux cipher translates a message into morse and then replaces the dot, hyphen and word breaks with a randomly selected character.",
-      "k1": "Characters for .",
-      "k2": "Characters for -",
-      "k3": "Characters for x"
-    },
-    "porta": {
-      "info": "The porta cipher is a polyalphabetic cipher which uses 13 alphabets.",
-      "k1": "Enter key (required)"
-    },
-    "portax": {
-      "info": "Portax is a polygraphic (replaces digrams), polyalphabetic (it shifts the alphabet), transposition (rows to columns) cipher.",
-      "k1": "Enter key"
-    },
-    "ragbaby": {
-      "info": "Using a selected keyword, construct a mixed alphabet. Keeping word divisions, the letters of the plaintext are numbered sequentially beginning with the first character of each word.  Ciphertext characters are obtained by taking the letter that is the indicated number of places to the right.",
-      "k1": "Enter key"
-    },
-    "railfence": {
-      "info": "The railfence cipher is a transposition cipher using a zigzag pattern.",
-      "k1": "Number of rails (greater than 1):",
-      "k2": "Initial offset"
-    },
-    "redefence": {
-      "info": "The redefence cipher is a transposition cipher. It is the generic form of the railfence cipher.",
-      "k1": "Number of rails (greater than 1):",
-      "k2": "Initial offset",
-      "k3": "Sequence of rails"
-    },
-    "reverse": {
-      "info": "Reverse the message"
-    },
-    "reversewords": {
-      "info": "Reverse each word of the message"
-    },
-    "rot5": {
-      "info": "ROT5 is a simple Caesar cipher that just uses digits. Default it has a shift of 5.",
-      "k1": "Shift"
-    },
-    "rot47": {
-      "info": "ROT47 is a Caesar cipher that uses an alphabet with lower- and uppercase, digits and some symbols (ASCII karakters 33 t/m 126). Default it has a shift of 47.",
-      "k1": "Shift"
-    },
-    "rot123": {
-      "info": "ROT123 increase the shift each time with 1. Numbers are shifted separately. Anything else is not encoded or decoded."
-    },
-    "scytale": {
-      "info": "Scytale is a very basique transposition cipher used in ancient Greece and by spartans. It uses a cylinder and a band characterized by its number of turns around the cylinder.",
-      "k1": "Number of turns"
-    },
-    "skip": {
-      "info": "The skip cipher is a transposition cipher that consists of extracting the letters of a message every n characters (by jumping n characters). When the end of the message is reached, resume at the beginning (loop).",
-      "k1": "Skip value",
-      "k2": "Start at"
-    },
-    "substitution": {
-      "info": "The generic substitution uses a random reordered alphabet. If you don't know it you can better use the Smart Replace tool.",
-      "k1": "Substitutes"
-    },
-    "syllabary": {
-      "info": "The Syllabary cipher was introduced by G-MAN (Robert J Friedman) in the May-June 2012 issue of the Cryptogram magazine. It is based on a standard 10x10 Key-Square containing all 26 letters and all 10 digits, plus a number of 2-letter and 3-letter combinations. Words can usually be represented in more than one way by row and column coordinates. For example AMSTERDAM can be encrypted as A M ST ER DA M but also as A M S TER D A M. This algorithm always takes the longest matches first. Decryption works always as long as the code is valid. The rows and columns are default numbered 0123456789 but they can be numbered anyway you like.",
-      "k1": "Key to generate square",
-      "k2": "Left (row) labels",
-      "k3": "Top (column) labels"
-    },
-    "tapir": {
-      "info": "TAPIR is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters, some digrams, numbers and some special characters."
-    },
-    "trevanion": {
-      "info": "Trevanion takes each letter after a signal character, usually punctuation. The offset is default one, but can be any number of characters after the signal. Characters that are not in the alphabet are ignored and do not count. The cipher is named after John Trevanion, a prisoner who received an encrypted letter, but this story is probably a fake.",
-      "k1": "Punctation",
-      "k2": "Offset"
-    },
-    "trifid": {
-      "info": "The trifid cipher uses a table to fractionate each plaintext letter into a trigram, mixes the constituents of the trigrams, and then applies the table in reverse to turn these mixed trigrams into ciphertext letters. The alphabet must be 27 long.",
-      "k1": "Enter key"
-    },
-    "trisquare": {
-      "info": "The trisquare cipher uses three polybius squares and encodes digrams (2 letters) into trigrams (3 letters).",
-      "k1": "Square 1",
-      "k2": "Square 2",
-      "k3": "Square 3"
-    },
-    "vatsyayana": {
-      "info": "The Vatsyayana or Kamasutra cipher uses pairs of the letters who replace each other.",
-      "k1": "First half",
-      "k2": "Second half"
-    },
-    "vigenere": {
-      "info": "The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a (required) keyword. It employs a form of polyalphabetic substitution.",
-      "k1": "Enter key (required)"
-    },
-    "zebra": {
-      "info": "ZEBRA is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters including German diacretics, some digrams, some trigrams, numbers and some special characters."
-    },
-    "zygazyfa": {
-      "info": "The Zygazyfa cipher was created by Ray Crowther for fun. He uses it in some of his geocaches. It is a polyalphabetic cipher using a kind of autokey.",
-      "k1": "Enter key"
+    "info": {
+      "adfgvx": "The ADFGX(V) cipher is Polybius cipher. A 5x5 or 6x6 square is used. The result is fractionated and the columns are transposed using the key.",
+      "affine": "The Affine cipher is a substitution cipher. It uses the function ax + b to calculate the ciphered text. The value of A must be coprime with the length of the alphabet.",
+      "amsco": "AMSCO Encryption consists in writing a text in a grid according to a cutting sequence (2,1) then use a permutation key to switch columns.",
+      "atbash": "Atbash is a very simpel cipher where each letter is replaced with the one in the reversed alphabet, so A=Z, B=Y ...",
+      "atomtom": "A-tom-tom is a very simple subsitution cipher where each letter is replaced with a combination of forward / and backward \\ slashes",
+      "autokey": "An autokey cipher (also known as the autoclave cipher) is a cipher that incorporates the message (the plaintext) into the key. This one uses Vigenere.",
+      "bacon": "Each character is replaced by 5 characters (normally A and B). There are two versions. Versions 1 uses the same combination for I and J, and U and V. Version 2 is different for each letter. You can also hide Bacon in any text using a different font for B or using lower- and uppercase for A and B.",
+      "bazeries": "The Bazeries cipher is a polygraphic cipher coding 2-letters at a time. It uses two squares. The first square by default is a vertically arranged square. The second key square is optional. If none is given the numeric key is also used to generate the second sqaure. The numeric key is also used for transpositioning. J is replaced by I, but this can be changed in expert mode, e.g. V replaces U.",
+      "beaufort": "The Beaufort cipher, created by Sir Francis Beaufort, is a substitution cipher similar to the Vigenère cipher, with a slightly modified enciphering mechanism and tableau. Keyword is required.",
+      "bibibinary": "Bibi-binary is a numeric encoding system. It converts the number to hexadecimal and translates into something that pronounces funny. Only numbers are allowed.",
+      "bifid": "The bifid cipher uses a standard Polybius square to fractionate each plaintext letter into a bigram, mixes the constituents of the bigrams, and then applies the Polybius square in reverse to turn these mixed bigrams into ciphertext letters.",
+      "burrowswheeler": "The Burrow Wheeler cipher is a transposition cipher. It uses a character to indicate end-of-file. This on is mandatory.",
+      "cadenus": "The Cadenus cipher is a columnar transposition. The key both reorders columns and sets the starting point of each column. The message must be a 25 * keylength characters.",
+      "caesar": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
+      "rot13": "The Caesar cipher is a classic substitution cipher. Each letter is replaced with a letter a number of positions to the right. ROT13 is the same as a Caesar cipher with a shift of 13.",
+      "chaocipher": "The chaocipher is polyalphabetic cipher with continuously changing alphabets. It was invented in 1918 by John F. Byrne.",
+      "collon": "Collon uses a grid (a Polybius square) to convert letters into bigram. The bigram is taken from the first/last row/column in the grid. The period is then used for fractionation.",
+      "columnartransposition": "Columnar transposition writes the message in columns, reorders it and writes the result column after column",
+      "condi": "The condi cipher (consecutive digrams) uses digrams to calculate the offset for the next letter.",
+      "digrafid": "A fractionated cipher using a tableau in which two alphabets are organized in grids (of 3x9 and 9x3) with 27 characters (ABCDEFGHIJKLMNOPQRSTUVWXYZ#) are mixed. The plaintext is divided into digraphs, and the digraphs are written in groups, the number of digraphs in each group being the period of the cipher",
+      "foursquare": "The foursquare cipher is a polygraphic substitution cipher that replaces diagrams using two Polybius squares.",
+      "gcid": "Geocache id, a.k.a base 31, translates a geocache id (a number) to its geocache code like GC001. You can enter multiple geoaches or ids.",
+      "goldbug": "The Gold-Bug cipher was included in a short story by Edgar Allan Poe and which was published in 1843. It is a simple substitution cipher.",
+      "graycode": "The reflected binary code (RBC), also known just as reflected binary (RB) or Gray code after Frank Gray, is an ordering of the binary numeral system such that two successive values differ in only one bit (binary digit).",
+      "gromark": "The gromark uses the key to reorder the alphabet and then uses the same key for columnar transposition of the cipher. The 5-digit primer is used to determine the shift of each letter.",
+      "gronsfeld": "The Gronsfeld cipher a Vigenere cipher using a numeric key. The key is mandatory.",
+      "kennycode": "Kenny code is based on the mumbling of the Southpark character. Each letter is encoded with a combination of m, p and f (fff is not used).",
+      "monomedinome": "The Monome-dinome cipher uses a 24 char alphabet. The first key is used to generate a 3x8 square. The second key is used to detemine the numbers for the rows and columns. Both keys are mandatory.",
+      "morbit": "Morbit first translates the message into Morse. Then the morse code is split into couples of 2 characters, which are translated into numbers using a 9-digit key.",
+      "morse": "Morse code is well known. It uses short and long beeps (. and -) to transmit messages. This one also does morse for numbers and punctuation.",
+      "myszkowski": "The Myszkowski cipher is a columnar transposition that uses a key with double letters. Plaintext columns with unique letters are transcribed downward; those with recurring letters are first transcribed left to right.",
+      "nicodemus": "The Nicodemus cipher first uses columnar transposition with the given key. The message is then encoded with Vigenere using the same key. The result is written column by column in blocks of 5 letters.",
+      "nesw": "The NESW or NEWS cipher takes a square a encodes a character by taking the N, E, S, W, NE, SE, SW or NW wind direction to encode a character. Decoding takes the opposite direction",
+      "nihilist": "The Nihilist cipher is a Polybius cipher. The first key is used to generate a 5x5 square. The second key is added to the generated numbers. The alphabet must be 25 characters and both keys are required.",
+      "nihilisttransposition": "The Nihilist transposition cipher is a columnar followed by a row based transposition, using the same key for both. The transposed grid can be read by rows or columns. The message size equals square of the key length.",
+      "onetimepad": "The one time pad has a key with the same length as the message. It is the only truly unbreakable cipher (if you never reuse the pad).",
+      "phillips": "The Phillips cipher is based on a Polybius square whose rows, columns or both are reordered to form 8 different squares. The plaintext is enciphered using each square in turn for groups of 5 letters.",
+      "playfair": "The Playfair cipher is a polygraphic cipher coding 2-letters at a time. The alphabet must be a square number characters.",
+      "polybius": "The Polybius cipher uses a 5x5 (or 6x6) square. The rows and columns are normally numbered 1 to 5 (or 1 to 6) but this can be changed. The alphabet must be 25 or 36 characters and both keys are required.",
+      "pollux": "The Pollux cipher translates a message into morse and then replaces the dot, hyphen and word breaks with a randomly selected character.",
+      "porta": "The porta cipher is a polyalphabetic cipher which uses 13 alphabets.",
+      "portax": "Portax is a polygraphic (replaces digrams), polyalphabetic (it shifts the alphabet), transposition (rows to columns) cipher.",
+      "ragbaby": "Using a selected keyword, construct a mixed alphabet. Keeping word divisions, the letters of the plaintext are numbered sequentially beginning with the first character of each word.  Ciphertext characters are obtained by taking the letter that is the indicated number of places to the right.",
+      "railfence": "The railfence cipher is a transposition cipher using a zigzag pattern.",
+      "redefence": "The redefence cipher is a transposition cipher. It is the generic form of the railfence cipher.",
+      "reverse": "Reverse the message",
+      "reversewords": "Reverse each word of the message",
+      "rot5": "ROT5 is a simple Caesar cipher that just uses digits. Default it has a shift of 5.",
+      "rot47": "ROT47 is a Caesar cipher that uses an alphabet with lower- and uppercase, digits and some symbols (ASCII karakters 33 t/m 126). Default it has a shift of 47.",
+      "rot123": "ROT123 increase the shift each time with 1. Numbers are shifted separately. Anything else is not encoded or decoded.",
+      "scytale": "Scytale is a very basique transposition cipher used in ancient Greece and by spartans. It uses a cylinder and a band characterized by its number of turns around the cylinder.",
+      "skip": "The skip cipher is a transposition cipher that consists of extracting the letters of a message every n characters (by jumping n characters). When the end of the message is reached, resume at the beginning (loop).",
+      "substitution": "The generic substitution uses a random reordered alphabet. If you don't know it you can better use the Smart Replace tool.",
+      "syllabary": "The Syllabary cipher was introduced by G-MAN (Robert J Friedman) in the May-June 2012 issue of the Cryptogram magazine. It is based on a standard 10x10 Key-Square containing all 26 letters and all 10 digits, plus a number of 2-letter and 3-letter combinations. Words can usually be represented in more than one way by row and column coordinates. For example AMSTERDAM can be encrypted as A M ST ER DA M but also as A M S TER D A M. This algorithm always takes the longest matches first. Decryption works always as long as the code is valid. The rows and columns are default numbered 0123456789 but they can be numbered anyway you like.",
+      "tapir": "TAPIR is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters, some digrams, numbers and some special characters.",
+      "trevanion": "Trevanion takes each letter after a signal character, usually punctuation. The offset is default one, but can be any number of characters after the signal. Characters that are not in the alphabet are ignored and do not count. The cipher is named after John Trevanion, a prisoner who received an encrypted letter, but this story is probably a fake.",
+      "trifid": "The trifid cipher uses a table to fractionate each plaintext letter into a trigram, mixes the constituents of the trigrams, and then applies the table in reverse to turn these mixed trigrams into ciphertext letters. The alphabet must be 27 long.",
+      "trisquare": "The trisquare cipher uses three polybius squares and encodes digrams (2 letters) into trigrams (3 letters).",
+      "vatsyayana": "The Vatsyayana or Kamasutra cipher uses pairs of the letters who replace each other.",
+      "vigenere": "The Vigenère cipher is a method of encrypting alphabetic text by using a series of interwoven Caesar ciphers, based on the letters of a (required) keyword. It employs a form of polyalphabetic substitution.",
+      "zebra": "ZEBRA is the name of a substitution table that was used in the National People’s Army as well as the Ministry of State Security of the German Democratic Republic. It replace single letters including German diacretics, some digrams, some trigrams, numbers and some special characters.",
+      "zygazyfa": "The Zygazyfa cipher was created by Ray Crowther for fun. He uses it in some of his geocaches. It is a polyalphabetic cipher using a kind of autokey."
     }
-  },
-
-  "cperrors" : {
-    "nothingtodo": "No message to encode or decode.",
-    "isrequired" : " is required.",
-    "mustbegreaterthen1" : " must be greater than 1.",
-    "mustbegreaterthen0" : " must be greater than 0.",
-    "mustbe1or2": " must be 1 or 2.",
-    "mustbe1char": " must be one character.",
-    "mustbeeof": " must be one character that is not in the alphabet.",
-    "mustbenumeric": " must be a number.",
-    "mustbehalfalf" : " must be half the length of the alphabet.",
-    "mustbe10ormore" : " must be 10 or more characters.",
-    "mustbe9": " must be 9 characters.",
-    "msg25key": "Message must be 25 times de key length long.",
-    "msgmustbesquareofkey" : " message size must be square of key length.",
-    "keylongerthenmsg" : " must be at least as long as the message.",
-    "keymustbesqrroot" : " must be square root of length of alphabet.",
-    "keymustbealph" : " must be the same length as the alphabet.",
-    "keyfromalph" : " must be composed of the alphabet.",
-    "keymustbenumeric" : " must be numeric."
   },
 
   "codebook": {
     "title": "Codebook",
-    "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search.",
-    "availtags": "Available tags",
-    "pagesfound": "Codes found - "
+    "long": "Find codes using keywords and tags. Almost 200 different codes are available. Available tags refer to origin of the code, the shapes used and other ways to identify the code. Type a text and/or select one of the tags and press Search."
   },
 
   "fonts": {
     "title": "Fonts",
-    "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>",
-    "selfont": "Select font",
-    "fontsize": "Select fontsize (e.g. 24px)",
-    "selcolor": "Select color",
-    "lineheight": "Line height (e.g. 1.5)",
-    "standard": "Standard"
+    "long": "<p>A code can be as simple as using a different font. More than 50 fonts are available as fonts. Just type any text and display it in the selected font. Make a screenshot to create your own puzzles. Or simply use it to solve mysteries that use these fonts.</p>"
   },
 
   "segment": {
     "title": "Segment display",
-    "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on. The binary notation could also be converted to a number.</p>",
-    "segsize": "Number of segments",
-    "input": "Segments as letters or as binary",
-    "letters": "Letter notation",
-    "binary": "Binary notation",
-    "numeric": "Numeric notation (0-9)",
-    "octal": "Octal notation (0-7)",
-    "hexa": "Hexadecimal notation (0-9A-F)",
-    "space": "Space is all segments off"
+    "long": "<p>Segment displays are used in electronics. Numbers and letters are shown by switching 7, 14 or 16 segments on or off. The segments are identified by letters, e.g. A to G for 7-segment displays. Alternatively 0 and 1 (binary) is used to indicate which segments are off and on. The binary notation could also be converted to a number.</p>"
   },
 
   "morsecode": {
     "title": "Morse code",
-    "long": "<p>Morse code is a method of encoding text characters as standardized sequences of two different signal durations, called dots and dashes. Morse code can be transmitted in sound, light or as a visual signal. It is widely used in geocaching puzzles. This tool supports letters, digits and some punctuation.</p><p>The tool can read morse from audio files (e.g. WAV or OGG). It can also play messages in morse and save them as an audio file (WAV). It also supports converting text to morse code and vice versa.</p>",
-    "decodeaudio": "Read morse from an audiofile",
-    "decodectl": "The parameters below can be used to finetune the decoding of audio files. The default values work in many cases, but audio files can be hard to decode. The morse signal might be obscured by noise. The duration of the signals might vary. Use the threshold to filter the signal from noise. It works in small steps and is sensitive, so adjust carefully. The duration of a dash is normally around 3 times the duration of a dot, but it can be more or less. The duration of the pause between letters is normally around 3 times the duration of a dot. The duration of the pauze between words is normally around 7 times the duration of a dot. The default parameters are a bit lower to allow for variations.",
-    "thres": "Threshold for signal detection (default 0.15)",
-    "dottohyphen": "Duration of a dash in relation to a dot (default 2.6)",
-    "dottopause": "Pause between letters in relation to a dot (default 2.4)",
-    "dottospace": "Pause between words in relation to a dot (default 5.0)",
-    "playmessage": "Play or save a message in morse code",
-    "encodectl": "The parameters below can be used to finetune the playing of morse code messages. Words per minute (WPM) is the standard way to indicate the speed of morse code. The default value is 20 WPM, which is a means the word PARIS can be sent 20 times per minute. If you want to play the message faster or slower, you can adjust the WPM value. The frequency is the pitch of the sound. The default value is 600 Hz, which is a common frequency for morse code. You can adjust it to make it easier to hear.",
-    "wpm": "Words per minute (default 20)",
-    "freq": "Frequency in Hz (default 600)",
-    "fileloaded1": "Info: File loaded successfully. Ready to decode. Samplerate: ",
-    "fileloaded2": " Hz, Duration: ",
-    "fileloaded3": " seconds.",
-    "noaudio": "Audio file appears to be empty. Please check the file and try again.",
-    "nomorse": "Could not find any Morse code signals. Try a file with a clearer 'beep' or adjust the threshold.",
-    "success": "Info: Successfully decoded morse code from audio.",
-    "notsupported": "Audio format not supported, no audio file or the file is corrupted.",
-    "failgen": "Failed to generate morse code audio: ",
-    "textmorse": "Text to morse code or morse code to text",
-    "textmorsectl": "Type morse code (using . and -) and press decode to get the text. Letters in morse code should be separated by a space. Words are normally separated by a slash (/),but this can be changed. Press encode to translate text to morse code.",
-    "spacesep": "Separator for words in morse code (default /)"
+    "long": "<p>Morse code is a method of encoding text characters as standardized sequences of two different signal durations, called dots and dashes. Morse code can be transmitted in sound, light or as a visual signal. It is widely used in geocaching puzzles. This tool supports letters, digits and some punctuation.</p><p>The tool can read morse from audio files (e.g. WAV or OGG). It can also play messages in morse and save them as an audio file (WAV). It also supports converting text to morse code and vice versa.</p>"
   },
 
   "bitplane" : {
@@ -586,586 +250,421 @@
 
   "exifscanner": {
     "title": "Exif Scanner",
-    "long": "Exif reader retrieve the metadata (EXIF and others) from an image. If a GPS location is included it is shown on the map. Also flips or rotates the image.",
-    "nogps": "No GPS from camera",
-    "gps": "GPS from camera",
-    "error": "Error loading image or EXIF data",
-    "noinfo": "No info",
-    "info": "Image info",
-    "cinfo": "Camera info",
-    "desc": "Description",
-    "ainfo": "Author info",
-    "filename": "Filename",
-    "filetype": "Type",
-    "size": "Size",
-    "width": "Width",
-    "height": "Height",
-    "npixels": "# pixels",
-    "date": "Date & time",
-    "datec": "Date & time created",
-    "camera": "Camera",
-    "lens": "Lens",
-    "aperture": "Aperture",
-    "shutter": "Shutter",
-    "title2": "Title",
-    "subject": "Subject",
-    "about": "About",
-    "keywords": "Keywords",
-    "comment": "Comment",
-    "artist": "Artist",
-    "creator": "Creator",
-    "author": "Author",
-    "copyright": "Copyright"
+    "long": "Exif reader retrieve the metadata (EXIF and others) from an image. If a GPS location is included it is shown on the map. Also flips or rotates the image."
   },
 
   "colorpicker": {
     "title": "Color Picker",
-    "long": "A tool that shows the RGB, hexadecimal RGB, CMY(K), HSL and HSV color values. Click anywhere in the image to display the values.",
-    "selcolor": "Selected color",
-    "rgbval": "RGB values",
-    "alpha": "Alpha channel",
-    "hexval": "RGB hexadecimal",
-    "hex": "RGB hex",
-    "hslval": "Hue, Saturation, Lightness",
-    "hue": "Hue",
-    "sat": "Saturation",
-    "lum": "Lumination",
-    "hsvval": "Hue, Saturation, Brigthness",
-    "bri": "Brightness",
-    "cmykval": "CMYK values",
-    "cmyval": "CMY values"
+    "long": "A tool that shows the RGB, hexadecimal RGB, CMY(K), HSL and HSV color values. Click anywhere in the image to display the values."
   },
 
   "filltool": {
     "title": "Color editor",
-    "long": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>",
-    "selfill": "Fill color",
-    "tol": "Tolerance",
-    "fill": "Color fill",
-    "fillinfo": "Click anywhere in the image to fill an area.",
-    "filter": "Filters",
-    "conbri": "Brightness & contrast",
-    "brigh": "Brightness",
-    "contr": "Contrast",
-    "gray1": "Grayscale (Averaged)",
-    "gray2": "Grayscale (Luminance)",
-    "invert": "Invert",
-    "sepia": "Sepia",
-    "colordepth": "Reduce color depth",
-    "colors": "colors"
+    "long": "<p>Replace one color with another. Try to replace large areas with the same color with another to reveal unseen differences in color. Convert the image to grayscale, sepia, invert the image or apply one of the other filters. Reduce the color depth. Change the contrast or brightness.</p><p>Click anywhere in the image to fill the area with the selected fill color. The tolerance defaults to 0. If you increase the tolerance, colors close to the selected color will also be filled. The maximum tolerance is 255 which causes the entire image to be filled. Use the sliders and buttons to apply anyone of the other settings.</p>"
   },
 
   "pixeldata": {
     "title": "Pixel analysis",
-    "long": "<p>With Pixel Analysis users can upload any image and extract comprehensive metadata, including precise dimensions, total pixel counts, and perceived average brightness. The application performs analysis by calculating the cumulative intensity of red, green, and blue channels while identifying 'dead-zones'—specific pixels where color data is absent. By clicking anywhere on the image preview, users can capture exact RGB values and count the number of exact matches. The count is alpha-aware meaning that transparent areas do not skew the results.</p><p>To aid in visual data interpretation, the suite features a dynamic histogram. This visualizer provides a frequency distribution map for individual color channels and overall luminance.</p>",
-    "count": "To count the number of pixels select values for red, green and blue or click the preview",
-    "targetcolor": "Target color search",
-    "metadata": "Image metadata",
-    "histogram": "Frequency distribution",
-    "channel": "Channel Intensity",
-    "channelexpl": "Sum of all R, G and B values in the image",
-    "deadzones": "Dead zones",
-    "deadzonesexpl": "Visible pixels where channel is 0",
-    "avgcol": "Average color"
+    "long": "<p>With Pixel Analysis users can upload any image and extract comprehensive metadata, including precise dimensions, total pixel counts, and perceived average brightness. The application performs analysis by calculating the cumulative intensity of red, green, and blue channels while identifying 'dead-zones'—specific pixels where color data is absent. By clicking anywhere on the image preview, users can capture exact RGB values and count the number of exact matches. The count is alpha-aware meaning that transparent areas do not skew the results.</p><p>To aid in visual data interpretation, the suite features a dynamic histogram. This visualizer provides a frequency distribution map for individual color channels and overall luminance.</p>"
   },
 
   "pixelbuild": {
     "title": "Pixeldraw",
-    "long": "<p>Tool to draw an image from a text with up to 10 different characters. Each character representing a different color. Example is a sequence of 0 and 1 representing a QR code. Another example would be a color drawing where the image appears if all colors are filled.</p><p>Height and width are optional. If height is empty, the number of lines in the input represents the height. If width is emptt, the length of the first line represents the width. You can select which character represents which color.</p>",
-    "input": "Text input",
-    "options": "Options"
+    "long": "<p>Tool to draw an image from a text with up to 10 different characters. Each character representing a different color. Example is a sequence of 0 and 1 representing a QR code. Another example would be a color drawing where the image appears if all colors are filled.</p><p>Height and width are optional. If height is empty, the number of lines in the input represents the height. If width is emptt, the length of the first line represents the width. You can select which character represents which color.</p>"
   },
 
   "imagetransform": {
     "title": "Transform",
-    "long": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image.",
-    "shift": "Shift",
-    "shiftinfo": "Select the number of pixels to shift each row/column.",
-    "shiftr": "Shift row #pixels",
-    "shiftc": "Shift column #pixels",
-    "fliphalf": "Flip half",
-    "flipinfo": "Select the width in pixels of row/column.",
-    "flipr": "Flip rows of #pixels",
-    "flipc": "Flip columns of #pixels",
-    "transform": "Mirror image",
-    "fliph": "Flip horizontal",
-    "flipv": "Flip vertical"
+    "long": "Shift each row or column a few pixels (cumulative). Flip half the rows or columns (each row or column one or more pixels wide). Mirror the entire image."
   },
 
   "textextractor": {
     "title": "Text extractor",
-    "long": "<p>Hiding texts in images, sounds or other files is a simple way to disguise a message. These small changes are often unnoticable. This kind of steganograpy works especially well on uncompressed data such as bitmaps and WAV files.</p<p>The tool can easily find those messages. This id done by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely.</p>",
-    "length": "Minimum string length",
-    "max": "Maximum number of results",
-    "start": "Start at position",
-    "maxexceeded": "Maximum number of results found. Use start position to continue search.",
-    "fileerror": "Error loading file."
+    "long": "<p>Hiding texts in images, sounds or other files is a simple way to disguise a message. These small changes are often unnoticable. This kind of steganograpy works especially well on uncompressed data such as bitmaps and WAV files.</p<p>The tool can easily find those messages. This id done by looking at printable charactters (ASCII 32 t/m 126). The minimum lenght of the string should be specified. The maximum number of search results and the start position can also be set. For example try to find long strings first and then use start position to search for smaller strings. Large files can take some time to scan or might fail to load entirely.</p>"
   },
 
   "barcode": {
     "title": "Barcodes",
-    "long": "Create a barcode. Some codes accept all text and characters, such as CODE128, QR, Datamatrix and Aztec. Other codes only accept numbers or only a small set of characters.",
-    "bctype": "Barcode type",
-    "msg": "Message",
-    "clr": "Bar color",
-    "bgclr": "Background color",
-    "showtxt": "Show text (works only for some barcodes)"
+    "long": "Create a barcode. Some codes accept all text and characters, such as CODE128, QR, Datamatrix and Aztec. Other codes only accept numbers or only a small set of characters."
   },
 
   "htmlparser": {
     "title": "Scan HTML",
-    "long": "Sometimes information is hidden inside the cache listing using HTML. For example using white or very small text, or marking letters as bold, italic or in some other way. Links can be hidden inside images or in other places. HTML Scanner scans the page source for links, images and hidden information. This tool only works with the official pages from geocaching.com. Copy & paste the page source below.",
-    "ph": "Paste the page source here",
-    "btnscan": "Scan",
-    "links": "Links found - select to open the link",
-    "images": "Images found - select to view the image",
-    "bgimages": "Background images found - select to view the image",
-    "comms": "(Hidden) comments found",
-    "white": "White text found",
-    "strong": "Strong text",
-    "bold": "Bold text",
-    "ital": "Italic text",
-    "sup": "Superscript text",
-    "sub": "Subscript text",
-    "size": "Font sized",
-    "del": "Deleted text",
-    "em": "Emphasized text",
-    "nocache": "No cache details found, please load correct page source",
-    "complete": "Scan completed, details below (could be none)",
-    "error": "Error loading or scanning the page source"
+    "long": "Sometimes information is hidden inside the cache listing using HTML. For example using white or very small text, or marking letters as bold, italic or in some other way. Links can be hidden inside images or in other places. HTML Scanner scans the page source for links, images and hidden information. This tool only works with the official pages from geocaching.com. Copy & paste the page source below."
   },
 
   "sudokusolv": {
     "title": "Sudoku solver",
-    "long":  "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares or alternatively type the hints as row column number separed by comma, e.g. 125,243,254",
-    "error": "Error solving sudoku, too many solutions or server timeout",
-    "type": "Sudoku type",
-    "size": "Size",
-    "alt": "Hints",
-    "thereare": "There are",
-    "sols": "solutions"
+    "long":  "Solver for  Sudoku and Sudoku X, sizes 2 and 3. Size 4 disabled because of server load. Fill the squares or alternatively type the hints as row column number separed by comma, e.g. 125,243,254"
   },
 
   "mmsolver": {
     "title": "Mastermind solver",
-    "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors.",
-    "npin": "Number of pins",
-    "ncolor": "Number of colors",
-    "unique": "Colors must be unique",
-    "pins": "Tries",
-    "pos": "Match location and color",
-    "col": "Match color only",
-    "invalidhint1": "Try must have the correct number of pins",
-    "invalidhint2": "Try has invalid color",
-    "invalidhint3": "Number of matches must be less or equal to number of pins"
+    "long":  "Mastermind is a logic game. The objective is to determine a code (a set of colors). For each attempt the number of correctly placed pins (location and color okay) as well ass the number of correct colors (color is okay but in the wrong position) is given. By using this information for the next attempt the combination can be determined. The original game had 5 positions (or pins) and used 8 colors. The most popular variant has 4 pins and 6 colors. The colors can be made unique, but this is not mandatory. This tool uses numbers instead of colors. Provide the number of pins, the number of colors and all the tried combinations with the number of correctly placed pins and colors."
   },
 
   "periodictable": {
     "title": "Periodic table",
-    "long": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>",
-    "ph": "Type numbers, names or symbols",
-    "searchsym": "Search symbols",
-    "searchnum": "Search numbers",
-    "searchname": "Search names",
-    "num": "Number",
-    "sym": "Symbol",
-    "grp": "Group",
-    "prd": "Period",
-    "blk": "Block",
-    "name": "Name"
+    "long": "<p>The periodic table is a system for classifying chemical elements. Each element has a number, a symbol to represent the element and a name. Chemical elements are also classified as a belonging to a certain group, period and block, depending on their chemical configuration. Please note that elements 119 and higher have only so-called systematic names. Also note that elements 110, 111 and 112 were previously Uun, Uuu and Uub.</p><p>This tool will search elements on number, symbol or name. Invalid input is simply ignored. Numbers and names have to be separated by spaces. Symbols can be typed without spaces and use the official notation: first a capital and then if present a lowercase letter, e.g. HSAgCoCCr. Pay attention as Co means Cobalt, but CO is Carbon and Oxygen.</p>"
   },
 
   "resistor": {
     "title": "Resistor colors",
-    "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>",
-    "band": "Band",
-    "mult": "Multiplier",
-    "res": "The resistance value is:"
+    "long": "<p>Resistors use colors to indicate their value (in Ohms). Colors are easier to read than numbers. There are 3, 4, 5 and 6 band color codes. For the three and four band resistors the first two give a value and the third band is the multiplier. For five and six band resistors the first three give the value and the 4th band is the multiplier. The 5th band is the tolerance and the 6th is the thermal capacity. The color codes are:&nbsp;<span style='text-align: center'><span style='background-color: black; color: white; padding-right: 15px; padding-left: 15px;'>0</span><span style='background-color: brown; color: white; padding-right: 15px; padding-left: 15px;'>1</span><span style='background-color: red; color: black; padding-right: 15px; padding-left: 15px;'> 2 </span><span style='background-color: orange; color: black; padding-right: 15px; padding-left: 15px;'> 3 </span><span style='background-color: yellow; color: black; padding-right: 15px; padding-left: 15px;'> 4 </span><span style='background-color: green; color: black; padding-right: 15px; padding-left: 15px;'> 5 </span><span style='background-color: blue; color: white; padding-right: 15px; padding-left: 15px;'> 6 </span><span style='background-color: violet; color: black; padding-right: 15px; padding-left: 15px;'> 7 </span><span style='background-color: gray; color: black; padding-right: 15px; padding-left: 15px;'> 8 </span><span style='background-color: white; color: black; padding-right: 15px; padding-left: 15px;'> 9 </span></span><br><p>The colors gold and silver are only valid for the multiplier, with gold is x 0.1 and silver is x 0.01. This calculator is for the 5 and 6 band version, select the colors of the first 4 bands. You can use it for the 3 and 4 band version, select black (0) for the first band and then select band 2, band 3 and the multiplier.</p>"
   },
 
   "decabit": {
     "title": "Decabit",
-    "long": "<p>Decabit is a protocol to transmit data across power lines using a series of electronic pulses. It transmits numbers between 0 up to and including 126. The numbers can be interpreted as numbers, as ASCII or anything else, for example positions in the alphabet.</p><p>This tool encodes and decodes decabit. Input/output can be numbers or text. Numbers should be between 0 - 126. Press encode to translate to decabit. Press decode to translate decabit back to text or numbers.</p>",
-    "selenc": "Select encoding",
-    "selnum": "Numbers (0 - 126)",
-    "selascii": "Text ASCII",
-    "selalpha": "Text alphabet (A=1, Z=26)"
+    "long": "<p>Decabit is a protocol to transmit data across power lines using a series of electronic pulses. It transmits numbers between 0 up to and including 126. The numbers can be interpreted as numbers, as ASCII or anything else, for example positions in the alphabet.</p><p>This tool encodes and decodes decabit. Input/output can be numbers or text. Numbers should be between 0 - 126. Press encode to translate to decabit. Press decode to translate decabit back to text or numbers.</p>"
   },
 
   "vanitycode" : {
     "title": "Vanity code",
-    "long": "<p>Vanity code is a method of encoding text into a sequence of numbers, using the same system as telephone keypads. Also known as the T9-alphabet or Nokia alphabet. Just type the text or codes and the result will be shown immediately.</p>",
-    "spaces": "Add spaces when encoding.",
-    "ignorespaces": "Ignore spaces when encoding.",
-    "addspaces": "Separate input with spaces",
-    "sel": "Select what to do",
-    "unknownchar": "Unknown characters: ",
-    "unknowncode": "Unknown codes: "
+    "long": "<p>Vanity code is a method of encoding text into a sequence of numbers, using the same system as telephone keypads. Also known as the T9-alphabet or Nokia alphabet. Just type the text or codes and the result will be shown immediately.</p>"
   },
 
   "countries": {
     "title": "Country codes",
-    "long": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>",
-    "ph": "Type multiple codes or numbers",
-    "flag": "Flag",
-    "ccode3": "ISO 3-letter code",
-    "ccode2": "ISO 2-letter code",
-    "cnum": "ISO country nr",
-    "name": "Country",
-    "tel": "Phone",
-    "web": "Web TLD",
-    "cur": "Currency",
-    "ccur": "Currency code",
-    "lcp": "License plate",
-    "names": {
-      "abw": "Aruba",
-      "afg": "Afghanistan",
-      "ago": "Angola",
-      "aia": "Anguilla",
-      "ala": "Åland",
-      "alb": "Albania",
-      "and": "Andorra",
-      "are": "United Arab Emirates",
-      "arg": "Argentina",
-      "arm": "Armenia",
-      "asm": "American Samoa",
-      "ata": "Antarctica",
-      "atf": "French Southern and Antarctic Lands",
-      "atg": "Antigua and Barbuda",
-      "aus": "Australia",
-      "aut": "Austria",
-      "aze": "Azerbaijan",
-      "bdi": "Burundi",
-      "bel": "Belgium",
-      "ben": "Benin",
-      "bes": "Caribbean Netherlands",
-      "bfa": "Burkina Faso",
-      "bgd": "Bangladesh",
-      "bgr": "Bulgaria",
-      "bhr": "Bahrain",
-      "bhs": "The Bahamas",
-      "bih": "Bosnia and Herzegovina",
-      "blm": "Saint Barthélemy",
-      "blr": "Belarus",
-      "blz": "Belize",
-      "bmu": "Bermuda",
-      "bol": "Bolivia",
-      "bra": "Brazil",
-      "brb": "Barbados",
-      "brn": "Brunei",
-      "btn": "Bhutan",
-      "bvt": "Bouvet Island",
-      "bwa": "Botswana",
-      "caf": "Central African Republic",
-      "can": "Canada",
-      "cck": "Cocos (Keeling) Islands",
-      "che": "Switzerland",
-      "chl": "Chili",
-      "chn": "China",
-      "civ": "Ivory Coast",
-      "cmr": "Cameroon",
-      "cod": "Democratic Republic of the Congo",
-      "cog": "Republic of the Congo",
-      "cok": "Cook Islands",
-      "col": "Colombia",
-      "com": "Comoros",
-      "cpv": "Cape Verde",
-      "cri": "Costa Rica",
-      "cub": "Cuba",
-      "cuw": "Curaçao",
-      "cxr": "Christmas Island",
-      "cym": "Cayman Islands",
-      "cyp": "Cyprus",
-      "cze": "Czech Republic",
-      "deu": "Germany",
-      "dji": "Djibouti",
-      "dma": "Dominica",
-      "dnk": "Denmark",
-      "dom": "Dominican Republic",
-      "dza": "Algeria",
-      "ecu": "Ecuador",
-      "egy": "Egypt",
-      "eri": "Eritrea",
-      "esh": "Western Sahara",
-      "esp": "Spain",
-      "est": "Estonia",
-      "eth": "Ethiopia",
-      "fin": "Finland",
-      "fji": "Fiji",
-      "flk": "Falkland Islands",
-      "fra": "France",
-      "fro": "Faroe Islands",
-      "fsm": "Micronesia",
-      "gab": "Gabon",
-      "gbr": "United Kingdom",
-      "geo": "Georgia",
-      "ggy": "Guernsey",
-      "gha": "Ghana",
-      "gib": "Gibraltar",
-      "gin": "Guinea",
-      "glp": "Guadeloupe",
-      "gmb": "The Gambia",
-      "gnb": "Guinea-Bissau",
-      "gnq": "Equatorial Guinea",
-      "grc": "Greece",
-      "grd": "Grenada",
-      "grl": "Greenland",
-      "gtm": "Guatemala",
-      "guf": "French Guiana",
-      "gum": "Guam",
-      "guy": "Guyana",
-      "hkg": "Hong Kong",
-      "hmd": "Heard Island and McDonald Islands",
-      "hnd": "Honduras",
-      "hrv": "Croatia",
-      "hti": "Haiti",
-      "hun": "Hungary",
-      "idn": "Indonesia",
-      "imn": "Isle of Man",
-      "ind": "India",
-      "iot": "British Indian Ocean Territory",
-      "irl": "Ireland",
-      "irn": "Iran",
-      "irq": "Iraq",
-      "isl": "Iceland",
-      "isr": "Israel",
-      "ita": "Italy",
-      "jam": "Jamaica",
-      "jey": "Jersey",
-      "jor": "Jordan",
-      "jpn": "Japan",
-      "kaz": "Kazakhstan",
-      "ken": "Kenya",
-      "kgz": "Kyrgyzstan",
-      "khm": "Cambodia",
-      "kir": "Kiribati",
-      "kna": "Saint Kitts and Nevis",
-      "kor": "South Korea",
-      "kwt": "Kuwait",
-      "lao": "Laos",
-      "lbn": "Lebanon",
-      "lbr": "Liberia",
-      "lby": "Libya",
-      "lca": "Saint Lucia",
-      "lie": "Liechtenstein",
-      "lka": "Sri Lanka",
-      "lso": "Lesotho",
-      "ltu": "Lithuania",
-      "lux": "Luxembourg",
-      "lva": "Latvia",
-      "mac": "Macau",
-      "maf": "Collectivity of Saint Martin",
-      "mar": "Morocco",
-      "mco": "Monaco",
-      "mda": "Moldova",
-      "mdg": "Madagascar",
-      "mdv": "Maldives",
-      "mex": "Mexico",
-      "mhl": "Marshall Islands",
-      "mkd": "North Macedonia",
-      "mli": "Mali",
-      "mlt": "Malta",
-      "mmr": "Myanmar",
-      "mne": "Montenegro",
-      "mng": "Mongolia",
-      "mnp": "Northern Mariana Islands",
-      "moz": "Mozambique",
-      "mrt": "Mauritania",
-      "msr": "Montserrat",
-      "mtq": "Martinique",
-      "mus": "Mauritius",
-      "mwi": "Malawi",
-      "mys": "Malaysia",
-      "myt": "Mayotte",
-      "nam": "Namibia",
-      "ncl": "New Caledonia",
-      "ner": "Niger",
-      "nfk": "Norfolk Island",
-      "nga": "Nigeria",
-      "nic": "Nicaragua",
-      "niu": "Niue",
-      "nld": "Netherlands",
-      "nor": "Norway",
-      "npl": "Nepal",
-      "nru": "Nauru",
-      "nzl": "New Zealand",
-      "omn": "Oman",
-      "pak": "Pakistan",
-      "pan": "Panama",
-      "pcn": "Pitcairn Islands",
-      "per": "Peru",
-      "phl": "Philippines",
-      "plw": "Palau",
-      "png": "Papua New Guinea",
-      "pol": "Poland",
-      "pri": "Puerto Rico",
-      "prk": "North Korea",
-      "prt": "Portugal",
-      "pry": "Paraguay",
-      "pse": "State of Palestine",
-      "pyf": "French Polynesia",
-      "qat": "Qatar",
-      "reu": "Réunion",
-      "rou": "Romania",
-      "rus": "Russia",
-      "rwa": "Rwanda",
-      "sau": "Saudi Arabia",
-      "sdn": "Sudan",
-      "sen": "Senegal",
-      "sgp": "Singapore",
-      "sgs": "South Georgia and the South Sandwich Islands",
-      "shn": "Saint Helena, Ascension and Tristan da Cunha",
-      "sjm": "Svalbard and Jan Mayen",
-      "slb": "Solomon Islands",
-      "sle": "Sierra Leone",
-      "slv": "El Salvador",
-      "smr": "San Marino",
-      "som": "Somalia",
-      "spm": "Saint Pierre and Miquelon",
-      "srb": "Serbia",
-      "ssd": "South Sudan",
-      "stp": "São Tomé and Príncipe",
-      "sur": "Suriname",
-      "svk": "Slovakia",
-      "svn": "Slovenia",
-      "swe": "Sweden",
-      "swz": "Eswatini",
-      "sxm": "Sint Maarten",
-      "syc": "Seychelles",
-      "syr": "Syria",
-      "tca": "Turks and Caicos Islands",
-      "tcd": "Chad",
-      "tgo": "Togo",
-      "tha": "Thailand",
-      "tjk": "Tajikistan",
-      "tkl": "Tokelau",
-      "tkm": "Turkmenistan",
-      "tls": "East Timor",
-      "ton": "Tonga",
-      "tto": "Trinidad and Tobago",
-      "tun": "Tunisia",
-      "tur": "Turkey",
-      "tuv": "Tuvalu",
-      "twn": "Taiwan",
-      "tza": "Tanzania",
-      "uga": "Uganda",
-      "ukr": "Ukraine",
-      "umi": "United States Minor Outlying Islands",
-      "ury": "Uruguay",
-      "usa": "United States",
-      "uzb": "Uzbekistan",
-      "vat": "Vatican City",
-      "vct": "Saint Vincent and the Grenadines",
-      "ven": "Venezuela",
-      "vgb": "British Virgin Islands",
-      "vir": "United States Virgin Islands",
-      "vnm": "Vietnam",
-      "vut": "Vanuatu",
-      "wlf": "Wallis and Futuna",
-      "wsm": "Samoa",
-      "yem": "Yemen",
-      "zaf": "South Africa",
-      "zmb": "Zambia",
-      "zwe": "Zimbabwe"
-    }
+    "long": "<p>List of all the countries and named territories in the world according to ISO3166. A total of 249 countries with their names, currencies and flags. Countries also have a 2-letter code (in most cases this is the same as the internet domain), a 3 letter code and number according to ISO3166. All countries also have a dialing code for international phone traffic and most have a vehicle registraion code. The names used are the commom names and not the official ones, additions like 'Republic of' and so on are not used here. The currencies are the simple names, without the common prefixes denoting the origin, e.g. Australian dollar or Mexican peso. The currency codes are the latest, but be aware these codes do change sometimes.</p><p>These codes and numbers, as well as word values of countries are often used in geocaches. You can also browse the entire table with countries and their details (including flags).</p><p>You can type multiple codes and numbers. The 2 and 3 letter codes don't need a space in between, the numbers do. If the result looks good but not perfect, you can check online resources for alternative spellings, names and so on.</p>"
   },
 
   "usastates": {
     "title": "US States",
-    "long": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>",
-    "ph": "Type searches divided by spaces, for state codes the spaces can be omitted",
-    "flag": "Flag",
-    "code": "ISO3166:2 code",
-    "name": "State",
-    "num": "Joined as",
-    "reps": "US House reps",
-    "area": "Area ranking",
-    "cap": "Capital"
+    "long": "<p>List of all the states of the United States of America, inclusief flag. The code is both the code used by US Postal Services as well as the code according to <a href='https://en.wikipedia.org/wiki/ISO_3166-2:US'>ISO3166-2:US</a>. Also shown are the ranking according to area, ranking according to joined data and the number of representatives in the House.</p><p>You can type multiple codes and numbers. The USPS Code doesn't need a space in between. If the result looks good but not perfect, you can check online resources for alternative spellings, data, names and so on. The state name contains a link to the wikipedia page.</p>"
   },
 
   "regions": {
     "title": "Regions of nl, be, de and fr",
-    "long": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>",
-    "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
-    "list": "Countries",
-    "nl": "Netherlands",
-    "be": "Belgium",
-    "de": "Germany",
-    "fr": "France",
-    "flag": "Flag",
-    "code": "ISO3166:2 code",
-    "name": "Province",
-    "mun": "#Municipalities",
-    "area": "Area ranking",
-    "cap": "Capital",
-    "cat": "Type of region",
-    "dep": "#Departments",
-    "arr": "#Arrondisements",
-    "canton": "#Cantons",
-    "bundesrat": "Bundesrat reps",
-    "landkreise": "#Landkreise",
-    "stadtkreise": "#Kreisefreie stadt"
+    "long": "<p>Regions of the Netherlands, Belgium, Germany and France including flags. The name links to the Wikipedia in the language of the country (Dutch, German or French).</p>"
   },
 
   "unitconvertor" : {
     "title": "Units",
-    "long": "Unit convertor converts a wide range of units. Units are organized in categories for units that measure the same event, e.g. length or temperature. It won't be possible to convert between categories. Categories are length, area, volume, temperature, power, angle and speed. All the common units are supported, but also a lot of lesser known or now obsolete units."  ,
-    "value": "Value",
-    "selcat": "Select a category",
-    "unitfrom": "From unit",
-    "unitto": "To unit",
-    "amount": "Amount",
-    "symbol": "Symbol",
-    "unit": "Unit",
-    "cat" : {
-      "length": {
-        "name": "Length & distance",
-        "desc": "The standard unit of length is meter (m). All the default prefixes like kilo (1000), hecta (100), deca (10), deci (1/10), centi (1/100) and milli (1/1000) are available. English speaking countries used / uses imperial units (inch, feet, yard, mile). Before the imperial system several other units were in use (e.g. furlong, rond or barleycorn). There are also former French and Russian units."
-      },
-      "temp": {
-        "name": "Temperature",
-        "desc": "The standard unit (SI unit) of temperature is Kelvin (K), the absolute zero. Celsius and Fahrenheit are the most frequently used. There is also a number of now obsolete temperature scales."
-      },
-      "area": {
-        "name": "Area",
-        "desc": "The standard unit of an area is the square meter (m2). An are is 10mx10m, a hectare 100mx100m. English speaking countries use imperial units like square inch, square feet, square yard and square mile."
-      },
-      "vol": {
-        "name": "Volume",
-        "desc": "The standard unit of volume is the cubic meter (m3). The liter (l or dm3) is frequently used. English speaking countries uses imperial measures like the fluid ounce (fl oz). Traditionally different volumes where used for fluid and dry goods, but this no longer the case, except for US customary volumes."
-      },
-      "power": {
-        "name": "Power",
-        "desc": "The standard unit of power is the Watt (W)."
-      },
-      "mass": {
-        "name": "Mass & weight",
-        "desc": "The standard unit of mass is the kilogram (kg). English speaking countries still use the ounce (oz) and pound (lb). The troy ounce and pound (and carat) are still used for precious stones and metals (troy). The apothecary are mostly replaced with the metric system. There are also old Russian units (before the adoption of the metric system in 1925) and anncient Roman units."
-      },
-      "angle": {
-        "name": "Angle",
-        "desc": "The standard unit of angle is radians (rad), but degrees are more commonly used."
-      },
-      "speed": {
-        "name": "Velocity & speed",
-        "desc": "The standard unit for speed is meter per second (m/s). English speaking countries still use imperial units such as feet per second (ft/s). The knot is a maritime unit."
-      },
-      "time": {
-        "name": "Time",
-        "desc": "The standard unit for time is the second (s). Most of the other units are common as well. When it comes to the exact duration of a year, there are many definitions. The Hebrew calendar also uses a few other definitions."
-      }
-    }
+    "long": "Unit convertor converts a wide range of units. Units are organized in categories for units that measure the same event, e.g. length or temperature. It won't be possible to convert between categories. Categories are length, area, volume, temperature, power, angle and speed. All the common units are supported, but also a lot of lesser known or now obsolete units."
   },
 
   "dnacode": {
     "title": "DNA Code",
-    "long": "<p>DNA or RNA codons are represented with 3 letters. Whenever you see a bunch of letters with lots of A, C, G, T or U you could be dealing with codons. Sometimes other letters are used as well to indicate combinations of codons. For example Y means T or C, so TAY means TAT or TAC. Type the codons in three letter chunks and press search.</p><p>Some background info. Codons are a combination of three nucleo acids. DNA are composed of A (Adenine), C (Cytosine)and G (Guanine) and T (Thymine). RNA shares three of the four nucleo acids but T is replaced with and U (Uracil). Most codons define an amino acid, which have a name, a three letter abbreviation and a single letter. Some codons are start and stop signals. Some codons are used for the same amino acid. A piece of RNA or DNA contains several codons, each representing an amino acid. The resulting chain of amino acids builds a proteine. For more information read <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>this</a>.</p>",
-    "ph": "Type searches, e.g. three letter RNA codes",
-    "letter": "Letter",
-    "abbr": "Abbr.",
-    "aminoacid": "Amino acid",
-    "rna": "RNA codons",
-    "dna": "DNA codons"
+    "long": "<p>DNA or RNA codons are represented with 3 letters. Whenever you see a bunch of letters with lots of A, C, G, T or U you could be dealing with codons. Sometimes other letters are used as well to indicate combinations of codons. For example Y means T or C, so TAY means TAT or TAC. Type the codons in three letter chunks and press search.</p><p>Some background info. Codons are a combination of three nucleo acids. DNA are composed of A (Adenine), C (Cytosine)and G (Guanine) and T (Thymine). RNA shares three of the four nucleo acids but T is replaced with and U (Uracil). Most codons define an amino acid, which have a name, a three letter abbreviation and a single letter. Some codons are start and stop signals. Some codons are used for the same amino acid. A piece of RNA or DNA contains several codons, each representing an amino acid. The resulting chain of amino acids builds a proteine. For more information read <a href='https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables'>this</a>.</p>"
+  },
+
+  "linepointdir": {
+    "title": "Line through point and direction",
+    "start": "Starting point",
+    "pdir": "Point and direction"
+  },
+
+  "convert": {
+    "title": "Convert",
+    "long" : "<p>There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard.</p<p>Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates.</p><p>Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).</p>"
+  },
+
+  "project": {
+    "title": "Project",
+    "long": "A projection is a coordinate with a given distance and direction (angle) from the given coordinate. Many different coordinate systems are supported. Distances can be specified in meters, kilometer, feet, yards and miles. Angles can be specified in degrees, radians and gon."
+  },
+
+  "revwherigo" : {
+    "title": "Reverse Wherigo",
+    "long": "<p>Resolves reverse wherigo (Waltmeister cartridge only). Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p><p>To create a reverse wherigo click the point on the map and press coordinate to reverse.</p>"
+  },
+
+  "mapmaker": {
+    "title": "Map maker",
+    "long" : "Maps a list of coordinates with markers and labels on a map. Optionally draw a circle with a given radius around each coordinate. Ideal for showing possible geocache locations, for placing a geocache or finding a possible location of a mystery cache. Supports many different coordinate systems. Placing of markers and labels can be disabled."
+  },
+
+  "plotcoord" : {
+    "title": "Draw coordinates",
+    "long" : "Make a drawing  of a list of coordinates. The coordinates are connected with lines and/or the polygons are filled. Supports many different coordinate systems. Placing of markers and labels can be disabled."
+  },
+
+  "triangulation": {
+    "title": "Triangulation",
+    "long" : "Triangulation is old way mapping areas on maps. It was used to calculate the grid based coordinates which are still around. Such as the Dutch Rijksdriehoeksmeting (RD) or the Belgina Lambert system. There are two main methods: Forward Intersection and Backward Resection. In Intersection mode, the application determines the exact location of a distant target based on bearings reported from two known observer stations. Conversely, the Resection mode — a classic technique for traditional map-and-compass navigation — calculates an unknown user position by analyzing sightings taken toward three distinct landmarks using the mathematically rigorous Tienstra Formula."
+  },
+
+  "incomplete": {
+    "title": "Incomplete coordinates",
+    "long" : "Plot and calculate possible coördinates where one to four numbers are unknown. For each of the unknowns the available options can be specified. A maximum of 500 locations can be shown. Clicking on the coordinate shows a popup with the used variables. The tool works with all available coordinate systems."
+  },
+
+  "lines": {
+    "title": "Lines",
+    "long" : "Calculate the midpoint, direction and distance of a line. Calculate point nearest on a line relative to another point. Calculate the intersection of two lines. All points and lines are plotted on the map."
+  },
+
+  "triangles": {
+    "title": "Triangles",
+    "long" : "Calculate the area, circumference, centroid, orthocenter, incenter, circumcenter, ninepoints center of a triangle. All points and triangles are shown on the map."
+  },
+
+  "circles": {
+    "title": "Circles",
+    "long" : "Calculate the intersection points and intersection area of two circles. All points and circles are plotted on the map."
+  },
+
+  "antipode": {
+    "title": "Antipode",
+    "long" : "The antipode is the point exactly on the opposite side of the earth. To calculate the latitude of an antipode, change the sign and direction of the latitude of the reference point. To calculate the longitude of an antipode, subtract the absolute value of the reference-point longitude from 180 degrees and change the sign and direction of the answer with reference to the reference point."
+  },
+
+  "tryanswers" : {
+    "title" : "Questions and answers",
+    "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by {'|'}. Just press try all and see if anything makes sense. You tick the boxes to try more options.</p>"
+  },
+
+  "wordvalue": {
+    "title": "Word value & square root",
+    "long" : "A tool to calculate the word value and square root of a text and each word individually. Supports many alphabets, including Greek and Cyrillic, Scrabble and Vanity code. Alphabets can be used in reverse order. Count starts default at one but can also start at zero. Replace diacritics if needed (but please be aware that sometimes diacritics are unique in the used alphabet)."
+  },
+
+  "charcodes": {
+    "title": "Character codes",
+    "long" : "<p>Computers internally use numbers and not letters. A number is translated into a character using a codepage. The most widely used these days is <b>UTF8 or UTF16</b>. <b>ASCII</b> is still frequently used. There are dozen of other codepages. For MS-DOS and Microsoft Windows there are many codepages with regional character sets. <b>Alt codes</b> refer to typing a number on the numeric keypad to display a special character from a Microsoft codepage. There is also an Atari version of Ascii and IBM's proprietary EBCDIC code.</p><p>In telegraphy codes were also used. These <b>Baudot and Murray codes</b> consisted of 5 bits (or holes in a paper tape). The tool can also translate these codes. The Cyrillic version called MTK2 is also supported.</p>"
+  },
+
+  "substcipher": {
+    "title": "Smart replace",
+    "long" : "A tool to solve any kind of substitution cipher. It uses frequency analysis to find the most likely matches for the selected language (English, Dutch, German, French and Spanish). Specify the original and replaced characters and the updated text will be shown with highlighted replacements. It can automatically replace the first 8 most likely candidates."
+  },
+
+  "texttransform" : {
+    "title" : "Text Transfomer",
+    "long": "Transform your text by cleaning it up, changing cases, reversing it, or applying fun filters."
+  },
+
+  "analtxt": {
+    "title": "Analyze text",
+    "long" : "A tool to analyze a text. Counts the number of words, lines, whitespace , lowercase, uppercase, each letter, each digit and all symbols in a text. Also shows percentages."
+  },
+
+  "texttonum": {
+    "title": "Text to numbers",
+    "long" : "A tool to translate text to numbers and vice versa using the position in the alphabet. Supports many alphabets. Optionally use a reverse alphabet and/or start at zero instead of one. A leading zero for numbers below 10 is optional, if it can be omitted safely."
+  },
+
+  "keyboards": {
+    "title": "Keyboards",
+    "long" : "A tool to convert text as if it was typed with a different keyboard. Supports different keyboard layouts including Qwerty, Azerty, Qwertz,Cyrillic (Jcuken), Dvorak and Colemak."
+  },
+
+  "texttoss": {
+    "title": "Toss",
+    "long": "Change the order of letters of each word in a text. The option that keeps both the first and last letter is also known as typoglycemia."
+  },
+
+  "textchunks": {
+    "title": "Text chunks",
+    "long": "<p>Cuts text in equal length chunks to find patterns. Optionally ignoring all whitespace or make everything uppercase. Look for repeating letters, numbers or symbols. Just increase or decrease the chunk size and the result will show immediately.</p><p>One possible use is chunking a seemingly binary code of 0s and 1s to reveal hidden patterns. But it can be anything that is hidden.</p>"
+  },
+
+  "wordle": {
+    "title": "Wordle solver",
+    "long": "<p>This is a tool for solving Wordle. Optionally specify letters that must be present or that are not present.</p>"
+  },
+
+  "wordsearch": {
+    "title": "Word search solver",
+    "long": "A tool to solve word search puzzles. It reads horizontal, vertical and diagonal in both directions. The remaining letters are displayed."
+  },
+
+  "dictsearch": {
+    "title": "Puzzle Dictionary",
+    "long": "<p>Search for words in one of the many dictionaries.</p>"
+  },
+
+  "anagrams": {
+    "title": "Anagrams",
+    "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device."
+  },
+
+  "baseconv": {
+    "title": "Base converter",
+    "long" : "A simple tool to convert the radix (2 to 36). Default the string 0-9A-Z is used as symbols, But it can be anything, you can use + and - for binary for example or the letters A to J for decimal numbers. Multiple numbers can be entered, use spaces in between."
+  },
+
+  "digits": {
+    "title": "Decimals",
+    "long" : "<p>A tool to search decimals of 𝜋, e, 𝜏, φ, γ, √2, √3 and ζ(3). The count starts at the first decimal (so to say after the dot). The first 1,000,000 digits are available.</p><p>All of these numbers are irrational, which implies that any sequence of numbers appears somewhere between the decimals. The following constants are available. Pi or 𝜋. The natural number e. Tau or 2𝜋. The golden ratio  or φ or phi. The Euler-Mascheroni constant or γ. The square roots of 2 and 3 (√2 and √3). The constant of Apéry or ζ(3) or zeta(3). The Gauss's constant and Catalan's constant both also denoted as G. The lemniscate constant.</p>"
+  },
+
+  "primes" : {
+    "title": "Primes",
+    "long" : "This tool checks if a number is prime or not. The max number to be checked is 2^53. It shows the prime number at a given position or shows the position of a given prime. The first 865,000 primes are available. Get prime factors."
+  },
+
+  "romans" : {
+    "title": "Roman numbers",
+    "long": "This tool converts roman numbers to decimal numbers and back. The maximum roman number is 3999. Roman numbers use the following characters MDCLXVI. It is possible to enter multiple numbers divided by spaces or something else."
+  },
+
+  "fibonacci": {
+    "title": "Fibonacci",
+    "long" : "The Fibonacci sequence starts with 1, 1. The next number is the addition of the previous two. So 1+1=2, 1+2=3, 2+3=5 and so on. The numbers get really large really quickly. The first 500 Fibonacci numbers are available."
+  },
+
+  "gcdandlcm": {
+    "title": "GCD and LCM",
+    "long" : "This tool finds the Greatest Common Divisor (GCD) and least common multiple (LCM). It will also list the prime factors of each number. You can type multiple numbers. Please be aware that very large numbers can take some time to calculate."
+  },
+
+  "formulasolver": {
+    "title": "Cryptarithm",
+    "long": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>"
+  },
+
+  "nimbers": {
+    "title": "Nimbers",
+    "long" : "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT). Enter two numbers and the product and sum will be calculated."
+  },
+
+  "bignumbers": {
+    "title": "Big number calculator",
+    "long": "<p>A calculator for very large numbers. Only integers are accepted. You can either enter decimal, binary, octal or hexadecimal numbers. All operators work als you would expect, except division. Division always truncates the result (instead of rounding to the nearest integer). All logical functions are bitwise logical operations.</p>"
+  },
+
+  "combinations": {
+    "title": "Combinations",
+    "long": "Count and generate the number of combinations (order doesn't matter) or permutations (order does matter). Choose a number of items from a set."
+  },
+
+  "equations": {
+    "title": "Equations",
+    "long": "Solves a system of linear equations. Input can be decimal numbers or fractions, e.g. 1.5 or 3/2 or 1 1/2 are all the same."
+  },
+
+  "cryptosolver": {
+    "title": "Kryptosolver",
+    "long": "<p>The game Krypto (or Crypto) is a simple math game. Everybody receives 5 cards with numbers between 1 and 20. One card is put in the middle. The first one to make a calculation using all five cards that results in the card in the middle wins. Normally negative numbers and decimals are not allowed. Only +, - , * and / are allowed operators. This tool solves the game for you.</p><p>In this version you can provide as many numbers as you want. Don't use all the numbers, allow negative numbers and decimals, use modulus or power or don't use some of the standard operators. The tool can also be used to solve the numbers game from the UK TV Game Show Countdown.</p>"
+  },
+
+  "numberprop": {
+    "title": "Number properties",
+    "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, composite, biprime, squarefree, evil, odious, perfect, deficient, abundant, narcistic, powerful, lucky, happy, aspiring and pentagonal."
+  },
+
+  "sequences": {
+    "title": "Sequences",
+    "long" : "This tool generates the n-th term of some well known sequences, such as Hailstone, Conway, Golomb and Niven. These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. You can search OEIS on words, but also on the first few numbers of the sequence."
+  },
+
+  "brainfuck": {
+    "title": "Brainfuck",
+    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands +-><.,[]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>"
+  },
+
+  "cow" : {
+    "title": "Cow",
+    "long": "<p>The COW programming language is an esoteric programming language created by Sean Heber in 2003. It is a Brainfuck variant designed humorously with Bovinae in mind. COW has twelve instructions (four more than Brainfuck) and is Turing-complete. Most instructions are moos, only the capitalization varies: mOo, moO, mOO, Moo, and so on. MMM, OOO, oom and OOM are the exceptions. All other character combinations are ignored and treated as comments. The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
+  },
+
+  "beatnik": {
+    "title": "Beatnik",
+    "long": "Beatnik calculates the Scrabble value of each word. The value is then treated as a command. Words consist only of letters, so Boeing747Dreamliner gives two words (and two commands). Multiple Scrabble versions are available, but English is the most likely choice. More info can be found <a href='https://esolangs.org/wiki/Beatnik'>here.</a></p><p>The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
+  },
+
+  "bcd": {
+    "title": "BCD",
+    "long":  "<p>BCD (Binary Coded Decimals) is a way to code numbers. By default it uses binary codes for each digit, so 4571 becomes 0100 0101 0111 0001. Binary codes can be packed into 8 digit groups. The example becomes 01000101 01110001. Or the 4 digits are filled to 8 digits like 11110100 11110101 11110111 11110001.</p><p>There are also other ways to code decimal numbers such as Aiken, Excess-3, Excess-6 or different Gray codes, which also use 4 bits per number but instead of binary some other table is used. More info can be found <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>here</a>.</p>"
+  },
+
+  "bintotext": {
+    "title": "Binary to text",
+    "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days. The following formats are supported: Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>"
+  },
+
+  "duckspeak": {
+    "title": "Duckspeak",
+    "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
+  },
+
+  "deadfish" : {
+    "title": "Deadfish",
+    "long":  "<p>Deadfish is a programming language with only 4 instructions. Increment with 1 (i), decrement with 1 (d), square (s) and output (o). The counter start at 0, if it reaches -1 or exactly 256 it resets to 0. Sometimes xdkc are used instead of idso. Both instruction sets are supported.</p>"
+  },
+
+  "checksum": {
+    "title": "Checkdigit",
+    "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark. For IBAN the check digits are the 3rd and 4th positions, always replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>"
+  },
+
+  "truthtable": {
+    "title": "Truth table",
+    "long": "Generate the truth table from a boolean or logical expression. Any string that is not: and, or, xor or not is considered a variable. Instead of literals you can use programming logic (&&, {'||'} and !) or algabraic notation (*, + and !) or even proposition logic (∧, ∨ and ¬). Although it is incorrect you can mix the notations if you would like to try."
+  },
+
+  "passwordgen" : {
+    "title": "Password generator",
+    "long": "<p>A password generator to generate random passwords. You can specify the length and the types of characters to include. The more types of characters you include, the stronger the password is. However, it also becomes harder to remember.</p>"
+  },
+
+  "encryption": {
+    "title": "Encryption",
+    "long": "<p>All of these are basically very complex ciphers used by computers to transmit and store information safely. They are the successors of the handciphers of the 20th century. All of these codes require a key. There are also advanced options which control the alghorithm, but on most occassions you should keep the default settings.</p><p>DES used to be the standard in computer encryption but has found to be insecure. AES is most common these days. Rabbit, HMAC and RC4 are also in use. Okto3 encrypts the input to a series of decimal numbers and is pretty useless for anything else but geocaches.</p>"
+  },
+
+  "hashes": {
+    "title": "Hashes",
+    "long": "<p>Hashes are like digital signatures. They only work one way. The message is hashed into a code (represented here as a hexadecimal string). The authenticity of a message can be confirmed by hashing the message again and compare it with the distributed hash. There are a couple of common hash algorithms. MD5 has been around for a while but is now considered insecure. SHA-1 is most common these days. SHA-3 is the most recent and most secure one. Other formats are SHA-2 (SHA256 and SHA512) and RIPEMD160.</p><p>Enter a message and press Calculate to get the hash. Optionally the hash is verified and the result is shown.</p>"
+  },
+
+  "dialogabout": {
+    "info": "This page is only available in English."
+  },
+
+  "dialoghowto": {
+    "info": "This page is only available in English."
+  },
+
+  "numerology": {
+    "title" : "Numerology",
+    "long" : "<p>Numerology is the practice of assigning a numerical value to a name, word or phrase by reading it as a number. Each letter represents a value. Values are not related to the position in the alphabet (as when calculating Word Value), but to their supposed numerological meaning.</p><p>The modern Latin alphabet is mostly used. Gematria uses the Hebrew alphabet. Isopsephy the Greek alphabet. Agrippan the classic Latin alphabet. In these cases latin characters are 'replaced' by their alternatives.</p>"
+  },
+
+  "piglatin": {
+    "title" : "Pig Latin",
+    "long" : "<p>Pig Latin is a language game that alters the letters of words. It is used to speak in code, so that others cannot understand what is being said. There are many variations with different origins.</p><p>Select the right language to identify vowels and consonants, or to search for words when decoding. Words that cannot be found are marked between asterisks.</p>"
+  },
+
+  "datecalc" :{
+    "title" : "Date calculator",
+    "long" : "Calculate the difference between two dates. Add or substract days from a given date. Give the number of days in the year, month, day of the week, day in the year of a given date."
+  },
+
+  "randomizer" : {
+    "title" : "Random Generator",
+    "long" : "<p>The random generator generates a random string of numbers or characters. This can be useful when you want to obfuscate a message by adding extra data. There are many other uses e.g. in games, running simulations or testing hypotheses.</p><p>Binary generates a string of 0 and 1. Numbers generate a string of numbers between the provided minium and maximum. Negative numbers can be used. Text generate a random string of characters form the given string. Collection takes values from a comma separated set. Printable characters generate a random string of ASCII printable characters, which include all letters, digits and common symbols.</p>"
+  },
+
+  "rotciphers" : {
+    "title": "Rotation ciphers",
+    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters. You can rotate hexadecimal numbers or specify a customized alphabet to use.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>"
+  },
+
+  "freqanal" : {
+    "title" : "Frequency Analysis",
+    "long" : "<p>The frequency distribution of individual characters or n-grams is very useful when cracking ciphers. The larger the text the more reliable and useful statistics are.</p><p>If you use size 1 you get the frequency distribution of the alphabet. If it looks similar to normal text it is probably a 1 on 1 replacement. You can use <a href='/substcipher'>Smart Replace</a> to crack the code.</p><p>Size 2 are so called digrams or bigrams. They can be used to crack ciphers that encode a single letter with two, such as Polybius. Digrams can also be useful for cracking ciphers that encode two characters each time, such as Bazeries or Trisquare. For ciphers that encode two characters at a time. The most common bigrams are probably also the bigrams most often found in normal text. So is TH the most common digram in English</p><p>The maximum number of missing n-grams shown is 1000.</p>"
+  },
+
+  "printlog" : {
+    "title": "Print logs",
+    "long" : "A handy tool to print logs. Set the number of columns, the lines per log, add images, choose colors and add FTF. When printing on A4 - 2 columns of 9cm will fit in petlings and 5 columns of 3.6cm will fit in photo canisters - 9 columns of 2cm will fit in almost anything. Save as PDF or PNG."
+  },
+
+  "genlog" : {
+    "title": "Generate logs",
+    "long": "<p>Generate logs with counters and copy the log to the clipboard so you can paste it elsewhere. If you use the geocaching website to log this is an easy tool to use. Counters increase everytime you generate a log.</p><p>Use multiple templates for more variance in your logs. Use random to pick a random template.</p><p>If you want more options try GSAK or use an app like C:geo.</p>"
+  },
+
+  "gameoflife": {
+    "title": "Game of life",
+    "long": "<p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It starts with an initial generation of cells. Each next generation follows a few simple rules: A cell dies if it has less than 2 or more than three neighbours. A cell becomes alive if it has exactly three neighbours.</p><p>Select a pattern to fill the grid. At any time you can click a cell to make it alive or kill it. You can change the default rules if you want.</p>"
+  },
+
+  "booksearch" : {
+    "title" : "Book search",
+    "long" : "This tool will lookup a book using the ISBN number, author, title or a combination of those. It uses the free online OpenLibrary.org. If there are more matches all of them will be displayed."
   },
 
   "dialogpb":{
@@ -1190,798 +689,8 @@
     }
   },
 
-  "dialogmap": {
-    "getloc": "Get location",
-    "mapstyle": "Map style",
-    "street": "Streets",
-    "satellite": "Satellite",
-    "satstreet": "Satellite/Street",
-    "outdoors": "Outdoors",
-    "light": "Light",
-    "dark": "Dark",
-    "hikebike": "Hike & bike",
-    "transport": "Public transport",
-    "cyclemap": "Cycle map",
-    "landscape": "Landscape",
-    "outdoors2": "Hiking routes"
-  },
-
   "dialogc3p": {
     "title": "Circle through 3 points"
-  },
-
-  "linepointdir": {
-    "title": "Line through point and direction",
-    "start": "Starting point",
-    "pdir": "Point and direction"
-  },
-
-  "convert": {
-    "title": "Convert",
-    "long" : "<p>There are many different coordinate systems in use. Most common is WGS84, which is more or less the standard.</p<p>Another common one is UTM (Universal Transverse Mercator). Then there are several grid based systems which use x, y based coordinates. Most based grid based systems are regionally based such as the British OGSM grid, the Dutch Grid (RD) or the Belgian Lambert coordinates.</p><p>Maidenhead, geohash and Google's Open Location Code are normal coordinates encoded with a hash. Mapcode and what3words are commercial initiatives to simplify coordinates. Other formats are MGRS and NAD. You can also define a custom conversion using the proj4 definition from EPSG (if you know what that means).</p>",
-    "proj4jsmsg": "You can convert any coordinate system using the definition below. The convertor uses Proj4js. First select Proj4js from the dropdown. The definition to use can be found on <a href='http://epsg.io'>EPSG.io</a>. Take the Proj4js.def (it can be found near the bottom of the page). Take the second string (the one that starts with +) without the quotes and copy / paste it in the field below.",
-    "proj4jslabel": "Proj4js definition",
-    "phfrom": "Coordinates to convert",
-    "phto": "Converted coordinates"
-  },
-
-  "project": {
-    "title": "Project",
-    "long": "A projection is a coordinate with a given distance and direction (angle) from the given coordinate. Many different coordinate systems are supported. Distances can be specified in meters, kilometer, feet, yards and miles. Angles can be specified in degrees, radians and gon.",
-    "projcoord": "The projected coordinate is ",
-    "startpoint": "Starting point",
-    "projpoint": "Projected point"
-  },
-
-  "revwherigo" : {
-    "title": "Reverse Wherigo",
-    "long": "<p>Resolves reverse wherigo (Waltmeister cartridge only). Provide the input of three numbers of 6 digits separated by spaces. The tool calculates the reverse coordinate.</p>"
-  },
-
-  "mapmaker": {
-    "title": "Map maker",
-    "long" : "Maps a list of coordinates with markers and labels on a map. Optionally draw a circle with a given radius around each coordinate. Ideal for showing possible geocache locations, for placing a geocache or finding a possible location of a mystery cache. Supports many different coordinate systems. Placing of markers and labels can be disabled.",
-    "phcoord": "Coordinates go here",
-    "phlabel": "Labels go here (optional)",
-    "showmark": "Show markers",
-    "showlabel": "Show marker labels",
-    "drawcircle": "Draw circles",
-    "makemap": "Make map",
-    "error1": "Number of coordinates and labels must match"
-  },
-
-  "plotcoord" : {
-    "title": "Draw coordinates",
-    "long" : "Make a drawing  of a list of coordinates. The coordinates are connected with lines and/or the polygons are filled. Supports many different coordinate systems. Placing of markers and labels can be disabled.",
-    "drawlines": "Draw lines",
-    "fillpoly": "Fill polygon"
-  },
-
-  "triangulation": {
-    "title": "Triangulation",
-    "long" : "Triangulation is old way mapping areas on maps. It was used to calculate the grid based coordinates which are still around. Such as the Dutch Rijksdriehoeksmeting (RD) or the Belgina Lambert system. There are two main methods: Forward Intersection and Backward Resection. In Intersection mode, the application determines the exact location of a distant target based on bearings reported from two known observer stations. Conversely, the Resection mode — a classic technique for traditional map-and-compass navigation — calculates an unknown user position by analyzing sightings taken toward three distinct landmarks using the mathematically rigorous Tienstra Formula.",
-    "result": "The triangulated coordinate is "
-  },
-
-  "incomplete": {
-    "title": "Incomplete coordinates",
-    "long" : "Plot and calculate possible coördinates where one to four numbers are unknown. For each of the unknowns the available options can be specified. A maximum of 500 locations can be shown. Clicking on the coordinate shows a popup with the used variables. The tool works with all available coordinate systems.",
-    "error1": "Maximum number of coordinates is 500. Reduce the number of options."
-  },
-
-  "lines": {
-    "title": "Lines",
-    "long" : "Calculate the midpoint, direction and distance of a line. Calculate point nearest on a line relative to another point. Calculate the intersection of two lines. All points and lines are plotted on the map.",
-    "calc1": "Calculate distance, direction and midpoint (uses coordinate 1 & 2)",
-    "calc2": "Calculate point nearest to Point 3 on line thru Point 1 and Point 2.",
-    "calc3": "Get intersection of lines thru Point 1 and 2 and Point 3 and 4",
-    "midpoint": "Midpoint",
-    "distance": "The distance is: ",
-    "direction": "The direction is: ",
-    "pointnearest": "Point nearest: ",
-    "intersection": "Intersection: "
-  },
-
-  "triangles": {
-    "title": "Triangles",
-    "long" : "Calculate the area, circumference, centroid, orthocenter, incenter, circumcenter, ninepoints center of a triangle. All points and triangles are shown on the map.",
-    "centroid": "Centroid",
-    "orthocenter": "Orthocenter",
-    "incenter": "Incenter",
-    "circumcenter": "Circumcenter",
-    "ninepoint": "Ninepointcenter",
-    "or": " or "
-  },
-
-  "circles": {
-    "title": "Circles",
-    "long" : "Calculate the intersection points and intersection area of two circles. All points and circles are plotted on the map.",
-    "ip": "Intersection point",
-    "ia": "Intersection area",
-    "ni": "No intersection",
-    "distance": "Distance between intersection points",
-    "or": " or ",
-    "surf": "Surface of circle ",
-    "circ": "Circumference of circle ",
-    "from3p": "Use 3 points",
-    "nocircle2": "Only one circle given"
-  },
-
-  "antipode": {
-    "title": "Antipode",
-    "long" : "The antipode is the point exactly on the opposite side of the earth. To calculate the latitude of an antipode, change the sign and direction of the latitude of the reference point. To calculate the longitude of an antipode, subtract the absolute value of the reference-point longitude from 180 degrees and change the sign and direction of the answer with reference to the reference point.",
-    "result": "The antipode coordinate is ",
-    "or": " or "
-  },
-
-  "tryanswers" : {
-    "title" : "Questions and answers",
-    "answers" : "One answer per line. Separate multiple options with ",
-    "formulas" : "Optionally use formulas",
-    "phformulas" : "A is the first answer, B the second and so on. For example A+B. One formula per line.",
-    "long" : "<p>Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.</p><p>Provide all the answers, one per line. If you are unsure provide multiple options separated by {'|'}. Just press try all and see if anything makes sense. You tick the boxes to try more options.</p>",
-    "short": "Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.",
-    "showdescr" : "Show descriptions",
-    "showtable" : "Show table",
-    "onlysq": "Only show square root (no word value)",
-    "tryleng": "Try length of the answers",
-    "trycnts" : "Try different counts",
-    "tryfirst" : "Try first letter",
-    "trylast" : "Try last letter",
-    "trysv" : "Try Scrabble and Vanity alfabet",
-    "trylang" : "Try other languages",
-    "tryrev" : "Try reversed alphabet (A=26, Z=1)",
-    "tryzero" : "Try alphabet starting at zero (A=0, Z=25)",
-    "value" : "Value",
-    "sq" : "Square root",
-    "full": "Full answer",
-    "first": "First letter",
-    "last": "Last letter",
-    "rev": "Reversed alphabet",
-    "zero": "Alphabet starting at 0",
-    "finds": " answers tried.",
-    "length" : "Length",
-    "words": "Count words",
-    "chars": "Count chars",
-    "letters": "Count letters",
-    "digits": "Count digits"
-  },
-
-  "wordvalue": {
-    "title": "Word value & square root",
-    "long" : "A tool to calculate the word value and square root of a text and each word individually. Supports many alphabets, including Greek and Cyrillic, Scrabble and Vanity code. Alphabets can be used in reverse order. Count starts default at one but can also start at zero. Replace diacritics if needed (but please be aware that sometimes diacritics are unique in the used alphabet)."
-  },
-
-  "charcodes": {
-    "title": "Character codes",
-    "long" : "<p>Computers internally use numbers and not letters. A number is translated into a character using a codepage. The most widely used these days is <b>UTF8 or UTF16</b>. <b>ASCII</b> is still frequently used. There are dozen of other codepages. For MS-DOS and Microsoft Windows there are many codepages with regional character sets. <b>Alt codes</b> refer to typing a number on the numeric keypad to display a special character from a Microsoft codepage. There is also an Atari version of Ascii and IBM's proprietary EBCDIC code.</p><p>In telegraphy codes were also used. These <b>Baudot and Murray codes</b> consisted of 5 bits (or holes in a paper tape). The tool can also translate these codes. The Cyrillic version called MTK2 is also supported.</p>",
-    "input": "Type of input",
-    "output": "Requested output",
-    "someinfo": "Information on character codes",
-    "someinfo2": "<p>Computers are binary, they only know 0 and 1. These can be converted into a decimal numbers of course. This tool also accepts octal, decimal and hexadecimal which are all common among computer programmers. As a bonus the tool converts between these number bases as well. These numbers are used to lookup the right character (glyph in nerd speak) in the so-called codepage.</p><p>The very first computer codepage was ASCII and it has been around ever since. It is a subset of the codepages in MS DOS and Windows and is also a subset of UTF. ASCII only had 7-bits (128 characters) available. The codepages from Microsoft used 8 bits (e.g. CP437, CP850, CP1252), 256 characters. In languages with other characters different codepages had to be used. With the introduction of UTF-8/16 this changed. With only one codepage there is enough room to support all characters on earth, as well as emoji's ;-). <strong>Alt codes</strong>: depending on the version of MS DOS or MS Windows and the installed codepage typing the numbers on the numeric keypad with the Alt-key down produced a special character.</p><p>For a history of all the characters sets used in information systems see <a href='https://en.wikipedia.org/wiki/List_of_information_system_character_sets'>Wikipedia's history of information system character sets</a>. See <a href='https://en.wikipedia.org/wiki/Code_page'>Wikipedia codepages</a> for an overview of all the codepages that ever existed.</p><p>In pre computer days telegraph and telex also used binary representations, which are called the Baudot code (ITA-1) and the Murray code (ITA-2). The bits are in the order 54321 normally and in the order 12345 for the reversed codes. There is also a Russin version known as MTK-2. More info see <a href='https://en.wikipedia.org/wiki/Baudot_code>Wikipedia</a>.</p>"
-  },
-
-  "substcipher": {
-    "title": "Smart replace",
-    "hint": "Hints",
-    "long" : "A tool to solve any kind of substitution cipher. It uses frequency analysis to find the most likely matches for the selected language (English, Dutch, German, French and Spanish). Specify the original and replaced characters and the updated text will be shown with highlighted replacements. It can automatically replace the first 8 most likely candidates.",
-    "errorlength": "From / to must have same length",
-    "errordouble": "Double characters found",
-    "highlight": "Highlight",
-    "orig": "Original letters",
-    "repl": "Substitutes",
-    "casesens": "Case sensitive",
-    "get": "Get hints",
-    "apply": "Apply hints"
-  },
-
-  "analtxt": {
-    "title": "Analyze text",
-    "long" : "A tool to analyze a text. Counts the number of words, lines, whitespace , lowercase, uppercase, each letter, each digit and all symbols in a text. Also shows percentages.",
-    "analyze": "Analyze text",
-    "result": "Table with counts and percentages comes here",
-    "nwords": "Number of words",
-    "nlines": "Number of lines",
-    "nchar": "Number of characters",
-    "nalpha": "Number of alphabetic characters (A to Z, a to z)",
-    "ndigit": "Number of digits (0 to 9)",
-    "nwhite": "Number of white space characters (spaces, tabs and linefeeds)",
-    "nupper": "Number of uppercase characters (A to Z)",
-    "nlower": "Number of lowercase characters (a to z)",
-    "nnonalpha": "Number of non alphabetic characters",
-    "nnonwhite": "Number of non white space",
-    "letter": "Letter",
-    "digit": "Digit",
-    "symbol": "Symbol",
-    "count": "Count",
-    "perc": "Percentage",
-    "upper": "upper",
-    "lower": "lower"
-  },
-
-  "texttonum": {
-    "title": "Text to numbers",
-    "long" : "A tool to translate text to numbers and vice versa using the position in the alphabet. Supports many alphabets. Optionally use a reverse alphabet and/or start at zero instead of one. A leading zero for numbers below 10 is optional, if it can be omitted safely.",
-    "leadzero": "Always use leading zero below 10",
-    "btnttn": "Text to numbers",
-    "btnntt": "Numbers to text"
-  },
-
-  "keyboards": {
-    "title": "Keyboards",
-    "long" : "A tool to convert text as if it was typed with a different keyboard. Supports different keyboard layouts including Qwerty, Azerty, Qwertz,Cyrillic (Jcuken), Dvorak and Colemak.",
-    "inputkb": "Input keyboard",
-    "outputkb": "Output keyboard",
-    "error": "Keyboard could not be converted, please check"
-  },
-
-  "texttoss": {
-    "title": "Toss",
-    "long": "Change the order of letters of each word in a text. The option that keeps both the first and last letter is also known as typoglycemia.",
-    "mode": "Select how to toss words",
-    "mode3": "Keep first and last letter (typoglycemia)",
-    "mode2": "Keep first letter",
-    "mode1": "Keep none of the letters"
-  },
-
-  "textchunks": {
-    "title": "Text chunks",
-    "long": "<p>Cuts text in equal length chunks to find patterns. Optionally ignoring all whitespace or make everything uppercase. Look for repeating letters, numbers or symbols. Just increase or decrease the chunk size and the result will show immediately.</p><p>One possible use is chunking a seemingly binary code of 0s and 1s to reveal hidden patterns. But it can be anything that is hidden.</p>",
-    "dir": "Direction",
-    "size": "Chunk size",
-    "ignore": "Ignore whitespace",
-    "upper": "All uppercase"
-  },
-
-  "wordle": {
-    "title": "Wordle solver",
-    "long": "<p>This is a tool for solving Wordle. Optionally specify letters that must be present or that are not present.</p>",
-    "length": "Wordle length",
-    "pattern": "Word pattern use ? for unknown letters",
-    "yellows": "Letters at unknown positions",
-    "greys": "Letters not in the word",
-    "wordsfound": " words found.",
-    "errpattern": "Word pattern too long or too short",
-    "toomany": "Maximum number of words reached.",
-    "lettersused": "Letters in alphabet"
-  },
-
-  "wordsearch": {
-    "title": "Word search solver",
-    "long": "A tool to solve word search puzzles. It reads horizontal, vertical and diagonal in both directions. The remaining letters are displayed.",
-    "grid": "The grid",
-    "words": "Words to find",
-    "ignore": "Character indicating unused positions",
-    "griderror": "Not all lines in the grid are the same length",
-    "remletters": "Remaining letters: ",
-    "notfound": " cannot be found."
-  },
-
-  "dictsearch": {
-    "title": "Puzzle Dictionary",
-    "long": "<p>Search for words in one of the many dictionaries.</p>",
-    "searchstr": "Search for",
-    "yellows": "Letters at unknown positions",
-    "greys": "Letters not in the word",
-    "minlength": "Min length",
-    "maxlength": "Max length (0 = no limit)",
-    "searchfor": "What are you searching for?",
-    "wordsfound": " words found.",
-    "toomany": "Maximum number of words reached.",
-    "longest": "Longest word with these letters",
-    "pattern": "Word pattern use ? for unknown letters",
-    "start": "Words starting with these letters",
-    "end": "Words ending with these letters",
-    "contains": "Words containing these letters",
-    "regex": "Words that meet the a regular expression",
-    "values": "Words with a given word value",
-    "lettersused": "Letters in alphabet"
-  },
-
-  "anagrams": {
-    "title": "Anagrams",
-    "long": "Find anagrams of a word. Speicfy the number of words and the minimal word length. The longer the input, the more words and the shorter the minimum word length the longer it can take to find all anagrams. Speeds depends on the browser and the device.",
-    "maxw": "Max # words",
-    "minl": "Min word length",
-    "maxl": "Max word length",
-    "letters": "Letters that must be present",
-    "wordsfound": " anagrams found.",
-    "toomany": "Maximum number of anagrams reached."
-  },
-
-  "baseconv": {
-    "title": "Base converter",
-    "long" : "A simple tool to convert the radix (2 to 36). Default the string 0-9A-Z is used as symbols, But it can be anything, you can use + and - for binary for example or the letters A to J for decimal numbers. Multiple numbers can be entered, use spaces in between.",
-    "from": "Radix from",
-    "to": "Radix to",
-    "custsym": "Custom symbols (optional)",
-    "symbolserr": "Number of symbols should match radix or symbols should be empty."
-  },
-
-  "digits": {
-    "title": "Decimals",
-    "long" : "<p>A tool to search decimals of 𝜋, e, 𝜏, φ, γ, √2, √3 and ζ(3). The count starts at the first decimal (so to say after the dot). The first 1,000,000 digits are available.</p><p>All of these numbers are irrational, which implies that any sequence of numbers appears somewhere between the decimals. The following constants are available. Pi or 𝜋. The natural number e. Tau or 2𝜋. The golden ratio  or φ or phi. The Euler-Mascheroni constant or γ. The square roots of 2 and 3 (√2 and √3). The constant of Apéry or ζ(3) or zeta(3). The Gauss's constant and Catalan's constant both also denoted as G. The lemniscate constant.</p>",
-    "sel": "Select a number",
-    "pi": "π or pi, starts with 3.141592653589...",
-  	"e": "e, starts with 2.718281828459...",
-    "tau": "𝜏, tau or 2*π, starts with 6.2831853071...",
-    "phi": "φ or phi or the golden ratio, starts with 1.61803398874989...",
-    "euler": "γ or the Euler–Mascheroni constant, starts with 0.577215664901...",
-    "sq2": "√2 or Pythagoras' constant, starts with 1.414213562373095...",
-    "sq3": "√3 or Theodorus' constant, starts with 1.7320508075...",
-    "zeta3": "ζ(3) or zeta(3) or Apéry's constant, starts with 1.202056903...",
-    "gauss": "Gauss's constant, starts with 0.8346268416...",
-    "lemni": "Lemniscate constant, starts with 5.2441151085...",
-    "cat": "Catalan's constant, starts with 0.915965594... ",
-    "champ": "Champernowne constant, starts with 0.12345678910111213...",
-    "from": "From digit",
-    "to": "to digit",
-    "get": "Get digits",
-    "res1": "The digits from ",
-    "res2": "to",
-    "res3": "are"
-  },
-
-  "primes" : {
-    "title": "Primes",
-    "long" : "This tool checks if a number is prime or not. The max number to be checked is 2^53. It shows the prime number at a given position or shows the position of a given prime. The first 865,000 primes are available. Get prime factors.",
-    "check": "Check if this is a prime",
-    "pos": "Get prime at position",
-    "primepos": "Get position of prime",
-    "primefact": "Prime factors of",
-    "toobig": "Number is too big",
-    "isprime": "is a prime number",
-    "isnotprime": "is not a prime number",
-    "primeatpos": "The prime number at position",
-    "primeis": "is",
-    "primenotfound": "Prime number not found",
-    "posofprime": "The position of prime"
-  },
-
-  "romans" : {
-    "title": "Roman numbers",
-    "long": "This tool converts roman numbers to decimal numbers and back. The maximum roman number is 3999. Roman numbers use the following characters MDCLXVI. It is possible to enter multiple numbers divided by spaces or something else.",
-    "btndtr": "Decimal to Roman",
-    "btnrtd": "Roman To Decimal",
-    "notroman": "Invalid roman number, only MDCLXVI are allowed",
-    "invalidint": "Invalid number, the maximum roman number is 3999"
-  },
-
-  "fibonacci": {
-    "title": "Fibonacci",
-    "long" : "The Fibonacci sequence starts with 1, 1. The next number is the addition of the previous two. So 1+1=2, 1+2=3, 2+3=5 and so on. The numbers get really large really quickly. The first 500 Fibonacci numbers are available.",
-    "pos": "Fibonacci number at position",
-    "check": "Check if this is a Fibonaci number",
-    "toobig": "Position too big (max 500)",
-    "errorzero": "Position must be greater than zero",
-    "the": "The ",
-    "nth": "th Fibonacci number is ",
-    "not": " not",
-    "fib": " is a Fibonacci number at position "
-  },
-
-  "gcdandlcm": {
-    "title": "GCD and LCM",
-    "long" : "This tool finds the Greatest Common Divisor (GCD) and least common multiple (LCM). It will also list the prime factors of each number. You can type multiple numbers. Please be aware that very large numbers can take some time to calculate.",
-    "num": "Numbers",
-    "inperror": "Invalid input, must be a number and greater than zero",
-    "t1": "Greatest Common Divisor (GCD) & Least Common Multiple (LCM)",
-    "t2": "Prime factors",
-    "gcd": "The GCD is ",
-    "lcm": "The LCM is"
-  },
-
-  "formulasolver": {
-    "title": "Cryptarithm",
-    "long": "<p>Cryptharithms are also known as alphametics or verbal arithmetic. It solves equations were letters represent numbers, e.g. CHECK + THE = TIRES. By default numbers are unique (for each number there is only one letter). By default all calculations are decimal. You can change the number base, but in most cases this is not needed.</p><p><b>Warning:</b> Generating all these formulas and evaluating them is a lot of work and depending on your computer it can take some time for the answers to show. Be patient.</p>",
-    "formula": "Formula",
-    "unique": "Unique numbers",
-    "base": "Base for calculations",
-    "nosol": "There are no solutions",
-    "exprerror": "Error evaluating expression, please check the formula",
-    "toomanyvars": "Too many variables, increase base or change formule"
-  },
-
-  "nimbers": {
-    "title": "Nimbers",
-    "long" : "Nimbers are not numbers, but you can add and multiply them. They are used in combinatorial game theory (CGT). Enter two numbers and the product and sum will be calculated.",
-    "num1": "First number",
-    "num2": "Second number",
-    "t1": "Product & sum",
-    "prod": "The nimber product is",
-    "sum": "The nimber sum is"
-  },
-
-  "bignumbers": {
-    "title": "Big number calculator",
-    "long": "<p>A calculator for very large numbers. Only integers are accepted. You can either enter decimal, binary, octal or hexadecimal numbers. All operators work als you would expect, except division. Division always truncates the result (instead of rounding to the nearest integer). All logical functions are bitwise logical operations.</p>",
-    "selnum": "Number base",
-    "num1": "Number A",
-    "num2": "Number B",
-    "decimal": "Decimal",
-    "binary": "Binary",
-    "octal": "Octal",
-    "hexadecimal": "Hexadecimal",
-    "arithmetic": "Arithmetic operations",
-    "logical": "Logical operations"
-  },
-
-  "combinations": {
-    "title": "Combinations",
-    "long": "Count and generate the number of combinations (order doesn't matter) or permutations (order does matter). Choose a number of items from a set.",
-    "cnt": "Number of items to choose",
-    "size": "Number of items to choose from",
-    "rpt": "Allow replacements (reuse options)",
-    "sel": "Combinations or permutations",
-    "set": "Select items from",
-    "set1": "Use numbers starting at 1",
-    "set2": "Use letters starting at A",
-    "set3": "Use list of items",
-    "list": "List of items",
-    "cntcomb": "Count combinations",
-    "cntperm": "Count permutations",
-    "gencomb": "Generate combinations",
-    "genperm": "Generate permutations",
-    "notenoughitems": "Not enough items in list",
-    "toomany": "Too many to calculate",
-    "numcomb": "The number of combinations is ",
-    "numperm": "The number of permutations is ",
-    "max": "Maximum number that can be generated is "
-  },
-
-  "equations": {
-    "title": "Equations",
-    "long": "Solves a system of linear equations. Input can be decimal numbers or fractions, e.g. 1.5 or 3/2 or 1 1/2 are all the same.",
-    "numvar": "Number of variables",
-    "output": "Output format",
-    "fractions": "Fractions",
-    "decimals": "Decimals",
-    "nosol": "There are no solutions"
-  },
-
-  "cryptosolver": {
-    "title": "Kryptosolver",
-    "long": "<p>The game Krypto (or Crypto) is a simple math game. Everybody receives 5 cards with numbers between 1 and 20. One card is put in the middle. The first one to make a calculation using all five cards that results in the card in the middle wins. Normally negative numbers and decimals are not allowed. Only +, - , * and / are allowed operators. This tool solves the game for you.</p><p>In this version you can provide as many numbers as you want. Don't use all the numbers, allow negative numbers and decimals, use modulus or power or don't use some of the standard operators. The tool can also be used to solve the numbers game from the UK TV Game Show Countdown.</p>",
-    "useall": "Use all numbers",
-    "nums": "Numbers to use",
-    "outcome": "Required outcome",
-    "allowneg": "Allow negative numbers",
-    "allowdec": "Allow decimals",
-    "allowadd": "Allow addition",
-    "allowsub": "Allow subtraction",
-    "allowmult": "Allow multiplication",
-    "allowdiv": "Allow division",
-    "allowmod": "Modulus, e.g. 11 % 3 = 2",
-    "allowpow": "Power, e.g. 2 ^ 3 = 8",
-    "nosolution": "No solution found",
-    "nooutcome": "No outcome provided",
-    "nonums": "Please input some numbers to use",
-    "found": "Solution found for "
-  },
-
-  "numberprop": {
-    "title": "Number properties",
-    "long" : "This tool checks if the given number has certain properties. Please be aware that very large numbers can take some time to calculate. The maximum number is 1,000,000,000. Properties include prime, fibonacci, composite, biprime, squarefree, evil, odious, perfect, deficient, abundant, narcistic, powerful, lucky, happy, aspiring and pentagonal.",
-    "num": "Number to check",
-    "t1": "Properties",
-    "oddoreven": "Odd or even",
-    "even": "Even - numbers divisable by 2",
-    "odd": "Odd - numbers not divisable by 2",
-    "primerel": "Primes and related",
-    "prime": "Prime - a number greater than 1 that is not a product of two smaller natural numbers",
-    "comp": "Composite - not a prime",
-    "bi": "Biprime - a number which is the product of exactly two primes",
-    "divrel": "Divisors and related",
-    "abun": "Abundant - Sigma(n) > 2n, where sigma(n) is the sum of the divisors of n",
-    "perfect": "Perfect - Sigma(n) = 2n, where sigma(n) is the sum of the divisors of n",
-    "defi": "Deficient - Sigma(n) < 2n, where sigma(n) is the sum of the divisors of n",
-    "sqfree": "Squarefree - a number not divisable for square > 1",
-    "pow": "Powerful - for every prime p dividing n, p**2 also divides n",
-    "polygonal": "Polygonal or 2D figurate numbers",
-    "tri": "Triagonal",
-    "squa": "Square",
-    "penta": "Pentagonal",
-    "hexa": "Hexagonal",
-    "hepta": "Heptagonal",
-    "octa": "Octagonal",
-    "nona": "Nonagonal",
-    "deca": "Decagonal",
-    "star": "Star or dodecagonal",
-    "binrel": "Binary properties",
-    "odious": "Odious - Binary representation has odd number of ones",
-    "evil": "Evil - Binary representation has even number of ones",
-    "polyhedral": "Polyhedral or 3D figurate numbers",
-    "tethed": "Tetrahedral - a pyramid with a triangular base",
-    "sqpyr": "Square pyramid",
-    "cube": "Cube",
-    "others": "Other properties",
-    "niven": "Niven or Harshad - Numbers which are divisable by the sum of their digits",
-    "narc": "Narcistic - Sum of digits ** (#digits) equals n",
-    "kap": "Kaprekar - sort the number, reverse it, subtract the reversed from the original, it should be the same",
-    "pal": "Palindrome - add the number is the same when reversed",
-    "lucky": "Lucky - see https://en.wikipedia.org/wiki/Lucky_number for an explanation",
-    "happ": "Happy - see https://en.wikipedia.org/wiki/Happy_number for an explanation",
-    "asp": "Aspiring - see https://oeis.org/A063769 Online Encyclopedia of Integer Sequences for an explanation",
-    "fib": "Fibonacci - sequence, each number is the sum of the previous two. It starts with 1, 1, 2, 3, ...",
-    "toobig": "Number must be smaller than 1,000,000,000"
-  },
-
-  "sequences": {
-    "title": "Sequences",
-    "long" : "This tool generates the n-th term of some well known sequences, such as Hailstone, Conway, Golomb and Niven. These are just a few of ten of thousands of documented integer sequences. If the one you need is not here, try the <a href='http://oeis.org'>Online Encyclopedia of Integer Sequences</a>. You can search OEIS on words, but also on the first few numbers of the sequence.",
-    "sel": "Select a sequence",
-    "conway": "Conway sequence a.k.a. the hear and say sequence",
-    "revconway": "Reverse Conway sequence a.k.a. the hear and say sequence",
-    "hailstone": "Hailstone or Collatz sequence, if n is even n/2, if n is odd 3n+1. The sequence always ends in 4, 2, 1, 4, 2, 1, ...",
-    "niven": "Niven or Harshad, numbers who are divisable by the sum of their digits",
-    "abundant": "Abundant, numbers where the sum of divisors is greater than twice the number",
-    "deficient": "Deficient, numbers where the sum of divisors is less than twice the number",
-    "golomb": "Golomb, the nth term is equal to the number of times n appears in the sequence",
-    "kaprekar": "Kaprekar, sort the number, reverse it, subtract the reversed from the original number until they are equal",
-    "palindrome": "Palindrome, add the number to its reverse until a palindrome is reached. A Lychrel number never reaches a palindrome",
-    "start": "Start with",
-    "res1": "The number on position",
-    "res2": "The sequence is",
-    "maxconway" : "The maximum number for Conway is 50",
-    "stop": "Stop when",
-    "stopiter": "Stop after this number of iterations",
-    "stopat": "Stop when the number is equal or greater then",
-    "stopend": "Stop at the defined end for this sequence",
-    "niter": "Stop after this number of iterations",
-    "endat": "Stop when equal or greater than this number"
-  },
-
-  "brainfuck": {
-    "title": "Brainfuck",
-    "long":  "<p>Brainfuck is an esoteric programming language (esolang) which is totally unreadable on purpose. It has eight commands +-><.,[]. Sometimes i, d, l and r are used instead of +, -, > and <. The shorthand notation allows numbers which repeat the previous command a number of times. </p><p>Ook! is the same as Brainfuck but with every command replaced with orang utan sounds. Spoon is the same as brainfuck but each command is an unambiguous sequence of 0 and 1. There are plenty other so-called <a href='https://esolangs.org/wiki/Trivial_brainfuck_substitution'>trivial Brainfuck substitutions</a> around, some of them can be executed here.</p>"
-  },
-
-  "cow" : {
-    "title": "Cow",
-    "long": "<p>The COW programming language is an esoteric programming language created by Sean Heber in 2003. It is a Brainfuck variant designed humorously with Bovinae in mind. COW has twelve instructions (four more than Brainfuck) and is Turing-complete. Most instructions are moos, only the capitalization varies: mOo, moO, mOO, Moo, and so on. MMM, OOO, oom and OOM are the exceptions. All other character combinations are ignored and treated as comments. The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
-  },
-
-  "beatnik": {
-    "title": "Beatnik",
-    "long": "Beatnik calculates the Scrabble value of each word. The value is then treated as a command. Words consist only of letters, so Boeing747Dreamliner gives two words (and two commands). Multiple Scrabble versions are available, but English is the most likely choice. More info can be found <a href='https://esolangs.org/wiki/Beatnik'>here.</a></p><p>The debugger writes information to the developers console of the browser, so the code can be debugged.</p>"
-  },
-
-  "bcd": {
-    "title": "BCD",
-    "long":  "<p>BCD (Binary Coded Decimals) is a way to code numbers. By default it uses binary codes for each digit, so 4571 becomes 0100 0101 0111 0001. Binary codes can be packed into 8 digit groups. The example becomes 01000101 01110001. Or the 4 digits are filled to 8 digits like 11110100 11110101 11110111 11110001.</p><p>There are also other ways to code decimal numbers such as Aiken, Excess-3, Excess-6 or different Gray codes, which also use 4 bits per number but instead of binary some other table is used. More info can be found <a href='https://en.wikipedia.org/wiki/Binary-coded_decimal'>here</a>.</p>",
-   "seltype": "Select method",
-    "bcdfrom": "BCD to numbers",
-    "bcdto": "Numbers to BCD",
-    "packed": "Packed BCD",
-    "fill": "Fill with"
-  },
-
-  "bintotext": {
-    "title": "Binary to text",
-    "long": "<p>Binary to text encodings take the input and converts each of its bytes (or 8 bits) to something else. This is done to make the binary stuff transferable using mail or other protocols. This might be pretty useless for text but it is pretty useful for images, videos or basically any other file that would otherwise get corrupted during transfer. Base64 is most common these days. The following formats are supported: Base64, base32, Bitcoin, Ripple, ascii85, uuencode, base16, base91.</p><p>Carriage returns and linefeeds are always removed from the input, which is common for binary to text encoding. Spaces however are kept (except for binary, decimal and hexadecimal). Binary, decimal and hexadecimal inputs are exactly 1 number, spaces might be added for readability but are otherwise ignored. So 123 123 is really the integer 123123. And 3A B4 is really the hexadecimal number 3AB4. </p>",
-    "selfrom": "Encoding from",
-    "selfromtable": "Encoding table",
-    "selto": "Encoding to",
-    "seltotable": "Encoding table"
-  },
-
-  "duckspeak": {
-    "title": "Duckspeak",
-    "long": "Duckspeak looks like a duck is speaking with a lot of Nak. It takes hexadecimal input and converts 0-9A-F to duckspeak. The input can also be text or decimal numbers (smaller than 255), which is converted first to hexadecimal. Decode does the reverse thing."
-  },
-
-  "deadfish" : {
-    "title": "Deadfish",
-    "long":  "<p>Deadfish is a programming language with only 4 instructions. Increment with 1 (i), decrement with 1 (d), square (s) and output (o). The counter start at 0, if it reaches -1 or exactly 256 it resets to 0. Sometimes xdkc are used instead of idso. Both instruction sets are supported.</p>"
-  },
-
-  "checksum": {
-    "title": "Checkdigit",
-    "long": "<p>Check digits are used to verify if numbers are correct, to detect for example typing errors. There are various ways to calculate check digits.</p><p>The check digit is the last number in almost every case. You can leave it out or replace it with a question mark. For IBAN the check digits are the 3rd and 4th positions, always replace those with question marks in the input, e.g. NL??RABO0373560113 or DE??012345678.</p>",
-    "checkres": "The check digit is: ",
-    "checkmethod": "Method",
-    "checkpar1": "0 (even parity) or 1 (odd parity)",
-    "checkpar2": "1 (even parity) or 0 (odd parity)"
-  },
-
-  "truthtable": {
-    "title": "Truth table",
-    "long": "Generate the truth table from a boolean or logical expression. Any string that is not: and, or, xor or not is considered a variable. Instead of literals you can use programming logic (&&, {'||'} and !) or algabraic notation (*, + and !) or even proposition logic (∧, ∨ and ¬). Although it is incorrect you can mix the notations if you would like to try.",
-    "expr": "Boolean expression"
-  },
-
-  "passwordgen" : {
-    "title": "Password generator",
-    "long": "<p>A password generator to generate random passwords. You can specify the length and the types of characters to include. The more types of characters you include, the stronger the password is. However, it also becomes harder to remember.</p>",
-    "len": "Length of password",
-    "uppcase": "Include uppercase letters (A-Z)",
-    "lowcase": "Include lowercase letters (a-z)",
-    "numbers": "Include numbers (0-9)",
-    "symbols": "Include symbols",
-    "result": "The generated password",
-    "errnosel": "Please select at least one type of characters to include"
-  },
-
-  "encryption": {
-    "title": "Encryption",
-    "long": "<p>All of these are basically very complex ciphers used by computers to transmit and store information safely. They are the successors of the handciphers of the 20th century. All of these codes require a key. There are also advanced options which control the alghorithm, but on most occassions you should keep the default settings.</p><p>DES used to be the standard in computer encryption but has found to be insecure. AES is most common these days. Rabbit, HMAC and RC4 are also in use. Okto3 encrypts the input to a series of decimal numbers and is pretty useless for anything else but geocaches.</p>",
-    "codes": "Select encryption",
-    "key": "Key",
-    "coded": "Coded message",
-    "advanced": "Advanced options",
-    "modes": "Mode",
-    "padding": "Padding",
-    "keytooshort": "Key for Okto3 needs to be at least 10 characters"
-  },
-
-  "hashes": {
-    "title": "Hashes",
-    "long": "<p>Hashes are like digital signatures. They only work one way. The message is hashed into a code (represented here as a hexadecimal string). The authenticity of a message can be confirmed by hashing the message again and compare it with the distributed hash. There are a couple of common hash algorithms. MD5 has been around for a while but is now considered insecure. SHA-1 is most common these days. SHA-3 is the most recent and most secure one. Other formats are SHA-2 (SHA256 and SHA512) and RIPEMD160.</p><p>Enter a message and press Calculate to get the hash. Optionally the hash is verified and the result is shown.</p>",
-    "hashes": "Select hash",
-    "hash": "Hash comes here",
-    "verify": "Enter a hash here to verify message",
-    "errorok": "Hash is correct, message is okay",
-    "errornok": "Hash is incorrect, message is corrupted"
-  },
-
-  "dialogabout": {
-    "info": "This page is only available in English."
-  },
-
-  "dialoghowto": {
-    "info": "This page is only available in English."
-  },
-
-  "numerology": {
-    "title" : "Numerology",
-    "long" : "<p>Numerology is the practice of assigning a numerical value to a name, word or phrase by reading it as a number. Each letter represents a value. Values are not related to the position in the alphabet (as when calculating Word Value), but to their supposed numerological meaning.</p><p>The modern Latin alphabet is mostly used. Gematria uses the Hebrew alphabet. Isopsephy the Greek alphabet. Agrippan the classic Latin alphabet. In these cases latin characters are 'replaced' by their alternatives.</p>",
-    "selmethod" : "Select method",
-    "res1" : "The numerological value is ",
-    "res2" : "Calculation ",
-    "valtab": "Values of each letter",
-    "err1" : "One or more unknown characters found."
-  },
-
-  "piglatin": {
-    "title" : "Pig Latin",
-    "long" : "<p>Pig Latin is a language game that alters the letters of words. It is used to speak in code, so that others cannot understand what is being said. There are many variations with different origins.</p><p>Select the right language to identify vowels and consonants, or to search for words when decoding. Words that cannot be found are marked between asterisks.</p>",
-    "sel" : "What kind of pig latin do you want to speak?"
-  },
-
-  "datecalc" :{
-    "title" : "Date calculator",
-    "long" : "Calculate the difference between two dates. Add or substract days from a given date. Give the number of days in the year, month, day of the week, day in the year of a given date.",
-    "date1" : "First date",
-    "date2" : "Second date",
-    "days" : "Add or substract days",
-    "res1a" : "The number of days between the first and second date is ",
-    "res1b" : " days.",
-    "res2a" : "Adding ",
-    "res2b" : " to the first date ",
-    "res3a" : "Substracting ",
-    "res3b" : " from the first date ",
-    "res4" : "The day of the week is ",
-    "res5" : "The number of days in the year ",
-    "res6" : "The number of days in the month ",
-    "res7" : "Day in the year "
-  },
-
-  "randomizer" : {
-    "title" : "Random Generator",
-    "long" : "<p>The random generator generates a random string of numbers or characters. This can be useful when you want to obfuscate a message by adding extra data. There are many other uses e.g. in games, running simulations or testing hypotheses.</p><p>Binary generates a string of 0 and 1. Numbers generate a string of numbers between the provided minium and maximum. Negative numbers can be used. Text generate a random string of characters form the given string. Collection takes values from a comma separated set. Printable characters generate a random string of ASCII printable characters, which include all letters, digits and common symbols.</p>",
-    "sel" : "Select method",
-    "selbin": "Binary (0 and 1)",
-    "selrng": "Numbers in range",
-    "seltxt": "Text from string",
-    "selcol": "Collection",
-    "selascii": "All printable characters",
-    "numberof": "Number of randoms",
-    "minmax": "Min and max for range",
-    "chars": "Use this characters for string",
-    "coll": "Use this collection (comma separated)",
-    "sep": "Separate",
-    "sepnone": "None",
-    "sepspace": "Space",
-    "sepcomma": "Comma",
-    "sepcolon": "Colon",
-    "sephyphen": "Hyphen"
-  },
-
-  "rotciphers" : {
-    "title": "Rotation ciphers",
-    "long": "<p>Rotation ciphers simply replace each letter with one in the alphabet a few positions further up. If you pass the end of the alphabet you start at the beginning, hence the name rotation ciphers. By default the shift is half the size of the alphabet used, which makes the encryption and decryption identical. ROT13 uses the Latin alphabet in uppercase. ROT5 only numbers and ROT47 uses all printable ASCII characters. You can rotate hexadecimal numbers or specify a customized alphabet to use.</p><p>This tool generates all possible rotations, which makes it easy to crack the cipher if the rotation is unknown. ROT13 is used by geocaching.com to encrypt hints.</p>",
-    "selmethod": "Select rotation",
-    "rot5" : "Numbers (ROT5)",
-    "rot13": "Latin (ROT13)",
-    "rot47": "Printable ASCII (ROT47)",
-    "hexa": "Hexadecimal (ROT8)",
-    "custom": "Specify your own rotation",
-    "other": "Specify the alphabet to use (use CAPS)"
-  },
-
-  "freqanal" : {
-    "title" : "Frequency Analysis",
-    "long" : "<p>The frequency distribution of individual characters or n-grams is very useful when cracking ciphers. The larger the text the more reliable and useful statistics are.</p><p>If you use size 1 you get the frequency distribution of the alphabet. If it looks similar to normal text it is probably a 1 on 1 replacement. You can use <a href='/substcipher'>Smart Replace</a> to crack the code.</p><p>Size 2 are so called digrams or bigrams. They can be used to crack ciphers that encode a single letter with two, such as Polybius. Digrams can also be useful for cracking ciphers that encode two characters each time, such as Bazeries or Trisquare. For ciphers that encode two characters at a time. The most common bigrams are probably also the bigrams most often found in normal text. So is TH the most common digram in English</p><p>The maximum number of missing n-grams shown is 1000.</p>",
-    "size" : "Size of n-gram",
-    "slide" : "Slide (ABCDE => AB, BC, CD, DE)",
-    "bound" : "Respect word boundaries",
-    "showmissing" : "Show missing n-grams (max 1000)",
-    "numfound" : "Number of n-grams found: ",
-    "nummissing" : "Number of n-grams missing: ",
-    "missing": "Missing n-grams"
-  },
-
-  "printlog" : {
-    "title": "Print logs",
-    "long" : "A handy tool to print logs. Set the number of columns, the lines per log, add images, choose colors and add FTF. When printing on A4 - 2 columns of 9cm will fit in petlings and 5 columns of 3.6cm will fit in photo canisters - 9 columns of 2cm will fit in almost anything. Save as PDF or PNG.",
-    "header": "Header",
-    "ncol": "No. of columns",
-    "lpl" : "Lines per log",
-    "hdrcol": "Header color",
-    "txtcol" : "Text color",
-    "linecol" : "Line color",
-    "ftfcol" : "FTF color",
-    "extra" : "Extra options",
-    "showimg" : "Add image on top",
-    "selimg" : "Choose image",
-    "nmdttm" : "Name, date, time",
-    "printftf" : "Print FTF, STF and TTF",
-    "nolines" : "No lines between columns",
-    "savepdf" : "Save PDF",
-    "savepng" : "Save PNG",
-    "lh" : "Line spacing",
-    "lh1": "Very tight",
-    "lh2": "Tight",
-    "lh3": "Normal",
-    "lh4": "Wide",
-    "lh5": "Very wide"
-  },
-
-  "genlog" : {
-    "title": "Generate logs",
-    "long": "<p>Generate logs with counters and copy the log to the clipboard so you can paste it elsewhere. If you use the geocaching website to log this is an easy tool to use. Counters increase everytime you generate a log.</p><p>Use multiple templates for more variance in your logs. Use random to pick a random template.</p><p>If you want more options try GSAK or use an app like C:geo.</p>",
-    "n" : "Number of templates",
-    "tot": "Total finds (%tot%)",
-    "day": "Total finds for today (%day%)",
-    "ph": "Type a log. Use %tot% and %day% for counters",
-    "random": "Random template",
-    "template": "Generate log using template "
-  },
-
-  "gameoflife": {
-    "title": "Game of life",
-    "long": "<p>The Game of Life is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It starts with an initial generation of cells. Each next generation follows a few simple rules: A cell dies if it has less than 2 or more than three neighbours. A cell becomes alive if it has exactly three neighbours.</p><p>Select a pattern to fill the grid. At any time you can click a cell to make it alive or kill it. You can change the default rules if you want.</p>",
-    "newgrid": "Start new",
-    "step": "Step",
-    "gen": "Generation: ",
-    "cellsalive": "Cells alive: ",
-    "fillgrid": "Start pattern",
-    "chgrules": "Change rules",
-    "diebelow": "Die below",
-    "dieabove": "Die above",
-    "bornabove": "Born above",
-    "bornbelow": "Born below",
-    "empty": "Empty",
-    "random": "Random",
-    "rndsym": "Random symmetrical",
-    "rows": "# rows",
-    "cols": "# columns"
-  },
-
-  "booksearch" : {
-    "title" : "Book search",
-    "long" : "This tool will lookup a book using the ISBN number, author, title or a combination of those. It uses the free online OpenLibrary.org. If there are more matches all of them will be displayed.",
-    "sel" : "Show results",
-    "short": "Author(s), title, one ISBN",
-    "extra": "Author(s), title, all ISBN, year published, languages, publishers",
-    "bkfnd": "Books found: ",
-    "isbn": "ISBN(s): ",
-    "author": "Author(s): ",
-    "titles": "Title: ",
-    "firstpub": "First published: ",
-    "lang": "Language(s): ",
-    "pub": "Publisher(s): ",
-    "edcnt": "Edition count: "
   }
 
 }

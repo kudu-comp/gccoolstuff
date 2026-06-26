@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('equations.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -58,13 +58,13 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate class="mb-2" id="calc" @calculate="solve()"></v-calculate>
+          <CalculateButton @calculate="solve()" />
         </div>
       </VCard>
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div v-if="result" class="card resultbox" v-html="result">
+        <div v-if="result" class="resultbox" v-html="result">
         </div>
       </VCard>
     </div>
@@ -75,7 +75,7 @@
 import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { fraction, lusolve, format as mathFormat, floor, subtract, isZero } from "mathjs";
-import VCalculate from '@/components/generic/VCalculate.vue';
+import CalculateButton from '@/components/generic/CalculateButton.vue';
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({
@@ -89,6 +89,7 @@ const size = ref(2);
 const format = ref("1");
 const result = ref("");
 const errormsg = ref("");
+const startOpen = window.innerWidth > 768;
 const varname = "xyzabcdefghijklmnopqrstuvw";
 
 // Reactive data structures for the grid
@@ -186,3 +187,27 @@ const solve = () => {
 };
 
 </script>
+
+<i18n locale="en">
+{
+  "equations": {
+    "numvar": "Number of variables",
+    "output": "Output format",
+    "fractions": "Fractions",
+    "decimals": "Decimals",
+    "nosol": "There are no solutions"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "equations": {
+    "numvar": "Aantal variabelen",
+    "output": "Output formaat",
+    "fractions": "Breuken",
+    "decimals": "Decimalen",
+    "nosol": "Er zijn geen oplossingen."
+  }
+}
+</i18n>

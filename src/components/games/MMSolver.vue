@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('mmsolver.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -71,7 +71,7 @@
           class="resultbox"
         >
           <h4>
-            {{ t('sudokusolv.thereare') }} {{ results.length }} {{ t('sudokusolv.sols') }}
+            {{ t('mmsolver.sols', results.length) }}
           </h4>
           <template v-for="r in results">
               {{ r }}<br>          
@@ -110,6 +110,7 @@ const solved = ref(false)
 
 // --- Template Ref ---
 const npinInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -249,3 +250,37 @@ onMounted(() => {
   font-size: 0.9rem;
 }
 </style>
+
+<i18n locale="en">
+{
+  "mmsolver": {
+    "npin": "Number of pins",
+    "ncolor": "Number of colors",
+    "unique": "Colors must be unique",
+    "pins": "Tries",
+    "pos": "Match location and color",
+    "col": "Match color only",
+    "invalidhint1": "Try must have the correct number of pins",
+    "invalidhint2": "Try has invalid color",
+    "invalidhint3": "Number of matches must be less or equal to number of pins",
+    "sols": "There is no solution.|There is one solution.|There are {n} solutions."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "mmsolver": {
+    "npin": "Aantal pins",
+    "ncolor": "Aantal kleuren",
+    "unique": "Kleuren zijn uniek",
+    "pins": "Pogingen",
+    "pos": "Kleur & positie",
+    "col": "Alleen kleur",
+    "invalidhint1": "Poging heeft onjuist aantal pins",
+    "invalidhint2": "Poging heeft een ongeldige kleur",
+    "invalidhint3": "Aantal matches moet kleiner of gelijk zijn aan het aantal pins",
+    "sols": "Er is geen oplossing.|Er is één oplossing|Er zijn {n} oplossingen."
+  }
+}
+</i18n>

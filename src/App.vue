@@ -24,9 +24,9 @@
             </button>
 
             <div v-if="isLocaleDropdownOpen" class="locale-dropdown">
-              <div 
-                v-for="loc in locales" 
-                :key="loc.value" 
+              <div
+                v-for="loc in locales"
+                :key="loc.value"
                 class="locale-option"
                 :class="{ 'is-selected': locale === loc.value }"
                 @click="changeLocale(loc.value)"
@@ -52,14 +52,14 @@
       </template>
     </VMenu>
 
-    <main class="content">
+    <main>
 
       <!-- Container is now truly full-width -->
       <div class="container">
 
         <!-- The GC Tools menu-->
-        <router-view /> 
-        
+        <router-view />
+
       </div>
     </main>
   </div>
@@ -81,7 +81,7 @@ const locales = [
   { label: 'Nederlands', value: 'nl', flag: '🇳🇱' }
 ];
 
-const selectedLocale = computed(() => 
+const selectedLocale = computed(() =>
   locales.find(l => l.value === locale.value)
 );
 
@@ -100,16 +100,16 @@ const vClickOutside = {
 
 const menuItems = ref([
   { label: t('menu.coordinates'), children: [
-    { label: t('convert.title'), to: '/convert' }, 
-    { label: t('project.title'), to: '/project' }, 
-    { label: t('mapmaker.title'), to: '/mapmaker' }, 
-    { label: t('incomplete.title'), to: '/incomplete' }, 
-    { label: t('lines.title'), to: '/lines' }, 
-    { label: t('triangles.title'), to: '/triangles' }, 
-    { label: t('circles.title'), to: '/circles' }, 
-    { label: t('antipode.title'), to: '/antipode' }, 
-    { label: t('plotcoord.title'), to: '/plotcoord' }, 
-    { label: t('triangulation.title'), to: '/triangulation' }, 
+    { label: t('convert.title'), to: '/convert' },
+    { label: t('project.title'), to: '/project' },
+    { label: t('mapmaker.title'), to: '/mapmaker' },
+    { label: t('incomplete.title'), to: '/incomplete' },
+    { label: t('lines.title'), to: '/lines' },
+    { label: t('triangles.title'), to: '/triangles' },
+    { label: t('circles.title'), to: '/circles' },
+    { label: t('antipode.title'), to: '/antipode' },
+    { label: t('plotcoord.title'), to: '/plotcoord' },
+    { label: t('triangulation.title'), to: '/triangulation' },
     { label: t('revwherigo.title'), to: '/revwherigo' }
   ] },
   { label: t('menu.texttools'), children: [
@@ -223,7 +223,7 @@ const menuItems = ref([
 
 <style>
 
-/* Utility classes for spacing and padding */
+/* Utility classes for padding */
 .mb-0 { margin-bottom: 0rem;}
 .ml-0 { margin-right: 0rem;}
 .me-0 { margin-right: 0rem}
@@ -239,13 +239,18 @@ const menuItems = ref([
 .ms-4 { margin-left: 2rem; }
 .me-4 { margin-right: 2rem; }
 .mt-4 { margin-top: 2rem; }
-.sm-size { width: 2rem}
-.md-size { width: 4rem}
-.lg-size { width: 6rem}
-.xl-size { width: 8rem}
 
-/* Headers setting *?
-
+/* Universal SVG icon class */
+.svg-icon {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0; /* Prevents the icon from squishing on small buttons */
+}
 
 /* =========================================
    1. THEME VARIABLES & GLOBAL RESET
@@ -331,14 +336,14 @@ html, body {
 }
 
 .page-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .page-header h1 {
   margin: 0rem;
   padding-left: 1rem;
   color: var(--primary-green);
-  font-size: 2.2rem;
+  font-size: 2.0rem;
   letter-spacing: -0.5px;
 }
 
@@ -355,7 +360,7 @@ html, body {
   flex-direction: column;
   gap: 1rem; /* Matches the grid gap for a uniform look */
   grid-column: span 1; /* Ensures it only takes up one grid cell */
-} 
+}
 
 /* =========================================
    3. Form layouts
@@ -410,13 +415,13 @@ html, body {
 }
 
 /* Stretchable input control */
-.form-horizontal input, 
-.form-horizontal select, 
+.form-horizontal input,
+.form-horizontal select,
 .form-horizontal textarea,
 .form-horizontal .custom-select-container {
   flex: 1;               /* Stretches to fill the remaining space */
   min-width: 0;          /* Prevents input from overflowing flex container */
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 @media (max-width: 680px) {
@@ -428,19 +433,19 @@ html, body {
 
   .form-horizontal label {
     /* KEY FIX: Reset flex so 150px height doesn't apply */
-    flex: none !important; 
+    flex: none !important;
     width: 100% !important;
     height: auto !important;
     margin-bottom: 2px;
     /* Optional: reduce font size slightly for mobile if needed */
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
   }
 
-  .form-horizontal input, 
-  .form-horizontal select, 
+  .form-horizontal input,
+  .form-horizontal select,
   .form-horizontal textarea {
     /* KEY FIX: Ensure it doesn't try to grow vertically */
-    flex: none !important; 
+    flex: none !important;
     width: 100% !important;
     height: 45px; /* Set a standard touch-friendly height */
     min-height: 45px;
@@ -527,8 +532,8 @@ input[type="color"] {
 }
 
 /* The Green Focus State */
-input:focus, 
-textarea:focus, 
+input:focus,
+textarea:focus,
 select:focus,
 .custom-select-trigger.is-active {
   outline: none;
@@ -713,6 +718,8 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem; /* This creates the space between the icon and text automatically */
+  line-height: 1; /* Prevents text from shifting vertically */
   border: 2px solid transparent;
 }
 
@@ -752,11 +759,11 @@ textarea {
 /* =========================================
    8. COMPONENT SPECIFIC (BRand, header, local, search )
    ========================================= */
-.brand { 
-  color: var(--primary-green); 
+.brand {
+  color: var(--primary-green);
   font-size: 1.3rem;
   margin-left: -10px;
-  cursor: pointer; 
+  cursor: pointer;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -840,9 +847,9 @@ textarea {
 
 /* Ensure the search button scales nicely next to it */
 .search-btn {
-  background: none; 
-  border: none; 
-  color: var(--primary-green); 
+  background: none;
+  border: none;
+  color: var(--primary-green);
   cursor: pointer;
   padding: 8px;
   width: 36px;
@@ -858,10 +865,10 @@ textarea {
   background: var(--soft-green);
 }
 
-/* .search-btn { 
-  background: none; 
-  border: none; 
-  color: var(--primary-green); 
+/* .search-btn {
+  background: none;
+  border: none;
+  color: var(--primary-green);
   cursor: pointer;
   padding: 8px;
   display: flex;
@@ -933,7 +940,7 @@ textarea {
   border-collapse: collapse;
   background-color: var(--white);
   text-align: left;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
 }
 
 /* Override min-width for small tables so they can fit in narrow cards */
@@ -950,7 +957,7 @@ textarea {
   color: var(--primary-dark);
   font-weight: 700;
   /* 2. Tightened padding */
-  padding: 0.4rem 0.5rem; 
+  padding: 0.4rem 0.5rem;
   border-bottom: 2px solid var(--accent-green);
   text-align: center;
   white-space: nowrap;
@@ -958,7 +965,7 @@ textarea {
 
 .p-table-small td {
   /* 3. Tightened padding for rows */
-  padding: 0.3rem 0.5rem; 
+  padding: 0.3rem 0.5rem;
   border-bottom: 1px solid var(--soft-green);
   color: var(--text-dark);
   overflow-wrap: break-word; /* Ensures long words wrap if necessary */
@@ -1054,7 +1061,7 @@ input.is-invalid {
 
 input.is-invalid:focus {
   box-shadow: 0 0 0 4px rgba(192, 93, 77, 0.1) !important;
-} 
+}
 
 /* =========================================
    11. LINK STYLING
@@ -1094,7 +1101,7 @@ a:focus {
   align-items: center;
   padding: 0.6rem 1.2rem;
   background-color: var(--primary-green);
-  color: white !important; 
+  color: white !important;
   border-radius: 8px;
   font-weight: 500;
   border: none;
@@ -1106,7 +1113,7 @@ a:focus {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(107, 142, 35, 0.2);
   border-bottom: none; /* Override the global border-bottom */
-}   
+}
 
   /* =========================================
   12. RELAXED GREEN CARD STYLING
@@ -1185,7 +1192,7 @@ a:focus {
 .v-card-body {
   padding: 0 1.5rem 1.5rem 1.5rem;
   /* overflow: visible allows absolute dropdowns to show outside the card */
-  overflow: visible; 
+  overflow: visible;
 }
 
 @media (max-width: 600px) {
@@ -1211,7 +1218,7 @@ a:focus {
   transition: all 0.3s ease-out;
   max-height: 1200px; /* Large enough to accommodate form content */
   opacity: 1;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 /* Starting state for entering / Ending state for leaving */

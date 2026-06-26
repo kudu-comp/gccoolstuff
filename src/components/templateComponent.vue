@@ -42,7 +42,7 @@
           <input type="checkbox" v-model="chk">
           <span class="checkmark"></span>
           {{ t('compname.label') }}
-        </label>  
+        </label>
         <!-- Use this for a dropdown -->
         <!-- Options list has records with label and value  -->
          <CustomDropdown
@@ -74,7 +74,7 @@
         </p>
         <p v-else-if="infomsg" class="infomsg mb-2">
           {{ infomsg }}
-        </p>        
+        </p>
         <div class="button-row">
           <button class="btn btn-primary"  @click="doSomething">
             {{ t('buttons.action') }}
@@ -84,10 +84,15 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div
-          v-if="result"
-          class="card resultbox"
-        >
+        <div class="button-row mb-2">
+          <!-- Or use :content="result" -->
+          <CopyButton
+            :content="resultsContainer"
+            :is-html="true"
+          />
+        </div>
+        <!-- Add an declare ref if CopyButton uses html -->
+        <div v-if="result" class="resultbox">
           {{ result }}
         </div>
       </VCard>
@@ -104,20 +109,19 @@
 import { ref, computed } from 'vue';
 import VMenu from '@/components/generic/VMenu.vue';
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 // Control intro text box on small screens
 const startOpen = window.innerWidth > 768;
 
 // Replace result, infomsg and errormsg with computed function if requested
 const result=ref('')
-const errormsg=''
-const infomsg=''
+const errormsg=ref('')
+const infomsg=ref('')
 
 // Variables used in settings and input card go here
 const num=ref(0)
@@ -127,6 +131,7 @@ const chk=ref(true)
 const radio=ref(0)
 const sel=ref(0)
 const msg=ref('')
+const startOpen = window.innerWidth > 768;
 
 // Onmount set initial focus and do other stuff
 onMounted(() => {
@@ -143,9 +148,9 @@ const doSomething = function() {
 <style scoped>
 </style>
 
-<!-- 
-All language definitions 
-But info and long should be global as they are used in menus and search 
+<!--
+All language definitions
+But info and long should be global as they are used in menus and search
 -->
 <i18n locale="en">
 {

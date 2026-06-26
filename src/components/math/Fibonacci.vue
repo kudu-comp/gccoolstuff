@@ -5,24 +5,21 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('fibonacci.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
          <div class="form-horizontal">
           <label>{{ t('fibonacci.pos') }}</label>
           <input type="text" v-model="pos" ref="posInput">
-          <v-calculate @calculate="getFib"></v-calculate>
+          <CalculateButton @calculate="getFib" />
         </div>
          <div class="form-horizontal">
           <label>{{ t('fibonacci.check') }}</label>
           <input type="text" v-model="check">
-          <v-calculate @calculate="checkFib"></v-calculate>
+          <CalculateButton @calculate="checkFib" />
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-show="errormsg" class="errormsg mt-2">
           {{ errormsg }}.
         </p>
       </VCard>
@@ -31,7 +28,7 @@
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -44,12 +41,13 @@
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import VCard from '@/components/generic/VCard.vue'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 defineOptions({
   name: 'Fibonacci'
 })
 
 const { t } = useI18n()
+const startOpen = window.innerWidth > 768;
 
 // --- Static Data ---
 const FIB_NUMBERS = [
@@ -339,7 +337,7 @@ const getFib = () => {
     return
   }
 
-  result.value = t('fibonacci.the') + pos.value + t('fibonacci.nth') + FIB_NUMBERS[pos.value - 1]
+  result.value = t('fibonacci.nth', {pos: pos.value, fib: FIB_NUMBERS[pos.value - 1]})
 }
 
 const checkFib = () => {
@@ -359,3 +357,32 @@ const checkFib = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "fibonacci": {
+    "pos": "Fibonacci number at position",
+    "check": "Check if this is a Fibonaci number",
+    "toobig": "Position too big (max 500)",
+    "errorzero": "Position must be greater than zero",
+    "the": "The ",
+    "nth": "The {pos}th Fibonacci number is {fib}.",
+    "not": " is not a Fibonacci number.",
+    "fib": " is a Fibonacci number at position "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "fibonacci": {
+    "pos": "Fibonacci nummer op positie",
+    "check": "Controleer of dit een Fibonacci nummer is",
+    "toobig": "Positie te hoog (max 500)",
+    "errorzero": "Positie moet groter dan 0 zijn",
+    "nth": "The {pos}e Fibonacci nummer is {fib}.",
+    "not": " is geen Fibonacci nummer.",
+    "fib": " is een Fibonacci nummer op positie "
+  }
+}
+</i18n>

@@ -5,14 +5,14 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('mapmaker.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
           <label
           >{{ t('labels.from') }}</label>
-          <v-datums
+          <DatumSelect
             id="from"
             v-model:datum="from"
           />
@@ -48,28 +48,23 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <textarea
-          id="coordfrom"
           ref="coordFromRef"
           v-model="coordfrom"
-          class="form-control mt-2"
+          class="mb-2"
           :placeholder="t('mapmaker.phcoord')"
           rows="5"
         />
         <textarea
-          id="labels"
           v-model="labels"
-          class="form-control mt-2 mb-2"
+          class="mb-2"
           :placeholder="t('mapmaker.phlabel')"
           rows="5"
         />
-        <div
-          v-show="errormsg"
-          class="errormsg"
-        >
+        <div v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}
         </div>
         <div class="button-row">
-          <v-show-on-map id="go" class="btn btn-primary" @Show="makeMap()" />
+          <ButtonShowOnMap @Show="makeMap()" />
         </div>
       </VCard>
     </div>
@@ -89,11 +84,11 @@ import L from 'leaflet';
 import * as coords from '@/scripts/coords.js';
 
 // Component Imports
-import VDatums from '@/components/generic/VDatums.vue';
+import DatumSelect from '@/components/generic/DatumSelect.vue';
 import VDistance from '@/components/generic/VDistance.vue';
 import VMap from '@/components/generic/VMap.vue';
 import VCard from '@/components/generic/VCard.vue';
-import VShowOnMap from '@/components/generic/VShowOnMap.vue';
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue';
 
 defineOptions({
   name: 'MapMaker'
@@ -115,6 +110,7 @@ const dist = ref(165);
 
 // --- Template Refs ---
 const coordFromRef = ref(null);
+const startOpen = window.innerWidth > 768;
 
 // --- Lifecycle ---
 onMounted(() => {
@@ -192,3 +188,31 @@ const makeMap = () => {
   });
 };
 </script>
+
+<i18n locale="en">
+{
+  "mapmaker": {
+    "phcoord": "Coordinates go here",
+    "phlabel": "Labels go here (optional)",
+    "showmark": "Show markers",
+    "showlabel": "Show marker labels",
+    "drawcircle": "Draw circles",
+    "makemap": "Make map",
+    "error1": "Number of coordinates and labels must match"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "mapmaker": {
+    "phcoord": "Coördinaten hier invoeren",
+    "phlabel": "Labels hier invoeren (optioneel)",
+    "showmark": "Toon markers",
+    "showlabel": "Toon marker labels",
+    "drawcircle": "Teken cirkels",
+    "makemap": "Maak kaart",
+    "error1": "Aantal coördinaten en labels moet gelijk zijn"
+  }
+}
+</i18n>

@@ -608,9 +608,7 @@ import VCard from '@/components/generic/VCard.vue'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 const closed=ref(false)
 const open=ref(true)

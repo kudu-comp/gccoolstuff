@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('wordsearch.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -42,8 +42,11 @@
         </div>
       </VCard>
       <VCard :title="t('labels.result')">
-        <div class="card resultbox" >
-          {{ result }} 
+        <div class="resultbox" >
+          {{ result }}
+          <div v-if="result" class="button-row mb-2">
+            <DownloadButton v-model:canvas="puzzleCanvas" />
+          </div>
           <div class="canvas-container">
             <canvas ref="puzzleCanvas"></canvas>
           </div>
@@ -57,6 +60,7 @@
 import { ref, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
+import DownloadButton from '@/components/generic/DownloadButton.vue';
 
 defineOptions({
   name: "WordSearch"
@@ -84,6 +88,7 @@ const circlecolor = ref("#6b8e23");
 
 // --- Template Refs ---
 const puzzleCanvas = ref(null);
+const startOpen = window.innerWidth > 768;
 
 // --- Directional Logic ---
 const moves = [
@@ -288,5 +293,28 @@ canvas {
 }
 </style>
 
-<style scoped>
-</style>
+<i18n locale="en">
+{
+  "wordsearch": {
+    "grid": "The grid",
+    "words": "Words to find",
+    "ignore": "Character indicating unused positions",
+    "griderror": "Not all lines in the grid are the same length",
+    "remletters": "Remaining letters: ",
+    "notfound": " cannot be found."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "wordsearch": {
+    "grid": "Het zoekvierkant",
+    "words": "Te vinden woorden",
+    "ignore": "Karakter voor ongebruikte posities",
+    "griderror": "Niet alle regels in het zoekvierkant hebben dezelfde lengte",
+    "remletters": "Overgebleven letters: ",
+    "notfound": " kan niet worden gevonden."
+  }
+}
+</i18n>

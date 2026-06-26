@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('printlog.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -90,9 +90,21 @@
         </div>
         <div class="button-row mt-2">
           <button class="btn btn-primary" @click="save">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
             {{ t('printlog.savepdf')}}
           </button>
           <button class="btn btn-primary" @click="savepng">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
             {{ t('printlog.savepng')}}
           </button>
         </div>
@@ -128,6 +140,7 @@ const { t } = useI18n();
 // --- Template Refs ---
 const canvasRef = ref(null);
 const hdr1Input = ref(null);
+const startOpen = window.innerWidth > 768;
 
 // --- State ---
 const ncol = ref(5);
@@ -373,3 +386,59 @@ canvas {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "printlog": {
+    "header": "Header",
+    "ncol": "No. of columns",
+    "lpl" : "Lines per log",
+    "hdrcol": "Header color",
+    "txtcol" : "Text color",
+    "linecol" : "Line color",
+    "ftfcol" : "FTF color",
+    "extra" : "Extra options",
+    "showimg" : "Add image on top",
+    "selimg" : "Choose image",
+    "nmdttm" : "Name, date, time",
+    "printftf" : "Print FTF, STF and TTF",
+    "nolines" : "No lines between columns",
+    "savepdf" : "Save PDF",
+    "savepng" : "Save PNG",
+    "lh" : "Line spacing",
+    "lh1": "Very tight",
+    "lh2": "Tight",
+    "lh3": "Normal",
+    "lh4": "Wide",
+    "lh5": "Very wide"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "printlog": {
+    "header": "Kopregel",
+    "ncol": "Aantal kolommen",
+    "lpl" : "Regels per log",
+    "hdrcol": "Kopregelkleur",
+    "txtcol" : "Tekstkleur",
+    "linecol" : "Lijnkleur",
+    "ftfcol" : "FTF kleur",
+    "extra" : "Extra opties",
+    "showimg" : "Afbeelding toevoegen",
+    "selimg" : "Kies afbeelding",
+    "nmdttm" : "Naam, datum, tijd",
+    "printftf" : "Print FTF, STF en TTF",
+    "nolines" : "Geen lijnen tussen de kolommen",
+    "savepdf" : "PDF opslaan",
+    "savepng" : "PNG opslaan",
+    "lh" : "Regelhoogte",
+    "lh1": "Erg krap",
+    "lh2": "Krap",
+    "lh3": "Normaal",
+    "lh4": "Ruim",
+    "lh5": "Erg ruim"
+  }
+}
+</i18n>

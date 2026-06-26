@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('usastates.long')" />
       </VCard>
 
@@ -45,6 +45,7 @@ const { t } = useI18n()
 const formattedResult = ref("")
 const tableError = ref("")
 const defsearch = 1 // Default to 'Code' column
+const startOpen = window.innerWidth > 768;
 
 // Placeholder for the search box
 const phsearch = computed(() => t('usastates.ph'))
@@ -184,3 +185,33 @@ const rows = [
   { code: "WY", name: "Wyoming", reps: "1", num: "44", flag: "Flag", area: "10", cap: "Cheyenne" }
 ]
 </script>
+
+<i18n locale="en">
+{
+  "usastates": {
+    "ph": "Type searches divided by spaces, for state codes the spaces can be omitted",
+    "flag": "Flag",
+    "code": "ISO3166:2 code",
+    "name": "State",
+    "num": "Joined as",
+    "reps": "US House reps",
+    "area": "Area ranking",
+    "cap": "Capital"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "usastates": {
+    "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "flag": "Vlag",
+    "code": "ISO3166:2 code",
+    "name": "Staat",
+    "num": "Toetreding",
+    "reps": "Huis reps",
+    "area": "Opp. ranking",
+    "cap": "Hoofdstad"
+  }
+}
+</i18n>

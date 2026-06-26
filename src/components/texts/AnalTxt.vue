@@ -5,7 +5,7 @@
   
   <div class="card-grid mb-2">
     <div class="card-stack">      
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('analtxt.long')" />
       </VCard>
 
@@ -71,6 +71,7 @@ const message = ref("")
 const replacediac = ref(true)
 const errormsg = ref("")
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   messageInput.value?.focus()
@@ -215,3 +216,55 @@ th {
   font-weight: bold;
 }
 </style>
+
+<i18n locale="en">
+{
+  "analtxt": {
+    "analyze": "Analyze text",
+    "result": "Table with counts and percentages comes here",
+    "nwords": "Number of words",
+    "nlines": "Number of lines",
+    "nchar": "Number of characters",
+    "nalpha": "Number of alphabetic characters (A to Z, a to z)",
+    "ndigit": "Number of digits (0 to 9)",
+    "nwhite": "Number of white space characters (spaces, tabs and linefeeds)",
+    "nupper": "Number of uppercase characters (A to Z)",
+    "nlower": "Number of lowercase characters (a to z)",
+    "nnonalpha": "Number of non alphabetic characters",
+    "nnonwhite": "Number of non white space",
+    "letter": "Letter",
+    "digit": "Digit",
+    "symbol": "Symbol",
+    "count": "Count",
+    "perc": "Percentage",
+    "upper": "upper",
+    "lower": "lower"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "analtxt": {
+    "analyze": "Analiseer tekst",
+    "result": "Tabel met aantallen en percentages komt hier",
+    "nwords": "Aantal woorden",
+    "nlines": "Aantal regels",
+    "nchar": "Aantal karakters",
+    "nalpha": "Aantal letters (A to Z, a to z)",
+    "ndigit": "Aantal cijfers (0 to 9)",
+    "nwhite": "Aantal witgebruik (spaties, tabs, regeleinde)",
+    "nupper": "Aantal hoofdletters (A to Z)",
+    "nlower": "Aantal kleine letters (a to z)",
+    "nnonalpha": "Aantal niet-letters",
+    "nnonwhite": "Aantal niet-witgebruik",
+    "letter": "Letter",
+    "digit": "Cijfer",
+    "symbol": "Symbool",
+    "count": "Aantal",
+    "perc": "Percentage",
+    "upper": "hoofd",
+    "lower": "kleine"
+  }
+}
+</i18n>

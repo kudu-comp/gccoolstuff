@@ -5,27 +5,23 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('plotcoord.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label
-          >{{ t('labels.from') }}</label>
-          <v-datums
-            id="from"
-            v-model:datum="from"
-          />
+          <label>{{ t('labels.from') }}</label>
+          <DatumSelect v-model:datum="from" />
         </div>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showmarkers">
           <span class="checkmark"></span>
-          {{ t('mapmaker.showmark') }}
+          {{ t('plotcoord.showmark') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="showlabels">
           <span class="checkmark"></span>
-          {{ t('mapmaker.showlabel') }}
+          {{ t('plotcoord.showlabel') }}
         </label>
         <label class="checkbox-container mb-2">
           <input type="checkbox" v-model="drawlines">
@@ -43,25 +39,20 @@
           ref="coordFromInput"
           v-model="coordfrom"
           class="mb-2"
-          :placeholder="t('mapmaker.phcoord')"
+          :placeholder="t('plotcoord.phcoord')"
           rows="5"
         />
         <textarea
           v-model="labels"
-          :placeholder="t('mapmaker.phlabel')"
+          :placeholder="t('plotcoord.phlabel')"
           rows="5"
           class="mb-2"
         />
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
         </p>          
         <div class="button-row">
-          <button class="btn btn-primary"  @click="makeMap">
-            {{ t('buttons.show') }}
-          </button>
+          <ButtonShowOnMap @click="makeMap" />
         </div>
       </VCard>
     </div>
@@ -81,8 +72,8 @@ import L from 'leaflet'
 import * as coords from '@/scripts/coords.js'
 import VMap from '@/components/generic/VMap.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VDatums from '@/components/generic/VDatums.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import DatumSelect from '@/components/generic/DatumSelect.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
   name: 'PlotCoord'
@@ -103,6 +94,7 @@ const showmarkers = ref(false)
 
 // --- Template Ref ---
 const coordFromInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   coordFromInput.value?.focus()
@@ -182,3 +174,29 @@ const makeMap = () => {
     })
 }
 </script>
+
+<i18n locale="en">
+{
+  "plotcoord": {
+    "phcoord": "Coordinates go here",
+    "phlabel": "Labels go here (optional)",
+    "showmark": "Show markers",
+    "showlabel": "Show marker labels",
+    "drawlines": "Draw lines",
+    "fillpoly": "Fill polygon"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "plotcoord": {
+    "phcoord": "Coördinaten hier invoeren",
+    "phlabel": "Labels hier invoeren (optioneel)",
+    "showmark": "Toon markers",
+    "showlabel": "Toon marker labels",
+    "drawlines": "Teken lijnen",
+    "fillpoly": "Vul het polygoon"
+  }
+}
+</i18n>

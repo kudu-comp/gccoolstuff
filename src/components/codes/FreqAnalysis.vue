@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('freqanal.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -52,7 +52,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row">
-          <v-calculate class="mb-2" id="calc" @calculate="genStats()"></v-calculate>
+          <CalculateButton class="mb-2" id="calc" @calculate="genStats()" />
         </div>
       </VCard>
     </div>
@@ -69,7 +69,7 @@
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import VCard from '@/components/generic/VCard.vue'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 
 defineOptions({
   name: "FreqAnalysis"
@@ -86,6 +86,7 @@ const slide = ref(true)
 const bound = ref(true)
 const showmissing = ref(false)
 const msg = ref("")
+const startOpen = window.innerWidth > 768;
 
 // --- Template Ref ---
 const msgInput = ref(null)
@@ -202,3 +203,35 @@ const genStats = () => {
   genNgrams(size.value)
 }
 </script>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "freqanal": {
+    "size" : "Size of n-gram",
+    "slide" : "Slide (ABCDE => AB, BC, CD, DE)",
+    "bound" : "Respect word boundaries",
+    "showmissing" : "Show missing n-grams (max 1000)",
+    "numfound" : "Number of n-grams found: ",
+    "nummissing" : "Number of n-grams missing: ",
+    "missing": "Missing n-grams"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "freqanal": {
+    "size" : "Lengte n-gram",
+    "slide" : "Verschuif (ABCDE => AB, BC, CD, DE)",
+    "bound" : "Analyseer losse woorden",
+    "showmissing" : "Toon ontbrekende n-grams (max 1000)",
+    "numfound" : "Aantal gevonden n-grams: ",
+    "nummissing" : "Aantal ontbrekende n-grams: ",
+    "missing": "Ontbrekende n-grammen"
+  }
+}
+</i18n>

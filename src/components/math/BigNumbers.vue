@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('bignumbers.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -54,7 +54,7 @@
       <VCard :title="t('labels.result')">     
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -74,6 +74,7 @@ defineOptions({
 })
 
 const { t } = useI18n()
+const startOpen = window.innerWidth > 768;
 
 // --- Static Data ---
 const BASE_OPTIONS = [
@@ -176,3 +177,35 @@ h4 {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "bignumbers": {
+    "selnum": "Number base",
+    "num1": "Number A",
+    "num2": "Number B",
+    "decimal": "Decimal",
+    "binary": "Binary",
+    "octal": "Octal",
+    "hexadecimal": "Hexadecimal",
+    "arithmetic": "Arithmetic operations",
+    "logical": "Logical operations"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "bignumbers": {
+    "selnum": "Rekenstelsel",
+    "num1": "Getal A",
+    "num2": "Getal B",
+    "decimal": "Decimaal",
+    "binary": "Binair",
+    "octal": "Octaal",
+    "hexadecimal": "Hexadecimaal",
+    "arithmetic": "Rekenkundige bewerkingen",
+    "logical": "Logische bewerkingen"
+  }
+}
+</i18n>

@@ -4,7 +4,7 @@
     <h1>{{ t('decabit.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('decabit.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -59,7 +59,7 @@
     <VCard :title="t('labels.result')">
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
       >
         {{ result }}
       </div>
@@ -103,6 +103,7 @@ const message = ref("")
 const format = ref(0)
 const mode = ref("encode") // 'encode' or 'decode'
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   messageInput.value?.focus()
@@ -181,3 +182,29 @@ const translation = computed(() => {
 const result = computed(() => translation.value.text)
 const errormsg = computed(() => translation.value.error)
 </script>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "decabit": {
+    "selenc": "Select encoding",
+    "selnum": "Numbers (0 - 126)",
+    "selascii": "Text ASCII",
+    "selalpha": "Text alphabet (A=1, Z=26)"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "decabit": {
+    "selenc": "Selecteer codering",
+    "selnum": "Nummers (0 - 126)",
+    "selascii": "Tekst ASCII",
+    "selalpha": "Tekst alfabet (A=1, Z=26)"
+  }
+}
+</i18n>

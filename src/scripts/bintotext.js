@@ -51,8 +51,8 @@ export function binaryToBuffer (s) {
   s = s.replace(/[ \n\r\t]/g, "");
 
   // Prepend with 0 if not exactly multiple of 8
-  if (s.length % 8 > 0)
-    for (let i = 0; i < 8 - (s.length % 8); i++) s = "0" + s;
+  let pad = (8 - (s.length % 8));
+  for (let i = 0; i < pad; i++) s = "0" + s;
 
   // Take 8 bit chunks and build the array
   let len = s.length / 8;
@@ -62,7 +62,6 @@ export function binaryToBuffer (s) {
   for (let i = 0; i < s.length; i += 8) {
     b[j++] =parseInt(s.slice(i, i + 8), 2);
   }
-
   return b;
   
 }

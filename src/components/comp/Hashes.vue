@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('hashes.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -39,6 +39,9 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
+        <div class="button-row mb-2">
+          <CopyButton :content="result" />
+        </div>
         <div class="resultbox" v-if="result">
           {{ result }}
         </div>
@@ -54,7 +57,7 @@ import { useI18n } from 'vue-i18n';
 import CryptoJS from 'crypto-js';
 import VCard from '@/components/generic/VCard.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
-import VCalculate from '@/components/generic/VCalculate.vue';
+import CopyButton from '@/components/generic/CopyButton.vue'
 
 defineOptions({
   name: 'Hashes'
@@ -68,6 +71,7 @@ const message = ref("");
 const verify = ref("");
 const selhash = ref("SHA1");
 const messageRef = ref(null);
+const startOpen = window.innerWidth > 768;
 
 const hashes = [
   { value: "MD5", label: "MD5" },
@@ -143,3 +147,26 @@ const infomsg = computed(() => {
 });
 </script>
 
+<i18n locale="en">
+{
+  "hashes": {
+    "hashes": "Select hash",
+    "hash": "Hash comes here",
+    "verify": "Enter a hash here to verify message",
+    "errorok": "Hash is correct, message is okay",
+    "errornok": "Hash is incorrect, message is corrupted"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "hashes": {
+    "hashes": "Selecteer hash",
+    "hash": "Hash verschijnt hier",
+    "verify": "Tik een hash hier om het bericht te verifiëren",
+    "errorok": "Hash is correct, bericht is oké",
+    "errornok": "Hash is incorrect, bericht is corrupt"
+  }
+}
+</i18n>

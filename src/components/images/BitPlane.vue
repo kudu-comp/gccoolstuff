@@ -1,66 +1,72 @@
 <template>
-
   <header class="page-header">
     <h1>{{ t('bitplane.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('bitplane.long')" />
       </VCard>
+      
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <label>{{ t('labels.selectfile') }}</label>
           <input type="file" accept="image/*" @change="handleImageUpload" />
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-show="errormsg" class="errormsg mt-2">
           {{ errormsg }}.
         </p>          
         <div class="form-horizontal">
           <CustomDropdown 
             v-model="selectedChannel" 
-            :options="channelOptions" 
-            title="Channel Select"
+            :options="translatedChannelOptions" 
+            :title="t('bitplane.labels.channel_select')"
           />
         </div>
         <div class="form-horizontal">
-          <label>Bit Plane: <strong>{{ selectedBit }}</strong><br>(0=LSB, 7=MSB)</label>
+          <label>{{ t('bitplane.labels.bit_plane_hint', { bit: selectedBit }) }}</label>
           <input type="range" class="range-input" v-model.number="selectedBit" min="0" max="7" step="1" />
         </div>
       </VCard>
-      <VCard title="Extracted Data (preview)">
+
+      <VCard :title="t('bitplane.extraction.title')">
         <div v-if="extractedData">
           <ShowSecret :data="extractedData" />
         </div>
       </VCard>
-      <VCard title="Injection">
+
+      <VCard :title="t('bitplane.injection.title')">
         <label class="checkbox-container">
           <input type="checkbox" v-model="wantsToInject">
           <span class="checkmark"></span>
-          Inject new secret
+          {{ t('bitplane.injection.checkbox') }}
         </label>
         <div v-if="wantsToInject" class="mt-2">
-            ⚠️ <strong>Notice:</strong> Injection is only supported for Native (RGBA) channels to prevent data corruption during color conversion.
-          <div class="info-alert mt-2">Capacity: {{ maxCapacityBytes.toLocaleString() }} bytes</div>
+          <div class="info-alert mb-2">
+            ⚠️ <strong>{{ t('bitplane.injection.notice_title') }}:</strong> {{ t('bitplane.injection.notice_text') }}
+          </div>
+          <div class="info-alert mt-2">
+            {{ t('bitplane.injection.capacity', maxCapacityBytes) }}
+          </div>
           <div style="border-style: solid; border-width: 2px; border-radius: 6px; border-color: var(--border-color); padding: 5px;">
             <LoadSecret @update:secret="val => newSecretData = val" />
           </div>
           <div class="button-row">
-            <button @click="injectAndSave" class="btn btn-primary mt-2">Inject & Download Stego PNG</button>
+            <button @click="injectAndSave" class="btn btn-primary mt-2">
+              {{ t('bitplane.injection.button') }}
+            </button>
           </div>
         </div>
       </VCard>
     </div> 
+
     <div class="card-stack">
-      <VCard title="Original Image">
+      <VCard :title="t('bitplane.results.original')">
         <div v-if="imageLoaded">
           <canvas ref="originalCanvas"></canvas>
         </div>
       </VCard>
-      <VCard :title='"Bitplane: " + channelName + " - Bit " + selectedBit' >
+      <VCard :title="t('bitplane.results.preview', { channel: channelName, bit: selectedBit })">
         <div v-if="imageLoaded">
           <canvas ref="bitplaneCanvas"></canvas>
         </div>
@@ -70,7 +76,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onUnmounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import VCard from '@/Components/generic/VCard.vue';
 import CustomDropdown from '@/Components/generic/CustomDropdown.vue';
 import LoadSecret from '@/Components/generic/LoadSecret.vue';
@@ -89,41 +95,39 @@ const selectedBit = ref(0);
 const extractedData = ref(null);
 const wantsToInject = ref(false);
 const newSecretData = ref(null);
+const startOpen = window.innerWidth > 768;
 
-const channelOptions = [
-  { label: 'Native (RGBA)', value: '', disabled:true },
-  { label: 'Red', value: 'r' },
-  { label: 'Green', value: 'g' },
-  { label: 'Blue', value: 'b' },
-  { label: 'Alpha', value: 'a' },
-  { label: 'Subtractive (CMYK)', value: '', disabled:true },
-  { label: 'Cyan', value: 'c' },
-  { label: 'Magenta', value: 'm' },
-  { label: 'Yellow', value: 'y' },
-  { label: 'Black (Key)', value: 'k' },
-  { label: 'Perceptual (HSV)', value: '', disabled:true },
-  { label: 'Hue', value: 'h' },
-  { label: 'Saturation', value: 's' },
-  { label: 'Value', value: 'v' },
-]
-
-let ctxOrig = null;
-let ctxBit = null;
-let imgW = 0;
-let imgH = 0;
+// Use computed for options so they update on language switch
+const translatedChannelOptions = computed(() => [
+  { label: t('bitplane.channels.group_native'), value: '', disabled: true },
+  { label: t('bitplane.channels.r'), value: 'r' },
+  { label: t('bitplane.channels.g'), value: 'g' },
+  { label: t('bitplane.channels.b'), value: 'b' },
+  { label: t('bitplane.channels.a'), value: 'a' },
+  { label: t('bitplane.channels.group_cmyk'), value: '', disabled: true },
+  { label: t('bitplane.channels.c'), value: 'c' },
+  { label: t('bitplane.channels.m'), value: 'm' },
+  { label: t('bitplane.channels.y'), value: 'y' },
+  { label: t('bitplane.channels.k'), value: 'k' },
+  { label: t('bitplane.channels.group_hsv'), value: '', disabled: true },
+  { label: t('bitplane.channels.h'), value: 'h' },
+  { label: t('bitplane.channels.s'), value: 's' },
+  { label: t('bitplane.channels.v'), value: 'v' },
+]);
 
 const channelName = computed(() => {
-  const map = { r:'Red', g:'Green', b:'Blue', a:'Alpha', c:'Cyan', m:'Magenta', y:'Yellow', k:'Black', h:'Hue', s:'Saturation', v:'Value' };
-  return map[selectedChannel.value];
+  return t(`bitplane.channels.${selectedChannel.value}`);
 });
 
 const isExperimental = computed(() => !['r','g','b','a'].includes(selectedChannel.value));
 const maxCapacityBytes = computed(() => Math.floor((imgW * imgH) / 8));
 
-/**
- * Robust Color Logic
- * Optimized to handle CMYK/HSV more reliably for bitwise viewing
- */
+// Logic remains identical ...
+let ctxOrig = null;
+let ctxBit = null;
+let imgW = 0;
+let imgH = 0;
+
 const getPixelValue = (r, g, b, a, channel) => {
   if (channel === 'r') return r;
   if (channel === 'g') return g;
@@ -134,16 +138,14 @@ const getPixelValue = (r, g, b, a, channel) => {
   const min = Math.min(r, g, b);
   const delta = max - min;
 
-  // CMYK logic (Integer based)
   if (['c', 'm', 'y', 'k'].includes(channel)) {
     if (channel === 'k') return 255 - max;
-    if (max === 0) return 0; // Pure black
+    if (max === 0) return 0;
     if (channel === 'c') return ((max - r) / max) * 255;
     if (channel === 'm') return ((max - g) / max) * 255;
     if (channel === 'y') return ((max - b) / max) * 255;
   }
 
-  // HSV logic
   if (['h', 's', 'v'].includes(channel)) {
     if (channel === 'v') return max;
     if (channel === 's') return max === 0 ? 0 : (delta / max) * 255;
@@ -244,12 +246,93 @@ const injectAndSave = () => {
 watch([selectedChannel, selectedBit], process);
 </script>
 
-<style scoped>
+<i18n lang="json">
+{
+  "en": {
+    "bitplane": {
+      "labels": {
+        "channel_select": "Channel Select",
+        "bit_plane_hint": "Bit Plane: {bit} (0=LSB, 7=MSB)"
+      },
+      "extraction": {
+        "title": "Extracted Data (preview)"
+      },
+      "injection": {
+        "title": "Injection",
+        "checkbox": "Inject new secret",
+        "notice_title": "Notice",
+        "notice_text": "Injection is only supported for Native (RGBA) channels to prevent data corruption during color conversion.",
+        "capacity": "Capacity: {n} byte | Capacity: {n} bytes",
+        "button": "Inject & Download Stego PNG"
+      },
+      "results": {
+        "original": "Original Image",
+        "preview": "Bitplane: {channel} - Bit {bit}"
+      },
+      "channels": {
+        "group_native": "Native (RGBA)",
+        "r": "Red",
+        "g": "Green",
+        "b": "Blue",
+        "a": "Alpha",
+        "group_cmyk": "Subtractive (CMYK)",
+        "c": "Cyan",
+        "m": "Magenta",
+        "y": "Yellow",
+        "k": "Black (Key)",
+        "group_hsv": "Perceptual (HSV)",
+        "h": "Hue",
+        "s": "Saturation",
+        "v": "Value"
+      }
+    }
+  },
+  "nl": {
+    "bitplane": {
+      "labels": {
+        "channel_select": "Kanaal Selecteren",
+        "bit_plane_hint": "Bit plane: {bit} (0=LSB, 7=MSB)"
+      },
+      "extraction": {
+        "title": "Geëxtraheerde Data (preview)"
+      },
+      "injection": {
+        "title": "Injectie",
+        "checkbox": "Nieuw geheim injecteren",
+        "notice_title": "Let op",
+        "notice_text": "Injectie wordt alleen ondersteund voor Native (RGBA) kanalen om corruptie tijdens kleurconversie te voorkomen.",
+        "capacity": "Capaciteit: {n} byte | Capaciteit: {n} bytes",
+        "button": "Injecteer & Download Stego PNG"
+      },
+      "results": {
+        "original": "Originele Afbeelding",
+        "preview": "Bit plane: {channel} - Bit {bit}"
+      },
+      "channels": {
+        "group_native": "Standaard (RGBA)",
+        "r": "Rood",
+        "g": "Groen",
+        "b": "Blauw",
+        "a": "Alpha",
+        "group_cmyk": "Subtractief (CMYK)",
+        "c": "Cyaan",
+        "m": "Magenta",
+        "y": "Geel",
+        "k": "Zwart (Key)",
+        "group_hsv": "Perceptueel (HSV)",
+        "h": "Tint (Hue)",
+        "s": "Verzadiging",
+        "v": "Waarde (Value)"
+      }
+    }
+  }
+}
+</i18n>
 
+<style scoped>
 canvas {
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
-
 </style>

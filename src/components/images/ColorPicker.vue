@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('colorpicker.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -150,6 +150,8 @@ const selColorBox = ref(null)
 
 // --- State ---
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
+
 const slr = ref(0)
 const slg = ref(0)
 const slb = ref(0)
@@ -347,3 +349,43 @@ canvas {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "colorpicker": {
+    "selcolor": "Selected color",
+    "rgbval": "RGB values",
+    "alpha": "Alpha channel",
+    "hexval": "RGB hexadecimal",
+    "hex": "RGB hex",
+    "hslval": "Hue, Saturation, Lightness",
+    "hue": "Hue",
+    "sat": "Saturation",
+    "lum": "Lumination",
+    "hsvval": "Hue, Saturation, Brigthness",
+    "bri": "Brightness",
+    "cmykval": "CMYK values",
+    "cmyval": "CMY values"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "colorpicker": {
+    "selcolor": "Geselecteerde kleur",
+    "rgbval": "RGB waardes",
+    "alpha": "Alpha",
+    "hexval": "RGB hexadecimaal",
+    "hex": "RGB hex",
+    "hslval": "HSL (Tint, Verzadiging, Lichtheid)",
+    "hue": "Tint",
+    "sat": "Verzadiging",
+    "lum": "Lichtheid",
+    "hsvval": "HSV/HSB (Tint, Verzadiging, Helderheid)",
+    "bri": "Helderheid",
+    "cmykval": "CMYK waardes",
+    "cmyval": "CMY waardes"
+  }
+}
+</i18n>

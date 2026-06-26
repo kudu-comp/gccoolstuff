@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('formulasolver.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -29,7 +29,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate id="calc" @calculate="solveFormula" :disabled="working"></v-calculate>
+          <CalculateButton @calculate="solveFormula" :disabled="working" />
         </div>
       </VCard>
     </div>
@@ -37,13 +37,13 @@
       <VCard :title="t('labels.result')">
         <div
           v-if="results.length > 0"
-          class="card resultbox"
+          class="resultbox"
         >
           <template v-for="(res, idx) in results">
             {{ printSolution(idx) }}<br>
           </template>
         </div>
-        <div v-else class="card resultbox">
+        <div v-else class="resultbox">
           {{ result }}
         </div>
       </VCard>
@@ -55,7 +55,7 @@
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { evaluate } from 'mathjs';
-import VCalculate from '@/components/generic/VCalculate.vue';
+import CalculateButton from '@/components/generic/CalculateButton.vue';
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({
@@ -76,6 +76,7 @@ const working = ref(false);
 
 // --- Template Ref ---
 const formulaInput = ref(null);
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   formulaInput.value?.focus();
@@ -203,3 +204,28 @@ const solveFormula = () => {
 };
 </script>
 
+<i18n locale="en">
+{
+  "formulasolver": {
+    "formula": "Formula",
+    "unique": "Unique numbers",
+    "base": "Base for calculations",
+    "nosol": "There are no solutions",
+    "exprerror": "Error evaluating expression, please check the formula",
+    "toomanyvars": "Too many variables, increase base or change formule"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "formulasolver": {
+    "formula": "Formule",
+    "unique": "Nummers zijn uniek",
+    "base": "Getalstelsel",
+    "nosol": "Er zijn geen oplossingen",
+    "exprerror": "Fout bij het evalueren van de expressie. Controleer de formule.",
+    "toomanyvars": "Te veel variabelen, verhoog getalstelsel of pas de formule aan."
+  }
+}
+</i18n>

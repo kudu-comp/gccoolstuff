@@ -4,7 +4,7 @@
     <h1>{{ t('texttonum.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('texttonum.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -68,7 +68,7 @@
     <VCard :title="t('labels.result')">
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
       >
         {{ result }}
       </div>      
@@ -83,9 +83,7 @@ import VAlphabets from '@/components/generic/VAlphabets.vue'
 import VCard from '@/components/generic/VCard.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: 'TextToNum'
@@ -102,6 +100,7 @@ const replacediac = ref(true)
 
 // --- Template Ref ---
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   messageInput.value?.focus()
@@ -182,3 +181,23 @@ const numbersToText = () => {
 
 <style scoped>
 </style>
+
+<i18n locale="en">
+{
+  "texttonum": {
+    "leadzero": "Always use leading zero below 10",
+    "btnttn": "Text to numbers",
+    "btnntt": "Numbers to text"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "texttonum": {
+    "leadzero": "Gebruik altijd een 0 voor getallen <10",
+    "btnttn": "Tekst naar getallen",
+    "btnntt": "Getallen naar tekst"
+  }
+}
+</i18n>

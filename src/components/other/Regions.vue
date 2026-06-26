@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('regions.long')" />
       </VCard>
 
@@ -55,6 +55,7 @@ const country = ref("nl")
 const formattedResult = ref("")
 const tableError = ref("")
 const defsearch = ref(1)
+const startOpen = window.innerWidth > 768;
 
 const countries = [
   { value: "nl", label: t('regions.nl') },
@@ -221,3 +222,55 @@ const handleReset = () => {
   tableError.value = ""
 }
 </script>
+
+<i18n locale="en">
+{
+  "regions": {
+    "ph": "Type searches divided by spaces, for codes the spaces can be omitted",
+    "list": "Countries",
+    "nl": "Netherlands",
+    "be": "Belgium",
+    "de": "Germany",
+    "fr": "France",
+    "flag": "Flag",
+    "code": "ISO3166:2 code",
+    "name": "Province",
+    "mun": "#Municipalities",
+    "area": "Area ranking",
+    "cap": "Capital",
+    "cat": "Type of region",
+    "dep": "#Departments",
+    "arr": "#Arrondisements",
+    "canton": "#Cantons",
+    "bundesrat": "Bundesrat reps",
+    "landkreise": "#Landkreise",
+    "stadtkreise": "#Kreisefreie stadt"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "regions": {
+    "ph": "Voer zoektermen in gescheiden door spaties, voor ISO3166 codes kan de spatie achterwege blijven",
+    "list": "Landen",
+    "nl": "Nederland",
+    "be": "België",
+    "de": "Duitsland",
+    "fr": "Frankrijk",
+    "flag": "Vlag",
+    "code": "ISO3166:2 code",
+    "name": "Provincie",
+    "mun": "#Gemeentes",
+    "area": "Opp. ranking",
+    "cap": "Hoofdstad",
+    "cat": "Type regio",
+    "dep": "#Departmenten",
+    "arr": "#Arrondisementem",
+    "canton": "#Cantons",
+    "bundesrat": "Bundesrat reps",
+    "landkreise": "#Landkreise",
+    "stadtkreise": "#Kreisefreie stadt"
+  }
+}
+</i18n>

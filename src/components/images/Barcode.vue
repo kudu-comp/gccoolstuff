@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('barcode.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -63,9 +63,7 @@ import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: "Barcode"
@@ -104,6 +102,7 @@ const bgclr = ref("#FFFFFF")
 
 // --- Template Ref ---
 const canvasRef = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -129,7 +128,7 @@ const generate = () => {
     textcolor: clr.value.replace('#', ''),
     padding: 8,
     includetext: showtxt.value,
-    scale: 2 // Added scale for better quality
+    scale: 3 // Added scale for better quality
   }
 
   try {
@@ -155,3 +154,26 @@ onMounted(() => {
 })
 </script>
 
+<i18n locale="en">
+{
+  "barcode": {
+    "bctype": "Barcode type",
+    "msg": "Message",
+    "clr": "Bar color",
+    "bgclr": "Background color",
+    "showtxt": "Show text (works only for some barcodes)"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "barcode": {
+    "bctype": "Barcode type",
+    "msg": "Bericht",
+    "clr": "Barcode kleur",
+    "bgclr": "Achtergrond color",
+    "showtxt": "Toon tekst (werkt niet voor all barcodes)"
+  }
+}
+</i18n>

@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('dictsearch.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -22,7 +22,7 @@
           <label>{{ t('dictsearch.minlength') }}</label>
           <input type="number" v-model="minlen">
         </div>
-        <div class="radio-group">
+        <div class="radio-group mb-2">
           <label>{{ t('dictsearch.searchfor') }}</label>
           <div class="radio-options-vertical">
             <label class="radio-item" v-for="r in radios" :key="r">
@@ -38,7 +38,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <button :disabled="dictloading" class="btn btn-primary" @click="dictsearch()">
+          <button :disabled="dictloading || working" class="btn btn-primary" @click="dictsearch()">
             {{t('buttons.search')}}
           </button>
         </div>
@@ -46,7 +46,14 @@
   </div>
   <div class="card-stack">
     <VCard :title="t('labels.result')">
-      <div v-if="result" class="card resultbox" v-html="result" />
+        <div class="button-row mb-2">
+          <!-- Or use :content="result" -->
+          <CopyButton 
+            :content="resultsContainer"
+            :is-html="true"
+          />
+        </div>
+        <div v-if="result" class="resultbox" v-html="result" ref="resultsContainer"/>
     </VCard>
     </div>
   </div>
@@ -59,6 +66,7 @@ import { useI18n } from "vue-i18n";
 import VLanguage from "@/components/generic/VLanguage.vue";
 import { wordValueSimple } from "@/scripts/texthelper.js";
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 defineOptions({
   name: "DictSearch"
@@ -80,8 +88,11 @@ const maxcnt = 2500;
 const finds = ref([]);
 const dict = ref({});
 const dictloading = ref(true);
+const working = ref(false);
 const sf = ref("1");
 const chunk = ref("");
+const startOpen = window.innerWidth > 768;
+const resultsContainer = ref(null)
 
 const radios = [
   { label: t('dictsearch.pattern'), value : 1},
@@ -133,7 +144,7 @@ const findPattern = () => {
   // Remove duplicates and sort
   let uniqueFinds = [...new Set(finds.value)].sort();
 
-  result.value = uniqueFinds.length + t("dictsearch.wordsfound") + "<br><br>";
+  result.value = t('dictsearch.wordsfound', uniqueFinds.length) + "<br><br>";
   result.value += uniqueFinds.join("<br>");
 };
 
@@ -195,7 +206,7 @@ const findStart = () => {
     }
     pos++;
   }
-  result.value = count + t("dictsearch.wordsfound") + "<br><br>" + output;
+  result.value = t('dictsearch.wordsfound', count) + "<br><br>" + output;
 };
 
 const findEnd = () => {
@@ -210,7 +221,7 @@ const findEnd = () => {
       count++;
     }
   }
-  result.value = count + t("dictsearch.wordsfound") + "<br><br>" + output;
+  result.value = t('dictsearch.wordsfound', count) + "<br><br>" + output;
 };
 
 const findContains = () => {
@@ -223,7 +234,7 @@ const findContains = () => {
       count++;
     }
   }
-  result.value = count + t("dictsearch.wordsfound") + "<br><br>" + output;
+  result.value = t('dictsearch.wordsfound', count) + "<br><br>" + output;
 };
 
 const findRegex = () => {
@@ -244,7 +255,7 @@ const findRegex = () => {
         count++;
       }
     }
-    result.value = count + t("dictsearch.wordsfound") + "<br><br>" + output;
+    result.value = t('dictsearch.wordsfound', count) + "<br><br>" + output;
   } catch (e) {
     errormsg.value = t("errors.invalid_regex");
   }
@@ -267,7 +278,7 @@ const findWordValue = () => {
       count++;
     }
   }
-  result.value = count + t("dictsearch.wordsfound") + "<br><br>" + output;
+  result.value = t("dictsearch.wordsfound", count) + "<br><br>" + output;
 };
 
 // --- Main Action ---
@@ -278,6 +289,7 @@ const dictsearch = () => {
   errormsg.value = "";
   cnt.value = 0;
   finds.value = [];
+  working.value = true;
 
   // Prep search strings via dictionary-specific cleaning
   searchstr.value = dict.value.cleanStr(searchstr.value.trim());
@@ -286,15 +298,19 @@ const dictsearch = () => {
   minl.value = minlen.value < 1 ? 1 : minlen.value;
   maxl.value = maxlen.value === 0 ? 99999 : maxlen.value;
 
-  switch (parseInt(sf.value)) {
-    case 1: findPattern(); break;
-    case 2: findStart(); break;
-    case 3: findEnd(); break;
-    case 4: findContains(); break;
-    case 5: findRegex(); break;
-    case 6: findLongest(); break;
-    case 7: findWordValue(); break;
-  }
+  setTimeout(() => {
+    switch (parseInt(sf.value)) {
+      case 1: findPattern(); break;
+      case 2: findStart(); break;
+      case 3: findEnd(); break;
+      case 4: findContains(); break;
+      case 5: findRegex(); break;
+      case 6: findLongest(); break;
+      case 7: findWordValue(); break;
+    }
+  }, 50)
+
+  working.value = false;
 };
 
 onMounted(() => {
@@ -303,3 +319,47 @@ onMounted(() => {
 
 </script>
 
+<i18n locale="en">
+{
+  "dictsearch": {
+    "searchstr": "Search for",
+    "yellows": "Letters at unknown positions",
+    "greys": "Letters not in the word",
+    "minlength": "Min length",
+    "maxlength": "Max length (0 = no limit)",
+    "searchfor": "What are you searching for?",
+    "wordsfound": "No words found | One word found. | {n} words found.",
+    "toomany": "Maximum number of words reached.",
+    "longest": "Longest word with these letters",
+    "pattern": "Word pattern use ? for unknown letters",
+    "start": "Words starting with these letters",
+    "end": "Words ending with these letters",
+    "contains": "Words containing these letters",
+    "regex": "Words that meet the a regular expression",
+    "values": "Words with a given word value",
+    "lettersused": "Letters in alphabet"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "dictsearch": {
+      "searchstr": "Zoekterm",
+      "yellows": "Letters op onbekende positie",
+      "greys": "Letters die niet voorkomen",
+      "minlength": "Min lengte",
+      "maxlength": "Max lengte (0 = geen limiet)",
+      "searchfor": "Hoe wil je zoeken?",
+      "wordsfound": "Geen woorden gevonden | Eén woord gevonden. | {n} woorden gevonden.",
+      "toomany": "Maximum aantal woorden gevonden.",
+      "longest": "Langste woord met alle gegeven letters",
+      "pattern": "Patroon gebruik ? voor onbekende letters",
+      "start": "Woorden die beginnen met de gegeven letters",
+      "end": "Woorden die eindigen met de gegeven letters",
+      "contains": "Woorden die de gegeven letters bevatten",
+      "regex": "Woorden die voldoen aan een reguliere expressie",
+      "values": "Woorden met een bepaalde waarde"
+  }
+}
+</i18n>

@@ -3,7 +3,7 @@
     <h1>{{ t('morsecode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('morsecode.long')" />
     </VCard>
     <VCard :title="t('morsecode.textmorse')">
@@ -132,6 +132,7 @@ const message2 = ref('');
 const wpm = ref(20);
 const freq = ref(600);
 const spaceSep = ref('/');
+const startOpen = window.innerWidth > 768;
 
 const onFileChange = (e) => {
   const file = e.target.files[0];
@@ -359,3 +360,63 @@ const handleError = (msg, section = 1) => {
 
 <style scoped>
 </style>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "morsecode": {
+    "decodeaudio": "Read morse from an audiofile",
+    "decodectl": "The parameters below can be used to finetune the decoding of audio files. The default values work in many cases, but audio files can be hard to decode. The morse signal might be obscured by noise. The duration of the signals might vary. Use the threshold to filter the signal from noise. It works in small steps and is sensitive, so adjust carefully. The duration of a dash is normally around 3 times the duration of a dot, but it can be more or less. The duration of the pause between letters is normally around 3 times the duration of a dot. The duration of the pauze between words is normally around 7 times the duration of a dot. The default parameters are a bit lower to allow for variations.",
+    "thres": "Threshold for signal detection (default 0.15)",
+    "dottohyphen": "Duration of a dash in relation to a dot (default 2.6)",
+    "dottopause": "Pause between letters in relation to a dot (default 2.4)",
+    "dottospace": "Pause between words in relation to a dot (default 5.0)",
+    "playmessage": "Play or save a message in morse code",
+    "encodectl": "The parameters below can be used to finetune the playing of morse code messages. Words per minute (WPM) is the standard way to indicate the speed of morse code. The default value is 20 WPM, which is a means the word PARIS can be sent 20 times per minute. If you want to play the message faster or slower, you can adjust the WPM value. The frequency is the pitch of the sound. The default value is 600 Hz, which is a common frequency for morse code. You can adjust it to make it easier to hear.",
+    "wpm": "Words per minute (default 20)",
+    "freq": "Frequency in Hz (default 600)",
+    "fileloaded1": "Info: File loaded successfully. Ready to decode. Samplerate: ",
+    "fileloaded2": " Hz, Duration: ",
+    "fileloaded3": " seconds.",
+    "noaudio": "Audio file appears to be empty. Please check the file and try again.",
+    "nomorse": "Could not find any Morse code signals. Try a file with a clearer 'beep' or adjust the threshold.",
+    "success": "Info: Successfully decoded morse code from audio.",
+    "notsupported": "Audio format not supported, no audio file or the file is corrupted.",
+    "failgen": "Failed to generate morse code audio: ",
+    "textmorse": "Text to morse code or morse code to text",
+    "textmorsectl": "Type morse code (using . and -) and press decode to get the text. Letters in morse code should be separated by a space. Words are normally separated by a slash (/),but this can be changed. Press encode to translate text to morse code.",
+    "spacesep": "Separator for words in morse code (default /)"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "morsecode": {
+    "decodeaudio": "Lees morse uit een audiofile",
+    "decodectl": "De parameters hieronder kunnen worden gebruikt om het ontcijferen van audio files te verfijnen. De standaard waarden werken in veel gevallen, maar audio files kunnen moeilijk te ontcijferen zijn. Het morse signaal kan worden verstoord door ruis. De duur van de signalen kan variëren. Gebruik de drempelwaarde om het signaal te filteren van ruis. Het werkt in kleine stappen en is gevoelig, dus pas het zorgvuldig aan. De duur van een streepje is normaal gesproken ongeveer 3 keer de duur van een puntje, maar het kan meer of minder zijn. De pauze tussen twee letters is normaal gesproken ongeveer 3 keer de duur van een puntje. De duur van de ruimte tussen woorden is normaal gesproken ongeveer 7 keer de duur van een puntje. De standaard parameters zijn iets lager om variaties toe te staan.",
+    "thres": "Drempelwaarde (default 0.15)",
+    "dottohyphen": "Duur van een streepje in verhouding tot een puntje (default 2.6)",
+    "dottopause": "Pauze tussen letters in verhouding tot een puntje (default 2.4)",
+    "dottospace": "Pauze tussen woorden in verhouding tot een puntje (default 5.0)",
+    "playmessage": "Speel of bewaar een bericht in morse code",
+    "encodectl": "De parameters hieronder kunnen worden gebruikt om het afspelen van morse code berichten te verfijnen. Woorden per minuut (WPM) is de standaard manier om de snelheid van morse code aan te geven. De standaardwaarde is 20 WPM, wat betekent dat het woord PARIS 20 keer per minuut kan worden verzonden. Als je het bericht sneller of trager wilt afspelen, kun je de WPM-waarde aanpassen. De frequentie is de toonhoogte van het geluid. De standaardwaarde is 600 Hz, wat een veelvoorkomende frequentie is voor morse code. Je kunt deze aanpassen om het makkelijker te horen.",
+    "wpm": "Woorden per minuut (default 20)",
+    "freq": "Frequency in Hz (default 600)",
+    "fileloaded1": "Info: File succesvol geladen. Klaar om te decoderen. Samplerate: ",
+    "fileloaded2": " Hz, Tijd: ",
+    "fileloaded3": " secondes.",
+    "noaudio": "Audio file lijkt leeg. Controleer de file en probeer het nog eens.",
+    "nomorse": "Geen morse code signalen gevonden. Probeer een file met een duidelijkere 'beep' of pas de drempelwaarde aan.",
+    "success": "Info: Morse code succesvol ontcijferd.",
+    "notsupported": "Audio formaat niet ondersteund, geen audio file of de file is beschadigd.",
+    "failgen": "Mislukt om morse code audio te genereren: ",
+    "textmorse": "Tekst naar morse en morse naar tekst",
+    "textmorsectl": "Type morse code (door middel van . en -) en druk op Decodeer om de tekst te ontcifjeren. Letters in morse worden onderling gescheiden door een spatie. Woorden worden normaal gescheiden door een slash (/), maar dit kan worden aangepast. Klik op Codeer om tekst naar morse code te converteren.",
+    "spacesep": "Scheidingsteken voor woorden (default /)"
+  }
+}
+</i18n>

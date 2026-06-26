@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('lines.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -85,29 +85,26 @@
             @close="createLine(lat1,lon1,lat2,lon2,2); modal2 = false"
           />
         </div>
-        <div
-          v-show="errormsg"
-          class="errormsg"
-        >
+        <div v-show="errormsg" class="errormsg">
           {{ errormsg }}
         </div>
         <div class="button-row mb-2">
           <label>{{ t('lines.calc1') }}</label>
-          <v-show-on-map id="line1" class="btn btn-primary" @show="doLine1()" />
+          <ButtonShowOnMap @show="doLine1()" />
         </div>
         <div class="button-row mb-2">
           <label>{{ t('lines.calc2') }}</label>
-          <v-show-on-map id="line2" class="btn btn-primary" @show="doLine2()" />
+          <ButtonShowOnMap @show="doLine2()" />
         </div>
         <div class="button-row">
           <label>{{ t('lines.calc3') }}</label>
-          <v-show-on-map id="line3" class="btn btn-primary" @show="doLine3()" />
+          <ButtonShowOnMap @show="doLine3()" />
         </div>
       </VCard>
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
           v-html="result"
         />     
       </VCard>
@@ -132,7 +129,7 @@ import * as coords from '@/scripts/coords.js'
 import VCoord from '@/components/generic/VCoord.vue'
 import VMap from '@/components/generic/VMap.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 import VLinePointDir from '@/components/generic/VLinePointDir.vue'
 
 defineOptions({
@@ -159,6 +156,7 @@ const lat1 = ref(0)
 const lon1 = ref(0)
 const lat2 = ref(0)
 const lon2 = ref(0)
+const startOpen = window.innerWidth > 768;
 
 // --- Helper Functions ---
 
@@ -343,5 +341,32 @@ const doLine3 = async () => {
 }
 </script>
 
-<style scoped>
-</style>
+<i18n locale="en">
+{
+  "lines": {
+     "calc1": "Calculate distance, direction and midpoint (uses coordinate 1 & 2)",
+    "calc2": "Calculate point nearest to Point 3 on line thru Point 1 and Point 2.",
+    "calc3": "Get intersection of lines thru Point 1 and 2 and Point 3 and 4",
+    "midpoint": "Midpoint",
+    "distance": "The distance is: ",
+    "direction": "The direction is: ",
+    "pointnearest": "Point nearest: ",
+    "intersection": "Intersection: "
+ }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "lines": {
+    "calc1": "Bereken afstand, richting en middenpunt (gebruikt coördinaten 1 & 2)",
+    "calc2": "Bereken punt het dichtste bij punt 3 op de lijn door punt 1 en punt 2.",
+    "calc3": "Bereken het snijpunt van de lijn door punt 1 en punt 2 en de lijn door punt 3 en punt 4.",
+    "midpoint": "Middenpunt",
+    "distance": "De afstand is: ",
+    "direction": "De richting is: ",
+    "pointnearest": "Dichtstbijzijnde punt: ",
+    "intersection": "Snijpunt: "
+  }
+}
+</i18n>

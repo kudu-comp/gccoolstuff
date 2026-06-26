@@ -4,7 +4,7 @@
     <h1>{{ t('keyboards.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('keyboards.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -44,7 +44,7 @@
     <VCard :title="t('labels.result')">
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
       >
         {{ result }}
       </div>
@@ -75,6 +75,7 @@ const errormsg = ref("")
 
 // --- Template Ref ---
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   // Automatically focus the input on mount
@@ -102,3 +103,23 @@ const translateKeyboard = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "keyboards": {
+    "inputkb": "Input keyboard",
+    "outputkb": "Output keyboard",
+    "error": "Keyboard could not be converted, please check"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "keyboards": {
+    "inputkb": "Invoer toetsenbord",
+    "outputkb": "Uitvoer toetsenbord",
+    "error": "Toetsenbord kan niet worden geconverteerd. Controleer de invoer."
+  }
+}
+</i18n>

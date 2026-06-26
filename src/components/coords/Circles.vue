@@ -1,16 +1,16 @@
 <template>
 
-<header class="page-header">
+  <header class="page-header">
     <h1>{{ t('circles.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('circles.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="input-box mb-2">
-          <span class="input-box-title">Circle 1</span>
+          <span class="input-box-title">{{t('circles.circle')}} 1</span>
           <div class="form-horizontal">
             <v-coord
               v-model:coord="coordinate1"
@@ -20,8 +20,8 @@
                 {{ t('labels.center') }} 1
               </template>
               <!-- <template #popup>
-                <button 
-                  class="btn sm-size mb-2 ms-2" 
+                <button
+                  class="btn sm-size mb-2 ms-2"
                   @click="modal1 = true"
                 >
                   {{ t('circles.from3p') }}
@@ -40,8 +40,8 @@
             </v-distance>
           </div>
         </div>
-        <div class="input-box">
-          <span class="input-box-title">Circle 2</span>
+        <div class="input-box mb-2">
+          <span class="input-box-title">{{t('circles.circle')}} 2</span>
           <div class="form-horizontal">
             <v-coord
               v-model:coord="coordinate2"
@@ -51,8 +51,8 @@
                 {{ t('labels.center') }} 2
               </template>
               <!-- <template #popup>
-                <button 
-                  class="btn sm-size mb-2 ms-2" 
+                <button
+                  class="btn sm-size mb-2 ms-2"
                   @click="modal2 = true"
                 >
                   {{ t('circles.from3p') }}
@@ -85,20 +85,17 @@
               @close="createCenter(lat2,lon2,2); modal2 = false"
             />
         </div>
-        <div class="button-row">
-          <v-show-on-map id="go" class="btn btn-primary" @show="getPoints()" />
-        </div>
-        <div
-          v-show="errormsg"
-          class="errormsg"
-        >
+        <div v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}
+        </div>
+        <div class="button-row">
+          <ButtonShowOnMap @show="getPoints()" />
         </div>
       </VCard>
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
           v-html="result"
         />
       </VCard>
@@ -126,7 +123,7 @@ import VCoord from '@/components/generic/VCoord.vue'
 import VMap from '@/components/generic/VMap.vue'
 import VCard from '@/components/generic/VCard.vue'
 import VDistance from '@/components/generic/VDistance.vue'
-import VShowOnMap from '@/components/generic/VShowOnMap.vue'
+import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 import VCircle3p from '@/components/generic/VCircle3p.vue'
 
 defineOptions({ name: 'Circles' })
@@ -145,6 +142,7 @@ const radius2 = ref(0)
 const unit2 = ref(1)
 const result = ref("")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 /**
  * onMounted Hook:
@@ -170,7 +168,7 @@ const createCenter = async (lat, lon, h) => {
   const coord = { lat, lon }
   const seldatum = (h === 2) ? selecteddatum2.value : selecteddatum1.value
   const data = await coords.convertCoordFromLatLon(coord, "RD", seldatum)
-  
+
   if (h === 2) {
     coordinate2.value = coords.getTextFromCoord(data, seldatum, 7)
   } else {
@@ -248,3 +246,37 @@ const getPoints = async () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "circles": {
+    "circle": "Circle",
+    "ip": "Intersection point",
+    "ia": "Intersection area",
+    "ni": "No intersection",
+    "distance": "Distance between intersection points",
+    "or": " or ",
+    "surf": "Surface of circle ",
+    "circ": "Circumference of circle ",
+    "from3p": "Use 3 points",
+    "nocircle2": "Only one circle given"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "circles": {
+    "circle": "Cirkel",
+    "ip": "Snijpunt",
+    "ia": "Oppervlakte snijvlak",
+    "ni": "Geen snijpunten",
+    "distance": "Afstand tussen snijpunten",
+    "or": " of ",
+    "surf": "Oppervlakte van cirkel ",
+    "circ": "Omtrek van cirkel  ",
+    "from3p": "Geef 3 punten",
+    "nocircle2": "Maar één cirkel ingevoerd"
+  }
+}
+</i18n>

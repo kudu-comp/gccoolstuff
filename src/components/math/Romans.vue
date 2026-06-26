@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('romans.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -13,12 +13,9 @@
           ref="inputRef"
           v-model="input"
           :placeholder="t('labels.number')"
-          rows="1"
+          class="mb-2"
         />
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-if="errormsg" class="errormsg mt-2">
           {{ errormsg }}.
         </p>
         <div class="button-row mt-2">
@@ -35,7 +32,7 @@
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -67,6 +64,7 @@ const errormsg = ref("")
 
 // --- Template Ref ---
 const inputRef = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   inputRef.value?.focus()
@@ -167,3 +165,25 @@ const decToRoman = () => {
   result.value = finalResult.trim()
 }
 </script>
+
+<i18n locale="en">
+{
+  "romans": {
+    "btndtr": "Decimal to Roman",
+    "btnrtd": "Roman To Decimal",
+    "notroman": "Invalid roman number, only MDCLXVI are allowed",
+    "invalidint": "Invalid number, the maximum roman number is 3999"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "romans": {
+    "btndtr": "Decimaal naar Romeins",
+    "btnrtd": "Romeins naar Decimaal",
+    "notroman": "Ongeldig Romeins getal, alleen MDCLXVI zijn toegestaan",
+    "invalidint": "Ongeldig getal, het maximale Romeinse getal is 3999"
+  }
+}
+</i18n>

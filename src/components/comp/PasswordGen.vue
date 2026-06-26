@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('passwordgen.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -50,7 +50,7 @@
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ t('passwordgen.result') }}<br><br>
           <span class="monospace">{{ result }}</span>
@@ -82,6 +82,7 @@ const symbols = ref(true)
 
 // --- Template Ref ---
 const lenInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   // Focus the length input on mount
@@ -135,3 +136,31 @@ const generate = () => {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 </style>
+
+<i18n locale="en">
+{
+  "passwordgen": {
+    "len": "Length of password",
+    "uppcase": "Include uppercase letters (A-Z)",
+    "lowcase": "Include lowercase letters (a-z)",
+    "numbers": "Include numbers (0-9)",
+    "symbols": "Include symbols",
+    "result": "The generated password",
+    "errnosel": "Please select at least one type of characters to include"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "passwordgen": {
+    "len": "Lengte van wachtwoord",
+    "uppcase": "Hoofdletters (A-Z) meenemen",
+    "lowcase": "Kleine letters (a-z) meenemen",
+    "numbers": "Cijfers (0-9) meenemen",
+    "symbols": "Symbolen meenemen",
+    "result": "Het gegenereerde wachtwoord is",
+    "errnosel": "Selecteer ten minste één verzameling karakters om te gebruiken."
+  }
+}
+</i18n>

@@ -4,7 +4,7 @@
     <h1>{{ t('fonts.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('fonts.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -67,9 +67,7 @@ import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 // Define Props
 const props = defineProps({
@@ -88,6 +86,7 @@ const message = ref("ABCDEFGHI\nJKLMNOPQR\nSTUVWXYZ\n0123456789")
 const errormsg = ref("")
 const isDropdownOpen = ref(false)
 const fontdef = ref([])
+const startOpen = window.innerWidth > 768;
 
 // Style object for dynamic binding
 const styleObject = reactive({
@@ -179,3 +178,31 @@ onMounted(() => {
 @font-face { font-family: Wakandan;   src: url('@/assets/fonts/ModernWakandan-Regular.woff'); }
 
 </style>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "fonts": {
+    "selfont": "Select font",
+    "fontsize": "Select fontsize (e.g. 24px)",
+    "selcolor": "Select color",
+    "lineheight": "Line height (e.g. 1.5)",
+    "standard": "Standard"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "fonts": {
+    "selfont": "Selecteer font",
+    "fontsize": "Selecteer grootte (bijv. 24px)",
+    "selcolor": "Selecteer kleur",
+    "lineheight": "Regelafstand (bijv. 1.5)",
+    "standard": "Standaard"
+  }
+}
+</i18n>

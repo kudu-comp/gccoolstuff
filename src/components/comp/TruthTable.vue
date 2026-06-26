@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('truthtable.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -20,7 +20,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate class="mb-2" id="calc" @calculate="calculate()"></v-calculate>
+          <CalculateButton @calculate="calculate()" />
         </div>
       </VCard>
     </div>
@@ -43,7 +43,7 @@
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { evaluate } from "mathjs";
-import VCalculate from '@/components/generic/VCalculate.vue';
+import CalculateButton from '@/components/generic/CalculateButton.vue';
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({
@@ -56,6 +56,7 @@ const { t } = useI18n();
 const expr = ref("");
 const result = ref("");
 const errormsg = ref("");
+const startOpen = window.innerWidth > 768;
 
 // These variables are used during the calculation process
 let vararr = [];
@@ -170,5 +171,18 @@ const calculate = () => {
 };
 </script>
 
-<style scoped>
-</style>
+<i18n locale="en">
+{
+  "truthtable": {
+    "expr": "Boolean expression"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "truthtable": {
+    "expr": "Boolean expressie"
+  }
+}
+</i18n>

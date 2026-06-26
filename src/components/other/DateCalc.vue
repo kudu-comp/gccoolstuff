@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('datecalc.long')" />
       </VCard>
 
@@ -94,6 +94,7 @@ const extradays = ref(0);
 
 // Template Ref for autofocus
 const date1Input = ref(null);
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   date1Input.value?.focus();
@@ -116,15 +117,15 @@ const results = computed(() => {
 
   // 1. Difference between dates
   const daysDiff = Math.round((d2 - d1) / msPerDay);
-  const diffStr = t('datecalc.res1a') + daysDiff + t('datecalc.res1b');
+  const diffStr = t('datecalc.res1', daysDiff);
 
   // 2. Adding days
   const dAdd = new Date(d1.getTime() + extradays.value * msPerDay);
-  const addStr = t('datecalc.res2a') + extradays.value + t('datecalc.res2b') + d1.toLocaleDateString() + ": " + dAdd.toLocaleDateString();
+  const addStr = t('datecalc.res2', { n: extradays.value, date1: d1.toLocaleDateString()}) + dAdd.toLocaleDateString();
 
   // 3. Subtracting days
   const dSub = new Date(d1.getTime() - extradays.value * msPerDay);
-  const subStr = t('datecalc.res3a') + extradays.value + t('datecalc.res3b') + d1.toLocaleDateString() + ": " + dSub.toLocaleDateString();
+  const subStr = t('datecalc.res3', { n: extradays.value, date1: d1.toLocaleDateString()}) +  dSub.toLocaleDateString();
 
   // 4. Day in year (Ordinal)
   const startOfYear = new Date(d1.getFullYear(), 0, 0);
@@ -172,3 +173,37 @@ input[type="date"] {
   min-width: 150px;
 }
 </style>
+
+<i18n locale="en">
+{
+  "datecalc": {
+    "date1" : "First date",
+    "date2" : "Second date",
+    "days" : "Add or substract days",
+    "res1" : "The number of days between the first and second date is {n} days.",
+    "res2" : "Adding {n} to the first date gives ",
+    "res3" : "Substracting {n} from the first date gives",
+    "res4" : "The day of the week is ",
+    "res5" : "The number of days in the year ",
+    "res6" : "The number of days in the month ",
+    "res7" : "Day in the year "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "datecalc": {
+    "date1" : "Eerste datum",
+    "date2" : "Tweede datum",
+    "days" : "Dagen optellen of aftrekken",
+    "res1" : "Het aantal dagen tussen de eerste en tweede datum is {n} dagen.",
+    "res2" : "Tel {n} dagen op bij {date1} geeft ",
+    "res3" : "Trek {n} dagen af van {date1} geeft ",
+    "res4" : "De dag van de week is ",
+    "res5" : "Het aantal dagen in het jaar ",
+    "res6" : "Het aantal dagen in de maand ",
+    "res7" : "Dag in het jaar "
+  }
+}
+</i18n>

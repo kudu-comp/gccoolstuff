@@ -4,7 +4,7 @@
     <h1>{{ t('texttoss.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('texttoss.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -46,7 +46,7 @@
     <VCard :title="t('labels.result')">
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
       >
         {{ result }}
       </div>
@@ -68,6 +68,7 @@ const result = ref("")
 const mode = ref(3) // 3: Keep 1st & Last, 2: Keep 1st, 1: Keep none
 const errormsg = ref("")
 const messageInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => messageInput.value?.focus())
 
@@ -135,3 +136,25 @@ const tossWords = () => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "texttoss": {
+    "mode": "Select how to toss words",
+    "mode3": "Keep first and last letter (typoglycemia)",
+    "mode2": "Keep first letter",
+    "mode1": "Keep none of the letters"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "texttoss": {
+    "mode": "Selecteer wijze van woorden husselen",
+    "mode3": "Behoud de eerste en de laatste letter (typoglycemia)",
+    "mode2": "Behoud alleen de eerste letter",
+    "mode1": "Hussel alle letters"
+  }
+}
+</i18n>

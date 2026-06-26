@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('nimbers.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -24,13 +24,13 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate @calculate = "nimberProduct"></v-calculate>
+          <CalculateButton @calculate = "nimberProduct" />
         </div>
       </VCard>
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">     
-        <p class="card resultbox" v-if="prod">
+        <p class="resultbox" v-if="prod">
           {{ t('nimbers.prod') }} <strong>{{ prod }}</strong>.<br>
           {{ t('nimbers.sum') }} <strong>{{ sum }}</strong>.
         </p>
@@ -42,12 +42,10 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import VCard from '@/components/generic/VCard.vue' 
-import VCalculate from '@/components/generic/VCalculate.vue' 
+import CalculateButton from '@/components/generic/CalculateButton.vue' 
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: 'Nimbers'
@@ -55,6 +53,7 @@ defineOptions({
 
 // --- State ---
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 const x = ref(0)
 const y = ref(0)
 const prod = ref(0)
@@ -105,3 +104,27 @@ const nimberProduct = async () => {
 
 <style scoped>
 </style>
+
+<i18n locale="en">
+{
+  "nimbers": {
+    "num1": "First number",
+    "num2": "Second number",
+    "t1": "Product & sum",
+    "prod": "The nimber product is",
+    "sum": "The nimber sum is"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "nimbers": {
+    "num1": "Eerste nummer",
+    "num2": "Tweede nummer",
+    "t1": "Product & som",
+    "prod": "Het nimber product is",
+    "sum": "De nimber som is"
+  }
+}
+</i18n>

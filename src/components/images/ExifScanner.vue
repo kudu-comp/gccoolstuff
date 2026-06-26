@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('exifscanner.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -135,6 +135,7 @@ defineOptions({
 
 const store = useStore()
 const { t } = useI18n()
+const startOpen = window.innerWidth > 768;
 
 // --- State (Data) ---
 const fileurl = ref("")
@@ -312,3 +313,75 @@ h4 {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "exifscanner": {
+    "nogps": "No GPS from camera",
+    "gps": "GPS from camera",
+    "error": "Error loading image or EXIF data",
+    "noinfo": "No info",
+    "info": "Image info",
+    "cinfo": "Camera info",
+    "desc": "Description",
+    "ainfo": "Author info",
+    "filename": "Filename",
+    "filetype": "Type",
+    "size": "Size",
+    "width": "Width",
+    "height": "Height",
+    "npixels": "# pixels",
+    "date": "Date & time",
+    "datec": "Date & time created",
+    "camera": "Camera",
+    "lens": "Lens",
+    "aperture": "Aperture",
+    "shutter": "Shutter",
+    "title2": "Title",
+    "subject": "Subject",
+    "about": "About",
+    "keywords": "Keywords",
+    "comment": "Comment",
+    "artist": "Artist",
+    "creator": "Creator",
+    "author": "Author",
+    "copyright": "Copyright"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "exifscanner": {
+    "nogps": "Geen GPS van de camera",
+    "gps": "GPS van de camera",
+    "error": "Fout bij het laden van de foto of het ophalen van de EXIF data",
+    "noinfo": "Geen info",
+    "info": "Image info",
+    "cinfo": "Camera info",
+    "desc": "Omschrijving",
+    "ainfo": "Informatie auteur",
+    "filename": "Filenaam",
+    "filetype": "Type",
+    "size": "Grootte",
+    "width": "Breedte",
+    "height": "Hoogte",
+    "npixels": "# pixels",
+    "date": "Datum & tijd",
+    "datec": "Aanmaakdatum & tijd",
+    "camera": "Camera",
+    "lens": "Lens",
+    "aperture": "Diafragma",
+    "shutter": "Sluiter",
+    "title2": "Titel",
+    "subject": "Onderwerp",
+    "about": "Info",
+    "keywords": "Keywords",
+    "comment": "Commentaar",
+    "artist": "Artiest",
+    "creator": "Maker",
+    "author": "Auteur",
+    "copyright": "Copyright"
+  }
+}
+</i18n>

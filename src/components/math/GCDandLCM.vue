@@ -4,7 +4,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('gcdandlcm.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -68,6 +68,7 @@ const primes = ref([])
 const errormsg = ref("")
 const isValid = ref(false)
 const inputRef = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => { inputRef.value?.focus() })
 
@@ -145,3 +146,29 @@ const performCalculation = (rawInput) => {
   }
 }
 </script>
+
+<i18n locale="en">
+{
+  "gcdandlcm": {
+    "num": "Numbers",
+    "inperror": "Invalid input, must be a number and greater than zero",
+    "t1": "Greatest Common Divisor (GCD) & Least Common Multiple (LCM)",
+    "t2": "Prime factors",
+    "gcd": "The GCD is ",
+    "lcm": "The LCM is"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "gcdandlcm": {
+    "num": "Nummers",
+    "inperror": "Ongeldige invoer, nummer moet groter dan 0 zijn",
+    "t1": "Grootste Gemene Deler (GGD) & Kleinste Gemene Veelvoud (KGV)",
+    "t2": "Priemfactoren",
+    "gcd": "De GGD is ",
+    "lcm": "Het KGV is"
+  }
+}
+</i18n>

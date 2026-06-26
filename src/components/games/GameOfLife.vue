@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('gameoflife.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -29,7 +29,7 @@
           <span class="checkmark"></span>
           {{ t('gameoflife.chgrules') }}
         </label>
-        <div class="input-box" v-if="chgrules">
+        <div class="input-box mb-2" v-if="chgrules">
           <div class="form-horizontal mt-2">
             <label>{{ t('gameoflife.diebelow') }}</label>
             <input type="number" v-model="diebelow">
@@ -47,10 +47,10 @@
             <input type="number" v-model="bornabove">
           </div>
         </div>
-         <p v-show="errormsg"class="errormsg">
-          {{ errormsg }}
-          </p>
-         <div class="button-row mt-2">
+         <p v-show="errormsg"class="errormsg mb-2">
+           {{ errormsg }}
+         </p>
+         <div class="button-row">
           <button class="btn btn-primary"  @click="fillGrid">
             {{ t('gameoflife.newgrid') }}
           </button>
@@ -62,7 +62,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div class="card resultbox">
+        <div class="resultbox">
           {{  result1 }}<br>
           {{  result2 }}<br><br>
           <canvas ref="canvasRef" @mousedown="cellClicked" style="cursor: crosshair; display: block;"></canvas>
@@ -112,6 +112,7 @@ let game = [];
 // --- Template Refs ---
 const canvasRef = ref(null);
 const selRef = ref(null);
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   selRef.value?.focus();
@@ -283,3 +284,46 @@ const step = () => {
 }
 </style>
 
+<i18n locale="en">
+{
+  "gameoflife": {
+    "newgrid": "Start new",
+    "step": "Step",
+    "gen": "Generation: ",
+    "cellsalive": "Cells alive: ",
+    "fillgrid": "Start pattern",
+    "chgrules": "Change rules",
+    "diebelow": "Die below",
+    "dieabove": "Die above",
+    "bornabove": "Born above",
+    "bornbelow": "Born below",
+    "empty": "Empty",
+    "random": "Random",
+    "rndsym": "Random symmetrical",
+    "rows": "# rows",
+    "cols": "# columns"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "gameoflife": {
+    "newgrid": "Start nieuw",
+    "step": "Volgende",
+    "gen": "Generatie: ",
+    "cellsalive": "Aantal levende cellen: ",
+    "fillgrid": "Start patroon",
+    "chgrules": "Aangepaste regels",
+    "diebelow": "Sterft onder",
+    "dieabove": "Sterft boven",
+    "bornabove": "Leeft boven",
+    "bornbelow": "Leeft onder",
+    "empty": "Leeg",
+    "random": "Willekeurig",
+    "rndsym": "Willekeurig symetrisch",
+    "rows": "# rijen",
+    "cols": "# kolommen"
+  }
+}
+</i18n>

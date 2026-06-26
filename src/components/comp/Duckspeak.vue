@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('duckspeak.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -47,13 +47,13 @@
     <div class="card-stack">
       <VCard :title="t('labels.result')">
         <div v-if="result" class="button-row mb-2">
-          <button @click="copyToClipboard" class="btn btn-small btn-primary" :class="{ copied: copiedStatus }">
-            {{ copiedStatus ? '✓' : t('buttons.copy') }}
-          </button>
+          <CopyButton 
+            :content="result"
+          />
         </div>
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -67,6 +67,7 @@ import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 defineOptions({
   name: 'Duckspeak'
@@ -91,20 +92,10 @@ const message = ref("");
 const result = ref("");
 const selDS = ref("0"); // 0: ASCII, 1: Hex, 2: Dec
 const errormsg = ref("");
-const copiedStatus = ref(false);
 
 // --- Template Ref ---
 const codeInput = ref(null);
-
-const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(result.value);
-    copiedStatus.value = true;
-    setTimeout(() => copiedStatus.value = false, 2000);
-  } catch (err) {
-    console.error('Failed to copy!', err);
-  }
-};
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   if (codeInput.value) {

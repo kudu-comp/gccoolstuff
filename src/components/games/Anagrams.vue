@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('anagrams.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -26,14 +26,11 @@
           <label>{{ t('anagrams.maxl') }}</label>
           <input type="number" v-model="maxl">
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}
         </p>
-        <div class="button-row mt-2">
-          <button :disabled="dictloading" class="btn btn-primary" @click="runAnagramSearch">
+        <div class="button-row">
+          <button :disabled="dictloading || working" class="btn btn-primary" @click="runAnagramSearch">
             {{t('buttons.search')}}
           </button>
         </div>
@@ -41,7 +38,13 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div v-if="result" class="card resultbox" v-html="result" />
+        <div class="button-row mb-2">
+          <CopyButton 
+            :content="resultsContainer"
+            :is-html="true"
+          />
+        </div>
+        <div v-if="result" class="resultbox" v-html="result" ref="resultsContainer"/>
       </VCard>
     </div>
   </div>
@@ -53,6 +56,7 @@ import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import VLanguage from "@/components/generic/VLanguage.vue";
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 defineOptions({
   name: "Anagrams"
@@ -69,10 +73,13 @@ const minl = ref(1);
 const maxl = ref(999);
 const dict = ref({});
 const dictloading = ref(true);
+const working = ref(false);
 const finds = ref([]);
 const base = ref("");
 const maxcnt = 2500;
 const lettersRef=ref(null)
+const resultsContainer=ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   lettersRef.value?.focus()
@@ -165,26 +172,57 @@ const runAnagramSearch = () => {
   errormsg.value = "";
   finds.value = [];
 
-  if (!letters.value) return;
-
   // Sanitize input using dictionary rules
   base.value = dict.value.cleanStr(letters.value.replace(/\s/g, ""));
-
-  if (!base.value) return;
-
-  // Kick off recursion
-  for (let i = 0; i < base.value.length; i++) {
-    nextTry([i], [0], 0);
+  if (!base.value) {
+    errormsg.value = t('anagrams.noletters') 
+    return;
   }
 
-  // Filter unique results and sort
-  const uniqueFinds = [...new Set(finds.value)].sort();
+  // Kick off recursion
+  working.value = true;
+  setTimeout(() => {  
+    for (let i = 0; i < base.value.length; i++) {
+      nextTry([i], [0], 0);
+    }
+    // Filter unique results and sort
+    const uniqueFinds = [...new Set(finds.value)].sort();
 
-  // Print results
-  let output = uniqueFinds.length + t("anagrams.wordsfound") + "<br><br>";
-  output += uniqueFinds.join("<br>");
+    // Print results
+    let output = t("anagrams.wordsfound", uniqueFinds.length ) + "<br><br>";
+    output += uniqueFinds.join("<br>");
 
-  result.value = output;
+    working.value = false;
+    result.value = output;
+  }, 50);
+
 };
 </script>
 
+<i18n locale="en">
+{
+  "anagrams": {
+    "noletters": "Please provide some letters from the alphabet.",
+    "maxw": "Max # words",
+    "minl": "Min word length",
+    "maxl": "Max word length",
+    "letters": "Letters that must be present",
+    "wordsfound": "No anagrams found|{n} anagram found|{n} anagrams found.",
+    "toomany": "Maximum number of anagrams reached."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "anagrams": {
+    "noletters": "Geen geldige letters, gebruik letters uit het alfabet.",
+    "maxw": "Max # woorden",
+    "minl": "Min woord lengte",
+    "maxl": "Max woord lengte",
+    "letters": "Te gebruiken letters",
+    "wordsfound": "Geen anagrammen gevonden|{n} anagram gevonden|{n} anagrammen gevonden.",
+    "toomany": "Maximum aantal anagrammen gevonden."
+  }
+}
+</i18n>

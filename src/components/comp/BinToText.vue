@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('bintotext.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -59,9 +59,12 @@
         </p>
       </VCard>
       <VCard :title="t('labels.result')">
+        <div class="button-row mb-2">
+          <CopyButton :content="result" />
+        </div>
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -76,12 +79,14 @@ import { useI18n } from 'vue-i18n'
 import * as bt from '@/scripts/bintotext.js'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import VCard from '@/components/generic/VCard.vue'
+import CopyButton from '@/components/generic/CopyButton.vue'
 
 defineOptions({
   name: 'BinToText'
 })
 
 const { t } = useI18n()
+const startOpen = window.innerWidth > 768;
 
 // --- State ---
 const message = ref("")
@@ -221,3 +226,25 @@ h6 {
   margin-left: 0.5em;
 }
 </style>
+
+<i18n locale="en">
+{
+  "bintotext": {
+    "selfrom": "Encoding from",
+    "selfromtable": "Encoding table",
+    "selto": "Encoding to",
+    "seltotable": "Encoding table"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "bintotext": {
+    "selfrom": "Encoding van",
+    "selfromtable": "Encoding table",
+    "selto": "Encoding naar",
+    "seltotable": "Encoding table"
+  }
+}
+</i18n>

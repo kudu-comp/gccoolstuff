@@ -4,7 +4,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('baseconv.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -38,7 +38,7 @@
       </VCard>
       
       <VCard :title="t('labels.result')">     
-        <div class="card resultbox font-monospace" v-if="result">
+        <div class="resultbox font-monospace" v-if="result">
           {{ result }}      
         </div>
       </VCard>
@@ -67,6 +67,7 @@ const tostr = ref("")
 const from = ref(2)
 const to = ref(10)
 const inputRef = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   inputRef.value?.focus()
@@ -154,6 +155,28 @@ const errormsg = computed(() => conversion.value.error)
 <style scoped>
 .resultbox {
   white-space: pre-wrap;
-  word-break: break-all;
+  overflow-wrap: break-word;
 }
 </style>
+
+<i18n locale="en">
+{
+  "baseconv": {
+    "from": "Radix from",
+    "to": "Radix to",
+    "custsym": "Custom symbols (optional)",
+    "symbolserr": "Number of symbols should match radix or symbols should be empty."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "baseconv": {
+    "from": "Van",
+    "to": "Naar",
+    "custsym": "Aangepaste symbolen (optioneel)",
+    "symbolserr": "Aantal symbolen moet overeenkomen met grondtal of leeg zijn."
+  }
+}
+</i18n>

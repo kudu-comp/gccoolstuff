@@ -145,7 +145,7 @@
       </div>
       <div
         v-if="result"
-        class="card resultbox"
+        class="resultbox"
         v-html="result"
       />
       <v-map v-model:mylocation="coordinate1" />
@@ -156,7 +156,7 @@
 <script>
 
 import VCoord from '@/components/generic/VCoord.vue';
-import VDatums from '@/components/generic/VDatums.vue';
+import DatumSelect from '@/components/generic/DatumSelect.vue';
 import VMap from '@/components/generic/VMap.vue';
 import VDistance from '@/components/generic/VDistance.vue'
 import * as coords from '@/scripts/coords.js';
@@ -168,7 +168,7 @@ export default {
 
   components: {
     VCoord,
-    VDatums,
+    DatumSelect,
     VDistance,
     VMap,
   },

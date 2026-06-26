@@ -1,65 +1,81 @@
 <template>
-
   <header class="page-header">
     <h1>{{ t('pngchunk.title') }}</h1>
   </header>
+
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <!-- Intro Card -->
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('pngchunk.long')" />
       </VCard>
+
+      <!-- Input Card -->
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <label>{{ t('labels.selectfile') }}</label>
           <input type="file" accept="image/*" @change="handleFileUpload" />
           <p v-if="originalFileName !== 'image'" class="card-text mt-2">
-            File: <strong>{{ originalFileName }}.png</strong>
+            {{ t('labels.file') }}: <strong>{{ originalFileName }}.png</strong>
           </p>
         </div>
+
         <div v-if="globalError" class="alert error">
           {{ globalError }}
           <button @click="globalError = ''" class="close-btn">&times;</button>
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+
+        <p v-show="errormsg" class="errormsg mt-2">
           {{ errormsg }}.
         </p> 
       </VCard>
-      <VCard title="Add New Metadata Chunk">
-        <!-- Editor Section -->
+
+      <!-- Editor Card -->
+      <VCard :title="t('editor.title')">
         <div v-if="rawBuffer" class="card card-body mb-2">
           <div class="form-horizontal">
-            <label >Keyword (Required, max 79 chars):</label>
-            <input v-model="newKeyword" type="text"
-              placeholder="e.g. Author, Software"
+            <label>{{ t('editor.keyword_label') }}</label>
+            <input 
+              v-model="newKeyword" 
+              type="text"
+              :placeholder="t('editor.keyword_placeholder')"
             />
             <span v-if="keywordError" class="error-text">{{ keywordError }}</span>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Text Content:</label>
-            <textarea class="form-control mb-2" v-model="newText" rows="3" placeholder="Enter metadata value here..."></textarea>
+            <label class="form-label">{{ t('editor.text_label') }}</label>
+            <textarea 
+              class="form-control mb-2" 
+              v-model="newText" 
+              rows="3" 
+              :placeholder="t('editor.text_placeholder')"
+            ></textarea>
           </div>
+
           <div class="button-row">
-            <button class="btn btn-primary" @click="addChunk('tEXt')">Add tEXt</button>
-            <button class="btn btn-primary" @click="addChunk('zTXt')">Add zTXt</button>
-            <button class="btn btn-primary" @click="addChunk('iTXt')">Add iTXt</button>
-            <button class="btn btn-primary" :disabled="!hasBeenModified" @click="downloadPng">
-              {{ t('buttons.download') }}
+            <button class="btn btn-primary" @click="addChunk('tEXt')">{{ t('buttons.add_text') }}</button>
+            <button class="btn btn-primary" @click="addChunk('zTXt')">{{ t('buttons.add_ztxt') }}</button>
+            <button class="btn btn-primary" @click="addChunk('iTXt')">{{ t('buttons.add_itxt') }}</button>
+            <button 
+              class="btn btn-primary" 
+              :disabled="!hasBeenModified" 
+              @click="downloadPng"
+            >
+              {{ t('pngchunk.saveaspng') }}
             </button>
           </div>
-      </div>
-      <p v-if="!hasBeenModified" class="hint-text">Add at least one chunk to enable download.</p>
+        </div>
+        <p v-if="!hasBeenModified" class="hint-text">{{ t('editor.hint') }}</p>
       </VCard>
     </div>  
+
+    <!-- Result Card -->
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <!-- Chunks Display (Hiding IDAT) -->
         <div v-if="filteredChunks.length" class="card card-body">
           <div class="card-title h4">
-            Metadata & Header Chunks
+            {{ t('labels.metadata_header') }}
           </div>
 
           <div v-for="(chunk, index) in filteredChunks" :key="index" class="chunk-card">
@@ -69,24 +85,28 @@
                 <span class="chunk-size">{{ chunk.length.toLocaleString() }} bytes</span>
               </div>
               <div class="button-row">
-                <button v-if="chunk.metadata" class="btn btn-secondary" @lick="saveChunkAsTxt(chunk)">{{t('buttons.save')}} .txt</button>
-                <button v-if="isMetadataType(chunk.type)" class="btn btn-secondary" @click="removeChunk(chunk.originalIndex)">{{t('buttons.delete')}}</button>
+                <button v-if="chunk.metadata" class="btn btn-secondary" @click="saveChunkAsTxt(chunk)">
+                  {{ t('buttons.save') }} .txt
+                </button>
+                <button v-if="isMetadataType(chunk.type)" class="btn btn-secondary" @click="removeChunk(chunk.originalIndex)">
+                  {{ t('pngchunk.delete') }}
+                </button>
               </div>
             </div>
             
             <div v-if="chunk.metadata" class="chunk-content">
               <div class="metadata-row">
-                <span class="label">Keyword</span>
+                <span class="label">{{ t('labels.keyword') }}</span>
                 <span class="keyword-value">{{ chunk.metadata.keyword }}</span>
               </div>
               <div class="metadata-row">
-                <span class="label">Value</span>
+                <span class="label">{{ t('labels.value') }}</span>
                 <pre class="text-value">{{ chunk.metadata.text }}</pre>
               </div>
             </div>
           </div>
         </div>
-    </VCard>
+      </VCard>
     </div>
   </div>
 </template>
@@ -94,11 +114,10 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import VCard from '@/Components/generic/VCard.vue';
-import { useI18n } from 'vue-i18n'
+import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
+const startOpen = window.innerWidth > 768;
 
 const PNG_SIG = new Uint8Array([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]);
 
@@ -107,7 +126,7 @@ const rawBuffer = ref(null);
 const loading = ref(false);
 const globalError = ref('');
 const keywordError = ref('');
-const hasBeenModified = ref(false); // Track modification state
+const hasBeenModified = ref(false);
 
 const originalFileName = ref('image');
 const lastActionTag = ref('loaded');
@@ -128,20 +147,20 @@ async function handleFileUpload(e) {
   const file = e.target.files[0];
   if (!file) return;
   if (file.type !== 'image/png') {
-    globalError.value = "Please upload a valid PNG file.";
+    globalError.value = t('errors.invalid_png');
     return;
   }
   
   loading.value = true;
   globalError.value = '';
-  hasBeenModified.value = false; // Reset modification flag on new file
+  hasBeenModified.value = false;
   originalFileName.value = file.name.replace(/\.[^/.]+$/, "");
   
   try {
     const buffer = await file.arrayBuffer();
     await parseChunks(buffer);
   } catch (err) {
-    globalError.value = "Error: " + err.message;
+    globalError.value = t('errors.general_prefix') + err.message;
   } finally {
     loading.value = false;
   }
@@ -149,8 +168,8 @@ async function handleFileUpload(e) {
 
 async function parseChunks(buffer) {
   const view = new DataView(buffer);
-  if (buffer.byteLength < 8) throw new Error("File too small.");
-  for (let i = 0; i < 8; i++) if (view.getUint8(i) !== PNG_SIG[i]) throw new Error("Invalid PNG signature.");
+  if (buffer.byteLength < 8) throw new Error(t('errors.too_small'));
+  for (let i = 0; i < 8; i++) if (view.getUint8(i) !== PNG_SIG[i]) throw new Error(t('errors.invalid_sig'));
 
   let offset = 8;
   const found = [];
@@ -165,7 +184,7 @@ async function parseChunks(buffer) {
       if (type === 'tEXt') metadata = parsePlainText(data);
       else if (type === 'zTXt') metadata = await parseCompressedText(data);
       else if (type === 'iTXt') metadata = await parseInternationalText(data);
-    } catch (e) { metadata = { keyword: "Error", text: "[Decode Failed]" }; }
+    } catch (e) { metadata = { keyword: "Error", text: `[${t('errors.decode_failed')}]` }; }
 
     found.push({ type, length, fullBytes, metadata });
     offset += 12 + length;
@@ -176,7 +195,7 @@ async function parseChunks(buffer) {
 }
 
 async function addChunk(type) {
-  if (!newKeyword.value.trim()) { keywordError.value = "Keyword is required."; return; }
+  if (!newKeyword.value.trim()) { keywordError.value = t('errors.keyword_req'); return; }
   loading.value = true;
   try {
     const encoder = new TextEncoder();
@@ -199,17 +218,17 @@ async function addChunk(type) {
     });
 
     lastActionTag.value = type;
-    hasBeenModified.value = true; // Enable download
+    hasBeenModified.value = true;
     await rebuildFile();
     newKeyword.value = ''; newText.value = '';
-  } catch (err) { globalError.value = "Add failed: " + err.message; }
+  } catch (err) { globalError.value = t('errors.add_failed') + ": " + err.message; }
   loading.value = false;
 }
 
 async function removeChunk(originalIndex) {
   lastActionTag.value = `del_${chunks.value[originalIndex].type}`;
   chunks.value.splice(originalIndex, 1);
-  hasBeenModified.value = true; // Enable download
+  hasBeenModified.value = true;
   await rebuildFile();
 }
 
@@ -227,7 +246,7 @@ function downloadPng() {
 function saveChunkAsTxt(chunk) {
   const safeK = chunk.metadata.keyword.replace(/[^a-z0-9]/gi, '_');
   const name = `${originalFileName.value}_${safeK}.txt`;
-  const content = `Keyword: ${chunk.metadata.keyword}\nType: ${chunk.type}\nValue: ${chunk.metadata.text}`;
+  const content = `${t('labels.keyword')}: ${chunk.metadata.keyword}\nType: ${chunk.type}\n${t('labels.value')}: ${chunk.metadata.text}`;
   saveBlob(new Blob([content], { type: 'text/plain' }), name);
 }
 
@@ -239,7 +258,7 @@ function saveBlob(blob, filename) {
   URL.revokeObjectURL(url);
 }
 
-// --- LOGIC HELPERS ---
+// CRC and Parse Logic remain unchanged ...
 function assembleChunk(type, data) {
   const typeBytes = new TextEncoder().encode(type);
   const res = new Uint8Array(12 + data.length);
@@ -291,29 +310,98 @@ async function parseInternationalText(d) {
 }
 </script>
 
+<i18n lang="json">
+{
+  "en": {
+    "pngchunk": {
+      "saveaspng": "Save PNG",
+      "delete": "Delete"
+    },
+    "labels": {
+      "selectfile": "Select a PNG file",
+      "file": "File",
+      "metadata_header": "Metadata & Header Chunks",
+      "keyword": "Keyword",
+      "value": "Value"
+    },
+    "editor": {
+      "title": "Add New Metadata Chunk",
+      "keyword_label": "Keyword (Required, max 79 chars):",
+      "keyword_placeholder": "e.g. Author, Software",
+      "text_label": "Text Content:",
+      "text_placeholder": "Enter metadata value here...",
+      "hint": "Add at least one chunk to enable save."
+    },
+    "buttons": {
+      "add_text": "Add tEXt",
+      "add_ztxt": "Add zTXt",
+      "add_itxt": "Add iTXt",
+      "save": "Save",
+      "delete": "Delete"
+    },
+    "errors": {
+      "invalid_png": "Please upload a valid PNG file.",
+      "too_small": "File too small.",
+      "invalid_sig": "Invalid PNG signature.",
+      "keyword_req": "Keyword is required.",
+      "decode_failed": "Decode Failed",
+      "add_failed": "Add failed",
+      "general_prefix": "Error: "
+    }
+  },
+  "nl": {
+    "pngchunk": {
+      "saveaspng": "PNG Opslaan",
+      "delete": "Verwijder"
+    },
+    "labels": {
+      "selectfile": "Selecteer een PNG bestand",
+      "file": "Bestand",
+      "metadata_header": "Metadata & Header Chunks",
+      "keyword": "Trefwoord",
+      "value": "Waarde"
+    },
+    "editor": {
+      "title": "Nieuwe Metadata Toevoegen",
+      "keyword_label": "Trefwoord (Verplicht, max 79 tekens):",
+      "keyword_placeholder": "bijv. Auteur, Software",
+      "text_label": "Tekst Inhoud:",
+      "text_placeholder": "Voer hier de waarde in...",
+      "hint": "Voeg minimaal één chunk toe om opslaan mogelijk te maken."
+    },
+    "buttons": {
+      "add_text": "tEXt Toevoegen",
+      "add_ztxt": "zTXt Toevoegen",
+      "add_itxt": "iTXt Toevoegen",
+      "save": "Opslaan",
+      "delete": "Verwijderen"
+    },
+    "errors": {
+      "invalid_png": "Upload een geldig PNG bestand.",
+      "too_small": "Bestand is te klein.",
+      "invalid_sig": "Ongeldige PNG signatuur.",
+      "keyword_req": "Trefwoord is verplicht.",
+      "decode_failed": "Decoderen mislukt",
+      "add_failed": "Toevoegen mislukt",
+      "general_prefix": "Fout: "
+    }
+  }
+}
+</i18n>
+
 <style scoped>
+/* Scoped styles remain the same as your original */
 .alert { background: #ffeaa7; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #fdcb6e; }
 .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-
-/* Form Section */
-
-/* Buttons */
-.button-group { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
-.add-buttons { display: flex; gap: 8px; }
-
-/* Display List */
-.flex-header { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; border-bottom: 2px solid #dfe6e9; padding-bottom: 10px; }
 .chunk-card { border: 1px solid #dfe6e9; margin: 5px 0; border-radius: 10px; background: white; overflow: hidden; }
 .chunk-header { color: #09776E; background: #f8f9fa; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
 .chunk-type { font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 1.1rem; }
 .chunk-size { font-size: 0.75rem; color: #676e70; margin-left: 10px; }
-
-/* Keyword and Value Display */
 .chunk-content { padding: 20px; }
 .metadata-row { margin-bottom: 10px; }
-.metadata-row:last-child { margin-bottom: 0; }
 .metadata-row .label { display: block; font-size: 0.7rem; color: #09776E; font-weight: 800; margin-bottom: 2px; letter-spacing: 1px; }
 .keyword-value { font-size: 0.9rem; font-weight: 700; color: #2d3436; margin-left: 2px; }
 .text-value { font-size: 0.9rem; font-weight: 700; color: #2d3436; margin-left: 2px; white-space: pre-wrap; font-family: inherit; line-height: 1.1; }
-.meta-tag { font-size: 0.65rem; color: #b2bec3; font-weight: bold; text-transform: uppercase; }
+.hint-text { font-size: 0.8rem; color: #636e72; font-style: italic; margin-top: 10px; }
+.error-text { color: #d63031; font-size: 0.8rem; display: block; margin-top: 5px; }
 </style>

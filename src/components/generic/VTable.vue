@@ -96,9 +96,7 @@ import { ref, reactive, watch, onMounted, computed } from 'vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 const props = defineProps({
   phsearch: { type: String, default: "Type searches" },

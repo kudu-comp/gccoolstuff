@@ -31,7 +31,7 @@
     <span class="sr-only">Loading...</span>
   </div>
   <div v-if="!dictloading">
-    <label for="len" class="form-label md-size mb-2">{{t('wordle.lettersused')}}</label>
+    <label for="len" class="form-label md-size mb-2">{{t('lettersused')}}</label>
     <span class="md-size ms-2 mb-2">{{dict.alphabet}}</span>
   </div>
 </template>
@@ -217,3 +217,14 @@ onMounted(() => {
 
 </script>
 
+<i18n locale="en">
+{
+    "lettersused": "Letters in alphabet"
+}
+</i18n>
+
+<i18n locale="nl">
+{
+    "lettersused": "Letters in alfabet"
+}
+</i18n>

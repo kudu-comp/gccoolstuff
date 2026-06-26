@@ -4,7 +4,7 @@
     <h1>{{ t('textchunks.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('textchunks.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -54,7 +54,7 @@
       </p>          
     </VCard>
     <VCard :title="t('labels.result')">
-      <div v-if="result" style="font-family: Courier" class="card resultbox" v-html="result" />     
+      <div v-if="result" style="font-family: Courier" class="resultbox" v-html="result" />     
     </VCard>
   </div>
 </template>
@@ -81,6 +81,7 @@ const upper = ref(false)
 
 // --- Template Ref ---
 const txtInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   // Focus the input on mount
@@ -138,3 +139,25 @@ const chunk = () => {
   result.value = outputBuilder
 }
 </script>
+
+<i18n locale="en">
+{
+  "textchunks": {
+    "dir": "Direction",
+    "size": "Chunk size",
+    "ignore": "Ignore whitespace",
+    "upper": "All uppercase"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "textchunks": {
+    "dir": "Richting",
+    "size": "Blok grootte",
+    "ignore": "Negeer spaties",
+    "upper": "Alles hoofdletters"
+  }
+}
+</i18n>

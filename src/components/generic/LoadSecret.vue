@@ -1,16 +1,21 @@
 <template>
   <div class="load-secret">
     <div class="input-toggle">
-      <button @click="mode = 'text'" :class="{ active: mode === 'text' }">Text</button>
-      <button @click="mode = 'file'" :class="{ active: mode === 'file' }">File</button>
-      <button @click="mode = 'bitplane'" :class="{ active: mode === 'bitplane' }">Bitplane Image</button>
+      <button @click="mode = 'text'" :class="{ active: mode === 'text' }">
+        {{ t('load_secret.tabs.text') }}
+      </button>
+      <button @click="mode = 'file'" :class="{ active: mode === 'file' }">
+        {{ t('load_secret.tabs.file') }}
+      </button>
+      <button @click="mode = 'bitplane'" :class="{ active: mode === 'bitplane' }">
+        {{ t('load_secret.tabs.bitplane') }}
+      </button>
     </div>
 
     <div v-if="mode === 'text'" class="input-area">
       <textarea 
         v-model="textInput" 
-        @input="emitText"
-        placeholder="Enter secret message..." 
+        :placeholder="t('load_secret.text_placeholder')" 
         class="secret-textarea"
       ></textarea>
     </div>
@@ -22,17 +27,19 @@
     <div v-else-if="mode === 'bitplane'" class="input-area">
       <div class="file-input-wrapper">
         <input class="form-control" type="file" accept="image/*" @change="handleBitplaneFile" ref="bitplaneRef" />
-        <p class="hint">Image bits will be extracted based on brightness (>128).</p>
+        <p class="hint">{{ t('load_secret.bitplane_hint') }}</p>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
+
+const { t } = useI18n({
+  useScope: 'local'
+});
 
 const emit = defineEmits(['update:secret']);
 
@@ -55,7 +62,6 @@ watch(mode, () => {
     const encoder = new TextEncoder();
     emit('update:secret', encoder.encode(textInput.value || ''));
   } else {
-    // If switching to file, reset to null until a file is picked
     emit('update:secret', null);
   }
 });
@@ -125,9 +131,37 @@ defineExpose({
 });
 </script>
 
+<i18n lang="json">
+{
+  "en": {
+    "load_secret": {
+      "tabs": {
+        "text": "Text",
+        "file": "File",
+        "bitplane": "Bitplane Image"
+      },
+      "text_placeholder": "Enter secret message...",
+      "bitplane_hint": "Image bits will be extracted based on brightness (>128)."
+    }
+  },
+  "nl": {
+    "load_secret": {
+      "tabs": {
+        "text": "Tekst",
+        "file": "Bestand",
+        "bitplane": "Bitvlak Afbeelding"
+      },
+      "text_placeholder": "Voer geheim bericht in...",
+      "bitplane_hint": "Beeldbits worden geëxtraheerd op basis van helderheid (>128)."
+    }
+  }
+}
+</i18n>
+
 <style scoped>
 .input-toggle { display: flex; background: #f1f2f6; padding: 4px; border-radius: 8px; margin-bottom: 10px; }
 .input-toggle button { flex: 1; border: none; padding: 8px; cursor: pointer; border-radius: 6px; background: transparent; font-weight: bold; }
 .input-toggle button.active { background: white; color: #09776E; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .secret-textarea { width: 100%; height: 100px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
+.hint { font-size: 0.8rem; color: #636e72; font-style: italic; margin-top: 5px; }
 </style>

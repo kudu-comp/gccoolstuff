@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('beatnik.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -33,24 +33,29 @@
             rows="5"
           />
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+               <p v-if="errormsg" class="errormsg">
           {{ errormsg }}
+        </p>
+        <p v-else-if="infomsg" class="infomsg">
+          {{ infomsg }}
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="runBeatnik">
-            {{ t('brainfuck.run') }}
+            {{ t('beatnik.run') }}
           </button>
         </div>
       </VCard>
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
+        <div v-if="result" class="button-row mb-2">
+          <CopyButton 
+            :content="result"
+          />
+        </div>
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -65,6 +70,7 @@ import { useI18n } from 'vue-i18n';
 import * as textHelper from '@/scripts/texthelper.js';
 import VCard from '@/components/generic/VCard.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 defineOptions({
   name: 'Beatnik'
@@ -78,11 +84,13 @@ const result = ref("");
 const input = ref("");
 const debug = ref(false);
 const errormsg = ref("");
+const infomsg = ref("")
 const selectedalphabet = ref("Scrabble English");
 const alphabets = ref([]);
 
 // --- Template Ref ---
 const codeRef = ref(null);
+const startOpen = window.innerWidth > 768;
 
 // --- Lifecycle ---
 onMounted(() => {
@@ -106,7 +114,7 @@ const runBeatnik = () => {
     // 1. Tokenize input message into words
     const cmds = message.value.match(/[A-Z]+/ig);
     if (!cmds) {
-      console.warn("Beatnik: No commands found in message.");
+      errormsg.value = t('errors.noinput');
       return;
     }
 
@@ -206,6 +214,7 @@ const runBeatnik = () => {
         console.log(`Stack: [${stack}] | Pointer: ${i}`);
       }
     }
+    infomsg.value = t('beatnik.success')
   } catch (e) {
     errormsg.value = t('errors.generic');
     console.error("Beatnik Error:", e);
@@ -219,7 +228,8 @@ const runBeatnik = () => {
     "debug": "Debug to console",
     "code": "Program code",
     "input": "Input variables",
-    "run": "Run Beatnik"
+    "run": "Run Beatnik",
+    "success": "Code completed, if you don't see a result the code has no output commands"
   }
 }
 </i18n>
@@ -230,7 +240,8 @@ const runBeatnik = () => {
     "code": "Programmacode",
     "debug": "Debug info naar console",
     "input": "Input variabelen",
-    "run": "Run Beatnik"
+    "run": "Run Beatnik",
+    "success": "Code uitgevoerd, als er geen resultaat wordt getoond bevat de code geen uitvoercommando's"
   }
 }
 </i18n>

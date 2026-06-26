@@ -4,7 +4,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('substcipher.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -25,11 +25,11 @@
             </label>
             <label class="radio-item">
               <input type="radio" value="bold" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ t('highlights.bold') }}
+              <span class="radio-mark"></span> {{ t('substcipher.bold') }}
             </label>
             <label class="radio-item">
               <input type="radio" value="upper" v-model="highlightflag">
-              <span class="radio-mark"></span> {{ t('highlights.upper') }}
+              <span class="radio-mark"></span> {{ t('substcipher.upper') }}
             </label>
           </div>
         </div>
@@ -80,7 +80,7 @@
             type="text"
             size="50"
             @keyup="replaceInput"
-          >{{ error1 }}
+          >
         </div> 
         <div class="form-horizontal">
           <label
@@ -90,7 +90,7 @@
             type="text"
             size="50"
             @keyup="replaceInput"
-          >{{ error2 }}
+          >
         </div>  
         <label
         >{{ t('labels.input') }}</label>
@@ -102,6 +102,9 @@
           @keyup="replaceInput"
           class="mb-2"
         />
+        <p v-if="errormsg" class="errormsg mb-2">
+          {{ errormsg }}
+        </p>
         <div class="button-row">
           <button id="hint1" class="btn btn-primary"  @click="printHints">
             {{ t('substcipher.get') }}
@@ -112,10 +115,10 @@
         </div>
       </VCard>
       <VCard :title="t('labels.result')">
-          <p
-            class="col-6 card resultbox"
-            v-html="result"
-          />
+        <div v-if="result" class="button-row mb-2">
+          <CopyButton :content="result" :is-html="true"/>
+        </div>
+        <p class="resultbox" v-html="result" />
       </VCard>
     </div>
   </div>
@@ -131,6 +134,7 @@ import { ref, onMounted, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import * as textHelper from '@/scripts/texthelper.js';
 import VCard from '@/components/generic/VCard.vue';
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 defineOptions({
   name: 'SubstCipher'
@@ -142,12 +146,12 @@ const { t } = useI18n();
 const alphabet = ref("");
 const from = ref("");
 const to = ref("");
-const error1 = ref("");
-const error2 = ref("");
+const errormsg = ref("");
 const input = ref("");
 const message = ref("");
 const highlightflag = ref("red");
 const casesens = ref(false);
+const upper=ref(false);
 const remdiacr = ref(true);
 const result = ref("");
 const percentages = ref([]);
@@ -155,6 +159,7 @@ const freq = ref("");
 const freqperc = ref([]);
 const hints = ref("");
 const language = ref("nl");
+const startOpen = window.innerWidth > 768;
 
 // --- Template Ref ---
 const messageRef = ref(null);
@@ -250,19 +255,17 @@ const applyHints = () => {
 };
 
 const replaceInput = () => {
-  error1.value = "";
-  error2.value = "";
+  errormsg.value = "";
   
   const toStr = !casesens.value ? to.value.toLowerCase() : to.value;
   const hmsg = remdiacr.value ? textHelper.removeDiacritics(message.value) : message.value;
 
   if (to.value.length !== from.value.length) {
-    error1.value = t('substcipher.errorlength');
-    error2.value = t('substcipher.errorlength');
+    errormsg.value = t('substcipher.errorlength');
   } else if (checkDouble(to.value)) {
-    error2.value = t('substcipher.errordouble');
+    errormsg.value = t('substcipher.errordouble', { s : t('substcipher.repl').toLowerCase()});
   } else if (checkDouble(from.value)) {
-    error1.value = t('substcipher.errordouble');
+    errormsg.value = t('substcipher.errordouble', { s : t('substcipher.orig').toLowerCase()});
   } else {
     let html = "";
     for (let i = 0; i < hmsg.length; i++) {
@@ -286,7 +289,7 @@ const replaceInput = () => {
           case 'bold':
             html += `<b>${c}</b>`;
             break;
-          case 'uppercase':
+          case 'upper':
             html += c.toUpperCase();
             break;
         }
@@ -314,3 +317,42 @@ watch(language, () => {
 });
 </script>
 
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "substcipher": {
+    "hint": "Hints",
+    "errorlength": "From / to must have same length",
+    "errordouble": "Double characters found in {s}",
+    "highlight": "Highlight",
+    "bold": "Bold",
+    "upper": "Uppercase",
+    "orig": "Original letters",
+    "repl": "Substitutes",
+    "casesens": "Case sensitive",
+    "get": "Get hints",
+    "apply": "Apply hints"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "substcipher": {
+    "hint": "Hints",
+    "errorlength": "Origineel en substituten moeten dezelfde lengte hebben",
+    "errordouble": "Dubbele letters gevonden in {s}",
+    "highlight": "Highlight",
+    "bold": "Vet",
+    "upper": "Hoofdletters",
+    "orig": "Originele letters",
+    "repl": "Substituten",
+    "casesens": "Hoofdlettergevoelig",
+    "get": "Hints ophalen",
+    "apply": "Hints toepassen"
+  }
+}
+</i18n>

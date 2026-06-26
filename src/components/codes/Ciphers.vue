@@ -6,9 +6,8 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- 1. Intro & Selection Card -->
-      <VCard :title="t('labels.intro')">
-        <div class="infoblock mb-3" v-html="t('ciphers.long')" />
-
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
+        <div class="infoblock mb-2" v-html="t('ciphers.long')" />
         <div class="form-horizontal">
           <CustomDropdown
             :title="t('ciphers.selcipher')"
@@ -24,7 +23,7 @@
           </select> -->
         </div>
 
-        <div class="mt-3 p-3 bg-light border rounded small">
+        <div>
           {{ explanation }}
         </div>
       </VCard>
@@ -151,6 +150,9 @@
       </VCard>
 
       <VCard :title="t('labels.result')" >
+        <div class="button-row mb-2">
+          <CopyButton :content="result" />
+        </div>
         <div v-if="result" class="resultbox">
           {{ result }}
         </div>
@@ -167,10 +169,9 @@ import * as textHelper from '@/scripts/texthelper.js';
 import VCard from '@/components/generic/VCard.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue';
 import { ciphers } from "@/scripts/ciphers.js";
+import CopyButton from '@/components/generic/CopyButton.vue'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 const route = useRoute();
 
 // --- State ---
@@ -197,6 +198,7 @@ const codealphabet = ref("");
 const replacements = ref('');
 const explanation = ref('');
 const messageRef = ref(null);
+const startOpen = window.innerWidth > 768;
 
 const phpurl = `${window.location.protocol}//${window.location.hostname}/cipher-toolkit/encoderdecoder.php`;
 
@@ -244,7 +246,7 @@ const selCipher = () => {
   cleandecode.value = current.cleandec;
   alphabet.value = current.alphabet;
   codealphabet.value = current.codealph;
-  explanation.value = t("ciphers." + current.ref + ".info");
+  explanation.value = t("ciphers.info." + current.ref );
   keepcase.value = current.keepcase;
   keepunknown.value = current.keepunkn;
   keepdiacrit.value = current.keepdiac;
@@ -362,10 +364,220 @@ onMounted(() => {
 }
 </style>
 
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
 <i18n locale="en">
-
+{
+  "ciphers": {
+    "cipher": "Cipher",
+    "selcipher": "Select cipher",
+    "keepcase": "Keep lowercase characters",
+    "keepdiacrit": "Keep diacritics (do not change to normal letters)",
+    "keepunknown": "Keep letters that are not in the alphabet",
+    "replacechars": "Replace characters as specified below",
+    "formatoutput": "Format output in blocks with separator as specified below",
+    "expertmode": "Expert mode",
+    "hideexpertmode": "Standard mode",
+    "gensq": "Generate square",
+    "genalp": "Generate alphabet",
+    "errdec": "Message could not be decoded, please check.",
+    "errenc": "Message could not be encoded, please check.",
+    "sep": "Separator",
+    "bs": "Block size",
+    "repl": "Replacements",
+    "adfgvx": { "k1": "Square", "k2": "Column transposition key" },
+    "affine": { "k1": "A (greater than 1)", "k2": "B (greater than 0)" },
+    "amsco": { "k1": "Column transposition key:" },
+    "autokey": { "k1": "Enter key:" },
+    "bacon": { "k1": "Version (1 or 2)", "k2": "Value to use for A", "k3": "Value to use for B" },
+    "bazeries": { "k1": "Square 1", "k2": "Square 2", "k3": "Numeric key" },
+    "beaufort": { "k1": "Key (mandatory)" },
+    "bifid": { "k1": "Enter key" },
+    "burrowswheeler": { "k1": "End of file character" },
+    "cadenus": { "k1": "Columnar transposition key" },
+    "caesar": { "k1": "Shift" },
+    "rot13": { "k1": "Shift" },
+    "chaocipher": { "k1": "Left starting alphabet", "k2": "Right starting alphabet" },
+    "collon": {
+      "k1": "Select order of digrams", "k2": "Polybius square", "k3": "Period:",
+      "s1": {
+        "rfcl": "Row first, column last", "rlcl": "Row last, column last", "rfcf": "Row first, column first",
+        "rlcf": "Row last, column first", "clrl": "Column last, row last", "clrf": "Column last, row first",
+        "cfrf": "Column first, row first", "cfrl": "Column first, row last"
+      }
+    },
+    "columnartransposition": { "k1": "Columnar transposition key" },
+    "condi": { "k1": "Key for the cipher alphabet", "k2": "Initial offset" },
+    "digrafid": { "k1": "Key first grid", "k2": "Key second grid", "k3": "Period (required)" },
+    "foursquare": { "k1": "Square 1", "k2": "Square 2" },
+    "graycode": { "k1": "Number of digits:" },
+    "gromark": { "k1": "Key (required)", "k2": "Primer (5 digits)" },
+    "gronsfeld": { "k1": "Enter key (numeric)" },
+    "monomedinome": { "k1": "Key to reorder the alphabet", "k2": "Key for transposition (min 10 chars)" },
+    "morbit": { "k1": "Enter key (9 letters)" },
+    "myszkowski": { "k1": "Key for columnar transposition (should contain double letters):" },
+    "nicodemus": { "k1": "Key for columnar transposition and Vigenere:" },
+    "nesw": { "k1": "Square" },
+    "nihilist": { "k1": "Polybius square", "k2": "Key to be added" },
+    "nihilisttransposition": {
+      "k1": "Key for columnar transposition", "k2": "Read by rows or columns",
+      "s1": { "row": "Rows", "col": "Columns" }
+    },
+    "onetimepad": { "k1": "Enter pad" },
+    "phillips": { "k1": "Polybius square" },
+    "playfair": { "k1": "Polybius square" },
+    "polybius": { "k1": "Square", "k2": "Rows", "k3": "Columns" },
+    "pollux": { "k1": "Characters for .", "k2": "Characters for -", "k3": "Characters for x" },
+    "porta": { "k1": "Enter key (required)" },
+    "portax": { "k1": "Enter key" },
+    "ragbaby": { "k1": "Enter key" },
+    "railfence": { "k1": "Number of rails (greater than 1):", "k2": "Initial offset" },
+    "redefence": { "k1": "Number of rails (greater than 1):", "k2": "Initial offset", "k3": "Sequence of rails" },
+    "rot5": { "k1": "Shift" },
+    "rot47": { "k1": "Shift" },
+    "scytale": { "k1": "Number of turns" },
+    "skip": { "k1": "Skip value", "k2": "Start at" },
+    "substitution": { "k1": "Substitutes" },
+    "syllabary": { "k1": "Key to generate square", "k2": "Left (row) labels", "k3": "Top (column) labels" },
+    "trevanion": { "k1": "Punctation", "k2": "Offset" },
+    "trifid": { "k1": "Enter key" },
+    "trisquare": { "k1": "Square 1", "k2": "Square 2", "k3": "Square 3" },
+    "vatsyayana": { "k1": "First half", "k2": "Second half" },
+    "vigenere": { "k1": "Enter key (required)" },
+    "zygazyfa": { "k1": "Enter key" }
+  },
+  "cperrors" : {
+    "nothingtodo": "No message to encode or decode.",
+    "isrequired" : " is required.",
+    "mustbegreaterthen1" : " must be greater than 1.",
+    "mustbegreaterthen0" : " must be greater than 0.",
+    "mustbe1or2": " must be 1 or 2.",
+    "mustbe1char": " must be one character.",
+    "mustbeeof": " must be one character that is not in the alphabet.",
+    "mustbenumeric": " must be a number.",
+    "mustbehalfalf" : " must be half the length of the alphabet.",
+    "mustbe10ormore" : " must be 10 or more characters.",
+    "mustbe9": " must be 9 characters.",
+    "msg25key": "Message must be 25 times de key length long.",
+    "msgmustbesquareofkey" : " message size must be square of key length.",
+    "keylongerthenmsg" : " must be at least as long as the message.",
+    "keymustbesqrroot" : " must be square root of length of alphabet.",
+    "keymustbealph" : " must be the same length as the alphabet.",
+    "keyfromalph" : " must be composed of the alphabet.",
+    "keymustbenumeric" : " must be numeric."
+  }
+}
 </i18n>
 
 <i18n locale="nl">
-
+{
+  "ciphers": {
+    "cipher": "Geheimschrift",
+    "selcipher": "Selecteer cipher",
+    "keepcase": "Behoud kleine letters",
+    "keepdiacrit": "Behoud diakrieten (vervang niet door normale letters)",
+    "keepunknown": "Behoud letters die niet voorkomen in het alfabet",
+    "replacechars": "Vervang de letters zoals hieronder opgegeven",
+    "formatoutput": "Verdeel de output in blokken zoals hieronder opgegeven",
+    "expertmode": "Expert mode",
+    "hideexpertmode": "Standaard mode",
+    "gensq": "Genereer vierkant",
+    "genalp": "Genereer alfabet",
+    "errdec": "Bericht kan niet worden gedecodeerd. Er gaat iets fout.",
+    "errenc": "Bericht kan niet worden gecodeerd. Er gaat iets fout.",
+    "sep": "Scheidingsteken",
+    "bs": "Lengte blokken",
+    "repl": "Vervangingen",
+    "adfgvx": { "k1": "Vierkant", "k2": "Transpositiesleutel" },
+    "affine": { "k1": "A (groter dan 1)", "k2": "B (groter dan 0)" },
+    "amsco": { "k1": "Transpositiesleutel" },
+    "autokey": { "k1": "Sleutel" },
+    "bacon": { "k1": "Versie (1 of 2)", "k2": "Vervang A door", "k3": "Vervang B door" },
+    "bazeries": { "k1": "Vierkant 1", "k2": "Vierkant 2", "k3": "Transpositiesleutel (numeriek)" },
+    "beaufort": { "k1": "Sleutel (verplicht)" },
+    "bifid": { "k1": "Transpositiesleutel" },
+    "burrowswheeler": { "k1": "End-of-file karakter" },
+    "cadenus": { "k1": "Transpositiesleutel" },
+    "caesar": { "k1": "Verschuiving" },
+    "rot13": { "k1": "Verschuiving" },
+    "chaocipher": { "k1": "Linker startalfabet", "k2": "Rechter startalfabet" },
+    "collon": {
+      "k1": "Volgorde van bigrams:",
+      "k2": "Polybiusvierkant",
+      "k3": "Periode",
+      "s1": {
+        "rfcl": "Rij eerst, kolom laatst",
+        "rlcl": "Rij laatst, kolom laatst",
+        "rfcf": "Rij eerst, kolom eerst",
+        "rlcf": "Rij laatst, kolom eerst",
+        "clrl": "Kolom laatste, rij laatst",
+        "clrf": "Kolom laatste, rij eerst",
+        "cfrf": "Kolom eerst, rij eerst",
+        "cfrl": "Kolom eerst, rij laatst"
+      }
+    },
+    "columnartransposition": { "k1": "Transpositiesleutel" },
+    "condi": { "k1": "Sleutel voor het cijferalfabet", "k2": "Start met verschuiving" },
+    "digrafid": { "k1": "Sleutel tableau 1", "k2": "Sleutel tableau 2", "k3": "Periode (verplicht)" },
+    "foursquare": { "k1": "Vierkant 1", "k2": "Vierkant 2" },
+    "graycode": { "k1": "Aantal bits" },
+    "gromark": { "k1": "Sleutel (verplicht)", "k2": "Primer (5 cijfers)" },
+    "gronsfeld": { "k1": "Sleutel (numeriek)" },
+    "monomedinome": { "k1": "Sleutel voor het alfabet", "k2": "Sleutel voor rij/kolom (min 10 letters)" },
+    "morbit": { "k1": "Sleutel (9 letters)" },
+    "myszkowski": { "k1": "Transpositiesleutel (met dubbele letters)" },
+    "nesw": { "k1": "Vierkant" },
+    "nicodemus": { "k1": "Sleutel" },
+    "nihilist": { "k1": "Polybius vierkant", "k2": "Sleutel om op te tellen" },
+    "nihilisttransposition": {
+      "k1": "Transpositiesleutel",
+      "k2": "Per kolom / per rij",
+      "s1": { "row": "Rij", "col": "Kolom" }
+    },
+    "onetimepad": { "k1": "Pad" },
+    "phillips": { "k1": "Polybius vierkant" },
+    "playfair": { "k1": "Polybius vierkant" },
+    "polybius": { "k1": "Vierkant", "k2": "Rijen", "k3": "Kolommen" },
+    "pollux": { "k1": "Tekens voor .", "k2": "Tekens voor -", "k3": "Tekens voor x" },
+    "porta": { "k1": "Sleutel (verplicht)" },
+    "portax": { "k1": "Transpositiesleutel" },
+    "ragbaby": { "k1": "Sleutel" },
+    "railfence": { "k1": "Aantal rails (groter dan 1)", "k2": "Offset" },
+    "redefence": { "k1": "Aantal rails (groter dan 1)", "k2": "Offset", "k3": "Volgorde van de rails" },
+    "rot5": { "k1": "Verschuiving" },
+    "rot47": { "k1": "Verschuiving" },
+    "scytale": { "k1": "Aantal wikkelingen" },
+    "skip": { "k1": "Skipwaarde", "k2": "Beginpositie" },
+    "substitution": { "k1": "Cijferalfabet" },
+    "syllabary": { "k1": "Sleutel voor tabel", "k2": "Linker (rij) labels", "k3": "Top (kolom) labels" },
+    "trevanion": { "k1": "Leestekens", "k2": "Offset" },
+    "trifid": { "k1": "Sleutel" },
+    "trisquare": { "k1": "Vierkant 1", "k2": "Vierkant 2", "k3": "Vierkant 3" },
+    "vatsyayana": { "k1": "Eerste helft van de paren", "k2": "Tweede helft van de paren" },
+    "vigenere": { "k1": "Sleutel (verplicht)" },
+    "zygazyfa": { "k1": "Sleutel" }
+},
+"cperrors" : {
+    "nothingtodo": "Geen bericht om te coderen of te decoderen.",
+    "isrequired" : " is verplicht.",
+    "mustbegreaterthen1" : " moet groter dan 1 zijn.",
+    "mustbegreaterthen0" : " moet groter dan 0 zijn.",
+    "mustbe1or2": " moet 1 of 2 zijn.",
+    "mustbe1char": " moet precies 1 teken zijn.",
+    "mustbeeof": " moet een teken zijn dat niet in het alfabet voorkomt.",
+    "mustbenumeric": " moet een getal zijn.",
+    "mustbehalfalf" : " moet de halve lengte van het alfabet zijn.",
+    "msg25key": "Bericht moet 25 keer de lengte van de sleutel lang zijn.",
+    "mustbe10ormore" : " moet 10 of meer tekens lang zijn.",
+    "mustbe9": " moet precies 9 tekens lang zijn.",
+    "msgmustbesquareofkey" : "Bericht moet het kwadraat van de lengte van de sleutel lang zijn.",
+    "keylongerthenmsg" : " moet net zo lang of langer zijn dan de lengte van het bericht.",
+    "keymustbesqrroot" : " sleutel moet de wortel van de lengte van het alfabet lang zijn.",
+    "keymustbealph" : " moet dezelfde lengte hebben als het alfabet.",
+    "keyfromalph" : " moet zijn samengesteld uit het alfabet.",
+    "keymustbenumeric" : " moet numeriek zijn."
+  }
+}
 </i18n>

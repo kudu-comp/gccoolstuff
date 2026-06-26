@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('cryptosolver.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -69,13 +69,19 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate @calculate="findCalculation()"></v-calculate>
+          <CalculateButton @calculate="findCalculation()" />
         </div>
       </VCard>
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div v-if="result" class="card resultbox" v-html="result"></div>
+        <div class="button-row mb-2">
+          <CopyButton 
+            :content="resultsContainer"
+            :is-html="true"
+          />
+        </div>
+        <div v-if="result" class="resultbox" v-html="result" ref="resultsContainer"></div>
       </VCard>
     </div>
   </div>
@@ -84,7 +90,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CopyButton from '@/components/generic/CopyButton.vue';
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 
 defineOptions({
@@ -110,6 +117,8 @@ const allowdiv = ref(true)
 const allowmod = ref(false)
 const allowpow = ref(false)
 const numsRef=ref(null)
+const resultsContainer=ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   numsRef.value?.focus()
@@ -262,3 +271,46 @@ const findCalculation = () => {
 }
 </script>
 
+<i18n locale="en">
+{
+  "cryptosolver": {
+    "useall": "Use all numbers",
+    "nums": "Numbers to use",
+    "outcome": "Required outcome",
+    "allowneg": "Allow negative numbers",
+    "allowdec": "Allow decimals",
+    "allowadd": "Allow addition",
+    "allowsub": "Allow subtraction",
+    "allowmult": "Allow multiplication",
+    "allowdiv": "Allow division",
+    "allowmod": "Modulus, e.g. 11 % 3 = 2",
+    "allowpow": "Power, e.g. 2 ^ 3 = 8",
+    "nosolution": "No solution found",
+    "nooutcome": "No outcome provided",
+    "nonums": "Please input some numbers to use",
+    "found": "Solution found for "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "cryptosolver": {
+    "useall": "Gebruik alle getallen",
+    "nums": "Getallen om te gebruiken",
+    "outcome": "Gewenste uitkomst",
+    "allowneg": "Negatieve getallen zijn toegestaan",
+    "allowdec": "Breuken zijn toegestaan",
+    "allowadd": "Optellen",
+    "allowsub": "Aftrekken",
+    "allowmult": "Vermenigvuldigen",
+    "allowmod": "Modulo, bijv. 11 % 3 = 2",
+    "allowpow": "Machtsverheffen, bijv 2 ^ 3 = 8",
+    "allowdiv": "Delen",
+    "nosolution": "Geen oplossing gevonden.",
+    "nooutcome": "Geen gewenste uitkomst ingevoerd.",
+    "nonums": "Geen getallen ingevoerd.",
+    "found": "Oplossing gevonden voor "
+  }
+}
+</i18n>

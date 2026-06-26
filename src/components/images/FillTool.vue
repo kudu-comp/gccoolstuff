@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('filltool.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -132,7 +132,7 @@
           <button class="btn btn-primary" @click="restore"> 
             {{  t('buttons.original') }} 
           </button>
-          <v-download 
+          <DownloadButton 
             v-model:canvas ="canvasRef"
           />
         </div>
@@ -148,7 +148,7 @@
 <script setup>
 import { ref, computed, onMounted, shallowRef } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VDownload from '@/components/generic/VDownload.vue'
+import DownloadButton from '@/components/generic/DownloadButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 import '@/components/css/slidertheme.css'
 
@@ -161,6 +161,7 @@ const { t } = useI18n()
 // --- Template Refs ---
 const canvasRef = ref(null)
 const fileInputRef = ref(null)
+const startOpen = window.innerWidth > 768;
 
 // --- Reactive State ---
 const errormsg = ref("")
@@ -424,3 +425,45 @@ h4 {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "filltool": {
+    "selfill": "Fill color",
+    "tol": "Tolerance",
+    "fill": "Color fill",
+    "fillinfo": "Click anywhere in the image to fill an area.",
+    "filter": "Filters",
+    "conbri": "Brightness & contrast",
+    "brigh": "Brightness",
+    "contr": "Contrast",
+    "gray1": "Grayscale (Averaged)",
+    "gray2": "Grayscale (Luminance)",
+    "invert": "Invert",
+    "sepia": "Sepia",
+    "colordepth": "Reduce color depth",
+    "colors": "colors"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "filltool": {
+    "selfill": "Vulkleur",
+    "tol": "Tolerantie",
+    "fill": "Vul kleur",
+    "fillinfo": "Klik in de afbeelding om een gebied te vullen.",
+    "filter": "Filter",
+    "conbri": "Helderheid & contrast",
+    "brigh": "Helderheid",
+    "contr": "Contrast",
+    "gray1": "Zwart/Wit (Gemiddelden)",
+    "gray2": "Zwart/Wit (Luminantie)",
+    "invert": "Negatief",
+    "sepia": "Sepia",
+    "colordepth": "Kleurdiepte aanpassen",
+    "colors": "kleuren"
+  }
+}
+</i18n>

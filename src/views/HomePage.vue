@@ -1,6 +1,6 @@
 <template>
   <div class="card-grid">
-    <v-card :title="t('labels.welcome')">
+    <v-card :title="t('home.welcome')">
       <img style="width: 100%; height: 200px; object-fit: cover;" src="../assets/images/welcome.jpg" alt="Welcome">
       <div class="card-body">
         <p v-html="t('home.intro')"></p>
@@ -133,9 +133,7 @@ import { useRouter } from 'vue-router';
 import VCard from '@/components/generic/VCard.vue';
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 // Define the name of the component (optional)
 defineOptions({
@@ -162,6 +160,12 @@ const goSearch = () => {
 {
   "home": {
     "new" : "What's new",
+    "welcome": "GC Tools",
+    "whatare" : "What are you looking for?",
+    "favs" : "Favorites",
+    "intro": "GC Tools has all the tools needed to solve your geocache puzzles. Use search to find the tool you need or use the menu. GC Tools is 100% free, no ads, no cookies!",
+    "contact": "Contact",
+    "contacttxt": "We love to hear from you. Please let us know your suggestions. Send us a message through Geocaching.com to Team Chaenaan or send us an email to info{'@'}gctools.nl",
     "info" : "<p>GCTools has been upgraded. The user inferface works better om mobile and uses cards. All tools have been tested thoroughly.</p><p>And there are some great new tools especially for <b>Steganography</b>. You can now easily find hidden messages in images and sound files. And you create your own secret messages!</p>"
   }
 }
@@ -171,7 +175,12 @@ const goSearch = () => {
 {
   "home": {
     "new" : "Laatste updates",
-    "info" : "<p>GCTools is flink verbeterd. The website werkt nu nog beter op mobiel. Alle tools maken gebruik van kaarten, zodat alle informatie overzichtelijk wordt gepresetneerd. En we alles nog eens flink getest.</p><p>En er zijn enkele nieuwe tools. Probeer de verschillende opties voor steganografie eens. Hiermee kan je simpel boodschappen verstoppen in afbeeldingen of geluiden.</p>"
+    "info" : "<p>GCTools is flink verbeterd. The website werkt nu nog beter op mobiel. Alle tools maken gebruik van kaarten, zodat alle informatie overzichtelijk wordt gepresetneerd. En we alles nog eens flink getest.</p><p>En er zijn enkele nieuwe tools. Probeer de verschillende opties voor steganografie eens. Hiermee kan je simpel boodschappen verstoppen in afbeeldingen of geluiden.</p>",
+    "whatare" : "Waar ben je naar op zoek?",
+    "favs" : "Favorieten",
+    "intro": "GC Tools biedt alle tools die je nodig hebt voor het oplossen van je geocache puzzels. Gebruik de zoekfunctie om de juiste tool te vinden of gebruik het menu. GC Tools is 100% gratis, geen advertenties en geen cookies!",
+    "contact": "Contact",
+    "contacttxt": "Stuur ons je opmerkingen en suggesties. We horen het graag. Gebruik Geocaching.com, onze naam is Team Chaenaan of stuur een email naar info{'@'}gctools.nl"
   }
 }
 </i18n>

@@ -1,6 +1,6 @@
 <template>
   <header class="page-header">
-    <h1 style="padding-left: 2rem;">{{ t('wordvalue.title') }}</h1>
+    <h1>{{ t('wordvalue.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
     <VCard :title="t('labels.intro')" :initialOpen="startOpen">
@@ -52,7 +52,13 @@
       </p>
     </VCard>
     <VCard :title="t('labels.result')">
-      <div v-if="result" class="resultbox">
+      <div v-if="result" class="button-row mb-2">
+        <CopyButton 
+          :content="resultsContainer"
+          :is-html="true"
+        />
+      </div>
+      <div v-if="result" class="resultbox" ref="resultsContainer">
         <div class="table-responsive" v-html="result">
         </div>
       </div>
@@ -60,7 +66,7 @@
   </div>
   <div v-show="showvalues" class="card-grid mb-2">
     <VCard :title="t('labels.alphabet')">
-      <div class="table-responsive">
+      <div class="table-responsive" >
         <table class="p-table">
           <thead>
             <tr>
@@ -100,16 +106,14 @@ import { useI18n } from 'vue-i18n'
 import * as textHelper from '@/scripts/texthelper.js'
 import VAlphabetsExt from '@/components/generic/VAlphabetsExt.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CopyButton from '@/components/generic/CopyButton.vue';
 
 // Define the name of the component
 defineOptions({
   name: 'WordValue'
 })
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 const startOpen = window.innerWidth > 768;
 
 // State (formerly data)
@@ -127,6 +131,7 @@ const errormsg = ref("")
 
 // Template Ref for focusing the textarea
 const messageInput = ref(null)
+const resultsContainer = ref(null);
 
 onMounted(() => {
   if (messageInput.value) {

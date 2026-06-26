@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('combinations.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -56,7 +56,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">     
-        <div v-if="result" class="card resultbox" v-html="result" />
+        <div v-if="result" class="resultbox" v-html="result" />
       </VCard>
     </div>
   </div>
@@ -84,6 +84,7 @@ const txt = ref("Purple,Indigo,Blue,Green,Yellow,Orange,Red")
 const result = ref("")
 const errormsg = ref("")
 const list = ref([])
+const startOpen = window.innerWidth > 768;
 
 // Dropdown Options
 const options = [
@@ -253,3 +254,53 @@ const doAction = () => {
 
 <style scoped>
 </style>
+
+<i18n locale="en">
+{
+  "combinations": {
+    "cnt": "Number of items to choose",
+    "size": "Number of items to choose from",
+    "rpt": "Allow replacements (reuse options)",
+    "sel": "Combinations or permutations",
+    "set": "Select items from",
+    "set1": "Use numbers starting at 1",
+    "set2": "Use letters starting at A",
+    "set3": "Use list of items",
+    "list": "List of items",
+    "cntcomb": "Count combinations",
+    "cntperm": "Count permutations",
+    "gencomb": "Generate combinations",
+    "genperm": "Generate permutations",
+    "notenoughitems": "Not enough items in list",
+    "toomany": "Too many to calculate",
+    "numcomb": "The number of combinations is ",
+    "numperm": "The number of permutations is ",
+    "max": "Maximum number that can be generated is "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "combinations": {
+    "cnt": "Aantal te kiezen items",
+    "size": "Aantal items om uit te kiezen",
+    "rpt": "Vervanging toegestaan (hergebruik opties)",
+    "sel": "Combinaties of permutaties",
+    "set": "Selecteer items uit",
+    "set1": "Cijfers vanaf 1",
+    "set2": "Letters vanaf A",
+    "set3": "Lijst van items",
+    "list": "Lijst van items",
+    "cntcomb": "Aantal combinaties",
+    "cntperm": "Aantal permutaties",
+    "gencomb": "Genereer combinaties",
+    "genperm": "Genereer permutaties",
+    "notenoughitems": "Niet genoeg items in de lijst",
+    "toomany": "Teveel om te berekenen",
+    "numcomb": "Het aantal combinaties is ",
+    "numperm": "Het aantal permutaties is ",
+    "max": "Maximum aantal dat kan worden gegenereerd is "
+  }
+}
+</i18n>

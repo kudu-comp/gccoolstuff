@@ -4,7 +4,7 @@
     <h1>{{ t('vanitycode.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('vanitycode.long')" />
       <img width="200px" max-width="100%" src="~@\assets\images\vanitycode.png">
     </VCard>
@@ -56,7 +56,7 @@
       <!-- Result area or use v-html -->
     </VCard>
     <VCard :title="t('labels.result')">
-      <div v-if="result" class="card resultbox" >
+      <div v-if="result" class="resultbox" >
         {{ result }}
       </div>
     </VCard>
@@ -95,6 +95,7 @@ const msg = ref("");
 const sel = ref("1"); // "0" for Encode, "1" for Decode
 const spaces = ref(true);
 const ignorespaces = ref(true);
+const startOpen = window.innerWidth > 768;
 
 // --- Computed Logic ---
 
@@ -167,3 +168,33 @@ const addSpaces = () => {
 <style scoped>
 img { max-width: 100%; max-height: 200px; display: block; margin: 0 auto; }
 </style>
+
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "vanitycode": {
+    "spaces": "Add spaces when encoding.",
+    "ignorespaces": "Ignore spaces when encoding.",
+    "addspaces": "Separate input with spaces",
+    "sel": "Select what to do",
+    "unknownchar": "Unknown characters: ",
+    "unknowncode": "Unknown codes: "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "vanitycode": {
+    "spaces": "Voeg spaties toe bij het coderen.",
+    "ignorespaces": "Negeer spaties bij het (de)coderen.",
+    "addspaces": "Voeg spaties tussen in het bericht",
+    "sel": "Selecteer coderen of decoderen",
+    "unknownchar": "Onbekende karakters: ",
+    "unknowncode": "Onbekende codes: "
+  }
+}
+</i18n>

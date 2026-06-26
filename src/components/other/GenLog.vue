@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('genlog.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -34,7 +34,7 @@
         </div>
       </VCard>
       <VCard :title="t('labels.result')">
-        <div v-if="result" class="card resultbox" >
+        <div v-if="result" class="resultbox" >
           {{ result }}
         </div>
       </VCard>
@@ -65,9 +65,7 @@ import { ref, watch } from 'vue';
 import VCard from '@/components/generic/VCard.vue';
 import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n({
-  useScope: 'local'
-});
+const { t } = useI18n();
 
 defineOptions({
   name: "GenLog"
@@ -80,6 +78,7 @@ const n = ref(2);      // Number of templates
 const tot = ref(1);    // Total counter
 const day = ref(1);    // Daily counter
 const txt = ref(["", ""]); // Array of template strings
+const startOpen = window.innerWidth > 768;
 
 // --- Methods ---
 
@@ -143,3 +142,28 @@ watch(n, () => {
 });
 </script>
 
+<i18n locale="en">
+{
+  "genlog": {
+    "n" : "Number of templates",
+    "tot": "Total finds (%tot%)",
+    "day": "Total finds for today (%day%)",
+    "ph": "Type a log. Use %tot% and %day% for counters",
+    "random": "Random template",
+    "template": "Generate log using template "
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "genlog": {
+    "n" : "Aantal templates",
+    "tot": "Totaal gevonden (%tot%)",
+    "day": "Vandaag gevonden (%day%)",
+    "ph": "Type een log. Gebruik %tot% en %day% voor tellers",
+    "random": "Willekeurige template",
+    "template": "Genereer log met template "
+  }
+}
+</i18n>

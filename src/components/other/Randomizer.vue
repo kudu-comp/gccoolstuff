@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('randomizer.long')" />
       </VCard>
 
@@ -76,7 +76,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row">
-          <VCalculate @calculate="generate" />
+          <CalculateButton @calculate="generate" />
         </div>
       </VCard>
     </div>
@@ -96,7 +96,7 @@
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import VCard from '@/components/generic/VCard.vue';
-import VCalculate from '@/components/generic/VCalculate.vue';
+import CalculateButton from '@/components/generic/CalculateButton.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue';
 
 defineOptions({ name: 'Randomizer' });
@@ -113,6 +113,7 @@ const coll = ref("purple,indigo,blue,green,yellow,orange,red");
 const sep = ref("");
 const result = ref("");
 const errormsg = ref("");
+const startOpen = window.innerWidth > 768;
 
 // Template Ref
 const selRef = ref(null);
@@ -193,3 +194,49 @@ const generate = () => {
   result.value = builder;
 };
 </script>
+
+<i18n locale="en">
+{
+  "randomizer": {
+    "sel" : "Select method",
+    "selbin": "Binary (0 and 1)",
+    "selrng": "Numbers in range",
+    "seltxt": "Text from string",
+    "selcol": "Collection",
+    "selascii": "All printable characters",
+    "numberof": "Number of randoms",
+    "minmax": "Min and max for range",
+    "chars": "Use this characters for string",
+    "coll": "Use this collection (comma separated)",
+    "sep": "Separate",
+    "sepnone": "None",
+    "sepspace": "Space",
+    "sepcomma": "Comma",
+    "sepcolon": "Colon",
+    "sephyphen": "Hyphen"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "randomizer": {
+    "sel" : "Selecteer methode",
+    "selbin": "Binair (0 en 1)",
+    "selrng": "Bereik",
+    "seltxt": "Tekst",
+    "selcol": "Verzameling",
+    "selascii": "Alle printbare tekens (ASCII)",
+    "numberof": "Aantal random",
+    "minmax": "Min en max voor bereik",
+    "chars": "Alfabet voor tekst",
+    "coll": "Verzameling (komma geschieden)",
+    "sep": "Tussenvoegsel",
+    "sepnone": "Geen",
+    "sepspace": "Spatie",
+    "sepcomma": "Komma",
+    "sepcolon": "Dubbele punt",
+    "sephyphen": "Streepje"
+  }
+}
+</i18n>

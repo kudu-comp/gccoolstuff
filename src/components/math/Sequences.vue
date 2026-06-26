@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('sequences.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -50,14 +50,11 @@
           <label>{{ t('sequences.endat') }}</label>
           <input type="number" v-model="endat" min="0" max="1000000">
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mb-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
         </p>
         <div class="button-row mt-2">
-          <v-calculate @calculate="sequence"/>
+          <CalculateButton @calculate="sequence"/>
         </div>
       </VCard>
     </div>
@@ -65,7 +62,7 @@
       <VCard :title="t('labels.result')">     
         <div
           v-if="result"
-          class="card resultbox monospace"
+          class="resultbox monospace"
         >
           <p>{{ t('sequences.res1') }} {{ count }}: {{ result }}.</p>
           <p>{{ t('sequences.res2') }}: </p>
@@ -81,7 +78,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import * as mathtools from '@/scripts/mathtools.js'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 import VCard from '@/components/generic/VCard.vue'
 
 defineOptions({
@@ -105,6 +102,7 @@ const seqs = ref([])
 
 // --- Template Ref ---
 const niterInput = ref(null)
+const startOpen = window.innerWidth > 768;
 
 onMounted(() => {
   // Focus logic
@@ -201,3 +199,57 @@ h4 {
 }
 
 </style>
+
+<i18n locale="en">
+{
+  "sequences": {
+    "sel": "Select a sequence",
+    "conway": "Conway sequence a.k.a. the hear and say sequence",
+    "revconway": "Reverse Conway sequence a.k.a. the hear and say sequence",
+    "hailstone": "Hailstone or Collatz sequence, if n is even n/2, if n is odd 3n+1. The sequence always ends in 4 2 1 ...",
+    "niven": "Niven or Harshad, numbers who are divisable by the sum of their digits",
+    "abundant": "Abundant, numbers where the sum of divisors is greater than twice the number",
+    "deficient": "Deficient, numbers where the sum of divisors is less than twice the number",
+    "golomb": "Golomb, the nth term is equal to the number of times n appears in the sequence",
+    "kaprekar": "Kaprekar, sort the number, reverse it, subtract the reversed from the original number until they are equal",
+    "palindrome": "Palindrome, add the number to its reverse until a palindrome is reached. A Lychrel number never reaches a palindrome",
+    "start": "Start with",
+    "res1": "The number on position",
+    "res2": "The sequence is",
+    "maxconway" : "The maximum number for Conway is 50",
+    "stop": "Stop when",
+    "stopiter": "Stop after this number of iterations",
+    "stopat": "Stop when the number is equal or greater then",
+    "stopend": "Stop at the defined end for this sequence",
+    "niter": "Stop after this number of iterations",
+    "endat": "Stop when equal or greater than this number"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "sequences": {
+    "sel": "Selecteer een reeks",
+    "conway": "Conway reeks ook wel bekend als de hoor-en-spreek reeks",
+    "revconway": "Reverse Conway reeks ook wel bekend als de hoor-en-spreek reeks",
+    "hailstone": "Hailstone of Collatz reeks, als n even n/2, als n oneven 3n+1. De reeks eindigt altijd met 4 2 1 ...",
+    "niven": "Niven of Harshad, nummers deelbaar door de som van de cijfers",
+    "abundant": "Abundant, nummers waarvoor de som van de delers groter is dan 2x het nummer",
+    "deficient": "Deficient, nummers waarvoor de soms van de delers kleiner is dan 2x het nummer",
+    "golomb": "Golomb, de n-de term is gelijk aan het aantal keren dat n voorkomt in de reeks",
+    "kaprekar": "Kaprekar, sorteer het getal, draai het om en trek beiden van elkaar af tot beiden hetzelfde zijn",
+    "palindrome": "Palindroom, tel een getal op bij zijn omgekeerde totdat een palindroom is gevonden. Een Lychrel nummer wordt nooit een palindroom.",
+    "start": "Startwaarde",
+    "res1": "Het getal op positie",
+    "res2": "De reeks is",
+    "maxconway" : "Het maximum voor Conway is 50",
+    "stop": "Stop wanneer",
+    "stopiter": "Stop na een aantal iteraties",
+    "stopat": "Stop als het nummer groter of gelijk is dan",
+    "stopend": "Stop bij het eindpunt van deze reeks",
+    "niter": "Stop na dit aantal herhalingen",
+    "endat": "Stop als het nummer gelijk is of groter dan"
+  }
+}
+</i18n>

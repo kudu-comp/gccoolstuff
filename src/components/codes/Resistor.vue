@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('resistor.long')" />
       </VCard>
 
@@ -32,8 +32,7 @@
               <option value="-2" style="background-color: silver; color: black">Silver</option>
             </template>
           </vd-color>
-        </div>
-        
+        </div>        
         <p v-show="errormsg" class="errormsg mt-2">{{ errormsg }}</p>
       </VCard>
 
@@ -61,6 +60,7 @@ const band2 = ref(0);
 const band3 = ref(0);
 const mult = ref(0);
 const errormsg = ref("");
+const startOpen = window.innerWidth > 768;
 
 // --- Computed Result ---
 const resultHtml = computed(() => {
@@ -83,3 +83,26 @@ const resultHtml = computed(() => {
 });
 </script>
 
+<!-- 
+All language definitions 
+But info and long should be global as they are used in menus and search 
+-->
+<i18n locale="en">
+{
+  "resistor": {
+    "band": "Band",
+    "mult": "Multiplier",
+    "res": "The resistance value is:"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "resistor": {
+    "band": "Band",
+    "mult": "x Factor",
+    "res": "De weerstand bedraagt:"
+  }
+}
+</i18n>

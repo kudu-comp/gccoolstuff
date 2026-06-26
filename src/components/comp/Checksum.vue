@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('checksum.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -27,7 +27,7 @@
           {{ errormsg }}
         </p>
         <div class="button-row mt-2">
-          <v-calculate id="run" @calculate="runChecksum" />
+          <CalculateButton @calculate="runChecksum" />
         </div>  
       </VCard>
     </div>
@@ -35,7 +35,7 @@
       <VCard :title="t('labels.result')">
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -47,7 +47,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VCalculate from '@/components/generic/VCalculate.vue'
+import CalculateButton from '@/components/generic/CalculateButton.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import VCard from '@/components/generic/VCard.vue'
 
@@ -62,6 +62,7 @@ const checksel = ref("0")
 const result = ref("")
 const txt = ref("")
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 const checks = [
   { value: "0", label: "Modulo 10" },
@@ -120,7 +121,7 @@ const runChecksum = () => {
       if (c === "?") continue
       let i = parseInt(c, 10)
       if (isNaN(i)) {
-        errormsg.value = t('errors.notanumber')
+        errormsg.value = t('checksum.notanumber')
         return
       }
       nums.push(i)
@@ -202,3 +203,26 @@ const runChecksum = () => {
 }
 </script>
 
+<i18n locale="en">
+{
+  "checksum": {
+    "checkres": "The check digit is: ",
+    "checkmethod": "Method",
+    "checkpar1": "0 (even parity) or 1 (odd parity)",
+    "checkpar2": "1 (even parity) or 0 (odd parity)",
+    "notanumber": "Input is not a number"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "checksum": {
+    "checkres": "Het controlegetal is: ",
+    "checkmethod": "Methode",
+    "checkpar1": "0 (even parity) of 1 (oneven parity)",
+    "checkpar2": "1 (even parity) of 0 (oneven parity)",
+    "notanumber": "Invoer is geen getal",
+  }
+}
+</i18n>

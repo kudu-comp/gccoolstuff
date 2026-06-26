@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // Static imports (always available)
 import HomePage from '@/views/HomePage.vue'
+import WordValue from '@/components/texts/WordValue.vue'
+import RotCiphers from '@/components/codes/RotCiphers.vue'
 
 const routes = [
   { path: '/',                    name: 'home',                  component: HomePage  },
@@ -18,7 +20,7 @@ const routes = [
   { path: "/plotcoord",           name: 'PlotCoord',             component: () => import('@/components/coords/PlotCoord.vue') },
   { path: "/triangulation",       name: 'Triangulation',         component: () => import('@/components/coords/Triangulation.vue') },
   { path: "/tryanswers",          name: 'TryAnswers',            component: () => import('@/components/texts/TryAnswers.vue') },
-  { path: "/wordvalue",           name: 'WordValue',             component: () => import('@/components/texts/WordValue.vue') },
+  { path: "/wordvalue",           name: 'WordValue',             component: WordValue },
   { path: "/analtxt",             name: 'AnalTxt',               component: () => import('@/components/texts/AnalTxt.vue') },
   { path: "/texttonum",           name: 'TextToNum',             component: () => import('@/components/texts/TextToNum.vue') },
   { path: "/charcodes",           name: 'CharCodes',             component: () => import('@/components/texts/CharCodes.vue') },
@@ -29,7 +31,7 @@ const routes = [
   { path: "/piglatin/:pig?",      name: 'PigLatin',              component: () => import('@/components/texts/PigLatin.vue') },    //Param: pig
   { path: "/numerology/:num?",    name: 'Numerology',            component: () => import('@/components/texts/Numerology.vue') },
   { path: '/ciphers/:cphr?',      name: 'Ciphers',               component: () => import('@/components/codes/Ciphers.vue'),  },   //Param: cphr
-  { path: '/rotciphers',          name: 'RotCiphers',            component: () => import('@/components/codes/RotCiphers.vue')  },
+  { path: '/rotciphers',          name: 'RotCiphers',            component: RotCiphers },
   { path: "/substcipher",         name: 'SubstCipher',           component: () => import('@/components/codes/SubstCipher.vue') },
   { path: "/codebook/:code?",     name: 'Codebook',              component: () => import('@/components/codes/CodeBook.vue') },    //Param: code
   { path: "/fonts/:font?",        name: 'Fonts',                 component: () => import('@/components/codes/Fonts.vue') },       //Param: font
@@ -58,6 +60,7 @@ const routes = [
   { path: "/brainfuck/:bf?",      name: 'brainfuck',             component: () => import('@/components/comp/Brainfuck.vue') },  //Param: bf is name of the initial BF variation
   { path: "/deadfish",            name: 'deadfish',              component: () => import('@/components/comp/Deadfish.vue') },
   { path: "/cow",                 name: 'cow',                   component: () => import('@/components/comp/Cow.vue') },
+  { path: "/chef",                name: 'chef',                  component: () => import('@/components/comp/Chef.vue') },
   { path: "/beatnik",             name: 'beatnik',               component: () => import('@/components/comp/Beatnik.vue') },
   { path: "/bintotext",           name: 'bintotext',             component: () => import('@/components/comp/BinToText.vue') },
   { path: "/duckspeak",           name: 'duckspeak',             component: () => import('@/components/comp/Duckspeak.vue') },

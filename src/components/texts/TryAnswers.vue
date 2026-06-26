@@ -4,7 +4,7 @@
     <h1>{{ t('tryanswers.title') }}</h1>
   </header>
   <div class="card-grid mb-2">
-    <VCard :title="t('labels.intro')">
+    <VCard :title="t('labels.intro')" :initialOpen="startOpen">
       <div v-html="t('tryanswers.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
@@ -73,14 +73,14 @@
         :placeholder="t('tryanswers.phformulas')"
         rows="5"
       />
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2"
-      >
-        {{ errormsg }}.
+      <p v-if="errormsg" class="errormsg">
+        {{ errormsg }}
+      </p>
+      <p v-else-if="infomsg" class="infomsg">
+        {{ infomsg }}
       </p>
       <div class="button-row">
-        <button class="btn btn-primary" @click="doAction()">{{t('buttons.try')}}</button>
+        <button class="btn btn-primary" @click="doAction()">{{t('tryanswers.try')}}</button>
       </div>
     </VCard>
     <VCard :title="t('labels.result')">
@@ -129,7 +129,9 @@ const leng = ref(false);
 const cnts = ref(false);
 const result = ref("");
 const errormsg = ref("");
+const infomsg = ref("");
 const trycounter = ref(0);
+const startOpen = window.innerWidth > 768;
 
 // Implicit state variables (internal logic)
 let answs = [];
@@ -241,6 +243,7 @@ const nextAnswer = (currentAnswers, cnt) => {
 const doAction = () => {
   // Reset
   errormsg.value = "";
+  infomsg.value = "";
   result.value = "";
   const cleanedTxt = txt.value.trim();
   const cleanedFormulas = formulas.value.trim();
@@ -366,6 +369,78 @@ const doAction = () => {
 
   if (table.value) result.value += "</table>";
 
-  errormsg.value = trycounter.value + t('tryanswers.finds');
+  infomsg.value = t('tryanswers.finds', trycounter.value);
 };
 </script>
+
+<i18n locale="en">
+{
+  "tryanswers": {
+    "try": "Try all answers",
+    "answers" : "One answer per line. Separate multiple options with ",
+    "formulas" : "Optionally use formulas",
+    "phformulas" : "A is the first answer, B the second and so on. For example A+B. One formula per line.",
+    "short": "Every geocacher knows this. You have to answer a couple of questions and then calculate a coordinate. But you are unsure about the right answers. And should you use square root or word value. Or maybe just the first or last letter. Too many options to try by hand. This tool makes your life a lot easier.",
+    "showdescr" : "Show descriptions",
+    "showtable" : "Show table",
+    "onlysq": "Only show square root (no word value)",
+    "tryleng": "Try length of the answers",
+    "trycnts" : "Try different counts",
+    "tryfirst" : "Try first letter",
+    "trylast" : "Try last letter",
+    "trysv" : "Try Scrabble and Vanity alfabet",
+    "trylang" : "Try other languages",
+    "tryrev" : "Try reversed alphabet (A=26, Z=1)",
+    "tryzero" : "Try alphabet starting at zero (A=0, Z=25)",
+    "value" : "Value",
+    "sq" : "Square root",
+    "full": "Full answer",
+    "first": "First letter",
+    "last": "Last letter",
+    "rev": "Reversed alphabet",
+    "zero": "Alphabet starting at 0",
+    "finds": "{count} answer tried|{count} answers tried.",
+    "length" : "Length",
+    "words": "Count words",
+    "chars": "Count chars",
+    "letters": "Count letters",
+    "digits": "Count digits"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "tryanswers": {
+    "try": "Probeer alle antwoorden",
+    "answers" : "Eén antwoord per regel. Meerder opties scheiden door ",
+    "formulas" : "Gebruik formules",
+    "phformulas" : "1e antwoord is A, 2e is B enzovoorts. Bijv A+B. Eén formule per regel.",
+    "short": "Elke geocacher kent het. Je hebt een aantal vragen te beantwoorden, wat formules in te vullen en daar moet een coördinaat uit rollen. Maar je bent niet zeker over de juiste antwoorden. En moet je nu de woordwaarde gebruiken of stapeltellen. Eindeloos veel opties om te proberen. Dat kan makkelijker!",
+    "showdescr" : "Toon omschrijvingen",
+    "showtable" : "Toon tabel",
+    "onlysq": "Alleen stapeltellen (geen woordwaardes)",
+    "tryleng": "Probeer lengte van het antwoord",
+    "trycnts" : "Probeer diverse tellingen",
+    "tryfirst" : "Probeer de 1e letter",
+    "trylast" : "Probeer de laatste letter",
+    "trysv" : "Probeer het Scrabble en Vanity alfabet",
+    "trylang" : "Probeer andere talen",
+    "tryrev" : "Probeer het omgekeerde alfabet (A=26, Z=1)",
+    "tryzero" : "Probeer met starten op nul (A=0, Z=25)",
+    "value" : "Waarde",
+    "sq" : "Stapeltellen",
+    "full": "Volledig antwoord",
+    "first": "Eerste letter",
+    "last": "Laatste letter",
+    "rev": "Omgekeerd alfabet",
+    "zero": "Alfabet start op 0",
+    "finds": "{count} antwoord gevonden.|{count} antwoorden gevonden.",
+    "length" : "Lengte",
+    "words": "Aantal woorden",
+    "chars": "Aantal tekens",
+    "letters": "Aantal letters",
+    "digits": "Aantal cijfers"
+  }
+}
+</i18n>

@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('wordle.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
@@ -41,7 +41,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div v-if="result" class="card resultbox" v-html="result" />
+        <div v-if="result" class="resultbox" v-html="result" />
       </VCard>  
     </div>
   </div>
@@ -70,6 +70,7 @@ const cnt = ref(0);
 const finds = ref([]);
 const dict = ref({});
 const dictloading = ref(true);
+const startOpen = window.innerWidth > 768;
 
 const maxcnt = 2500;
 let availableLetters = ""; // Local variable used during recursion
@@ -162,3 +163,31 @@ const findwordle = () => {
   }
 };
 </script>
+
+<i18n locale="en">
+{
+  "wordle": {
+    "length": "Wordle length",
+    "pattern": "Word pattern use ? for unknown letters",
+    "yellows": "Letters at unknown positions",
+    "greys": "Letters not in the word",
+    "wordsfound": " words found.",
+    "errpattern": "Word pattern too long or too short",
+    "toomany": "Maximum number of words reached."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "wordle": {
+    "length": "Woord lengte",
+    "pattern": "Patroon gebruik ? voor onbekende letters",
+    "yellows": "Letters op onbekende positie",
+    "greys": "Letters die niet voorkomen",
+    "wordsfound": " woorden gevonden.",
+    "errpattern": "Teveel of te weinig letters in patroon.",
+    "toomany": "Maximum aantal woorden gevonden."
+  }
+}
+</i18n>

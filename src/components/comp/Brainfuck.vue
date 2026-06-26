@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('brainfuck.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -35,11 +35,11 @@
           rows="5"
           @input="doSomething"
         />
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-if="errormsg" class="errormsg">
           {{ errormsg }}
+        </p>
+        <p v-else-if="infomsg" class="infomsg">
+          {{ infomsg }}
         </p>
         <div class="button-row mt-2">
           <button class="btn btn-primary"  @click="runBrainfuck">
@@ -54,13 +54,13 @@
     <div class="card-stack">
       <VCard :title="t('labels.result')">
         <div v-if="result" class="button-row mb-2">
-          <button @click="copyToClipboard" class="btn btn-small btn-primary" :class="{ copied: copiedStatus }">
-            {{ copiedStatus ? '✓' : t('buttons.copy') }}
-          </button>
+          <CopyButton 
+            :content="result"
+          />
         </div>
         <div
           v-if="result"
-          class="card resultbox"
+          class="resultbox"
         >
           {{ result }}
         </div>
@@ -74,6 +74,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import * as bf from '@/scripts/brainfuck.js'
+import CopyButton from '@/components/generic/CopyButton.vue';
 import VCard from '@/components/generic/VCard.vue';
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 
@@ -82,7 +83,7 @@ defineOptions({
 })
 
 const route = useRoute()
-const { t } = useI18n()
+const { t } = useI18n();
 
 // --- State ---
 const message = ref("")
@@ -92,20 +93,11 @@ const input = ref("")
 const shorthand = ref(false)
 const bfvars = ref([])
 const errormsg = ref("")
-const copiedStatus = ref(false);
+const infomsg = ref("")
 
 // --- Template Ref ---
 const codeInput = ref(null)
-
-const copyToClipboard = async () => {
-  try {
-    await navigator.clipboard.writeText(result.value);
-    copiedStatus.value = true;
-    setTimeout(() => copiedStatus.value = false, 2000);
-  } catch (err) {
-    console.error('Failed to copy!', err);
-  }
-};
+const startOpen = window.innerWidth > 768;
 
 // --- Lifecycle ---
 onMounted(() => {
@@ -153,6 +145,7 @@ const runBrainfuck = () => {
     
     // 3. Run the interpreter
     result.value = bf.run(bfcode, input.value)
+    infomsg.value = t('brainfuck.success')
 
   } catch (e) {
     errormsg.value = t('errors.generic')
@@ -170,7 +163,8 @@ const runBrainfuck = () => {
     "code": "Program code",
     "input": "Input variables",
     "run": "Run code",
-    "create": "Text to Brainfuck"
+    "create": "Text to Brainfuck",
+    "success": "Code completed, if you don't see a result the code has no output commands"
   }
 }
 </i18n>
@@ -184,7 +178,8 @@ const runBrainfuck = () => {
     "debug": "Debug info naar console",
     "input": "Input variabelen",
     "run": "Run code",
-    "create": "Tekst naar Brainfuck"
+    "create": "Tekst naar Brainfuck",
+    "success": "Code uitgevoerd, als er geen resultaat wordt getoond bevat de code geen uitvoercommando's"
   }
 }
 </i18n>

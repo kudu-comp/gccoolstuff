@@ -6,7 +6,7 @@
   <div class="card-grid mb-2">
     <div class="card-stack">
       <!-- Intro Card -->
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('dnacode.long')" />
       </VCard>
 
@@ -49,6 +49,7 @@ const { t } = useI18n()
 // --- Local State for Emitted Data ---
 const formattedResult = ref("")
 const tableError = ref("")
+const startOpen = window.innerWidth > 768;
 
 // Settings
 const phsearch = computed(() => t('dnacode.ph'))
@@ -139,3 +140,29 @@ const rows = [
   { letter: "-", abbr: "Stop", aminoacid: "Stop", RNA: "UAA, UGA, UAG, URA, UAR", DNA: "TAA, TGA, TAG, TRA, TAR"},
 ]
 </script>
+
+<i18n locale="en">
+{
+  "dnacode": {
+    "ph": "Type searches, e.g. three letter RNA codes",
+    "letter": "Letter",
+    "abbr": "Abbr.",
+    "aminoacid": "Amino acid",
+    "rna": "RNA codons",
+    "dna": "DNA codons"
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "dnacode": {
+    "ph": "Type zoektermen, bijvoorbeeld 3-letter RNA codons",
+    "letter": "Letter",
+    "abbr": "Afk.",
+    "aminoacid": "Aminozuur",
+    "rna": "RNA codons",
+    "dna": "DNA codons"
+  }
+}
+</i18n>

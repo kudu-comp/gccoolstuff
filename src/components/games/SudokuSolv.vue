@@ -5,7 +5,7 @@
   </header>
   <div class="card-grid mb-2">
     <div class="card-stack">
-      <VCard :title="t('labels.intro')">
+      <VCard :title="t('labels.intro')" :initialOpen="startOpen">
         <div v-html="t('sudokusolv.long')" />
       </VCard>
       <VCard :title="t('labels.settings')">
@@ -56,7 +56,7 @@
             </table>
           </div>
         </div>
-         <div class="form-row">
+         <div class="form-row mb-2">
           <label>{{ t('sudokusolv.alt') }}</label>
           <input type="text" v-model="knownnumbers">
         </div>
@@ -78,10 +78,8 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.result')">
-        <div v-if="results" class="mb-2">
-          <span style="font-weight:bold;">
-            {{ t('sudokusolv.thereare') }} {{ numberofsolutions }} {{ t('sudokusolv.sols') }}
-          </span>
+        <div v-if="results.length > 0" class="mb-2">
+          <p>{{ t('sudokusolv.sols', numberofsolutions) }}</p>
           <div v-if='results.length > 0'>
             <CustomDropdown
               title=""
@@ -117,6 +115,7 @@ const working = ref(false)
 const results = ref([])
 const numberofsolutions = ref(0)
 const errormsg = ref("")
+const startOpen = window.innerWidth > 768;
 
 const sideLength = computed(() => size.value ** 2)
 
@@ -266,3 +265,26 @@ const solveSudoku = async () => {
 
 </style>
 
+<i18n locale="en">
+{
+  "sudokusolv": {
+    "error": "Error solving sudoku, too many solutions or server timeout",
+    "type": "Sudoku type",
+    "size": "Size",
+    "alt": "Hints",
+    "sols": "There are no solutions. | There is one solution. | There are {n} solutions."
+  }
+}
+</i18n>
+
+<i18n locale="nl">
+{
+  "sudokusolv": {
+    "error": "Fout bij het oplossen van de sudoku. Te veel oplossingen of timeout van de server",
+    "type": "Sudoku type",
+    "size": "Afmeting",
+    "alt": "Hints",
+    "sols": "Er zijn geen oplossingen. | Er is één oplossing. | Er zijn {n} oplossingen."
+  }
+}
+</i18n>
