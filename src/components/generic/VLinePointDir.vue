@@ -11,19 +11,19 @@
 
           <div class="modal-body mt-2">
             <slot name="body">
-              <v-coord
-                v-model:coord="coordinate1"
+              <CoordInput
+                v-model:coord="coorCoordInputdinate1"
                 v-model:datum="selecteddatum1"
               >
                 <template #label>
                   {{ t('linepointdir.start') }}
                 </template>
-              </v-coord>
-              <v-angle
+              </CoordInput>
+              <AngleSelect
                 v-model:angle="angle"
                 v-model:unit="angleunit"
               />
-              <v-distance
+              <DistanceSelect
                 v-model:dist="dist"
                 v-model:unit="unit"
               />
@@ -60,9 +60,9 @@
 
 <script>
 
-import VCoord from '@/components/generic/VCoord.vue';
-import VAngle from '@/components/generic/VAngle.vue';
-import VDistance from '@/components/generic/VDistance.vue';
+import CoordInput from '@/components/generic/CoordInput.vue';
+import AngleSelect from '@/components/generic/AngleSelect.vue';
+import DistanceSelect from '@/components/generic/DistanceSelect.vue';
 
 import * as coords from '@/scripts/coords.js';
 
@@ -90,9 +90,9 @@ export default {
   },
 
   components: {
-    VCoord,
-    VAngle,
-    VDistance
+    CoordInput,
+    AngleSelect,
+    DistanceSelect
   },
   
   emits: [

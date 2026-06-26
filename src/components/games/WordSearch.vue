@@ -13,7 +13,7 @@
           <label>{{ t('wordsearch.ignore') }}</label>
           <input type="text" v-model="ignore" lenght="1">
         </div>
-        <div class="card-grid">
+        <div class="card-grid mb-2">
           <div class="form-row">
             <label>{{ t('wordsearch.grid') }}</label>
             <textarea
@@ -29,14 +29,11 @@
             />
           </div>
         </div>
-        <p
-          v-show="errormsg"
-          class="errormsg mt-2"
-        >
+        <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
         </p>
-        <div class="button-row mt-2">
-          <button class="btn btn-primary"  @click="solve">
+        <div class="button-row">
+          <button class="btn btn-primary"  :disabled="working" @click="solve">
             {{ t('buttons.solve') }}
           </button>
         </div>
@@ -78,6 +75,7 @@ const ncol = ref(0);
 const ignore = ref("-");
 const result = ref("");
 const errormsg = ref("");
+const working = ref(false)
 
 // Styling Settings
 const boxsize = ref(30);
@@ -211,7 +209,7 @@ const solve = async () => {
   errormsg.value = "";
   gridarr.value = [];
   checkarr.value = [];
-
+  working.value = true
 
   // Parse Grid
   let gridlines = grid.value.trim().toUpperCase().split(/[\n\r]+/g);
@@ -249,36 +247,41 @@ const solve = async () => {
   }
 
   // Find Words
-  for (let w = 0; w < wordList.length; w++) {
-    const currentWord = wordList[w];
-    let found = false;
+  setTimeout(() => { 
+    for (let w = 0; w < wordList.length; w++) {
+      const currentWord = wordList[w];
+      let found = false;
 
-    for (let r = 0; r < nrow.value && !found; r++) {
-      for (let c = 0; c < ncol.value && !found; c++) {
-        if (gridarr.value[r][c] === currentWord[0]) {
-          found = tryPos(r, c, currentWord);
+      for (let r = 0; r < nrow.value && !found; r++) {
+        for (let c = 0; c < ncol.value && !found; c++) {
+          if (gridarr.value[r][c] === currentWord[0]) {
+            found = tryPos(r, c, currentWord);
+          }
+        }
+      }
+
+      if (!found) {
+        errormsg.value = currentWord + " " + t('wordsearch.notfound');
+        working.value =false;
+        return;
+      }
+    }
+
+    // Final Result Generation
+    circleRemainingLetters();
+    let remaining = "";
+    for (let r = 0; r < nrow.value; r++) {
+      for (let c = 0; c < ncol.value; c++) {
+        if (!checkarr.value[r][c] && gridarr.value[r][c] !== ignore.value) {
+          remaining += gridarr.value[r][c];
         }
       }
     }
+    
+    result.value = t('wordsearch.remletters') + ": " + remaining;
+    working.value =false;
+  }, 50)
 
-    if (!found) {
-      errormsg.value = currentWord + " " + t('wordsearch.notfound');
-      return;
-    }
-  }
-
-  // Final Result Generation
-  circleRemainingLetters();
-  let remaining = "";
-  for (let r = 0; r < nrow.value; r++) {
-    for (let c = 0; c < ncol.value; c++) {
-      if (!checkarr.value[r][c] && gridarr.value[r][c] !== ignore.value) {
-        remaining += gridarr.value[r][c];
-      }
-    }
-  }
-  
-  result.value = t('wordsearch.remletters') + ": " + remaining;
 };
 </script>
 

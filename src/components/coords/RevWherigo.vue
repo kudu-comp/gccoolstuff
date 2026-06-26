@@ -27,7 +27,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="message" />     
+        <MapView v-model:mylocation="message" />     
       </VCard>
     </div>
   </div>
@@ -40,7 +40,7 @@ import { useI18n } from 'vue-i18n'
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VMap from '@/components/generic/VMap.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
 
 defineOptions({

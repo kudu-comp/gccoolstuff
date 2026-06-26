@@ -10,41 +10,41 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate1"
             v-model:datum="selecteddatum1"
           >
             <template #label>
               {{ t('labels.point') }} 1
             </template>
-          </v-coord>
+          </CoordInput>
         </div>
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate2"
             v-model:datum="selecteddatum2"
           >
             <template #label>
               {{ t('labels.point') }} 2
             </template>
-          </v-coord>
+          </CoordInput>
         </div>
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate3"
             v-model:datum="selecteddatum3"
           >
             <template #label>
               {{ t('labels.point') }} 3
             </template>
-          </v-coord>
+          </CoordInput>
         </div>
         <div v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}
         </div>
         <div class="button-row">
           <ButtonShowOnMap @Show="getPoints()" />
-        </div>  
+        </div>
       </VCard>
       <VCard :title="t('labels.result')">
         <div
@@ -56,7 +56,7 @@
       </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate1" />
+        <MapView v-model:mylocation="coordinate1" />
       </VCard>
     </div>
   </div>
@@ -73,9 +73,9 @@ import * as coords from '@/scripts/coords.js'
 import { calculateTriangleProperties } from '@/scripts/triangle.js'
 
 // UI Component Imports (The missing part!)
-import VCoord from '@/components/generic/VCoord.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VMap from '@/components/generic/VMap.vue'
+import MapView from '@/components/generic/MapView.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
@@ -136,13 +136,13 @@ const getPoints = async () => {
 
     // 6. Center Points: Convert RD back to WGS84
     const centerKeys = ['centroid', 'orthocenter', 'incenter', 'circumcenter', 'ninepointcenter']
-    const centerWgsPromises = centerKeys.map(key => 
+    const centerWgsPromises = centerKeys.map(key =>
       coords.convertCoordToWGS({ lat: data[key].y, lon: data[key].x }, "RD")
     )
     const [centroid, orthocenter, incenter, circumcenter, ninepointcenter] = await Promise.all(centerWgsPromises)
 
     // 7. Center Points: Convert WGS84 back to Input Datum for the text list
-    const datumPromises = [centroid, orthocenter, incenter, circumcenter, ninepointcenter].map(p => 
+    const datumPromises = [centroid, orthocenter, incenter, circumcenter, ninepointcenter].map(p =>
       coords.convertCoordFromWGS(p, selecteddatum1.value)
     )
     const datumPoints = await Promise.all(datumPromises)
@@ -158,10 +158,10 @@ const getPoints = async () => {
 
     centers.forEach((center, idx) => {
       const datumP = datumPoints[idx]
-      output += `<br>${t(`triangles.${center.key}`)}: ` 
+      output += `<br>${t(`triangles.${center.key}`)}: `
       output += coords.getTextFromCoord(datumP, selecteddatum1.value, 7, coordinate1.value)
       output += t('triangles.or') + coords.printCoordinateFromDMS(center.wgs, "N12 34.567 E1 23.456")
-      
+
       // Plot centers on map
       coords.displayMarker(mymap, center.wgs, t(`triangles.${center.key}`))
     })

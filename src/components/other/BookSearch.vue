@@ -12,7 +12,7 @@
 
       <!-- Settings/Search Card -->
       <VCard :title="t('labels.settings')">
-        <v-search
+        <SearchInput
           v-model:search="txt"
           @keyup.enter="goSearch"
         />
@@ -56,7 +56,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
-import VSearch from '@/components/generic/VSearch.vue';
+import SearchInput from '@/components/generic/SearchInput.vue';
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({ name: 'BookSearch' });

@@ -1,7 +1,7 @@
 <template>
   <label
   >{{ t('labels.alphabet') }}</label>
-  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+  <div class="custom-select-container" v-click-outside="closeDropdown">
     <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
       {{ selectedCategoryLabel }}
       <span class="chevron">▾</span>
@@ -64,4 +64,23 @@ const selectAlphabet = (name) => {
 onMounted(() => {
   alphabets.value = textHelper.alphabets;
 });
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false
+}
+
+const vClickOutside = {
+  mounted(el, binding) {
+    el.clickOutsideEvent = (event) => {
+      if (!(el === event.target || el.contains(event.target))) {
+        binding.value(event)
+      }
+    }
+    document.body.addEventListener('click', el.clickOutsideEvent)
+  },
+  unmounted(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent)
+  }
+}
+
 </script>

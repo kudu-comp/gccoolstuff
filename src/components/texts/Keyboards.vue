@@ -10,14 +10,14 @@
     <VCard :title="t('labels.settings')">
       <div class="form-horizontal">
         <label>{{ t('keyboards.inputkb') }}</label>
-        <v-keyboards
+        <KeyboardSelect
           v-model:keyboard="fromkeyboard"
           @click="translateKeyboard"
         />
       </div>
       <div class="form-horizontal">
         <label>{{ t('keyboards.outputkb') }}</label>
-        <v-keyboards
+        <KeyboardSelect
           v-model:keyboard="tokeyboard"
           @click="translateKeyboard"
         />
@@ -55,7 +55,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VKeyboards from '@/components/generic/VKeyboards.vue'
+import KeyboardSelect from '@/components/generic/KeyboardSelect.vue'
 import * as keyboards from '@/scripts/keyboards.js'
 import VCard from '@/components/generic/VCard.vue'
 

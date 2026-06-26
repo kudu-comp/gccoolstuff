@@ -1,7 +1,11 @@
 <template>
 
-  <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
-    <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
+  <div class="custom-select-container" v-click-outside="closeDropdown">
+    <div 
+      class="custom-select-trigger" 
+      @click="isDropdownOpen = !isDropdownOpen" 
+      :class="{ 'is-active': isDropdownOpen }"
+    >
       {{ selectDatum }}
       <span class="chevron">▾</span>
     </div>
@@ -10,8 +14,10 @@
         <div 
           v-for="option in datumOptions"
           class="custom-option" 
-          :class="{ 'selected': datum === option.value }" 
-          :disabled="option.disabled"
+          :class="{ 
+            'selected': datum === option.value,
+            'is-disabled': option.disabled 
+          }" 
           @click="$emit('update:datum', option.value)"
         >
           {{ option.label }}
@@ -85,4 +91,22 @@ const datumOptions = [
   { label: '--- Define your own ---', disabled: true },
   { label: 'Proj4js definition', value: 'Proj4js' }
 ]
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false
+}
+
+const vClickOutside = {
+  mounted(el, binding) {
+    el.clickOutsideEvent = (event) => {
+      if (!(el === event.target || el.contains(event.target))) {
+        binding.value(event)
+      }
+    }
+    document.body.addEventListener('click', el.clickOutsideEvent)
+  },
+  unmounted(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent)
+  }
+}
 </script>

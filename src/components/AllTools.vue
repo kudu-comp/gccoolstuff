@@ -9,8 +9,7 @@
         <div v-html="t('alltools.long')" />
       </VCard>
       <VCard :title="t('labels.search')">
-        <v-search
-          id="searchstr"
+        <SearchInput
           v-model:search="searchstr"
           @keyup.enter="goSearch"
         />
@@ -35,10 +34,7 @@
           </button>
         </div>
         <!-- Error message -->
-        <p
-          v-if="errormsg"
-          class="errormsg"
-        >
+        <p v-if="errormsg" class="errormsg">
           {{ errormsg }}
         </p>
       </VCard>
@@ -60,7 +56,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import VSearch from '@/components/generic/VSearch.vue'
+import SearchInput from '@/components/generic/SearchInput.vue'
 import VCard from '@/components/generic/VCard.vue'
 import TreeList from '@/components/generic/TreeList.vue';
 

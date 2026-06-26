@@ -58,7 +58,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordfrom" />     
+        <MapView v-model:mylocation="coordfrom" />     
       </VCard>
     </div>
   </div>
@@ -70,7 +70,7 @@ import { useStore } from 'vuex'
 import { useI18n } from 'vue-i18n'
 import L from 'leaflet'
 import * as coords from '@/scripts/coords.js'
-import VMap from '@/components/generic/VMap.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
 import DatumSelect from '@/components/generic/DatumSelect.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'

@@ -10,39 +10,27 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-        <v-coord
+        <CoordInput
           v-model:coord="coordinate"
           v-model:datum="selecteddatum"
           class="mb-2"
         />
         </div>
-        <div class="form-horizontal">
-        <v-variable
-          v-model:variable="var1"
-          v-model:varoptions="var1options"
-        />
-        </div>
-        <div class="form-horizontal">
-        <v-variable
-          v-model:variable="var2"
-          v-model:varoptions="var2options"
-        />
-        </div>
-        <div class="form-horizontal">
-        <v-variable
-          v-model:variable="var3"
-          v-model:varoptions="var3options"
-        />
-        </div>
-        <div class="form-horizontal">
-        <v-variable
-          v-model:variable="var4"
-          v-model:varoptions="var4options"
-        />
+        <div class="form-horizontal" v-for="(v, idx) in vars">
+          <label>{{ t('labels.variable') }}</label>
+          <input
+            type="text"
+            v-model="vars[idx].var"
+          >
+          <label>{{ t('labels.option') }}</label>
+          <input
+            type="text"
+            v-model="vars[idx].options"
+          >
         </div>
         <p v-show="errormsg" class="errormsg mb-2">
           {{ errormsg }}.
-        </p>          
+        </p>
         <div class="button-row">
           <ButtonShowOnMap @show="showCoordinates()" />
         </div>
@@ -50,7 +38,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate" />     
+        <MapView v-model:mylocation="coordinate" />
       </VCard>
     </div>
   </div>
@@ -64,10 +52,9 @@ import L from 'leaflet'
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VCoord from '@/components/generic/VCoord.vue'
-import VMap from '@/components/generic/VMap.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VVariable from '@/components/generic/VVariable.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({
@@ -80,14 +67,12 @@ const { t } = useI18n()
 // --- State ---
 const coordinate = ref("")
 const selecteddatum = ref("WGS84")
-const var1 = ref("a")
-const var1options = ref("0123456789")
-const var2 = ref("b")
-const var2options = ref("0123456789")
-const var3 = ref("c")
-const var3options = ref("0123456789")
-const var4 = ref("d")
-const var4options = ref("0123456789")
+const vars = ref([
+  { var: "a", options: "0123456789"},
+  { var: "b", options: "0123456789"},
+  { var: "c", options: "0123456789"},
+  { var: "d", options: "0123456789"}
+])
 const errormsg = ref("")
 const startOpen = window.innerWidth > 768;
 
@@ -109,19 +94,20 @@ const printMarker = (newcoord, vars) => {
 const showCoordinates = () => {
   // Initialize
   errormsg.value = ""
+  console.log(vars)
 
   try {
     // Check which variables are actually present in the text
-    const useVar1 = coordinate.value.indexOf(var1.value) >= 0
-    const useVar2 = coordinate.value.indexOf(var2.value) >= 0
-    const useVar3 = coordinate.value.indexOf(var3.value) >= 0
-    const useVar4 = coordinate.value.indexOf(var4.value) >= 0
+    const useVar1 = coordinate.value.indexOf(vars.value[0].var) >= 0
+    const useVar2 = coordinate.value.indexOf(vars.value[1].var) >= 0
+    const useVar3 = coordinate.value.indexOf(vars.value[2].var) >= 0
+    const useVar4 = coordinate.value.indexOf(vars.value[3].var) >= 0
 
     // Calculate total permutations
-    const totaloptions = (useVar1 ? var1options.value.length : 1) *
-                         (useVar2 ? var2options.value.length : 1) *
-                         (useVar3 ? var3options.value.length : 1) *
-                         (useVar4 ? var4options.value.length : 1)
+    const totaloptions = (useVar1 ? vars.value[0].options.length : 1) *
+                         (useVar2 ? vars.value[1].options.length : 1) *
+                         (useVar3 ? vars.value[2].options.length : 1) *
+                         (useVar4 ? vars.value[3].options.length : 1)
 
     if (totaloptions > 500) {
       errormsg.value = t('incomplete.error1')
@@ -129,36 +115,36 @@ const showCoordinates = () => {
     }
 
     // Initialize regular expressions for replacement
-    const regex1 = new RegExp(var1.value, "g")
-    const regex2 = new RegExp(var2.value, "g")
-    const regex3 = new RegExp(var3.value, "g")
-    const regex4 = new RegExp(var4.value, "g")
+    const regex1 = new RegExp(vars.value[0].var, "g")
+    const regex2 = new RegExp(vars.value[1].var, "g")
+    const regex3 = new RegExp(vars.value[2].var, "g")
+    const regex4 = new RegExp(vars.value[3].var, "g")
 
     // Nested loops for permutations
     // (v == 0) check ensures loops run once if variable is not used
-    for (let v1 = 0; (useVar1 && v1 < var1options.value.length) || (v1 === 0); v1++) {
-      for (let v2 = 0; (useVar2 && v2 < var2options.value.length) || (v2 === 0); v2++) {
-        for (let v3 = 0; (useVar3 && v3 < var3options.value.length) || (v3 === 0); v3++) {
-          for (let v4 = 0; (useVar4 && v4 < var4options.value.length) || (v4 === 0); v4++) {
-            
+    for (let v1 = 0; (useVar1 && v1 < vars.value[0].options.length) || (v1 === 0); v1++) {
+      for (let v2 = 0; (useVar2 && v2 < vars.value[1].options.length) || (v2 === 0); v2++) {
+        for (let v3 = 0; (useVar3 && v3 < vars.value[2].options.length) || (v3 === 0); v3++) {
+          for (let v4 = 0; (useVar4 && v4 < vars.value[3].options.length) || (v4 === 0); v4++) {
+
             let currentCoord = coordinate.value
             let currentVars = ""
 
             if (useVar1) {
-              currentCoord = currentCoord.replace(regex1, var1options.value[v1])
-              currentVars += `${var1.value}=${var1options.value[v1]} `
+              currentCoord = currentCoord.replace(regex1, vars.value[0].options[v1])
+              currentVars += `${vars.value[0].var}=${vars.value[0].options[v1]} `
             }
             if (useVar2) {
-              currentCoord = currentCoord.replace(regex2, var2options.value[v2])
-              currentVars += `${var2.value}=${var2options.value[v2]} `
+              currentCoord = currentCoord.replace(regex2, vars.value[1].options[v2])
+              currentVars += `${vars.value[1].var}=${vars.value[1].options[v2]} `
             }
             if (useVar3) {
-              currentCoord = currentCoord.replace(regex3, var3options.value[v3])
-              currentVars += `${var3.value}=${var3options.value[v3]} `
+              currentCoord = currentCoord.replace(regex3, vars.value[2].options[v3])
+              currentVars += `${vars.value[2].var}=${vars.value[2].options[v3]} `
             }
             if (useVar4) {
-              currentCoord = currentCoord.replace(regex4, var4options.value[v4])
-              currentVars += `${var4.value}=${var4options.value[v4]} `
+              currentCoord = currentCoord.replace(regex4, vars.value[3].options[v4])
+              currentVars += `${vars.value[3].var}=${vars.value[3].options[v4]} `
             }
 
             // Async plot marker

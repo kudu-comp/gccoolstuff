@@ -10,7 +10,7 @@
       <p style="margin-top: 0px; opacity:0.65;">{{ argots[sel].descr }}</p>
     </VCard>
     <VCard :title="t('labels.settings')">
-      <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+      <LanguageSelect v-model:dict="dict" v-model:dictloading="dictloading" />
       <div class="radio-group mt-2">
         <label>{{t('piglatin.sel')}}</label>
         <div class="radio-options-vertical">
@@ -53,7 +53,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import VLanguage from "@/components/generic/VLanguage.vue"
+import LanguageSelect from "@/components/generic/LanguageSelect.vue"
 import VCard from "@/components/generic/VCard.vue"
 import { piglatin } from "@/scripts/piglatin.js"
 import { useI18n } from 'vue-i18n'

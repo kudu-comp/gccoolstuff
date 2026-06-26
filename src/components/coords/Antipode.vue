@@ -10,7 +10,7 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate"
             v-model:datum="selecteddatum"
           />
@@ -33,7 +33,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate" />
+        <MapView v-model:mylocation="coordinate" />
       </VCard>
     </div>
   </div>
@@ -46,9 +46,9 @@ import { useI18n } from 'vue-i18n'
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VCoord from '@/components/generic/VCoord.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VMap from '@/components/generic/VMap.vue'
+import MapView from '@/components/generic/MapView.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({

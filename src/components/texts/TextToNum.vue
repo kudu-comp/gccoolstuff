@@ -8,7 +8,7 @@
       <div v-html="t('texttonum.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
-      <v-alphabets v-model:alphabet="selectedalphabet"/>
+      <AlphabetSelect v-model:alphabet="selectedalphabet"/>
       <label class="checkbox-container mb-2 mt-2">
         <input type="checkbox" v-model="reverse">
         <span class="checkmark"></span>
@@ -79,7 +79,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import * as textHelper from '@/scripts/texthelper.js'
-import VAlphabets from '@/components/generic/VAlphabets.vue'
+import AlphabetSelect from '@/components/generic/AlphabetSelect.vue'
 import VCard from '@/components/generic/VCard.vue'
 import { useI18n } from 'vue-i18n'
 

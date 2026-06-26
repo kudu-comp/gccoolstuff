@@ -7,8 +7,7 @@
       <div v-html="t('codebook.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
-      <v-search
-        id="searchstr"
+      <SearchInput
         v-model:search="searchstr"
         @keyup.enter="goSearch"
       />
@@ -97,7 +96,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { codepages } from '@/scripts/codebook.js'
-import VSearch from '@/components/generic/VSearch.vue'
+import SearchInput from '@/components/generic/SearchInput.vue'
 import VCard from '@/components/generic/VCard.vue'
 import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import { useI18n } from 'vue-i18n'

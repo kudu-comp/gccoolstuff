@@ -10,33 +10,25 @@
       </VCard>
       <VCard :title="t('labels.settings')">
         <div class="form-horizontal">
-          <label
-          >{{ t('labels.from') }}</label>
+          <label>{{ t('labels.from') }}</label>
           <DatumSelect
             id="from"
             v-model:datum="from"
           />
         </div>
         <div class="form-horizontal">
-          <label
-          >{{ t('labels.to') }}</label>
+          <label>{{ t('labels.to') }}</label>
           <DatumSelect
             id="to"
             v-model:datum="to"
           />
         </div>
         <div class="form-horizontal">
-          <v-wgsformat
-            id="wgsformat"
-            v-model:format="wgsformat"
-          />
+          <WgsSelect v-model:format="wgsformat" />
           <div v-if="to == 'Proj4js' || from == 'Proj4js'">
             <div v-html="t('convert.proj4jsmsg')" />
-            <label
-              for="proj4jsdef"
-            >{{ t('convert.proj4jslabel') }}</label>
+            <label>{{ t('convert.proj4jslabel') }}</label>
             <input
-              id="proj4jsdef"
               v-model="proj4jsdef"
               type="text"
             >
@@ -72,7 +64,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordfrom" />     
+        <MapView v-model:mylocation="coordfrom" />     
       </VCard>
     </div>
   </div>
@@ -85,8 +77,8 @@ import { useI18n } from 'vue-i18n'
 import * as coords from '@/scripts/coords.js'
 import DatumSelect from '@/components/generic/DatumSelect.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VWgsformat from '@/components/generic/VWgsformat.vue'
-import VMap from '@/components/generic/VMap.vue'
+import WgsSelect from '@/components/generic/WgsSelect.vue'
+import MapView from '@/components/generic/MapView.vue'
 
 defineOptions({
   name: 'Convert'

@@ -7,7 +7,7 @@
       <div v-html="t('wordvalue.long')" />
     </VCard>
     <VCard :title="t('labels.settings')">
-      <v-alphabets-ext
+      <AlphabetExtSelect
         id="listofalpha"
         v-model:alphabet="selectedalphabet"
         @click="wordValue"
@@ -104,7 +104,7 @@
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as textHelper from '@/scripts/texthelper.js'
-import VAlphabetsExt from '@/components/generic/VAlphabetsExt.vue'
+import AlphabetExtSelect from '@/components/generic/AlphabetExtSelect.vue'
 import VCard from '@/components/generic/VCard.vue'
 import CopyButton from '@/components/generic/CopyButton.vue';
 

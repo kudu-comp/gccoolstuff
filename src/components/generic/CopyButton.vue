@@ -55,7 +55,13 @@ const formatElementToText = (element) => {
     table.parentNode.replaceChild(document.createTextNode('\n' + tableText + '\n'), table);
   });
 
-  // 3. Return the text content
+  // 3. Manually convert <br> tags to newline characters
+  const lineBreaks = clone.querySelectorAll('br');
+  lineBreaks.forEach(br => {
+    br.parentNode.replaceChild(document.createTextNode('\n'), br);
+  });
+  
+  // 4. Return the text content
   // innerText is used as it respects <br> and CSS spacing/visibility
   return (clone.innerText || clone.textContent).trim();
 };

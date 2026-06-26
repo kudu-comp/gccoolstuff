@@ -10,19 +10,19 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate"
             v-model:datum="selecteddatum"
           />
         </div>
         <div class="form-horizontal">
-          <v-distance
+          <DistanceSelect
             v-model:dist="dist"
             v-model:unit="unit"
           />
         </div>
         <div class="form-horizontal">
-          <v-angle
+          <AngleSelect
             v-model:angle="angle"
             v-model:unit="angleunit"
           />
@@ -40,7 +40,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate" />     
+        <MapView v-model:mylocation="coordinate" />     
       </VCard>
     </div>
   </div>
@@ -54,11 +54,11 @@ import L from 'leaflet'
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VCoord from '@/components/generic/VCoord.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VAngle from '@/components/generic/VAngle.vue'
-import VDistance from '@/components/generic/VDistance.vue'
-import VMap from '@/components/generic/VMap.vue'
+import AngleSelect from '@/components/generic/AngleSelect.vue'
+import DistanceSelect from '@/components/generic/DistanceSelect.vue'
+import MapView from '@/components/generic/MapView.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 
 defineOptions({

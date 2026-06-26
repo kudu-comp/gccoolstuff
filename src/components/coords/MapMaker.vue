@@ -33,7 +33,7 @@
           {{ t('mapmaker.drawcircle') }}
         </label>
         <div class="form-horizontal" v-if="drawcircles">
-          <v-distance
+          <DistanceSelect
             v-model:dist="dist"
             v-model:unit="unit"
           >
@@ -43,7 +43,7 @@
                 for="distance"
               >{{ t('labels.radius') }}</label>
             </template>
-          </v-distance>
+          </DistanceSelect>
         </div>  
       </VCard>
       <VCard :title="t('labels.input')">
@@ -70,7 +70,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordfrom" />
+        <MapView v-model:mylocation="coordfrom" />
       </VCard>
       </div>
   </div>
@@ -85,8 +85,8 @@ import * as coords from '@/scripts/coords.js';
 
 // Component Imports
 import DatumSelect from '@/components/generic/DatumSelect.vue';
-import VDistance from '@/components/generic/VDistance.vue';
-import VMap from '@/components/generic/VMap.vue';
+import DistanceSelect from '@/components/generic/DistanceSelect.vue';
+import MapView from '@/components/generic/MapView.vue';
 import VCard from '@/components/generic/VCard.vue';
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue';
 

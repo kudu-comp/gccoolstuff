@@ -11,16 +11,16 @@
     <VCard :title="t('labels.settings')">
       <div class="form-horizontal">
       <label>{{ t('charcodes.input') }}</label>
-      <v-code
-        id="codes-in"
-        v-model:code="selectedcode"
+      <CustomDropdown
+        :options="codeOptions"
+        v-model="selectedcode"
       />
     </div>
     <div class="form-horizontal">
         <label>{{ t('charcodes.output') }}</label>
-        <v-code
-          id="codes-out"
-          v-model:code="selectedoutput"
+        <CustomDropdown
+          :options="codeOptions"
+          v-model="selectedoutput"
         />
       </div>
     </VCard>
@@ -28,16 +28,12 @@
   <div class="card-grid mb-2">
     <VCard :title="t('labels.input')">
       <textarea
-        id="message"
         ref="messageInput"
         v-model="message"
         :placeholder="t('labels.message')"
         rows="5"
       />
-      <p
-        v-show="errormsg"
-        class="errormsg mb-2 mt-2"
-      >
+      <p v-show="errormsg" class="errormsg mb-2 mt-2">
         {{ errormsg }}
       </p>          
     </VCard>
@@ -63,7 +59,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import VCode from '@/components/generic/VCode.vue'
+import CustomDropdown from '@/components/generic/CustomDropdown.vue'
 import VCard from '@/components/generic/VCard.vue'
 import * as baudotcode from '@/scripts/baudotcode.js'
 import * as codepages from '@/scripts/codepages.js'
@@ -81,6 +77,32 @@ const selectedcode = ref("Decimal")
 const selectedoutput = ref("UTF16")
 const messageInput = ref(null)
 const startOpen = window.innerWidth > 768;
+
+const codeOptions = [
+  { label: 'Text (UTF8/UTF16)', value: 'UTF16' },
+  { label: '--- Numbers ---', disabled: true },
+  { label: 'Binary (0,1)', value: 'Binary' },
+  { label: 'Octal (0-7)', value: 'Octal' },
+  { label: 'Decimal (0-9)', value: 'Decimal' },
+  { label: 'Hexadecimal (0-F)', value: 'Hexadecimal' },
+  { label: '--- Older codepages & alt codes ---', disabled: true },
+  { label: 'Text Ascii', value: 'ASCII' },
+  { label: 'Windows Western European (CP1252)', value: 'CP1252' },
+  { label: 'Original IBM Hardware (CP437)', value: 'CP437' },
+  { label: 'MS DOS Western European(CP850)', value: 'CP850' },
+  { label: 'MS DOS Eastern European (CP852)', value: 'CP852' },
+  { label: 'MS DOS Turkish codepage (CP857)', value: 'CP857' },
+  { label: 'MS DOS Cyrillic codepage (CP866)', value: 'CP866' },
+  { label: 'Atari ASCII variant (ATASCII)', value: 'ATASCII' },
+  { label: 'EBCDIC character set', value: 'EBCDIC' },
+  { label: '--- Telegraphy & telex ---', disabled: true },
+  { label: 'Baudot code (ITA-1)', value: 'Baudotcode' },
+  { label: 'Baudot code (ITA-1) - reversed', value: 'BaudotcodeR' },
+  { label: 'Murray code (ITA-2)', value: 'Murraycode' },
+  { label: 'Murray code (ITA-2) - reversed', value: 'MurraycodeR' },
+  { label: 'Murray Cyrillic (MTK-2)', value: 'MurrayMTK2' },
+  { label: 'Murray Cyrillic (MTK-2) - reversed', value: 'MurrayMTK2R' }
+]
 
 onMounted(() => {
   messageInput.value?.focus()

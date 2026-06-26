@@ -14,24 +14,24 @@
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
           <label>{{ t('resistor.band') }} 1 </label>
-          <vd-color v-model:color="band1" />
+          <ColorResistance v-model:color="band1" />
         </div>
         <div class="form-horizontal">
           <label>{{ t('resistor.band') }} 2 </label>
-          <vd-color v-model:color="band2" />
+          <ColorResistance v-model:color="band2" />
         </div>
         <div class="form-horizontal">
           <label>{{ t('resistor.band') }} 3 </label>
-          <vd-color v-model:color="band3" />
+          <ColorResistance v-model:color="band3" />
         </div>
         <div class="form-horizontal">
           <label>{{ t('resistor.mult') }}</label>
-          <vd-color v-model:color="mult">
+          <ColorResistance v-model:color="mult">
             <template #addcolors>
               <option value="-1" style="background-color: gold; color: black">Gold</option>
               <option value="-2" style="background-color: silver; color: black">Silver</option>
             </template>
-          </vd-color>
+          </ColorResistance>
         </div>        
         <p v-show="errormsg" class="errormsg mt-2">{{ errormsg }}</p>
       </VCard>
@@ -47,7 +47,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import VdColor from '@/components/generic/VdColor.vue';
+import ColorResistance from '@/components/generic/ColorResistance.vue';
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({ name: 'Resistor' });

@@ -3,9 +3,9 @@
 
 <div class="custom-select-container" v-click-outside="closeDropdown">
     <div 
-    class="custom-select-trigger" 
-    @click="isDropdownOpen = !isDropdownOpen" 
-    :class="{ 'is-active': isDropdownOpen }"
+      class="custom-select-trigger" 
+      @click="isDropdownOpen = !isDropdownOpen" 
+      :class="{ 'is-active': isDropdownOpen }"
     >
     {{ selectedOptionLabel }}
     <span class="chevron">▾</span>

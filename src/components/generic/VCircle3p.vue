@@ -11,30 +11,30 @@
 
           <div class="modal-body mt-2">
             <slot name="body">
-              <v-coord
+              <CoordInput
                 v-model:coord="coordinate1"
                 v-model:datum="selecteddatum1"
               >
                 <template #label>
                   {{ t('labels.point') }} 1
                 </template>
-              </v-coord>
-              <v-coord
+              </CoordInput>
+              <CoordInput
                 v-model:coord="coordinate2"
                 v-model:datum="selecteddatum2"
               >
                 <template #label>
                   {{ t('labels.point') }} 2
                 </template>
-              </v-coord>
-              <v-coord
+              </CoordInput>
+              <CoordInput
                 v-model:coord="coordinate3"
                 v-model:datum="selecteddatum3"
               >
                 <template #label>
                   {{ t('labels.point') }} 3
                 </template>
-              </v-coord>
+              </CoordInput>
             </slot>
           </div>
 
@@ -68,7 +68,7 @@
 
 <script>
 
-import VCoord from '@/components/generic/VCoord.vue';
+import CoordInput from '@/components/generic/CoordInput.vue';
 import * as coords from '@/scripts/coords.js';
 
 export default {
@@ -91,7 +91,7 @@ export default {
   },
 
   components: {
-    VCoord
+    CoordInput
   },
   
   emits: [

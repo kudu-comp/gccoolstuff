@@ -17,13 +17,13 @@
         <div v-for="(item, idx) in (mode === 'intersection' ? observers : landmarks)" :key="idx" class="input-box mb-2">
           <label class="input-box-title">{{ item.name + item.id }}</label>
           <div class="form-horizontal">
-            <v-coord
+            <CoordInput
               v-model:coord="item.coordinate"
               v-model:datum="item.selecteddatum"
             />
           </div>
           <div class="form-horizontal">
-            <v-angle
+            <AngleSelect
               v-model:angle="item.angle"
               v-model:unit="item.angleunit"
             />
@@ -44,7 +44,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="observers[0].coordinate" />     
+        <MapView v-model:mylocation="observers[0].coordinate" />     
       </VCard>
     </div>
   </div>
@@ -53,10 +53,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
-import VMap from '@/components/generic/VMap.vue';
+import MapView from '@/components/generic/MapView.vue';
 import VCard from '@/components/generic/VCard.vue';
-import VCoord from '@/components/generic/VCoord.vue';
-import VAngle from '@/components/generic/VAngle.vue';
+import CoordInput from '@/components/generic/CoordInput.vue';
+import AngleSelect from '@/components/generic/AngleSelect.vue';
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue';
 import * as coords from '@/scripts/coords.js';
 import L from 'leaflet';

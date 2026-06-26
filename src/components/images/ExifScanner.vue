@@ -111,7 +111,7 @@
         </div>
       </VCard>
       <VCard :title="t('labels.map')">
-        <v-map />
+        <MapView />
       </VCard>
     </div>
   </div>
@@ -126,7 +126,7 @@ import L from "leaflet"
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VMap from '@/components/generic/VMap.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
 
 defineOptions({

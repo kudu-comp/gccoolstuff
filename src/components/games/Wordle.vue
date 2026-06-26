@@ -9,7 +9,7 @@
         <div v-html="t('wordle.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
-        <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+        <LanguageSelect v-model:dict="dict" v-model:dictloading="dictloading" />
           <div class="form-horizontal mt-4">
             <label>{{ t('wordle.length') }}</label>
             <input type="number" v-model="len">
@@ -26,14 +26,11 @@
             <label>{{ t('wordle.greys') }}</label>
             <input type="text" v-model="greys">
           </div>
-          <p
-            v-show="errormsg"
-            class="errormsg"
-          >
+          <p v-show="errormsg" class="errormsg mb-2">
             {{ errormsg }}
           </p>
-          <div class="button-row mt-2">
-            <button :disabled="dictloading" class="btn btn-primary"  @click="findwordle">
+          <div class="button-row">
+            <button :disabled="dictloading || working" class="btn btn-primary"  @click="findwordle">
               {{ t('buttons.search') }}
             </button>
           </div>
@@ -50,7 +47,7 @@
 <script setup>
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import VLanguage from "@/components/generic/VLanguage.vue";
+import LanguageSelect from "@/components/generic/LanguageSelect.vue";
 import VCard from '@/components/generic/VCard.vue';
 
 defineOptions({
@@ -70,6 +67,7 @@ const cnt = ref(0);
 const finds = ref([]);
 const dict = ref({});
 const dictloading = ref(true);
+const working=ref(false);
 const startOpen = window.innerWidth > 768;
 
 const maxcnt = 2500;
@@ -125,6 +123,7 @@ const findwordle = () => {
   errormsg.value = "";
   cnt.value = 0;
   finds.value = [];
+  working.value = true;
 
   // 1. Validate and clean inputs using dictionary rules
   if (!dict.value.cleanStr) return;
@@ -147,20 +146,23 @@ const findwordle = () => {
     availableLetters = availableLetters.split(char).join("");
   }
 
-  // 4. Start search
-  nextTry("");
+  setTimeout(() => { 
+    // 4. Start search
+    nextTry("");
+    // 5. Deduplicate and sort results
+    const uniqueFinds = [...new Set(finds.value)].sort();
+    
+    // 6. Format result for display
+    if (uniqueFinds.length === 0) {
+      result.value = t("errors.noresult");
+    } else {
+      let output = uniqueFinds.length + t("wordle.wordsfound") + "<br><br>";
+      output += uniqueFinds.join("<br>");
+      result.value = output;
+    }
+    working.value = false;
+  }, 50);
 
-  // 5. Deduplicate and sort results
-  const uniqueFinds = [...new Set(finds.value)].sort();
-  
-  // 6. Format result for display
-  if (uniqueFinds.length === 0) {
-    result.value = t("errors.noresult") || "No words found.";
-  } else {
-    let output = uniqueFinds.length + t("wordle.wordsfound") + "<br><br>";
-    output += uniqueFinds.join("<br>");
-    result.value = output;
-  }
 };
 </script>
 

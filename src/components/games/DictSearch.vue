@@ -9,7 +9,7 @@
         <div v-html="t('dictsearch.long')" />
       </VCard>
       <VCard :title="t('labels.input')">
-        <v-language v-model:dict="dict" v-model:dictloading="dictloading" />
+        <LanguageSelect v-model:dict="dict" v-model:dictloading="dictloading" />
         <div class="form-horizontal mt-4">
           <label>{{ t('dictsearch.searchstr') }}</label>
           <input type="text" v-model="searchstr" ref="searchRef">
@@ -63,7 +63,7 @@
 
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import VLanguage from "@/components/generic/VLanguage.vue";
+import LanguageSelect from "@/components/generic/LanguageSelect.vue";
 import { wordValueSimple } from "@/scripts/texthelper.js";
 import VCard from '@/components/generic/VCard.vue';
 import CopyButton from '@/components/generic/CopyButton.vue';

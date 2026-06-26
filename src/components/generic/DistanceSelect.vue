@@ -12,7 +12,7 @@
     <!-- <label
       ><slot name="label2">&nbsp;</slot>
     </label> -->
-    <div class="custom-select-container" v-click-outside="() => isDropdownOpen = false">
+    <div class="custom-select-container" v-click-outside="closeDropdown">
       <div class="custom-select-trigger" @click="isDropdownOpen = !isDropdownOpen" :class="{ 'is-active': isDropdownOpen }">
         {{ selectUnit }}
         <span class="chevron">▾</span>
@@ -80,6 +80,25 @@ const unitOptions = [
   { label: 'Mile intnl (mi)', value: 1760 },
   { label: 'Mile US (mi)', value: 1609.344 }
 ]
+
+const closeDropdown = () => {
+  isDropdownOpen.value = false
+}
+
+const vClickOutside = {
+  mounted(el, binding) {
+    el.clickOutsideEvent = (event) => {
+      if (!(el === event.target || el.contains(event.target))) {
+        binding.value(event)
+      }
+    }
+    document.body.addEventListener('click', el.clickOutsideEvent)
+  },
+  unmounted(el) {
+    document.body.removeEventListener('click', el.clickOutsideEvent)
+  }
+}
+
 </script>
 
 <style scoped>

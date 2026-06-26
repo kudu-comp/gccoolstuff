@@ -10,7 +10,7 @@
       </VCard>
       <VCard :title="t('labels.input')">
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate1"
             v-model:datum="selecteddatum1"
             class="mb-2"
@@ -26,10 +26,10 @@
                 {{ t('linepointdir.pdir') }}
               </button>
             </template>    -->
-          </v-coord>
+          </CoordInput>
         </div>
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate2"
             v-model:datum="selecteddatum2"
             class="mb-2"
@@ -37,10 +37,10 @@
             <template #label>
               {{ t('labels.point') }} 2
             </template>
-          </v-coord>
+          </CoordInput>
         </div>
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate3"
             v-model:datum="selecteddatum3"
             class="mb-2"
@@ -56,10 +56,10 @@
                 {{ t('linepointdir.pdir') }}
               </button>
             </template>         -->
-          </v-coord>
+          </CoordInput>
         </div>
         <div class="form-horizontal">
-          <v-coord
+          <CoordInput
             v-model:coord="coordinate4"
             v-model:datum="selecteddatum4"
             class="mb-2"
@@ -67,7 +67,7 @@
             <template #label>
               {{ t('labels.point') }} 4
             </template>
-          </v-coord>
+          </CoordInput>
           <v-line-point-dir
             v-if="modal1"
             v-model:lat1="lat1"
@@ -111,7 +111,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate1" />     
+        <MapView v-model:mylocation="coordinate1" />     
       </VCard>
     </div>
   </div>
@@ -126,8 +126,8 @@ import L from "leaflet"
 import * as coords from '@/scripts/coords.js'
 
 // Component Imports
-import VCoord from '@/components/generic/VCoord.vue'
-import VMap from '@/components/generic/VMap.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 import VLinePointDir from '@/components/generic/VLinePointDir.vue'

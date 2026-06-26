@@ -12,7 +12,7 @@
         <div class="input-box mb-2">
           <span class="input-box-title">{{t('circles.circle')}} 1</span>
           <div class="form-horizontal">
-            <v-coord
+            <CoordInput
               v-model:coord="coordinate1"
               v-model:datum="selecteddatum1"
             >
@@ -27,23 +27,23 @@
                   {{ t('circles.from3p') }}
                 </button>
               </template>      -->
-            </v-coord>
+            </CoordInput>
           </div>
           <div class="form-horizontal">
-            <v-distance
+            <DistanceSelect
               v-model:dist="radius1"
               v-model:unit="unit1"
             >
               <template #label>
                 {{ t('labels.radius') }}
               </template>
-            </v-distance>
+            </DistanceSelect>
           </div>
         </div>
         <div class="input-box mb-2">
           <span class="input-box-title">{{t('circles.circle')}} 2</span>
           <div class="form-horizontal">
-            <v-coord
+            <CoordInput
               v-model:coord="coordinate2"
               v-model:datum="selecteddatum2"
             >
@@ -58,17 +58,17 @@
                   {{ t('circles.from3p') }}
                 </button>
               </template>     -->
-            </v-coord>
+            </CoordInput>
           </div>
           <div class="form-horizontal">
-            <v-distance
+            <DistanceSelect
               v-model:dist="radius2"
               v-model:unit="unit2"
             >
               <template #label>
                 {{ t('labels.radius') }}
               </template>
-            </v-distance>
+            </DistanceSelect>
           </div>
           <v-circle3p
               v-if="modal1"
@@ -102,7 +102,7 @@
     </div>
     <div class="card-stack">
       <VCard :title="t('labels.map')">
-        <v-map v-model:mylocation="coordinate1" />
+        <MapView v-model:mylocation="coordinate1" />
       </VCard>
     </div>
   </div>
@@ -119,10 +119,10 @@ import * as coords from '@/scripts/coords.js'
 import { calculateCircleProperties } from '@/scripts/circles.js'
 
 // UI Component Imports
-import VCoord from '@/components/generic/VCoord.vue'
-import VMap from '@/components/generic/VMap.vue'
+import CoordInput from '@/components/generic/CoordInput.vue'
+import MapView from '@/components/generic/MapView.vue'
 import VCard from '@/components/generic/VCard.vue'
-import VDistance from '@/components/generic/VDistance.vue'
+import DistanceSelect from '@/components/generic/DistanceSelect.vue'
 import ButtonShowOnMap from '@/components/generic/ButtonShowOnMap.vue'
 import VCircle3p from '@/components/generic/VCircle3p.vue'
 
